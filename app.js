@@ -26,7 +26,7 @@ var port = process.env.VCAP_APP_PORT || 3000;
 
 app.configure('all', function()
 {
-	Setting.isProduction = (process.env['sitehost'] == 'appfog');
+	Setting.isProduction = (process.env.NODE_ENV == 'production');
 	Setting.redis = url.parse(process.env.REDISCLOUD_URL);
 	Setting.redis.auth = Setting.redis.auth.split(":")[1];
 
