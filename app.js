@@ -22,7 +22,7 @@ var hbs = require('express-hbs');
 var url = require('url');
 var app = Express();
 /** @type {Number} */
-var port = process.env.VCAP_APP_PORT || 3000;
+var port = Setting.port.development;
 
 app.configure('all', function()
 {
@@ -34,6 +34,8 @@ app.configure('all', function()
 
 	if (Setting.isProduction)
 	{
+		port = Setting.port.production;
+
 		log.remove(log.transports.Console).add(log.transports.Redis,
 		{
 			host: Setting.redis.hostname,

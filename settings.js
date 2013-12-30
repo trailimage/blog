@@ -15,6 +15,15 @@ exports.emailRecipient = Format.decodeBase64(process.env.SMTP_RECIPIENT);
 exports.redis = null;
 
 /**
+ * @enum {int}
+ */
+exports.port =
+{
+	production: 5000,
+	development: 3000
+};
+
+/**
  * @enum {String}
  */
 exports.reCaptcha =
