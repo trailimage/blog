@@ -1,0 +1,18 @@
+var menu = {};
+{{#each metadata.collections}}
+	menu['{{this.title}}'] = [
+	{{#this.collections}}
+		{ 'title': '{{this.title}}', "items":[
+		{{#this.sets}}
+			{{#if this.isGroupStart}}
+				{ 'slug': '{{this.slug}}', 'title': '{{this.title}} ({{this.totalParts}} parts)' },
+			{{/if}}
+
+			{{^this.isPartial}}
+				{ 'slug': '{{this.slug}}', 'title': '{{this.title}}' },
+			{{/this.isPartial}}
+		{{/this.sets}}
+		]},
+	{{/this.collections}}
+	];
+{{/each}}

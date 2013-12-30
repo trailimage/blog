@@ -1,0 +1,25 @@
+{{#contentFor "head"}}
+	{{! https://developers.facebook.com/docs/reference/opengraph/object-type/article/ }}
+	{{! https://developers.facebook.com/tools/debug/og/ }}
+	<meta property='og:title' content='{{info.title._content}}'/>
+	<meta property='fb:app_id' content='{{setting.facebook.appID}}'/>
+	<meta property='fb:admins' content='{{setting.facebook.adminID}}' />
+	<meta property='og:url' content='http://{{setting.domain}}/{{slug}}/'/>
+	<meta property='og:image' content='http://farm{{info.farm}}.static.flickr.com/{{info.server}}/{{info.primary}}_{{info.secret}}.jpg'/>
+	<meta property='og:type' content='article'/>
+	<meta property='article:published_time' content='{{formatISO8601 info.date_create}}'/>
+	<meta property='article:modified_time' content='{{formatISO8601 info.date_update}}'/>
+	<meta property='article:author' content='{{setting.facebook.authorURL}}'/>
+	{{#if video}}
+	<meta property='og:video' content='http://youtu.be/{{video.id}}'/>
+	{{/if}}
+{{/contentFor}}
+
+<div id="fb-root"></div>
+<script class="fb-script">(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id; js.async = true;
+	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{setting.facebook.appID}}";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

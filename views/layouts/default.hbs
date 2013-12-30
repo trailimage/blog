@@ -1,0 +1,48 @@
+<html>
+	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+		<title>{{title}}</title>
+		<meta content='{{description}}' name='description'/>
+	{{#if keywords}}
+		<meta content='Adventure, Scenery, Photography, {{keywords}}' name='keywords'/>
+	{{else}}
+		<meta content='BMW R1200GS, KTM XCW, jeep wrangler, motorcycle, motorcycling, riding, adventure, Jason Abbott, Abbott, outdoors, scenery, idaho, mountains' name='keywords'/>
+	{{/if}}
+		<link href='/css/ti.css' rel='stylesheet' type='text/css'/>
+		<link href='/img/favicon.ico' rel='shortcut icon'/>
+		<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
+		<link rel="apple-touch-icon" href='/img/apple-touch-icon-57x57.png' />
+		<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
+		<link rel="alternate" type="application/rss+xml" title="Trail Image RSS" href="/rss" />
+		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' type='text/javascript'></script>
+		<script src='/js/menu.js?t={{setting.timestamp}}' type='text/javascript' defer></script>
+		<script src='/js/ti.js' type='text/javascript'></script>
+		<meta property='og:site_name' content='{{setting.title}}' />
+		<meta property='og:description' content='{{description}}' />
+	{{#setting.isProduction}}
+		{{> ga}}
+		{{> twitter}}
+	{{/setting.isProduction}}
+		{{{block "head"}}}
+	<!--[if lte IE 7]>
+		<style>
+			img { -ms-interpolation-mode: bicubic; }		/* Image quality fix */
+		</style>
+	<![endif]-->
+	</head>
+	<body>
+		<div id='content'></div>
+		<div id='links'>
+			<a href="/">Home</a>
+			<a href="/about">About</a>
+			<a href="/search">Search</a>
+			<a href="/contact">Contact</a>
+			<!--<a href="/featured">Featured</a>-->
+			<a href="/ruminations">Ruminations</a>
+			<a href="https://twitter.com/trailimage" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow</a>
+			<a href="/rss" class="feed-icon">RSS Feed</a>
+		</div>
+		{{{body}}}
+		{{{block "afterBody"}}}
+	</body>
+</html>

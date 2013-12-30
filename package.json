@@ -1,0 +1,32 @@
+{
+	"name": "trail-image",
+	"description": "Trail Image server",
+	"version": "1.0.0",
+	"private": true,
+	"author":
+	{
+		"name": "Jason Abbott",
+		"email": "dev@trailimage.com"
+	},
+	"dependencies":
+	{
+		"express": ">=3.x",
+		"express-hbs": ">=0.3.0",
+		"uglify-js": ">=2.4.0",
+		"html-minifier": "*",
+		"feed": ">=0.2.5",
+		"oauth": ">=0.9.0",
+		"winston": ">=0.7.2",
+		"redis": ">=0.8.4",
+		"winston-redis": ">=0.2.1",
+		"nodemailer": ">=0.5.2",
+		"pdfkit": "*",
+		"recaptcha": "*"
+	},
+	"repository":
+	{
+		"type": "svn",
+		"url": "https://trail-image.googlecode.com/svn/trunk/"
+	},
+	"main": "index"
+}

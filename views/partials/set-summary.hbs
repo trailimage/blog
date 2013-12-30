@@ -1,0 +1,21 @@
+<li class="set-summary">
+	<div class="thumb">
+	{{#if thumbnail}}
+		<a href="/{{slug}}"><img src="{{thumbnail}}"/></a>
+	{{/if}}
+	</div>
+	<div class="detail">
+		<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
+	{{#if photoCount}}
+		<div class="photo-count">{{photoCount}} photos</div>
+	{{/if}}
+		<a class="link" href="/{{slug}}">trailimage.com/{{slug}}</a>
+		<p class="summary">{{description}}</p>
+		<ul class="tags">
+			{{#each tags}}
+			<li><a href="/tag/{{makeSlug this}}">{{this}}</a></li>
+			{{/each}}
+		</ul>
+	</div>
+	<div class="clear"></div>
+</li>

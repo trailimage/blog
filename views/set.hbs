@@ -1,0 +1,96 @@
+{{#setting.facebook.enabled}}
+{{> facebook-head}}
+{{/setting.facebook.enabled}}
+
+<div id="header" itemscope itemtype ="http://schema.org/BlogPosting" class="content">
+	<div id="top">
+	{{#if meta.isPartial}}
+		<h1 itemprop="name">{{meta.title}}</h1>
+		<div class='subTitle'>
+			<div class='parts'>Part {{meta.part}} of {{meta.totalParts}}</div>
+			{{meta.subTitle}}
+		</div>
+	{{else}}
+		<h1 itemprop="name">{{info.title._content}}</h1>
+	{{/if}}
+		<!--googleoff: index-->
+		{{> menu}}
+		<!--googleon: index-->
+	</div>
+
+	{{#if dateTaken}}
+	<div id="setDate" itemprop="dateCreated">{{dateTaken}}</div>
+	{{/if}}
+
+	<div class="fb-like" data-href="http://{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+
+	{{#if video}}
+	<a class="videoLink" href="#video"><img src='/img/play_video3.png'/>jump to the video</a>
+	{{/if}}
+
+	<blockquote class="synopsis">
+	{{#if info.description._content}}
+		<p itemprop="description">{{info.description._content}}<p>
+	{{/if}}
+	{{#if meta.tags}}
+		<div class="tag-wrapper">
+			<ul class="tags">
+				<li class="label">Categories:</li>
+			{{#each meta.tags}}
+				<li><a href="/tag/{{makeSlug this}}">{{this}}</a></li>
+			{{/each}}
+			</ul>
+		</div>
+	{{/if}}
+	</blockquote>
+
+	{{> navigation}}
+
+	{{#if map}}
+	<div class='map' itemprop="creator" itemscope itemtype='http://schema.org/Person'>
+		<div id='by-line'>by <span itemprop='name'>Jason Abbott</span></div>
+		<img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{map}}"/>
+	</div>
+	{{/if}}
+
+</div>
+
+{{#set.photo}}
+
+<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
+	<a name="{{index}}" href="{{url_k}}" title="Enlarge image {{index}}">
+		<img src="{{url_s}}" alt="{{title}}{{#if tags}} (content: {{tags}}){{/if}}"
+			width="{{width_l}}" height="{{height_l}}" itemprop="url"
+			style="width: {{width_l}}px; height: {{height_l}}px;"
+			data-original="{{url_l}}"/>
+	</a>
+
+	{{#if longitude}}
+		<a class='map' target='_blank' href="http://maps.google.com/maps?q={{latitude}},{{longitude}}&hl=en&t=w&z=15">map</a>
+	{{/if}}
+
+	{{#if title}}
+		<p><span itemprop="name">{{{formatTitle title}}}</span></p>
+	{{/if}}
+</div>
+
+<div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
+
+{{/set.photo}}
+
+{{#if video}}
+<a name="video">
+<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add video.width 8}}}px;">
+	<iframe width="{{video.width}}" height="{{video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</a>
+{{/if}}
+
+<div id="footer" class="content">
+	{{> navigation}}
+	{{#setting.facebook.enabled}}
+	<div class="fb-comments" data-href="http://{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
+	{{/setting.facebook.enabled}}
+	{{> footer}}
+</div>
+

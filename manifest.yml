@@ -1,0 +1,19 @@
+---
+applications:
+  .:
+    name: trail-image
+    framework:
+      name: node
+      info:
+        mem: 64M
+        description: Node.js Application
+        exec: 
+    infra: aws
+    url: ${name}.${target-base}
+    mem: 64M
+    instances: 1
+    services:
+      Trail-Image:
+        type: redis
+      redis-fa66f:
+        type: redis

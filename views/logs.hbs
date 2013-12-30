@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Trail Image</title>
+	<meta name="robots" content="noindex">
+	<link href='/img/favicon.ico' rel='shortcut icon'/>
+	<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
+	<style type="text/css">
+		body { background-color: #ddd; text-align: center; }
+		table { border-collapse: collapse; margin: 0 auto; }
+		td { font-family: Tahoma, Arial; border-bottom: 1px solid #000; margin: 0; padding: 1px 4px; }
+		td.timestamp { text-align: right; padding-right: 8px; color: #666; font-size: smaller; white-space: nowrap; }
+		tr:hover { background-color: #fff; cursor: pointer; }
+		tr.error:hover { color: #600; }
+		tr.error td.timestamp { color: #aaa; }
+		.info { }
+		.warn { background-color: #ee0; }
+		.error { background-color: #800; color: #fff; }
+		p.stats
+		{
+			text-align: center;
+			font-weight: normal;
+			font-family: Verdana, Arial, sans-serif;
+			line-height: 1.2em;
+			font-size: 8pt;
+			margin: 4px;
+		}
+	</style>
+</head>
+
+<body>
+
+<p class='stats'>
+	<a href="/">Home</a> &bull;
+	<a href='https://cloud.google.com/console#/project/{{setting.google.projectID}}'>Map API</a> &bull;
+	<a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a> &bull;
+	<a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a>  &bull;
+	<a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a>
+</p>
+
+<table>
+	<tbody>
+{{#logs}}
+	<tr class='{{level}}'><td class='timestamp'>{{formatLogTime timestamp}}</td><td>{{message}}</td></tr>
+{{/logs}}
+	</tbody>
+</table>
+
+</body>
+</html>
