@@ -26,10 +26,12 @@
 		"pdfkit": "*",
 		"recaptcha": "*"
 	},
-	"repository":
-	{
-		"type": "svn",
-		"url": "https://trail-image.googlecode.com/svn/trunk/"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jabbott7/Trail-Image.git"
 	},
-	"main": "index"
+	"main": "index",
+	"bugs": {
+		"url": "https://github.com/jabbott7/Trail-Image/issues"
+	}
 }

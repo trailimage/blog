@@ -25,6 +25,7 @@ exports.reCaptcha =
 
 /**
  * @enum {String|Boolean|Object}
+ * @see https://devcenter.heroku.com/articles/config-vars
  */
 exports.flickr =
 {
