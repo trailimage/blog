@@ -98,6 +98,7 @@ function defineRoutes()
 	var sitemap = require('./routes/sitemap-route.js');
 	var pdf = require('./routes/pdf-route.js');
 	var authorize = require('./routes/authorize-route.js');
+    var photo = require('./routes/photo-route.js');
 
 	app.get('/', set.default);                                       // the latest set
 	app.get('/rss', rss.view);
@@ -117,6 +118,7 @@ function defineRoutes()
 	app.get('/log/view', logs.view);
 	app.get('/log/'+clear, logs.clear);
 	app.get('/tag/'+clear, tag.clearAll);
+    app.get('/exif/:photoID(\\d{10})', photo.exif);
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', set.blog);       // old blog links with format /YYYY/MM/slug
