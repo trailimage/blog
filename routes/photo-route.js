@@ -1,20 +1,19 @@
-var Setting = require('../settings.js');
 var Format = require('../format.js');
-var Enum = require('../enum.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
-/** @type {MetadataSet} */
-var MetadataSet = require('../metadata/set.js');
 /** @type {singleton} */
 var Flickr = require('../flickr.js');
-/** @type {singleton} */
-var Output = require('../output.js');
 var log = require('winston');
 
 /**
  * Default route action
+ * @var {Array.<Flickr.Exif>} exif
  */
 exports.exif = function(req, res)
 {
+    /** @type {string} */
+    var photoID = req.params.photoID;
 
+    flickr.getEXIF(photoID, function(exif)
+    {
+        res.render('exif', { 'exif': exif, 'layout': null });
+    });
 };

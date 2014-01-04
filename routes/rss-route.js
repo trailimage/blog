@@ -45,7 +45,7 @@ exports.view = function(req, res)
 		description:    Setting.description,
 		link:           'http://' + Setting.domain,
 		image:          'http://' + Setting.domain + '/img/logo.png',
-		copyright:      'Copyright © 2013 Jason Abbott. All rights reserved',
+		copyright:      'Copyright © 2014 Jason Abbott. All rights reserved',
 		author:
 		{
 			name:       'Jason Abbott',

@@ -209,12 +209,12 @@ function FlickrAPI()
 	/**
 	 * Get photo context
 	 * @param {String} id Flickr photo ID
-	 * @param {function(Flickr.PhotoExif.photo)} callback
+	 * @param {function(Array.<Flickr.Exif>)} callback
 	 * @see {@link http://www.flickr.com/services/api/flickr.photos.getExif.html}
 	 */
 	this.getEXIF = function(id, callback)
 	{
-		call('photos.getExif', 'photo_id', id, function(r) { callback(r.photo); });
+		call('photos.getExif', 'photo_id', id, function(r) { callback(r.photo.exif); });
 	};
 
 	/**
