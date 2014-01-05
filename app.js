@@ -34,7 +34,8 @@ app.configure('all', function()
 
 	if (Setting.isProduction)
 	{
-		log.remove(log.transports.Console).add(log.transports.Redis,
+		//log.remove(log.transports.Console).add(log.transports.Redis,
+        log.add(log.transports.Redis,
 		{
 			host: Setting.redis.hostname,
 			port: Setting.redis.port,
