@@ -42,6 +42,17 @@ exports.logTime = function(text)
 };
 
 /**
+ * Format fractions within the text
+ * @param {String} text
+ * @return {String}
+ * @static
+ */
+exports.fraction = function(text)
+{
+	return text.replace(/(\d+)\/(\d+)/, '<sup>$1</sup>&frasl;<sub>$2</sub>');
+};
+
+/**
  * Decode base 64 string
  * @param {String} text
  * @returns {string}

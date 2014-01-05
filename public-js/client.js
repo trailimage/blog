@@ -13,6 +13,7 @@ $(function()
 
 	var $setList = $('#sets'),
 		$collectionList = $('#collections'),
+		$photos = $('.photo'),
 		key = 'root',
 		root = loadSelection();
 
@@ -28,7 +29,12 @@ $(function()
 	$setList.change(function(e)	{ location.href = '/' + $(e.target).val(); });
 	$collectionList.change(updateSets);
 
-	$('.photo').find('img').lazyload();
+	$photos.find('img').lazyload();
+	$photos.find('.exif').mouseenter(function()
+	{
+		var $exif = $(this);
+		$exif.off('mouseenter').html('Loading …').load($exif.data('url'));
+	});
 
 	function updateSets()
 	{

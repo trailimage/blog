@@ -67,6 +67,7 @@ app.configure('all', function()
 	hbs.registerHelper('makeSlug', function(text) { return Format.slug(text); });
 	hbs.registerHelper('formatLogTime', function(text) { return Format.logTime(text); });
 	hbs.registerHelper('formatISO8601', function(text) { return Format.iso8601time(text); });
+	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
 
 	app.use(Express.bodyParser());
 	app.use(app.router);
@@ -80,13 +81,17 @@ app.configure('all', function()
 	});
 });
 
+/**
+ * @var {Express} app
+ */
 function defineRoutes()
 {
-	/**
-	 * Slug pattern
-	 * @type {string}
-	 */
+	/** @type {string} Slug pattern */
 	var s = '([\\w\\d-]{4,})';
+    /** @type {string} Flickr photo ID pattern */
+    var photoID = ':photoID(\\d{10,11})';
+    /** @type {string} Flickr set ID pattern */
+    var setID = ':setID(\\d{17})';
 	var clear = 'reset';
 	var set = require('./routes/set-route.js');
 	var contact = require('./routes/contact-route.js');
@@ -119,13 +124,13 @@ function defineRoutes()
 	app.get('/log/view', logs.view);
 	app.get('/log/'+clear, logs.clear);
 	app.get('/tag/'+clear, tag.clearAll);
-    app.get('/exif/:photoID(\\d{10})', photo.exif);
+    app.get('/exif/'+photoID, photo.exif);
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', set.blog);       // old blog links with format /YYYY/MM/slug
-	app.get('/:photoID(\\d{10})', set.photoID);                     // links with bare Flickr photo ID
-	app.get('/:setID(\\d{17})', set.flickrID);                      // links with bare Flickr set ID
-	app.get('/:setID(\\d{17})/:photoID(\\d{10})', set.flickrID);
+	app.get('/'+photoID, set.photoID);                              // links with bare Flickr photo ID
+	app.get('/'+setID, set.flickrID);                               // links with bare Flickr set ID
+	app.get('/'+setID+'/'+photoID, set.flickrID);
 	app.get('/:slug'+s+'/pdf', pdf.view);
 	app.get('/:slug'+s+'/'+clear, set.clear);
 	app.get('/:slug'+s+'/new', set.newSet);

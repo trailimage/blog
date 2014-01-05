@@ -529,6 +529,39 @@ div.photo
 		}
 	}
 
+	div.exif
+	{
+	  	position: absolute;
+	  	top: 5px;
+		right: 5px;
+		background-color: #000;
+		padding: 5px 10px;
+		font-family: @sanSerifFont;
+		font-size: 13pt;
+		color: #fff;
+		cursor: help;
+		display: none;
+		text-align: center;
+		.opacity(0.7);
+		.border-radius(0, 0, 10px, 0);
+
+		ul
+		{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+
+			li
+			{
+				padding-top: 5px;
+
+				&.camera { font-size: 16pt; }
+				&.lens { margin-bottom: 10px; }
+				&.software { margin-top: 10px; }
+			}
+		}
+	}
+
 	a.map
 	{
 		display: block;
@@ -555,7 +588,11 @@ div.photo
 
 	}
 
-	&:hover { a.map { .opacity(0.7); } }
+	&:hover
+	{
+		a.map { .opacity(0.7); }
+		div.exif { display: block; }
+	}
 
 	p
 	{

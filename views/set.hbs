@@ -58,12 +58,14 @@
 {{#set.photo}}
 
 <div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
-	<a name="{{index}}" href="{{url_k}}" title="Enlarge image {{index}}">
+	<a name="{{index}}" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
 		<img src="{{url_s}}" alt="{{title}}{{#if tags}} (content: {{tags}}){{/if}}"
 			width="{{width_l}}" height="{{height_l}}" itemprop="url"
 			style="width: {{width_l}}px; height: {{height_l}}px;"
 			data-original="{{url_l}}"/>
 	</a>
+
+    <div class="exif" data-url="/exif/{{id}}">Camera Settings</div>
 
 	{{#if longitude}}
 		<a class='map' target='_blank' href="http://maps.google.com/maps?q={{latitude}},{{longitude}}&hl=en&t=w&z=15">map</a>

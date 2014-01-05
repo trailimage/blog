@@ -7,7 +7,7 @@ Environment Variables
 
 <table>
 <tr><th>Variable</th><th>Encoding</th><th>Purpose</th></tr>
-<tr><td>FLICKR_HOME</td><td>None</td><td></td></tr>
+<tr><td>FLICKR_KEY</td><td>None</td><td></td></tr>
 <tr><td>FLICKR_TOKEN</td><td>None</td><td></td></tr>
 <tr><td>FLICKR_TOKEN_SECRET</td><td>None</td><td></td></tr>
 <tr><td>GOOGLE_KEY</td><td>None</td><td></td></tr>
