@@ -1,0 +1,10 @@
+{{#if this}}
+<div class="tag-wrapper">
+	<ul class="tags">
+		<li class="label">Categories:</li>
+		{{#each this}}
+			<li><a href="/tag/{{makeSlug this}}">{{this}}</a></li>
+		{{/each}}
+	</ul>
+</div>
+{{/if}}

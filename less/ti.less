@@ -380,71 +380,6 @@ div.next, div.previous
 		}
 
 		p { margin: 0; padding: 0; }
-
-		div.tag-wrapper
-		{
-			width: 100%;
-			margin-top: 3px;
-			text-align: center;
-			position: relative;
-			border-top: 1px dotted @lightTrimColor;
-
-			ul.tags
-			{
-				list-style: none;
-				padding: 0;
-				margin: 0 auto 2px auto;
-
-				@media @small
-				{
-					height: 1.5em;
-					padding: 15px 0 0 0;
-					border: none;
-				}
-
-				li
-				{
-					font-size: 9pt;
-					font-weight: normal;
-					color: #888;
-					display: inline-block;
-					padding: 1px 4px 0 0;
-					margin-left: 3px;
-					line-height: 1em;
-
-					@media @small
-					{
-						float: none;
-						display: inline-block;
-						font-size: 20pt;
-						padding: 0 2px;
-					}
-
-					&.label
-					{
-						margin-left: 0;
-						margin-right: 0;
-						padding-left: 0;
-						pading-right: 0;
-						font-weight: bold;
-						@media @small { display: none; }
-					}
-
-					a
-					{
-						text-decoration: none;
-
-						@media @small
-						{
-							background-color: #fff;
-							padding: 3px 8px;
-							border: 1px solid @trimColor;
-							.rounded(4);
-						}
-					}
-				}
-			}
-		}
 	}
 
 	div.map
@@ -470,6 +405,79 @@ div.next, div.previous
 			line-height: 1em;
 			color: #fff;
 			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+		}
+	}
+}
+
+.footer-tags
+{
+	font-family: @sanSerifFont;
+	background-color: #fff;
+	margin-bottom: 10px;
+	border-bottom: 1px dotted @lightTrimColor;
+}
+
+div.tag-wrapper
+{
+	width: 100%;
+	margin-top: 3px;
+	text-align: center;
+	position: relative;
+	border-top: 1px dotted @lightTrimColor;
+
+	ul.tags
+	{
+		list-style: none;
+		padding: 0;
+		margin: 0 auto 2px auto;
+
+		@media @small
+		{
+			height: 1.5em;
+			padding: 15px 0 0 0;
+			border: none;
+		}
+
+		li
+		{
+			font-size: 9pt;
+			font-weight: normal;
+			color: #888;
+			display: inline-block;
+			padding: 1px 4px 0 0;
+			margin-left: 3px;
+			line-height: 1em;
+
+			@media @small
+			{
+				float: none;
+				display: inline-block;
+				font-size: 20pt;
+				padding: 0 2px;
+			}
+
+			&.label
+			{
+				margin-left: 0;
+				margin-right: 0;
+				padding-left: 0;
+				padding-right: 0;
+				font-weight: bold;
+				@media @small { display: none; }
+			}
+
+			a
+			{
+				text-decoration: none;
+
+				@media @small
+				{
+					background-color: #fff;
+					padding: 3px 8px;
+					border: 1px solid @trimColor;
+					.rounded(4);
+				}
+			}
 		}
 	}
 }
