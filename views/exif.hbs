@@ -1,6 +1,7 @@
 <ul>
 {{#if exif.Model}}<li class="camera">{{exif.Model}}</li>{{/if}}
 {{#if exif.Lens}}<li class="lens">{{exif.Lens}}</li>{{/if}}
+{{#if exif.FocalLength}}<li class="focal-length">(at {{exif.FocalLength}})</li>{{/if}}
 {{#if exif.ISO}}<li class="iso">ISO {{exif.ISO}}</li>{{/if}}
 {{#if exif.ExposureTime}}<li class="shutter">{{exif.ExposureTime}} second</li>{{/if}}
 {{#if exif.FNumber}}<li class="aperture">f/{{exif.FNumber}}</li>{{/if}}

@@ -32,6 +32,8 @@ exports.exif = function(req, res)
 		    values.Model = normalizeCamera(values.Model);
 		    values.Lens = normalizeLens(values.Lens);
 		    values.ExposureCompensation = normalizeCompensation(values.ExposureCompensation);
+			// don't show focal length for primes
+		    if (!/\d\-\d/.test(values.Lens)) { values.FocalLength = null; }
 	    }
 
 	    values.Software = normalizeSoftware(values.Software);
@@ -63,6 +65,7 @@ function normalizeLens(text)
 		.replace('150.0 mm f/2.8', 'Sigma 150mm f/2.8 EX DG HSM APO')
 		.replace('90.0 mm f/2.8', 'Tamron 90mm f/2.8 SP AF Di')
 		.replace('24.0 mm f/3.5', 'Nikkor PC-E 24mm f/3.5D ED')
+		.replace('17.0-55.0 mm f/2.8', 'Nikon 17-55mm f/2.8G')
 		.replace('10.0-20.0 mm f/4.0-5.6', 'Sigma 10-20mm f/4-5.6 EX DC HSM')
 		.replace('18.0-200.0 mm f/3.5-5.6', 'Nikkor 18-200mm f/3.5-5.6G ED VR');
 }
