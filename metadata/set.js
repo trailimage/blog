@@ -249,6 +249,9 @@ MetadataSet.blogUrl =
 	'tuscarora-in-hills': '',
 	'tuscarora-town': '',
 	'tuscarora-getting-there': '',
+	'jump-creek-to-leslie-gulch-part-1': 'jump-creek-and-leslie-gulch',                 // old link
+	'jump-creek-to-leslie-gulch-part-2': 'jump-creek-and-leslie-gulch',
+	'jump-creek-to-leslie-gulch-part-3': 'jump-creek-and-leslie-gulch',
 	'owyhee-rocks-succor-creek': 'jump-creek-and-leslie-gulch',
 	'owyhee-rocks-leslie-gulch': 'jump-creek-and-leslie-gulch',
 	'owyhee-rocks-jump-creek-canyon': 'jump-creek-and-leslie-gulch',
@@ -262,6 +265,7 @@ MetadataSet.blogUrl =
 	'lost-lake-crawdads-of-st-joe-day-1': 'brother-ride-2009',
 	'circumnavigating-oahu': '',
 	'boise-ridge-with-boy': 'boise-ridge-with-the-boy',
+	'three-brothers-three-days-three-loops': 'brother-ride-2008/cold-ride-home',        // old link
 	'three-loops-in-st-joe-day-3': 'brother-ride-2008/cold-ride-home',
 	'three-loops-in-st-joe-day-2': 'brother-ride-2008/camping-with-cows',
 	'three-loops-in-st-joe-day-1': 'brother-ride-2008',
