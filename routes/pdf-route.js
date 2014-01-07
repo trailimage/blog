@@ -17,9 +17,11 @@ var sizes = [
 	Flickr.size.large1024,
 	Flickr.size.large1600
 ];
+var dpi = 72;
 
 /**
  * Default route action
+ * @see http://pdfkit.org/docs/getting_started.html
  */
 exports.view = function(req, res)
 {
@@ -27,7 +29,7 @@ exports.view = function(req, res)
 	var metadata = Metadata.current;
 	/** @type {FlickrAPI} */
 	var flickr = Flickr.current;
-	/** @type {Metadata.Set} */
+	/** @type {MetadataSet} */
 	var set = metadata.setWithSlug(req.params.slug);
 
 	if (set != null)
@@ -39,6 +41,7 @@ exports.view = function(req, res)
 			{
 				size: 'letter',
 				layout: 'portrait',
+				margins: 0,
 				info:
 				{
 					Title: set.title,
@@ -51,9 +54,11 @@ exports.view = function(req, res)
 			pdf.registerFont('San Serif', 'fonts/trebuc.ttf');
 			pdf.registerFont('San Serif Bold', 'fonts/trebucbd.ttf');
 
-			pdf.font('San Serif Bold').fontSize(35).text(set.title);
-			pdf.font('San Serif').fontSize(15).text('by Jason Abbott');
-			pdf.text(setPhotos.photo[0].datetaken, {align: 'right'});
+			pdf.moveDown(2);
+			pdf.font('San Serif Bold').fontSize(40).text(set.title, {align: 'center'});
+			pdf.moveDown(1);
+			pdf.font('San Serif').fontSize(15).text('by Jason Abbott', {align: 'center'});
+			pdf.text(setPhotos.photo[0].datetaken, {align: 'center'});
 
 			pdf.font('Serif').fontSize(11);
 
@@ -90,10 +95,11 @@ function writePdfPhoto(pdf, photos, index, callback)
 
 		getImage(p.url_l, p.id, function(fileName)
 		{
-			log.info(fileName);
-			pdf.image(fileName);
-			pdf.text(p.description._content);
-			pdf.moveDown(2);
+			pdf.addPage({margins: {top: 0, right: 0, bottom: 0, left: 0}, layout: 'landscape'});
+
+			pdf.image(fileName, {fit: [11 * dpi, 8.5 * dpi]});
+			pdf.text(p.description._content, dpi * 0.5, null, {width: 10 * dpi});
+			//pdf.moveDown(2);
 
 			writePdfPhoto(pdf, photos, index + 1, callback);
 		});
@@ -123,7 +129,7 @@ function getImage(url, fileName, callback)
 		}
 		else
 		{
-			// console.log('downloading ' + url + ' to ' + fileName);
+			console.log('downloading ' + url + ' to ' + fileName);
 
 			var req = http.get(url, function(res)
 			{
@@ -139,7 +145,7 @@ function getImage(url, fileName, callback)
 				})
 			});
 
-			req.on('error', function(e) { console.log(e); })
+			req.on('error', function(e) { log.error(e.message); })
 		}
 	});
 }
