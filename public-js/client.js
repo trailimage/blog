@@ -1,5 +1,7 @@
 $(function()
 {
+	var bullet = '∙';
+
 	/**
 	 * @return {*|Object|!jQuery|Object|Object|!jQuery|Object}
 	 */
@@ -7,7 +9,9 @@ $(function()
 	{
 		return this.each(function()
 		{
-			$(this).append($('<option>').attr('value', value).html(name));
+			var $option =$('<option>').attr('value', value).html(name);
+			if (name.indexOf(bullet) == 0) { $option.addClass('bullet'); }
+			$(this).append($option);
 		});
 	};
 
@@ -53,7 +57,7 @@ $(function()
 				.css({borderColor: '#f40', color: '#f40'})
 				.animate({borderColor: '#747e73', color: '#000'}, 600)
 				.appendOption(0, '— View Another Adventure —')
-				.append($('<optgroup>').addClass('note').attr('label', '    *Motorcycle Ride'));
+				.append($('<optgroup>').addClass('note').attr('label', '    ' + bullet + 'Motorcycle Ride'));
 
 			for (var i = 0; i < menu[root].length; i++)
 			{
