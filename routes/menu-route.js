@@ -21,7 +21,7 @@ exports.view = function(req, res)
 	{
 		if (sent) { return; }
 
-		reply.render('menu-script', { 'metadata': Metadata.current, 'layout': null }, function(text)
+		reply.render('menu-script', {'metadata': Metadata.current, 'layout': null }, function(text)
 		{
 			return Uglify.minify(text, {fromString: true}).code;
 		});

@@ -36,6 +36,8 @@ function MetadataSet(api, timebound)
 	 * @type {Array.<String>}
 	 **/
 	this.tags = [];
+	/** @type {bool} */
+	this.motorcycle = false;
 
 	// fields added by call to addInfo()
 
@@ -186,7 +188,15 @@ function MetadataSet(api, timebound)
 	 * Metadata groups the items belongs to are treated as tags or keywords
 	 * @param {String} tag
 	 */
-	this.addTag = function(tag) { if (_this.tags.indexOf(tag) == -1) { _this.tags.push(tag); } };
+	this.addTag = function(tag)
+	{
+		if (_this.tags.indexOf(tag) == -1)
+		{
+			_this.tags.push(tag);
+
+			if (Enum.pattern.motorcycle.test(tag)) { _this.motorcycle = true; }
+		}
+	};
 
 	init();
 }

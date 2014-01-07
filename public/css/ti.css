@@ -214,6 +214,9 @@ div.previous a:hover {
   background-color: #eff1ef;
   border: 1px solid #747e73;
 }
+#header #top #menu select optgroup.note {
+  color: #747e73;
+}
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top #menu select {
     font-size: 24pt;

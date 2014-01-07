@@ -5,11 +5,11 @@ var menu = {};
 		{ 'title': '{{this.title}}', "items":[
 		{{#this.sets}}
 			{{#if this.isGroupStart}}
-				{ 'slug': '{{this.slug}}', 'title': '{{this.title}} ({{this.totalParts}} parts)' },
+				{ 'slug': '{{this.slug}}', 'title': '{{this.title}}{{#if this.motorcycle}}*{{/if}} ({{this.totalParts}} parts)' },
 			{{/if}}
 
 			{{^this.isPartial}}
-				{ 'slug': '{{this.slug}}', 'title': '{{this.title}}' },
+				{ 'slug': '{{this.slug}}', 'title': '{{this.title}}{{#if this.motorcycle}}*{{/if}}' },
 			{{/this.isPartial}}
 		{{/this.sets}}
 		]},
