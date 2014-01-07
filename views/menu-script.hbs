@@ -1,3 +1,4 @@
+{{! http://www.cs.tut.fi/~jkorpela/chars/spaces.html }}
 var menu = {};
 {{#each metadata.collections}}
 	menu['{{this.title}}'] = [
@@ -5,11 +6,11 @@ var menu = {};
 		{ 'title': '{{this.title}}', "items":[
 		{{#this.sets}}
 			{{#if this.isGroupStart}}
-				{ 'slug': '{{this.slug}}', 'title': '{{#if this.motorcycle}}∙{{else}} {{/if}}{{this.title}} ({{this.totalParts}} parts)' },
+				{ 'slug': '{{this.slug}}', 'title': '{{#if this.motorcycle}}∙{{else}}  {{/if}}{{this.title}} ({{this.totalParts}} parts)' },
 			{{/if}}
 
 			{{^this.isPartial}}
-				{ 'slug': '{{this.slug}}', 'title': '{{#if this.motorcycle}}∙{{else}} {{/if}}{{this.title}}' },
+				{ 'slug': '{{this.slug}}', 'title': '{{#if this.motorcycle}}∙{{else}}  {{/if}}{{this.title}}' },
 			{{/this.isPartial}}
 		{{/this.sets}}
 		]},

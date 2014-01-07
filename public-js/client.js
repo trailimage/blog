@@ -52,12 +52,13 @@ $(function()
 		{
 			saveSelection(root);
 
+			// http://www.cs.tut.fi/~jkorpela/chars/spaces.html
 			$setList
 				.empty()
 				.css({borderColor: '#f40', color: '#f40'})
 				.animate({borderColor: '#747e73', color: '#000'}, 600)
 				.appendOption(0, '— View Another Adventure —')
-				.append($('<optgroup>').addClass('note').attr('label', '    ' + bullet + 'Motorcycle Ride'));
+				.append($('<optgroup>').addClass('note').attr('label', '     ' + bullet + 'Motorcycle Ride'));
 
 			for (var i = 0; i < menu[root].length; i++)
 			{

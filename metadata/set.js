@@ -194,7 +194,11 @@ function MetadataSet(api, timebound)
 		{
 			_this.tags.push(tag);
 
-			if (Enum.pattern.motorcycle.test(tag)) { _this.motorcycle = true; }
+			if (Enum.pattern.motorcycle.test(tag))
+			{
+				_this.motorcycle = true;
+				Enum.pattern.motorcycle.lastIndex = 0;
+			}
 		}
 	};
 

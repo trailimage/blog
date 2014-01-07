@@ -213,9 +213,11 @@ div.previous a:hover {
   font-size: 12pt;
   background-color: #eff1ef;
   border: 1px solid #747e73;
+  /* option.bullet { color: #444; } */
 }
 #header #top #menu select optgroup.note {
   color: #8e978d;
+  font-size: small;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top #menu select {
