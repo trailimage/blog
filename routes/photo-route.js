@@ -32,6 +32,7 @@ exports.exif = function(req, res)
 		    values.Model = normalizeCamera(values.Model);
 		    values.Lens = normalizeLens(values.Lens);
 		    values.ExposureCompensation = normalizeCompensation(values.ExposureCompensation);
+		    values.FNumber = values.FNumber.replace('f','ƒ');
 			// don't show focal length for primes
 		    if (!/\d\-\d/.test(values.Lens)) { values.FocalLength = null; }
 	    }
@@ -60,17 +61,17 @@ function normalizeCamera(text)
 function normalizeLens(text)
 {
 	return text
-		.replace('FE 35mm F2.8 ZA', 'Sony 35mm f/2.8')
-		.replace('58.0 mm f/1.4', 'Voigtländer Nokton 58mm f/1.4 SL II')
-		.replace('14.0 mm f/2.8', 'Samyang 14mm f/2.8')
-		.replace('50.0 mm f/1.4', 'Sigma 50mm f/1.4 EX DG')
-		.replace('35.0 mm f/2.0', 'Nikkor 35mm f/2.0D')
-		.replace('150.0 mm f/2.8', 'Sigma 150mm f/2.8 EX DG HSM APO')
-		.replace('90.0 mm f/2.8', 'Tamron 90mm f/2.8 SP AF Di')
-		.replace('24.0 mm f/3.5', 'Nikkor PC-E 24mm f/3.5D ED')
-		.replace('17.0-55.0 mm f/2.8', 'Nikon 17-55mm f/2.8G')
-		.replace('10.0-20.0 mm f/4.0-5.6', 'Sigma 10-20mm f/4-5.6 EX DC HSM')
-		.replace('18.0-200.0 mm f/3.5-5.6', 'Nikkor 18-200mm f/3.5-5.6G ED VR');
+		.replace('FE 35mm F2.8 ZA', 'Sony 35mm ƒ/2.8')
+		.replace('58.0 mm f/1.4', 'Voigtländer Nokton 58mm ƒ/1.4 SL II')
+		.replace('14.0 mm f/2.8', 'Samyang 14mm ƒ/2.8')
+		.replace('50.0 mm f/1.4', 'Sigma 50mm ƒ/1.4 EX DG')
+		.replace('35.0 mm f/2.0', 'Nikkor 35mm ƒ/2.0D')
+		.replace('150.0 mm f/2.8', 'Sigma 150mm ƒ/2.8 EX DG HSM APO')
+		.replace('90.0 mm f/2.8', 'Tamron 90mm ƒ/2.8 SP AF Di')
+		.replace('24.0 mm f/3.5', 'Nikkor PC-E 24mm ƒ/3.5D ED')
+		.replace('17.0-55.0 mm f/2.8', 'Nikon 17–55mm ƒ/2.8G')
+		.replace('10.0-20.0 mm f/4.0-5.6', 'Sigma 10–20mm ƒ/4–5.6 EX DC HSM')
+		.replace('18.0-200.0 mm f/3.5-5.6', 'Nikkor 18–200mm ƒ/3.5–5.6G ED VR');
 }
 
 /**
