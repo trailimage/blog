@@ -95,6 +95,11 @@ exports.flickrID = function(req, res)
 	showSetWithID(res, req.params.setID);
 };
 
+exports.featured = function(req, res)
+{
+	res.redirect(Enum.httpStatus.permanentRedirect, 'http://www.flickr.com/photos/trailimage/sets/72157631638576162/');
+};
+
 function showSetWithID(res, id)
 {
 	prepare();

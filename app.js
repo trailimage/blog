@@ -128,6 +128,7 @@ function defineRoutes()
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', set.blog);       // old blog links with format /YYYY/MM/slug
+	app.get('/featured', set.featured);
 	app.get('/'+photoID, set.photoID);                              // links with bare Flickr photo ID
 	app.get('/'+setID, set.flickrID);                               // links with bare Flickr set ID
 	app.get('/'+setID+'/'+photoID, set.flickrID);
