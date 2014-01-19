@@ -48,7 +48,9 @@ exports.exif = function(req, res)
  */
 function normalizeCamera(text)
 {
-	return text.replace('NIKON', 'Nikon');
+	return text
+		.replace('NIKON', 'Nikon')
+		.replace('ILCE-7R', 'Sony α7R');
 }
 
 /**
@@ -58,6 +60,7 @@ function normalizeCamera(text)
 function normalizeLens(text)
 {
 	return text
+		.replace('FE 35mm F2.8 ZA', 'Sony 35mm f/2.8')
 		.replace('58.0 mm f/1.4', 'Voigtländer Nokton 58mm f/1.4 SL II')
 		.replace('14.0 mm f/2.8', 'Samyang 14mm f/2.8')
 		.replace('50.0 mm f/1.4', 'Sigma 50mm f/1.4 EX DG')
