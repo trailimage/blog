@@ -32,7 +32,6 @@ exports.exif = function(req, res)
 		    values.Model = normalizeCamera(values.Model);
 		    values.Lens = normalizeLens(values.Lens);
 		    values.ExposureCompensation = normalizeCompensation(values.ExposureCompensation);
-		    values.FNumber = values.FNumber.replace('f','ƒ');
 			// don't show focal length for primes
 		    if (!/\d\-\d/.test(values.Lens)) { values.FocalLength = null; }
 	    }
