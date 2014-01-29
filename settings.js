@@ -84,7 +84,7 @@ exports.google =
 {
 	apiKey: process.env.GOOGLE_KEY,
 	projectID: '1033232213688',
-	analyticsID: '22180727',        // shown as 'UA-22180727-1'
+	analyticsID: '22180727',        // shown as 'UA-22180727-1
 	searchEngineID: process.env.GOOGLE_SEARCH_ID,
 	blogID: '118459106898417641',
 	userID: Format.decodeBase64(process.env.SMTP_LOGIN),
