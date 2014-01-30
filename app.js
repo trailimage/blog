@@ -71,6 +71,7 @@ app.configure('all', function()
 
 	app.use(Express.bodyParser());
 	app.use(app.router);
+	app.use(Express.compress());
 	app.use(Express.static(__dirname + '/public'));
 
 	Metadata.make(function()
@@ -139,4 +140,3 @@ function defineRoutes()
 	app.get('/:groupSlug'+s+'/:partSlug'+s+'/'+clear, set.clearSubSet);
 	app.get('/:slug'+s, set.view);
 }
-
