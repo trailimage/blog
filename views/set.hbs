@@ -28,11 +28,9 @@
 	<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
 	{{/if}}
 
-	<blockquote class="synopsis">
 	{{#if info.description._content}}
-		<p itemprop="description">{{info.description._content}}<p>
+	<blockquote class="synopsis"><p itemprop="description">{{info.description._content}}<p></blockquote>
 	{{/if}}
-	</blockquote>
 
 	{{> navigation}}
 	{{> set-tags meta.tags}}
