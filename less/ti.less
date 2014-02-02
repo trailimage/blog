@@ -9,6 +9,7 @@
 @fontSize: 16px;
 @headerHeight: 70px;
 @mobileHeaderHeight: @headerHeight + 20;
+@imageWidth: 1034px;	/* includes borders */
 @contentWidth: 650px;
 @mobileWidth: 1024px;
 @boldColor: #524948;
@@ -17,9 +18,6 @@
 @lightColor: #dfe1df;
 @hoverColor: #910;
 @footnoteColor: #900;
-/* http://www.google.com/cse/setup/advanced?cx=012532665638014192714%3Aeb0vr5on0aw */
-@searchBackground: #f2f2f2;
-@searchFont: 'Droid Sans', Arial, sans-serif;
 /* http://codepen.io/ericrasch/pen/HzoEx and http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
 @small: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
 	    ~"only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
@@ -105,7 +103,7 @@ a
 
 .clear { clear: both; }
 
-/* Facebook ---------------------------------------------------------------- */
+/* Social ------------------------------------------------------------------ */
 
 #fb-root { position: absolute; }
 
@@ -163,7 +161,7 @@ div.previous
 
 div.next, div.previous
 {
-	width: (1028 - @contentWidth) / 2;
+	width: (@imageWidth - @contentWidth) / 2;
 	margin-top: 30px;
 	position: absolute;
 	font-family: @sanSerifFont;
@@ -218,7 +216,7 @@ div.next, div.previous
 	{
 		position: absolute;
 		top: 39px;
-		left: 7px;
+		left: 6px;
 		margin: 0;
 		white-space: nowrap;
 		font-size: 46px;
@@ -243,6 +241,15 @@ div.next, div.previous
 
 	@media @small {	display: none; }
 
+	.twitter
+	{
+		height: 22px;
+		width: 65px;
+		position: absolute;
+		right: 15px;
+		top: 35px;
+	}
+
 	a
 	{
 		display: block;
@@ -250,15 +257,106 @@ div.next, div.previous
 		text-decoration: none;
 
 		&:hover { text-decoration: underline; color: @lightColor; }
+
 		&.feed-icon
 		{
 			background-image: url(/img/feed-icon-14x14.png);
 			background-repeat: no-repeat;
-			margin-top: 7px;
+			margin-top: 3px;
 			padding-left: 18px;
 			line-height: 1em;
 		}
 	}
+
+	div.gsc-control-searchbox-only
+	{
+		@width: (@imageWidth - @contentWidth) / 2;
+		@buttonWidth: 50px;
+
+		width: @width;
+
+		form.gsc-search-box
+		{
+			table.gsc-search-box
+			{
+				width: auto;
+				line-height: 14px;
+
+				td
+				{
+					padding: 0;
+					margin: 0;
+
+					&.gsc-input
+					{
+						div.gsc-input-box
+						{
+							width: @width - @buttonWidth;
+							position: relative;
+							border-color: #000;
+							border-right: none;
+							.inner-shadow(1px, 1px, 2px, 0.4);
+
+							table
+							{
+								margin: 5px 0 0 5px;
+
+								td
+								{
+									padding-right: 10px;
+
+									input.gsc-input
+									{
+										font-size: 14px;
+										font-family: @sanSerifFont;
+									}
+									/* cancel button */
+									div a span.gscb_a { position: absolute; top: -5px; right: 0; }
+								}
+							}
+						}
+					}
+
+					&.gsc-search-button
+					{
+						width: @buttonWidth;
+						vertical-align: top;
+
+						input.gsc-search-button
+						{
+							margin: 0;
+							background-color: @trimColor;
+							border-color: #000;
+							border-left: none;
+							padding: 6px 8px;
+							.border-radius(3px, 3px);
+
+							&:hover
+							{
+								background-color: @lightTrimColor;
+							}
+						}
+					}
+
+					&.gsc-clear-button
+					{
+						div.gsc-clear-button
+						{
+
+						}
+					}
+				}
+			}
+
+			table.gsc-branding
+			{
+				td.gsc-branding-user-defined { }
+				td.gsc-branding-text { div { } }
+				td.gsc-branding-img { img { } }
+			}
+		}
+	}
+
 	.twitter-follow-button { margin-top: 7px; }
 }
 
@@ -1185,7 +1283,6 @@ li.set-summary
 
 div.category
 {
-	border-bottom: 1px solid @lightTrimColor;
 	margin-bottom: 10px;
 
 	ul.sets
@@ -1204,57 +1301,10 @@ div.category
 
 /* Search ------------------------------------------------------------------ */
 
+/* http://www.google.com/cse/setup/advanced?cx=012532665638014192714%3Aeb0vr5on0aw */
 div.search
 {
-	background-color: @searchBackground;
-	border-bottom: 1px solid @lightTrimColor;
 	margin-bottom: 10px;
-
-	ul.sets
-	{
-		list-style: none;
-		padding: 0;
-		margin: 0 20px 0 13px;
-
-		li.set-summary
-		{
-			font-family: @searchFont;
-
-			div.thumb
-			{
-				float: left;
-				margin: 0 10px;
-				width: 78px;
-				height: 78px;
-
-				img
-				{
-					border: 1px solid #524948;
-					&:hover { border-color: @hoverColor; }
-				}
-			}
-
-			a.title { color: #524948; }
-			a.link
-			{
-				display: block;
-				color: #453;
-				text-decoration: none;
-				font-size: 10pt;
-			}
-			p.summary { display: none; }
-			div.photo-count { display: none; }
-
-			&:hover
-			{
-				padding: 8px;
-				background-color: #fff;
-				border: 1px solid @trimColor;
-
-				ul.tags li { border: none; }
-			}
-		}
-	}
 }
 
 /* Contact ----------------------------------------------------------------- */

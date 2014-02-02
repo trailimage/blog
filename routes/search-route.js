@@ -1,7 +1,7 @@
 var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
-/** @type {singleton} */
+/** @type {Metadata} */
 var Metadata = require('../metadata/metadata.js');
 
 /**
@@ -12,30 +12,28 @@ exports.view = function(req, res)
 	var template = 'search';
 	var reply = Output.current.responder(template, res, 'text/html');
 
-	if (!Metadata.current.setInfoLoaded)
+	reply.render(template,
 	{
-		// don't cache until all item info is loaded since search page shows lazy loaded thumbs
-		render(reply, template);
-	}
-	else
-	{
-		reply.send(function(sent)
-		{
-			if (!sent) { render(reply, template); }
-		});
-	}
+		'title': 'Search for &ldquo;' + req.query['q'] + '&rdquo;',
+		'setting': Setting
+	});
+
+//	reply.send(function(sent)
+//	{
+//		if (!sent) { render(req.query['q'], reply, template); }
+//	});
 };
 
 /**
+ * @param {String} term
  * @param {Responder} reply
  * @param {String} template
  */
-function render(reply, template)
-{
-	reply.render(template,
-	{
-		'sets': Metadata.current.sets,
-		'title': 'Search ' + Setting.title,
-		'setting': Setting
-	});
-}
+//function render(term, reply, template)
+//{
+//	reply.render(template,
+//	{
+//		'title': 'Search for &ldquo;' + term + '&rdquo;',
+//		'setting': Setting
+//	});
+//}
