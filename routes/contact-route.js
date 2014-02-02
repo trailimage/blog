@@ -58,7 +58,7 @@ function showForm(res, error, recaptcha)
 
 	reply.render(key,
 	{
-		'title': 'Contact Me',
+		'title': Format.icon('envelope') + 'Contact Me',
 		'error': error,
 		'captcha': recaptcha.toHTML()
 	});

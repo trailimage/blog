@@ -198,6 +198,7 @@ div.next, div.previous
 	position: absolute;
 	top: 15px;
 	left: 5px;
+	text-decoration: none;
 
 	@media @small {	display: none; }
 
@@ -222,6 +223,13 @@ div.next, div.previous
 		white-space: nowrap;
 		font-size: 46px;
 		font-family: 'Qwigley', Tahoma, Arial;
+	}
+
+	&:hover
+	{
+		h1, h2, h3 { text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7); .transition(); }
+		h1, h3 { color: rgba(255, 255, 255, 0.2); }
+		h2 { color: rgba(255, 255, 255, 0.4); }
 	}
 }
 
@@ -319,6 +327,12 @@ div.next, div.previous
 			vertical-align: top;
 			margin-top: 2px;
 
+			.glyphicon
+			{
+				padding: 0 5px 0 1px;
+				.opacity(0.8);
+			}
+
 			@media @small
 			{
 				font-size: 36pt;
@@ -366,16 +380,17 @@ div.next, div.previous
 	#setDate, .videoLink
 	{
 		position: absolute;
-		font-size: 10pt;
 		font-family: @sanSerifFont;
-		color: @boldColor;
 	}
 
 	#setDate
 	{
 		top: @headerHeight - 26;
-		right: 65px;
+		right: 63px;
 		z-index: 200;
+		font-weight: bold;
+		font-size: 14px;
+		color: lighten(@boldColor, 10%);
 
 		@media @small
 		{
@@ -457,14 +472,14 @@ div.by-line
 	position: relative;
 	text-align: right;
 	font-family: 'Qwigley', Tahoma, Arial;
-	font-size: 35px;
+	font-size: 55px;
 	font-weight: normal;
 	line-height: 40px;
 	color: @boldColor;
 	padding: 0 30px 20px 0;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 
-	span { font-size: 55px; }
+	span { font-size: 35px; padding-right: 5px; }
 }
 
 div.tag-wrapper
@@ -487,9 +502,9 @@ div.tag-wrapper
 	.glyphicon
 	{
 		position: absolute;
-		top: 2px;
+		top: 3px;
 		right: 6px;
-		font-size: @height - 4;
+		font-size: @height - 6;
 		color: rgba(255, 255, 255, 0.4);
 	}
 
@@ -810,6 +825,7 @@ div.caption
 
 	blockquote
 	{
+		font-size: @fontSize - 1;
 		background-image: url(/img/left-quote.png);
 		background-repeat: no-repeat;
 		background-position: left top;
@@ -818,17 +834,16 @@ div.caption
 
 		&.poem
 		{
+			font-family: @serifFont;
 			padding-left: 6em;
 			line-height: 1.2em;
 			margin-bottom: 1em;
-			font-size: 12pt;
 			text-align: left;
 		}
 
 		p
 		{
-			padding: 0 3em 0.5em 4em;
-			font-size: 12pt;
+			padding: 0 4em 0.5em 4em;
 			//text-indent: 0;
 			line-height: 1.1em;
 			color: #444;
@@ -892,10 +907,12 @@ div.caption
 	}
 	div.footnotes
 	{
+		@indent: 20px;
+
 		position: relative;
 		border-top: 1px solid @trimColor;
 		background-color: darken(@lightColor, 5%);
-		padding: 8px 20px 0 0;
+		padding: 0 20px 0 0;
 		font-family: @sanSerifFont;
 		font-size: 13px;
 		margin-top: 8px;
@@ -918,9 +935,9 @@ div.caption
 		p
 		{
 			font-family: @sanSerifFont;
-			text-indent: -14px;
+			text-indent: -@indent;
 			margin: 0 40px;
-			padding: 0 0 3px 12px;
+			padding: 5px 0 3px @indent;
 			line-height: 1.2em;
 
 			@media @small
@@ -928,16 +945,20 @@ div.caption
 				text-indent: -28px;
 			}
 
-			a { margin-left: 3px; }
+			a { }
 		}
 		sup
 		{
+			display: inline-block;
+			text-indent: 0;
+			width: @indent;
+			margin: 0;
 			font-size: 13px;
 			line-height: 15px;
-			padding: 0 4px;
+			padding: 0;
 			vertical-align: bottom;
 
-			&.title { padding-left: 2px; font-size: 20px; line-height: 10px; vertical-align: bottom; }
+			&.title { font-size: 20px; line-height: 10px; vertical-align: bottom; }
 		}
 
 		.opacity();
@@ -1248,7 +1269,6 @@ div.contact
 	{
 		padding: 1em 0;
 		text-align: left;
-		border-bottom: 1px solid @lightTrimColor;
 
 		label
 		{
@@ -1366,10 +1386,12 @@ div.authorize
 		color: #777;
 		font-weight: normal;
 		font-family: @sanSerifFont;
-		font-size: 14px;
+		font-size: 13px;
 		text-indent: 0;
 		padding: 0;
 		margin: 2px;
+
+		&.rights { font-size: 14px; };
 
 		@media @small { font-size: 14pt; }
 	}
