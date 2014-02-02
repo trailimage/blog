@@ -268,81 +268,89 @@ div.next, div.previous
 		}
 	}
 
-	div.gsc-control-searchbox-only
+	div.google-search
 	{
 		@width: (@imageWidth - @contentWidth) / 2;
 		@buttonWidth: 50px;
 
 		width: @width;
+		height: 30px;
+		margin-left: -1px;
 
-		form.gsc-search-box
+		div.gsc-control-searchbox-only
 		{
-			table.gsc-search-box
+			@width: (@imageWidth - @contentWidth) / 2;
+			@buttonWidth: 50px;
+
+			form.gsc-search-box
 			{
-				width: auto;
-				line-height: 14px;
-
-				td
+				table.gsc-search-box
 				{
-					padding: 0;
-					margin: 0;
+					width: auto;
+					line-height: 14px;
 
-					&.gsc-input
+					td
 					{
-						div.gsc-input-box
+						padding: 0;
+						margin: 0;
+
+						&.gsc-input
 						{
-							width: @width - @buttonWidth;
-							position: relative;
-							border-color: #000;
-							border-right: none;
-							.inner-shadow(1px, 1px, 2px, 0.4);
-
-							table
+							div.gsc-input-box
 							{
-								margin: 5px 0 0 5px;
+								width: @width - @buttonWidth;
+								position: relative;
+								border-color: #000;
+								border-right: none;
+								.inner-shadow(1px, 1px, 2px, 0.4);
 
-								td
+								table
 								{
-									padding-right: 10px;
+									margin: 5px 0 0 5px;
 
-									input.gsc-input
+									td
 									{
-										font-size: 14px;
-										font-family: @sanSerifFont;
+										padding-right: 10px;
+
+										input.gsc-input
+										{
+											font-size: 14px;
+											font-family: @sanSerifFont;
+										}
+										/* cancel button */
+										div a span.gscb_a { position: absolute; top: -5px; right: 0; }
 									}
-									/* cancel button */
-									div a span.gscb_a { position: absolute; top: -5px; right: 0; }
 								}
 							}
 						}
-					}
 
-					&.gsc-search-button
-					{
-						width: @buttonWidth;
-						vertical-align: top;
-
-						input.gsc-search-button
+						&.gsc-search-button
 						{
-							margin: 0;
-							background-color: @trimColor;
-							border-color: #000;
-							border-left: none;
-							padding: 6px 8px;
-							.border-radius(3px, 3px);
+							width: @buttonWidth;
+							vertical-align: top;
 
-							&:hover
+							input.gsc-search-button
 							{
-								background-color: @lightTrimColor;
+								margin: 0;
+								background-color: @trimColor;
+								border-color: #000;
+								border-left: none;
+								padding: 6px 8px;
+								.border-radius(3px, 3px);
+
+								&:hover
+								{
+									background-color: @lightTrimColor;
+								}
 							}
 						}
-					}
 
-					&.gsc-clear-button
-					{
-						div.gsc-clear-button
+						&.gsc-clear-button
 						{
+							div.gsc-clear-button
+							{
 
+							}
 						}
 					}
 				}
