@@ -89,6 +89,11 @@ function MetadataSet(api, timebound)
 		}
 	}
 
+	this.hasTags = function()
+	{
+		return _this.tags.length > 0;
+	};
+
 	/**
 	 * Title and optional subtitle
 	 * @returns {string}
