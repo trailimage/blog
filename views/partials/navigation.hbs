@@ -2,10 +2,10 @@
 <!--googleoff: index-->
 <div class='previous'>
 {{#if meta.previousIsPart}}
-	<h4>&larr; Part {{meta.previous.part}}</h4>
+	<h4>{{{icon 'chevron-left'}}} Part {{meta.previous.part}}</h4>
 	<a href="/{{meta.previous.slug}}">{{meta.previous.subTitle}}</a>
 {{else}}
-	<h4>&larr; Previous</h4>
+	<h4>{{{icon 'chevron-left'}}} Previous</h4>
 	<a href="/{{meta.previous.slug}}">{{meta.previous.title}}</a>
 {{/if}}
 </div>
@@ -15,10 +15,10 @@
 <!--googleoff: index-->
 <div class='next'>
 {{#if meta.nextIsPart}}
-	<h4>Part {{meta.next.part}}&rarr;</h4>
+	<h4>Part {{meta.next.part}}{{{icon 'chevron-right'}}}</h4>
 	<a href="/{{meta.next.slug}}">{{meta.next.subTitle}}</a>
 {{else}}
-	<h4>Next &rarr;</h4>
+	<h4>Next {{{icon 'chevron-right'}}}</h4>
 	<a href="/{{meta.next.slug}}">{{meta.next.title}}</a>
 {{/if}}
 </div>

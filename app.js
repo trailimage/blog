@@ -68,6 +68,7 @@ app.configure('all', function()
 	hbs.registerHelper('formatLogTime', function(text) { return Format.logTime(text); });
 	hbs.registerHelper('formatISO8601', function(text) { return Format.iso8601time(text); });
 	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
+	hbs.registerHelper('icon', function(name) { return Format.icon(name); });
 
 	app.use(Express.bodyParser());
 	app.use(app.router);

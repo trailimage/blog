@@ -1,10 +1,11 @@
 {{#if this}}
 <div class="tag-wrapper">
 	<ul class="tags">
-		<li class="label">Categories:</li>
+		<li class="label">More like this:</li>
 		{{#each this}}
 			<li><a href="/tag/{{makeSlug this}}">{{this}}</a></li>
 		{{/each}}
 	</ul>
+	{{{icon 'tags'}}}
 </div>
 {{/if}}

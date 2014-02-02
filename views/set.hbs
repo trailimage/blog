@@ -25,21 +25,20 @@
 	<div class="fb-like" data-href="http://{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 	{{#if video}}
-	<a class="videoLink" href="#video"><img src='/img/play_video3.png'/>jump to the video</a>
+	<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
 	{{/if}}
 
 	<blockquote class="synopsis">
 	{{#if info.description._content}}
 		<p itemprop="description">{{info.description._content}}<p>
 	{{/if}}
-	{{> set-tags meta.tags}}
 	</blockquote>
 
 	{{> navigation}}
+	{{> set-tags meta.tags}}
 
 	{{#if map}}
-	<div class='map' itemprop="creator" itemscope itemtype='http://schema.org/Person'>
-		<div id='by-line'>by <span itemprop='name'>Jason Abbott</span></div>
+	<div class='map'>
 		<img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{map}}"/>
 	</div>
 	{{/if}}
@@ -56,10 +55,10 @@
 			data-original="{{url_l}}"/>
 	</a>
 
-    <div class="exif" data-url="/exif/{{id}}">Camera Settings</div>
+    <div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
 
 	{{#if longitude}}
-		<a class='map' target='_blank' href="http://maps.google.com/maps?q={{latitude}},{{longitude}}&hl=en&t=w&z=15">map</a>
+		<a class='map' target='_blank' title='View on map' href="http://maps.google.com/maps?q={{latitude}},{{longitude}}&hl=en&t=w&z=15">map{{{icon 'map-marker'}}}</a>
 	{{/if}}
 
 	{{#if title}}
@@ -79,10 +78,11 @@
 </a>
 {{/if}}
 
+{{> navigation}}
 <div class="footer-tags content">{{> set-tags meta.tags}}</div>
+<div class='by-line content' itemprop="creator" itemscope itemtype='http://schema.org/Person'>by <span itemprop='name'>Jason Abbott</span></div>
 
 <div id="footer" class="content">
-	{{> navigation}}
 	{{#setting.facebook.enabled}}
 	<div class="fb-comments" data-href="http://{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
 	{{/setting.facebook.enabled}}

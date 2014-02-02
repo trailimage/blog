@@ -365,7 +365,7 @@ exports.paragraph = function(text)
 					.replace(/[⁴]\s*/g, '<sup>4.</sup>')
 					.replace(/[⁵]\s*/g, '<sup>5.</sup>')
 					.replace(/[⁶]\s*/g, '<sup>6.</sup>')
-					.replace(/[⁷]\s*/g, '<sup>7.</sup>') + '</div>';
+					.replace(/[⁷]\s*/g, '<sup>7.</sup>') + exports.icon('book') + '</div>';
 			})
 			.replace(Enum.pattern.superscript, '<sup>$1</sup>')
 			.replace(/(<p>)?\[Q\]/g, '<blockquote><p>')
@@ -403,6 +403,16 @@ exports.poem = function(text)
 	p = p.replace(Enum.pattern.superscript, '<sup>$1</sup>');
 
 	return '<' + tag + ' class="poem">' + p + '</' + tag + '>';
+};
+
+/**
+ * @param {string} name
+ * @returns {string}
+ * @see http://getbootstrap.com/components/
+ */
+exports.icon = function(name)
+{
+	return '<span class="glyphicon glyphicon-' + name + '"></span>';
 };
 
 /**

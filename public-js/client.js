@@ -37,7 +37,7 @@ $(function()
 	$photos.find('.exif').mouseenter(function()
 	{
 		var $exif = $(this);
-		$exif.off('mouseenter').html('Loading …').load($exif.data('url'));
+		$exif.off('mouseenter').html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>').load($exif.data('url'));
 	});
 
 	function updateSets()
@@ -58,7 +58,7 @@ $(function()
 				.css({borderColor: '#f40', color: '#f40'})
 				.animate({borderColor: '#747e73', color: '#000'}, 600)
 				.appendOption(0, '— View Another Adventure —')
-				.append($('<optgroup>').addClass('note').attr('label', '     ' + bullet + 'Motorcycle Ride'));
+				.append($('<optgroup>').addClass('note').attr('label', '     ' + bullet + '(dot indicates motorcycle ride)'));
 
 			for (var i = 0; i < menu[root].length; i++)
 			{

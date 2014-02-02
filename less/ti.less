@@ -1,10 +1,12 @@
 @import "elements";
+@import "glyphicons";
 
 /* http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
 
 /* https://github.com/acdvorak/intellij-lessc-plugin */
-@sanSerifFont: Trebuchet MS, Tahoma, Arial;
-@serifFont: Georgia, Times;
+@sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
+@serifFont: 'Lora', Georgia, Times;
+@fontSize: 16px;
 @headerHeight: 80px;
 @mobileHeaderHeight: @headerHeight + 20;
 @contentWidth: 650px;
@@ -14,9 +16,10 @@
 @lightTrimColor: #bfc1bf;
 @lightColor: #dfe1df;
 @hoverColor: #910;
+@footnoteColor: #900;
 /* http://www.google.com/cse/setup/advanced?cx=012532665638014192714%3Aeb0vr5on0aw */
 @searchBackground: #f2f2f2;
-@searchFont: Arial, sans-serif;
+@searchFont: 'Droid Sans', Arial, sans-serif;
 /* http://codepen.io/ericrasch/pen/HzoEx and http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
 @small: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
 	    ~"only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
@@ -27,6 +30,7 @@ html
 {
 	overflow-y: scroll;
 	overflow: -moz-scrollbars-vertical;
+	/*-webkit-font-smoothing: subpixel-antialiased;*/
 }
 
 body
@@ -84,7 +88,9 @@ a
 .content
 {
 	position: relative;
-	font: normal normal 121% Georgia, Times New Roman,Sans-Serif;
+	/*font: normal normal 121% Georgia, Times New Roman, Sans-Serif;*/
+	font-family: @sanSerifFont;
+	font-weight: normal;
 	text-align: left;
 	margin: 0 auto;
 	padding: 0;
@@ -161,11 +167,22 @@ div.next, div.previous
 	margin-top: 30px;
 	position: absolute;
 	font-family: @sanSerifFont;
-	font-size: 12pt;
+	font-size: 16px;
 
 	@media @small {	display: none; }
 
-	h4 { color: #777; margin: 0; font-size: 14pt; line-height: 1em; }
+	h4
+	{
+		color: #777;
+		margin: 0 0 2px 0;
+		font-size: 22px;
+		line-height: 1em;
+
+		.glyphicon
+		{
+			font-size: 17px;
+		}
+	}
 	a
 	{
 		color: #ddd;
@@ -175,6 +192,36 @@ div.next, div.previous
 }
 
 /* Header ------------------------------------------------------ */
+
+#bug
+{
+	position: absolute;
+	top: 10px;
+	left: 5px;
+
+	h1, h2, h3
+	{
+		margin: 0 0 0 10px;
+		padding: 0;
+		color: rgba(255, 255, 255, 0.1);
+		text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+		font-family: 'Oswald', Impact, Arial;
+		font-weight: normal;
+		line-height: 1em;
+	}
+	h1 { font-size: 40px; }
+	h2 { font-size: 13px; letter-spacing: 5px; text-transform: uppercase; padding-left: 5px; color: rgba(255, 255, 255, 0.2); }
+	h3
+	{
+		position: absolute;
+		top: 39px;
+		left: 7px;
+		margin: 0;
+		white-space: nowrap;
+		font-size: 46px;
+		font-family: 'Qwigley', Tahoma, Arial;
+	}
+}
 
 #links
 {
@@ -243,7 +290,7 @@ div.next, div.previous
 				border: 1px solid @trimColor;
 
 				/* option.bullet { color: #444; } */
-				optgroup.note { color: lighten(@trimColor, 10%); font-size: small; }
+				optgroup.note { color: #855; font-size: small; }
 
 				@media @small
 				{
@@ -257,14 +304,16 @@ div.next, div.previous
 		h1
 		{
 			margin-left: 7px;
-			font-family: Impact, Arial, sans-serif;
-			font-weight: normal;
-			font-size: 32px;
+			font-family: 'Oswald', Impact, Arial;
+			letter-spacing: -1px;
+			font-weight: 700;
+			font-size: 34px;
+			line-height: 1em;
 			color: @boldColor; /* 423938 or 5e685c */
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 			float: left;
 			vertical-align: top;
-			margin-top: 0;
+			margin-top: 5px;
 
 			@media @small
 			{
@@ -277,8 +326,10 @@ div.next, div.previous
 		.subTitle
 		{
 			font-family: @sanSerifFont;
-			padding-left: 10px;
-			font-size: 20px;
+			color: @boldColor;
+			letter-spacing: 0;
+			padding: 4px 0 0 7px;
+			font-size: 22px;
 			float: left;
 			line-height: 0.8em;
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -318,7 +369,7 @@ div.next, div.previous
 
 	#setDate
 	{
-		top: @headerHeight - 1;
+		top: @headerHeight;
 
 		@media @small
 		{
@@ -330,33 +381,31 @@ div.next, div.previous
 
 	.videoLink
 	{
-		top: @headerHeight + 18;
+		position: absolute;
+		right: 8px;
+		top: @headerHeight + 16;
+		height: 16px;
 		text-transform: uppercase;
 		text-decoration: none;
 		letter-spacing: 1px;
-		font-size: 8pt;
-		right: 9px;
+		font-size: 12px;
+		line-height: 12px;
 		z-index: 21;
+		color: #fff;
+		padding: 1px 4px 0;
+		.gradient(#800, #810, #966);
+		.rounded(3px);
+		.opacity(0.7);
+		
+		.glyphicon { margin-right: 6px; }
+
+		&:hover { .opacity(1); }
 
 		@media @small
 		{
 			display: none;
 			top: @mobileHeaderHeight + 18;
 			font-size: 18pt;
-		}
-
-		img
-		{
-			position: absolute;
-			left: -20px;
-			top: 0;
-			.opacity();
-		}
-
-		&:hover
-		{
-			color: #c00;
-			img { .opacity(1); }
 		}
 	}
 
@@ -366,13 +415,13 @@ div.next, div.previous
 		border: none;
 		background-color: rgba(255, 255, 255, 0.5);
 		font-weight: normal;
-		line-height: 1.1em;
+		line-height: 1em;
 		font-family: @sanSerifFont;
 		letter-spacing: -0.5px;
-		font-size: 12pt;
+		font-size: 15px;
 		text-align: justify;
 		margin: 0 45px;
-		padding: 1em 1.5em 0 1.5em;
+		padding: 0.5em 1em;
 		color: @boldColor;
 
 		@media @small
@@ -396,43 +445,56 @@ div.next, div.previous
 		margin: 0;
 
 		@media @small { display: none; }
-
-		#by-line
-		{
-			position: absolute;
-			font-family: @sanSerifFont;
-			font-weight: bold;
-			right: 10px; /* 47; */
-			font-size: 13pt;
-			top: 3px;
-			line-height: 1em;
-			color: #fff;
-			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
-		}
 	}
 }
 
-.footer-tags
+div.by-line
 {
-	font-family: @sanSerifFont;
-	background-color: #fff;
-	margin-bottom: 10px;
-	border-bottom: 1px dotted @lightTrimColor;
+	position: relative;
+	text-align: right;
+	font-family: 'Qwigley', Tahoma, Arial;
+	font-size: 35px;
+	font-weight: normal;
+	line-height: 40px;
+	color: @boldColor;
+	padding: 0 30px 20px 0;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+	span { font-size: 55px; }
 }
 
 div.tag-wrapper
 {
+	@height: 17px;
+
 	width: 100%;
-	margin-top: 3px;
+	height: @height;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 	text-align: center;
 	position: relative;
-	border-top: 1px dotted @lightTrimColor;
+	border: none;
+	background-color: @trimColor;
+	font-family: @sanSerifFont;
+	line-height: 10px;
+	.drop-shadow(0, 0, 2px, 0.4);
+
+	.glyphicon
+	{
+		position: absolute;
+		top: 2px;
+		right: 6px;
+		font-size: @height - 4;
+		color: rgba(255, 255, 255, 0.4);
+	}
 
 	ul.tags
 	{
 		list-style: none;
 		padding: 0;
-		margin: 0 auto 2px auto;
+		margin: 0 auto 0 auto;
+		white-space: nowrap;
 
 		@media @small
 		{
@@ -443,13 +505,14 @@ div.tag-wrapper
 
 		li
 		{
-			font-size: 9pt;
+			font-size: 13px;
 			font-weight: normal;
-			color: #888;
+			color: #fff;
 			display: inline-block;
-			padding: 1px 4px 0 0;
-			margin-left: 3px;
-			line-height: 1em;
+			padding: 0;
+			margin: 0;
+			line-height: @height - 4;
+			vertical-align: bottom;
 
 			@media @small
 			{
@@ -461,17 +524,27 @@ div.tag-wrapper
 
 			&.label
 			{
+				padding-bottom: 4px;
 				margin-left: 0;
-				margin-right: 0;
-				padding-left: 0;
-				padding-right: 0;
 				font-weight: bold;
+				text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
 				@media @small { display: none; }
 			}
 
 			a
 			{
+				height: @height;
+				display: block;
+				padding: 2px 4px 0;
 				text-decoration: none;
+				background-color: lighten(@trimColor, 7%);
+				color: #fff;
+
+
+				&:hover
+				{
+					background-color: darken(@trimColor, 10%);
+				}
 
 				@media @small
 				{
@@ -483,6 +556,14 @@ div.tag-wrapper
 			}
 		}
 	}
+}
+
+
+.footer-tags
+{
+	margin: 10px auto;
+
+	div.tag-wrapper { .drop-shadow(0, 0, 7px, 0.6); }
 }
 
 div.gas
@@ -498,7 +579,7 @@ div.gas
 
 div.video
 {
-	margin: 20px auto 1px auto;
+	margin: 5px auto 1px auto;
 
 	iframe
 	{
@@ -545,28 +626,57 @@ div.photo
 	  	position: absolute;
 	  	top: 5px;
 		right: 5px;
-		background-color: #000;
-		padding: 5px 10px;
-		font-family: @sanSerifFont;
-		font-size: 13pt;
 		color: #fff;
-		cursor: help;
+		background-color: #000;
+		padding: 2px 5px;
+		font-family: @sanSerifFont;
+		font-size: 15px;
+		font-weight: normal;
 		display: none;
 		text-align: center;
 		.opacity(0.7);
-		.border-radius(0, 0, 10px, 0);
+		.border-radius(0, 0, 3px);
+
+		p, .glyphicon
+		{
+			cursor: progress;
+			font-weight: normal;
+		}
+
+		p
+		{
+			display: inline;
+			line-height: 1.3em;
+			padding: 0 4px 0 27px;
+		}
+
+		.glyphicon
+		{
+			position: absolute;
+			top: 2px;
+			left: 6px;
+			color: @trimColor;
+			font-size: 21px;
+
+			&.glyphicon-download
+			{
+				top: 6px;
+				font-size: 17px;
+			}
+		}
 
 		ul
 		{
 			list-style: none;
-			margin: 0;
+			cursor: help;
+			margin: 4px 4px 6px 8px;
 			padding: 0;
 
 			li
 			{
-				padding-top: 5px;
+				padding-top: 1px;
 
-				&.camera { font-size: 16pt; }
+				&.camera { font-size: 16pt; margin-bottom: 2px; font-weight: bold; color: rgba(255, 255, 255, 0.6); }
 				&.focal-length { font-size: 12pt; line-height: 1em; }
 				&.iso { margin-top: 10px; }
 				&.software { margin-top: 10px; }
@@ -579,17 +689,29 @@ div.photo
 		display: block;
 		background-color: #fff;
 		color: #000;
-		padding: 2px 5px 5px 5px;
+		padding: 2px 23px 2px 5px;
 		font-family: @sanSerifFont;
-		font-size: 14pt;
+		font-size: 20px;
+		line-height: 17px;
 		text-decoration: none;
+		letter-spacing: -2px;
 		position: absolute;
 		border: 1px solid @boldColor;
 		.rounded(5px);
-		.opacity(0.3);
+		.opacity(0.2);
 		right: 11px;
-		bottom: 10px;
+		bottom: 12px;
 		z-index: 30;
+
+		.glyphicon
+		{
+			position: absolute;
+			right: 4px;
+			top: 2px;
+			font-size: 18px;
+			padding-left: 1px;
+			color: rgba(0, 0, 0, 0.4);
+		}
 
 		@media @small
 		{
@@ -602,8 +724,19 @@ div.photo
 
 	&:hover
 	{
-		a.map { .opacity(0.7); }
+		a.map
+		{
+			.opacity(0.7);
+			.glyphicon { color: rgba(255, 0, 0, 0.5); }
+
+			&:hover
+			{
+				.opacity(1);
+				.glyphicon { color: rgba(255, 0, 0, 1); }
+			}
+		}
 		div.exif { display: block; }
+		p span { color: #000; }
 	}
 
 	p
@@ -616,6 +749,7 @@ div.photo
 		z-index: 55;
 		margin: -17px auto 0 auto;
 		width: 100%;
+		letter-spacing: -1px;
 
 		@media @small
 		{
@@ -628,7 +762,7 @@ div.photo
 			margin-top: -10px;
 			background-color: #fff;
 			white-space: nowrap;
-			color: #000;
+			color: rgba(0, 0, 0, 0.7);
 			border: 1px solid #666;
 			.opacity(0.8);
 			padding: 0px 10px 1px 10px;
@@ -653,7 +787,17 @@ div.caption
 	margin-top: 0;
 	line-height: 1.3em;
 	padding: 4px 0;
-	font-size: 14pt;
+	font-size: @fontSize;
+
+	sup
+	{
+		color: @footnoteColor;
+		vertical-align: top;
+		line-height: 1em;
+		font-family: @sanSerifFont;
+		font-size: 18px;
+		cursor: help;
+	}
 
 	@media @small
 	{
@@ -666,6 +810,7 @@ div.caption
 		background-repeat: no-repeat;
 		background-position: left top;
 		margin: 1em;
+		text-align: justify;
 
 		&.poem
 		{
@@ -673,13 +818,12 @@ div.caption
 			line-height: 1.2em;
 			margin-bottom: 1em;
 			font-size: 12pt;
+			text-align: left;
 		}
-
-		sup { color: #900; vertical-align: top; line-height: 1em; }
 
 		p
 		{
-			padding: 0 2em 0.5em 4em;
+			padding: 0 3em 0.5em 4em;
 			font-size: 12pt;
 			//text-indent: 0;
 			line-height: 1.1em;
@@ -692,7 +836,7 @@ div.caption
 		text-indent: 2em;
 		font-family: @serifFont;
 		margin: 0;
-		padding: 0 2em 0.2em 2em;
+		padding: 0 2em 0.3em 2em;
 
 		@media @small
 		{
@@ -700,9 +844,7 @@ div.caption
 			padding-bottom: 0.5em;
 		}
 
-		&:first-child, &.first { text-indent: 0; padding-top: 0.3em; }
-
-		sup { color: #900; vertical-align: top; line-height: 1em; font-size: smaller; }
+		&:first-child, &.first { text-indent: 0; padding-top: 0.5em; }
 
 		&.note
 		{
@@ -745,11 +887,23 @@ div.caption
 	}
 	div.footnotes
 	{
+		position: relative;
 		border-top: 1px solid @trimColor;
-		padding: 0.5em 0 0.3em 0;
+		background-color: darken(@lightColor, 5%);
+		padding: 8px 20px 4px 0;
 		font-family: @sanSerifFont;
-		font-size: 10pt;
-		margin-top: 1em;
+		font-size: 13px;
+		margin-top: 8px;
+		cursor: help;
+
+		.glyphicon
+		{
+			color: darken(@lightTrimColor, 6%);
+			position: absolute;
+			right: 8px;
+			top: 4px;
+			font-size: 20px;
+		}
 
 		@media @small
 		{
@@ -758,29 +912,36 @@ div.caption
 
 		p
 		{
-			text-indent: -18px;
-			margin: 0 3em;
-			padding: 0 0 0 20px;
-			line-height: 1.3em;
+			font-family: @sanSerifFont;
+			text-indent: -14px;
+			margin: 0 40px;
+			padding: 0 0 3px 12px;
+			line-height: 1.2em;
 
 			@media @small
 			{
 				text-indent: -28px;
 			}
 
-			a { }
+			a { margin-left: 3px; }
 		}
 		sup
 		{
-			font-size: 10pt;
-			padding-right: 6px;
+			font-size: 13px;
+			line-height: 15px;
+			padding: 0 4px;
+			vertical-align: bottom;
 
-			&.title { padding-right: 8px; font-size: 14pt; }
+			&.title { padding-left: 2px; font-size: 20px; line-height: 10px; vertical-align: bottom; }
 		}
 
 		.opacity();
 
-		&:hover { .opacity(1); }
+		&:hover
+		{
+			background: none;
+			.opacity(1);
+		}
 	}
 }
 
@@ -793,13 +954,12 @@ div.caption
 	padding: 0;
 	position: relative;
 
-	p {	padding: 0 1em; }
+	p {	padding: 0 1em; font-family: @serifFont; font-size: 17px; line-height: 1.2em; }
 
 	.by-line
 	{
-		text-align: right;
-		font-style: italic;
-		padding: 0 1em;
+		text-align: center;
+		font-size: 48px;
 	}
 
 	#right-column
@@ -828,7 +988,7 @@ div.caption
 			float: left;
 			width: (@imageWidth / 2) - 1;
 			font-family: @sanSerifFont;
-			font-size: 10pt;
+			font-size: 13px;
 			line-height: 1em;
 			margin: 0;
 			padding: 0 0 0.5em 0;
@@ -860,7 +1020,7 @@ div.caption
 				clear: left;
 				width: @imageWidth - 1;
 				a { display: inline; margin: 0; }
-				p { margin: 0 1em; padding: 0.5em 0; }
+				p { margin: 0 1em; padding: 0.5em 0; font-family: @sanSerifFont; font-size: 15px; }
 				h1 { margin-bottom: 0; border-top: 1px solid @lightTrimColor; }
 			}
 		}
@@ -1188,8 +1348,10 @@ div.authorize
 
 #foot-links
 {
-	margin-top: -10px;
+	position: relative;
 	padding: 6px 0;
+	border-top: 1px solid @trimColor;
+	.inner-shadow(0, 2px, 4px, 0.2);
 
 	@media @small { margin-top: 1em; }
 
@@ -1198,12 +1360,11 @@ div.authorize
 		text-align: center;
 		color: #777;
 		font-weight: normal;
-		font-family: Verdana, Arial, sans-serif;
-		line-height: 1.2em;
-		font-size: 8pt;
+		font-family: @sanSerifFont;
+		font-size: 14px;
 		text-indent: 0;
 		padding: 0;
-		margin: 4px;
+		margin: 2px;
 
 		@media @small { font-size: 14pt; }
 	}
