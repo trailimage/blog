@@ -7,7 +7,7 @@
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
 @fontSize: 16px;
-@headerHeight: 80px;
+@headerHeight: 70px;
 @mobileHeaderHeight: @headerHeight + 20;
 @contentWidth: 650px;
 @mobileWidth: 1024px;
@@ -196,7 +196,7 @@ div.next, div.previous
 #bug
 {
 	position: absolute;
-	top: 20px;
+	top: 15px;
 	left: 5px;
 
 	@media @small {	display: none; }
@@ -256,6 +256,8 @@ div.next, div.previous
 
 #header
 {
+	position: relative;
+
 	#top
 	{
 		height: @headerHeight;
@@ -279,7 +281,7 @@ div.next, div.previous
 		#menu
 		{
 			position: absolute;
-			bottom: 8px;
+			bottom: 3px;
 			left: 5px;
 
 			@media @small {	bottom: 4px; }
@@ -315,7 +317,7 @@ div.next, div.previous
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 			float: left;
 			vertical-align: top;
-			margin-top: 5px;
+			margin-top: 2px;
 
 			@media @small
 			{
@@ -329,11 +331,11 @@ div.next, div.previous
 		{
 			font-family: @sanSerifFont;
 			color: @boldColor;
-			letter-spacing: 0;
-			padding: 4px 0 0 7px;
+			letter-spacing: -1px;
+			padding: 1px 0 0 7px;
 			font-size: 22px;
 			float: left;
-			line-height: 0.8em;
+			line-height: 18px;
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 
 			@media @small
@@ -344,9 +346,10 @@ div.next, div.previous
 			.parts
 			{
 				display: block;
-				font-size: 14px;
-				padding: 2px 0 0 1px;
-				line-height: 1em;
+				font-size: 15px;
+				padding: 3px 0 0 1px;
+				line-height: 13px;
+				letter-spacing: 0;
 
 				@media @small
 				{
@@ -366,12 +369,13 @@ div.next, div.previous
 		font-size: 10pt;
 		font-family: @sanSerifFont;
 		color: @boldColor;
-		right: 10px;
 	}
 
 	#setDate
 	{
-		top: @headerHeight;
+		top: @headerHeight - 26;
+		right: 65px;
+		z-index: 200;
 
 		@media @small
 		{
@@ -385,7 +389,7 @@ div.next, div.previous
 	{
 		position: absolute;
 		right: 8px;
-		top: @headerHeight + 16;
+		top: @headerHeight + 7;
 		height: 16px;
 		text-transform: uppercase;
 		text-decoration: none;
@@ -678,7 +682,7 @@ div.photo
 			{
 				padding-top: 1px;
 
-				&.camera { font-size: 16pt; margin-bottom: 2px; font-weight: bold; color: rgba(255, 255, 255, 0.6); }
+				&.camera { font-size: 16pt; margin-bottom: 3px; font-weight: bold; color: rgba(255, 255, 255, 0.6); }
 				&.focal-length { font-size: 12pt; line-height: 1em; }
 				&.iso { margin-top: 10px; }
 				&.software { margin-top: 10px; }

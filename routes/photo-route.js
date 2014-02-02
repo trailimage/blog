@@ -27,7 +27,7 @@ exports.exif = function(req, res)
             'Software'
         ]);
 
-	    if (values.Artist && /Abbott/.test(values.Artist))
+	    if (values.Artist && /(Abbott|Wright|Bowman|Thomas)/.test(values.Artist))
 	    {
 		    values.Model = normalizeCamera(values.Model);
 		    values.Lens = normalizeLens(values.Lens);
@@ -70,6 +70,8 @@ function normalizeLens(text)
 		.replace('24.0 mm f/3.5', 'Nikkor PC-E 24mm ƒ3.5D ED')
 		.replace('17.0-55.0 mm f/2.8', 'Nikon 17–55mm ƒ2.8G')
 		.replace('10.0-20.0 mm f/4.0-5.6', 'Sigma 10–20mm ƒ4–5.6 EX DC HSM')
+		.replace('1 NIKKOR VR 30-110mm f/3.8-5.6', 'Nikkor 1 30–110mm ƒ3.8–5.6 VR')
+		.replace('1 NIKKOR VR 10-30mm f/3.5-5.6', 'Nikkor 1 10–30mm ƒ3.5–5.6 VR')
 		.replace('18.0-200.0 mm f/3.5-5.6', 'Nikkor 18–200mm ƒ3.5–5.6G ED VR');
 }
 
