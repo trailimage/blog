@@ -14,7 +14,7 @@ exports.view = function(req, res)
 
 	reply.render(template,
 	{
-		'title': 'Search for &ldquo;' + req.query['q'] + '&rdquo;',
+		'title': 'Search for “' + req.query['q'] + '”',
 		'setting': Setting
 	});
 
