@@ -301,7 +301,7 @@ exports.story = function(text)
 		}
 		else
 		{
-			text = exports.paragraph(text);
+			text = exports.paragraphs(text);
 		}
 	}
 	return text;
@@ -322,11 +322,34 @@ exports.haiku = function(text, regex)
 		+ match[1] + '<br/>'
 		+ match[2] + '<br/>'
 		+ match[3] + exports.icon('leaf') + '</p>'
-		+ exports.paragraph(text.replace(match[0], ''));
+		+ exports.paragraphs(text.replace(match[0], ''));
 
 	regex.lastIndex = 0;
 
 	return text;
+};
+
+/**
+ * @param {String} text
+ * @returns {string}
+ */
+exports.poem = function(text)
+{
+	var tag = 'p',
+		p = text
+			.replace(/[\r\n\s]*$/g, '')
+			.replace(/\r*\n/gi, '<br/>')
+			.replace(/· · /g, '<span class="tab"></span>');
+
+	if (/^\s*["“]/g.test(p) && /["”]\s*[¹²³⁴⁵⁶⁷]?\s*$/g.test(p))
+	{
+		p = p.replace(/["“”]/g, '');
+		tag = 'blockquote';
+	}
+
+	p = p.replace(Enum.pattern.superscript, '<sup>$1</sup>');
+
+	return '<' + tag + ' class="poem">' + p + '</' + tag + '>';
 };
 
 /**
@@ -335,7 +358,7 @@ exports.haiku = function(text, regex)
  * @return {String} HTML formatted text
  * @see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */
-exports.paragraph = function(text)
+exports.paragraphs = function(text)
 {
 	"use strict";
 
@@ -400,29 +423,6 @@ exports.paragraph = function(text)
 		return text;
 	}
 	return '';
-};
-
-/**
- * @param {String} text
- * @returns {string}
- */
-exports.poem = function(text)
-{
-	var tag = 'p',
-		p = text
-		.replace(/[\r\n\s]*$/g, '')
-		.replace(/\r*\n/gi, '<br/>')
-		.replace(/· · /g, '<span class="tab"></span>');
-
-	if (/^\s*["“]/g.test(p) && /["”]\s*[¹²³⁴⁵⁶⁷]?\s*$/g.test(p))
-	{
-		p = p.replace(/["“”]/g, '');
-		tag = 'blockquote';
-	}
-
-	p = p.replace(Enum.pattern.superscript, '<sup>$1</sup>');
-
-	return '<' + tag + ' class="poem">' + p + '</' + tag + '>';
 };
 
 /**

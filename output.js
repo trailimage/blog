@@ -156,7 +156,7 @@ function Responder(key, res, output, mime)
 			compress.gzip(text, function(err, buffer)
 			{
 				var item = new OutputItem(key, buffer);
-				output.add(key, item);
+				if (Setting.cacheOutput) { output.add(key, item); }
 				sendCompressed(buffer, item.eTag);
 			});
 		});
@@ -186,19 +186,26 @@ function Responder(key, res, output, mime)
 	 */
 	this.send = function(callback)
 	{
-		output.get(key, function(item)
+		if (Setting.cacheOutput)
 		{
-			if (item != null)
+			output.get(key, function(item)
 			{
-				sendCompressed(item.bytes, item.eTag);
-				callback(true);
-			}
-			else
-			{
-				log.info('"%s" not cached', key);
-				callback(false);
-			}
-		});
+				if (item != null)
+				{
+					sendCompressed(item.bytes, item.eTag);
+					callback(true);
+				}
+				else
+				{
+					log.info('"%s" not cached', key);
+					callback(false);
+				}
+			});
+		}
+		else
+		{
+			callback(false);
+		}
 	};
 
 	/**

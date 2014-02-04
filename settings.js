@@ -13,6 +13,8 @@ exports.logFile = './temp/trail-image.log';
 exports.emailRecipient = Format.decodeBase64(process.env.SMTP_RECIPIENT);
 /** @type {url} */
 exports.redis = null;
+/** @type {Boolean} */
+exports.cacheOutput = false;
 
 /**
  * @enum {String}

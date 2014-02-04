@@ -29,6 +29,7 @@ app.configure('all', function()
 	Setting.isProduction = (process.env.NODE_ENV == 'production');
 	Setting.redis = url.parse(process.env.REDISCLOUD_URL);
 	Setting.redis.auth = Setting.redis.auth.split(":")[1];
+	Setting.cacheOutput = Setting.isProduction;
 
 	require('winston-redis').Redis;
 
