@@ -1002,13 +1002,22 @@ div.caption
 
 		&.haiku
 		{
-			font-family: Book Antiqua, Palatino, Times New Roman;
 			font-style: italic;
 			font-size: 24px;
 			text-indent: 0;
 			padding-left: 80px;
 			line-height: 1.1em;
-			color: #7e887c;
+
+			.glyphicon
+			{
+				display: block;
+				position: absolute;
+				top: 20px;
+				right: 100px;
+				color: @trimColor;
+				font-size: 70px;
+				.opacity(0.3);
+			}
 		}
 	}
 	div.footnotes

@@ -279,33 +279,53 @@ exports.story = function(text)
 	{
 		var haiku = Enum.pattern.haiku;
 		var poetry = Enum.pattern.allPoem;
+		var allHaiku = Enum.pattern.allHaiku;
 
 		if (poetry.test(text))
 		{
-			text = '<p class="poem">'
-				+ text.replace(/\r*\n/gi, '<br/>').replace(/· · /g, '<span class="tab"></span>')
-				+ '</p>';
+			if (allHaiku.test(text))
+			{
+				text = exports.haiku(text, allHaiku);
+			}
+			else
+			{
+				text = '<p class="poem">'
+					+ text.replace(/\r*\n/gi, '<br/>').replace(/· · /g, '<span class="tab"></span>')
+					+ '</p>';
+			}
 			poetry.lastIndex = 0;
 		}
 		else if (haiku.test(text))
 		{
-			haiku.lastIndex = 0;
-
-			var match = haiku.exec(text);
-
-			text = '<p class="haiku">'
-				+ match[1] + '<br/>'
-				+ match[2] + '<br/>'
-				+ match[3] + '</p>'
-				+ exports.paragraph(text.replace(match[0], ''));
-
-			haiku.lastIndex = 0;
+			text = exports.haiku(text, haiku);
 		}
 		else
 		{
-			text = this.paragraph(text);
+			text = exports.paragraph(text);
 		}
 	}
+	return text;
+};
+
+/**
+ *
+ * @param {String} text
+ * @param {RegExp} regex
+ */
+exports.haiku = function(text, regex)
+{
+	regex.lastIndex = 0;
+
+	var match = regex.exec(text);
+
+	text = '<p class="haiku">'
+		+ match[1] + '<br/>'
+		+ match[2] + '<br/>'
+		+ match[3] + exports.icon('leaf') + '</p>'
+		+ exports.paragraph(text.replace(match[0], ''));
+
+	regex.lastIndex = 0;
+
 	return text;
 };
 
