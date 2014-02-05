@@ -8,7 +8,7 @@
 @serifFont: 'Lora', Georgia, Times;
 @fontSize: 16px;
 @headerHeight: 70px;
-@mobileHeaderHeight: @headerHeight + 20;
+@mobileHeaderHeight: @headerHeight + 33;
 @imageWidth: 1034px;	/* includes borders */
 @contentWidth: 650px;
 @mobileWidth: 1024px;
@@ -44,7 +44,8 @@ body
 	@media @small
 	{
 		background: none;
-		/* background-color: #000; */
+		width: @mobileWidth;
+		overflow: hidden;
 	}
 }
 
@@ -86,7 +87,6 @@ a
 .content
 {
 	position: relative;
-	/*font: normal normal 121% Georgia, Times New Roman, Sans-Serif;*/
 	font-family: @sanSerifFont;
 	font-weight: normal;
 	text-align: left;
@@ -403,7 +403,7 @@ div.next, div.previous
 			select
 			{
 				font-family: @sanSerifFont;
-				font-size: 12pt;
+				font-size: 16px;
 				background-color: #eff1ef;
 				border: 1px solid @trimColor;
 
@@ -412,7 +412,7 @@ div.next, div.previous
 
 				@media @small
 				{
-					font-size: 24pt;
+					font-size: 24px;
 					padding: 0 10px;
 					text-align: center;
 				}
@@ -441,8 +441,7 @@ div.next, div.previous
 
 			@media @small
 			{
-				font-size: 36pt;
-				font-weight: bold;
+				font-size: 50px;
 				line-height: 1.1em;
 			}
 		}
@@ -500,9 +499,9 @@ div.next, div.previous
 
 		@media @small
 		{
-			top: @mobileHeaderHeight + 4;
-			font-size: 18pt;
-			right: 8px;
+			font-size: 20px;
+			right: 74px;
+			top: @mobileHeaderHeight - 34;
 		}
 	}
 
@@ -586,11 +585,19 @@ div.by-line
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 
 	span { font-size: 35px; padding-right: 5px; }
+
+	@media @small
+	{
+		font-size: 80px;
+		line-height: 55px;
+		padding-top: 10px;
+	}
 }
 
 div.tag-wrapper
 {
 	@height: 17px;
+	@mobileHeight: @height + 30;
 
 	width: 100%;
 	height: @height;
@@ -614,6 +621,13 @@ div.tag-wrapper
 		color: rgba(255, 255, 255, 0.4);
 	}
 
+	@media @small
+	{
+		height: @mobileHeight;
+		.box-shadow(none);
+		.glyphicon { top: 8px; right: 15px; font-size: @mobileHeight - 15; }
+	}
+
 	ul.tags
 	{
 		list-style: none;
@@ -623,8 +637,6 @@ div.tag-wrapper
 
 		@media @small
 		{
-			height: 1.5em;
-			padding: 15px 0 0 0;
 			border: none;
 		}
 
@@ -641,10 +653,9 @@ div.tag-wrapper
 
 			@media @small
 			{
-				float: none;
-				display: inline-block;
-				font-size: 20pt;
-				padding: 0 2px;
+				padding-top: 2px;
+				font-size: 28px;
+				line-height: @mobileHeight - 10;
 			}
 
 			&.label
@@ -653,7 +664,12 @@ div.tag-wrapper
 				margin-left: 0;
 				font-weight: bold;
 				text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
-				@media @small { display: none; }
+
+				@media @small
+				{
+					padding-bottom: 1px;
+					text-spacing: -1px;
+				}
 			}
 
 			a
@@ -665,7 +681,6 @@ div.tag-wrapper
 				background-color: lighten(@trimColor, 7%);
 				color: #fff;
 
-
 				&:hover
 				{
 					background-color: darken(@trimColor, 10%);
@@ -673,8 +688,10 @@ div.tag-wrapper
 
 				@media @small
 				{
+					height: @mobileHeight - 8;
+					color: @trimColor;
 					background-color: #fff;
-					padding: 3px 8px;
+					padding: 0 8px;
 					border: 1px solid @trimColor;
 					.rounded(4);
 				}
@@ -688,7 +705,15 @@ div.tag-wrapper
 {
 	margin: 10px auto;
 
-	div.tag-wrapper { .drop-shadow(0, 0, 7px, 0.6); }
+	div.tag-wrapper
+	{
+		.drop-shadow(0, 0, 7px, 0.6);
+	}
+	@media @small
+	{
+		margin: 0;
+		div.tag-wrapper { .box-shadow(none); }
+	}
 }
 
 div.gas
@@ -722,12 +747,6 @@ div.photo
 	position: relative;
 	padding: 0 9px 0 0;
 
-	@media @small
-	{
-		margin: 0 auto;
-		padding: 0;
-	}
-
 	img
 	{
 		border: 1px solid #000;
@@ -737,12 +756,18 @@ div.photo
 		cursor: pointer;
 		z-index: 20;
 		.drop-shadow(0, 0, 10px, 0.4);
+	}
 
-		@media @small
+	@media @small
+	{
+		margin: 0;
+		padding: 0;
+
+		img
 		{
 			border: none;
 			padding: 0;
-			.drop-shadow(0, 0, 20px, 0.6);
+			.box-shadow(none);
 		}
 	}
 
@@ -761,6 +786,11 @@ div.photo
 		text-align: center;
 		.opacity(0.6);
 		.border-radius(0, 0, 3px);
+
+		@media @small
+		{
+			font-size: 20px;
+		}
 
 		p, .glyphicon
 		{
@@ -840,9 +870,11 @@ div.photo
 
 		@media @small
 		{
-			font-size: 24pt;
+			font-size: 36px;
 			.rounded(10px);
-			padding: 10px 10px 14px 10px;
+			padding: 10px 34px 14px 10px;
+
+			.glyphicon { top: 6px; font-size: 30px; }
 		}
 
 	}
@@ -876,12 +908,6 @@ div.photo
 		width: 100%;
 		letter-spacing: -1px;
 
-		@media @small
-		{
-			font-size: 20pt;
-			margin-top: -21px;
-		}
-
 		span
 		{
 			margin-top: -10px;
@@ -891,8 +917,14 @@ div.photo
 			border: 1px solid #666;
 			.opacity(0.8);
 			padding: 0px 10px 1px 10px;
+		}
 
-			@media @small
+		@media @small
+		{
+			font-size: 20pt;
+			margin-top: -21px;
+
+			span
 			{
 				.opacity(0.5);
 			}
@@ -926,7 +958,7 @@ div.caption
 
 	@media @small
 	{
-		padding: 18px 0;
+		padding: 18px 0 0 0;
 	}
 
 	blockquote
@@ -1023,6 +1055,7 @@ div.caption
 	div.footnotes
 	{
 		@indent: 20px;
+		@mobileIndent: 30px;
 
 		position: relative;
 		border-top: 1px solid @trimColor;
@@ -1042,23 +1075,13 @@ div.caption
 			font-size: 20px;
 		}
 
-		@media @small
-		{
-			padding-top: 1em;
-		}
-
 		p
 		{
 			font-family: @sanSerifFont;
 			text-indent: -@indent;
 			margin: 0 40px;
-			padding: 5px 0 3px @indent;
+			padding: 5px 0 0 @indent;
 			line-height: 1.2em;
-
-			@media @small
-			{
-				text-indent: -28px;
-			}
 
 			a { }
 		}
@@ -1073,7 +1096,7 @@ div.caption
 			padding: 0;
 			vertical-align: bottom;
 
-			&.title { font-size: 20px; line-height: 10px; vertical-align: bottom; }
+			&.title { font-size: @indent; line-height: @indent / 2; vertical-align: bottom; }
 		}
 
 		.opacity();
@@ -1083,6 +1106,35 @@ div.caption
 			background: none;
 			.opacity(1);
 		}
+
+		@media @small
+		{
+			padding-top: 10px;
+			padding-bottom: 10px;
+
+			.glyphicon
+			{
+				top: 9px;
+				right: 14px;
+				font-size: 39px;
+			}
+
+			p
+			{
+				text-indent: -@mobileIndent;
+				padding: 5px 0 0 @mobileIndent;
+			}
+
+			sup
+			{
+				font-size: 22px;
+				line-height: 29px;
+				width: @mobileIndent;
+
+				&.title { font-size: @mobileIndent; line-height: @mobileIndent; vertical-align: bottom; }
+			}
+		}
+
 	}
 }
 

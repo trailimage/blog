@@ -632,6 +632,7 @@ html {
   overflow-y: scroll;
   overflow: -moz-scrollbars-vertical;
   /*-webkit-font-smoothing: subpixel-antialiased;*/
+
 }
 body {
   margin: 0;
@@ -645,7 +646,8 @@ body {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   body {
     background: none;
-    /* background-color: #000; */
+    width: 1024px;
+    overflow: hidden;
   }
 }
 a {
@@ -693,7 +695,6 @@ a:active {
 }
 .content {
   position: relative;
-  /*font: normal normal 121% Georgia, Times New Roman, Sans-Serif;*/
   font-family: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
   font-weight: normal;
   text-align: left;
@@ -722,6 +723,7 @@ a:active {
   padding: 4px 0 2px 7px;
   height: 22px;
   /*overflow: hidden;*/
+
   z-index: 20;
 }
 div.fb-comments {
@@ -895,6 +897,7 @@ div.previous a:hover {
 #links div.google-search div.gsc-control-searchbox-only form.gsc-search-box table.gsc-search-box td.gsc-input div.gsc-input-box table td {
   padding-right: 10px;
   /* cancel button */
+
 }
 #links div.google-search div.gsc-control-searchbox-only form.gsc-search-box table.gsc-search-box td.gsc-input div.gsc-input-box table td input.gsc-input {
   font-size: 14px;
@@ -955,7 +958,7 @@ div.previous a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top {
-    height: 90px;
+    height: 103px;
     background-position: bottom right;
   }
 }
@@ -971,10 +974,11 @@ div.previous a:hover {
 }
 #header #top #menu select {
   font-family: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
-  font-size: 12pt;
+  font-size: 16px;
   background-color: #eff1ef;
   border: 1px solid #747e73;
   /* option.bullet { color: #444; } */
+
 }
 #header #top #menu select optgroup.note {
   color: #855;
@@ -982,7 +986,7 @@ div.previous a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top #menu select {
-    font-size: 24pt;
+    font-size: 24px;
     padding: 0 10px;
     text-align: center;
   }
@@ -996,6 +1000,7 @@ div.previous a:hover {
   line-height: 1em;
   color: #524948;
   /* 423938 or 5e685c */
+
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
   float: left;
   vertical-align: top;
@@ -1012,8 +1017,7 @@ div.previous a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top h1 {
-    font-size: 36pt;
-    font-weight: bold;
+    font-size: 50px;
     line-height: 1.1em;
   }
 }
@@ -1063,9 +1067,9 @@ div.previous a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #setDate {
-    top: 94px;
-    font-size: 18pt;
-    right: 8px;
+    font-size: 20px;
+    right: 74px;
+    top: 69px;
   }
 }
 #header .videoLink {
@@ -1114,7 +1118,7 @@ div.previous a:hover {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header .videoLink {
     display: none;
-    top: 108px;
+    top: 121px;
     font-size: 18pt;
   }
 }
@@ -1170,6 +1174,13 @@ div.by-line span {
   font-size: 35px;
   padding-right: 5px;
 }
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  div.by-line {
+    font-size: 80px;
+    line-height: 55px;
+    padding-top: 10px;
+  }
+}
 div.tag-wrapper {
   width: 100%;
   height: 17px;
@@ -1193,6 +1204,19 @@ div.tag-wrapper .glyphicon {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.4);
 }
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  div.tag-wrapper {
+    height: 47px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+  div.tag-wrapper .glyphicon {
+    top: 8px;
+    right: 15px;
+    font-size: 32px;
+  }
+}
 div.tag-wrapper ul.tags {
   list-style: none;
   padding: 0;
@@ -1201,8 +1225,6 @@ div.tag-wrapper ul.tags {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.tag-wrapper ul.tags {
-    height: 1.5em;
-    padding: 15px 0 0 0;
     border: none;
   }
 }
@@ -1218,10 +1240,9 @@ div.tag-wrapper ul.tags li {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.tag-wrapper ul.tags li {
-    float: none;
-    display: inline-block;
-    font-size: 20pt;
-    padding: 0 2px;
+    padding-top: 2px;
+    font-size: 28px;
+    line-height: 37px;
   }
 }
 div.tag-wrapper ul.tags li.label {
@@ -1232,7 +1253,8 @@ div.tag-wrapper ul.tags li.label {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.tag-wrapper ul.tags li.label {
-    display: none;
+    padding-bottom: 1px;
+    text-spacing: -1px;
   }
 }
 div.tag-wrapper ul.tags li a {
@@ -1248,8 +1270,10 @@ div.tag-wrapper ul.tags li a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.tag-wrapper ul.tags li a {
+    height: 39px;
+    color: #747e73;
     background-color: #fff;
-    padding: 3px 8px;
+    padding: 0 8px;
     border: 1px solid #747e73;
     -webkit-border-radius: 4;
     -moz-border-radius: 4;
@@ -1266,6 +1290,16 @@ div.tag-wrapper ul.tags li a:hover {
   -webkit-box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  .footer-tags {
+    margin: 0;
+  }
+  .footer-tags div.tag-wrapper {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 div.gas {
   position: absolute;
@@ -1293,12 +1327,6 @@ div.photo {
   position: relative;
   padding: 0 9px 0 0;
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
-  div.photo {
-    margin: 0 auto;
-    padding: 0;
-  }
-}
 div.photo img {
   border: 1px solid #000;
   background-color: #fff;
@@ -1311,12 +1339,16 @@ div.photo img {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  div.photo {
+    margin: 0;
+    padding: 0;
+  }
   div.photo img {
     border: none;
     padding: 0;
-    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   }
 }
 div.photo div.exif {
@@ -1352,6 +1384,11 @@ div.photo div.exif {
   -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  div.photo div.exif {
+    font-size: 20px;
+  }
 }
 div.photo div.exif p,
 div.photo div.exif .glyphicon {
@@ -1437,14 +1474,18 @@ div.photo a.map .glyphicon {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.photo a.map {
-    font-size: 24pt;
+    font-size: 36px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
     -moz-background-clip: padding-box;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    padding: 10px 10px 14px 10px;
+    padding: 10px 34px 14px 10px;
+  }
+  div.photo a.map .glyphicon {
+    top: 6px;
+    font-size: 30px;
   }
 }
 div.photo:hover a.map {
@@ -1486,12 +1527,6 @@ div.photo p {
   width: 100%;
   letter-spacing: -1px;
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
-  div.photo p {
-    font-size: 20pt;
-    margin-top: -21px;
-  }
-}
 div.photo p span {
   margin-top: -10px;
   background-color: #fff;
@@ -1507,6 +1542,10 @@ div.photo p span {
   padding: 0px 10px 1px 10px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  div.photo p {
+    font-size: 20pt;
+    margin-top: -21px;
+  }
   div.photo p span {
     -moz-opacity: 0.5;
     -khtml-opacity: 0.5;
@@ -1537,7 +1576,7 @@ div.caption sup {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.caption {
-    padding: 18px 0;
+    padding: 18px 0 0 0;
   }
 }
 div.caption blockquote {
@@ -1646,22 +1685,12 @@ div.caption div.footnotes .glyphicon {
   top: 4px;
   font-size: 20px;
 }
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
-  div.caption div.footnotes {
-    padding-top: 1em;
-  }
-}
 div.caption div.footnotes p {
   font-family: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
   text-indent: -20px;
   margin: 0 40px;
-  padding: 5px 0 3px 20px;
+  padding: 5px 0 0 20px;
   line-height: 1.2em;
-}
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
-  div.caption div.footnotes p {
-    text-indent: -28px;
-  }
 }
 div.caption div.footnotes sup {
   display: inline-block;
@@ -1686,6 +1715,31 @@ div.caption div.footnotes:hover {
   opacity: 1;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
   filter: alpha(opacity=100);
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
+  div.caption div.footnotes {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  div.caption div.footnotes .glyphicon {
+    top: 9px;
+    right: 14px;
+    font-size: 39px;
+  }
+  div.caption div.footnotes p {
+    text-indent: -30px;
+    padding: 5px 0 0 30px;
+  }
+  div.caption div.footnotes sup {
+    font-size: 22px;
+    line-height: 29px;
+    width: 30px;
+  }
+  div.caption div.footnotes sup.title {
+    font-size: 30px;
+    line-height: 30px;
+    vertical-align: bottom;
+  }
 }
 /* About ------------------------------------------------------------------- */
 .about {
