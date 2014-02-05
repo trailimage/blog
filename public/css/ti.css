@@ -1681,9 +1681,9 @@ div.caption div.footnotes {
 div.caption div.footnotes .glyphicon {
   color: #afb2af;
   position: absolute;
-  right: 8px;
-  top: 4px;
-  font-size: 20px;
+  right: 6px;
+  top: 3px;
+  font-size: 18px;
 }
 div.caption div.footnotes p {
   font-family: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
