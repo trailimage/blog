@@ -55,7 +55,7 @@ exports.httpStatus =
  */
 exports.pattern =
 {
-	haiku: /^([ \w]{5,100})[\r\n]+([ \w]{5,100})[\r\n]+([ \w]{5,100})([\r\n]|$)+/gi,
+	haiku: /^([ \w]{5,100})[\r\n]+([ \w]{5,100})[\r\n]+([ \w]{5,100})([\r\n]{2}|$)+/gi,
 	allHaiku: /^([ \w]{5,100})[\r\n]+([ \w]{5,100})[\r\n]+([ \w]{5,100})$/gi,
 	allPoem: /^([^\r\n]{3,100}([\r\n]|$)+){4,}$/gi,
 	// exclude trailing comma -- can't remember why; also used to exclude trailing question mark
