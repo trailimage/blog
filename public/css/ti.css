@@ -958,7 +958,7 @@ div.previous a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top {
-    height: 103px;
+    height: 115px;
     background-position: bottom right;
   }
 }
@@ -986,7 +986,7 @@ div.previous a:hover {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #top #menu select {
-    font-size: 24px;
+    font-size: 36px;
     padding: 0 10px;
     text-align: center;
   }
@@ -1068,8 +1068,8 @@ div.previous a:hover {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header #setDate {
     font-size: 20px;
-    right: 74px;
-    top: 69px;
+    right: 55px;
+    top: 7px;
   }
 }
 #header .videoLink {
@@ -1118,7 +1118,7 @@ div.previous a:hover {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   #header .videoLink {
     display: none;
-    top: 121px;
+    top: 133px;
     font-size: 18pt;
   }
 }
@@ -1543,8 +1543,8 @@ div.photo p span {
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.photo p {
-    font-size: 20pt;
-    margin-top: -21px;
+    font-size: 20px;
+    margin-top: -26px;
   }
   div.photo p span {
     -moz-opacity: 0.5;
@@ -1564,7 +1564,7 @@ div.caption {
   margin-top: 0;
   line-height: 1.3em;
   padding: 4px 0;
-  font-size: 16px;
+  font-size: 17px;
 }
 div.caption sup {
   color: #990000;
@@ -1575,12 +1575,12 @@ div.caption sup {
   cursor: help;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
-  div.caption {
-    padding: 18px 0 0 0;
+  div.caption sup {
+    font-size: 40px;
   }
 }
 div.caption blockquote {
-  font-size: 15px;
+  font-size: 16px;
   background-image: url(/img/left-quote.png);
   background-repeat: no-repeat;
   background-position: left top;
@@ -1608,7 +1608,9 @@ div.caption p {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px), only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px), only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px) {
   div.caption p {
     text-indent: 4em;
+    line-height: 1.5em;
     padding-bottom: 0.5em;
+    font-size: 32px;
   }
 }
 div.caption p:first-child,
@@ -1729,9 +1731,10 @@ div.caption div.footnotes:hover {
   div.caption div.footnotes p {
     text-indent: -30px;
     padding: 5px 0 0 30px;
+    font-size: 17px;
   }
   div.caption div.footnotes sup {
-    font-size: 22px;
+    font-size: 26px;
     line-height: 29px;
     width: 30px;
   }

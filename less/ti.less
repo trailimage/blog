@@ -6,9 +6,9 @@
 /* https://github.com/acdvorak/intellij-lessc-plugin */
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
-@fontSize: 16px;
+@fontSize: 17px;
 @headerHeight: 70px;
-@mobileHeaderHeight: @headerHeight + 33;
+@mobileHeaderHeight: @headerHeight + 45;
 @imageWidth: 1034px;	/* includes borders */
 @contentWidth: 650px;
 @mobileWidth: 1024px;
@@ -412,7 +412,7 @@ div.next, div.previous
 
 				@media @small
 				{
-					font-size: 24px;
+					font-size: 36px;
 					padding: 0 10px;
 					text-align: center;
 				}
@@ -500,8 +500,8 @@ div.next, div.previous
 		@media @small
 		{
 			font-size: 20px;
-			right: 74px;
-			top: @mobileHeaderHeight - 34;
+			right: 55px;
+			top: 7px;
 		}
 	}
 
@@ -921,13 +921,10 @@ div.photo
 
 		@media @small
 		{
-			font-size: 20pt;
-			margin-top: -21px;
+			font-size: 20px;
+			margin-top: -26px;
 
-			span
-			{
-				.opacity(0.5);
-			}
+			span { .opacity(0.5); }
 		}
 	}
 }
@@ -954,11 +951,8 @@ div.caption
 		font-family: @sanSerifFont;
 		font-size: 18px;
 		cursor: help;
-	}
 
-	@media @small
-	{
-		padding: 18px 0 0 0;
+		@media @small { font-size: 40px; }
 	}
 
 	blockquote
@@ -998,7 +992,9 @@ div.caption
 		@media @small
 		{
 			text-indent: 4em;
+			line-height: 1.5em;
 			padding-bottom: 0.5em;
+			font-size: @fontSize + 15;
 		}
 
 		&:first-child, &.first { text-indent: 0; padding-top: 0.5em; }
@@ -1123,11 +1119,12 @@ div.caption
 			{
 				text-indent: -@mobileIndent;
 				padding: 5px 0 0 @mobileIndent;
+				font-size: @fontSize;
 			}
 
 			sup
 			{
-				font-size: 22px;
+				font-size: 26px;
 				line-height: 29px;
 				width: @mobileIndent;
 
