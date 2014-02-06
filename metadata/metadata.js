@@ -320,7 +320,7 @@ Metadata.refresh = function(callback)
 {
 	cloud = require('./../cloud.js').current;
 
-	cloud.delete(Metadata.tagKey).delete(Metadata.key, function(done)
+	cloud.delete([Metadata.tagKey, Metadata.key], function(done)
 	{
 		if (done || (Metadata.current == null || Metadata.current.setInfoLoaded))
 		{
