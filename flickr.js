@@ -76,15 +76,26 @@ function FlickrAPI()
 				}
 				catch (ex)
 				{
-					log.error('Parsing %s resulted in %s', options.path, ex);
-					_this.emit('error', ex)
+					log.error('Parsing %s resulted in %s', options.path, ex.toString());
+
+					if (/<html>/.test(result))
+					{
+						// Flickr returned an HTML response instead of JSON -- likely an error message
+						// see if we can swallow it
+						log.error('Flickr returned HTML instead of JSON');
+						callback(null);
+					}
+					else
+					{
+						_this.emit('error', ex)
+					}
 				}
 			});
 		});
 
 		request.on('error', function(e)
 		{
-			log.error('Calling %s resulted in %j', options.path, e);
+			log.error('Calling %s resulted in %j', options.path, e.toString());
 			_this.emit('error', e);
 		});
 		request.end();
@@ -131,8 +142,17 @@ function FlickrAPI()
 	{
 		if (alsoGetInfo === undefined) { alsoGetInfo = true; }
 
-		call('photosets.getPhotos', 'photoset_id', id, function(r)
+		var service = 'photosets.getPhotos';
+
+		call(service, 'photoset_id', id, function(r)
 			{
+				if (r == null)
+				{
+					log.error('Flickr %s service failed for %s', service, id);
+					callback(null, null);
+					return;
+				}
+
 				/** @type {Flickr.SetPhotos} */
 				var photos = normalizePhotos(r.photoset);
 
@@ -157,9 +177,19 @@ function FlickrAPI()
 	 */
 	this.getSetInfo = function(id, callback)
 	{
-		call('photosets.getInfo', 'photoset_id', id, function(r)
+		var service = 'photosets.getInfo';
+
+		call(service, 'photoset_id', id, function(r)
 		{
-			callback(r.photoset);
+			if (r != null)
+			{
+				callback(r.photoset);
+			}
+			else
+			{
+				log.error('Flickr %s service failed for %s', service, id);
+				callback(null);
+			}
 		});
 	};
 

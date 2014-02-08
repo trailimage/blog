@@ -109,6 +109,9 @@ function MetadataSet(api, timebound)
 	 */
 	this.addInfo = function(info)
 	{
+		// info will be null of Flickr service is down
+		if (info == null) { return; }
+
 		var d = info.description._content;
 
 		if (d) { d = d.replace(Enum.pattern.video, '').replace(/[\r\n\s]*$/, ''); }
