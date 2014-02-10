@@ -233,6 +233,23 @@ exports.blog = function(req, res)
 	}
 };
 
+/**
+ * Fix mistaken routes that were shared
+ * @param {Express} app
+ */
+exports.addFixes = function(app)
+{
+	var fixes =
+	{
+		'/brother-rider-2013-a-night-in-pierce': '/brother-ride-2013'
+	};
+
+	for (var i in fixes)
+	{
+		app.get(i, function(req, res) { res.redirect(Enum.httpStatus.permanentRedirect, fixes[i]); });
+	}
+}
+
 function notReady(res)
 {
 	var retrySeconds = Setting.retryDelay / Enum.time.second;

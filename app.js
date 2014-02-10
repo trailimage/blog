@@ -109,6 +109,8 @@ function defineRoutes()
 	var authorize = require('./routes/authorize-route.js');
     var photo = require('./routes/photo-route.js');
 
+	set.addFixes(app);
+
 	app.get('/', set.default);                                       // the latest set
 	app.get('/rss', rss.view);
 	app.get('/'+clear, set.clearAll);
