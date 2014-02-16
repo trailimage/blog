@@ -19,7 +19,7 @@ exports.view = function(req, res)
 				'docID': value,
 				'slug': req.params.slug,
 				'setting': Setting,
-				'layout': 'layouts\\issue-layout'
+				'layout': 'layouts/issue-layout'
 			});
 		}
 		else
