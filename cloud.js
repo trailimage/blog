@@ -79,6 +79,21 @@ function Cloud(redis)
 
 	/**
 	 * @param {String} key
+	 * @param {String} field
+	 * @param {function(String)} callback
+	 * @return {Cloud}
+	 */
+	this.getHashItem = function(key, field, callback)
+	{
+		redis.hget(key, field, function(err, reply)
+		{
+			callback(reply);
+		});
+		return _this;
+	};
+
+	/**
+	 * @param {String} key
 	 * @param {Object} err
 	 * @param {Object} reply
 	 * @param {function(Object)} callback
@@ -206,7 +221,7 @@ singleton.make = function()
 	var redis = require('redis').createClient(Setting.redis.port, Setting.redis.hostname);
 	var authorize = function() { redis.auth(Setting.redis.auth); };
 
-	redis.on('error', function(err) { log.error("Could not connect to redis: %s", err); });
+	redis.on('error', function(err) { log.error("Could not connect to redis: %s", err.toString()); });
 	redis.on('connect', authorize);
 
 	authorize();

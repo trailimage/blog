@@ -108,6 +108,7 @@ function defineRoutes()
 	var pdf = require('./routes/pdf-route.js');
 	var authorize = require('./routes/authorize-route.js');
     var photo = require('./routes/photo-route.js');
+	var issue = require('./routes/issue-route.js');
 
 	set.addFixes(app);
 
@@ -130,6 +131,7 @@ function defineRoutes()
 	app.get('/log/'+clear, logs.clear);
 	app.get('/tag/'+clear, tag.clearAll);
     app.get('/exif/'+photoID, photo.exif);
+	app.get('/issue/:slug'+s, issue.view);
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', set.blog);       // old blog links with format /YYYY/MM/slug

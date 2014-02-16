@@ -1,0 +1,80 @@
+@import "elements";
+@import "glyphicons";
+
+@columnWidth: 320px;
+
+html
+{
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-family: "Droid Sans", Arial;
+}
+
+#google-doc
+{
+	width: 100%;
+	margin-right: @columnWidth;
+	height: 100%;
+}
+
+#meta
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: @columnWidth;
+	padding: 0 20px 0 10px;
+	border-left: 1px solid #eee;
+
+	h1, h2 { font-weight: normal; margin: 0; padding: 0; color: #226; }
+
+	h1
+	{
+		font-family: 'Qwigley', Tahoma, Arial;
+		font-size: 85px;
+		line-height: 50px;
+		text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+		text-align: center;
+		margin-top: 15px;
+		margin-right: 10px;
+	}
+
+	h2
+	{
+		text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+		font-size: 20px;
+		line-height: 10px;
+		letter-spacing: 1px;
+		font-family: 'Oswald', Tahoma, Arial;
+		font-weight: normal;
+		text-align: right;
+		margin-right: 20px;
+		text-transform: uppercase;
+		.opacity(0.7);
+	}
+
+	.twitter
+	{
+		position: absolute;
+		top: 61px;
+		left: 60px;
+	}
+
+	.fb-like
+	{
+		margin-top: 30px;
+	}
+
+	.rights { font-size: 16px; }
+}
+
+
