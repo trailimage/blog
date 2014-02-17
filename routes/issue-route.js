@@ -1,12 +1,7 @@
 var Setting = require('../settings.js');
-var log = require('winston');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
 /** @type {singleton} */
 var Cloud = require('../cloud.js');
-
-/** @type {Metadata} */
-var metadata = null;
+var layout = 'layouts/issue-layout';
 
 exports.view = function(req, res)
 {
@@ -19,20 +14,24 @@ exports.view = function(req, res)
 				'docID': value,
 				'slug': req.params.slug,
 				'setting': Setting,
-				'layout': 'layouts/issue-layout'
+				'layout': layout
 			});
 		}
 		else
 		{
-			log.warn('"%s" matches no view', req.params.slug);
-
-			res.render('search',
-			{
-				'sets': Metadata.current.items,
-				'title': 'Requested page was not found',
-				'setting': Setting
-			});
+			exports.home(req, res);
 		}
 	});
 };
 
+exports.home = function(req, res)
+{
+	res.render('issue',
+	{
+		//'docID': '1GUgmZwV-nfqyhty4KY2swwY5Vwcgb8Jlwl4esLxy2LA',
+		'docID': '0B0lgcM9JCuSbYjYxRGIzSTl1bEk',
+		'slug': null,
+		'setting': Setting,
+		'layout': layout
+	});
+};

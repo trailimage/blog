@@ -131,6 +131,7 @@ function defineRoutes()
 	app.get('/log/'+clear, logs.clear);
 	app.get('/tag/'+clear, tag.clearAll);
     app.get('/exif/'+photoID, photo.exif);
+	app.get('/issue', issue.home);
 	app.get('/issue/:slug'+s, issue.view);
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
