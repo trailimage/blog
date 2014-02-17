@@ -28,8 +28,7 @@ exports.home = function(req, res)
 {
 	res.render('issue',
 	{
-		//'docID': '1GUgmZwV-nfqyhty4KY2swwY5Vwcgb8Jlwl4esLxy2LA',
-		'docID': '0B0lgcM9JCuSbYjYxRGIzSTl1bEk',
+		'docID': '1GUgmZwV-nfqyhty4KY2swwY5Vwcgb8Jlwl4esLxy2LA',
 		'slug': null,
 		'setting': Setting,
 		'layout': layout
