@@ -330,7 +330,7 @@ Metadata.refresh = function(callback)
 			// there's a fully loaded current instance (unexpected)
 			log.warn('Removed cache schema: reloading');
 			if (Metadata.current != null) { Metadata.current.setInfoLoaded = false; }
-			Metadata.make(callback);
+			Metadata.make(callback, true);
 		}
 		else
 		{
@@ -342,14 +342,15 @@ Metadata.refresh = function(callback)
 
 /**
  * @param {function} [callback]
+ * @param {boolean} [forceReload] Whether to force reload from Flickr (default is false)
  */
-Metadata.make = function(callback)
+Metadata.make = function(callback, forceReload)
 {
 	cloud = require('./../cloud.js').current;
 
 	cloud.getHash(Metadata.key, function(hash)
 	{
-		if (hash != null)
+		if (hash != null || forceReload)
 		{
 			var metadata = new Metadata(JSON.parse(hash.tree));
 			/** @type {MetadataSet} */
