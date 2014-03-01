@@ -350,7 +350,7 @@ Metadata.make = function(callback, forceReload)
 
 	cloud.getHash(Metadata.key, function(hash)
 	{
-		if (hash != null || forceReload)
+		if (hash != null && !forceReload)
 		{
 			var metadata = new Metadata(JSON.parse(hash.tree));
 			/** @type {MetadataSet} */
