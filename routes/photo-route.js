@@ -68,10 +68,14 @@ exports.search = function(req, res)
 {
 	Flickr.current.tagSearch([req.params['tagSlug']], function(photos)
 	{
+		var tag = Library.current.photoTags[req.params['tagSlug']];
+		var title = Format.sayNumber(photos.length) + ' ' + tag + ' Image' + ((photos.length != 1) ? 's' : '');
+
 		res.render('photo-search',
 		{
 			'photos': photos,
 			'setting': Setting,
+			'title': title,
 			'layout': null
 		});
 
