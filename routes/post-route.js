@@ -55,7 +55,12 @@ exports.view = function(req, res)
 	showPost(res, req.params.slug);
 };
 
-exports.default = function(req, res)
+/**
+ * "Home" page shows latest post
+ * @param req
+ * @param res
+ */
+exports.home = function(req, res)
 {
 	prepare();
 	if (library != null) { showPost(res, library.posts[0].slug); }
@@ -109,18 +114,6 @@ function showPostWithID(res, id)
 	else { Output.replyNotFound(res, id); }
 }
 
-exports.clearAll = function(req, res)
-{
-	prepare();
-
-	var slugs = library.postSlugs().concat(['about','contact','search']);
-
-	log.warn('Removing all posts from cache');
-
-	output.remove(slugs);
-	res.redirect('/');
-};
-
 /**
  * Clear set cache and post's tag caches
  * @param req
@@ -152,8 +145,8 @@ exports.newPost = function(req, res)
 		output.remove(post.slug, function(done)
 		{
 			if (!done) { log.error('Failed to remove "%s" from cache', post.slug); }
-			clearAdjacent(post.next);
-			clearAdjacent(post.previous);
+			if (post.next) { clearPost(post.next.slug); }
+			if (post.previous) { clearPost(post.previous.slug); }
 			res.redirect('/' + post.slug);
 		});
 	}
@@ -163,64 +156,59 @@ exports.newPost = function(req, res)
 	}
 };
 
+//- Cache clearing ------------------------------------------------------------
+
 /**
- * @param {Post} post
+ * Clear all posts from cache
+ * @param req
+ * @param res
  */
-function clearAdjacent(post)
+exports.clearAll = function(req, res)
 {
-	if (post)
-	{
-		log.warn('Removing post "%s" from cache', post.slug);
-		output.remove(post.next.slug, function(done)
-		{
-			if (!done) { log.error('Failed to remove "%s" from cache', post.slug); }
-		});
-	}
+	prepare();
+
+	var slugs = library.postSlugs().concat(['about','contact','search']);
+
+	log.warn('Removing all posts from cache');
+
+	output.remove(slugs);
+	res.redirect('/');
+};
+
+exports.clear = function(req, res) { refreshPost(res, req.params.slug); };
+exports.clearSeriesPost = function(req, res) { refreshPost(res, seriesPostSlug(req)); };
+
+/**
+ * Remove post content from cache and reload page
+ * @param res
+ * @param {String} slug
+ */
+function refreshPost(res, slug)
+{
+	// reload page even if an error ocurrs
+	clearPost(slug, function() { res.redirect('/' + slug); });
 }
 
-exports.clear = function(req, res)
-{
-	clearPost(res, req.params.slug);
-};
-
-exports.clearSeriesPost = function(req, res)
-{
-	clearPost(res, seriesPostSlug(req));
-};
-
-function clearPost(res, slug)
+/**
+ *
+ * @param {String} slug
+ * @param {Function} [callback]
+ */
+function clearPost(slug, callback)
 {
 	prepare();
 	log.warn('Removing post "%s" from cache', slug);
 	output.remove(slug, function(done)
 	{
 		if (!done) { log.error('Failed to remove "%s" from cache', slug); }
-		res.redirect('/' + slug);   // reload page even if an error ocurred
+		if (callback) { callback(); }
 	});
 }
 
-/**
- *
- * @param req
- * @param res
- */
-exports.seriesPost = function(req, res)
-{
-	prepare();
-	showPost(res, seriesPostSlug(req));
-};
+//- Redirects -----------------------------------------------------------------
 
 /**
- * Slug for single post within a series
- * @returns {string}
- */
-function seriesPostSlug(req)
-{
-	return req.params['groupSlug'] + '/' + req.params['partSlug'];
-}
-
-/**
- * Posts still on the old blog only
+ * Redirect to posts that haven't been transitioned from the old blog
  */
 exports.blog = function(req, res)
 {
@@ -238,6 +226,27 @@ exports.blog = function(req, res)
 		res.redirect(Enum.httpStatus.temporaryRedirect, url);
 	}
 };
+
+
+/**
+ * Display post that's part of a series
+ * @param req
+ * @param res
+ */
+exports.seriesPost = function(req, res)
+{
+	prepare();
+	showPost(res, seriesPostSlug(req));
+};
+
+/**
+ * Slug for single post within a series
+ * @returns {string}
+ */
+function seriesPostSlug(req)
+{
+	return req.params['groupSlug'] + '/' + req.params['partSlug'];
+}
 
 /**
  * Fix mistaken routes that were shared
@@ -272,6 +281,12 @@ function notReady(res)
 	});
 }
 
+/**
+ *
+ * @param res
+ * @param slug
+ * @param template
+ */
 function showPost(res, slug, template)
 {
 	var reply = output.responder(slug, res, 'text/html');

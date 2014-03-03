@@ -1,12 +1,52 @@
 {{>header}}
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
+	<script type='text/javascript'>
+		function init()
+		{
+			if (typeof jQuery !== 'function') { window.setTimeout(init, 200); return; }
+
+			var $view = $('#photo-tag');
+			var selected = 'item-a';
+
+			$view.find('li').mouseover(function(e)
+			{
+				var $li = $(this);
+				$view.find('.index div').hide(); $('#'+ $li.data('for')).show();
+				$view.find('li.selected').removeClass('selected');
+				$li.addClass('selected');
+			});
+
+			$view.find('#' + selected).show();
+			$view.find('li[data-for=' + selected + ']').addClass('selected');
+
+			$view.find('.index a').click(function(e)
+			{
+				e.stopPropagation();
+				e.preventDefault();
+				$('#thumbs').load($(this).attr('href'));
+			});
+		}
+		init();
+	</script>
 {{/contentFor}}
 
-<div class="photo-tag content">
-	<ul class="sets">
-
+<div id="photo-tag" class="content">
+	<ul class="tags">
+	{{#alphabet}}
+		<li data-for="item-{{this}}">{{this}}</li>
+	{{/alphabet}}
 	</ul>
+	<div class="index">
+	{{#each tags}}
+		<div id="item-{{@key}}">
+		{{#each this}}
+			<a href="/photo-tag/{{@key}}">{{this}}</a>
+		{{/each}}
+		</div>
+	{{/each}}
+	</div>
+	<div id="thumbs"></div>
 </div>
 
 {{>footer}}

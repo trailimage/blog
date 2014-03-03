@@ -289,6 +289,11 @@ Flickr.Response.prototype.sizes;
  */
 Flickr.Response.prototype.stat;
 
+/**
+ * @type {Flickr.SearchResult}
+ */
+Flickr.Response.prototype.photos;
+
 // Content --------------------------------------------------------------------
 
 /**
@@ -1327,3 +1332,32 @@ Flickr.Tag.prototype.clean;
  * @type {Array.<Flickr.Content>}
  */
 Flickr.Tag.prototype.raw;
+
+// Search Results -------------------------------------------------------------
+
+Flickr.SearchResult = {};
+
+/**
+ * @type {Integer}
+ */
+Flickr.SearchResult.prototype.page;
+
+/**
+ * @type {Integer}
+ */
+Flickr.SearchResult.prototype.pages;
+
+/**
+ * @type {Integer}
+ */
+Flickr.SearchResult.prototype.perpage;
+
+/**
+ * @type {Integer}
+ */
+Flickr.SearchResult.prototype.total;
+
+/**
+ * @type {Array.<PhotoSummary>}
+ */
+Flickr.SearchResult.prototype.photo;

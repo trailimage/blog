@@ -1,6 +1,9 @@
+var Setting = require('../settings.js');
 var Format = require('../format.js');
 /** @type {singleton} */
 var Flickr = require('../flickr.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 var log = require('winston');
 
 /**
@@ -11,7 +14,7 @@ var log = require('winston');
 exports.exif = function(req, res)
 {
     /** @type {string} */
-    var photoID = req.params.photoID;
+    var photoID = req.params['photoID'];
 
     Flickr.current.getEXIF(photoID, function(exif)
     {
@@ -40,6 +43,39 @@ exports.exif = function(req, res)
 
         res.render('exif', { 'exif': values, 'layout': null });
     });
+};
+
+exports.tags = function(req, res)
+{
+	var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+	var list = Library.current.photoTags;
+	var tags = {};
+
+	// group tags by first letter
+	for (var i = 0; i < alphabet.length; i++) { tags[alphabet[i]] = {}; }
+	for (var key in list) {	tags[key.substr(0, 1).toLowerCase()][key] = list[key]; }
+
+	res.render('photo-tag',
+	{
+		'tags': tags,
+		'alphabet': alphabet,
+		'title': 'Photo Tags',
+		'setting': Setting
+	});
+};
+
+exports.search = function(req, res)
+{
+	Flickr.current.tagSearch([req.params['tagSlug']], function(photos)
+	{
+		res.render('photo-search',
+		{
+			'photos': photos,
+			'setting': Setting,
+			'layout': null
+		});
+
+	});
 };
 
 /**

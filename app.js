@@ -112,7 +112,7 @@ function defineRoutes()
 
 	post.addFixes(app);
 
-	app.get('/', post.default);                                       // the latest set
+	app.get('/', post.home);                                       // the latest set
 	app.get('/rss', rss.view);
 	app.get('/'+clear, post.clearAll);
 	app.get('/about', about.view);
@@ -136,6 +136,8 @@ function defineRoutes()
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', post.blog);       // old blog links with format /YYYY/MM/slug
+	app.get('/photo-tag', photo.tags);
+	app.get('/photo-tag/:tagSlug'+s, photo.search);
 	app.get('/featured', post.featured);
 	app.get('/'+photoID, post.photoID);                              // links with bare Flickr photo ID
 	app.get('/'+setID, post.flickrID);                               // links with bare Flickr set ID

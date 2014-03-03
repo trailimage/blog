@@ -44,17 +44,17 @@ function FlickrAPI()
 	 * @param {String} idType Type of FlickrAPI ID whether photo, set, collection, etc.
 	 * @param {String} id FlickrAPI object ID
 	 * @param {function(Flickr.Response)} callback Method to call when service completes
-	 * @param {Array.<String>} [extras] Additional fields to return from the service
+	 * @param {Object.<String>} [args] Additional arguments
 	 * @see {@link http://www.flickr.com/services/api/response.json.html}
 	 */
-	function call(method, idType, id, callback, extras)
+	function call(method, idType, id, callback, args)
 	{
 		var options =
 		{
 			'hostname': _host,
 			'port': 80,
 			'method': 'GET',
-			'path': _baseUrl + parameterize(method, idType, id, extras),
+			'path': _baseUrl + parameterize(method, idType, id, args),
 			'agent': false      // disable socket pooling
 		};
 
@@ -125,7 +125,7 @@ function FlickrAPI()
 	{
 		call('tags.getTree', 'user_id', _userID, function(r)
 		{
-			callback(r.tags);
+			callback(r.collections);
 		});
 	};
 
@@ -145,28 +145,29 @@ function FlickrAPI()
 		var service = 'photosets.getPhotos';
 
 		call(service, 'photoset_id', id, function(r)
+		{
+			if (r == null)
 			{
-				if (r == null)
-				{
-					log.error('Flickr %s service failed for %s', service, id);
-					callback(null, null);
-					return;
-				}
+				log.error('Flickr %s service failed for %s', service, id);
+				callback(null, null);
+				return;
+			}
 
-				/** @type {Flickr.SetPhotos} */
-				var photos = normalizePhotos(r.photoset);
+			/** @type {Flickr.SetPhotos} */
+			var photos = normalizePhotos(r.photoset);
 
-				if (alsoGetInfo)
-				{
-					_this.getSetInfo(id, function(info) { callback(photos, info); });
-				}
-				else
-				{
-					callback(photos, null);
-				}
-			},
-			imageSizes.concat(['description', 'tags', 'date_taken', 'geo'])		// extras
-		);
+			if (alsoGetInfo)
+			{
+				_this.getSetInfo(id, function(info) { callback(photos, info); });
+			}
+			else
+			{
+				callback(photos, null);
+			}
+		},
+		{
+			'extras': imageSizes.concat(['description', 'tags', 'date_taken', 'geo']).join()
+		});
 	};
 
 	/**
@@ -190,6 +191,35 @@ function FlickrAPI()
 				log.error('Flickr %s service failed for %s', service, id);
 				callback(null);
 			}
+		});
+	};
+
+	/**
+	 *
+	 * @param {Array.<String>} tags
+	 * @param {function(Array.<Flickr.PhotoSummary>)} callback Method to call after FlickrAPI responds
+	 * @see http://www.flickr.com/services/api/flickr.photos.search.html
+	 */
+	this.tagSearch = function(tags, callback)
+	{
+		var service = 'photos.search';
+
+		call(service, 'user_id', _userID, function(r)
+		{
+			if (r != null)
+			{
+				callback(r.photos.photo);
+			}
+			else
+			{
+				log.error('Flickr %s service failed for %s', service, _userID);
+				callback(null);
+			}
+		},
+		{
+			'extras': [singleton.size.thumbnail, singleton.size.square75, singleton.size.square150].join(),
+			'tags': tags.join(),
+			'per-page': 500         // maximum
 		});
 	};
 
@@ -297,23 +327,22 @@ function FlickrAPI()
 	 * @param {String} method Name of flickr API method to call
 	 * @param {String} [idType] The type of ID whether photo, set or other
 	 * @param {String} [id] ID of the flickr object
-	 * @param {Array.<String>} [extras] Additional fields to return
+	 * @param {Object.<String>} [args] Additional parameters
 	 * @return {String}
 	 */
-	function parameterize(method, idType, id, extras)
+	function parameterize(method, idType, id, args)
 	{
 		var qs = '';
 		var op = '?';
-		var args =
-		{
-			'api_key': Setting.flickr.key,
-			'format': 'json',
-			'nojsoncallback': 1,
-			'method': 'flickr.' + method
-		};
+
+		if (args === undefined || args === null) { args = {}; }
+
+		args['api_key'] = Setting.flickr.key;
+		args['format'] = 'json';
+		args['nojsoncallback'] = 1;
+		args['method'] = 'flickr.' + method;
 
 		if (idType && id) { args[idType] = id; }
-		if (extras) { args.extras = extras.toString(); }
 
 		for (var k in args) { qs += op + k + '=' + args[k];	op = '&'; }
 

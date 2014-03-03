@@ -15,23 +15,23 @@ $(function()
 		});
 	};
 
-	var $setList = $('#sets'),
-		$collectionList = $('#collections'),
+	var $postList = $('#posts'),
+		$tagList = $('#tags'),
 		$photos = $('.photo'),
 		key = 'root',
 		root = loadSelection();
 
-	for (var c in menu) { $collectionList.appendOption(c, c + ':'); }
+	for (var tag in menu) { $tagList.appendOption(tag, tag + ':'); }
 
 	if (root)
 	{
-		$collectionList.val(root);
+		$tagList.val(root);
 	}
 
 	updateSets();
 
-	$setList.change(function(e)	{ location.href = '/' + $(e.target).val(); });
-	$collectionList.change(updateSets);
+	$postList.change(function(e) { location.href = '/' + $(e.target).val(); });
+	$tagList.change(updateSets);
 
 	$photos.find('img').lazyload();
 	$photos.find('.exif').mouseenter(function()
@@ -44,7 +44,7 @@ $(function()
 	{
 		"use strict";
 
-		var root = $collectionList.val(),
+		var root = $tagList.val(),
 			sub = null,
 			$group = null;
 
@@ -53,7 +53,7 @@ $(function()
 			saveSelection(root);
 
 			// http://www.cs.tut.fi/~jkorpela/chars/spaces.html
-			$setList
+			$postList
 				.empty()
 				.css({borderColor: '#f40', color: '#f40'})
 				.animate({borderColor: '#747e73', color: '#000'}, 600)
@@ -69,7 +69,7 @@ $(function()
 				{
 					$group.appendOption(sub.items[j].slug, sub.items[j].title);
 				}
-				$setList.append($group);
+				$postList.append($group);
 			}
 		}
 	}

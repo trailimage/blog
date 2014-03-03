@@ -36,7 +36,10 @@ function Library(api)
 	 */
 	this.posts = [];
 
-	/** @type {Object.<String>} */
+	/**
+	 * Hash of photo tags in hash[key] = name format
+	 * @type {Object.<String>}
+	 **/
 	this.photoTags = {};
 
 	/**
