@@ -1,7 +1,7 @@
 var Setting = require('../settings.js');
 var Format = require('../format.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 /** @type {singleton} */
 var Flickr = require('../flickr.js');
 var PDFDocument = require('pdfkit');
@@ -25,16 +25,16 @@ var dpi = 72;
  */
 exports.view = function(req, res)
 {
-	/** @type {Metadata} */
-	var metadata = Metadata.current;
+	/** @type {Library} */
+	var library = Library.current;
 	/** @type {FlickrAPI} */
 	var flickr = Flickr.current;
-	/** @type {MetadataSet} */
-	var set = metadata.setWithSlug(req.params.slug);
+	/** @type {Post} */
+	var post = library.postWithSlug(req.params.slug);
 
-	if (set != null)
+	if (post != null)
 	{
-		flickr.getSet(set.id, sizes, function(setPhotos, setInfo)
+		flickr.getSet(post.id, sizes, function(setPhotos, setInfo)
 		{
 			/** @type {PDFDocument} */
 			var pdf = new PDFDocument(
@@ -44,7 +44,7 @@ exports.view = function(req, res)
 				margins: 0,
 				info:
 				{
-					Title: set.title,
+					Title: post.title,
 					Author: 'Jason Abbott'
 				}
 			});
@@ -55,7 +55,7 @@ exports.view = function(req, res)
 			pdf.registerFont('San Serif Bold', 'fonts/trebucbd.ttf');
 
 			pdf.moveDown(2);
-			pdf.font('San Serif Bold').fontSize(40).text(set.title, {align: 'center'});
+			pdf.font('San Serif Bold').fontSize(40).text(post.title, {align: 'center'});
 			pdf.moveDown(1);
 			pdf.font('San Serif').fontSize(15).text('by Jason Abbott', {align: 'center'});
 			pdf.text(setPhotos.photo[0].datetaken, {align: 'center'});
@@ -69,7 +69,7 @@ exports.view = function(req, res)
 				pdf.output(function(buffer)
 				{
 					//res.setHeader('Cache-Control', 'max-age=86400, public');
-					res.setHeader('Content-Disposition', 'inline; filename="' + set.title + ' by Jason Abbott.pdf"');
+					res.setHeader('Content-Disposition', 'inline; filename="' + post.title + ' by Jason Abbott.pdf"');
 					res.setHeader('Content-Type', 'application/pdf; charset=utf-8');
 					res.end(buffer, 'binary');
 				});

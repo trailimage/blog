@@ -1,7 +1,7 @@
 /** @type {singleton} */
 var Output = require('../output.js');
-/** @type {singleton} */
-var Metadata = require('../metadata/metadata.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 /** @type {String} */
 var key = 'sitemap';
 var log = require('winston');
@@ -13,8 +13,8 @@ exports.view = function(req, res)
 {
 	/** @type {Responder} */
 	var reply = Output.current.responder(key, res, 'application/xml');
-	/** @type {Metadata} */
-	var metadata = Metadata.current;
+	/** @type {Library} */
+	var library = Library.current;
 
 	reply.send(function(sent)
 	{
@@ -22,8 +22,8 @@ exports.view = function(req, res)
 
 		reply.render('sitemap-xml',
 		{
-			'sets': metadata.sets,
-			'tags': metadata.collectionSlugs(),
+			'posts': library.posts,
+			'tags': library.tagSlugs(),
 			'layout': null
 		});
 	});

@@ -3,7 +3,7 @@ var compress = require('zlib');
 var singleton = {};
 var Setting = require('./settings.js');
 /** @type {singleton} */
-var Metadata = require('./metadata/metadata.js');
+var Metadata = require('./metadata/library.js');
 /** @type {singleton} */
 var Cloud = require('./cloud.js');
 var log = require('winston');

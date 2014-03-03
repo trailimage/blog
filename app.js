@@ -9,8 +9,8 @@ var Flickr = require('./flickr.js');
 var Cloud = require('./cloud.js');
 /** @type {singleton} */
 var Output = require('./output.js');
-/** @type {Metadata} */
-var Metadata = require('./metadata/metadata.js');
+/** @type {Library} */
+var Library = require('./metadata/library.js');
 var Express = require('express');
 var log = require('winston');
 
@@ -76,7 +76,7 @@ app.configure('all', function()
 	app.use(Express.compress());
 	app.use(Express.static(__dirname + '/public'));
 
-	Metadata.make(function()
+	Library.make(function()
 	{
 		defineRoutes();
 		app.listen(port);
@@ -96,7 +96,7 @@ function defineRoutes()
     /** @type {string} Flickr set ID pattern */
     var setID = ':setID(\\d{17})';
 	var clear = 'reset';
-	var set = require('./routes/set-route.js');
+	var post = require('./routes/post-route.js');
 	var contact = require('./routes/contact-route.js');
 	var tag = require('./routes/tag-route.js');
 	var logs = require('./routes/log-route.js');
@@ -110,11 +110,11 @@ function defineRoutes()
     var photo = require('./routes/photo-route.js');
 	var issue = require('./routes/issue-route.js');
 
-	set.addFixes(app);
+	post.addFixes(app);
 
-	app.get('/', set.default);                                       // the latest set
+	app.get('/', post.default);                                       // the latest set
 	app.get('/rss', rss.view);
-	app.get('/'+clear, set.clearAll);
+	app.get('/'+clear, post.clearAll);
 	app.get('/about', about.view);
 	app.get('/about/'+clear, about.clear);
 	app.get('/authorize', authorize.view);
@@ -135,15 +135,15 @@ function defineRoutes()
 	app.get('/issue/:slug'+s, issue.view);
 	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', set.blog);       // old blog links with format /YYYY/MM/slug
-	app.get('/featured', set.featured);
-	app.get('/'+photoID, set.photoID);                              // links with bare Flickr photo ID
-	app.get('/'+setID, set.flickrID);                               // links with bare Flickr set ID
-	app.get('/'+setID+'/'+photoID, set.flickrID);
+	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', post.blog);       // old blog links with format /YYYY/MM/slug
+	app.get('/featured', post.featured);
+	app.get('/'+photoID, post.photoID);                              // links with bare Flickr photo ID
+	app.get('/'+setID, post.flickrID);                               // links with bare Flickr set ID
+	app.get('/'+setID+'/'+photoID, post.flickrID);
 	app.get('/:slug'+s+'/pdf', pdf.view);
-	app.get('/:slug'+s+'/'+clear, set.clear);
-	app.get('/:slug'+s+'/new', set.newSet);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, set.subSet);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/'+clear, set.clearSubSet);
-	app.get('/:slug'+s, set.view);
+	app.get('/:slug'+s+'/'+clear, post.clear);
+	app.get('/:slug'+s+'/new', post.newPost);
+	app.get('/:groupSlug'+s+'/:partSlug'+s, post.seriesPost);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/'+clear, post.clearSeriesPost);
+	app.get('/:slug'+s, post.view);
 }

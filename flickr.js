@@ -117,15 +117,15 @@ function FlickrAPI()
 	};
 
 	/**
-	 * Get collection of Flickr sets and photos
+	 * Get collection of Flickr posts and photos
 	 * @param {function(Flickr.Tree)} callback method to call when collection is returned
-	 * @see {@link http://www.flickr.com/services/api/flickr.collections.getTree.html}
+	 * @see {@link http://www.flickr.com/services/api/flickr.tags.getTree.html}
 	 */
 	this.getCollection = function(callback)
 	{
-		call('collections.getTree', 'user_id', _userID, function(r)
+		call('tags.getTree', 'user_id', _userID, function(r)
 		{
-			callback(r.collections);
+			callback(r.tags);
 		});
 	};
 

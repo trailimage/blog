@@ -2,13 +2,13 @@ var Format = require('../format.js');
 var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
+/** @type {Library} */
+var Metadata = require('../metadata/library.js');
 var log = require('winston');
 
 /** @type {Boolean} */
 var prepared = false;
-/** @type {Metadata} */
+/** @type {Library} */
 var metadata = null;
 /** @type {Output} */
 var output = null;
@@ -42,28 +42,28 @@ exports.clearAll = function(req, res)
 {
 	prepare();
 	log.warn('Clearning all tags from cache');
-	output.remove(metadata.collectionSlugs(), function(done) { refreshSchema(res); });
+	output.remove(metadata.postTagSlugs(), function(done) { refreshSchema(res); });
 };
 
 function Tag(req)
 {
 	var c = req.params.category;
 	var t = req.params.tag;
-	/** @type {MetadataCollection} */
+	/** @type {Tag} */
 	var parent = null;
-	/** @type {MetadataCollection} */
+	/** @type {Tag} */
 	this.collection = null;
 	this.slug = null;
 
 	if (c != 'tag')
 	{
 		this.slug = c + '/' + t;
-		parent = metadata.collections[Format.capitalize(c)];
+		parent = metadata.tags[Format.capitalize(c)];
 		this.collection = (parent != null) ? parent.withName(t) : null;
 	}
 	else
 	{
-		parent = metadata.collectionWithChild(t);
+		parent = metadata.tagWithChild(t);
 		this.collection = parent.withName(t);
 		this.slug = parent.slug + '/' + t;
 	}
@@ -84,7 +84,7 @@ function refreshSchema(res, path)
 }
 
 /**
- * @param {MetadataCollection} collection
+ * @param {Tag} collection
  * @param {String} [slug]
  * @param [res]
  */
@@ -92,7 +92,7 @@ function tryRender(collection, slug, res)
 {
 	var reply = output.responder(slug, res, 'text/html');
 
-	if (!metadata.setInfoLoaded)
+	if (!metadata.postInfoLoaded)
 	{
 		// don't cache until all item info is loaded since search page shows lazy loaded thumbs
 		render(collection, reply, slug, res);
@@ -107,7 +107,7 @@ function tryRender(collection, slug, res)
 }
 
 /**
- * @param {MetadataCollection} collection
+ * @param {Tag} collection
  * @param {Responder} reply
  * @param {String} [slug]
  * @param [res]
@@ -116,11 +116,11 @@ function render(collection, reply, slug, res)
 {
 	if (collection != null)
 	{
-		var count = collection.sets.length;
+		var count = collection.posts.length;
 
-		reply.render('category',
+		reply.render('post-tag',
 		{
-			'sets': collection.sets,
+			'sets': collection.posts,
 			'title': Format.string('{0} post{1} tagged “{2}”',
 				Format.sayNumber(count),
 				((count > 1) ? 's' : ''),

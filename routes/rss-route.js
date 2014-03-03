@@ -1,8 +1,8 @@
 var Setting = require('../settings.js');
 var Enum = require('../enum.js');
 var Format = require('../format.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 var Feed = require('feed');
 var log = require('winston');
 /**
@@ -18,27 +18,27 @@ var retries = 0;
  */
 exports.view = function(req, res)
 {
-	/** @type {Metadata} */
-	var metadata = Metadata.current;
+	/** @type {Library} */
+	var library = Library.current;
 
-	if (metadata == null || !metadata.setInfoLoaded)
+	if (library == null || !library.postInfoLoaded)
 	{
 		if (retries > MAX_RETRIES)
 		{
-			log.error('Unable to load menu after %d tries', MAX_RETRIES);
+			log.error('Unable to load library after %d tries', MAX_RETRIES);
 			res.render(Enum.httpStatus.notFound, {'title': 'Unable to load feed'});
 		}
 		else
 		{
 			retries++;
-			log.error('Meta not ready when creating menu — attempt %d', retries);
+			log.error('Library not ready when creating menu — attempt %d', retries);
 			setTimeout(exports.send, 1000, req, res);
 		}
 		return;
 	}
 
-	/** @type {Metadata.Set} */
-	var set = null,
+	/** @type {Post} */
+	var post = null,
 		feed = new Feed(
 	{
 		title:          Setting.title,
@@ -53,17 +53,17 @@ exports.view = function(req, res)
 		}
 	});
 
-	for (var i = 0; i < metadata.sets.length; i++)
+	for (var i = 0; i < library.posts.length; i++)
 	{
-		set = metadata.sets[i];
+		post = library.posts[i];
 
-		if (set.timebound)
+		if (post.timebound)
 		{
 			feed.item({
-				title: set.title,
-				link: Format.string('http://{0}/{1}/', Setting.domain, set.slug),
-				description: set.description,
-				date: set.createdOn
+				title: post.title,
+				link: Format.string('http://{0}/{1}/', Setting.domain, post.slug),
+				description: post.description,
+				date: post.createdOn
 			});
 		}
 	}

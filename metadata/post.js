@@ -5,22 +5,22 @@ var Enum = require('./../enum.js');
 
 /**
  * @param {FlickrAPI.SetSummary|Object} api
- * @param {boolean} [timebound = true] Whether item occurred at a point in time
+ * @param {boolean} [timebound = true] Whether set photos occurred together at a point in time
  * @constructor
  */
-function MetadataSet(api, timebound)
+function Post(api, timebound)
 {
-	/** @type {MetadataSet} */
+	/** @type {Post} */
 	var _this = this;
 	/** @type {String} */
 	var _originalTitle = api.title;
 	/**
-	 * The slug shared by sets in a story
+	 * The slug shared by posts in a series
 	 * @type {String}
 	 **/
-	var _groupSlug = null;
+	var _seriesSlug = null;
 	/**
-	 * Unique slug for set in a group
+	 * Unique slug for one post in a series
 	 * @type {String}
 	 **/
 	var _partSlug = null;
@@ -59,16 +59,16 @@ function MetadataSet(api, timebound)
 	this.timebound = (timebound === undefined) || timebound;
 	/** @type {String} */
 	this.slug = null;
-	/** @type {MetadataSet} */
+	/** @type {Post} */
 	this.next = null;
-	/** @type {MetadataSet} */
+	/** @type {Post} */
 	this.previous = null;
 	/** @type {int} */
 	this.part = 0;
 	/** @type {int} */
 	this.totalParts = 0;
 	/** @type {boolean} */
-	this.isGroupStart = false;
+	this.isSeriesStart = false;
 
 	function init()
 	{
@@ -79,9 +79,9 @@ function MetadataSet(api, timebound)
 		if (parts.length > 1)
 		{
 			_this.subTitle = parts[1];
-			_groupSlug = Format.slug(_this.title);
+			_seriesSlug = Format.slug(_this.title);
 			_partSlug = Format.slug(_this.subTitle);
-			_this.slug = _groupSlug + '/' + _partSlug;
+			_this.slug = _seriesSlug + '/' + _partSlug;
 		}
 		else
 		{
@@ -123,20 +123,20 @@ function MetadataSet(api, timebound)
 		_this.thumbnail = Format.string('http://farm{0}.staticflickr.com/{1}/{2}_{3}_s.jpg', info.farm, info.server, info.primary, info.secret);
 	};
 
-	this.makeGroupStart = function()
+	this.makeSeriesStart = function()
 	{
-		_this.isGroupStart = true;
-		_this.slug = _groupSlug;
+		_this.isSeriesStart = true;
+		_this.slug = _seriesSlug;
 	};
 
 	/**
-	 * Whether set is part of a group
+	 * Whether post is part of a series
 	 * @returns {boolean}
 	 */
 	this.isPartial = function() { return _this.totalParts > 1; };
 
 	/**
-	 * Whether next set is part of the same group
+	 * Whether next post is part of the same series
 	 * @returns {boolean}
 	 */
 	this.nextIsPart = function()
@@ -145,7 +145,7 @@ function MetadataSet(api, timebound)
 	};
 
 	/**
-	 * Whether previous set is part of the same group
+	 * Whether previous post is part of the same series
 	 * @returns {boolean}
 	 */
 	this.previousIsPart = function()
@@ -169,16 +169,16 @@ function MetadataSet(api, timebound)
 	};
 
 	/**
-	 * For set titles that looked like part of a story (colon separator) but had no other parts
+	 * For post titles that looked like part of a series (colon separator) but had no other parts
 	 */
 	this.ungroup = function()
 	{
 		_this.title = _originalTitle;
 		_this.subTitle = null;
 		_this.slug = Format.slug(_originalTitle);
-		_this.isGroupStart = false;
+		_this.isSeriesStart = false;
 
-		_groupSlug = null;
+		_seriesSlug = null;
 		_partSlug = null;
 	};
 
@@ -189,11 +189,11 @@ function MetadataSet(api, timebound)
 	 */
 	this.isMatch = function(slug)
 	{
-		return (_this.slug == slug || (_partSlug != null && slug == _groupSlug + '-' + _partSlug));
+		return (_this.slug == slug || (_partSlug != null && slug == _seriesSlug + '-' + _partSlug));
 	};
 
 	/**
-	 * Metadata groups the items belongs to are treated as tags or keywords
+	 * Library groups the items belong to are treated as tags or keywords
 	 * @param {String} tag
 	 */
 	this.addTag = function(tag)
@@ -218,7 +218,7 @@ function MetadataSet(api, timebound)
  * @see http://www.blogger.com/blogger.g?blogID=118459106898417641#allposts
  * @enum {String}
  */
-MetadataSet.blogUrl =
+Post.blogUrl =
 {
 	'juntura-by-desert-dry-creek-gorge': 'juntura-by-desert',
 	'juntura-by-desert-owyhee-dam': 'juntura-by-desert',
@@ -302,4 +302,4 @@ MetadataSet.blogUrl =
 	'caterpillar-ridge-ride': 'spring-caterpillars-on-the-boise-ridge'
 };
 
-module.exports = MetadataSet;
+module.exports = Post;

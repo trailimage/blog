@@ -1,7 +1,7 @@
 /** @type {singleton} */
 var Output = require('../output.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 /** @see https://npmjs.org/package/uglify-js */
 var Uglify = require('uglify-js');
 var log = require('winston');
@@ -21,7 +21,7 @@ exports.view = function(req, res)
 	{
 		if (sent) { return; }
 
-		reply.render('menu-script', {'metadata': Metadata.current, 'layout': null }, function(text)
+		reply.render('menu-script', {'library': Library.current, 'layout': null }, function(text)
 		{
 			return Uglify.minify(text, {fromString: true}).code;
 		});
@@ -30,7 +30,7 @@ exports.view = function(req, res)
 
 exports.clear = function(req, res)
 {
-	Metadata.refresh(function()
+	Library.refresh(function()
 	{
 		Output.current.remove(key, function() { res.redirect('/'); });
 	});

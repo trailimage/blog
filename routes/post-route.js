@@ -1,10 +1,10 @@
 var Setting = require('../settings.js');
 var Format = require('../format.js');
 var Enum = require('../enum.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
-/** @type {MetadataSet} */
-var MetadataSet = require('../metadata/set.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
+/** @type {Post} */
+var Post = require('../metadata/post.js');
 /** @type {singleton} */
 var Flickr = require('../flickr.js');
 /** @type {singleton} */
@@ -17,8 +17,8 @@ var log = require('winston');
 var prepared = false;
 /** @type {FlickrAPI} */
 var flickr = null;
-/** @type {Metadata} */
-var metadata = null;
+/** @type {Library} */
+var library = null;
 /** @type {Output} */
 var output = null;
 
@@ -40,7 +40,7 @@ function prepare()
 	if (!prepared)
 	{
 		flickr = Flickr.current;
-		metadata = Metadata.current;
+		library = Library.current;
 		output = Output.current;
 		prepared = true;
 	}
@@ -52,13 +52,13 @@ function prepare()
 exports.view = function(req, res)
 {
 	prepare();
-	showSet(res, req.params.slug);
+	showPost(res, req.params.slug);
 };
 
 exports.default = function(req, res)
 {
 	prepare();
-	if (metadata != null) { showSet(res, metadata.sets[0].slug); }
+	if (library != null) { showPost(res, library.posts[0].slug); }
 	else { notReady(res); }
 };
 
@@ -67,21 +67,21 @@ exports.photoID = function(req, res)
 	prepare();
 
 	/** @type {string} */
-	var photoID = req.params.photoID;
+	var photoID = req.params['photoID'];
 	/** @type {string} */
-	var setID;
+	var postID;
 
-	/** @var Array.<Flickr.MemberSet>) sets */
+	/** @var Array.<Flickr.MemberSet>) posts */
 	flickr.getContext(photoID, function(sets)
 	{
 		if (sets)
 		{
 			for (i = 0; i < sets.length; i++)
 			{
-				setID = sets[i].id;
-				if (setID != Setting.flickr.favoriteSet && setID != Setting.flickr.poemSet)
+				postID = sets[i].id;
+				if (postID != Setting.flickr.favoriteSet && postID != Setting.flickr.poemSet)
 				{
-					showSetWithID(res, setID);
+					showPostWithID(res, postID);
 					return;
 				}
 			}
@@ -92,7 +92,7 @@ exports.photoID = function(req, res)
 
 exports.flickrID = function(req, res)
 {
-	showSetWithID(res, req.params.setID);
+	showPostWithID(res, req.params['setID']);
 };
 
 exports.featured = function(req, res)
@@ -100,12 +100,12 @@ exports.featured = function(req, res)
 	res.redirect(Enum.httpStatus.permanentRedirect, 'http://www.flickr.com/photos/trailimage/sets/72157631638576162/');
 };
 
-function showSetWithID(res, id)
+function showPostWithID(res, id)
 {
 	prepare();
 
-	var set = metadata.setWithID(id);
-	if (set != null) { res.redirect(Enum.httpStatus.permanentRedirect, '/' + set.slug)	}
+	var post = library.postWithID(id);
+	if (post != null) { res.redirect(Enum.httpStatus.permanentRedirect, '/' + post.slug); }
 	else { Output.replyNotFound(res, id); }
 }
 
@@ -113,30 +113,30 @@ exports.clearAll = function(req, res)
 {
 	prepare();
 
-	var slugs = metadata.setSlugs().concat(['about','contact','search']);
+	var slugs = library.postSlugs().concat(['about','contact','search']);
 
-	log.warn('Removing all pages from cache');
+	log.warn('Removing all posts from cache');
 
 	output.remove(slugs);
 	res.redirect('/');
 };
 
 /**
- * Clear set cache and set's tag caches
+ * Clear set cache and post's tag caches
  * @param req
  * @param res
  */
-exports.newSet = function(req, res)
+exports.newPost = function(req, res)
 {
 	prepare();
 
-	/** @type {MetadataSet} */
-	var set = metadata.setWithSlug(req.params.slug);
+	/** @type {Post} */
+	var post = library.postWithSlug(req.params.slug);
 
-	if (set != null)
+	if (post != null)
 	{
 		/** @type {Array.<String>} */
-		var tags = metadata.tagSlugs(set.tags);
+		var tags = library.tagSlugs(post.tags);
 		log.warn('Removing tags ["%s"] from cache', tags.join('", "'));
 		output.remove(tags, function(done)
 		{
@@ -144,54 +144,54 @@ exports.newSet = function(req, res)
 			{
 				log.warn('Failed to remove tags ["%s"] (may just mean some were not cached)', tags.join('", "'));
 			}
-			log.warn('Refreshing metadata');
-			Metadata.refresh();
+			log.warn('Refreshing library');
+			Library.refresh();
 		});
 
-		log.warn('Removing set "%s" from cache', set.slug);
-		output.remove(set.slug, function(done)
+		log.warn('Removing post "%s" from cache', post.slug);
+		output.remove(post.slug, function(done)
 		{
-			if (!done) { log.error('Failed to remove "%s" from cache', set.slug); }
-			clearAdjacent(set.next);
-			clearAdjacent(set.previous);
-			res.redirect('/' + set.slug);
+			if (!done) { log.error('Failed to remove "%s" from cache', post.slug); }
+			clearAdjacent(post.next);
+			clearAdjacent(post.previous);
+			res.redirect('/' + post.slug);
 		});
 	}
 	else
 	{
-		log.error('Set slug "%s" not found in metadata', set.slug);
+		log.error('Post slug "%s" not found in metadata', post.slug);
 	}
 };
 
 /**
- * @param {MetadataSet} set
+ * @param {Post} post
  */
-function clearAdjacent(set)
+function clearAdjacent(post)
 {
-	if (set)
+	if (post)
 	{
-		log.warn('Removing set "%s" from cache', set.slug);
-		output.remove(set.next.slug, function(done)
+		log.warn('Removing post "%s" from cache', post.slug);
+		output.remove(post.next.slug, function(done)
 		{
-			if (!done) { log.error('Failed to remove "%s" from cache', set.slug); }
+			if (!done) { log.error('Failed to remove "%s" from cache', post.slug); }
 		});
 	}
 }
 
 exports.clear = function(req, res)
 {
-	clearSet(res, req.params.slug);
+	clearPost(res, req.params.slug);
 };
 
-exports.clearSubSet = function(req, res)
+exports.clearSeriesPost = function(req, res)
 {
-	clearSet(res, groupSetSlug(req));
+	clearPost(res, seriesPostSlug(req));
 };
 
-function clearSet(res, slug)
+function clearPost(res, slug)
 {
 	prepare();
-	log.warn('Removing set "%s" from cache', slug);
+	log.warn('Removing post "%s" from cache', slug);
 	output.remove(slug, function(done)
 	{
 		if (!done) { log.error('Failed to remove "%s" from cache', slug); }
@@ -199,30 +199,36 @@ function clearSet(res, slug)
 	});
 }
 
-exports.subSet = function(req, res)
+/**
+ *
+ * @param req
+ * @param res
+ */
+exports.seriesPost = function(req, res)
 {
 	prepare();
-	showSet(res, groupSetSlug(req));
+	showPost(res, seriesPostSlug(req));
 };
 
 /**
+ * Slug for single post within a series
  * @returns {string}
  */
-function groupSetSlug(req)
+function seriesPostSlug(req)
 {
-	return req.params.groupSlug + '/' + req.params.partSlug;
+	return req.params['groupSlug'] + '/' + req.params['partSlug'];
 }
 
 /**
- * Sets still on the old blog only
+ * Posts still on the old blog only
  */
 exports.blog = function(req, res)
 {
 	var slug = req.params.slug.replace(/\.html?$/, '');
 
-	if (slug in MetadataSet.blogUrl && !Format.isEmpty(MetadataSet.blogUrl[slug]))
+	if (slug in Post.blogUrl && !Format.isEmpty(Post.blogUrl[slug]))
 	{
-		res.redirect(Enum.httpStatus.permanentRedirect, '/' + MetadataSet.blogUrl[slug]);
+		res.redirect(Enum.httpStatus.permanentRedirect, '/' + Post.blogUrl[slug]);
 	}
 	else
 	{
@@ -248,13 +254,13 @@ exports.addFixes = function(app)
 	{
 		app.get(i, function(req, res) { res.redirect(Enum.httpStatus.permanentRedirect, fixes[i]); });
 	}
-}
+};
 
 function notReady(res)
 {
 	var retrySeconds = Setting.retryDelay / Enum.time.second;
 
-	log.warn('Meta not ready. Trying again in %d seconds.', retrySeconds);
+	log.warn('Library not ready. Trying again in %d seconds.', retrySeconds);
 
 	res.set('Retry-After', retrySeconds);
 	res.render('503',
@@ -266,25 +272,25 @@ function notReady(res)
 	});
 }
 
-function showSet(res, slug, template)
+function showPost(res, slug, template)
 {
 	var reply = output.responder(slug, res, 'text/html');
-	/** @type {MetadataSet} */
-	var set = null;
+	/** @type {Post} */
+	var post = null;
 
 	reply.send(function(sent)
 	{
 		if (sent) { return; }
 
-		if (metadata == null) { notReady(res); return; }
+		if (library == null) { notReady(res); return; }
 
-		set = metadata.setWithSlug(slug);
+		post = library.postWithSlug(slug);
 
-		if (set == null) { reply.notFound(slug); return; }
+		if (post == null) { reply.notFound(slug); return; }
 
-		flickr.getSet(set.id, sizes, function(setPhotos, setInfo)
+		flickr.getSet(post.id, sizes, function(photos, info)
 		{
-			if (template === undefined) { template = 'set'; }
+			if (template === undefined) { template = 'post'; }
 
 			/** @type {String} */
 			var map = '';
@@ -297,25 +303,25 @@ function showSet(res, slug, template)
 			/** @type {String} */
 			var keywords = null;
 
-			if (set.id != Setting.flickr.poemSet && set.id != Setting.flickr.favoriteSet)
+			if (post.id != Setting.flickr.poemSet && post.id != Setting.flickr.favoriteSet)
 			{
-				video = getVideoMetadata(setInfo);
-				dateTaken = getDateTaken(setPhotos.photo);
-				map = getMapCoordinates(setPhotos.photo);
-				keywords = getKeywords(setPhotos);
-				description = getDescription(setInfo, setPhotos.photo, video);
+				video = getVideoMetadata(info);
+				dateTaken = getDateTaken(photos.photo);
+				map = getMapCoordinates(photos.photo);
+				keywords = getKeywords(photos);
+				description = getDescription(info, photos.photo, video);
 			}
 
 			reply.render(template,
 			{
-				'set': setPhotos,
-				'info': setInfo,
+				'photos': photos,
+				'info': info,
 				'keywords': keywords,
-				'meta': set,
+				'post': post,
 				'map': (Format.isEmpty(map)) ? null : encodeURIComponent('size:tiny' + map),
 				'dateTaken': dateTaken,
 				'video': video,
-				'title': setInfo.title._content,
+				'title': info.title._content,
 				'slug': slug,
 				'description': description,
 				'setting': Setting
@@ -376,7 +382,7 @@ function getDescription(info, photos, video)
 }
 
 /**
- * Get unique list of tags used on photos in the set
+ * Get unique list of tags used on photos in the post
  * @param {Flickr.SetPhotos} set
  * @return {String}
  */
@@ -396,7 +402,7 @@ function getKeywords(set)
 
 		for (var j = 0; j < t.length; j++)
 		{
-			var tag = metadata.photoTags[t[j]];     // lookup original tag name
+			var tag = library.photoTags[t[j]];     // lookup original tag name
 
 			if (tag)
 			{

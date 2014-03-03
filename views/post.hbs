@@ -4,11 +4,11 @@
 
 <div id="header" itemscope itemtype ="http://schema.org/BlogPosting" class="content">
 	<div id="top">
-	{{#if meta.isPartial}}
-		<h1 itemprop="name">{{meta.title}}</h1>
+	{{#if post.isPartial}}
+		<h1 itemprop="name">{{post.title}}</h1>
 		<div class='subTitle'>
-			<div class='parts'>Part {{meta.part}} of {{meta.totalParts}}</div>
-			{{meta.subTitle}}
+			<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
+			{{post.subTitle}}
 		</div>
 	{{else}}
 		<h1 itemprop="name">{{info.title._content}}</h1>
@@ -19,7 +19,7 @@
 	</div>
 
 	{{#if dateTaken}}
-	<div id="setDate" itemprop="dateCreated">{{dateTaken}}</div>
+	<div id="postDate" itemprop="dateCreated">{{dateTaken}}</div>
 	{{/if}}
 
 	<div class="fb-like" data-href="http://{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
@@ -32,7 +32,7 @@
 	<blockquote class="synopsis"><p itemprop="description">{{info.description._content}}<p></blockquote>
 	{{/if}}
 
-	{{> set-tags meta.tags}}
+	{{> post-tags post.tags}}
 	{{> navigation}}
 
 	{{#if map}}
@@ -43,7 +43,7 @@
 
 </div>
 
-{{#set.photo}}
+{{#photos.photo}}
 
 <div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
 	<a name="{{index}}" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
@@ -66,7 +66,7 @@
 
 <div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
 
-{{/set.photo}}
+{{/photos.photo}}
 
 {{#if video}}
 <a name="video">
@@ -77,7 +77,7 @@
 {{/if}}
 
 {{> navigation}}
-<div class="footer-tags content">{{> set-tags meta.tags}}</div>
+<div class="footer-tags content">{{> post-tags post.tags}}</div>
 <div class='by-line content'><span>by</span>Jason Abbott</div>
 
 <div id="footer" class="content">

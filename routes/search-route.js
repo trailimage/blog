@@ -1,8 +1,8 @@
 var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
-/** @type {Metadata} */
-var Metadata = require('../metadata/metadata.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 
 /**
  * Default route action
