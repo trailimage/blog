@@ -123,7 +123,7 @@ function FlickrAPI()
 	 */
 	this.getCollection = function(callback)
 	{
-		call('tags.getTree', 'user_id', _userID, function(r)
+		call('collections.getTree', 'user_id', _userID, function(r)
 		{
 			callback(r.collections);
 		});
