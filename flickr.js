@@ -58,8 +58,6 @@ function FlickrAPI()
 			'agent': false      // disable socket pooling
 		};
 
-		//console.log('http://' + _host + options.path);
-
 		var request = http.request(options, function(response)
 		{
 			var result= "";
@@ -102,18 +100,32 @@ function FlickrAPI()
 	}
 
 	/**
+	 * Execute signed service call
+	 * @param {String} method Name of FlickrAPI API method to call
+	 * @param {String} idType Type of FlickrAPI ID whether photo, set, collection, etc.
+	 * @param {String} id FlickrAPI object ID
+	 * @param {function(Flickr.Response)} callback Method to call when service completes
+	 * @param {Object.<String>} [args] Additional arguments
+	 * @see {@link http://www.flickr.com/services/api/response.json.html}
+	 */
+	function signedCall(method, idType, id, callback, args)
+	{
+		var qs = parameterize(method, idType, id, args);
+		var url = Format.string('http://{0}/{1}{2}', _host, _baseUrl, qs);
+
+		_oauth.get(url, Setting.flickr.token, Setting.flickr.tokenSecret, function(error, data)
+		{
+			if (error) { log.error(error); } else {	callback(JSON.parse(data));	}
+		});
+	}
+
+	/**
 	 * @param {function(Flickr.TagInfo)} callback
 	 * @see {@link http://www.flickr.com/services/api/flickr.tags.getListUserRaw.html}
 	 */
 	this.getTags = function(callback)
 	{
-		var method = 'tags.getListUserRaw';
-		var url = Format.string('http://{0}/{1}{2}', _host, _baseUrl, parameterize(method));
-
-		_oauth.get(url, Setting.flickr.token, Setting.flickr.tokenSecret, function(error, data)
-		{
-			if (error) { log.error(error); } else {	callback(JSON.parse(data)); }
-		});
+		signedCall('tags.getListUserRaw', null, null, function(r) { callback(r); });
 	};
 
 	/**
@@ -195,7 +207,8 @@ function FlickrAPI()
 	};
 
 	/**
-	 *
+	 * The documentation says signing is not required but results differ even with entirely
+	 * public photos -- perhaps a Flickr bug
 	 * @param {Array.<String>} tags
 	 * @param {function(Array.<Flickr.PhotoSummary>)} callback Method to call after FlickrAPI responds
 	 * @see http://www.flickr.com/services/api/flickr.photos.search.html
@@ -204,7 +217,7 @@ function FlickrAPI()
 	{
 		var service = 'photos.search';
 
-		call(service, 'user_id', _userID, function(r)
+		signedCall(service, 'user_id', _userID, function(r)
 		{
 			if (r != null)
 			{
