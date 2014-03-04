@@ -1370,6 +1370,7 @@ div.post-tag
 {
 	@thumbWidth: 150px;
 	@tabWidth: 40px;
+	@viewWidth: (@thumbWidth + 4) * 3;
 
 	#flickr-logo
 	{
@@ -1426,14 +1427,15 @@ div.post-tag
 	#tag-index
 	{
 		float: left;
-		margin-left: -15px;
-		width: @contentWidth - ((@thumbWidth + 2) * 3);
+		margin: 0;
+		width: @contentWidth - (@viewWidth + 5);
 		overflow: hidden;
 
 		div
 		{
 			display: none;
-			padding: 10px 20px;
+			margin: 7px 0;
+			padding: 0;
 
 			a
 			{
@@ -1453,8 +1455,8 @@ div.post-tag
 	#thumbs
 	{
 		float: right;
-		width: (@thumbWidth + 4) * 3;
-		margin-bottom: 20px;
+		width: @viewWidth;
+		margin: 0 2px 20px 0;
 
 		h4
 		{
@@ -1472,8 +1474,8 @@ div.post-tag
 			padding: 2px 0;
 			margin: 0;
 
-			img { margin: 0; padding: 0; }
-			&:hover img { .drop-shadow(0, 0, 6px, 0.6); }
+			img { margin: 0; padding: 0; border: 1px solid @trimColor; }
+			&:hover img { border-color: @hoverColor; }
 		}
 	}
 }

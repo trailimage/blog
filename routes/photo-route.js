@@ -53,9 +53,14 @@ exports.tags = function(req, res)
 	var selected = req.params['tagSlug'];
 	var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 	var list = Library.current.photoTags;
+	var keys = Object.keys(list);
 	var tags = {};
 
-	if (Format.isEmpty(selected)) { selected = "sunset"; }
+	if (Format.isEmpty(selected))
+	{
+		// select a random tag
+		selected = keys[Math.floor((Math.random() * keys.length) + 1)];
+	}
 
 	// group tags by first letter
 	for (var i = 0; i < alphabet.length; i++) { tags[alphabet[i]] = {}; }
@@ -66,7 +71,7 @@ exports.tags = function(req, res)
 		'tags': tags,
 		'selected': selected,
 		'alphabet': alphabet,
-		'title': 'Photo Tags',
+		'title': keys.length + ' Photo Tags',
 		'setting': Setting
 	});
 };
