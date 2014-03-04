@@ -219,7 +219,7 @@ function FlickrAPI()
 		{
 			'extras': [singleton.size.thumbnail, singleton.size.square75, singleton.size.square150].join(),
 			'tags': tags.join(),
-			'per-page': 500         // maximum
+			'per_page': 500         // maximum
 		});
 	};
 

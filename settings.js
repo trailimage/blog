@@ -36,7 +36,7 @@ exports.flickr =
 	secret: process.env.FLICKR_SECRET,
 	token: process.env.FLICKR_TOKEN,
 	tokenSecret: process.env.FLICKR_TOKEN_SECRET,
-	favoriteSet: '72157631638576162',
+	featureSet: '72157631638576162',
 	poemSet: '72157632729508554',
 	defaultCollection: '72157630885395608',
 	/** @enum {String} */

@@ -157,7 +157,7 @@ function Library(api)
 
 		if (root)
 		{
-			addPost(new Post({'id': Setting.flickr.favoriteSet, 'title': 'Featured'}, false));
+			addPost(new Post({'id': Setting.flickr.featureSet, 'title': 'Featured'}, false));
 			addPost(new Post({'id': Setting.flickr.poemSet, 'title': 'Ruminations'}, false));
 		}
 

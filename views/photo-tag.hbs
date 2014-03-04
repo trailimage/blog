@@ -1,52 +1,82 @@
 {{>header}}
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
+	<script src="/js/history/html4+html5/jquery.history.js" defer></script>
 	<script type='text/javascript'>
 		function init()
 		{
 			if (typeof jQuery !== 'function') { window.setTimeout(init, 200); return; }
 
 			var $view = $('#photo-tag');
-			var selected = 'item-a';
+			var selected = '{{selected}}';
+			var id = 'item-' + selected.substr(0, 1).toLowerCase();
+			var $list = $view.find('#' + id);
+			var $link = $list.find('#link-' + selected);
+			var $li = $view.find('li[data-for=' + id + ']');
 
-			$view.find('li').mouseover(function(e)
+			$list.show();
+			$link.addClass('selected');
+			$li.addClass('selected');
+
+			load($link);
+
+			$view.find('li').click(function(e)
 			{
-				var $li = $(this);
-				$view.find('.index div').hide(); $('#'+ $li.data('for')).show();
-				$view.find('li.selected').removeClass('selected');
+				$li.removeClass('selected');
+				$li = $(this);
 				$li.addClass('selected');
+
+				$list.hide();
+				$list =	$('#'+ $li.data('for'));
+				$list.show();
 			});
 
-			$view.find('#' + selected).show();
-			$view.find('li[data-for=' + selected + ']').addClass('selected');
-
-			$view.find('.index a').click(function(e)
+			$view.find('#tag-index a').click(function(e)
 			{
 				e.stopPropagation();
 				e.preventDefault();
-				$('#thumbs').load($(this).attr('href'));
+				$link.removeClass('selected');
+				$link = $(this);
+				$link.addClass('selected');
+				load($link);
+
+				History.pushState(
+					null,
+					'Trail Image photos tagged with "' + $link.html() + '"',
+					$link.attr('href').replace('/search', '')
+				);
 			});
 		}
+
+		function load(link)
+		{
+			$('#wait').show();
+			$('#thumbs').load(link.attr('href'), function()	{ $('#wait').hide(); });
+		}
+
 		init();
 	</script>
 {{/contentFor}}
 
 <div id="photo-tag" class="content">
-	<ul class="tags">
+	<div id="wait">&nbsp;</div>
+	<a id="flickr-logo" href="http://www.flickr.com/photos/trailimage/tags" title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
+	<div id="thumbs"></div>
+	<ul id="letters">
 	{{#alphabet}}
 		<li data-for="item-{{this}}">{{this}}</li>
 	{{/alphabet}}
 	</ul>
-	<div class="index">
+	<div id="tag-index">
 	{{#each tags}}
 		<div id="item-{{@key}}">
 		{{#each this}}
-			<a href="/photo-tag/{{@key}}">{{this}}</a>
+			<a id="link-{{@key}}" href="/photo-tag/search/{{@key}}">{{this}}</a>
 		{{/each}}
 		</div>
 	{{/each}}
 	</div>
-	<div id="thumbs"></div>
+	<div class="clear"></div>
 </div>
 
 {{>footer}}

@@ -67,55 +67,34 @@ exports.home = function(req, res)
 	else { notReady(res); }
 };
 
-exports.photoID = function(req, res)
+exports.flickrID = function(req, res)
 {
 	prepare();
 
-	/** @type {string} */
-	var photoID = req.params['photoID'];
-	/** @type {string} */
-	var postID;
+	var post = library.postWithID(req.params['postID']);
 
-	/** @var Array.<Flickr.MemberSet>) posts */
-	flickr.getContext(photoID, function(sets)
+	if (post != null)
 	{
-		if (sets)
-		{
-			for (i = 0; i < sets.length; i++)
-			{
-				postID = sets[i].id;
-				if (postID != Setting.flickr.favoriteSet && postID != Setting.flickr.poemSet)
-				{
-					showPostWithID(res, postID);
-					return;
-				}
-			}
-		}
-		Output.replyNotFound(res, photoID);
-	});
+		res.redirect(Enum.httpStatus.permanentRedirect, '/' + post.slug);
+	}
+	else
+	{
+		Output.replyNotFound(res, id);
+	}
 };
 
-exports.flickrID = function(req, res)
-{
-	showPostWithID(res, req.params['setID']);
-};
-
+/**
+ * Show featured set at Flickr
+ * @param req
+ * @param res
+ */
 exports.featured = function(req, res)
 {
 	res.redirect(Enum.httpStatus.permanentRedirect, 'http://www.flickr.com/photos/trailimage/sets/72157631638576162/');
 };
 
-function showPostWithID(res, id)
-{
-	prepare();
-
-	var post = library.postWithID(id);
-	if (post != null) { res.redirect(Enum.httpStatus.permanentRedirect, '/' + post.slug); }
-	else { Output.replyNotFound(res, id); }
-}
-
 /**
- * Clear set cache and post's tag caches
+ * Clear cache and post's tag caches
  * @param req
  * @param res
  */
@@ -124,13 +103,14 @@ exports.newPost = function(req, res)
 	prepare();
 
 	/** @type {Post} */
-	var post = library.postWithSlug(req.params.slug);
+	var post = library.postWithSlug(req.params['slug']);
 
 	if (post != null)
 	{
 		/** @type {Array.<String>} */
 		var tags = library.tagSlugs(post.tags);
 		log.warn('Removing tags ["%s"] from cache', tags.join('", "'));
+
 		output.remove(tags, function(done)
 		{
 			if (!done)
@@ -142,6 +122,7 @@ exports.newPost = function(req, res)
 		});
 
 		log.warn('Removing post "%s" from cache', post.slug);
+
 		output.remove(post.slug, function(done)
 		{
 			if (!done) { log.error('Failed to remove "%s" from cache', post.slug); }
@@ -221,12 +202,11 @@ exports.blog = function(req, res)
 	else
 	{
 		// send to old blog
-		var url = 'http://trailimage.blogspot.com/' + req.params.year + '/' + req.params.month + '/' + req.params.slug;
+		var url = 'http://trailimage.blogspot.com/' + req.params['year'] + '/' + req.params['month'] + '/' + req.params['slug'];
 		log.warn('Sending %s request to %s', slug, url);
 		res.redirect(Enum.httpStatus.temporaryRedirect, url);
 	}
 };
-
 
 /**
  * Display post that's part of a series
@@ -284,8 +264,8 @@ function notReady(res)
 /**
  *
  * @param res
- * @param slug
- * @param template
+ * @param {String} slug
+ * @param {String} [template]
  */
 function showPost(res, slug, template)
 {
@@ -318,7 +298,7 @@ function showPost(res, slug, template)
 			/** @type {String} */
 			var keywords = null;
 
-			if (post.id != Setting.flickr.poemSet && post.id != Setting.flickr.favoriteSet)
+			if (post.id != Setting.flickr.poemSet && post.id != Setting.flickr.featureSet)
 			{
 				video = getVideoMetadata(info);
 				dateTaken = getDateTaken(photos.photo);

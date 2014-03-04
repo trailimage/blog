@@ -1,7 +1,10 @@
 var Setting = require('../settings.js');
 var Format = require('../format.js');
+var Enum = require('../enum.js');
 /** @type {singleton} */
 var Flickr = require('../flickr.js');
+/** @type {singleton} */
+var Output = require('../output.js');
 /** @type {Library} */
 var Library = require('../metadata/library.js');
 var log = require('winston');
@@ -47,9 +50,12 @@ exports.exif = function(req, res)
 
 exports.tags = function(req, res)
 {
+	var selected = req.params['tagSlug'];
 	var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 	var list = Library.current.photoTags;
 	var tags = {};
+
+	if (Format.isEmpty(selected)) { selected = "sunset"; }
 
 	// group tags by first letter
 	for (var i = 0; i < alphabet.length; i++) { tags[alphabet[i]] = {}; }
@@ -58,9 +64,51 @@ exports.tags = function(req, res)
 	res.render('photo-tag',
 	{
 		'tags': tags,
+		'selected': selected,
 		'alphabet': alphabet,
 		'title': 'Photo Tags',
 		'setting': Setting
+	});
+};
+
+/**
+ * Find and show post with given photo ID
+ * @param req
+ * @param res
+ */
+exports.view = function(req, res)
+{
+	/** @type {string} */
+	var photoID = req.params['photoID'];
+	/** @type {string} */
+	var postID;
+
+	/** @var Array.<Flickr.MemberSet>) sets */
+	Flickr.current.getContext(photoID, function(sets)
+	{
+		if (sets)
+		{
+			for (var i = 0; i < sets.length; i++)
+			{
+				postID = sets[i].id;
+
+				if (postID != Setting.flickr.featureSet)
+				{
+					var post = Library.current.postWithID(postID);
+
+					if (post != null)
+					{
+						res.redirect(Enum.httpStatus.permanentRedirect, '/' + post.slug + '#' + photoID);
+					}
+					else
+					{
+						Output.replyNotFound(res, postID);
+					}
+					return;
+				}
+			}
+		}
+		Output.replyNotFound(res, photoID);
 	});
 };
 
@@ -69,7 +117,7 @@ exports.search = function(req, res)
 	Flickr.current.tagSearch([req.params['tagSlug']], function(photos)
 	{
 		var tag = Library.current.photoTags[req.params['tagSlug']];
-		var title = Format.sayNumber(photos.length) + ' ' + tag + ' Image' + ((photos.length != 1) ? 's' : '');
+		var title = Format.sayNumber(photos.length) + ' &ldquo;' + tag + '&rdquo; Image' + ((photos.length != 1) ? 's' : '');
 
 		res.render('photo-search',
 		{

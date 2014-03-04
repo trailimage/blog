@@ -94,7 +94,7 @@ function defineRoutes()
     /** @type {string} Flickr photo ID pattern */
     var photoID = ':photoID(\\d{10,11})';
     /** @type {string} Flickr set ID pattern */
-    var setID = ':setID(\\d{17})';
+    var postID = ':postID(\\d{17})';
 	var clear = 'reset';
 	var post = require('./routes/post-route.js');
 	var contact = require('./routes/contact-route.js');
@@ -137,11 +137,12 @@ function defineRoutes()
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', post.blog);       // old blog links with format /YYYY/MM/slug
 	app.get('/photo-tag', photo.tags);
-	app.get('/photo-tag/:tagSlug'+s, photo.search);
+	app.get('/photo-tag/:tagSlug', photo.tags);
+	app.get('/photo-tag/search/:tagSlug', photo.search);
 	app.get('/featured', post.featured);
-	app.get('/'+photoID, post.photoID);                              // links with bare Flickr photo ID
-	app.get('/'+setID, post.flickrID);                               // links with bare Flickr set ID
-	app.get('/'+setID+'/'+photoID, post.flickrID);
+	app.get('/'+photoID, photo.view);                              // links with bare Flickr photo ID
+	app.get('/'+postID, post.flickrID);                               // links with bare Flickr set ID
+	app.get('/'+postID+'/'+photoID, post.flickrID);
 	app.get('/:slug'+s+'/pdf', pdf.view);
 	app.get('/:slug'+s+'/'+clear, post.clear);
 	app.get('/:slug'+s+'/new', post.newPost);
