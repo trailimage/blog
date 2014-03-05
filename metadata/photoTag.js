@@ -74,6 +74,6 @@ PhotoTag.load = function(callback)
 			});
 		}
 	});
-}
+};
 
 module.exports = PhotoTag;
