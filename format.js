@@ -106,6 +106,28 @@ exports.string = function(text)
 };
 
 /**
+ *
+ * @param {String} list Comma delimited tag list given with each photo
+ * @return {String}
+ */
+exports.tagList = function(list)
+{
+	var links = '';
+	var link = '<a href="/photo-tag/{0}">{1}</a>';
+
+	if (list)
+	{
+		var tags = list.split(/\s*,\s*/);
+
+		for (var i = 0; i < tags.length; i++)
+		{
+			links += exports.string(link, tags[i].toLowerCase().replace(/\s/g, ''), tags[i]) + ' ';
+		}
+	}
+	return links;
+};
+
+/**
  * Replace number with word
  * @param {int} n
  * @param {bool} [capitalize]

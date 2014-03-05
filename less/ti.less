@@ -771,6 +771,39 @@ div.photo
 		}
 	}
 
+	div.tags
+	{
+		position: absolute;
+		left: 5px;
+		bottom: 70px;
+		color: #fff;
+		background-color: #000;
+		margin-right: 4px;
+		padding: 5px 10px 5px 30px;
+		.opacity(0.6);
+		display: none;
+		text-align: left;
+		font-size: 15px;
+
+		.glyphicon
+		{
+			position: absolute;
+			top: 7px;
+			left: 10px;
+		}
+
+		a
+		{
+			color: #fff;
+			font-family: @sanSerifFont;
+			padding: 0 10px;
+			text-decoration: none;
+			white-space: nowrap;
+
+			&:hover { color: #ff0; }
+		}
+	}
+
 	div.exif
 	{
 	  	position: absolute;
@@ -892,7 +925,7 @@ div.photo
 				.glyphicon { color: rgba(255, 0, 0, 1); }
 			}
 		}
-		div.exif { display: block; }
+		div.exif, div.tags { display: block; }
 		p span { color: #000; }
 	}
 

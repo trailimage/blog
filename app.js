@@ -66,6 +66,7 @@ app.configure('all', function()
 	hbs.registerHelper('formatTitle', function(text) { return Format.text(text); });
 	hbs.registerHelper('add', function(a, b) { return (a * 1) + b; });
 	hbs.registerHelper('makeSlug', function(text) { return Format.slug(text); });
+	hbs.registerHelper('makeTagList', function(list) { return Format.tagList(list); });
 	hbs.registerHelper('formatLogTime', function(text) { return Format.logTime(text); });
 	hbs.registerHelper('formatISO8601', function(text) { return Format.iso8601time(text); });
 	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
