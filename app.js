@@ -18,6 +18,7 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 
 /**
+ * @type {ExpressHbs}
  * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
  * @see https://npmjs.org/package/express-hbs
  */
