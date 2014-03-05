@@ -779,16 +779,30 @@ div.photo
 		color: #fff;
 		background-color: #000;
 		margin-right: 4px;
-		padding: 5px 10px 5px 30px;
+		padding: 5px 5px 5px 30px;
 		.opacity(0.6);
 		display: none;
 		text-align: left;
 		font-size: 15px;
 
+		h4
+		{
+			display: none;
+			position: absolute;
+			font-family: @sanSerifFont;
+			font-weight: normal;
+			font-size: 10px;
+			line-height: 10px;
+			margin: 0;
+			padding: 0;
+			top: 2px;
+			left: 4px;
+		}
+
 		.glyphicon
 		{
 			position: absolute;
-			top: 7px;
+			top: 10px;
 			left: 10px;
 		}
 
@@ -796,11 +810,12 @@ div.photo
 		{
 			color: #fff;
 			font-family: @sanSerifFont;
-			padding: 0 10px;
+			line-height: 22px;
+			padding: 7px;
 			text-decoration: none;
 			white-space: nowrap;
 
-			&:hover { color: #ff0; }
+			&:hover { color: #ff0; text-decoration: underline; }
 		}
 	}
 

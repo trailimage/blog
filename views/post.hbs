@@ -57,7 +57,11 @@
     <div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
 
 	{{#if tags}}
-	<div class="tags">{{{icon 'tags'}}}{{{makeTagList tags}}}</div>
+	<div class="tags">
+		{{{icon 'tags'}}}
+		<h4>More photos like this</h4>
+		{{{makeTagList tags}}}
+	</div>
 	{{/if}}
 
 	{{#if longitude}}

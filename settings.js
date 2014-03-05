@@ -100,7 +100,7 @@ exports.google =
  * @const
  * @static
  */
-exports.removeTag = ['Idaho','United States of America','Abbott','LensTagger'];
+exports.removeTag = ['Idaho','United States of America','Abbott','LensTagger','Boise'];
 
 /**
  * @type {string}
