@@ -95,6 +95,14 @@ exports.google =
 };
 
 /**
+ * Remove overly generic photo tags
+ * @type {String[]}
+ * @const
+ * @static
+ */
+exports.removeTag = ['Idaho','United States of America','Abbott','LensTagger'];
+
+/**
  * @type {string}
  * @const
  */

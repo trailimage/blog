@@ -184,7 +184,7 @@ Flickr =
 Flickr.prototype.Tree;
 
 /**
- * @type {Array.<Flickr.Collection>}
+ * @type {Flickr.Collection[]}
  */
 Flickr.Tree.prototype.collection;
 
@@ -221,12 +221,12 @@ Flickr.Collection.prototype.iconlarge;
 Flickr.Collection.prototype.iconsmall;
 
 /**
- * @type {Array.<Flickr.Collection>}
+ * @type {Flickr.Collection[]}
  */
 Flickr.Collection.prototype.collection;
 
 /**
- * @type {Array.<Flickr.SetSummary>}
+ * @type {Flickr.SetSummary[]}
  */
 Flickr.Collection.prototype.set;
 
@@ -265,7 +265,7 @@ Flickr.prototype.Response;
 Flickr.Response.prototype.photoset;
 
 /**
- * @type {Flickr.MemberSet}
+ * @type {Flickr.MemberSet[]}
  */
 Flickr.Response.prototype.set;
 
@@ -320,7 +320,7 @@ Flickr.prototype.PhotoExif;
 Flickr.PhotoExif.prototype.photo;
 
 /**
- * @type {Array.<Flickr.Exif>}
+ * @type {Flickr.Exif[]}
  */
 Flickr.PhotoExif.photo.prototype.exif;
 
@@ -404,7 +404,7 @@ Flickr.Size.prototype.media;
 Flickr.prototype.SizeList;
 
 /**
- * @type {Array.<Flickr.Size>}
+ * @type {Flickr.Size[]}
  */
 Flickr.SizeList.prototype.size;
 
@@ -475,7 +475,7 @@ Flickr.MemberSet.prototype.count_video;
 Flickr.prototype.PhotoMembership;
 
 /**
- * @type {Array.<Flickr.MemberSet>}
+ * @type {Flickr.MemberSet[]}
  */
 Flickr.PhotoMembership.prototype.set;
 
@@ -869,7 +869,7 @@ Flickr.PhotoInfo.prototype.usage;
 Flickr.PhotoInfo.prototype.tags = {};
 
 /**
- * @type {Array.<Flickr.TagSummary>}
+ * @type {Flickr.TagSummary[]}
  */
 Flickr.PhotoInfo.prototype.tags.tag;
 
@@ -894,7 +894,7 @@ Flickr.PhotoInfo.prototype.media;
 Flickr.PhotoInfo.prototype.urls = {};
 
 /**
- * @type {Array.<Flickr.URL>}
+ * @type {Flickr.URL[]}
  */
 Flickr.PhotoInfo.prototype.urls.url;
 
@@ -1177,7 +1177,7 @@ Flickr.prototype.SetPhotos;
 Flickr.SetPhotos.prototype.photoset;
 
 /**
- * @type {Array.<Flickr.PhotoSummary>}
+ * @type {Flickr.PhotoSummary[]}
  */
 Flickr.SetPhotos.prototype.photo;
 
@@ -1311,12 +1311,12 @@ Flickr.TagInfo = {};
 /**
  * @type {Object}
  */
-Flickr.TagInfo.prototype.Who = {};
+Flickr.Response.prototype.who = {};
 
 /**
- * @type {Array.<Flickr.Tag>}
+ * @type {Flickr.Tag[]}
  */
-Flickr.TagInfo.Who.prototype.tags;
+Flickr.Response.Who.prototype.tags;
 
 /**
  * @type {Object}
@@ -1329,7 +1329,7 @@ Flickr.Tag = {};
 Flickr.Tag.prototype.clean;
 
 /**
- * @type {Array.<Flickr.Content>}
+ * @type {Flickr.Content[]}
  */
 Flickr.Tag.prototype.raw;
 
@@ -1358,6 +1358,6 @@ Flickr.SearchResult.prototype.perpage;
 Flickr.SearchResult.prototype.total;
 
 /**
- * @type {Array.<PhotoSummary>}
+ * @type {PhotoSummary[]}
  */
 Flickr.SearchResult.prototype.photo;

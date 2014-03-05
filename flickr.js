@@ -120,7 +120,7 @@ function FlickrAPI()
 	}
 
 	/**
-	 * @param {function(Flickr.TagInfo)} callback
+	 * @param {function(Flickr.Response)} callback
 	 * @see {@link http://www.flickr.com/services/api/flickr.tags.getListUserRaw.html}
 	 */
 	this.getTags = function(callback)
@@ -144,7 +144,7 @@ function FlickrAPI()
 	/**
 	 * Creates new setObject or updates an existing one
 	 * @param {String} id Flickr ID of the set
-	 * @param {Array.<FlickrAPI.size>} imageSizes Image size optional parameters sent to service
+	 * @param {FlickrAPI.size[]} imageSizes Image size optional parameters sent to service
 	 * @param {function(Flickr.SetPhotos, Flickr.SetInfo)} callback Method to call after Flickr responds
 	 * @param {Boolean} [alsoGetInfo = true] Whether to also call getInfo() for additional details
 	 * @see {@link http://www.flickr.com/services/api/flickr.photosets.getPhotos.html}
@@ -209,8 +209,8 @@ function FlickrAPI()
 	/**
 	 * The documentation says signing is not required but results differ even with entirely
 	 * public photos -- perhaps a Flickr bug
-	 * @param {Array.<String>} tags
-	 * @param {function(Array.<Flickr.PhotoSummary>)} callback Method to call after FlickrAPI responds
+	 * @param {String[]} tags
+	 * @param {function(Flickr.PhotoSummary[])} callback Method to call after FlickrAPI responds
 	 * @see http://www.flickr.com/services/api/flickr.photos.search.html
 	 */
 	this.tagSearch = function(tags, callback)
@@ -270,7 +270,7 @@ function FlickrAPI()
 	/**
 	 * Get photo context
 	 * @param {String} id FlickrAPI photo ID
-	 * @param {function(Array.<Flickr.MemberSet>)} callback
+	 * @param {function(Flickr.MemberSet[])} callback
 	 * @see {@link http://www.flickr.com/services/api/flickr.photos.getAllContexts.html}
 	 */
 	this.getContext = function(id, callback)
@@ -282,7 +282,7 @@ function FlickrAPI()
 	/**
 	 * Get photo context
 	 * @param {String} id Flickr photo ID
-	 * @param {function(Array.<Flickr.Exif>)} callback
+	 * @param {function(Flickr.Exif[])} callback
 	 * @see {@link http://www.flickr.com/services/api/flickr.photos.getExif.html}
 	 */
 	this.getEXIF = function(id, callback)
@@ -293,7 +293,7 @@ function FlickrAPI()
 	/**
 	 * Get photo sizes
 	 * @param {String} id Flickr photo ID
-	 * @param {function(Flickr.Size)} callback Method to call when FlickrAPI responds
+	 * @param {function(Flickr.Response)} callback Method to call when FlickrAPI responds
 	 * @see {@link http://www.flickr.com/services/api/flickr.photos.getSizes.html}
 	 */
 	this.getSizes = function(id, callback)
@@ -385,7 +385,7 @@ function FlickrAPI()
 	/**
 	 * Open URL in a browser window
 	 * @param {String} url Address to open
-	 * @param {Array.<Array.<String>>} p Parameters to be signed along with the URL
+	 * @param {Array.<String[]>} p Parameters to be signed along with the URL
 	 */
 	function open(url, p) { window.open(sign(url, null, p), '_blank'); }
 
@@ -393,7 +393,7 @@ function FlickrAPI()
 	 * Add OAuth signature to URL
 	 * @param {String} url Address of Flickr service
 	 * @param {String} jsonCallName
-	 * @param {Array.<Array.<String>>} p URL parameters
+	 * @param {Array.<String[]>} p URL parameters
 	 * @return {String} Signed URL
 	 */
 	function sign(url, jsonCallName, p)
@@ -464,16 +464,13 @@ singleton.size =
 singleton.current = null;
 
 /**
- * @param {String} key
- * @param {String} secret
- * @param {String} userID
  * @param {Function} [callback]
  */
-singleton.make = function(key, secret, userID, callback)
+singleton.make = function(callback)
 {
 	log.info('Constructing Flickr service');
 	http.globalAgent.maxSockets = 200;
-	singleton.current = new FlickrAPI(key, secret, userID);
+	singleton.current = new FlickrAPI();
 	if (callback) { callback(); }
 };
 

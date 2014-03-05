@@ -86,7 +86,7 @@ app.configure('all', function()
 });
 
 /**
- * @var {Express} app
+ * @var {app} app
  */
 function defineRoutes()
 {

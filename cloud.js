@@ -13,7 +13,7 @@ function Cloud(redis)
 	var _cache = {};
 
 	/**
-	 * @param {String|Array.<String>} keys
+	 * @param {String|String[]} keys
 	 * @param {function(Boolean)} [callback]
 	 * @return {Cloud}
 	 */
@@ -178,7 +178,7 @@ function Cloud(redis)
 	};
 
 	/**
-	 * @param {String|Array.<String>} key
+	 * @param {String|String[]} key
 	 * @param err
 	 * @param {String} reply
 	 * @param {function(Boolean)} [callback]
@@ -193,7 +193,7 @@ function Cloud(redis)
 
 	/**
 	 * @param {String} verb
-	 * @param {String|Array.<String>} key
+	 * @param {String|String[]} key
 	 * @param {Object} err
 	 * @return {Boolean}
 	 */

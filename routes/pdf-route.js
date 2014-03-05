@@ -11,7 +11,7 @@ var log = require('winston');
 
 /**
  * Photo sizes to retrieve from FlickrAPI API
- * @type {Array.<String>}
+ * @type {String[]}
  */
 var sizes = [
 	Flickr.size.large1024,
@@ -80,7 +80,7 @@ exports.view = function(req, res)
 
 /**
  * @param {PDFDocument} pdf
- * @param {Array.<FlickrAPI.PhotoSummary>} photos
+ * @param {FlickrAPI.PhotoSummary[]} photos
  * @param {int} index
  * @param {Function} callback
  */

@@ -15,9 +15,9 @@ function Tag(api)
 	this.title = api.title;
 	/** @type {String} */
 	this.slug = Format.slug(api.title);
-	/** @type {Array.<Tag>} */
+	/** @type {Tag[]} */
 	this.tags = [];
-	/** @type {Array.<Post>} */
+	/** @type {Post[]} */
 	this.posts = [];
 
 	/**

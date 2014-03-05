@@ -28,7 +28,7 @@ function Output(cloud)
 	};
 
 	/**
-	 * @param {String|Array.<String>} keys
+	 * @param {String|String[]} keys
 	 * @param {function(Boolean)} [callback]
 	 * @see {@link http://redis.io/commands/del}
 	 */

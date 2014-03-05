@@ -18,14 +18,14 @@ var w = d * 7;
 exports.time = { second: s, minute: m, hour: h, day: d, week: w };
 
 /**
- * @type {Array.<String>}
+ * @type {String[]}
  * @const
  * @static
  */
 exports.month = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 /**
- * @type {Array.<String>}
+ * @type {String[]}
  * @const
  * @static
  */

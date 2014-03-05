@@ -121,7 +121,10 @@ exports.tagList = function(list)
 
 		for (var i = 0; i < tags.length; i++)
 		{
-			links += exports.string(link, tags[i].toLowerCase().replace(/\s/g, ''), tags[i]) + ' ';
+			if (Setting.removeTag.indexOf(tags[i]) == -1)
+			{
+				links += exports.string(link, tags[i].toLowerCase().replace(/\s/g, ''), tags[i]) + ' ';
+			}
 		}
 	}
 	return links;

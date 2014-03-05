@@ -11,7 +11,7 @@ var log = require('winston');
 
 /**
  * Default route action
- * @var {Array.<Flickr.Exif>} exif
+ * @var {Flickr.Exif[]} exif
  * @see {@link http://www.flickr.com/services/api/flickr.photos.getExif.html}
  */
 exports.exif = function(req, res)
@@ -88,7 +88,7 @@ exports.view = function(req, res)
 	/** @type {string} */
 	var postID;
 
-	/** @var Array.<Flickr.MemberSet>) sets */
+	/** @var {Flickr.MemberSet[]} sets */
 	Flickr.current.getContext(photoID, function(sets)
 	{
 		if (sets)
@@ -193,8 +193,8 @@ function normalizeCompensation(text)
 
 /**
  * Create object with tag keys and string values from EXIF
- * @param {Array.<Flickr.Exif>} exif
- * @param {Array.<string>} tags
+ * @param {Flickr.Exif[]} exif
+ * @param {String[]} tags
  * @return {Object.<string>}
  */
 function exifValues(exif, tags)

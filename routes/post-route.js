@@ -24,7 +24,7 @@ var output = null;
 
 /**
  * Photo sizes to retrieve from Flickr API
- * @type {Array.<String>}
+ * @type {String[]}
  */
 var sizes = [
 	Flickr.size.small240,       // thumbnail preview
@@ -107,7 +107,7 @@ exports.newPost = function(req, res)
 
 	if (post != null)
 	{
-		/** @type {Array.<String>} */
+		/** @type {String[]} */
 		var tags = library.tagSlugs(post.tags);
 		log.warn('Removing tags ["%s"] from cache', tags.join('", "'));
 
@@ -230,7 +230,7 @@ function seriesPostSlug(req)
 
 /**
  * Fix mistaken routes that were shared
- * @param {Express} app
+ * @param app
  */
 exports.addFixes = function(app)
 {
@@ -360,7 +360,7 @@ function getVideoMetadata(info)
 /**
  * Format set description
  * @param {Flickr.SetInfo} info
- * @param {Array.<Flickr.PhotoSummary>} photos
+ * @param {Flickr.PhotoSummary[]} photos
  * @param {Object.<int>} video
  */
 function getDescription(info, photos, video)
@@ -383,11 +383,11 @@ function getDescription(info, photos, video)
  */
 function getKeywords(set)
 {
-	/** @type {Array.<Flickr.PhotoSummary>} */
+	/** @type {Flickr.PhotoSummary[]} */
 	var photos = set.photo;
-	/** @type {Array.<String>} */
+	/** @type {String[]} */
 	var tags = [];
-	/** @type {Array.<String>} */
+	/** @type {String[]} */
 	var photoTags = [];
 
 	for (var i = 0; i < photos.length; i++)
@@ -413,7 +413,7 @@ function getKeywords(set)
 
 /**
  * Get the overall date for the photo set
- * @param {Array.<Flickr.PhotoSummary>} photos
+ * @param {Flickr.PhotoSummary[]} photos
  * @return {String}
  */
 function getDateTaken(photos)
@@ -426,7 +426,7 @@ function getDateTaken(photos)
 }
 
 /**
- * @param {Array.<Flickr.PhotoSummary>} photos
+ * @param {Flickr.PhotoSummary[]} photos
  * @return {String}
  */
 function getMapCoordinates(photos)

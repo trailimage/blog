@@ -7,7 +7,6 @@ var Setting = require('./../settings.js');
 var Post = require('./post.js');
 /** @type {Tag} */
 var Tag = require('./tag.js');
-/** @type {winston} */
 var log = require('winston');
 /** @type {FlickrAPI} */
 var flickr = null;
@@ -32,7 +31,7 @@ function Library(api)
 	this.tags = {};
 	/**
 	 * Flat reference to all posts for simplified lookup
-	 * @type {Array.<Post>}
+	 * @type {Post[]}
 	 */
 	this.posts = [];
 
@@ -58,7 +57,7 @@ function Library(api)
 	}
 
 	/**
-	 * @returns {Array.<String>}
+	 * @returns {String[]}
 	 */
 	this.postSlugs = function()
 	{
@@ -73,12 +72,12 @@ function Library(api)
 	};
 
 	/**
-	 * @param {Array.<String>} [names] List of tag names or all if no list given
-	 * @returns {Array.<String>}
+	 * @param {String[]} [names] List of tag names or all if no list given
+	 * @returns {String[]}
 	 */
 	this.tagSlugs = function(names)
 	{
-		/** @type {Array.<String>} */
+		/** @type {String[]} */
 		var slugs = [];
 		/** @type {Tag} */
 		var parent;
@@ -188,7 +187,7 @@ function Library(api)
 	{
 		/** @type {Post} */
 		var s = _this.posts[0];
-		/** @type {Array.<Post>} */
+		/** @type {Post[]} */
 		var parts = [];
 
 		while (s != null && s.previous != null)
@@ -403,8 +402,9 @@ function loadPhotoTags(callback)
 				{
 					text = tags[i].raw[0]._content;
 
-					if (text.indexOf('=') == -1)
+					if (text.indexOf('=') == -1 && Setting.removeTag.indexOf(text) == -1)
 					{
+						// not a machine tag and not a tag to be removed
 						library.photoTags[tags[i].clean] = text;
 					}
 				}

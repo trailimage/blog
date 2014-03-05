@@ -33,7 +33,7 @@ function Post(api, timebound)
 	this.title = null;
 	/**
 	 * Flickr collection names are applied as set tags
-	 * @type {Array.<String>}
+	 * @type {String[]}
 	 **/
 	this.tags = [];
 	/** @type {bool} */
