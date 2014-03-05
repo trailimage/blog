@@ -13,6 +13,9 @@ var Output = require('./output.js');
 var Library = require('./metadata/library.js');
 var Express = require('express');
 var log = require('winston');
+// middleware
+var compress = require('compression');
+var bodyParser = require('body-parser');
 
 /**
  * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
@@ -24,7 +27,9 @@ var app = Express();
 /** @type {Number} */
 var port = process.env.PORT || 3000;
 
-app.configure('all', function()
+configure();
+
+function configure()
 {
 	Setting.isProduction = (process.env.NODE_ENV == 'production');
 	Setting.redis = url.parse(process.env.REDISCLOUD_URL);
@@ -72,9 +77,8 @@ app.configure('all', function()
 	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
 	hbs.registerHelper('icon', function(name) { return Format.icon(name); });
 
-	app.use(Express.bodyParser());
-	app.use(app.router);
-	app.use(Express.compress());
+	app.use(bodyParser());
+	app.use(compress());
 	app.use(Express.static(__dirname + '/public'));
 
 	Library.make(function()
@@ -83,11 +87,8 @@ app.configure('all', function()
 		app.listen(port);
 		log.info('Listening on port %d', port);
 	});
-});
+}
 
-/**
- * @var {app} app
- */
 function defineRoutes()
 {
 	/** @type {string} Slug pattern */
