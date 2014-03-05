@@ -117,7 +117,7 @@ exports.tagList = function(list)
 
 	if (list)
 	{
-		var tags = list.split(/\s*,\s*/);
+		var tags = list.split(/\s*,\s*/).sort();
 
 		for (var i = 0; i < tags.length; i++)
 		{
