@@ -7,6 +7,8 @@ var Flickr = require('../flickr.js');
 var Output = require('../output.js');
 /** @type {Library} */
 var Library = require('../metadata/library.js');
+/** @type {PhotoTag} */
+var PhotoTag = require('../metadata/photoTag.js');
 var log = require('winston');
 
 /**
@@ -46,6 +48,17 @@ exports.exif = function(req, res)
 
         res.render('exif', { 'exif': values, 'layout': null });
     });
+};
+
+/**
+ * Remove photo tags from cache
+ * @param req
+ * @param res
+ */
+exports.clear = function(req, res)
+{
+	log.warn('Removing photo tags from cache');
+	PhotoTag.refresh(function() { exports.tags(req, res); });
 };
 
 exports.tags = function(req, res)

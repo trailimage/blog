@@ -6,7 +6,8 @@ var Setting = require('./../settings.js');
 /** @type {Post} */
 var Post = require('./post.js');
 /** @type {Tag} */
-var Tag = require('./tag.js');
+var Tag = require('./postTag.js');
+var PhotoTag = require('./photoTag.js');
 var log = require('winston');
 /** @type {FlickrAPI} */
 var flickr = null;
@@ -305,7 +306,6 @@ function Library(api)
 }
 
 Library.key = 'metadata';
-Library.tagKey = 'metadataTags';
 
 /**
  * @type {Library}
@@ -319,7 +319,7 @@ Library.refresh = function(callback)
 {
 	cloud = require('./../cloud.js').current;
 
-	cloud.delete([Library.tagKey, Library.key], function(done)
+	cloud.delete([PhotoTag.key, Library.key], function(done)
 	{
 		if (done || (Library.current == null || Library.current.postInfoLoaded))
 		{
@@ -338,6 +338,7 @@ Library.refresh = function(callback)
 		}
 	});
 };
+
 
 /**
  * @param {function} [callback]
@@ -365,56 +366,15 @@ Library.make = function(callback, forceReload)
 			Library.current = library;
 
 			log.info('Loaded %d photo posts from redis with details', library.posts.length);
-			loadPhotoTags(callback);
+			PhotoTag.load(callback);
 		}
 		else
 		{
-			loadFromFlickr(function() { loadPhotoTags(callback); });
+			loadFromFlickr(function() { PhotoTag.load(callback); });
 		}
 	});
 };
 
-/**
- * @param {function} [callback]
- */
-function loadPhotoTags(callback)
-{
-	var library = Library.current;
-
-	cloud.getObject(Library.tagKey, function(o)
-	{
-		if (o != null)
-		{
-			library.photoTags = o;
-			log.info("Photo tags loaded from redis");
-			if (callback) { callback(); }
-		}
-		else
-		{
-			if (flickr == null) { flickr = require('./../flickr.js').current; }
-
-			flickr.getTags(function(r)
-			{
-				var tags = r.who.tags.tag;
-				var text = null;
-
-				for (var i = 0; i < tags.length; i++)
-				{
-					text = tags[i].raw[0]._content;
-
-					if (text.indexOf('=') == -1 && Setting.removeTag.indexOf(text) == -1)
-					{
-						// not a machine tag and not a tag to be removed
-						library.photoTags[tags[i].clean] = text;
-					}
-				}
-				cloud.addObject(Library.tagKey, library.photoTags);
-				log.info("%s photo tags loaded from Flickr", tags.length);
-				if (callback) { callback(); }
-			});
-		}
-	});
-}
 
 /**
  * @param {function} [callback]

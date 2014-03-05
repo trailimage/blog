@@ -138,6 +138,7 @@ function defineRoutes()
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', post.blog);       // old blog links with format /YYYY/MM/slug
 	app.get('/photo-tag', photo.tags);
+	app.get('/photo-tag/'+clear, photo.clear);
 	app.get('/photo-tag/:tagSlug', photo.tags);
 	app.get('/photo-tag/search/:tagSlug', photo.search);
 	app.get('/featured', post.featured);
