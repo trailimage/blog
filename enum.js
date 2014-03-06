@@ -79,6 +79,5 @@ exports.pattern =
 	facebookID: /\d{15}\.\d{5}/g,
 	/** @see http://www.regular-expressions.info/regexbuddy/email.html */
 	email: /\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/gi,
-	machineTag: /=/g,
-	motorcycle: /(KTM|BMW|Honda)/gi
+	machineTag: /=/g
 };

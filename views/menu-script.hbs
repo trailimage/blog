@@ -6,11 +6,11 @@ var menu = {};
 		{ 'title': '{{this.title}}', "items":[
 		{{#this.posts}}
 			{{#if this.isSeriesStart}}
-				{ 'slug': '{{this.slug}}', 'title': '{{#if this.motorcycle}}∙{{else}}  {{/if}}{{this.title}} ({{this.totalParts}} parts)' },
+				{ 'slug': '{{this.slug}}', 'title': '{{this.title}} ({{this.totalParts}} parts)', 'icon': '{{this.mode}}' },
 			{{/if}}
 
 			{{^this.isPartial}}
-				{ 'slug': '{{this.slug}}', 'title': '{{#if this.motorcycle}}∙{{else}}  {{/if}}{{this.title}}' },
+				{ 'slug': '{{this.slug}}', 'title': '{{this.title}}', 'icon': '{{this.mode}}' },
 			{{/this.isPartial}}
 		{{/this.posts}}
 		]},

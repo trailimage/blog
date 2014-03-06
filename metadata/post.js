@@ -36,8 +36,8 @@ function Post(api, timebound)
 	 * @type {String[]}
 	 **/
 	this.tags = [];
-	/** @type {bool} */
-	this.motorcycle = false;
+	/** @type {String} Mode of transport for icon display in menu */
+	this.mode = null;
 
 	// fields added by call to addInfo()
 
@@ -193,7 +193,7 @@ function Post(api, timebound)
 	};
 
 	/**
-	 * Library groups the items belong to are treated as tags or keywords
+	 * Groups the items belong to are treated as tags or keywords
 	 * @param {String} tag
 	 */
 	this.addTag = function(tag)
@@ -202,16 +202,31 @@ function Post(api, timebound)
 		{
 			_this.tags.push(tag);
 
-			if (Enum.pattern.motorcycle.test(tag))
+			for (var i in Post.mode)
 			{
-				_this.motorcycle = true;
-				Enum.pattern.motorcycle.lastIndex = 0;
+				if (Post.mode[i].test(tag))
+				{
+					_this.mode = i;
+					Post.mode[i].lastIndex = 0;
+					break;
+				}
 			}
 		}
 	};
-
 	init();
 }
+
+/**
+ * @enum {RegExp}
+ * Set mode of transportation icon based on post tag (Flickr set collection)
+ */
+Post.mode =
+{
+	'motorcycle': /(KTM|BMW|Honda)/gi,
+	'bicycle': /bicycle/gi,
+	'hike': /hike/gi,
+	'jeep': /jeep/gi
+};
 
 /**
  * Slug is always prefixed by /YYYY/MM/
