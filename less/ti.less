@@ -403,17 +403,21 @@ div.next, div.previous
 			display: block;
 			background-color: #fff;
 			cursor: pointer;
-			padding: 2px 6px;
+			padding: 2px 25px 1px 6px;
 			border: 1px solid @trimColor;
 			text-decoration: none;
 			z-index: 205;
 			.rounded(3px);
 
+			&:hover { color: @hoverColor; }
+
 			.glyphicon
 			{
-				//line-height: 20px;
-				padding: 0;
-				margin: 0;
+				position: absolute;
+				right: 5px;
+				top: 3px;
+
+				&.glyphicon-chevron-up { display: none; top: 2px; }
 			}
 
 			&.selected
@@ -425,12 +429,15 @@ div.next, div.previous
 
 		#menu
 		{
+			@itemHeight: 24px;
+
 			position: absolute;
 			display: none;
 			z-index: 200;
 			width: @contentWidth - 16;
 			top: 66px;
 			left: 6px;
+			padding: 0;
 			background-color: #fff;
 			border: 1px solid @trimColor;
 			.drop-shadow(0, 4px, 6px, 0.5);
@@ -442,32 +449,64 @@ div.next, div.previous
 				display: block;
 				list-style: none;
 				margin: 0;
-				padding: 0;
+				padding: 5px 0;
 				max-height: 300px;
 				overflow-y: auto;
+				overflow-x: hidden;
 
 				li
 				{
+					position: relative;
 					cursor: pointer;
 					display: block;
 					font-size: 16px;
-					padding: 4px;
+					padding: 0 6px;
+					line-height: @itemHeight;
+					height: @itemHeight;
+					white-space: nowrap;
+					margin-right: @itemHeight / 2;
+				}
+			}
 
-					&:hover
-					{
-						background-color: yellow;
-					}
+			#menu-root li, #menu-tag li
+			{
+				&:after
+				{
+					left: 100%;
+					top: 50%;
+					border: solid transparent;
+					content: " ";
+					height: 0;
+					width: 0;
+					position: absolute;
+					pointer-events: none;
+					border-color: rgba(0, 0, 0, 0);
+					border-width: @itemHeight / 2;
+					margin-top: @itemHeight / -2;
+				}
 
-					&.selected
-					{
-						background-color: red;
-					}
+				&:hover
+				{
+					background-color: yellow;
+					&:after	{ border-left-color: yellow;}
+				}
+
+				&.selected
+				{
+					color: #fff;
+					background-color: @boldColor;
+					&:after { border-left-color: @boldColor; }
 				}
 			}
 
 			#menu-root { width: 15%; }
 			#menu-tag { width: 30%; }
-			#menu-post { width: 55%; }
+
+			#menu-post
+			{
+				width: 55%;
+				li:hover { color: @hoverColor; text-decoration: underline; }
+			}
 		}
 
 		h1

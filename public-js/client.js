@@ -20,6 +20,7 @@ function preparePhotos()
 function prepareMenu()
 {
 	var bullet = '∙';
+	var css = 'selected';
 	var $title = $('#menu-title');
 	var	$rootList = $('#menu-root');
 	var $tagList = $('#menu-tag');
@@ -34,30 +35,36 @@ function prepareMenu()
 
 	$title.click(function(e)
 	{
-		$title.addClass('selected');
-		$('#menu').show();
-
-//		$('body').one('click', function()
-//		{
-//			$title.removeClass('selected');
-//			$('#menu').hide();
-//		});
+		if ($title.hasClass(css))
+		{
+			$title.removeClass(css);
+			$('#menu').hide();
+			$title.find('.glyphicon-chevron-up').hide();
+			$title.find('.glyphicon-chevron-down').show();
+		}
+		else
+		{
+			$title.addClass(css);
+			$('#menu').show();
+			$title.find('.glyphicon-chevron-up').show();
+			$title.find('.glyphicon-chevron-down').hide();
+		}
 	});
 
 	$rootList.on('click', 'li', function(e)
 	{
 		var $li = $(this);
-		$rootList.find('li').removeClass('selected');
+		$rootList.find('li').removeClass(css);
 		loadTags($li.text());
-		$li.addClass('selected');
+		$li.addClass(css);
 	});
 
 	$tagList.on('click', 'li', function(e)
 	{
 		var $li = $(this);
-		$tagList.find('li').removeClass('selected');
+		$tagList.find('li').removeClass(css);
 		loadPosts($li.data('root'), $li.text());
-		$li.addClass('selected');
+		$li.addClass(css);
 	});
 
 	$postList.on('click', 'li', function(e)
