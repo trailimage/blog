@@ -35,14 +35,16 @@ function prepareMenu()
 		var $up = $title.find('.glyphicon-chevron-up');
 		var $down = $title.find('.glyphicon-chevron-down');
 		var $menu = $('#menu');
+		var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
 		if ($title.hasClass(css))
 		{
-			$title.removeClass(css); $menu.hide(); $up.hide(); $down.show();
+			hide();
 		}
 		else
 		{
 			$title.addClass(css); $menu.show(); $up.show(); $down.hide();
+			$('.content:not(#header), .map').one('click', hide);
 		}
 	});
 
