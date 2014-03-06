@@ -211,6 +211,7 @@ function Post(api, timebound)
 					break;
 				}
 			}
+			if (_this.mode == null) { _this.mode == 'motorcycle'; }
 		}
 	};
 	init();
