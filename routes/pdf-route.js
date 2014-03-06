@@ -11,13 +11,13 @@ var log = require('winston');
 
 /**
  * Photo sizes to retrieve from FlickrAPI API
- * @type {String[]}
+ * @type {FlickrAPI.size[]}
  */
 var sizes = [
 	Flickr.size.large1024,
 	Flickr.size.large1600
 ];
-var dpi = 72;
+var dpi = 300;
 
 /**
  * Default route action
@@ -36,7 +36,6 @@ exports.view = function(req, res)
 	{
 		flickr.getSet(post.id, sizes, function(setPhotos, setInfo)
 		{
-			/** @type {PDFDocument} */
 			var pdf = new PDFDocument(
 			{
 				size: 'letter',

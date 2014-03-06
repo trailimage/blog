@@ -380,7 +380,7 @@ div.next, div.previous
 		position: relative;
 		padding: 0;
 		margin: 0;
-		z-index: 10;
+		z-index: 200;
 		background-image: url(/img/logo.png);
 		background-repeat: no-repeat;
 		background-position: (@contentWidth - 95);
@@ -392,31 +392,82 @@ div.next, div.previous
 			background-position: bottom right;
 		}
 
-		#menu
+		#menu-title
 		{
 			position: absolute;
 			bottom: 3px;
-			left: 5px;
+			left: 6px;
+			font-family: @sanSerifFont;
+			font-size: 16px;
+			font-weight: bold;
+			display: block;
+			background-color: #fff;
+			cursor: pointer;
+			padding: 2px 6px;
+			border: 1px solid @trimColor;
+			text-decoration: none;
+			z-index: 205;
+			.rounded(3px);
 
-			@media @small {	bottom: 4px; }
-
-			select
+			.glyphicon
 			{
-				font-family: @sanSerifFont;
-				font-size: 16px;
-				background-color: #eff1ef;
-				border: 1px solid @trimColor;
+				//line-height: 20px;
+				padding: 0;
+				margin: 0;
+			}
 
-				/* option.bullet { color: #444; } */
-				optgroup.note { color: #855; font-size: small; }
+			&.selected
+			{
+				border-bottom-color: #fff;
+				.border-radius(3px, 0, 0, 3px);
+			}
+		}
 
-				@media @small
+		#menu
+		{
+			position: absolute;
+			display: none;
+			z-index: 200;
+			width: @contentWidth - 16;
+			top: 66px;
+			left: 6px;
+			background-color: #fff;
+			border: 1px solid @trimColor;
+			.drop-shadow(0, 4px, 6px, 0.5);
+			.border-radius(3px, 3px, 3px, 0);
+
+			#menu-root, #menu-tag, #menu-post
+			{
+				float: left;
+				display: block;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				max-height: 300px;
+				overflow-y: auto;
+
+				li
 				{
-					font-size: 36px;
-					padding: 0 10px;
-					text-align: center;
+					cursor: pointer;
+					display: block;
+					font-size: 16px;
+					padding: 4px;
+
+					&:hover
+					{
+						background-color: yellow;
+					}
+
+					&.selected
+					{
+						background-color: red;
+					}
 				}
 			}
+
+			#menu-root { width: 15%; }
+			#menu-tag { width: 30%; }
+			#menu-post { width: 55%; }
 		}
 
 		h1
