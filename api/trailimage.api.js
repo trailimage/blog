@@ -1,64 +1,71 @@
+var TrailImage = {};
+
 /**
- * @type {Object.<menu.Tag[]>}
+ * @type {Object.<TrailImage.Tag[]>}
  */
-var menu = {};
+TrailImage.prototype.menu = {};
+
+/**
+ * @type {Object.<TrailImage.Post[]>}
+ */
+TrailImage.prototype.post = {};
 
 // Post -----------------------------------------------------------------------
 
 /**
  * @type {Object}
  */
-menu.prototype.Post;
+TrailImage.prototype.Post;
 
 /**
  * @type {String}
  */
-menu.Post.prototype.slug;
+TrailImage.Post.prototype.slug;
 
 /**
  * @type {String}
  */
-menu.Post.prototype.title;
+TrailImage.Post.prototype.title;
 
 /**
  * @type {String}
  */
-menu.Post.prototype.subTitle;
+TrailImage.Post.prototype.subTitle;
 
 /**
  * @type {String}
  */
-menu.Post.prototype.icon;
+TrailImage.Post.prototype.icon;
 
 /**
  * @type {Integer}
  */
-menu.Post.prototype.part;
+TrailImage.Post.prototype.part;
 
 /**
  * @type {String}
  */
-menu.Post.prototype.description;
+TrailImage.Post.prototype.description;
 
 // Tag ------------------------------------------------------------------------
 
 /**
  * @type {Object}
  */
-menu.prototype.Tag = {};
+TrailImage.prototype.Tag = {};
 
 /**
  * @type {String}
  */
-menu.Tag.prototype.title;
+TrailImage.Tag.prototype.title;
 
 /**
  * @type {String}
  */
-menu.Tag.prototype.description;
+TrailImage.Tag.prototype.description;
 
 /**
- * @type {menu.Post[]}
+ * @type {String[]}
  */
-menu.Tag.prototype.items;
+TrailImage.Tag.prototype.posts;
 

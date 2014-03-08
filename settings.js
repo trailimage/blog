@@ -118,4 +118,10 @@ exports.title = 'Trail Image';
  * @type {String}
  * @const
  */
+exports.namespace = 'TrailImage';
+
+/**
+ * @type {String}
+ * @const
+ */
 exports.description = 'Stories, image and videos of small adventure trips in and around the state of Idaho';

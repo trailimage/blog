@@ -1,3 +1,4 @@
+var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 /** @type {Library} */
@@ -21,7 +22,7 @@ exports.view = function(req, res)
 	{
 		if (sent) { return; }
 
-		reply.render('menu-script', {'library': Library.current, 'layout': null }, function(text)
+		reply.render('menu-script', {'library': Library.current, 'setting': Setting, 'layout': null }, function(text)
 		{
 			return Uglify.minify(text, {fromString: true}).code;
 		});

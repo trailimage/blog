@@ -28,7 +28,7 @@ function prepareMenu()
 		.one('click', function()
 		{
 			// populate menu on first click
-			for (var root in menu)
+			for (var root in TrailImage.menu)
 			{
 				var $li = $('<li>').text(root);
 				$rootList.append($li);
@@ -95,8 +95,8 @@ function menuSelect($list, $clicked, loader, selection)
 function loadTags(selection)
 {
 	var $tagList = $('#menu-tag');
-	/** @type {menu.Tag[]} */
-	var tags = menu[selection[0]];
+	/** @type {TrailImage.Tag[]} */
+	var tags = TrailImage.menu[selection[0]];
 
 	$tagList.empty();
 
@@ -113,8 +113,8 @@ function loadTags(selection)
 function loadPosts(selection)
 {
 	var $postList = $('#menu-post');
-	/** @type {menu.Tag[]} */
-	var tags = menu[selection[0]];
+	/** @type {TrailImage.Tag[]} */
+	var tags = TrailImage.menu[selection[0]];
 
 	$postList.empty();
 
@@ -122,46 +122,51 @@ function loadPosts(selection)
 	{
 		if (tags[i].title == selection[1])
 		{
-			var posts = tags[i].items;
+			var ids = tags[i].posts;
 
-			for (var j = 0; j < posts.length; j++)
+			for (var j = 0; j < ids.length; j++)
 			{
-				var title = posts[j].title;
+				var post = TrailImage.post[ids[j]];
+				var title = post.title;
 
-				if (posts[j].part && j < (posts.length - 1) && title == posts[j + 1].title)
+				if (post.part && j < (ids.length - 1) && title == TrailImage.post[ids[j + 1]].title)
 				{
 					// found part in series followed by at least one more part in the same series
 					var $ol = $('<ol>');
 
-					while (j < posts.length && posts[j].title == title)
+					while (j < ids.length && TrailImage.post[ids[j]].title == title)
 					{
+						post = TrailImage.post[ids[j]];
+
 						$ol.prepend($('<li>')
 							.addClass('post')
-							.attr('value', posts[j].part)
-							.html(posts[j].subTitle)
-							.data('description', posts[j].description)
-							.data('slug', posts[j].slug));
+							.attr('value', post.part)
+							.html(post.subTitle)
+							.data('description', post.description)
+							.data('slug', post.slug));
 
 						j++;
 					}
 
 					j--;
 
+					post = TrailImage.post[ids[j]];
+
 					$postList.append($('<li>')
 						.addClass('series')
-						.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + posts[j].title)
+						.html('<span class="mode-icon ' + post.icon + '"></span>' + post.title)
 						.append($ol));
 				}
 				else
 				{
 					// if series part is orphaned within a tag then show full title
-					if (posts[j].part) { title += ': ' + posts[j].subTitle; }
+					if (post.part) { title += ': ' + post.subTitle; }
 
 					$postList.append($('<li>')
 						.addClass('post')
-						.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + title)
-						.data('description', posts[j].description)
-						.data('slug', posts[j].slug));
+						.html('<span class="mode-icon ' + post.icon + '"></span>' + title)
+						.data('description', post.description)
+						.data('slug', post.slug));
 				}
 			}
 		}

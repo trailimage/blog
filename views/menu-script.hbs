@@ -1,14 +1,25 @@
 {{! http://www.cs.tut.fi/~jkorpela/chars/spaces.html }}
-var menu = {};
+
+var TrailImage = { menu: {}, post: {} };
+
 {{#each library.tags}}
-	menu['{{this.title}}'] = [
+	TrailImage.menu['{{this.title}}'] = [
 	{{#this.tags}}
-		{ 'title': '{{this.title}}', "items":[
-		{{#this.posts}}
-			{ 'slug': '{{this.slug}}', 'title': '{{this.title}}', 'icon': '{{this.mode}}', 'description': '{{this.description}}'
-			{{#this.isPartial}} , 'subTitle': '{{this.subTitle}}', 'part': {{this.part}} {{/this.isPartial}} },
-		{{/this.posts}}
-		]},
+		{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
 	{{/this.tags}}
 	];
+{{/each}}
+
+{{#each library.posts}}
+	TrailImage.post['{{this.id}}'] =
+	{
+		'slug': '{{this.slug}}',
+		'title': '{{this.title}}',
+		'icon': '{{this.mode}}',
+		'description': '{{this.description}}'
+	{{#this.isPartial}},
+		'subTitle': '{{this.subTitle}}',
+	    'part': {{this.part}}
+	{{/this.isPartial}}
+	};
 {{/each}}
