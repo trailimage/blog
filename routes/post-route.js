@@ -229,14 +229,15 @@ function seriesPostSlug(req)
 }
 
 /**
- * Fix mistaken routes that were shared
+ * Redirect routes that have changed
  * @param app
  */
 exports.addFixes = function(app)
 {
 	var fixes =
 	{
-		'/brother-rider-2013-a-night-in-pierce': '/brother-ride-2013'
+		'/brother-rider-2013-a-night-in-pierce': '/brother-ride-2013',
+		'/backroads-to-college': ''
 	};
 
 	for (var i in fixes)

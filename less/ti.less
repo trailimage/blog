@@ -468,7 +468,7 @@ div.next, div.previous
 				list-style-type: none;
 				margin: 0;
 				padding: 5px 0;
-				max-height: 300px;
+				max-height: 275px;
 				overflow-y: auto;
 				overflow-x: hidden;
 
@@ -559,6 +559,18 @@ div.next, div.previous
 					&:hover	{ .mode-icon { .opacity(1); } }
 				}
 			}
+
+			#post-description
+			{
+				clear: left;
+				border-top: 1px solid @lightTrimColor;
+				min-height: 10px;
+				padding: 2px 10px;
+				font-size: 13px;
+				color: #000;
+				background-color: #eee;
+				.border-radius(0, 4px, 4px, 0);
+			}
 		}
 
 		h1
@@ -573,7 +585,7 @@ div.next, div.previous
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 			float: left;
 			vertical-align: top;
-			margin-top: 2px;
+			margin-top: 5px;
 
 			.glyphicon
 			{
@@ -593,7 +605,7 @@ div.next, div.previous
 			font-family: @sanSerifFont;
 			color: @boldColor;
 			letter-spacing: -1px;
-			padding: 1px 0 0 7px;
+			padding: 0 0 0 7px;
 			font-size: 22px;
 			float: left;
 			line-height: 18px;
@@ -608,8 +620,8 @@ div.next, div.previous
 			{
 				display: block;
 				font-size: 15px;
-				padding: 3px 0 0 1px;
-				line-height: 13px;
+				padding: 2px 0 0 1px;
+				line-height: 18px;
 				letter-spacing: 0;
 
 				@media @small

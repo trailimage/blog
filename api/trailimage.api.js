@@ -23,12 +23,22 @@ menu.Post.prototype.title;
 /**
  * @type {String}
  */
+menu.Post.prototype.subTitle;
+
+/**
+ * @type {String}
+ */
 menu.Post.prototype.icon;
 
 /**
  * @type {Integer}
  */
 menu.Post.prototype.part;
+
+/**
+ * @type {String}
+ */
+menu.Post.prototype.description;
 
 // Tag ------------------------------------------------------------------------
 
@@ -41,6 +51,11 @@ menu.prototype.Tag = {};
  * @type {String}
  */
 menu.Tag.prototype.title;
+
+/**
+ * @type {String}
+ */
+menu.Tag.prototype.description;
 
 /**
  * @type {menu.Post[]}

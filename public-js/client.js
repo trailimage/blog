@@ -21,51 +21,57 @@ function prepareMenu()
 		$rootList = $('#menu-root'),
 		$tagList = $('#menu-tag'),
 		$postList = $('#menu-post'),
+		$description = $('#post-description'),
 		selection = loadMenuSelection(['When', null]);
 
-	for (var root in menu)
-	{
-		var $li = $('<li>').text(root);
-		$rootList.append($li);
-		if (root == selection[0]) { $li.addClass(css); loadTags(selection); }
-	}
-
-	$title.click(function(e)
-	{
-		var $up = $title.find('.glyphicon-chevron-up');
-		var $down = $title.find('.glyphicon-chevron-down');
-		var $menu = $('#menu');
-		var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
-
-		if ($title.hasClass(css))
+	$title
+		.one('click', function()
 		{
-			hide();
-		}
-		else
+			// populate menu on first click
+			for (var root in menu)
+			{
+				var $li = $('<li>').text(root);
+				$rootList.append($li);
+				if (root == selection[0]) { $li.addClass(css); loadTags(selection); }
+			}
+		})
+		.click(function()
 		{
-			$title.addClass(css); $menu.show(); $up.show(); $down.hide();
-			$('.content:not(#header), .map').one('click', hide);
-		}
-	});
+			// toggle menu visibility
+			var $up = $title.find('.glyphicon-chevron-up');
+			var $down = $title.find('.glyphicon-chevron-down');
+			var $menu = $('#menu');
+			var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
-	$rootList.on('click', 'li', function(e)
+			if ($title.hasClass(css))
+			{
+				hide();
+			}
+			else
+			{
+				$title.addClass(css); $menu.show(); $up.show(); $down.hide();
+				$('.content:not(#header), .map').one('click', hide);
+			}
+		});
+
+	$rootList.on('click', 'li', function()
 	{
 		var $li = $(this);
 		selection = [$li.text(), null];
 		menuSelect($rootList, $li, loadTags, selection);
 	});
 
-	$tagList.on('click', 'li', function(e)
+	$tagList.on('click', 'li', function()
 	{
 		var $li = $(this);
 		selection[1] = $li.text();
 		menuSelect($tagList, $li, loadPosts, selection);
 	});
 
-	$postList.on('click', 'li.post', function(e)
-	{
-		window.location.href = '/' + $(this).data('slug');
-	});
+	$postList
+		.on('click', 'li.post', function()	{ window.location.href = '/' + $(this).data('slug'); })
+		.on('mouseover', 'li.post', function() { $description.html($(this).data('description')); })
+		.on('mouseout', function() { $description.empty(); })
 }
 
 /**
@@ -120,20 +126,26 @@ function loadPosts(selection)
 
 			for (var j = 0; j < posts.length; j++)
 			{
-				if (posts[j].part)
+				var title = posts[j].title;
+
+				if (posts[j].part && j < (posts.length - 1) && title == posts[j + 1].title)
 				{
-					var count = posts[j].part;
+					// found part in series followed by at least one more part in the same series
 					var $ol = $('<ol>');
 
-					for (var k = count - 1; k >= 0; k--)
+					while (j < posts.length && posts[j].title == title)
 					{
-						$ol.append($('<li>')
+						$ol.prepend($('<li>')
 							.addClass('post')
-							.html(posts[j + k].title)
-							.data('slug', posts[j + k].slug));
+							.attr('value', posts[j].part)
+							.html(posts[j].subTitle)
+							.data('description', posts[j].description)
+							.data('slug', posts[j].slug));
+
+						j++;
 					}
 
-					j += count;
+					j--;
 
 					$postList.append($('<li>')
 						.addClass('series')
@@ -142,9 +154,13 @@ function loadPosts(selection)
 				}
 				else
 				{
+					// if series part is orphaned within a tag then show full title
+					if (posts[j].part) { title += ': ' + posts[j].subTitle; }
+
 					$postList.append($('<li>')
 						.addClass('post')
-						.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + posts[j].title)
+						.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + title)
+						.data('description', posts[j].description)
 						.data('slug', posts[j].slug));
 				}
 			}
