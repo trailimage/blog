@@ -478,7 +478,6 @@ div.next, div.previous
 					display: block;
 					font-size: 16px;
 					padding: 0 6px;
-					white-space: nowrap;
 				}
 			}
 
@@ -488,6 +487,7 @@ div.next, div.previous
 				height: @itemHeight;
 				margin-right: @itemHeight / 2;
 				cursor: pointer;
+				white-space: nowrap;
 
 				&:after
 				{
@@ -533,6 +533,9 @@ div.next, div.previous
 
 				li
 				{
+					padding-left: 27px;
+					text-indent: -27px;
+
 					&.series
 					{
 						margin-top: 5px;
@@ -540,12 +543,14 @@ div.next, div.previous
 						ol
 						{
 							margin: 0 0 5px 10px;
+							padding-left: 10px;
 
 							li
 							{
 								display: list-item;
 								font-size: 14px;
 								padding-left: 0;
+								text-indent: 0;
 								color: #000;
 							}
 						}
