@@ -237,7 +237,7 @@ exports.addFixes = function(app)
 	var fixes =
 	{
 		'/brother-rider-2013-a-night-in-pierce': '/brother-ride-2013',
-		'/backroads-to-college': ''
+		'/backroads-to-college': '/panhandle-past-and-future'
 	};
 
 	for (var i in fixes)
