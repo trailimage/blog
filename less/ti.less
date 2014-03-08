@@ -465,7 +465,7 @@ div.next, div.previous
 			{
 				float: left;
 				display: block;
-				list-style: none;
+				list-style-type: none;
 				margin: 0;
 				padding: 5px 0;
 				max-height: 300px;
@@ -475,19 +475,20 @@ div.next, div.previous
 				li
 				{
 					position: relative;
-					cursor: pointer;
 					display: block;
 					font-size: 16px;
 					padding: 0 6px;
-					line-height: @itemHeight;
-					height: @itemHeight;
 					white-space: nowrap;
-					margin-right: @itemHeight / 2;
 				}
 			}
 
 			#menu-root li, #menu-tag li
 			{
+				line-height: @itemHeight;
+				height: @itemHeight;
+				margin-right: @itemHeight / 2;
+				cursor: pointer;
+
 				&:after
 				{
 					left: 100%;
@@ -530,10 +531,32 @@ div.next, div.previous
 					.opacity(0.7);
 				}
 
-				li:hover
+				li
 				{
-					color: @hoverColor; text-decoration: underline;
-					.mode-icon { .opacity(1); }
+					&.series
+					{
+						margin-top: 5px;
+
+						ol
+						{
+							margin: 0 0 5px 10px;
+
+							li
+							{
+								display: list-item;
+								font-size: 14px;
+								padding-left: 0;
+								color: #000;
+							}
+						}
+					}
+
+					&.post
+					{
+						cursor: pointer;
+						&:hover	{ color: @hoverColor; text-decoration: underline; }
+					}
+					&:hover	{ .mode-icon { .opacity(1); } }
 				}
 			}
 		}

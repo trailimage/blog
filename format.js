@@ -123,7 +123,7 @@ exports.tagList = function(list)
 		{
 			if (Setting.removeTag.indexOf(tags[i]) == -1)
 			{
-				links += exports.string(link, tags[i].toLowerCase().replace(/\s/g, ''), tags[i]) + ' ';
+				links += exports.string(link, tags[i].toLowerCase().replace(/\W/g, ''), tags[i]) + ' ';
 			}
 		}
 	}

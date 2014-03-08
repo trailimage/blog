@@ -5,13 +5,17 @@ var menu = {};
 	{{#this.tags}}
 		{ 'title': '{{this.title}}', "items":[
 		{{#this.posts}}
-			{{#if this.isSeriesStart}}
-				{ 'slug': '{{this.slug}}', 'title': '{{this.title}} ({{this.totalParts}} parts)', 'icon': '{{this.mode}}' },
-			{{/if}}
-
-			{{^this.isPartial}}
+			{{#if this.isPartial}}
+				{{#if this.isSeriesStart}}
+					{{! these are in reverse order because Flickr originally returned them newest-first }}
+					{ 'slug': '{{this.slug}}', 'title': '{{this.subTitle}}', 'part': {{this.part}} },
+					{ 'slug': '{{this.slug}}', 'title': '{{this.title}}', 'icon': '{{this.mode}}' },
+				{{else}}
+					{ 'slug': '{{this.slug}}', 'title': '{{this.subTitle}}', 'part': {{this.part}} },
+				{{/if}}
+			{{else}}
 				{ 'slug': '{{this.slug}}', 'title': '{{this.title}}', 'icon': '{{this.mode}}' },
-			{{/this.isPartial}}
+			{{/if}}
 		{{/this.posts}}
 		]},
 	{{/this.tags}}

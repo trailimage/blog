@@ -62,7 +62,7 @@ function prepareMenu()
 		menuSelect($tagList, $li, loadPosts, selection);
 	});
 
-	$postList.on('click', 'li', function(e)
+	$postList.on('click', 'li.post', function(e)
 	{
 		window.location.href = '/' + $(this).data('slug');
 	});
@@ -120,9 +120,33 @@ function loadPosts(selection)
 
 			for (var j = 0; j < posts.length; j++)
 			{
-				$postList.append($('<li>')
-					.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + posts[j].title)
-					.data('slug', posts[j].slug));
+				if (posts[j].part)
+				{
+					var count = posts[j].part;
+					var $ol = $('<ol>');
+
+					for (var k = count - 1; k >= 0; k--)
+					{
+						$ol.append($('<li>')
+							.addClass('post')
+							.html(posts[j + k].title)
+							.data('slug', posts[j + k].slug));
+					}
+
+					j += count;
+
+					$postList.append($('<li>')
+						.addClass('series')
+						.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + posts[j].title)
+						.append($ol));
+				}
+				else
+				{
+					$postList.append($('<li>')
+						.addClass('post')
+						.html('<span class="mode-icon ' + posts[j].icon + '"></span>' + posts[j].title)
+						.data('slug', posts[j].slug));
+				}
 			}
 		}
 	}

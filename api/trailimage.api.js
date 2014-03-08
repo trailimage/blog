@@ -25,6 +25,11 @@ menu.Post.prototype.title;
  */
 menu.Post.prototype.icon;
 
+/**
+ * @type {Integer}
+ */
+menu.Post.prototype.part;
+
 // Tag ------------------------------------------------------------------------
 
 /**
