@@ -348,9 +348,6 @@ Library.make = function(callback, forceReload)
 {
 	cloud = require('./../cloud.js').current;
 
-	// delete old key
-	cloud.delete(['metadata','metadataTags']);
-
 	cloud.getHash(Library.key, function(hash)
 	{
 		if (hash != null && !forceReload)
