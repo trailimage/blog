@@ -355,11 +355,33 @@ Library.make = function(callback, forceReload)
 			var library = new Library(JSON.parse(hash.tree));
 			/** @type {Post} */
 			var post = null;
+			/** @type {String} */
+			var value = null;
 
-			for (var i = 0; i < library.posts.length; i++)
+			try
 			{
-				post = library.posts[i];
-				post.addInfo(JSON.parse(hash[post.id]));
+				for (var i = 0; i < library.posts.length; i++)
+				{
+					post = library.posts[i];
+					value = hash[post.id];
+
+					if (Format.isEmpty(value) || value == 'undefined')
+					{
+						log.error('Encountered invalid cached content for post %s: must reload', post.id);
+						Library.refresh(callback);
+						return;
+					}
+					else
+					{
+						post.addInfo(JSON.parse(value));
+					}
+				}
+			}
+			catch (error)
+			{
+				log.error('Failed to parse post %s (%s): must reload', post.id, error.toString());
+				Library.refresh(callback);
+				return;
 			}
 
 			library.postInfoLoaded = true;
