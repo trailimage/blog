@@ -367,7 +367,7 @@ exports.poem = function(text)
 			.replace(/\r*\n/gi, '<br/>')
 			.replace(/· · /g, '<span class="tab"></span>');
 
-	if (/^\s*["“]/g.test(p) && /["”]\s*[¹²³⁴⁵⁶⁷]?\s*$/g.test(p))
+	if (/^\s*["“]/g.test(p) && /["”]\s*[⁰¹²³⁴⁵⁶⁷⁸⁹]?\s*$/g.test(p))
 	{
 		p = p.replace(/["“”]/g, '');
 		tag = 'blockquote';
@@ -446,7 +446,6 @@ exports.paragraphs = function(text)
 
 		if (poem.length > 0)
 		{
-			console.log(poem);
 			text = text.replace(ph, '</p>' + poem + '<p class="first">');
 		}
 
