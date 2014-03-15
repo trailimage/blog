@@ -7,7 +7,7 @@ var log = require('winston');
 
 function PhotoTag() { }
 
-PhotoTag.key = 'metadataTags';
+PhotoTag.key = 'photoTags';
 
 /**
  * Reload photo tags

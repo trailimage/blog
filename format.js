@@ -355,6 +355,7 @@ exports.haiku = function(text, regex)
 };
 
 /**
+ * Format poetry text
  * @param {String} text
  * @returns {string}
  */
@@ -389,20 +390,21 @@ exports.paragraphs = function(text)
 
 	if (!exports.isEmpty(text))
 	{
-		var ph = '[POEM]';
+		var ph = '[POEM]';  // poetry placeholder
 		var poem = '';
 
 		text = exports.fixFlickr(text);
 
-		text = text.replace(Enum.pattern.poetry, function(match, p1, p2)
+		text = text.replace(Enum.pattern.poetry, function(match, c1, c2)
 		{
-			poem += exports.poem(p1);
-			return ph;
+			poem += exports.poem(c2);   // set poetry text aside
+			return ph;                  // and replace with placeholder for now
 		});
 
-		text = text.replace(Enum.pattern.blockQuote, function(match, p1, p2)
+		text = text.replace(Enum.pattern.blockQuote, function(match, c1)
 		{
-			return '[Q]' + p1.replace(/[“”]/g, '') + '[/Q]\n\r';
+			// remove quotes and wrap in fake tags that won't match subsequent operations
+			return '[Q]' + c1.replace(/[“”]/g, '') + '[/Q]\n\r';
 		});
 
 		text = '<p>' + this.text(text) + '</p>';
@@ -410,22 +412,23 @@ exports.paragraphs = function(text)
 		text = text
 			.replace(Enum.pattern.link, function(match, url)
 			{
+				// shorten displayed URL to just the domain
 				return '<a href="' + url + '">' + url.split('/')[2] + '/&hellip;</a>';
 			})
 			.replace(Enum.pattern.newLine, '</p><p>')
-			.replace(Enum.pattern.footnotes, function(match, p1, p2, p3)
+			.replace(Enum.pattern.footnotes, function(match, c1, c2, c3)
 			{
 				// poems replace the first paragraph tag with a poem placeholder (ph)
 				var footnotes = '';
 				var prefix = '';
 
-				if (p3.indexOf(ph) == 0)
+				if (c3.indexOf(ph) == 0)
 				{
-					p3 = p3.replace(ph, '<p>');
+					c3 = c3.replace(ph, '<p>');
 					prefix = ph;
 				}
 
-				return prefix + '<div class="footnotes">' + p3
+				return prefix + '<div class="footnotes">' + c3
 					.replace(/[\*]\s*/g, '<sup class="title">*</sup>')
 					.replace(/[¹]\s*/g, '<sup>1.</sup>')
 					.replace(/[²]\s*/g, '<sup>2.</sup>')
@@ -433,15 +436,17 @@ exports.paragraphs = function(text)
 					.replace(/[⁴]\s*/g, '<sup>4.</sup>')
 					.replace(/[⁵]\s*/g, '<sup>5.</sup>')
 					.replace(/[⁶]\s*/g, '<sup>6.</sup>')
-					.replace(/[⁷]\s*/g, '<sup>7.</sup>') + exports.icon('book') + '</div>';
+					.replace(/[⁷]\s*/g, '<sup>7.</sup>')
+					.replace(/[⁸]\s*/g, '<sup>8.</sup>')
+					.replace(/[⁹]\s*/g, '<sup>9.</sup>') + exports.icon('book') + '</div>';
 			})
 			.replace(Enum.pattern.superscript, '<sup>$1</sup>')
-			.replace(/(<p>)?\[Q\]/g, '<blockquote><p>')
+			.replace(/(<p>)?\[Q\]/g, '<blockquote><p>')             // replace temporary blockquote tags with HTML
 			.replace(/\[\/Q\](<\/p>)?/g, '</p></blockquote>');
 
 		if (poem.length > 0)
 		{
-			//console.log(text);
+			console.log(poem);
 			text = text.replace(ph, '</p>' + poem + '<p class="first">');
 		}
 
@@ -461,6 +466,7 @@ exports.icon = function(name)
 };
 
 /**
+ * Flickr sometimes messes up URLs that have a space within them
  * @param {String} text
  * @example Newsletter, No. 2: <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
  * @return {String}

@@ -143,7 +143,8 @@ Flickr =
 	 */
 	Status:
 	{
-		ok: "okay"
+		ok: 'okay',
+		fail: 'fail'
 	},
 
 	/**
@@ -288,6 +289,11 @@ Flickr.Response.prototype.sizes;
  * @type {Flickr.Status}
  */
 Flickr.Response.prototype.stat;
+
+/**
+ * @type {String}
+ */
+Flickr.Response.prototype.message;
 
 /**
  * @type {Flickr.SearchResult}

@@ -196,7 +196,15 @@ function FlickrAPI()
 		{
 			if (r != null)
 			{
-				callback(r.photoset);
+				if (r.stat == 'fail')
+				{
+					log.error('Call to Flickr.%s with %s returned "%s"', service, id, r.message);
+					callback(null);
+				}
+				else
+				{
+					callback(r.photoset);
+				}
 			}
 			else
 			{

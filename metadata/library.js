@@ -305,7 +305,7 @@ function Library(api)
 	init();
 }
 
-Library.key = 'metadata';
+Library.key = 'library';
 
 /**
  * @type {Library}
@@ -327,7 +327,7 @@ Library.refresh = function(callback)
 			// removed from cache or
 			// there's no current instance or
 			// there's a fully loaded current instance (unexpected)
-			log.warn('Removed cache schema: reloading');
+			log.warn('Removed library and photo tag cache: reloading');
 			if (Library.current != null) { Library.current.postInfoLoaded = false; }
 			Library.make(callback, true);
 		}
@@ -348,18 +348,21 @@ Library.make = function(callback, forceReload)
 {
 	cloud = require('./../cloud.js').current;
 
+	// delete old key
+	cloud.delete(['metadata','metadataTags']);
+
 	cloud.getHash(Library.key, function(hash)
 	{
 		if (hash != null && !forceReload)
 		{
-			var library = new Library(JSON.parse(hash.tree));
-			/** @type {Post} */
-			var post = null;
-			/** @type {String} */
-			var value = null;
-
 			try
 			{
+				var library = new Library(JSON.parse(hash.tree));
+				/** @type {Post} */
+				var post = null;
+				/** @type {String} */
+				var value = null;
+
 				for (var i = 0; i < library.posts.length; i++)
 				{
 					post = library.posts[i];
@@ -379,7 +382,7 @@ Library.make = function(callback, forceReload)
 			}
 			catch (error)
 			{
-				log.error('Failed to parse post %s (%s): must reload', post.id, error.toString());
+				log.error('Unable to parse cached library (%s): must reload', error.toString());
 				Library.refresh(callback);
 				return;
 			}
@@ -418,14 +421,14 @@ function loadFromFlickr(callback)
 		var library = new Library(tree);
 		queue['tree'] = JSON.stringify(tree);
 		Library.current = library;
-		log.info('Loaded %d photo posts from Flickr. Beginning detail retrieval.', library.posts.length);
+		log.info('Loaded %d photo posts from Flickr: beginning detail retrieval', library.posts.length);
 		callback();
 		loadPostInfo(0);
 	});
 }
 
 /**
- * Asynchronously load additional information needed only by the RSS Feed
+ * Asynchronously load additional post information
  * @param {Number} index
  */
 function loadPostInfo(index)
@@ -442,13 +445,21 @@ function loadPostInfo(index)
 	}
 
 	/** @type {Post} */
-	var set = library.posts[index];
+	var post = library.posts[index];
 
-	flickr.getSetInfo(set.id, function(info)
+	flickr.getSetInfo(post.id, function(info)
 	{
 		//log.info('Loaded set detail %d/%d "%s"', index + 1, total, set.name());
-		queue[set.id] = JSON.stringify(info);
-		set.addInfo(info);
+		if (info)
+		{
+			queue[post.id] = JSON.stringify(info);
+			post.addInfo(info);
+		}
+		else
+		{
+			log.warn('Removing post %s from library', post.id);
+			delete queue[post.id];
+		}
 		loadPostInfo(index + 1);
 	});
 }
