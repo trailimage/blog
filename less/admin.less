@@ -5,6 +5,7 @@
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
 @borderColor: #aaa;
+@linkColor: #800;
 
 html
 {
@@ -46,21 +47,39 @@ fieldset
 
 	legend
 	{
-		text-align: left;
 		margin-left: 10px;
 		font-weight: bold;
+	}
+
+	label
+	{
+		display: block;
+	}
+
+	input[type=text]
+	{
+		margin: 4px;
+		display: block;
+		width: auto;
+		padding: 1px 2px;
+	}
+
+	.buttons
+	{
+		text-align: right;
+		padding-right: 5px;
 	}
 }
 
 .scroll
 {
-	text-align: left;
 	border-top: 1px solid @borderColor;
 	border-bottom: 1px solid @borderColor;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	margin: 4px 0;
 	background-color: #fff;
+	max-height: 200px;
 }
 
 #body
@@ -74,8 +93,20 @@ fieldset
 
 	#posts
 	{
-		text-align: right;
-		.scroll	{ height: 200px; }
+
+	}
+
+	#issues
+	{
+		li
+		{
+			cursor: pointer;
+			&:hover	{ color: @linkColor; }
+		}
+		input[type=text]
+		{
+			width: 25em;
+		}
 	}
 }
 
@@ -111,6 +142,7 @@ fieldset
 
 			&.error	{ td { background-color: #f99; }}
 			&.warn { td { background-color: #ffe; }}
+			&:hover	{ td { color: #80a; }}
 
 			td
 			{
@@ -126,6 +158,7 @@ fieldset
 					color: #666;
 					white-space: nowrap;
 					letter-spacing: -1px;
+					cursor: pointer;
 				}
 			}
 		}

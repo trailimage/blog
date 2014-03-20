@@ -2,7 +2,7 @@ var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 /** @type {Library} */
-var Library = require('../metadata/library.js');
+var Library = require('../models/library.js');
 /** @see https://npmjs.org/package/uglify-js */
 var Uglify = require('uglify-js');
 var log = require('winston');

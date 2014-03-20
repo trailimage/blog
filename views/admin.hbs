@@ -1,3 +1,66 @@
+{{#contentFor "head"}}
+	<script type='text/javascript'>
+		$(document).ready(function()
+		{
+			var $posts = $('#posts').find('input[type=checkbox]');
+			var $issues = $('#issues');
+
+			$('#select-all').click(function()  { $posts.prop('checked', true); });
+			$('#select-none').click(function() { $posts.prop('checked', false); });
+
+			$issues.find('li').click(function()
+			{
+				var $issue = $(this);
+				var slug = $issue.html();
+
+				$('#issue-doc').val($issue.data('doc'));
+				$('#issue-slug').val(slug).data('original', slug);
+
+				$issues.find('button').prop('disabled', false);
+			});
+
+			$issues.find('button').click(function()
+			{
+				var $button = $(this);
+				var $slug = $('#issue-slug');
+				var action = $button.data('action');
+				var docID = $('#issue-doc').val();
+				var slug = $slug.val();
+
+				$.ajax({
+					dataType: 'json',
+					url: '/admin/issue/'+action+'/',
+					data:
+					{
+						'slug': slug,
+						'docID': docID,
+						'originalSlug': $slug.data('original')
+					},
+					success: function(response)
+					{
+						if (response.success)
+						{
+							switch (action)
+							{
+								case 'new':
+									$issues.find('ul').append($('<li>').html(slug).data('doc', docID));
+									break;
+								case 'save': break;
+								case 'delete': break;
+									$issues.find('li');
+							}
+						}
+						else
+						{
+							alert('Failed to save ' + $slug.val());
+						}
+					}
+				});
+			});
+		});
+	</script>
+{{/contentFor}}
+
 <div id="logs">
 	<table>
 		<tbody>
@@ -15,15 +78,15 @@
 
 	<fieldset id="posts">
 		<legend>Posts</legend>
-		Select <button>All</button><button>None</button>
+		<div class="buttons">Select <button id="select-all">All</button><button id="select-none">None</button></div>
 		<div class="scroll">
 			<ul>
 		{{#each library.posts}}
-				<li><label><input type='checkbox'/>{{this.title}}</label></li>
+				<li><label><input type='checkbox'/>{{this.name}}</label></li>
 		{{/each}}
 			</ul>
 		</div>
-		<button>Clear Cache</button>
+		<div class="buttons"><button>Clear Cache</button></div>
 	</fieldset>
 
 	<fieldset id="statistics">
@@ -35,10 +98,31 @@
 		</ul>
 	</fieldset>
 
+	<fieldset id="issues">
+		<legend>Issues</legend>
+		<div class="scroll">
+			<ul>
+		{{#each issues}}
+				<li data-doc="{{this}}">{{@key}}</li>
+		{{/each}}
+			</ul>
+		</div>
+		<input type="text" id="issue-slug" placeholder="Slug"/>
+		<input type="text" id="issue-doc" placeholder="Document ID"/>
+		<div class="buttons">
+			<button data-action="delete" disabled="disabled">Delete</button>
+			<button data-action="save" disabled="disabled">Save</button>
+			<button data-action="new">New</button>
+		</div>
+	</fieldset>
+
 	<fieldset id="api-keys">
 		<legend>API Keys</legend>
 		<ul>
 			<li><a href='https://cloud.google.com/console#/project/{{setting.google.projectID}}'>Map API</a></li>
 		</ul>
+		<div class="buttons">
+			<button>Flickr Token</button>
+		</div>
 	</fieldset>
 </div>

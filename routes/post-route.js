@@ -2,9 +2,9 @@ var Setting = require('../settings.js');
 var Format = require('../format.js');
 var Enum = require('../enum.js');
 /** @type {Library} */
-var Library = require('../metadata/library.js');
+var Library = require('../models/library.js');
 /** @type {Post} */
-var Post = require('../metadata/post.js');
+var Post = require('../models/post.js');
 /** @type {singleton} */
 var Flickr = require('../flickr.js');
 /** @type {singleton} */
@@ -133,7 +133,7 @@ exports.newPost = function(req, res)
 	}
 	else
 	{
-		log.error('Post slug "%s" not found in metadata', post.slug);
+		log.error('Post slug "%s" not found in models', post.slug);
 	}
 };
 

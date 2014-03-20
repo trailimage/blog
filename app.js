@@ -10,7 +10,7 @@ var Cloud = require('./cloud.js');
 /** @type {singleton} */
 var Output = require('./output.js');
 /** @type {Library} */
-var Library = require('./metadata/library.js');
+var Library = require('./models/library.js');
 var Express = require('express');
 var log = require('winston');
 // middleware
@@ -119,6 +119,9 @@ function defineRoutes()
 
 	app.get('/admin', admin.home);
 	app.post('/admin', admin.login);
+	app.get('/admin/issue/save', admin.saveIssue);
+	app.get('/admin/issue/new', admin.newIssue);
+	app.get('/admin/issue/delete', admin.deleteIssue);
 	app.get('/', post.home);                                       // the latest set
 	app.get('/rss', rss.view);
 	app.get('/'+clear, post.clearAll);

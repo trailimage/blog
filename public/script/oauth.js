@@ -54,7 +54,7 @@
    parameters, you can call OAuth.addToURL, OAuth.formEncode or
    OAuth.getAuthorization.
 
-   This message object model harmonizes with the menu object model for
+   This message object models harmonizes with the menu object models for
    input elements of an form, whose value property isn't percent encoded.
    The menu encodes each value before transmitting it. For example,
    see consumer.setInputs in example/consumer.js.

@@ -3,7 +3,7 @@ var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 /** @type {Library} */
-var Metadata = require('../metadata/library.js');
+var Metadata = require('../models/library.js');
 var log = require('winston');
 
 /** @type {Boolean} */

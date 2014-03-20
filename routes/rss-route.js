@@ -2,7 +2,7 @@ var Setting = require('../settings.js');
 var Enum = require('../enum.js');
 var Format = require('../format.js');
 /** @type {Library} */
-var Library = require('../metadata/library.js');
+var Library = require('../models/library.js');
 var Feed = require('feed');
 var log = require('winston');
 /**

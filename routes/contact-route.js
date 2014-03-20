@@ -2,7 +2,7 @@ var Enum = require('../enum.js');
 var Setting = require('../settings.js');
 var Format = require('../format.js');
 var Recaptcha = require('recaptcha').Recaptcha;
-var nodemailer = require("nodemailer");
+var nodemailer = require('nodemailer');
 /** @type {String} */
 var key = 'contact';
 /** @type {singleton} */

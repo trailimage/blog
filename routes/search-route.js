@@ -2,7 +2,7 @@ var Setting = require('../settings.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 /** @type {Library} */
-var Library = require('../metadata/library.js');
+var Library = require('../models/library.js');
 
 /**
  * Default route action

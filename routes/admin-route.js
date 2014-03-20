@@ -1,7 +1,9 @@
 var Setting = require('../settings.js');
 var Format = require('../format.js');
+/** @type {singleton} */
+var Cloud = require('../cloud.js');
 /** @type {Library} */
-var Library = require('../metadata/library.js');
+var Library = require('../models/library.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 var log = require('winston');
@@ -44,6 +46,27 @@ exports.login = function(req, res)
 	}
 };
 
+exports.newIssue = function(req, res)
+{
+	Cloud.current.addHashItem(Enum.key.issues, req.query.slug, req.query.docID, function(success)
+	{
+		res.json({'success': success });
+	}, 1);
+};
+
+exports.saveIssue = function(req, res)
+{
+	Cloud.current.addHashItem(Enum.key.issues, req.query.slug, req.query.docID, function(success)
+	{
+		res.json({'success': success });
+	}, 0);
+};
+
+exports.deleteIssue = function(req, res)
+{
+	res.json({msgId: 'success' });
+};
+
 /**
  * @param req
  * @param res
@@ -56,7 +79,7 @@ function showLogin(req, res, message)
 
 function showAdmin(req, res, user)
 {
-	log.warn('%s (%s) viewing administration', user, req.connection.remoteAddress);
+	//log.warn('%s (%s) viewing administration', user, req.connection.remoteAddress);
 
 	/** @see https://github.com/flatiron/winston/blob/master/lib/winston/transports/transport.js */
 	var options =
@@ -65,17 +88,21 @@ function showAdmin(req, res, user)
 		rows: 500
 	};
 
-	log.query(options, function(err, results)
+	Cloud.current.getHash(Enum.key.issues, function(issues)
 	{
-		res.set("Cache-Control", "no-cache, no-store, must-revalidate");
-		res.set("Pragma", "no-cache");
-		res.set("Expires", 0);
-		res.render('admin',
+		log.query(options, function(err, results)
 		{
-			'logs': parseLogs(results),
-			'layout': layout,
-			'library': Library.current,
-			'setting': Setting
+			res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+			res.set("Pragma", "no-cache");
+			res.set("Expires", 0);
+			res.render('admin',
+			{
+				'logs': parseLogs(results),
+				'layout': layout,
+				'library': Library.current,
+				'issues': issues,
+				'setting': Setting
+			});
 		});
 	});
 }

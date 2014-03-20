@@ -6,9 +6,9 @@ var Flickr = require('../flickr.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 /** @type {Library} */
-var Library = require('../metadata/library.js');
+var Library = require('../models/library.js');
 /** @type {PhotoTag} */
-var PhotoTag = require('../metadata/photoTag.js');
+var PhotoTag = require('../models/photoTag.js');
 var log = require('winston');
 
 /**

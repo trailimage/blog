@@ -137,9 +137,22 @@ function Cloud(redis)
 	 */
 	this.addHashObject = function(key, field, object, callback)
 	{
-		redis.hset(key, field, JSON.stringify(object), function(err, reply)
+		return _this.addHashItem(key, field, JSON.stringify(object), callback);
+	};
+
+	/**
+	 * @param {String} key
+	 * @param {String} field
+	 * @param {String} value
+	 * @param {function(Boolean)} [callback]
+	 * @param {String|Number} [expected]
+	 * @return {Cloud}
+	 */
+	this.addHashItem = function(key, field, value, callback, expected)
+	{
+		redis.hset(key, field, value, function(err, reply)
 		{
-			answer(key, err, reply, callback, 'OK');
+			answer(key, err, reply, callback, expected);
 		});
 
 		return _this;
