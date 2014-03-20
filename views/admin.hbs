@@ -1,21 +1,44 @@
-
-<p class='stats'>
-	<a href="/">Home</a> &bull;
-	<a href='https://cloud.google.com/console#/project/{{setting.google.projectID}}'>Map API</a> &bull;
-	<a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a> &bull;
-	<a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a>  &bull;
-	<a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a>
-</p>
-
 <div id="logs">
 	<table>
 		<tbody>
 		{{#each logs}}
 			<tr class='head'><td colspan='2'>{{@key}}</td></tr>
 			{{#this}}
-			<tr class='{{level}}'><td class='timestamp'>{{timestamp}}</td><td>{{message}}</td></tr>
+			<tr class='{{level}}'><td>{{message}}</td><td class='timestamp'>{{timestamp}}</td></tr>
 			{{/this}}
 		{{/each}}
 		</tbody>
 	</table>
+</div>
+
+<div id="body">
+
+	<fieldset id="posts">
+		<legend>Posts</legend>
+		Select <button>All</button><button>None</button>
+		<div class="scroll">
+			<ul>
+		{{#each library.posts}}
+				<li><label><input type='checkbox'/>{{this.title}}</label></li>
+		{{/each}}
+			</ul>
+		</div>
+		<button>Clear Cache</button>
+	</fieldset>
+
+	<fieldset id="statistics">
+		<legend>Statistics</legend>
+		<ul>
+			<li><a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a></li>
+			<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a></li>
+			<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
+		</ul>
+	</fieldset>
+
+	<fieldset id="api-keys">
+		<legend>API Keys</legend>
+		<ul>
+			<li><a href='https://cloud.google.com/console#/project/{{setting.google.projectID}}'>Map API</a></li>
+		</ul>
+	</fieldset>
 </div>

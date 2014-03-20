@@ -1,11 +1,13 @@
 var Setting = require('../settings.js');
 var Format = require('../format.js');
+/** @type {Library} */
+var Library = require('../metadata/library.js');
 /** @type {singleton} */
 var Output = require('../output.js');
 var log = require('winston');
 var Enum = require('../enum.js');
 var layout = 'layouts/admin';
-var key = 'user';
+var key = 'auth';
 
 /**
  * Default route action
@@ -15,7 +17,15 @@ var key = 'user';
 exports.home = function(req, res)
 {
 	var user = req.cookies.get(key, { signed: true });
-	if (Format.isEmpty(user)) {	showLogin(req, res); } else { showAdmin(req, res, user); }
+
+	if (Format.isEmpty(user) || user != Setting.google.userID)
+	{
+		showLogin(req, res);
+	}
+	else
+	{
+		showAdmin(req, res, user);
+	}
 };
 
 exports.login = function(req, res)
@@ -64,6 +74,7 @@ function showAdmin(req, res, user)
 		{
 			'logs': parseLogs(results),
 			'layout': layout,
+			'library': Library.current,
 			'setting': Setting
 		});
 	});
@@ -101,9 +112,6 @@ function parseLogs(results)
 		}
 		grouped[dayKey].push(r);
 	}
-
-	console.log(grouped);
-
 	return grouped;
 }
 

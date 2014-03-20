@@ -4,6 +4,7 @@
 /* https://github.com/acdvorak/intellij-lessc-plugin */
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
+@borderColor: #aaa;
 
 html
 {
@@ -15,9 +16,67 @@ body
 {
 	background-color: #eee;
 	font-family: @sanSerifFont;
-	position: relative;
 	margin: 0;
 	padding: 0;
+}
+
+label
+{
+	cursor: pointer;
+}
+
+ul
+{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	li
+	{
+		padding: 0 3px;
+	}
+}
+
+fieldset
+{
+	border: 1px solid @borderColor;
+	.rounded(4px);
+	padding: 5px 0;
+	float: left;
+
+	legend
+	{
+		text-align: left;
+		margin-left: 10px;
+		font-weight: bold;
+	}
+}
+
+.scroll
+{
+	text-align: left;
+	border-top: 1px solid @borderColor;
+	border-bottom: 1px solid @borderColor;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	margin: 4px 0;
+	background-color: #fff;
+}
+
+#body
+{
+	position: absolute;
+	left: 475px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding: 10px;
+
+	#posts
+	{
+		text-align: right;
+		.scroll	{ height: 200px; }
+	}
 }
 
 #logs
@@ -26,47 +85,47 @@ body
 	left: 0;
 	top: 0;
 	bottom: 0;
-	width: 600px;
+	width: 475px;
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
+	border-right: 1px solid @borderColor;
 
 	table
 	{
 		border-collapse: collapse;
 		padding: 0;
 		margin: 0;
+		font-size: 12px;
 
 		tr
 		{
-			&:hover { background-color: #fff; cursor: pointer; }
-			&.error:hover { color: #600; }
-			&.error td.timestamp { color: #aaa; }
-			&.info { }
-			&.warn { background-color: #ee0; }
-			&.error { background-color: #800; color: #fff; }
 			&.head
 			{
-				background-color: #444;
+				text-align: center;
+				background-color: #000;
 				color: #fff;
 				font-weight: bold;
-				font-size: 30px;
+				font-size: 25px;
 			}
+
+			&.error	{ td { background-color: #f99; }}
+			&.warn { td { background-color: #ffe; }}
 
 			td
 			{
-				font-family: Tahoma, Arial;
-				border-bottom: 1px solid #000;
+				border-bottom: 1px solid @borderColor;
 				margin: 0;
-				padding: 1px 4px;
+				padding: 2px 4px;
+				line-height: 1em;
 
 				&.timestamp
 				{
 					text-align: right;
-					padding-right: 8px;
+					padding-right: 6px;
 					color: #666;
-					font-size: smaller;
 					white-space: nowrap;
+					letter-spacing: -1px;
 				}
 			}
 		}
