@@ -16,7 +16,7 @@ var log = require('winston');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+var Cookies = require('cookies');
 
 /**
  * @type {ExpressHbs}
@@ -79,7 +79,7 @@ function configure()
 	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
 	hbs.registerHelper('icon', function(name) { return Format.icon(name); });
 
-	app.use(cookieParser(Setting.flickr.userID));
+	app.use(Cookies.express([Setting.flickr.userID, Setting.facebook.adminID]));
 	app.use(bodyParser());
 	app.use(compress());
 	app.use(Express.static(__dirname + '/public'));
@@ -104,7 +104,6 @@ function defineRoutes()
 	var post = require('./routes/post-route.js');
 	var contact = require('./routes/contact-route.js');
 	var tag = require('./routes/tag-route.js');
-	var logs = require('./routes/log-route.js');
 	var rss = require('./routes/rss-route.js');
 	var about = require('./routes/about-route.js');
 	var search = require('./routes/search-route.js');
@@ -135,8 +134,6 @@ function defineRoutes()
 	app.get('/js/menu.js', menu.view);
 	app.get('/sitemap.xml', sitemap.view);
 	app.get('/sitemap/'+clear, sitemap.clear);
-	app.get('/log/view', logs.view);
-	app.get('/log/'+clear, logs.clear);
 	app.get('/tag/'+clear, tag.clearAll);
     app.get('/exif/'+photoID, photo.exif);
 	app.get('/issue', issue.home);

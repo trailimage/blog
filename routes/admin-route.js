@@ -5,6 +5,7 @@ var Output = require('../output.js');
 var log = require('winston');
 var Enum = require('../enum.js');
 var layout = 'layouts/admin';
+var key = 'user';
 
 /**
  * Default route action
@@ -13,26 +14,22 @@ var layout = 'layouts/admin';
  */
 exports.home = function(req, res)
 {
-	if (Format.isEmpty(req.cookies.user))
-	{
-		showLogin(req, res);
-	}
-	else
-	{
-		showAdmin(req, res);
-	}
+	var user = req.cookies.get(key, { signed: true });
+	if (Format.isEmpty(user)) {	showLogin(req, res); } else { showAdmin(req, res, user); }
 };
 
 exports.login = function(req, res)
 {
-	if (req.body.username == Setting.google.userID && req.body.password == Setting.google.password)
+	var user = req.body.username;
+
+	if (user == Setting.google.userID && req.body.password == Setting.google.password)
 	{
-		res.cookie('user', req.body.username, { secure: true });
-		showAdmin(req, res);
+		res.cookies.set(key, user, { httpOnly: true, expires: new Date(2100, 1), signed: true });
+		showAdmin(req, res, user);
 	}
 	else
 	{
-		log.warn('Login failed for “%s” from %s', req.body.username, req.connection.remoteAddress);
+		log.warn('Login failed for “%s” from %s', user, req.connection.remoteAddress);
 		showLogin(req, res, 'Invalid Credentials');
 	}
 };
@@ -47,15 +44,15 @@ function showLogin(req, res, message)
 	res.render('login', {'message': message, 'layout': layout});
 }
 
-function showAdmin(req, res)
+function showAdmin(req, res, user)
 {
-	log.warn('%s viewing administration', req.connection.remoteAddress);
+	log.warn('%s (%s) viewing administration', user, req.connection.remoteAddress);
 
 	/** @see https://github.com/flatiron/winston/blob/master/lib/winston/transports/transport.js */
 	var options =
 	{
 		from: new Date - Enum.time.week,
-		rows: 5000
+		rows: 500
 	};
 
 	log.query(options, function(err, results)
@@ -65,10 +62,63 @@ function showAdmin(req, res)
 		res.set("Expires", 0);
 		res.render('admin',
 		{
-			'logs': results.redis,
+			'logs': parseLogs(results),
 			'layout': layout,
-			'title': 'Administration',
 			'setting': Setting
 		});
 	});
 }
+
+/**
+ *
+ * @param {Object} results
+ * @return {Object}
+ */
+function parseLogs(results)
+{
+	var grouped = {};
+	var day = null;
+	var dayKey = null;
+	var r, d, h = null;
+
+	for (var i = 0; i < results.redis.length; i++)
+	{
+		r = results.redis[i];
+		d = new Date(r.timestamp);
+		h = d.getHours();
+		r.timestamp = Format.string('{0}:{1}:{2}.{3} {4}',
+			(h > 12) ? h - 12 : h,
+			Format.leadingZeros(d.getMinutes(), 2),
+			Format.leadingZeros(d.getSeconds(), 2),
+			Format.leadingZeros(d.getMilliseconds(), 3),
+			(h > 12) ? 'PM' : 'AM');
+
+		if (!sameDay(day, d))
+		{
+			day = d;
+			dayKey = Format.string('{0}, {1} {2}', Enum.weekday[d.getDay()], Enum.month[d.getMonth()], d.getDate());
+			grouped[dayKey] = [];
+		}
+		grouped[dayKey].push(r);
+	}
+
+	console.log(grouped);
+
+	return grouped;
+}
+
+/**
+ * Whether two string timestamps are the same day
+ * @param {Date} d1
+ * @param {Date} d2
+ * @returns {boolean}
+ */
+function sameDay(d1, d2)
+{
+	return (
+		d1 != null &&
+		d2 != null &&
+		d1.getMonth() == d2.getMonth() &&
+		d1.getDate() == d2.getDate());
+}
+

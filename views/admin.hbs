@@ -10,9 +10,12 @@
 <div id="logs">
 	<table>
 		<tbody>
-		{{#logs}}
-			<tr class='{{level}}'><td class='timestamp'>{{formatLogTime timestamp}}</td><td>{{message}}</td></tr>
-		{{/logs}}
+		{{#each logs}}
+			<tr class='head'><td colspan='2'>{{@key}}</td></tr>
+			{{#this}}
+			<tr class='{{level}}'><td class='timestamp'>{{timestamp}}</td><td>{{message}}</td></tr>
+			{{/this}}
+		{{/each}}
 		</tbody>
 	</table>
 </div>

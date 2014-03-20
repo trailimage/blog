@@ -34,7 +34,7 @@ exports.logTime = function(text)
 		d.getMonth() + 1,
 		d.getDate(),
 		Enum.weekday[d.getDay()],
-		hourOfDay(d.getHours()),
+		exports.hourOfDay(d.getHours()),
 		exports.leadingZeros(d.getMinutes(), 2),
 		exports.leadingZeros(d.getSeconds(), 2),
 		exports.leadingZeros(d.getMilliseconds(), 3)
@@ -71,9 +71,10 @@ exports.encodeBase64 = function(text)
 };
 
 /**
+ * Return AM or PM for the hour of the day
  * @param {int} h
  */
-function hourOfDay(h) { return (h > 12) ? 'PM ' + (h - 12) : 'AM ' + h; }
+exports.hourOfDay = function(h) { return (h > 12) ? 'PM ' + (h - 12) : 'AM ' + h; };
 
 /**
  * Pad integer with leading zeroes

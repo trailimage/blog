@@ -10,7 +10,6 @@ function Cloud(redis)
 {
 	/** @type {Cloud} */
 	var _this = this;
-	var _cache = {};
 
 	/**
 	 * @param {String|String[]} keys
