@@ -1,0 +1,117 @@
+@import "elements";
+@import "glyphicons";
+
+/* https://github.com/acdvorak/intellij-lessc-plugin */
+@sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
+@serifFont: 'Lora', Georgia, Times;
+
+body
+{
+	background-color: #eee;
+	font-family: @sanSerifFont;
+	position: relative;
+}
+
+#logs
+{
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 600px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	font-family: @sanSerifFont;
+
+	table
+	{
+		border-collapse: collapse;
+		margin: 0 auto;
+
+		tr
+		{
+			&:hover { background-color: #fff; cursor: pointer; }
+			&.error:hover { color: #600; }
+			&.error td.timestamp { color: #aaa; }
+			&.info { }
+			&.warn { background-color: #ee0; }
+			&.error { background-color: #800; color: #fff; }
+
+			td
+			{
+				font-family: Tahoma, Arial;
+				border-bottom: 1px solid #000;
+				margin: 0;
+				padding: 1px 4px;
+
+				&.timestamp
+				{
+					text-align: right;
+					padding-right: 8px;
+					color: #666;
+					font-size: smaller;
+					white-space: nowrap;
+				}
+			}
+		}
+	}
+}
+
+p.stats
+{
+	text-align: center;
+	font-weight: normal;
+	font-family: Verdana, Arial, sans-serif;
+	line-height: 1.2em;
+	font-size: 8pt;
+	margin: 4px;
+}
+
+
+div.message
+{
+	text-align: center;
+	font-size: 30px;
+	color: #800;
+}
+
+form#login
+{
+	font-size: 30px;
+	margin: 120px auto;
+	width: 700px;
+
+	fieldset
+	{
+		border: 1px solid #999;
+		background-color: #f9f9f9;
+		.rounded(4px);
+
+		.row
+		{
+			margin: 15px 0;
+		}
+
+		label
+		{
+			width: 150px;
+			text-align: right;
+			display: inline-block;
+			padding-right: 15px;
+		}
+
+		input
+		{
+			font-size: 30px;
+			border: 1px solid #999;
+			padding: 2px 8px;
+			.rounded(4px);
+
+			&.button
+			{
+				float: right;
+			}
+		}
+	}
+}

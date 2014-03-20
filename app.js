@@ -16,6 +16,7 @@ var log = require('winston');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 /**
  * @type {ExpressHbs}
@@ -39,7 +40,7 @@ function configure()
 
 	require('winston-redis').Redis;
 
-	if (Setting.isProduction)
+	if (true || Setting.isProduction)
 	{
 		//log.remove(log.transports.Console).add(log.transports.Redis,
         log.add(log.transports.Redis,
@@ -78,6 +79,7 @@ function configure()
 	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
 	hbs.registerHelper('icon', function(name) { return Format.icon(name); });
 
+	app.use(cookieParser(Setting.flickr.userID));
 	app.use(bodyParser());
 	app.use(compress());
 	app.use(Express.static(__dirname + '/public'));
@@ -112,9 +114,12 @@ function defineRoutes()
 	var authorize = require('./routes/authorize-route.js');
     var photo = require('./routes/photo-route.js');
 	var issue = require('./routes/issue-route.js');
+	var admin = require('./routes/admin-route.js');
 
 	post.addFixes(app);
 
+	app.get('/admin', admin.home);
+	app.post('/admin', admin.login);
 	app.get('/', post.home);                                       // the latest set
 	app.get('/rss', rss.view);
 	app.get('/'+clear, post.clearAll);
