@@ -1,11 +1,7 @@
-var Setting = require('../settings.js');
-var Format = require('../format.js');
-/** @type {singleton} */
-var Cloud = require('../adapters/redis.js');
-/** @type {Library} */
-var Library = require('../models/library.js');
-/** @type {singleton} */
-var Output = require('../adapters/output.js');
+var setting = require('../settings.js');
+var format = require('../format.js');
+var library = require('../models/library.js');
+var db = require('../adapters/redis.js');
 var log = require('winston');
 var Enum = require('../enum.js');
 var layout = 'layouts/admin';
@@ -20,7 +16,7 @@ exports.home = function(req, res)
 {
 	var user = req.cookies.get(key, { signed: true });
 
-	if (Format.isEmpty(user) || user != Setting.google.userID)
+	if (format.isEmpty(user) || user != setting.google.userID)
 	{
 		showLogin(req, res);
 	}
@@ -34,7 +30,7 @@ exports.login = function(req, res)
 {
 	var user = req.body.username;
 
-	if (user == Setting.google.userID && req.body.password == Setting.google.password)
+	if (user == setting.google.userID && req.body.password == setting.google.password)
 	{
 		res.cookies.set(key, user, { httpOnly: true, expires: new Date(2100, 1), signed: true });
 		showAdmin(req, res, user);
@@ -48,7 +44,7 @@ exports.login = function(req, res)
 
 exports.newIssue = function(req, res)
 {
-	Cloud.current.addHashItem(Enum.key.issues, req.query.slug, req.query.docID, function(success)
+	db.add(Enum.key.issues, req.query.slug, req.query.docID, function(success)
 	{
 		res.json({'success': success });
 	}, 1);
@@ -56,7 +52,7 @@ exports.newIssue = function(req, res)
 
 exports.saveIssue = function(req, res)
 {
-	Cloud.current.addHashItem(Enum.key.issues, req.query.slug, req.query.docID, function(success)
+	db.add(Enum.key.issues, req.query.slug, req.query.docID, function(success)
 	{
 		res.json({'success': success });
 	}, 0);
@@ -88,7 +84,7 @@ function showAdmin(req, res, user)
 		rows: 500
 	};
 
-	Cloud.current.getHash(Enum.key.issues, function(issues)
+	db.getAll(Enum.key.issues, function(issues)
 	{
 		log.query(options, function(err, results)
 		{
@@ -99,9 +95,9 @@ function showAdmin(req, res, user)
 			{
 				'logs': parseLogs(results),
 				'layout': layout,
-				'library': Library.current,
+				'library': library,
 				'issues': issues,
-				'setting': Setting
+				'setting': setting
 			});
 		});
 	});
@@ -119,25 +115,28 @@ function parseLogs(results)
 	var dayKey = null;
 	var r, d, h = null;
 
-	for (var i = 0; i < results.redis.length; i++)
+	if (results.hasOwnProperty('redis'))
 	{
-		r = results.redis[i];
-		d = new Date(r.timestamp);
-		h = d.getHours();
-		r.timestamp = Format.string('{0}:{1}:{2}.{3} {4}',
-			(h > 12) ? h - 12 : h,
-			Format.leadingZeros(d.getMinutes(), 2),
-			Format.leadingZeros(d.getSeconds(), 2),
-			Format.leadingZeros(d.getMilliseconds(), 3),
-			(h > 12) ? 'PM' : 'AM');
-
-		if (!sameDay(day, d))
+		for (var i = 0; i < results.redis.length; i++)
 		{
-			day = d;
-			dayKey = Format.string('{0}, {1} {2}', Enum.weekday[d.getDay()], Enum.month[d.getMonth()], d.getDate());
-			grouped[dayKey] = [];
+			r = results.redis[i];
+			d = new Date(r.timestamp);
+			h = d.getHours();
+			r.timestamp = format.string('{0}:{1}:{2}.{3} {4}',
+				(h > 12) ? h - 12 : h,
+				format.leadingZeros(d.getMinutes(), 2),
+				format.leadingZeros(d.getSeconds(), 2),
+				format.leadingZeros(d.getMilliseconds(), 3),
+				(h > 12) ? 'PM' : 'AM');
+
+			if (!sameDay(day, d))
+			{
+				day = d;
+				dayKey = format.string('{0}, {1} {2}', Enum.weekday[d.getDay()], Enum.month[d.getMonth()], d.getDate());
+				grouped[dayKey] = [];
+			}
+			grouped[dayKey].push(r);
 		}
-		grouped[dayKey].push(r);
 	}
 	return grouped;
 }

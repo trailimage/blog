@@ -1,8 +1,5 @@
-var Setting = require('../settings.js');
-/** @type {singleton} */
-var Output = require('../adapters/output.js');
-/** @type {Library} */
-var Library = require('../models/library.js');
+var setting = require('../settings.js');
+var library = require('../models/library.js');
 
 /**
  * Default route action
@@ -10,12 +7,11 @@ var Library = require('../models/library.js');
 exports.view = function(req, res)
 {
 	var template = 'search';
-	var reply = Output.current.responder(template, res, 'text/html');
 
-	reply.render(template,
+	res.render(template,
 	{
 		'title': 'Search for “' + req.query['q'] + '”',
-		'setting': Setting
+		'setting': setting
 	});
 
 //	reply.send(function(sent)
@@ -34,6 +30,6 @@ exports.view = function(req, res)
 //	reply.render(template,
 //	{
 //		'title': 'Search for &ldquo;' + term + '&rdquo;',
-//		'setting': Setting
+//		'setting': setting
 //	});
 //}

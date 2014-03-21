@@ -1,9 +1,6 @@
-var Setting = require('../settings.js');
 var Format = require('../format.js');
-/** @type {Library} */
-var Library = require('../models/library.js');
-/** @type {singleton} */
-var Flickr = require('../adapters/flickr.js');
+var library = require('../models/library.js');
+var flickr = require('../adapters/flickr.js');
 var PDFDocument = require('pdfkit');
 var fs = require('fs');
 var http = require('http');
@@ -11,11 +8,11 @@ var log = require('winston');
 
 /**
  * Photo sizes to retrieve from FlickrAPI API
- * @type {FlickrAPI.size[]}
+ * @type {string[]}
  */
 var sizes = [
-	Flickr.size.large1024,
-	Flickr.size.large1600
+	flickr.size.large1024,
+	flickr.size.large1600
 ];
 var dpi = 300;
 
@@ -25,10 +22,6 @@ var dpi = 300;
  */
 exports.view = function(req, res)
 {
-	/** @type {Library} */
-	var library = Library.current;
-	/** @type {FlickrAPI} */
-	var flickr = Flickr.current;
 	/** @type {Post} */
 	var post = library.postWithSlug(req.params.slug);
 

@@ -3,13 +3,22 @@
  */
 var Setting = require('./settings.js');
 var Format = require('./format.js');
-var Library = require('./models/library.js');
 var Express = require('express');
 var log = require('winston');
+var url = require('url');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
-var Cookies = require('cookies');
+var cookies = require('cookies');
+
+Setting.isProduction = (process.env.NODE_ENV == 'production');
+Setting.redis = url.parse(process.env.REDISCLOUD_URL);
+Setting.redis.auth = Setting.redis.auth.split(":")[1];
+Setting.cacheOutput = Setting.isProduction;
+
+// these depend on the redis settings
+var outputCache = require('./outputCache.js');
+var library = require('./models/library.js');
 
 /**
  * @type {ExpressHbs}
@@ -17,7 +26,6 @@ var Cookies = require('cookies');
  * @see https://npmjs.org/package/express-hbs
  */
 var hbs = require('express-hbs');
-var url = require('url');
 var app = Express();
 /** @type {Number} */
 var port = process.env.PORT || 3000;
@@ -26,11 +34,6 @@ configure();
 
 function configure()
 {
-	Setting.isProduction = (process.env.NODE_ENV == 'production');
-	Setting.redis = url.parse(process.env.REDISCLOUD_URL);
-	Setting.redis.auth = Setting.redis.auth.split(":")[1];
-	Setting.cacheOutput = Setting.isProduction;
-
 	require('winston-redis').Redis;
 
 	if (Setting.isProduction)
@@ -68,13 +71,13 @@ function configure()
 	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
 	hbs.registerHelper('icon', function(name) { return Format.icon(name); });
 
-	app.use(Cookies.express([Setting.flickr.userID, Setting.facebook.adminID]));
+	app.use(cookies.express([Setting.flickr.userID, Setting.facebook.adminID]));
 	app.use(bodyParser());
 	app.use(compress());
-	app.use(require('./outputCache.js')());
+	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
 
-	Library.load(function()
+	library.load(function()
 	{
 		defineRoutes();
 		app.listen(port);
@@ -90,7 +93,6 @@ function defineRoutes()
     var photoID = ':photoID(\\d{10,11})';
     /** @type {string} Flickr set ID pattern */
     var postID = ':postID(\\d{17})';
-	var clear = 'reset';
 	var post = require('./routes/post-route.js');
 	var contact = require('./routes/contact-route.js');
 	var tag = require('./routes/tag-route.js');
@@ -135,7 +137,6 @@ function defineRoutes()
 	app.get('/'+postID, post.flickrID);                               // links with bare Flickr set ID
 	app.get('/'+postID+'/'+photoID, post.flickrID);
 	app.get('/:slug'+s+'/pdf', pdf.view);
-	app.get('/:slug'+s+'/new', post.newPost);
 	app.get('/:groupSlug'+s+'/:partSlug'+s, post.seriesPost);
 	app.get('/:slug'+s, post.view);
 }

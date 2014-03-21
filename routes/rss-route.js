@@ -1,8 +1,6 @@
-var Setting = require('../settings.js');
+var setting = require('../settings.js');
 var Enum = require('../enum.js');
-var Format = require('../format.js');
-/** @type {Library} */
-var Library = require('../models/library.js');
+var format = require('../format.js');
 var Feed = require('feed');
 var log = require('winston');
 /**
@@ -18,10 +16,9 @@ var retries = 0;
  */
 exports.view = function(req, res)
 {
-	/** @type {Library} */
-	var library = Library.current;
+	var library = require('../models/library.js');
 
-	if (library == null || !library.postInfoLoaded)
+	if (!library.postInfoLoaded)
 	{
 		if (retries > MAX_RETRIES)
 		{
@@ -32,7 +29,7 @@ exports.view = function(req, res)
 		{
 			retries++;
 			log.error('Library not ready when creating menu — attempt %d', retries);
-			setTimeout(exports.send, 1000, req, res);
+			setTimeout(function() { exports.view(req, res); }, 1000);
 		}
 		return;
 	}
@@ -41,10 +38,10 @@ exports.view = function(req, res)
 	var post = null,
 		feed = new Feed(
 	{
-		title:          Setting.title,
-		description:    Setting.description,
-		link:           'http://' + Setting.domain,
-		image:          'http://' + Setting.domain + '/img/logo.png',
+		title:          setting.title,
+		description:    setting.description,
+		link:           'http://' + setting.domain,
+		image:          'http://' + setting.domain + '/img/logo.png',
 		copyright:      'Copyright © 2014 Jason Abbott. All rights reserved',
 		author:
 		{
@@ -59,9 +56,9 @@ exports.view = function(req, res)
 
 		if (post.timebound)
 		{
-			feed.item({
+			feed.addItem({
 				title: post.title,
-				link: Format.string('http://{0}/{1}/', Setting.domain, post.slug),
+				link: format.string('http://{0}/{1}/', setting.domain, post.slug),
 				description: post.description,
 				date: post.createdOn
 			});

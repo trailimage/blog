@@ -1,28 +1,24 @@
 "use strict";
 
-var Setting = require('./../settings.js');
-/** @type {singleton} */
-var Flickr = require('./../adapters/flickr.js');
+var setting = require('../settings.js');
+var library = require('./library.js');
 var log = require('winston');
+var db = require('../adapters/redis.js');
 
-function PhotoTag() { }
-
-PhotoTag.key = 'photoTags';
+exports.key = 'photoTags';
 
 /**
  * Reload photo tags
  * @param {function} callback
  */
-PhotoTag.refresh = function(callback)
+exports.reload = function(callback)
 {
-	var cloud = require('./../adapters/redis.js').current;
-
-	cloud.delete(PhotoTag.key, function(done)
+	db.remove(exports.key, function(done)
 	{
 		if (done)
 		{
 			log.warn('Removed photo tags');
-			PhotoTag.load(callback);
+			exports.load(callback);
 		}
 		else
 		{
@@ -35,25 +31,24 @@ PhotoTag.refresh = function(callback)
 /**
  * @param {function} [callback]
  */
-PhotoTag.load = function(callback)
+exports.load = function(callback)
 {
-	var key = PhotoTag.key;
-	var cloud = require('./../adapters/redis.js').current;
-	var library = require('./library.js').current;
+	var key = exports.key;
+	var flickr = require('../adapters/flickr.js');
 
-	cloud.getObject(key, function(o)
+	db.getObject(key, function(o)
 	{
 		if (o != null)
 		{
 			library.photoTags = o;
-			log.info("Photo tags loaded from redis");
+			log.info("Photo tags loaded from cache");
 			if (callback) { callback(); }
 		}
 		else
 		{
 			library.photoTags = {};
 
-			Flickr.current.getTags(function(r)
+			flickr.getTags(function(r)
 			{
 				var tags = r.who.tags.tag;
 				var text = null;
@@ -62,18 +57,16 @@ PhotoTag.load = function(callback)
 				{
 					text = tags[i].raw[0]._content;
 
-					if (text.indexOf('=') == -1 && Setting.removeTag.indexOf(text) == -1)
+					if (text.indexOf('=') == -1 && setting.removeTag.indexOf(text) == -1)
 					{
 						// not a machine tag and not a tag to be removed
 						library.photoTags[tags[i].clean] = text;
 					}
 				}
-				cloud.addObject(key, library.photoTags);
+				db.add(key, library.photoTags);
 				log.info("%s photo tags loaded from Flickr", tags.length);
 				if (callback) { callback(); }
 			});
 		}
 	});
 };
-
-module.exports = PhotoTag;

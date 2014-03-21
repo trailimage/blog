@@ -2,7 +2,6 @@ var singleton = {};
 var OAuth = require('oauth').OAuth;
 var Setting = require('./../settings.js');
 var Enum = require('./../enum.js');
-var sys = require("sys");
 var util = require("util");
 var http = require("http");
 /** @type {EventEmitter} */
@@ -26,6 +25,8 @@ var oauth = new OAuth(
 
 log.info('Constructing Flickr service');
 http.globalAgent.maxSockets = 200;
+
+exports = module.exports = new EventEmitter();
 
 /**
  * @param {function(Flickr.Response)} callback
@@ -93,28 +94,28 @@ exports.tagSearch = function(tags, callback)
 	var service = 'photos.search';
 
 	signedCall(service, 'user_id', userID, function(r)
+	{
+		if (r != null)
 		{
-			if (r != null)
-			{
-				callback(r.photos.photo);
-			}
-			else
-			{
-				log.error('Flickr %s service failed for %s', service, userID);
-				callback(null);
-			}
-		},
+			callback(r.photos.photo);
+		}
+		else
 		{
-			'extras': [singleton.size.thumbnail, singleton.size.square75, singleton.size.square150].join(),
-			'tags': tags.join(),
-			'per_page': 500         // maximum
-		});
+			log.error('Flickr %s service failed for %s', service, userID);
+			callback(null);
+		}
+	},
+	{
+		'extras': [exports.size.thumbnail, exports.size.square75, exports.size.square150].join(),
+		'tags': tags.join(),
+		'per_page': 500         // maximum
+	});
 };
 
 /**
  * Creates new setObject or updates an existing one
  * @param {String} id Flickr ID of the set
- * @param {size[]} imageSizes Image size optional parameters sent to service
+ * @param {string[]} imageSizes Image size optional parameters sent to service
  * @param {function(Flickr.SetPhotos, Flickr.SetInfo)} callback Method to call after Flickr responds
  * @param {Boolean} [alsoGetInfo = true] Whether to also call getInfo() for additional details
  * @see {@link http://www.flickr.com/services/api/flickr.photosets.getPhotos.html}
@@ -411,4 +412,4 @@ function parameterize(method, idType, id, args)
 }
 
 /** @see {@link http://nodejs.org/docs/latest/api/util.html#util_util_inherits_constructor_superconstructor} */
-util.inherits(module.exports, EventEmitter);
+util.inherits(exports, EventEmitter);

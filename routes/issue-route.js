@@ -1,11 +1,11 @@
-var Setting = require('../settings.js');
-/** @type {singleton} */
-var Cloud = require('../adapters/redis.js');
+var setting = require('../settings.js');
 var layout = 'layouts/issue-layout';
 
 exports.view = function(req, res)
 {
-	Cloud.current.getHashItem('issues', req.params.slug, function(value)
+	var db = require('../adapters/redis.js');
+
+	db.get('issues', req.params.slug, function(value)
 	{
 		if (value)
 		{
@@ -13,7 +13,7 @@ exports.view = function(req, res)
 			{
 				'docID': value,
 				'slug': req.params.slug,
-				'setting': Setting,
+				'setting': setting,
 				'layout': layout
 			});
 		}
@@ -30,7 +30,7 @@ exports.home = function(req, res)
 	{
 		'docID': '1GUgmZwV-nfqyhty4KY2swwY5Vwcgb8Jlwl4esLxy2LA',
 		'slug': null,
-		'setting': Setting,
+		'setting': setting,
 		'layout': layout
 	});
 };

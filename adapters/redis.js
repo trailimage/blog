@@ -94,7 +94,7 @@ exports.getAll = function(key, callback)
 /**
  * @param {String} key
  * @param {String|Object|function(Boolean)} p2
- * @param {String|function(Boolean)} p3
+ * @param {String|function(Boolean)} [p3]
  * @param {function(Boolean)} [p4]
  */
 exports.add = function(key, p2, p3, p4)
@@ -105,9 +105,7 @@ exports.add = function(key, p2, p3, p4)
 	{
 		callback = p4;
 
-		if (typeof p3 == 'object') { p3 = JSON.stringify(p3); }
-
-		redis.hset(key, p2, p3, function(err, reply)
+		redis.hset(key, p2, normalize(p3), function(err, reply)
 		{
 			answer(key, err, reply, callback);
 		});
@@ -116,15 +114,16 @@ exports.add = function(key, p2, p3, p4)
 	{
 		callback = p3;
 
-		if (typeof p2 == 'object') { p2 = JSON.stringify(p2); }
-
-		redis.set(key, p2, function(err, reply)
+		redis.set(key, normalize(p2), function(err, reply)
 		{
 			answer(key, err, reply, callback, 'OK');
 		});
 	}
-}
-
+	else if (p2 !== undefined)
+	{
+		redis.set(key, normalize(p2));
+	}
+};
 
 /**
  * Add all hash items or rows
@@ -145,6 +144,14 @@ exports.addAll = function(key, hash, callback)
 // - Private methods ----------------------------------------------------------
 
 function authorize() { redis.auth(Setting.redis.auth); }
+
+/**
+ * @param {Object|String|Array} value
+ */
+function normalize(value)
+{
+	return (typeof value == 'object') ? JSON.stringify(value) : value;
+}
 
 /**
  * Execute callback indicating if response was successful

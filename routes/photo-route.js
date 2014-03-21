@@ -1,14 +1,9 @@
-var Setting = require('../settings.js');
-var Format = require('../format.js');
+var setting = require('../settings.js');
+var format = require('../format.js');
 var Enum = require('../enum.js');
-/** @type {singleton} */
-var Flickr = require('../adapters/flickr.js');
-/** @type {singleton} */
-var Output = require('../adapters/output.js');
-/** @type {Library} */
-var Library = require('../models/library.js');
-/** @type {PhotoTag} */
-var PhotoTag = require('../models/photoTag.js');
+var photoTag = require('../models/photoTag.js');
+var flickr = require('../adapters/flickr.js');
+var library = require('../models/library.js');
 var log = require('winston');
 
 /**
@@ -21,7 +16,7 @@ exports.exif = function(req, res)
     /** @type {string} */
     var photoID = req.params['photoID'];
 
-    Flickr.current.getEXIF(photoID, function(exif)
+    flickr.getEXIF(photoID, function(exif)
     {
         var values = exifValues(exif, [
             'Artist',
@@ -50,26 +45,15 @@ exports.exif = function(req, res)
     });
 };
 
-/**
- * Remove photo tags from cache
- * @param req
- * @param res
- */
-exports.clear = function(req, res)
-{
-	log.warn('Removing photo tags from cache');
-	PhotoTag.refresh(function() { exports.tags(req, res); });
-};
-
 exports.tags = function(req, res)
 {
 	var selected = req.params['tagSlug'];
 	var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-	var list = Library.current.photoTags;
+	var list = library.photoTags;
 	var keys = Object.keys(list);
 	var tags = {};
 
-	if (Format.isEmpty(selected))
+	if (format.isEmpty(selected))
 	{
 		// select a random tag
 		selected = keys[Math.floor((Math.random() * keys.length) + 1)];
@@ -85,7 +69,7 @@ exports.tags = function(req, res)
 		'selected': selected,
 		'alphabet': alphabet,
 		'title': keys.length + ' Photo Tags',
-		'setting': Setting
+		'setting': setting
 	});
 };
 
@@ -102,7 +86,7 @@ exports.view = function(req, res)
 	var postID;
 
 	/** @var {Flickr.MemberSet[]} sets */
-	Flickr.current.getContext(photoID, function(sets)
+	flickr.getContext(photoID, function(sets)
 	{
 		if (sets)
 		{
@@ -110,9 +94,9 @@ exports.view = function(req, res)
 			{
 				postID = sets[i].id;
 
-				if (postID != Setting.flickr.featureSet)
+				if (postID != setting.flickr.featureSet)
 				{
-					var post = Library.current.postWithID(postID);
+					var post = library.postWithID(postID);
 
 					if (post != null)
 					{
@@ -120,27 +104,27 @@ exports.view = function(req, res)
 					}
 					else
 					{
-						Output.replyNotFound(res, postID);
+						res.notFound(postID);
 					}
 					return;
 				}
 			}
 		}
-		Output.replyNotFound(res, photoID);
+		res.notFound(photoID);
 	});
 };
 
 exports.search = function(req, res)
 {
-	Flickr.current.tagSearch([req.params['tagSlug']], function(photos)
+	flickr.tagSearch([req.params['tagSlug']], function(photos)
 	{
-		var tag = Library.current.photoTags[req.params['tagSlug']];
-		var title = Format.sayNumber(photos.length) + ' &ldquo;' + tag + '&rdquo; Image' + ((photos.length != 1) ? 's' : '');
+		var tag = library.photoTags[req.params['tagSlug']];
+		var title = format.sayNumber(photos.length) + ' &ldquo;' + tag + '&rdquo; Image' + ((photos.length != 1) ? 's' : '');
 
 		res.render('photo-search',
 		{
 			'photos': photos,
-			'setting': Setting,
+			'setting': setting,
 			'title': title,
 			'layout': null
 		});

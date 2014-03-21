@@ -1,77 +1,41 @@
 var Setting = require('../settings.js');
 var Format = require('../format.js');
 var Enum = require('../enum.js');
-/** @type {Library} */
-var Library = require('../models/library.js');
+var library = require('../models/library.js');
 /** @type {Post} */
-var Post = require('../models/post.js');
-/** @type {singleton} */
-var Flickr = require('../adapters/flickr.js');
-/** @type {singleton} */
-var Output = require('../adapters/output.js');
-/** @see https://github.com/kangax/html-minifier */
-var htmlMinify = require('html-minifier').minify;
+var post = require('../models/post.js');
+var flickr = require('../adapters/flickr.js');
 var log = require('winston');
-
-/** @type {Boolean} */
-var prepared = false;
-/** @type {FlickrAPI} */
-var flickr = null;
-/** @type {Library} */
-var library = null;
-/** @type {Output} */
-var output = null;
 
 /**
  * Photo sizes to retrieve from Flickr API
  * @type {String[]}
  */
 var sizes = [
-	Flickr.size.small240,       // thumbnail preview
-	Flickr.size.medium640,      // some older image have no size larger than 640x480
-	Flickr.size.medium800,
-	Flickr.size.large1024,
-	Flickr.size.large1600,
-	Flickr.size.large2048       // enlarged size
+	flickr.size.small240,       // thumbnail preview
+	flickr.size.medium640,      // some older image have no size larger than 640x480
+	flickr.size.medium800,
+	flickr.size.large1024,
+	flickr.size.large1600,
+	flickr.size.large2048       // enlarged size
 ];
-
-function prepare()
-{
-	if (!prepared)
-	{
-		flickr = Flickr.current;
-		library = Library.current;
-		output = Output.current;
-		prepared = true;
-	}
-}
 
 /**
  * Default route action
  */
-exports.view = function(req, res)
-{
-	prepare();
-	showPost(res, req.params.slug);
-};
+exports.view = function(req, res) { showPost(res, req.params.slug); };
 
 /**
  * "Home" page shows latest post
  * @param req
  * @param res
  */
-exports.home = function(req, res)
-{
-	prepare();
-	if (library != null) { showPost(res, library.posts[0].slug); }
-	else { notReady(res); }
-};
+exports.home = function(req, res) {	showPost(res, library.posts[0].slug); };
 
 exports.flickrID = function(req, res)
 {
-	prepare();
-
-	var post = library.postWithID(req.params['postID']);
+	var postID = req.params['postID'];
+	var post = library.postWithID(postID);
 
 	if (post != null)
 	{
@@ -79,7 +43,7 @@ exports.flickrID = function(req, res)
 	}
 	else
 	{
-		Output.replyNotFound(res, id);
+		res.notFound(postID);
 	}
 };
 
@@ -93,99 +57,6 @@ exports.featured = function(req, res)
 	res.redirect(Enum.httpStatus.permanentRedirect, 'http://www.flickr.com/photos/trailimage/sets/72157631638576162/');
 };
 
-/**
- * Clear cache and post's tag caches
- * @param req
- * @param res
- */
-exports.newPost = function(req, res)
-{
-	prepare();
-
-	/** @type {Post} */
-	var post = library.postWithSlug(req.params['slug']);
-
-	if (post != null)
-	{
-		/** @type {String[]} */
-		var tags = library.tagSlugs(post.tags);
-		log.warn('Removing tags ["%s"] from cache', tags.join('", "'));
-
-		output.remove(tags, function(done)
-		{
-			if (!done)
-			{
-				log.warn('Failed to remove tags ["%s"] (may just mean some were not cached)', tags.join('", "'));
-			}
-			log.warn('Refreshing library');
-			Library.refresh();
-		});
-
-		log.warn('Removing post "%s" from cache', post.slug);
-
-		output.remove(post.slug, function(done)
-		{
-			if (!done) { log.error('Failed to remove "%s" from cache', post.slug); }
-			if (post.next) { clearPost(post.next.slug); }
-			if (post.previous) { clearPost(post.previous.slug); }
-			res.redirect('/' + post.slug);
-		});
-	}
-	else
-	{
-		log.error('Post slug "%s" not found in models', post.slug);
-	}
-};
-
-//- Cache clearing ------------------------------------------------------------
-
-/**
- * Clear all posts from cache
- * @param req
- * @param res
- */
-exports.clearAll = function(req, res)
-{
-	prepare();
-
-	var slugs = library.postSlugs().concat(['about','contact','search']);
-
-	log.warn('Removing all posts from cache');
-
-	output.remove(slugs);
-	res.redirect('/');
-};
-
-exports.clear = function(req, res) { refreshPost(res, req.params.slug); };
-exports.clearSeriesPost = function(req, res) { refreshPost(res, seriesPostSlug(req)); };
-
-/**
- * Remove post content from cache and reload page
- * @param res
- * @param {String} slug
- */
-function refreshPost(res, slug)
-{
-	// reload page even if an error ocurrs
-	clearPost(slug, function() { res.redirect('/' + slug); });
-}
-
-/**
- *
- * @param {String} slug
- * @param {Function} [callback]
- */
-function clearPost(slug, callback)
-{
-	prepare();
-	log.warn('Removing post "%s" from cache', slug);
-	output.remove(slug, function(done)
-	{
-		if (!done) { log.error('Failed to remove "%s" from cache', slug); }
-		if (callback) { callback(); }
-	});
-}
-
 //- Redirects -----------------------------------------------------------------
 
 /**
@@ -195,9 +66,9 @@ exports.blog = function(req, res)
 {
 	var slug = req.params.slug.replace(/\.html?$/, '');
 
-	if (slug in Post.blogUrl && !Format.isEmpty(Post.blogUrl[slug]))
+	if (slug in post.blogUrl && !Format.isEmpty(post.blogUrl[slug]))
 	{
-		res.redirect(Enum.httpStatus.permanentRedirect, '/' + Post.blogUrl[slug]);
+		res.redirect(Enum.httpStatus.permanentRedirect, '/' + post.blogUrl[slug]);
 	}
 	else
 	{
@@ -213,20 +84,13 @@ exports.blog = function(req, res)
  * @param req
  * @param res
  */
-exports.seriesPost = function(req, res)
-{
-	prepare();
-	showPost(res, seriesPostSlug(req));
-};
+exports.seriesPost = function(req, res) { showPost(res, seriesPostSlug(req)); };
 
 /**
  * Slug for single post within a series
  * @returns {string}
  */
-function seriesPostSlug(req)
-{
-	return req.params['groupSlug'] + '/' + req.params['partSlug'];
-}
+function seriesPostSlug(req) { return req.params['groupSlug'] + '/' + req.params['partSlug']; }
 
 /**
  * Redirect routes that have changed
@@ -274,11 +138,11 @@ function showPost(res, slug, template)
 	{
 		if (library == null) { notReady(res); return; }
 
-		var post = library.postWithSlug(slug);
+		var p = library.postWithSlug(slug);
 
-		if (post == null) { res.notFound(slug); return; }
+		if (p == null) { res.notFound(slug); return; }
 
-		flickr.getSet(post.id, sizes, function(photos, info)
+		flickr.getSet(p.id, sizes, function(photos, info)
 		{
 			if (template === undefined) { template = 'post'; }
 
@@ -293,7 +157,7 @@ function showPost(res, slug, template)
 			/** @type {String} */
 			var keywords = null;
 
-			if (post.id != Setting.flickr.poemSet && post.id != Setting.flickr.featureSet)
+			if (p.id != Setting.flickr.poemSet && post.id != Setting.flickr.featureSet)
 			{
 				video = getVideoMetadata(info);
 				dateTaken = getDateTaken(photos.photo);
@@ -302,12 +166,12 @@ function showPost(res, slug, template)
 				description = getDescription(info, photos.photo, video);
 			}
 
-			cacher(slug, template,
+			cacher(template,
 			{
 				'photos': photos,
 				'info': info,
 				'keywords': keywords,
-				'post': post,
+				'post': p,
 				'map': (Format.isEmpty(map)) ? null : encodeURIComponent('size:tiny' + map),
 				'dateTaken': dateTaken,
 				'video': video,

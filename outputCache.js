@@ -1,9 +1,7 @@
 /** @see http://nodejs.org/api/zlib.html */
 var compress = require('zlib');
-var Setting = require('./settings.js');
+var setting = require('./settings.js');
 var db = require('./adapters/redis.js');
-/** @see https://github.com/kangax/html-minifier */
-var htmlMinify = require('html-minifier').minify;
 
 module.exports = function()
 {
@@ -12,15 +10,15 @@ module.exports = function()
 		/**
 		 * Load output from cache or return renderer that will cache the output
 		 * @param {string} key
-		 * @param {string|function} p2
+		 * @param {string|function|object} p2
 		 * @param {function} [p3] Method called if item is not cached
 		 */
 		res.fromCache = function(key, p2, p3)
 		{
-			var mimeType = (p3 === undefined) ? 'text/html' : p2;
+			var mimeType = (typeof p2 == 'string') ? p2 : 'text/html';
 			var callback = (p3 === undefined) ? p2 : p3;
 
-			if (Setting.cacheOutput)
+			if (setting.cacheOutput)
 			{
 				db.getAll(key, function(item)
 				{
@@ -31,13 +29,13 @@ module.exports = function()
 					else
 					{
 						log.info('"%s" not cached', key);
-						callback(toCache(res, key, mimeType));
+						render(res, key, mimeType, callback);
 					}
 				});
 			}
 			else
 			{
-				callback(toCache(res, key, mimeType));
+				render(res, key, mimeType, callback);
 			}
 		};
 
@@ -47,16 +45,18 @@ module.exports = function()
 		 */
 		res.notFound = function(title)
 		{
+			var library = require('../models/library.js');
+
 			log.warn('"%s" matches no view', title);
 
 			title = (title) ? '“' + title + '” Was Not Found' : 'Not Found';
 
 			res.render('search',
-				{
-					'sets': Metadata.current.items,
-					'title': title,
-					'setting': Setting
-				});
+			{
+				'posts': library.posts,
+				'title': title,
+				'setting': setting
+			});
 		};
 
 		next();
@@ -67,8 +67,28 @@ module.exports = function()
  * @param res
  * @param {string} key
  * @param {string} mimeType
+ * @param {function|object} [callback] or view options
  */
-function toCache(res, key, mimeType)
+function render(res, key, mimeType, callback)
+{
+	if (callback !== undefined && callback instanceof Function)
+	{
+		callback(cacher(res, key, mimeType));
+	}
+	else
+	{
+		// assume simple scenario where view name is identical to key
+		cacher(res, key, mimeType)(key, callback);
+	}
+}
+
+/**
+ * Return function to capture, compress and cache rendered content
+ * @param res
+ * @param {string} key
+ * @param {string} mimeType
+ */
+function cacher(res, key, mimeType)
 {
 	return function(view, options)
 	{
@@ -77,18 +97,11 @@ function toCache(res, key, mimeType)
 			options.description = options.setting.description;
 		}
 
-		res.render(res, options, function(err, text)
+		res.render(view, options, function(err, text)
 		{
-//				text = htmlMinify(text,
-//				{
-//					removeComments: false,
-//					collapseWhitespace: false,
-//					removeEmptyAttributes: true
-//				});
-
 			compress.gzip(text, function(err, buffer)
 			{
-				if (Setting.cacheOutput)
+				if (setting.cacheOutput)
 				{
 					db.add(key, 'buffer', buffer);
 					db.add(key, 'eTag', key);

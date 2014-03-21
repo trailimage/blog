@@ -327,7 +327,7 @@ function loadFromFlickr(callback)
 		loadTree(tree);
 		queue['tree'] = JSON.stringify(tree);
 		log.info('Loaded %d photo posts from Flickr: beginning detail retrieval', exports.posts.length);
-		callback();
+		if (callback) { callback(); }
 		loadPostInfo(0);
 	});
 }
@@ -350,6 +350,7 @@ function loadTree(api)
  */
 function loadPostInfo(index)
 {
+	var flickr = require('./../adapters/flickr.js');
 	var total = exports.posts.length;
 
 	if (index > total - 1)
