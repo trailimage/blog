@@ -1,7 +1,7 @@
 /** @see http://nodejs.org/api/zlib.html */
 var compress = require('zlib');
 var setting = require('./settings.js');
-var db = require('./adapters/redis.js');
+var db = require('./adapters/hash.js');
 
 module.exports = function()
 {

@@ -8,51 +8,52 @@
 			$('#select-all').click(function()  { $posts.prop('checked', true); });
 			$('#select-none').click(function() { $posts.prop('checked', false); });
 
-			$issues.find('li').click(function()
+			$issues.find('select').change(function()
 			{
-				var $issue = $(this);
-				var slug = $issue.html();
+				var $selected = $issues.find('option:selected');
 
-				$('#issue-doc').val($issue.data('doc'));
-				$('#issue-slug').val(slug).data('original', slug);
-
-				$issues.find('button').prop('disabled', false);
+				$('#issue-doc').val($selected.val());
+				$('#issue-slug').val($selected.text());
 			});
 
 			$issues.find('button').click(function()
 			{
-				var $button = $(this);
-				var $slug = $('#issue-slug');
-				var action = $button.data('action');
+				var $selected = $issues.find('option:selected');
+				var action = $(this).data('action');
+				var slug = $('#issue-slug').val();
 				var docID = $('#issue-doc').val();
-				var slug = $slug.val();
 
 				$.ajax({
 					dataType: 'json',
 					url: '/admin/issue/'+action+'/',
-					data:
-					{
-						'slug': slug,
-						'docID': docID,
-						'originalSlug': $slug.data('original')
-					},
+					data: {'slug': slug, 'docID': docID, 'originalSlug': $selected.text() },
 					success: function(response)
 					{
 						if (response.success)
 						{
 							switch (action)
 							{
-								case 'new':
-									$issues.find('ul').append($('<li>').html(slug).data('doc', docID));
+								case 'save':
+									if ($selected.text() == 'New')
+									{
+										// add option
+										$issues.find('select').append($('<option/>').val(docID).html(slug));
+									}
+									else
+									{
+										// update option
+										$selected.text(slug);
+										$selected.val(docID);
+									}
 									break;
-								case 'save': break;
-								case 'delete': break;
-									$issues.find('li');
+								case 'delete':
+									$issues.find('li[value=' + docID + ']').remove();
+									break;
 							}
 						}
 						else
 						{
-							alert('Failed to save ' + $slug.val());
+							alert('Failed to save ' + slug);
 						}
 					}
 				});
@@ -100,19 +101,17 @@
 
 	<fieldset id="issues">
 		<legend>Issues</legend>
-		<div class="scroll">
-			<ul>
+		<select>
+			<option>New</option>
 		{{#each issues}}
-				<li data-doc="{{this}}">{{@key}}</li>
+			<option value="{{this}}">{{@key}}</option>
 		{{/each}}
-			</ul>
-		</div>
+		</select>
 		<input type="text" id="issue-slug" placeholder="Slug"/>
 		<input type="text" id="issue-doc" placeholder="Document ID"/>
 		<div class="buttons">
-			<button data-action="delete" disabled="disabled">Delete</button>
-			<button data-action="save" disabled="disabled">Save</button>
-			<button data-action="new">New</button>
+			<button data-action="delete">Delete</button>
+			<button data-action="save">Save</button>
 		</div>
 	</fieldset>
 

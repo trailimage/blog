@@ -3,7 +3,7 @@ var layout = 'layouts/issue-layout';
 
 exports.view = function(req, res)
 {
-	var db = require('../adapters/redis.js');
+	var db = require('../adapters/hash.js');
 
 	db.get('issues', req.params.slug, function(value)
 	{

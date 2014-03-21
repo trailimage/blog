@@ -1,7 +1,7 @@
 var setting = require('../settings.js');
 var format = require('../format.js');
 var library = require('../models/library.js');
-var db = require('../adapters/redis.js');
+var Issue = require('../models/issue.js');
 var log = require('winston');
 var Enum = require('../enum.js');
 var layout = 'layouts/admin';
@@ -42,25 +42,14 @@ exports.login = function(req, res)
 	}
 };
 
-exports.newIssue = function(req, res)
-{
-	db.add(Enum.key.issues, req.query.slug, req.query.docID, function(success)
-	{
-		res.json({'success': success });
-	}, 1);
-};
-
 exports.saveIssue = function(req, res)
 {
-	db.add(Enum.key.issues, req.query.slug, req.query.docID, function(success)
-	{
-		res.json({'success': success });
-	}, 0);
+	Issue.fromRequest(req).save(function(success) { res.json({'success': success }); });
 };
 
 exports.deleteIssue = function(req, res)
 {
-	res.json({msgId: 'success' });
+	Issue.fromRequest(req).remove(function(success) { res.json({'success': success }); });
 };
 
 /**
@@ -84,7 +73,7 @@ function showAdmin(req, res, user)
 		rows: 500
 	};
 
-	db.getAll(Enum.key.issues, function(issues)
+	Issue.allFromDB(function(issues)
 	{
 		log.query(options, function(err, results)
 		{

@@ -3,7 +3,7 @@
 var setting = require('../settings.js');
 var library = require('./library.js');
 var log = require('winston');
-var db = require('../adapters/redis.js');
+var db = require('../adapters/hash.js');
 
 exports.key = 'photoTags';
 

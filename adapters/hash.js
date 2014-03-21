@@ -1,7 +1,6 @@
-var Setting = require('./../settings.js');
+var setting = require('./../settings.js');
 var log = require('winston');
-/** @type {RedisClient} */
-var redis = require('redis').createClient(Setting.redis.port, Setting.redis.hostname);
+var redis = require('redis').createClient(setting.redis.port, setting.redis.hostname);
 
 redis.on('error', function(err) { log.error("Could not connect to redis: %s", err.toString()); });
 redis.on('connect', authorize);
@@ -10,15 +9,30 @@ authorize();
 
 /**
  * @param {String|String[]} keys
- * @param {function(Boolean)} [callback]
-  */
-exports.remove = function(keys, callback)
+ * @param {String|String[]|function(Boolean)} [p2]
+ * @param {function(Boolean)} [p3]
+ */
+exports.remove = function(keys, p2, p3)
 {
-	redis.del(keys, function(err, reply)
+	var callback = (p3 === undefined)
+		? (p2 instanceof Function) ? p2 : null
+		: p3;
+
+	if (p3 !== undefined || !(p2 instanceof Function))
 	{
-		var expected = (keys instanceof Array) ? keys.length : 1;
-		answer(keys, err, reply, callback, expected);
-	});
+		// implies that hash field is the second argument
+		redis.hdel(keys, p2, function(err, reply)
+		{
+			answer(keys, err, reply, callback, expected(p2));
+		});
+	}
+	else
+	{
+		redis.del(keys, function(err, reply)
+		{
+			answer(keys, err, reply, callback, expected(keys));
+		});
+	}
 };
 
 /**
@@ -54,6 +68,11 @@ exports.get = function(key, p2, p3)
 	}
 };
 
+/**
+ * @param {string} key
+ * @param {string|function(boolean)} [p2]
+ * @param {function(boolean)} [p3]
+ */
 exports.getObject = function(key, p2, p3)
 {
 	var callback = (p3 === undefined) ? p2 : p3;
@@ -66,7 +85,6 @@ exports.getObject = function(key, p2, p3)
 	{
 		redis.hget(key, p2, function(err, reply) { replyAsObject(key, err, reply, callback); });
 	}
-
 };
 
 /**
@@ -78,7 +96,7 @@ exports.getAll = function(key, callback)
 {
 	redis.hgetall(key, function(err, reply)
 	{
-		if (!hasError('get', key, err) && reply != null)
+		if (!hasError(key, err) && reply != null)
 		{
 			callback(reply);
 		}
@@ -130,7 +148,6 @@ exports.add = function(key, p2, p3, p4)
  * @param {String} key
  * @param {Object} hash
  * @param {function(Boolean)} [callback]
- * @return {Cloud}
  */
 exports.addAll = function(key, hash, callback)
 {
@@ -143,15 +160,17 @@ exports.addAll = function(key, hash, callback)
 
 // - Private methods ----------------------------------------------------------
 
-function authorize() { redis.auth(Setting.redis.auth); }
+function authorize() { redis.auth(setting.redis.auth); }
+
+/**
+ * @param {String|String[]} fields
+ */
+function expected(fields) { return (fields instanceof Array) ? fields.length : 1; }
 
 /**
  * @param {Object|String|Array} value
  */
-function normalize(value)
-{
-	return (typeof value == 'object') ? JSON.stringify(value) : value;
-}
+function normalize(value) {	return (typeof value == 'object') ? JSON.stringify(value) : value; }
 
 /**
  * Execute callback indicating if response was successful
@@ -163,7 +182,7 @@ function normalize(value)
  */
 function answer(key, err, reply, callback, expected)
 {
-	var problem = hasError('save', key, err) || (expected !== undefined && reply != expected);
+	var problem = hasError(key, err) || (expected !== undefined && reply != expected);
 	if (callback) { callback(!problem); }
 }
 
@@ -175,29 +194,30 @@ function answer(key, err, reply, callback, expected)
  */
 function replyAsObject(key, err, reply, callback)
 {
-	if (!hasError('get', key, err) && reply != null)
+	if (callback)
 	{
-		callback(JSON.parse(reply));
-	}
-	else
-	{
-		callback(null);
+		if (!hasError(key, err) && reply != null)
+		{
+			callback(JSON.parse(reply));
+		}
+		else
+		{
+			callback(null);
+		}
 	}
 }
 
 /**
- * @param {String} verb
  * @param {String|String[]} key
  * @param {Object} err
  * @return {Boolean}
  */
-function hasError(verb, key, err)
+function hasError(key, err)
 {
-	if (key instanceof Array) { key = key.toString(); }
-
 	if (err != null)
 	{
-		log.error('Trying to %s %s resulted in %s', verb, key, err, {});
+		if (key instanceof Array) { key = key.toString(); }
+		log.error('Method with %s resulted in %s', key, err.toString());
 		return true;
 	}
 	return false;

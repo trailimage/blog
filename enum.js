@@ -50,15 +50,6 @@ exports.httpStatus =
 };
 
 /**
- * @enum {String}
- * @const
- */
-exports.key =
-{
-	issues: 'issues'
-};
-
-/**
  * @enum {RegExp}
  * @const
  */

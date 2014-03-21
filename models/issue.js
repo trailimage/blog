@@ -1,21 +1,56 @@
 "use strict";
 
-var TrailImage = require('base');
-var Format = require('./../format.js');
+var format = require('./../format.js');
 var Enum = require('./../enum.js');
+
+function db() { return require('../adapters/hash.js'); }
 
 /**
  * @constructor
- * @see http://forrst.com/posts/How_I_make_models_in_Node_js_using_Redis_as_dat-90W
  */
-function Issue()
+function Issue() {}
+
+Issue.prototype.documentID = null;
+Issue.prototype.slug = null;
+Issue.prototype.originalSlug = null;
+Issue.prototype.save = function(callback)
 {
-
-}
-
-Issue.prototype.save = function()
-{
-
+	if (this.originalSlug != exports.newSlug && this.originalSlug != this.slug)
+	{
+		// delete old key before inserting new
+	}
+	else
+	{
+		db().add(Enum.key.issues, this.slug, this.documentID, callback);
+	}
 };
 
-module.exports = Issue;
+Issue.prototype.remove = function(callback)
+{
+	db().remove(Enum.key.issues, this.slug, callback);
+};
+
+exports.key = 'issues';
+exports.newSlug = 'New';
+
+exports.fromRequest = function(req)
+{
+	var issue = new Issue();
+	issue.originalSlug = req.query.originalSlug;
+	issue.documentID = req.query.docID;
+	issue.slug = req.query.slug;
+	return issue;
+};
+
+exports.allFromDB = function(callback)
+{
+	db().getAll(exports.key, callback);
+};
+
+exports.fromDB = function(slug)
+{
+	var issue = new Issue();
+	issue.documentID = req.query.docID;
+	issue.slug = req.query.slug;
+	return issue;
+};

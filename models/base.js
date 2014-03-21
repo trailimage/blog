@@ -2,7 +2,8 @@
 
 var TrailImage = {};
 
-TrailImage.prototype.Library = {};
+TrailImage.prototype.Library = require('./library.js');
+TrailImage.prototype.Post = require('./post.js');
 TrailImage.prototype.Issues = [];
 
 module.exports = TrailImage;

@@ -246,7 +246,7 @@ function addPostInfo(index)
 
 exports.load = function(callback)
 {
-	var db = require('./../adapters/redis.js');
+	var db = require('./../adapters/hash.js');
 
 	db.getAll(exports.key, function(hash)
 	{
@@ -355,7 +355,7 @@ function loadPostInfo(index)
 
 	if (index > total - 1)
 	{
-		var db = require('./../adapters/redis.js');
+		var db = require('./../adapters/hash.js');
 		exports.postInfoLoaded = true;
 		db.addAll(exports.key, queue);
 		log.info('Finished loading photo set details');
