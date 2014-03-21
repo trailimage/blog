@@ -1,6 +1,6 @@
 var Setting = require('../settings.js');
 /** @type {singleton} */
-var Output = require('../output.js');
+var Output = require('../adapters/output.js');
 /** @type {String} */
 var key = 'about';
 var log = require('winston');

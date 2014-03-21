@@ -6,9 +6,9 @@ var Library = require('../models/library.js');
 /** @type {Post} */
 var Post = require('../models/post.js');
 /** @type {singleton} */
-var Flickr = require('../flickr.js');
+var Flickr = require('../adapters/flickr.js');
 /** @type {singleton} */
-var Output = require('../output.js');
+var Output = require('../adapters/output.js');
 /** @see https://github.com/kangax/html-minifier */
 var htmlMinify = require('html-minifier').minify;
 var log = require('winston');
@@ -270,19 +270,13 @@ function notReady(res)
  */
 function showPost(res, slug, template)
 {
-	var reply = output.responder(slug, res, 'text/html');
-	/** @type {Post} */
-	var post = null;
-
-	reply.send(function(sent)
+	res.fromCache(slug, function(cacher)
 	{
-		if (sent) { return; }
-
 		if (library == null) { notReady(res); return; }
 
-		post = library.postWithSlug(slug);
+		var post = library.postWithSlug(slug);
 
-		if (post == null) { reply.notFound(slug); return; }
+		if (post == null) { res.notFound(slug); return; }
 
 		flickr.getSet(post.id, sizes, function(photos, info)
 		{
@@ -308,7 +302,7 @@ function showPost(res, slug, template)
 				description = getDescription(info, photos.photo, video);
 			}
 
-			reply.render(template,
+			cacher(slug, template,
 			{
 				'photos': photos,
 				'info': info,
@@ -321,15 +315,6 @@ function showPost(res, slug, template)
 				'slug': slug,
 				'description': description,
 				'setting': Setting
-			},
-			function(text)
-			{
-				return htmlMinify(text,
-				{
-					removeComments: false,
-					collapseWhitespace: false,
-					removeEmptyAttributes: true
-				});
 			});
 		});
 	});

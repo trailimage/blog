@@ -1,5 +1,5 @@
 /** @type {singleton} */
-var Output = require('../output.js');
+var Output = require('../adapters/output.js');
 /** @type {Library} */
 var Library = require('../models/library.js');
 /** @type {String} */

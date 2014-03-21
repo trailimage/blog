@@ -3,13 +3,6 @@
  */
 var Setting = require('./settings.js');
 var Format = require('./format.js');
-/** @type {singleton} */
-var Flickr = require('./flickr.js');
-/** @type {singleton} */
-var Cloud = require('./cloud.js');
-/** @type {singleton} */
-var Output = require('./output.js');
-/** @type {Library} */
 var Library = require('./models/library.js');
 var Express = require('express');
 var log = require('winston');
@@ -40,9 +33,8 @@ function configure()
 
 	require('winston-redis').Redis;
 
-	if (true || Setting.isProduction)
+	if (Setting.isProduction)
 	{
-		//log.remove(log.transports.Console).add(log.transports.Redis,
         log.add(log.transports.Redis,
 		{
 			host: Setting.redis.hostname,
@@ -53,10 +45,7 @@ function configure()
 	}
 	log.error('Restarting %s application', (Setting.isProduction) ? 'production' : 'development');
 
-	Cloud.make();
-	Output.make();
-	Flickr.make();
-
+	// http://expressjs.com/4x/api.html#app-settings
 	app.set('views', __dirname + '/views');
 	/**
 	 * Mustache templating
@@ -82,9 +71,10 @@ function configure()
 	app.use(Cookies.express([Setting.flickr.userID, Setting.facebook.adminID]));
 	app.use(bodyParser());
 	app.use(compress());
+	app.use(require('./outputCache.js')());
 	app.use(Express.static(__dirname + '/public'));
 
-	Library.make(function()
+	Library.load(function()
 	{
 		defineRoutes();
 		app.listen(port);
@@ -124,28 +114,20 @@ function defineRoutes()
 	app.get('/admin/issue/delete', admin.deleteIssue);
 	app.get('/', post.home);                                       // the latest set
 	app.get('/rss', rss.view);
-	app.get('/'+clear, post.clearAll);
 	app.get('/about', about.view);
-	app.get('/about/'+clear, about.clear);
 	app.get('/authorize', authorize.view);
 	app.get('/contact', contact.view);
-	app.get('/contact/'+clear, contact.clear);
 	app.post('/contact', contact.send);
 	app.get('/search', search.view);
 	app.get('/browse', search.view);
-	app.get('/menu/'+clear, menu.clear);
 	app.get('/js/menu.js', menu.view);
 	app.get('/sitemap.xml', sitemap.view);
-	app.get('/sitemap/'+clear, sitemap.clear);
-	app.get('/tag/'+clear, tag.clearAll);
     app.get('/exif/'+photoID, photo.exif);
 	app.get('/issue', issue.home);
 	app.get('/issue/:slug'+s, issue.view);
-	app.get('/:category(who|what|when|where|tag)/:tag/'+clear, tag.clear);
 	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', post.blog);       // old blog links with format /YYYY/MM/slug
 	app.get('/photo-tag', photo.tags);
-	app.get('/photo-tag/'+clear, photo.clear);
 	app.get('/photo-tag/:tagSlug', photo.tags);
 	app.get('/photo-tag/search/:tagSlug', photo.search);
 	app.get('/featured', post.featured);
@@ -153,9 +135,7 @@ function defineRoutes()
 	app.get('/'+postID, post.flickrID);                               // links with bare Flickr set ID
 	app.get('/'+postID+'/'+photoID, post.flickrID);
 	app.get('/:slug'+s+'/pdf', pdf.view);
-	app.get('/:slug'+s+'/'+clear, post.clear);
 	app.get('/:slug'+s+'/new', post.newPost);
 	app.get('/:groupSlug'+s+'/:partSlug'+s, post.seriesPost);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/'+clear, post.clearSeriesPost);
 	app.get('/:slug'+s, post.view);
 }

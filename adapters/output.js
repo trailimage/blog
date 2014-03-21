@@ -1,11 +1,10 @@
 /** @see http://nodejs.org/api/zlib.html */
 var compress = require('zlib');
 var singleton = {};
-var Setting = require('./settings.js');
+var Setting = require('./../settings.js');
+var Library = require('./../models/library.js');
 /** @type {singleton} */
-var Metadata = require('./models/library.js');
-/** @type {singleton} */
-var Cloud = require('./cloud.js');
+var Cloud = require('./redis.js');
 var log = require('winston');
 
 /**
@@ -101,16 +100,6 @@ function Output(cloud)
 	}
 }
 
-/**
- * Display "not found" page
- * @param res
- * @param {String} [title]
- */
-singleton.replyNotFound = function(res, title)
-{
-	var reply = new Responder(null, res, singleton.current);
-	reply.notFound(title);
-};
 
 /**
  * @param {String} key
@@ -162,23 +151,7 @@ function Responder(key, res, output, mime)
 		});
 	};
 
-	/**
-	 * Display "not found" page
-	 * @param {string} [title]
-	 */
-	this.notFound = function(title)
-	{
-		log.warn('"%s" matches no view', title);
 
-		title = (title) ? '“' + title + '” Was Not Found' : 'Not Found';
-
-		res.render('search',
-		{
-			'sets': Metadata.current.items,
-			'title': title,
-			'setting': Setting
-		});
-	};
 
 	/**
 	 * Send cached response

@@ -1,6 +1,6 @@
 var Setting = require('../settings.js');
 /** @type {singleton} */
-var Cloud = require('../cloud.js');
+var Cloud = require('../adapters/redis.js');
 var layout = 'layouts/issue-layout';
 
 exports.view = function(req, res)

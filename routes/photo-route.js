@@ -2,9 +2,9 @@ var Setting = require('../settings.js');
 var Format = require('../format.js');
 var Enum = require('../enum.js');
 /** @type {singleton} */
-var Flickr = require('../flickr.js');
+var Flickr = require('../adapters/flickr.js');
 /** @type {singleton} */
-var Output = require('../output.js');
+var Output = require('../adapters/output.js');
 /** @type {Library} */
 var Library = require('../models/library.js');
 /** @type {PhotoTag} */

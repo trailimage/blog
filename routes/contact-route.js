@@ -6,7 +6,7 @@ var nodemailer = require('nodemailer');
 /** @type {String} */
 var key = 'contact';
 /** @type {singleton} */
-var Output = require('../output.js');
+var Output = require('../adapters/output.js');
 var log = require('winston');
 
 /**

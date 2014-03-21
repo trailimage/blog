@@ -3,7 +3,7 @@ var Format = require('../format.js');
 /** @type {Library} */
 var Library = require('../models/library.js');
 /** @type {singleton} */
-var Flickr = require('../flickr.js');
+var Flickr = require('../adapters/flickr.js');
 var PDFDocument = require('pdfkit');
 var fs = require('fs');
 var http = require('http');

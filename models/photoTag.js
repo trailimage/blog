@@ -2,7 +2,7 @@
 
 var Setting = require('./../settings.js');
 /** @type {singleton} */
-var Flickr = require('./../flickr.js');
+var Flickr = require('./../adapters/flickr.js');
 var log = require('winston');
 
 function PhotoTag() { }
@@ -15,7 +15,7 @@ PhotoTag.key = 'photoTags';
  */
 PhotoTag.refresh = function(callback)
 {
-	var cloud = require('./../cloud.js').current;
+	var cloud = require('./../adapters/redis.js').current;
 
 	cloud.delete(PhotoTag.key, function(done)
 	{
@@ -38,7 +38,7 @@ PhotoTag.refresh = function(callback)
 PhotoTag.load = function(callback)
 {
 	var key = PhotoTag.key;
-	var cloud = require('./../cloud.js').current;
+	var cloud = require('./../adapters/redis.js').current;
 	var library = require('./library.js').current;
 
 	cloud.getObject(key, function(o)
