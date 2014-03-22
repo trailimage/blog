@@ -1,5 +1,14 @@
 {{#contentFor "head"}}
 	<script type='text/javascript'>
+
+		/**
+		 * @param {string} message
+		 */
+		$.fn.showMessage = function(message)
+		{
+			return this.each(function() { $(this).find('.message').html(message).show(); });
+		};
+
 		$(document).ready(function()
 		{
 			var $posts = $('#posts').find('input[type=checkbox]');
@@ -26,7 +35,7 @@
 				$.ajax({
 					dataType: 'json',
 					url: '/admin/issue/'+action+'/',
-					data: {'slug': slug, 'docID': docID, 'originalSlug': $selected.text() },
+					data: {'slug': slug, 'docID': docID, 'oldSlug': $selected.text() },
 					success: function(response)
 					{
 						if (response.success)
@@ -37,23 +46,24 @@
 									if ($selected.text() == 'New')
 									{
 										// add option
-										$issues.find('select').append($('<option/>').val(docID).html(slug));
+										$issues.showMessage('Added ' + slug).find('select').append($('<option/>').val(docID).html(slug));
 									}
 									else
 									{
 										// update option
 										$selected.text(slug);
 										$selected.val(docID);
+										$issues.showMessage('Updated ' + slug);
 									}
 									break;
 								case 'delete':
-									$issues.find('li[value=' + docID + ']').remove();
+									$issues.showMessage('Deleted ' + slug).find('li[value=' + docID + ']').remove();
 									break;
 							}
 						}
 						else
 						{
-							alert('Failed to save ' + slug);
+							$issues.showMessage('Failed to ' + action + ' ' + slug);
 						}
 					}
 				});
@@ -88,6 +98,7 @@
 			</ul>
 		</div>
 		<div class="buttons"><button>Clear Cache</button></div>
+		<div class="message"></div>
 	</fieldset>
 
 	<fieldset id="statistics">
@@ -97,6 +108,7 @@
 			<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a></li>
 			<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
 		</ul>
+		<div class="message"></div>
 	</fieldset>
 
 	<fieldset id="issues">
@@ -113,6 +125,7 @@
 			<button data-action="delete">Delete</button>
 			<button data-action="save">Save</button>
 		</div>
+		<div class="message"></div>
 	</fieldset>
 
 	<fieldset id="api-keys">
@@ -123,5 +136,6 @@
 		<div class="buttons">
 			<button>Flickr Token</button>
 		</div>
+		<div class="message"></div>
 	</fieldset>
 </div>

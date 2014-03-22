@@ -12,22 +12,22 @@ function Issue() {}
 
 Issue.prototype.documentID = null;
 Issue.prototype.slug = null;
-Issue.prototype.originalSlug = null;
+Issue.prototype.oldSlug = null;
 Issue.prototype.save = function(callback)
 {
-	if (this.originalSlug != exports.newSlug && this.originalSlug != this.slug)
+	if (this.oldSlug != exports.newSlug && this.oldSlug != this.slug)
 	{
-		// delete old key before inserting new
+		db().replace(exports.key, this.oldSlug, this.slug, this.documentID, callback);
 	}
 	else
 	{
-		db().add(Enum.key.issues, this.slug, this.documentID, callback);
+		db().add(exports.key, this.slug, this.documentID, callback);
 	}
 };
 
 Issue.prototype.remove = function(callback)
 {
-	db().remove(Enum.key.issues, this.slug, callback);
+	db().remove(exports.key, this.slug, callback);
 };
 
 exports.key = 'issues';
@@ -36,7 +36,7 @@ exports.newSlug = 'New';
 exports.fromRequest = function(req)
 {
 	var issue = new Issue();
-	issue.originalSlug = req.query.originalSlug;
+	issue.oldSlug = req.query.oldSlug;
 	issue.documentID = req.query.docID;
 	issue.slug = req.query.slug;
 	return issue;

@@ -93,7 +93,7 @@ function showAdmin(req, res, user)
 }
 
 /**
- *
+ * Group logs by day
  * @param {Object} results
  * @return {Object}
  */
@@ -131,7 +131,7 @@ function parseLogs(results)
 }
 
 /**
- * Whether two string timestamps are the same day
+ * Whether two timestamps are the same day
  * @param {Date} d1
  * @param {Date} d2
  * @returns {boolean}

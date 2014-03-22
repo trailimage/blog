@@ -40,6 +40,7 @@ ul
 
 fieldset
 {
+	position: relative;
 	border: 1px solid @borderColor;
 	.rounded(4px);
 	padding: 5px 0;
@@ -77,6 +78,15 @@ fieldset
 	{
 		text-align: right;
 		padding-right: 5px;
+	}
+
+	.message
+	{
+		position: absolute;
+		bottom: 4px;
+		left: 4px;
+		display: none;
+		color: @linkColor;
 	}
 }
 
