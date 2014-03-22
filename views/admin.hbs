@@ -92,9 +92,9 @@
 		<div class="buttons">Select <button id="select-all">All</button><button id="select-none">None</button></div>
 		<div class="scroll">
 			<ul>
-		{{#each library.posts}}
-				<li><label><input type='checkbox'/>{{this.name}}</label></li>
-		{{/each}}
+		{{#outputs}}
+				<li><label><input type='checkbox'/>{{this}}</label></li>
+		{{/outputs}}
 			</ul>
 		</div>
 		<div class="buttons"><button>Clear Cache</button></div>

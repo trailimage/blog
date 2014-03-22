@@ -11,7 +11,7 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 var cookies = require('cookies');
 
-Setting.isProduction = (process.env.NODE_ENV == 'production');
+Setting.isProduction = true; // (process.env.NODE_ENV == 'production');
 Setting.redis = url.parse(process.env.REDISCLOUD_URL);
 Setting.redis.auth = Setting.redis.auth.split(":")[1];
 Setting.cacheOutput = Setting.isProduction;
@@ -120,7 +120,7 @@ function defineRoutes()
 	app.get('/photo-tag/:tagSlug', r.photo.tags);
 	app.get('/photo-tag/search/:tagSlug', r.photo.search);
 	app.get('/featured', r.post.featured);
-	app.get('/'+photoID, r.photo.view);                              // links with bare Flickr photo ID
+	app.get('/'+photoID, r.photo.view);                                 // links with bare Flickr photo ID
 	app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
 	app.get('/'+postID+'/'+photoID, r.post.flickrID);
 	app.get('/:slug'+s+'/pdf', r.pdf.view);
