@@ -30,10 +30,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/jabbott7/Trail-Image.git"
+		"url": "https://github.com/Jason-Abbott/Trail-Image.git"
 	},
 	"main": "index",
 	"bugs": {
-		"url": "https://github.com/jabbott7/Trail-Image/issues"
+		"url": "https://github.com/Jason-Abbott/Trail-Image/issues"
 	}
 }

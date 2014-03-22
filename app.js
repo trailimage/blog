@@ -1,8 +1,8 @@
 /**
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-var Setting = require('./settings.js');
-var Format = require('./format.js');
+var Setting = require('./lib/settings.js');
+var Format = require('./lib/format.js');
 var Express = require('express');
 var log = require('winston');
 var url = require('url');
@@ -17,8 +17,8 @@ Setting.redis.auth = Setting.redis.auth.split(":")[1];
 Setting.cacheOutput = Setting.isProduction;
 
 // these depend on the redis settings
-var outputCache = require('./outputCache.js');
-var library = require('./models/library.js');
+var outputCache = require('./lib/output-cache.js');
+var library = require('./lib/models/library.js');
 
 /**
  * @type {ExpressHbs}
@@ -93,49 +93,37 @@ function defineRoutes()
     var photoID = ':photoID(\\d{10,11})';
     /** @type {string} Flickr set ID pattern */
     var postID = ':postID(\\d{17})';
-	var post = require('./routes/post-route.js');
-	var contact = require('./routes/contact-route.js');
-	var tag = require('./routes/tag-route.js');
-	var rss = require('./routes/rss-route.js');
-	var about = require('./routes/about-route.js');
-	var search = require('./routes/search-route.js');
-	var menu = require('./routes/menu-route.js');
-	var sitemap = require('./routes/sitemap-route.js');
-	var pdf = require('./routes/pdf-route.js');
-	var authorize = require('./routes/authorize-route.js');
-    var photo = require('./routes/photo-route.js');
-	var issue = require('./routes/issue-route.js');
-	var admin = require('./routes/admin-route.js');
+	var r = require('./lib/routes/all-routes.js');
 
-	post.addFixes(app);
+	r.post.addFixes(app);
 
-	app.get('/admin', admin.home);
-	app.post('/admin', admin.login);
-	app.get('/admin/issue/save', admin.saveIssue);
-	app.get('/admin/issue/delete', admin.deleteIssue);
-	app.get('/', post.home);                                       // the latest set
-	app.get('/rss', rss.view);
-	app.get('/about', about.view);
-	app.get('/authorize', authorize.view);
-	app.get('/contact', contact.view);
-	app.post('/contact', contact.send);
-	app.get('/search', search.view);
-	app.get('/browse', search.view);
-	app.get('/js/menu.js', menu.view);
-	app.get('/sitemap.xml', sitemap.view);
-    app.get('/exif/'+photoID, photo.exif);
-	app.get('/issue', issue.home);
-	app.get('/issue/:slug'+s, issue.view);
-	app.get('/:category(who|what|when|where|tag)/:tag', tag.view);
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', post.blog);       // old blog links with format /YYYY/MM/slug
-	app.get('/photo-tag', photo.tags);
-	app.get('/photo-tag/:tagSlug', photo.tags);
-	app.get('/photo-tag/search/:tagSlug', photo.search);
-	app.get('/featured', post.featured);
-	app.get('/'+photoID, photo.view);                              // links with bare Flickr photo ID
-	app.get('/'+postID, post.flickrID);                               // links with bare Flickr set ID
-	app.get('/'+postID+'/'+photoID, post.flickrID);
-	app.get('/:slug'+s+'/pdf', pdf.view);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, post.seriesPost);
-	app.get('/:slug'+s, post.view);
+	app.get('/admin', r.admin.home);
+	app.post('/admin', r.admin.login);
+	app.get('/admin/issue/save', r.admin.saveIssue);
+	app.get('/admin/issue/delete', r.admin.deleteIssue);
+	app.get('/', r.post.home);                                       // the latest set
+	app.get('/rss', r.rss.view);
+	app.get('/about', r.about.view);
+	app.get('/authorize', r.authorize.view);
+	app.get('/contact', r.contact.view);
+	app.post('/contact', r.contact.send);
+	app.get('/search', r.search.view);
+	app.get('/browse', r.search.view);
+	app.get('/js/menu.js', r.menu.view);
+	app.get('/sitemap.xml', r.sitemap.view);
+    app.get('/exif/'+photoID, r.photo.exif);
+	app.get('/issue', r.issue.home);
+	app.get('/issue/:slug'+s, r.issue.view);
+	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
+	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
+	app.get('/photo-tag', r.photo.tags);
+	app.get('/photo-tag/:tagSlug', r.photo.tags);
+	app.get('/photo-tag/search/:tagSlug', r.photo.search);
+	app.get('/featured', r.post.featured);
+	app.get('/'+photoID, r.photo.view);                              // links with bare Flickr photo ID
+	app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
+	app.get('/'+postID+'/'+photoID, r.post.flickrID);
+	app.get('/:slug'+s+'/pdf', r.pdf.view);
+	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
+	app.get('/:slug'+s, r.post.view);
 }
