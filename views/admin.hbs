@@ -11,11 +11,60 @@
 
 		$(document).ready(function()
 		{
-			var $posts = $('#posts').find('input[type=checkbox]');
+			var $views = $('#views').find('input[type=checkbox]');
+			var $models = $('#models').find('input[type=checkbox]');
 			var $issues = $('#issues');
 
-			$('#select-all').click(function()  { $posts.prop('checked', true); });
-			$('#select-none').click(function() { $posts.prop('checked', false); });
+			$('form').submit(function()
+			{
+				var $form = $(this);
+
+				if ($form.data('waiting') === true) { return; }
+
+				var data = $form.serializeObject();
+
+				$form.data('waiting', true).find('fieldset').addClass('busy');
+
+				$.post($form.attr('action'), {'contentType': 'application/json', 'data': data}, function(response)
+				{
+					$form
+						.data('waiting', false)
+						.trigger('update', [(response.success) ? data : null])
+						.find('fieldset').removeClass('busy');
+				});
+
+				return false;
+			});
+
+			$('#views').on('update', function(e, data)
+			{
+				if (data)
+				{
+					$views.find(':selected').parent().remove();
+					$(this).showMessage('Removed cached items');
+				}
+				else
+				{
+					$(this).showMessage('Failed to delete cached items')
+				}
+			});
+
+			$('#models').on('update', function(e, data)
+			{
+				if (data)
+				{
+					$models.find(':selected').parent().remove();
+					$(this).showMessage('Removed cached items');
+				}
+				else
+				{
+					$(this).showMessage('Failed to delete cached items')
+				}
+			});
+
+
+			$('#select-all').click(function()  { $outputs.prop('checked', true); });
+			$('#select-none').click(function() { $outputs.prop('checked', false); });
 
 			$issues.find('select').change(function()
 			{
@@ -87,20 +136,6 @@
 
 <div id="body">
 
-	<fieldset id="posts">
-		<legend>Posts</legend>
-		<div class="buttons">Select <button id="select-all">All</button><button id="select-none">None</button></div>
-		<div class="scroll">
-			<ul>
-		{{#outputs}}
-				<li><label><input type='checkbox'/>{{this}}</label></li>
-		{{/outputs}}
-			</ul>
-		</div>
-		<div class="buttons"><button>Clear Cache</button></div>
-		<div class="message"></div>
-	</fieldset>
-
 	<fieldset id="statistics">
 		<legend>Statistics</legend>
 		<ul>
@@ -108,23 +143,6 @@
 			<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a></li>
 			<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
 		</ul>
-		<div class="message"></div>
-	</fieldset>
-
-	<fieldset id="issues">
-		<legend>Issues</legend>
-		<select>
-			<option>New</option>
-		{{#each issues}}
-			<option value="{{this}}">{{@key}}</option>
-		{{/each}}
-		</select>
-		<input type="text" id="issue-slug" placeholder="Slug"/>
-		<input type="text" id="issue-doc" placeholder="Document ID"/>
-		<div class="buttons">
-			<button data-action="delete">Delete</button>
-			<button data-action="save">Save</button>
-		</div>
 		<div class="message"></div>
 	</fieldset>
 
@@ -138,4 +156,56 @@
 		</div>
 		<div class="message"></div>
 	</fieldset>
+
+	<form id="views" action="/admin/view/delete">
+		<fieldset>
+			<legend>Cache Views</legend>
+			<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
+			<div class="scroll">
+				<ul>
+			{{#views}}
+					<li><label><input name='post{{@index}}' value='{{this}}' type='checkbox'/>{{this}}</label></li>
+			{{/views}}
+				</ul>
+			</div>
+			<div class="buttons"><button type="submit">Delete</button></div>
+			<div class="message"></div>
+		</fieldset>
+	</form>
+
+	<form id="models" action="/admin/model/delete">
+		<fieldset>
+			<legend>Cached Models</legend>
+			<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
+			<div class="scroll">
+				<ul>
+			{{#models}}
+					<li><label><input name='post{{@index}}' value='{{this}}' type='checkbox'/>{{this}}</label></li>
+			{{/models}}
+				</ul>
+			</div>
+			<div class="buttons"><button type="submit">Refresh</button></div>
+			<div class="message"></div>
+		</fieldset>
+	</form>
+
+	<form id="issues" method="post">
+		<fieldset>
+			<legend>Issues</legend>
+			<select>
+				<option>New</option>
+				{{#each issues}}
+					<option value="{{this}}">{{@key}}</option>
+				{{/each}}
+			</select>
+			<input type="text" id="issue-slug" placeholder="Slug"/>
+			<input type="text" id="issue-doc" placeholder="Document ID"/>
+			<div class="buttons">
+				<button type="submit" data-action="delete">Delete</button>
+				<button type="submit" data-action="save">Save</button>
+			</div>
+			<div class="message"></div>
+		</fieldset>
+	</form>
+
 </div>

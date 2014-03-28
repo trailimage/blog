@@ -11,7 +11,7 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 var cookies = require('cookies');
 
-Setting.isProduction = true; // (process.env.NODE_ENV == 'production');
+Setting.isProduction = (process.env.NODE_ENV == 'production');
 Setting.redis = url.parse(process.env.REDISCLOUD_URL);
 Setting.redis.auth = Setting.redis.auth.split(":")[1];
 Setting.cacheOutput = Setting.isProduction;
@@ -101,6 +101,8 @@ function defineRoutes()
 	app.post('/admin', r.admin.login);
 	app.get('/admin/issue/save', r.admin.saveIssue);
 	app.get('/admin/issue/delete', r.admin.deleteIssue);
+	app.post('/admin/view/delete', r.admin.deleteView);
+	app.post('/admin/model/delete', r.admin.deleteModel);
 	app.get('/', r.post.home);                                       // the latest set
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);

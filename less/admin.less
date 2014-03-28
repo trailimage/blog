@@ -38,13 +38,14 @@ ul
 	}
 }
 
+div.clear-fix { clear: both; }
+
 fieldset
 {
 	position: relative;
 	border: 1px solid @borderColor;
 	.rounded(4px);
 	padding: 5px 0;
-	float: left;
 
 	input, select { font-family: @sanSerifFont; font-size: 16px; }
 
@@ -88,6 +89,11 @@ fieldset
 		display: none;
 		color: @linkColor;
 	}
+
+	&.busy
+	{
+		cursor: wait !important;
+	}
 }
 
 .scroll
@@ -110,18 +116,22 @@ fieldset
 	right: 0;
 	padding: 10px;
 
-	#posts
+	#statistics, #api-keys { float: right; clear: right; width: 200px; }
+	#views, #issues, #models
 	{
-
+		fieldset
+		{
+			width: 47%;
+			li
+			{
+				cursor: pointer;
+				&:hover	{ color: @linkColor; }
+			}
+		}
 	}
 
-	#issues
+	#issues fieldset
 	{
-		li
-		{
-			cursor: pointer;
-			&:hover	{ color: @linkColor; }
-		}
 		input[type=text]
 		{
 			width: 25em;
