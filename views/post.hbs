@@ -11,39 +11,39 @@
 			{{post.subTitle}}
 		</div>
 	{{else}}
-		<h1 itemprop="name">{{info.title._content}}</h1>
+		<h1 itemprop="name">{{post.title}}</h1>
 	{{/if}}
 		<!--googleoff: index-->
 		{{> menu}}
 		<!--googleon: index-->
 	</div>
 
-	{{#if dateTaken}}
-	<div id="postDate" itemprop="dateCreated">{{dateTaken}}</div>
+	{{#if post.dateTaken}}
+	<div id="postDate" itemprop="dateCreated">{{post.dateTaken}}</div>
 	{{/if}}
 
 	<div class="fb-like" data-href="http://{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
-	{{#if video}}
+	{{#if post.video}}
 	<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
 	{{/if}}
 
-	{{#if info.description._content}}
-	<blockquote class="synopsis"><p itemprop="description">{{info.description._content}}<p></blockquote>
+	{{#if post.description}}
+	<blockquote class="synopsis"><p itemprop="description">{{post.description}}<p></blockquote>
 	{{/if}}
 
 	{{> post-tags post.tags}}
 	{{> navigation}}
 
-	{{#if map}}
+	{{#if post.photoCoordinates}}
 	<div class='map'>
-		<img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{map}}"/>
+		<img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/>
 	</div>
 	{{/if}}
 
 </div>
 
-{{#photos.photo}}
+{{#post.photos}}
 
 <div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
 	<a name="{{id}}"></a>
@@ -75,12 +75,12 @@
 
 <div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
 
-{{/photos.photo}}
+{{/post.photos}}
 
-{{#if video}}
+{{#if post.video}}
 <a name="video">
 <div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add video.width 8}}}px;">
-	<iframe width="{{video.width}}" height="{{video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
+	<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 </a>
 {{/if}}
