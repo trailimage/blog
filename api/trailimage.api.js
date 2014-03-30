@@ -61,6 +61,16 @@ Post.prototype.totalParts;
 Post.prototype.isPartial;
 
 /**
+ * @type {Boolean}
+ */
+Post.prototype.previousIsPart;
+
+/**
+ * @type {Boolean}
+ */
+Post.prototype.nextIsPart;
+
+/**
  * @type {String}
  */
 Post.prototype.description;
