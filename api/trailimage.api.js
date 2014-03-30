@@ -1,71 +1,155 @@
-var TrailImage = {};
-
-/**
- * @type {Object.<TrailImage.Tag[]>}
- */
-TrailImage.prototype.menu = {};
-
-/**
- * @type {Object.<TrailImage.Post[]>}
- */
-TrailImage.prototype.post = {};
-
 // Post -----------------------------------------------------------------------
 
 /**
- * @type {Object}
+ * @constructor
  */
-TrailImage.prototype.Post;
+Post = {};
 
 /**
  * @type {String}
  */
-TrailImage.Post.prototype.slug;
+Post.prototype.id;
 
 /**
  * @type {String}
  */
-TrailImage.Post.prototype.title;
+Post.prototype.slug;
 
 /**
  * @type {String}
  */
-TrailImage.Post.prototype.subTitle;
+Post.prototype.seriesSlug;
 
 /**
  * @type {String}
  */
-TrailImage.Post.prototype.icon;
+Post.prototype.partSlug;
+
+/**
+ * @type {String}
+ */
+Post.prototype.title;
+
+/**
+ * @type {String}
+ */
+Post.prototype.subTitle;
+
+/**
+ * @type {String}
+ */
+Post.prototype.dateTaken;
+
+/**
+ * @type {String}
+ */
+Post.prototype.icon;
 
 /**
  * @type {Integer}
  */
-TrailImage.Post.prototype.part;
+Post.prototype.part;
+
+/**
+ * @type {Integer}
+ */
+Post.prototype.totalParts;
+
+/**
+ * @type {Boolean}
+ */
+Post.prototype.isPartial;
 
 /**
  * @type {String}
  */
-TrailImage.Post.prototype.description;
+Post.prototype.description;
+
+/**
+ * @type {Boolean}
+ */
+Post.prototype.chronological;
+
+/**
+ * @type {Boolean}
+ */
+Post.prototype.isSeriesStart;
+
+/**
+ * @type {Post}
+ */
+Post.prototype.next;
+
+/**
+ * @type {Post}
+ */
+Post.prototype.previous;
+
+/**
+ * @type {Boolean}
+ */
+Post.prototype.photosLoaded;
+
+/**
+ * @type {Integer}
+ */
+Post.prototype.photoCount;
+
+/**
+ * @type {String}
+ */
+Post.prototype.photoCoordinates;
 
 // Tag ------------------------------------------------------------------------
 
 /**
- * @type {Object}
+ * @constructor
  */
-TrailImage.prototype.Tag = {};
+Tag = {}
 
 /**
  * @type {String}
  */
-TrailImage.Tag.prototype.title;
+Tag.prototype.title;
 
 /**
  * @type {String}
  */
-TrailImage.Tag.prototype.description;
+Tag.prototype.description;
 
 /**
  * @type {String[]}
  */
-TrailImage.Tag.prototype.posts;
+Tag.prototype.posts;
 
+// Library --------------------------------------------------------------------
+
+/**
+ * @constructor
+ */
+Library = {};
+
+/**
+ * @type {String}
+ */
+Library.prototype.key;
+
+/**
+ * @type {Object.<Tag>}
+ */
+Library.prototype.tags;
+
+/**
+ * @type {Post[]}
+ */
+Library.prototype.posts;
+
+/**
+ * @type {Object.<String>}
+ */
+Library.prototype.photoTags;
+
+/**
+ * @type {boolean}
+ */
+Library.prototype.postInfoLoaded;
