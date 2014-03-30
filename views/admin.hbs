@@ -11,60 +11,60 @@
 
 		$(document).ready(function()
 		{
-			var $views = $('#views').find('input[type=checkbox]');
-			var $models = $('#models').find('input[type=checkbox]');
+			var $views = $('#views');
+			var $viewItems = $views.find('input[type=checkbox]');
+			var $models = $('#models');
 			var $issues = $('#issues');
+			var waiting = false;
 
-			$('form').submit(function()
+			$views.find('.select-all').click(function()  { $viewItems.prop('checked', true); });
+			$views.find('.select-none').click(function() { $viewItems.prop('checked', false); });
+
+			$views.submit(function()
 			{
-				var $form = $(this);
+				if (waiting) { return false; }
 
-				if ($form.data('waiting') === true) { return; }
+				var data = $views.serializeObject();
 
-				var data = $form.serializeObject();
+				$views.find('input, button').prop('disabled', true);
+				waiting = true;
 
-				$form.data('waiting', true).find('fieldset').addClass('busy');
-
-				$.post($form.attr('action'), {'contentType': 'application/json', 'data': data}, function(response)
+				$.post($views.attr('action'), {'contentType': 'application/json', 'data': data}, function(response)
 				{
-					$form
-						.data('waiting', false)
-						.trigger('update', [(response.success) ? data : null])
-						.find('fieldset').removeClass('busy');
+					$views.find('input, button').prop('disabled', false);
+					waiting = false;
+
+					if (response.success)
+					{
+						$views.find('input:checked').parent().remove();
+						$views.showMessage('Done');
+					}
+					else
+					{
+						$views.showMessage('Failed')
+					}
 				});
 
 				return false;
 			});
 
-			$('#views').on('update', function(e, data)
+			$models.find('button').click(function()
 			{
-				if (data)
+				if (waiting) { return; }
+
+				var $button = $(this);
+
+				$button.prop('disabled', true);
+				waiting = true;
+
+				$.post('/admin/' + $button.data('url'), function(response)
 				{
-					$views.find(':selected').parent().remove();
-					$(this).showMessage('Removed cached items');
-				}
-				else
-				{
-					$(this).showMessage('Failed to delete cached items')
-				}
+					$button.prop('disabled', false);
+					waiting = false;
+					$models.showMessage((response.success) ? 'Reloaded' : 'Failed');
+				});
 			});
 
-			$('#models').on('update', function(e, data)
-			{
-				if (data)
-				{
-					$models.find(':selected').parent().remove();
-					$(this).showMessage('Removed cached items');
-				}
-				else
-				{
-					$(this).showMessage('Failed to delete cached items')
-				}
-			});
-
-
-			$('#select-all').click(function()  { $outputs.prop('checked', true); });
-			$('#select-none').click(function() { $outputs.prop('checked', false); });
 
 			$issues.find('select').change(function()
 			{
@@ -139,9 +139,9 @@
 	<fieldset id="statistics">
 		<legend>Statistics</legend>
 		<ul>
-			<li><a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a></li>
-			<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a></li>
 			<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
+			<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://trailimage.com/&authuser=0'>Google Webmaster</a></li>
+			<li><a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a></li>
 		</ul>
 		<div class="message"></div>
 	</fieldset>
@@ -157,9 +157,15 @@
 		<div class="message"></div>
 	</fieldset>
 
+	<fieldset id="models">
+		<legend>Cached Models</legend>
+		<button data-url="library/reload">Reload Library</button><button data-url="photo-tag/reload">Reload Photo Tags</button>
+		<div class="message"></div>
+	</fieldset>
+
 	<form id="views" action="/admin/view/delete">
 		<fieldset>
-			<legend>Cache Views</legend>
+			<legend>Cached Views</legend>
 			<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
 			<div class="scroll">
 				<ul>
@@ -169,22 +175,6 @@
 				</ul>
 			</div>
 			<div class="buttons"><button type="submit">Delete</button></div>
-			<div class="message"></div>
-		</fieldset>
-	</form>
-
-	<form id="models" action="/admin/model/delete">
-		<fieldset>
-			<legend>Cached Models</legend>
-			<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
-			<div class="scroll">
-				<ul>
-			{{#models}}
-					<li><label><input name='post{{@index}}' value='{{this}}' type='checkbox'/>{{this}}</label></li>
-			{{/models}}
-				</ul>
-			</div>
-			<div class="buttons"><button type="submit">Refresh</button></div>
 			<div class="message"></div>
 		</fieldset>
 	</form>

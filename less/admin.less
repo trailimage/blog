@@ -117,16 +117,13 @@ fieldset
 	padding: 10px;
 
 	#statistics, #api-keys { float: right; clear: right; width: 200px; }
-	#views, #issues, #models
+	#views fieldset, #issues fieldset, #models
 	{
-		fieldset
+		width: 47%;
+		li
 		{
-			width: 47%;
-			li
-			{
-				cursor: pointer;
-				&:hover	{ color: @linkColor; }
-			}
+			cursor: pointer;
+			&:hover	{ color: @linkColor; }
 		}
 	}
 
@@ -136,6 +133,13 @@ fieldset
 		{
 			width: 25em;
 		}
+	}
+
+	#models
+	{
+		text-align: center;
+
+		legend { text-align: left; }
 	}
 }
 
