@@ -58,7 +58,12 @@ Post.prototype.icon;
 /**
  * @type {String}
  */
-Post.prototype.thumbnail;
+Post.prototype.bigThumb;
+
+/**
+ * @type {String}
+ */
+Post.prototype.smallThumb;
 
 /**
  * @type {Integer}
