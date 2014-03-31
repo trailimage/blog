@@ -1,17 +1,17 @@
 {{#contentFor "head"}}
 	{{! https://developers.facebook.com/docs/reference/opengraph/object-type/article/ }}
 	{{! https://developers.facebook.com/tools/debug/og/ }}
-	<meta property='og:title' content='{{info.title._content}}'/>
+	<meta property='og:title' content='{{post.name}}'/>
 	<meta property='fb:app_id' content='{{setting.facebook.appID}}'/>
 	<meta property='fb:admins' content='{{setting.facebook.adminID}}' />
-	<meta property='og:url' content='http://www.{{setting.domain}}/{{slug}}/'/>
-	<meta property='og:image' content='http://farm{{info.farm}}.static.flickr.com/{{info.server}}/{{info.primary}}_{{info.secret}}.jpg'/>
+	<meta property='og:url' content='http://www.{{setting.domain}}/{{post.slug}}/'/>
+	<meta property='og:image' content='{{post.thumbnail}}'/>
 	<meta property='og:type' content='article'/>
-	<meta property='article:published_time' content='{{formatISO8601 info.date_create}}'/>
-	<meta property='article:modified_time' content='{{formatISO8601 info.date_update}}'/>
+	<meta property='article:published_time' content='{{formatISO8601 post.createdOn}}'/>
+	<meta property='article:modified_time' content='{{formatISO8601 post.updatedOn}}'/>
 	<meta property='article:author' content='{{setting.facebook.authorURL}}'/>
 	{{#if video}}
-	<meta property='og:video' content='http://youtu.be/{{video.id}}'/>
+	<meta property='og:video' content='http://youtu.be/{{post.video.id}}'/>
 	{{/if}}
 {{/contentFor}}
 

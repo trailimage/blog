@@ -41,9 +41,24 @@ Post.prototype.subTitle;
 Post.prototype.dateTaken;
 
 /**
+ * @type {Date}
+ */
+Post.prototype.createdOn;
+
+/**
+ * @type {Date}
+ */
+Post.prototype.updatedOn;
+
+/**
  * @type {String}
  */
 Post.prototype.icon;
+
+/**
+ * @type {String}
+ */
+Post.prototype.thumbnail;
 
 /**
  * @type {Integer}
