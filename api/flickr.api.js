@@ -291,6 +291,12 @@ Flickr.Response.prototype.sizes;
 Flickr.Response.prototype.stat;
 
 /**
+ * @type {Integer}
+ */
+Flickr.Response.prototype.code;
+
+
+/**
  * @type {String}
  */
 Flickr.Response.prototype.message;
