@@ -93,7 +93,7 @@ function defineRoutes()
     var photoID = ':photoID(\\d{10,11})';
     /** @type {string} Flickr set ID pattern */
     var postID = ':postID(\\d{17})';
-	var r = require('./lib/routes/all-routes.js');
+	var r = require('./lib/controllers/routes.js');
 
 	r.post.addFixes(app);
 
