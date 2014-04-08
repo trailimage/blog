@@ -79,7 +79,7 @@
 
 {{#if post.video}}
 <a name="video">
-<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add video.width 8}}}px;">
+<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
 	<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 </a>
