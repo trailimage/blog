@@ -102,6 +102,7 @@ function defineRoutes()
 	app.get('/admin/issue/save', r.admin.saveIssue);
 	app.get('/admin/issue/delete', r.admin.deleteIssue);
 	app.post('/admin/view/delete', r.admin.deleteView);
+	app.post('/admin/track/upload', r.admin.uploadTrack);
 	app.post('/admin/library/reload', r.admin.reloadLibrary);
 	app.post('/admin/photo-tag/reload', r.admin.reloadPhotoTags);
 	app.get('/', r.post.home);                                       // the latest set

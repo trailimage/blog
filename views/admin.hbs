@@ -14,11 +14,32 @@
 			var $views = $('#views');
 			var $viewItems = $views.find('input[type=checkbox]');
 			var $models = $('#models');
+			var $tracks = $('#tracks');
 			var $issues = $('#issues');
 			var waiting = false;
 
 			$views.find('.select-all').click(function()  { $viewItems.prop('checked', true); });
 			$views.find('.select-none').click(function() { $viewItems.prop('checked', false); });
+
+			$tracks.submit(function()
+			{
+				//var data = $tracks.serializeObject();
+				//var data = new FormData(this);
+
+				$.ajax({
+					url: $tracks.attr('action'),
+					type: 'POST',
+					data: new FormData(this),
+					processData: false,
+					contentType: false
+				});
+
+//				$.post($tracks.attr('action'), { processData: false, contentType: false, data: data}, function(response)
+//				{
+//					console.log(response);
+//				});
+				return false;
+			});
 
 			$views.submit(function()
 			{
@@ -178,6 +199,22 @@
 				</ul>
 			</div>
 			<div class="buttons"><button type="submit">Delete</button></div>
+			<div class="message"></div>
+		</fieldset>
+	</form>
+
+	<form id="tracks" action="/admin/track/upload">
+		<fieldset>
+			<legend>Tracks</legend>
+			<label>Post<select id="gpxPost" name="post">
+			{{#library.posts}}
+				<option value="{{id}}">{{name}}</option>
+			{{/library.posts}}
+			</select></label>
+			<div class="buttons">
+				<input id="gpxFile" name="gpx" type="file"/>
+				<button type="submit" data-action="upload">Upload</button>
+			</div>
 			<div class="message"></div>
 		</fieldset>
 	</form>

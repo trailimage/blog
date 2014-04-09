@@ -19,6 +19,9 @@
 		"compression": "1.x",
 		"cookies": ">=0.4.0",
 		"uglify-js": ">=2.4.0",
+		"simplify-js": ">=1.2.0",
+		"formidable": ">=1.0.14",
+		"togeojson": ">=0.7.0",
 		"feed": ">=0.2.5",
 		"oauth": ">=0.9.0",
 		"winston": ">=0.7.2",
@@ -26,7 +29,8 @@
 		"winston-redis": ">=0.2.1",
 		"nodemailer": ">=0.5.2",
 		"pdfkit": "*",
-		"recaptcha": "*"
+		"recaptcha": "*",
+		"xmldom": ">=0.1.19"
 	},
 	"repository": {
 		"type": "git",
