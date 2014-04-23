@@ -23,21 +23,21 @@
 
 			$tracks.submit(function()
 			{
-				//var data = $tracks.serializeObject();
-				//var data = new FormData(this);
-
 				$.ajax({
 					url: $tracks.attr('action'),
 					type: 'POST',
 					data: new FormData(this),
 					processData: false,
-					contentType: false
+					contentType: false,
+					success: function(response, status, jqXHR)
+					{
+						$tracks.find('select, input, button').prop('disabled', false);
+						$tracks.showMessage((response.success) ? 'Done' : 'Failed');
+					}
 				});
 
-//				$.post($tracks.attr('action'), { processData: false, contentType: false, data: data}, function(response)
-//				{
-//					console.log(response);
-//				});
+				$tracks.find('select, input, button').prop('disabled', true);
+
 				return false;
 			});
 
