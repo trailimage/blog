@@ -9,7 +9,6 @@
 	<script type='text/javascript'>
 		google.maps.event.addDomListener(window, 'load', function()
 		{
-			var bounds = new google.maps.LatLngBounds();
 			var canvas = document.getElementById('map-canvas');
 			var options = {
 				zoom: 7,
@@ -19,9 +18,8 @@
 			var map = new google.maps.Map(canvas, options);
 
 			map.data.loadGeoJson('/{{post.slug}}/geo.json');
-			map.data.forEach(function(feature) { console.log(feature); bounds.extend(feature.getGeometry()); });
-			//map.fitBounds(bounds);
 
+			//setTimeout(function() { zoom(map); }, 1000);
 			// https://developers.google.com/maps/documentation/javascript/datalayer#style_options
 			map.data.setStyle({	strokeColor: 'red', strokeWeight: 3 });
 
@@ -30,6 +28,40 @@
 				map.data.overrideStyle(event.feature, {strokeColor: 'yellow'});
 			});
 		});
+
+		/**
+		 * Update a map's viewport to fit each geometry in a dataset
+		 * @param {google.maps.Map} map The map to adjust
+		 */
+		function zoom(map)
+		{
+			var bounds = new google.maps.LatLngBounds();
+			map.data.forEach(function(feature)
+			{
+				processPoints(feature.getGeometry(), bounds.extend, bounds);
+			});
+			map.fitBounds(bounds);
+		}
+
+		/**
+		 * Process each point in a Geometry, regardless of how deep the points may lie.
+		 * @param {google.maps.Geometry} geometry The structure to process
+		 * @param {function(google.maps.LatLng)} callback A function to call on each
+		 *     LatLng point encountered (e.g. Array.push)
+		 * @param {Object} thisArg The value of 'this' as provided to 'callback' (e.g.
+		 *     myArray)
+		 */
+		function processPoints(geometry, callback, thisArg) {
+			if (geometry instanceof google.maps.LatLng) {
+				callback.call(thisArg, geometry);
+			} else if (geometry instanceof google.maps.Data.Point) {
+				callback.call(thisArg, geometry.get());
+			} else {
+				geometry.getArray().forEach(function(g) {
+					processPoints(g, callback, thisArg);
+				});
+			}
+		}
 	</script>
 	<style>
 		#map-canvas
