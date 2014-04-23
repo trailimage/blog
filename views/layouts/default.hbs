@@ -1,34 +1,19 @@
 <html>
 	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-		<title>{{title}}</title>
-		<meta content='{{description}}' name='description'/>
+		{{> html-head}}
 	{{#if keywords}}
 		<meta content='Adventure, Scenery, Photography, {{keywords}}' name='keywords'/>
 	{{else}}
 		<meta content='BMW R1200GS, KTM XCW, jeep wrangler, motorcycle, motorcycling, riding, adventure, Jason Abbott, Abbott, outdoors, scenery, idaho, mountains' name='keywords'/>
 	{{/if}}
-		<link href='http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic' rel='stylesheet' type='text/css'>
-		<link href='/css/ti.css' rel='stylesheet' type='text/css'/>
-		<link href='/img/favicon.ico' rel='shortcut icon'/>
-		<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
-		<link rel="apple-touch-icon" href='/img/apple-touch-icon-57x57.png' />
-		<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
-		<link rel="alternate" type="application/rss+xml" title="Trail Image RSS" href="/rss" />
-		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript' defer></script>
 		<script src='/js/menu.js?t={{setting.timestamp}}' type='text/javascript' defer></script>
 		<script src='/js/ti.js' type='text/javascript' defer></script>
-		<meta name="viewport" content="width=1024">
 		<meta property='og:site_name' content='{{setting.title}}' />
 		<meta property='og:description' content='{{description}}' />
+		{{> html-head}}
 		{{> ga}}
 		{{> twitter}}
 		{{{block "head"}}}
-	<!--[if lte IE 7]>
-		<style>
-			img { -ms-interpolation-mode: bicubic; }		/* Image quality fix */
-		</style>
-	<![endif]-->
 	</head>
 	<body>
 		<div id='content'></div>
