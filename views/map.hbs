@@ -9,13 +9,16 @@
 			var preview = new google.maps.InfoWindow();
 			var bounds = new google.maps.LatLngBounds();
 			var map = new google.maps.Map(canvas, { mapTypeId: google.maps.MapTypeId.HYBRID	});
+			var photoID = {{photoID}};
 
 			// https://developers.google.com/maps/documentation/javascript/datalayer#style_options
 			// http://mapicons.nicolasmollet.com/
 			map.data.setStyle(function(feature)
 			{
+				var selected = parseInt(feature.getProperty('id')) == photoID;
+
 				return {
-					icon: '/img/camera-marker.png',
+					icon: (selected) ? '/img/camera-marker-selected.png' : '/img/camera-marker.png',
 					strokeWeight: 2,
 					strokeColor: 'red'
 				};
