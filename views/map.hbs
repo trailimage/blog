@@ -1,59 +1,82 @@
 {{#contentFor "head"}}
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script type='text/javascript'>
+		var timer = 0;
+
 		google.maps.event.addDomListener(window, 'load', function()
 		{
 			var canvas = document.getElementById('map-canvas');
-			var options = {
-				zoom: 7,
-				center: new google.maps.LatLng(45.448422, -113.402443),
-				mapTypeId: google.maps.MapTypeId.HYBRID
-			};
-			var map = new google.maps.Map(canvas, options);
+			var preview = new google.maps.InfoWindow();
+			var bounds = new google.maps.LatLngBounds();
+			var map = new google.maps.Map(canvas, { mapTypeId: google.maps.MapTypeId.HYBRID	});
 
-			map.data.loadGeoJson('/{{post.slug}}/geo.json');
-
-			//setTimeout(function() { zoom(map); }, 1000);
 			// https://developers.google.com/maps/documentation/javascript/datalayer#style_options
-			map.data.setStyle({	strokeColor: 'red', strokeWeight: 3 });
+			// http://mapicons.nicolasmollet.com/
+			map.data.setStyle(function(feature)
+			{
+				return {
+					icon: '/img/camera-marker.png',
+					strokeWeight: 2,
+					strokeColor: 'red'
+				};
+			});
 
+			map.data.addListener('addfeature', function(event)
+			{
+				clearTimeout(timer);
+				extend(bounds, event.feature.getGeometry());
+				timer = setTimeout(function() { map.fitBounds(bounds); }, 200);
+			});
+
+			// https://developers.google.com/maps/documentation/javascript/examples/layer-data-dragndrop
 			map.data.addListener('click', function(event)
 			{
-				map.data.overrideStyle(event.feature, {strokeColor: 'yellow'});
+				var image = event.feature.getProperty('preview');
+
+				if (preview)
+				{
+					var id = event.feature.getProperty('id');
+					var geo = event.feature.getGeometry();
+
+					preview.setOptions({
+						content: '<a href="/{{post.slug}}#' + id + '"><img src="' + image + '"/></a>',
+						position: geo.get()
+					});
+					preview.open(map);
+				}
 			});
+
+			map.data.addListener('mouseover', function(event)
+			{
+				map.data.overrideStyle(event.feature, {icon: '/img/camera-marker-hover.png'});
+			});
+
+			map.data.addListener('mouseout', function(event)
+			{
+				map.data.revertStyle();
+			});
+
+			map.data.loadGeoJson('/{{post.slug}}/geo.json');
 		});
 
 		/**
 		 * Update a map's viewport to fit each geometry in a dataset
-		 * @param {google.maps.Map} map The map to adjust
+		 * @param {google.maps.LatLngBounds} bounds
+		 * @param {google.maps.Geometry|google.maps.Point} geometry coordinates to apply
 		 */
-		function zoom(map)
+		function extend(bounds, geometry)
 		{
-			var bounds = new google.maps.LatLngBounds();
-			map.data.forEach(function(feature)
+			if (geometry instanceof google.maps.LatLng)
 			{
-				processPoints(feature.getGeometry(), bounds.extend, bounds);
-			});
-			map.fitBounds(bounds);
-		}
-
-		/**
-		 * Process each point in a Geometry, regardless of how deep the points may lie.
-		 * @param {google.maps.Geometry} geometry The structure to process
-		 * @param {function(google.maps.LatLng)} callback A function to call on each
-		 *     LatLng point encountered (e.g. Array.push)
-		 * @param {Object} thisArg The value of 'this' as provided to 'callback' (e.g.
-		 *     myArray)
-		 */
-		function processPoints(geometry, callback, thisArg) {
-			if (geometry instanceof google.maps.LatLng) {
-				callback.call(thisArg, geometry);
-			} else if (geometry instanceof google.maps.Data.Point) {
-				callback.call(thisArg, geometry.get());
-			} else {
-				geometry.getArray().forEach(function(g) {
-					processPoints(g, callback, thisArg);
-				});
+				bounds.extend(geometry);
+			}
+			else if (geometry instanceof google.maps.Data.Point)
+			{
+				bounds.extend(geometry.get());
+			}
+			else
+			{
+				geometry.getArray().forEach(function(g) { extend(bounds, g); });
 			}
 		}
 	</script>
