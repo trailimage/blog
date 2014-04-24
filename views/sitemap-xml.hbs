@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://www.trailimage.com/</loc>
+		<loc>http://www.{{setting.domain}}/</loc>
 		<changefreq>daily</changefreq>
 		<priority>1</priority>
 	</url>
 	<url>
-		<loc>http://www.trailimage.com/about</loc>
+		<loc>http://www.{{setting.domain}}/about</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.7</priority>
 	</url>
+{{#each posts}}
 	<url>
-		<loc>http://www.trailimage.com/contact</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.6</priority>
-	</url>
-	{{#each posts}}
-	<url>
-		<loc>http://www.trailimage.com/{{this.slug}}</loc>
+		<loc>http://www.{{../setting.domain}}/{{this.slug}}</loc>
 		<changefreq>monthly</changefreq>
 	</url>
-	{{/each}}
+{{/each}}
 {{#each tags}}
 	<url>
-		<loc>http://www.trailimage.com/{{this}}</loc>
-		<changefreq>weekly</changefreq>
+		<loc>http://www.{{../setting.domain}}/{{this}}</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+{{/each}}
+{{#each photoTags}}
+	<url>
+		<loc>http://www.{{../setting.domain}}/photo-tag/{{@key}}</loc>
+		<changefreq>monthly</changefreq>
 	</url>
 {{/each}}
 </urlset>

@@ -1,8 +1,8 @@
 /**
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-var Setting = require('./lib/settings.js');
-var Format = require('./lib/format.js');
+var setting = require('./lib/settings.js');
+var format = require('./lib/format.js');
 var Express = require('express');
 var log = require('winston');
 var url = require('url');
@@ -11,10 +11,10 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 var cookies = require('cookies');
 
-Setting.isProduction = (process.env.NODE_ENV == 'production');
-Setting.redis = url.parse(process.env.REDISCLOUD_URL);
-Setting.redis.auth = Setting.redis.auth.split(":")[1];
-Setting.cacheOutput = Setting.isProduction;
+setting.isProduction = (process.env.NODE_ENV == 'production');
+setting.redis = url.parse(process.env.REDISCLOUD_URL);
+setting.redis.auth = setting.redis.auth.split(":")[1];
+setting.cacheOutput = setting.isProduction;
 
 // these depend on the redis settings
 var outputCache = require('./lib/output-cache.js');
@@ -36,17 +36,17 @@ function configure()
 {
 	require('winston-redis').Redis;
 
-	if (Setting.isProduction)
+	if (setting.isProduction)
 	{
         log.add(log.transports.Redis,
 		{
-			host: Setting.redis.hostname,
-			port: Setting.redis.port,
-			auth: Setting.redis.auth,
+			host: setting.redis.hostname,
+			port: setting.redis.port,
+			auth: setting.redis.auth,
 			length: 10000
 		});
 	}
-	log.error('Restarting %s application', (Setting.isProduction) ? 'production' : 'development');
+	log.error('Restarting %s application', (setting.isProduction) ? 'production' : 'development');
 
 	// http://expressjs.com/4x/api.html#app-settings
 	app.set('views', __dirname + '/views');
@@ -61,17 +61,18 @@ function configure()
 		partialsDir: __dirname + '/views/partials'
 	}));
 
-	hbs.registerHelper('formatCaption', function(text) { return Format.story(text); });
-	hbs.registerHelper('formatTitle', function(text) { return Format.text(text); });
+	hbs.registerHelper('formatCaption', function(text) { return format.story(text); });
+	hbs.registerHelper('formatTitle', function(text) { return format.text(text); });
 	hbs.registerHelper('add', function(a, b) { return (a * 1) + b; });
-	hbs.registerHelper('makeSlug', function(text) { return Format.slug(text); });
-	hbs.registerHelper('makeTagList', function(list) { return Format.tagList(list); });
-	hbs.registerHelper('formatLogTime', function(text) { return Format.logTime(text); });
-	hbs.registerHelper('formatISO8601', function(text) { return Format.iso8601time(text); });
-	hbs.registerHelper('formatFraction', function(text) { return Format.fraction(text); });
-	hbs.registerHelper('icon', function(name) { return Format.icon(name); });
+	hbs.registerHelper('makeSlug', function(text) { return format.slug(text); });
+	hbs.registerHelper('makeTagList', function(list) { return format.tagList(list); });
+	hbs.registerHelper('formatLogTime', function(text) { return format.logTime(text); });
+	hbs.registerHelper('formatISO8601', function(text) { return format.iso8601time(text); });
+	hbs.registerHelper('formatFraction', function(text) { return format.fraction(text); });
+	hbs.registerHelper('icon', function(name) { return format.icon(name); });
+	hbs.registerHelper('obfuscate', function(text) { return format.characterEntities(text); });
 
-	app.use(cookies.express([Setting.flickr.userID, Setting.facebook.adminID]));
+	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
 	app.use(bodyParser());
 	app.use(compress());
 	app.use(outputCache());
@@ -109,8 +110,6 @@ function defineRoutes()
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/authorize', r.authorize.view);
-	app.get('/contact', r.contact.view);
-	app.post('/contact', r.contact.send);
 	app.get('/search', r.search.view);
 	app.get('/browse', r.search.view);
 	app.get('/js/menu.js', r.menu.view);

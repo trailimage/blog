@@ -25,9 +25,7 @@
 		"winston": ">=0.7.2",
 		"redis": ">=0.10.1",
 		"winston-redis": ">=0.2.1",
-		"nodemailer": ">=0.5.2",
 		"pdfkit": "*",
-		"recaptcha": "*",
 		"xmldom": ">=0.1.19"
 	},
 	"repository": {
