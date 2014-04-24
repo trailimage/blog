@@ -128,6 +128,7 @@ function defineRoutes()
 	app.get('/'+postID+'/'+photoID, r.post.flickrID);
 	app.get('/:slug'+s+'/pdf', r.pdf.view);
 	app.get('/:slug'+s+'/map', r.map.view);
+	app.get('/:slug'+s+'/map/'+photoID, r.map.view);
 	app.get('/:slug'+s+'/geo.json', r.map.json);
 	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
 	app.get('/:slug'+s, r.post.view);

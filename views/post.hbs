@@ -37,7 +37,7 @@
 
 	{{#if post.photoCoordinates}}
 	<div class='map'>
-		<img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/>
+		<a href="/{{slug}}/map"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 	</div>
 	{{/if}}
 
@@ -65,7 +65,7 @@
 	{{/if}}
 
 	{{#if longitude}}
-		<a class='map' target='_blank' title='View on map' href="http://maps.google.com/maps?q={{latitude}},{{longitude}}&hl=en&t=w&z=15">map{{{icon 'map-marker'}}}</a>
+		<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}">map{{{icon 'map-marker'}}}</a>
 	{{/if}}
 
 	{{#if title}}
