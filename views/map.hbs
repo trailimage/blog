@@ -35,22 +35,30 @@
 
 				geo = event.feature.getGeometry();
 
+				var speed = 0;
+
 				extend(bounds, geo);
 
 				if (geo instanceof google.maps.Data.LineString || geo instanceof google.maps.Data.MultiLineString)
 				{
+					count++;
 					miles += event.feature.getProperty('distance');
 					hours += event.feature.getProperty('duration');
-					topSpeed = parseFloat(event.feature.getProperty('topSpeed'));
-					avgSpeed = parseFloat(event.feature.getProperty('avgSpeed'));
-				}
 
+					speed = parseFloat(event.feature.getProperty('topSpeed'));
+
+					if (speed > topSpeed) { topSpeed = speed; }
+
+					speed = parseFloat(event.feature.getProperty('avgSpeed'));
+
+					avgSpeed = ((avgSpeed * (count - 1)) + speed) / count;
+				}
 
 				timer = setTimeout(function()
 				{
 					map.fitBounds(bounds);
 					$('#distance').html(miles.toFixed(1));
-					$('#duration').html(hours.toFixed(2));
+					$('#duration').html(hoursAndMinutes(hours));
 					$('#top-speed').html(topSpeed.toFixed(1));
 					$('#avg-speed').html(avgSpeed.toFixed(1));
 				},
@@ -87,6 +95,16 @@
 
 			map.data.loadGeoJson('/{{post.slug}}/geo.json');
 		});
+
+		function hoursAndMinutes(hours)
+		{
+			var h = Math.floor(hours);
+			var m = (Math.round(60 * (hours - h))).toString();
+
+			if (m.length < 2) { m = '0' + m; }
+
+			return h + ':' + m;
+		}
 
 		/**
 		 * Update a map's viewport to fit each geometry in a dataset
