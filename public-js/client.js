@@ -69,9 +69,16 @@ function prepareMenu()
 	});
 
 	$postList
-		.on('click', 'li.post', function()	{ window.location.href = '/' + $(this).data('slug'); })
+		.on('click', 'li.post', showSelection)
 		.on('mouseover', 'li.post', function() { $description.html($(this).data('description')); })
 		.on('mouseout', function() { $description.empty(); })
+}
+
+function showSelection()
+{
+	var suffix = (/\/map$/.test(window.location.href)) ? '/map' : '';
+
+	window.location.href = '/' + $(this).data('slug') + suffix;
 }
 
 /**

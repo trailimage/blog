@@ -1,6 +1,6 @@
 {{#contentFor "head"}}
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<link href='http://fonts.googleapis.com/css?family=Orbitron:700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Orbitron:700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link href='/css/map.css' rel='stylesheet' type='text/css'/>
 	<script type='text/javascript'>
 		var timer = 0;
@@ -14,9 +14,9 @@
 			var map = new google.maps.Map(canvas, { mapTypeId: google.maps.MapTypeId.HYBRID	});
 			var photoID = {{photoID}};
 
-			// https://developers.google.com/maps/documentation/javascript/datalayer#style_options
-			// https://developers.google.com/maps/documentation/javascript/symbols
-			// http://mapicons.nicolasmollet.com/
+			{{! https://developers.google.com/maps/documentation/javascript/datalayer#style_options }}
+			{{! https://developers.google.com/maps/documentation/javascript/symbols }}
+			{{! http://mapicons.nicolasmollet.com/ }}
 			map.data.setStyle(function(feature)
 			{
 				var selected = parseInt(feature.getProperty('id')) == photoID;
@@ -65,7 +65,7 @@
 						200);
 			});
 
-			// https://developers.google.com/maps/documentation/javascript/examples/layer-data-dragndrop
+			{{! https://developers.google.com/maps/documentation/javascript/examples/layer-data-dragndrop }}
 			map.data.addListener('click', function(event)
 			{
 				var image = event.feature.getProperty('preview');
@@ -130,6 +130,7 @@
 {{/contentFor}}
 
 <div id="map-canvas"></div>
+{{> menu}}
 <div id="summary">
 	Miles
 	<div class="lcd" id="distance">0</div>
