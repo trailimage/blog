@@ -35,24 +35,7 @@ function prepareMenu()
 				if (root == selection[0]) { $li.addClass(css); loadTags(selection); }
 			}
 		})
-		.click(function()
-		{
-			// toggle menu visibility
-			var $up = $title.find('.glyphicon-chevron-up');
-			var $down = $title.find('.glyphicon-chevron-down');
-			var $menu = $('#menu');
-			var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
-
-			if ($title.hasClass(css))
-			{
-				hide();
-			}
-			else
-			{
-				$title.addClass(css); $menu.show(); $up.show(); $down.hide();
-				$('.content:not(#header), .map').one('click', hide);
-			}
-		});
+		.click(toggleMenu);
 
 	$rootList.on('click', 'li', function()
 	{
@@ -74,11 +57,41 @@ function prepareMenu()
 		.on('mouseout', function() { $description.empty(); })
 }
 
+function toggleMenu()
+{
+	// toggle menu visibility
+	var css = 'selected';
+	var $title = $('#menu-title');
+	var $up = $title.find('.glyphicon-chevron-up');
+	var $down = $title.find('.glyphicon-chevron-down');
+	var $menu = $('#menu');
+	var show = function() { $title.addClass(css); $menu.show(); $up.show(); $down.hide(); };
+	var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
+
+	if ($title.hasClass(css))
+	{
+		hide();
+	}
+	else
+	{
+		show();
+		$('.content:not(#header), .map').one('click', hide);
+	}
+}
+
 function showSelection()
 {
-	var suffix = (/\/map$/.test(window.location.href)) ? '/map' : '';
+	var slug = $(this).data('slug');
 
-	window.location.href = '/' + $(this).data('slug') + suffix;
+	if (loadPostTrack !== undefined)
+	{
+		loadPostTrack(slug);
+		toggleMenu();
+	}
+	else
+	{
+		window.location.href = '/' + slug;
+	}
 }
 
 /**

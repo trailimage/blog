@@ -4,25 +4,33 @@
 	<link href='/css/map.css' rel='stylesheet' type='text/css'/>
 	<script type='text/javascript'>
 		var timer = 0;
+		/** @var {google.maps.Map} */
+		var map = null;
+		/** @var {google.maps.LatLngBounds} */
+		var bounds = null;
+		var slug = '{{post.slug}}';
+		var miles = 0, hours = 0, topSpeed = 0, avgSpeed = 0, count = 0, geo = null;
 
 		google.maps.event.addDomListener(window, 'load', function()
 		{
-			var miles = 0, hours = 0, topSpeed = 0, avgSpeed = 0, count = 0, geo = null;
 			var canvas = document.getElementById('map-canvas');
 			var preview = new google.maps.InfoWindow();
-			var bounds = new google.maps.LatLngBounds();
-			var map = new google.maps.Map(canvas, { mapTypeId: google.maps.MapTypeId.HYBRID	});
 			var photoID = {{photoID}};
+			var selected = null;
+
+			bounds = new google.maps.LatLngBounds();
+			map = new google.maps.Map(canvas, { mapTypeId: google.maps.MapTypeId.HYBRID	});
 
 			{{! https://developers.google.com/maps/documentation/javascript/datalayer#style_options }}
 			{{! https://developers.google.com/maps/documentation/javascript/symbols }}
 			{{! http://mapicons.nicolasmollet.com/ }}
 			map.data.setStyle(function(feature)
 			{
-				var selected = parseInt(feature.getProperty('id')) == photoID;
+				if (parseInt(feature.getProperty('id')) == photoID)	{ selected = feature; }
 
 				return {
-					icon: (selected) ? '/img/camera-marker-selected.png' : '/img/camera-marker.png',
+					icon: '/img/blue-marker.png',
+					label: 'test',
 					clickable: (feature.getGeometry() instanceof google.maps.Data.Point),
 					strokeWeight: 2,
 					strokeColor: 'red'
@@ -57,35 +65,32 @@
 				timer = setTimeout(function()
 				{
 					map.fitBounds(bounds);
-					$('#distance').html(miles.toFixed(1));
-					$('#duration').html(hoursAndMinutes(hours));
-					$('#top-speed').html(topSpeed.toFixed(1));
-					$('#avg-speed').html(avgSpeed.toFixed(1));
+					$summary = $('#summary');
+
+					if (miles > 0)
+					{
+						$summary.show();
+						$('#distance').html(miles.toFixed(1));
+						$('#duration').html(hoursAndMinutes(hours));
+						$('#top-speed').html(topSpeed.toFixed(1));
+						$('#avg-speed').html(avgSpeed.toFixed(1));
+
+						if (selected) { showPhoto(selected, preview); }
+					}
+					else
+					{
+						$summary.hide();
+					}
 				},
 						200);
 			});
 
 			{{! https://developers.google.com/maps/documentation/javascript/examples/layer-data-dragndrop }}
-			map.data.addListener('click', function(event)
-			{
-				var image = event.feature.getProperty('preview');
-
-				if (preview)
-				{
-					var id = event.feature.getProperty('id');
-					var geo = event.feature.getGeometry();
-
-					preview.setOptions({
-						content: '<a href="/{{post.slug}}#' + id + '"><img src="' + image + '"/></a>',
-						position: geo.get()
-					});
-					preview.open(map);
-				}
-			});
+			map.data.addListener('click', function(event) {	showPhoto(event.feature, preview); });
 
 			map.data.addListener('mouseover', function(event)
 			{
-				map.data.overrideStyle(event.feature, {icon: '/img/camera-marker-hover.png'});
+				map.data.overrideStyle(event.feature, {icon: '/img/camera-marker.png'});
 			});
 
 			map.data.addListener('mouseout', function(event)
@@ -95,6 +100,43 @@
 
 			map.data.loadGeoJson('/{{post.slug}}/geo.json');
 		});
+
+		/**
+		 * @param {google.maps.Data.Feature} feature
+		 * @param {google.maps.InfoWindow} modal
+		 */
+		function showPhoto(feature, modal)
+		{
+			if (modal && feature)
+			{
+				var image = feature.getProperty('preview');
+				var id = feature.getProperty('id');
+				var geo = feature.getGeometry();
+
+				modal.setOptions({
+					content: '<a href="/' + slug + '#' + id + '"><img src="' + image + '"/></a>',
+					position: geo.get()
+				});
+				modal.open(map);
+			}
+		}
+
+		function loadPostTrack(newSlug)
+		{
+			map.data.forEach(function(f) { map.data.remove(f); });
+
+			slug = newSlug;
+			miles = 0;
+			hours = 0;
+			topSpeed = 0;
+			avgSpeed = 0;
+			count = 0;
+			bounds = new google.maps.LatLngBounds();
+
+			window.history.pushState(null, null, '/' + slug + '/map');
+
+			map.data.loadGeoJson('/' + slug + '/geo.json');
+		}
 
 		function hoursAndMinutes(hours)
 		{
