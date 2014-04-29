@@ -83,15 +83,15 @@ function showSelection()
 {
 	var slug = $(this).data('slug');
 
-	if (loadPostTrack !== undefined)
+	if (typeof loadPostTrack != 'undefined')
 	{
 		loadPostTrack(slug);
-		toggleMenu();
 	}
 	else
 	{
 		window.location.href = '/' + slug;
 	}
+	toggleMenu();
 }
 
 /**

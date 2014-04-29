@@ -70,7 +70,7 @@ function configure()
 	hbs.registerHelper('formatISO8601', function(text) { return format.iso8601time(text); });
 	hbs.registerHelper('formatFraction', function(text) { return format.fraction(text); });
 	hbs.registerHelper('icon', function(name) { return format.icon(name); });
-	hbs.registerHelper('obfuscate', function(text) { return format.characterEntities(text); });
+	hbs.registerHelper('rot13', function(text) { return format.rot13(text); });
 
 	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
 	app.use(bodyParser());

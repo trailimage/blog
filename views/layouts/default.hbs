@@ -24,7 +24,9 @@
 			<div class="twitter"><a href="https://twitter.com/trailimage" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow</a></div>
 			<a href="/">Home</a>
 			<a href="/about">About</a>
-			<a href="mailto:{{obfuscate setting.contactEmail}}">Contact</a>
+			<script type="text/javascript">
+				document.write('{{{rot13 setting.contactLink}}}'.replace(/[a-zA-Z]/g, function(c) { return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+			</script>
 			<!--<a href="/featured">Featured</a>-->
 			<a href="/ruminations">Ruminations</a>
 			<a href="/rss" class="feed-icon">RSS Feed</a>
