@@ -131,5 +131,7 @@ function defineRoutes()
 	app.get('/:slug'+s+'/map/'+photoID, r.map.view);
 	app.get('/:slug'+s+'/geo.json', r.map.json);
 	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/', r.map.seriesView);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
 	app.get('/:slug'+s, r.post.view);
 }

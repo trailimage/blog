@@ -208,7 +208,9 @@
 			<legend>Tracks</legend>
 			<label>Post<select id="gpxPost" name="post">
 			{{#library.posts}}
-				<option value="{{id}}">{{name}}</option>
+				{{#unless previousIsPart}}
+					<option value="{{id}}">{{#if isPartial}}{{title}}{{else}}{{name}}{{/if}}</option>
+				{{/unless}}
 			{{/library.posts}}
 			</select></label>
 			<div class="buttons">
