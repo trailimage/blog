@@ -60,7 +60,7 @@
 
 <div id="photo-tag" class="content">
 	<div id="wait">&nbsp;</div>
-	<a id="flickr-logo" href="http://www.flickr.com/photos/trailimage/tags" title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
+	<a id="flickr-logo" rel="nofollow" href="http://www.flickr.com/photos/trailimage/tags" title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
 	<div id="thumbs"></div>
 	<ul id="letters">
 	{{#alphabet}}
@@ -71,7 +71,7 @@
 	{{#each tags}}
 		<div id="item-{{@key}}">
 		{{#each this}}
-			<a id="link-{{@key}}" href="/photo-tag/search/{{@key}}">{{this}}</a>
+			<a id="link-{{@key}}" rel="nofollow" href="/photo-tag/search/{{@key}}">{{this}}</a>
 		{{/each}}
 		</div>
 	{{/each}}

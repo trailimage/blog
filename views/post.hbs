@@ -37,7 +37,7 @@
 
 	{{#if post.photoCoordinates}}
 	<div class='map'>
-		<a href="/{{slug}}/map"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+		<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 	</div>
 	{{/if}}
 
@@ -47,7 +47,7 @@
 
 <div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
 	<a name="{{id}}"></a>
-	<a name="{{index}}" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
+	<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
 		<img src="{{url_s}}" alt="{{title}}"
 			width="{{width_l}}" height="{{height_l}}" itemprop="url"
 			style="width: {{width_l}}px; height: {{height_l}}px;"
@@ -65,7 +65,7 @@
 	{{/if}}
 
 	{{#if longitude}}
-		<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}">map{{{icon 'map-marker'}}}</a>
+		<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
 	{{/if}}
 
 	{{#if title}}
