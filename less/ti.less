@@ -1140,7 +1140,15 @@ div.caption
 	padding: 0;
 	position: relative;
 
-	p {	padding: 0 1em; font-family: @serifFont; font-size: 17px; line-height: 1.2em; }
+	p
+	{
+		padding: 0 1em;
+		font-family: @serifFont;
+		font-size: 17px;
+		line-height: 1.2em;
+		margin: 0 0 1em 0;
+		&.first { padding-top: 1em; }
+	}
 
 	.by-line
 	{
