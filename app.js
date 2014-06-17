@@ -6,6 +6,7 @@ var format = require('./lib/format.js');
 var Express = require('express');
 var log = require('winston');
 var url = require('url');
+var https = require('https');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
@@ -35,6 +36,15 @@ configure();
 function configure()
 {
 	require('winston-redis').Redis;
+
+	var options =
+	{
+		key: setting.certificate.privateKey,
+		cert: setting.certificate.server,
+		ca: setting.certificate.authority,
+		requestCert: true,
+		rejectUnauthorized: false
+	};
 
 	if (setting.isProduction)
 	{
@@ -81,7 +91,8 @@ function configure()
 	library.load(function()
 	{
 		defineRoutes();
-		app.listen(port);
+		//app.listen(port);
+		https.createServer(options, app).listen(port);
 		log.info('Listening on port %d', port);
 	});
 }
