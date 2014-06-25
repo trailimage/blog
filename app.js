@@ -6,7 +6,7 @@ var format = require('./lib/format.js');
 var Express = require('express');
 var log = require('winston');
 var url = require('url');
-var https = require('https');
+//var https = require('https');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
@@ -37,14 +37,14 @@ function configure()
 {
 	require('winston-redis').Redis;
 
-	var options =
-	{
-		key: setting.certificate.privateKey,
-		cert: setting.certificate.server,
-		ca: setting.certificate.authority,
-		requestCert: true,
-		rejectUnauthorized: false
-	};
+//	var options =
+//	{
+//		key: setting.certificate.privateKey,
+//		cert: setting.certificate.server,
+//		ca: setting.certificate.authority,
+//		requestCert: true,
+//		rejectUnauthorized: false
+//	};
 
 	if (setting.isProduction)
 	{
@@ -91,8 +91,8 @@ function configure()
 	library.load(function()
 	{
 		defineRoutes();
-		//app.listen(port);
-		https.createServer(options, app).listen(port);
+		app.listen(port);
+		//https.createServer(options, app).listen(port);
 		log.info('Listening on port %d', port);
 	});
 }
@@ -127,6 +127,7 @@ function defineRoutes()
 	app.get('/sitemap.xml', r.sitemap.view);
     app.get('/exif/'+photoID, r.photo.exif);
 	app.get('/issue', r.issue.home);
+	app.get('/issues', r.issue.home);
 	app.get('/issue/:slug'+s, r.issue.view);
 	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
