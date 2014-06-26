@@ -22,25 +22,13 @@
 	<script type="text/javascript">
 		$(function()
 		{
-			$('#menu').find('.glyphicon').click(function()
+			var count = 0;
+
+			$('#google-doc').load(function()
 			{
-				$('#meta').show();
-				$('#overlay').show();
+				if (count > 0) { $('#meta').hide(); }
+				count++
 			});
-
-			$('#meta').find('.menu .glyphicon').click(function()
-			{
-				$('#meta').hide();
-				$('#overlay').hide();
-			});
-
-
-//			$('#google-doc').load(function()
-//			{
-//				var $doc = $(this).find('document');
-//
-//				$doc.click(function() {	})
-//			});
 		});
 	</script>
 	{{> ga}}
