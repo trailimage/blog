@@ -1232,8 +1232,6 @@ div.caption
 
 li.set-summary
 {
-	@thumbSize: 75px;
-
 	font-weight: normal;
 	clear: left;
 	text-shadow: none;
@@ -1246,16 +1244,11 @@ li.set-summary
 
 	div.thumb
 	{
-		float: left;
 		margin: 0 10px;
-		width: @thumbSize + 3;
-		height: @thumbSize + 3;
 
 		@media @small
 		{
 			font-size: 18pt;
-			width: @thumbSize * 2 + 3;
-			height: @thumbSize * 2 + 3;
 		}
 
 		img
@@ -1266,7 +1259,6 @@ li.set-summary
 			@media @small
 			{
 				margin-top: 4px;
-				.transform(scale(2) translate(@thumbSize/4, @thumbSize/4));
 			}
 		}
 	}

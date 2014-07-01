@@ -1,11 +1,16 @@
 <li class="set-summary">
+	<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
 	<div class="thumb">
-	{{#if smallThumb}}
-		<a href="/{{slug}}"><img src="{{smallThumb}}"/></a>
+	{{#if bigThumb}}
+		<a href="/{{slug}}"><img src="{{bigThumb}}"/></a>
 	{{/if}}
 	</div>
+	{{#if photoCoordinates}}
+	<div class='map'>
+		<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=500x200&key={{setting.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+	</div>
+	{{/if}}
 	<div class="detail">
-		<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
 	{{#if photoCount}}
 		<div class="photo-count">{{photoCount}} photos</div>
 	{{/if}}

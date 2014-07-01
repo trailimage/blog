@@ -83,7 +83,8 @@ function configure()
 	hbs.registerHelper('rot13', function(text) { return format.rot13(text); });
 
 	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
-	app.use(bodyParser());
+	app.use(bodyParser.urlencoded({	extended: true }));
+	app.use(bodyParser.json());
 	app.use(compress());
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
