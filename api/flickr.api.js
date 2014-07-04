@@ -1214,6 +1214,26 @@ Flickr.SetPhotos.prototype.perpage;
 Flickr.SetPhotos.prototype.pages;
 
 /**
+ * @type {String}
+ */
+Flickr.SetPhotos.prototype.primary;
+
+/**
+ * @type {String}
+ */
+Flickr.SetPhotos.prototype.owner;
+
+/**
+ * @type {String}
+ */
+Flickr.SetPhotos.prototype.ownername;
+
+/**
+ * @type {String}
+ */
+Flickr.SetPhotos.prototype.title;
+
+/**
  * @type {Number}
  */
 Flickr.SetPhotos.prototype.total;

@@ -56,6 +56,11 @@ Post.prototype.updatedOn;
 Post.prototype.icon;
 
 /**
+ * @type {Flickr.PhotoSummary}
+ */
+Post.prototype.thumb;
+
+/**
  * @type {String}
  */
 Post.prototype.bigThumb;

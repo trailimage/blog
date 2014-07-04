@@ -74,11 +74,13 @@ function configure()
 	hbs.registerHelper('formatCaption', function(text) { return format.story(text); });
 	hbs.registerHelper('formatTitle', function(text) { return format.text(text); });
 	hbs.registerHelper('add', function(a, b) { return (a * 1) + b; });
+	hbs.registerHelper('subtract', function(a, b) { return (a * 1) - b });
 	hbs.registerHelper('makeSlug', function(text) { return format.slug(text); });
 	hbs.registerHelper('makeTagList', function(list) { return format.tagList(list); });
 	hbs.registerHelper('formatLogTime', function(text) { return format.logTime(text); });
 	hbs.registerHelper('formatISO8601', function(text) { return format.iso8601time(text); });
 	hbs.registerHelper('formatFraction', function(text) { return format.fraction(text); });
+	hbs.registerHelper('mapHeight', function(width, height) { return height > width ? 200 : height;	});
 	hbs.registerHelper('icon', function(name) { return format.icon(name); });
 	hbs.registerHelper('rot13', function(text) { return format.rot13(text); });
 
@@ -122,8 +124,6 @@ function defineRoutes()
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/authorize', r.authorize.view);
-	app.get('/search', r.search.view);
-	app.get('/browse', r.search.view);
 	app.get('/js/menu.js', r.menu.view);
 	app.get('/sitemap.xml', r.sitemap.view);
     app.get('/exif/'+photoID, r.photo.exif);

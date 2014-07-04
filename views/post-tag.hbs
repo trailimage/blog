@@ -5,9 +5,30 @@
 
 <div class="post-tag content">
 	<ul class="sets">
-		{{#posts}}
-			{{> post-summary}}
-		{{/posts}}
+	{{#posts}}
+		<li class="set-summary">
+			<div class="heading">
+			{{#if photoCount}}
+				<div class="photo-count">{{photoCount}} photos</div>
+			{{/if}}
+				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
+			</div>
+
+			<a class="thumb" href="/{{slug}}"><img src="{{thumb.url_n}}" width="{{thumb.width_n}}" height="{{thumb.height_n}}" style="width: {{thumb.width_n}}px; height: {{thumb.height_n}}px;"/></a>
+			{{#if photoCoordinates}}
+			<a class="map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.width_n}}x{{mapHeight thumb.width_n thumb.height_n}}&key={{../../setting.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+			{{/if}}
+			<div class="detail">
+				<p class="summary">{{description}}</p>
+				<ul class="tags">
+				{{#each tags}}
+					<li><a href="/tag/{{makeSlug this}}">{{this}}</a></li>
+				{{/each}}
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</li>
+	{{/posts}}
 	</ul>
 </div>
 

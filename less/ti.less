@@ -1230,119 +1230,6 @@ div.caption
 
 /* Category ---------------------------------------------------------------- */
 
-li.set-summary
-{
-	font-weight: normal;
-	clear: left;
-	text-shadow: none;
-	padding: 9px;
-
-	@media @small
-	{
-		border-bottom: 1px solid @lightTrimColor;
-	}
-
-	div.thumb
-	{
-		margin: 0 10px;
-
-		@media @small
-		{
-			font-size: 18pt;
-		}
-
-		img
-		{
-			border: 1px solid #524948;
-			&:hover { border-color: @hoverColor; }
-
-			@media @small
-			{
-				margin-top: 4px;
-			}
-		}
-	}
-
-	a.title
-	{
-		color: @boldColor;
-		font-size: 14pt;
-		line-height: 1em;
-		font-weight: bold;
-		text-decoration: none;
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-		padding: 0;
-
-		&:hover { color: @hoverColor; }
-	}
-	a.link { display: none; }
-
-	p.summary
-	{
-		margin: 2px 20px 5px 0;
-		font-family: @serifFont;
-		font-size: 10pt;
-	}
-
-	div.photo-count
-	{
-		float: right;
-		font-size: 10pt;
-		color: @lightTrimColor;
-	}
-
-	ul.tags
-	{
-		float: right;
-		list-style: none;
-		margin: 0 20px 0 0;
-		padding: 0 0 15px 10px;
-
-		@media @small
-		{
-			margin-top: 10px;
-		}
-
-		li
-		{
-			font-size: 9pt;
-			font-weight: normal;
-			color: #888;
-			display: block;
-			float: left;
-			clear: none;
-			padding: 1px 6px 0 6px;
-			margin-left: 3px;
-			line-height: 1em;
-
-			@media @small
-			{
-				font-size: 18pt;
-				padding: 0 3px;
-			}
-
-			a
-			{
-				text-decoration: none;
-
-				@media @small
-				{
-					background-color: lighten(@lightColor, 5%);
-					border: 1px solid @lightTrimColor;
-					padding: 3px 8px;
-					.rounded(4);
-				}
-			}
-		}
-	}
-
-	&:hover
-	{
-		background-color: #fff;
-		ul.tags li { border: none; }
-	}
-}
-
 div.post-tag
 {
 	margin-bottom: 10px;
@@ -1354,9 +1241,108 @@ div.post-tag
 		margin: 15px 0 0 0;
 		font-family: @sanSerifFont;
 
-		li
+		li.set-summary
 		{
+			font-weight: normal;
+			clear: left;
+			text-shadow: none;
+			padding: 0;
+			margin: 0;
+			border-bottom: 1px solid @lightTrimColor;
 
+			div.heading
+			{
+				padding: 35px 5px 5px 3px;
+
+				a.title
+				{
+					clear: both;
+					color: @boldColor;
+					font-size: 14pt;
+					font-weight: bold;
+					text-decoration: none;
+					text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+
+					&:hover { color: @hoverColor; }
+				}
+
+				div.photo-count
+				{
+					float: right;
+					font-size: 12px;
+				}
+			}
+
+			a.thumb
+			{
+				margin: 0;
+				float: left;
+
+				@media @small { font-size: 18pt; }
+
+				img
+				{
+					@media @small { margin-top: 4px; }
+				}
+			}
+
+			a.map
+			{
+
+			}
+
+			p.summary
+			{
+				padding: 10px;
+				font-family: @serifFont;
+				font-size: 14px;
+				line-height: 1.2em;
+			}
+
+			ul.tags
+			{
+				float: right;
+				list-style: none;
+				margin: 0 20px 0 0;
+				padding: 0 0 15px 10px;
+
+				@media @small
+				{
+					margin-top: 10px;
+				}
+
+				li
+				{
+					font-size: 9pt;
+					font-weight: normal;
+					color: #888;
+					display: block;
+					float: left;
+					clear: none;
+					padding: 1px 6px 0 6px;
+					margin-left: 3px;
+					line-height: 1em;
+
+					@media @small
+					{
+						font-size: 18pt;
+						padding: 0 3px;
+					}
+
+					a
+					{
+						text-decoration: none;
+
+						@media @small
+						{
+							background-color: lighten(@lightColor, 5%);
+							border: 1px solid @lightTrimColor;
+							padding: 3px 8px;
+							.rounded(4);
+						}
+					}
+				}
+			}
 		}
 	}
 }
