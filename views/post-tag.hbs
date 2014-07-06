@@ -8,10 +8,13 @@
 	{{#posts}}
 		<li class="set-summary">
 			<div class="heading">
-			{{#if photoCount}}
-				<div class="photo-count">{{photoCount}} photos</div>
-			{{/if}}
+				<ul class="info">
+					<li class="date-taken">{{dateTaken}}</li>
+  {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
+				</ul>
 				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
+				<span class="mode-icon {{{mode}}}"></span>
+				<div class="clear"></div>
 			</div>
 
 			<a class="thumb" href="/{{slug}}"><img src="{{thumb.url_n}}" width="{{thumb.width_n}}" height="{{thumb.height_n}}" style="width: {{thumb.width_n}}px; height: {{thumb.height_n}}px;"/></a>
@@ -22,7 +25,7 @@
 				<p class="summary">{{description}}</p>
 				<ul class="tags">
 				{{#each tags}}
-					<li><a href="/tag/{{makeSlug this}}">{{this}}</a></li>
+					<li>{{{icon 'tag'}}}<a href="/tag/{{makeSlug this}}">{{this}}</a></li>
 				{{/each}}
 				</ul>
 			</div>

@@ -1228,7 +1228,7 @@ div.caption
 	}
 }
 
-/* Category ---------------------------------------------------------------- */
+/* Post tag ---------------------------------------------------------------- */
 
 div.post-tag
 {
@@ -1248,28 +1248,37 @@ div.post-tag
 			text-shadow: none;
 			padding: 0;
 			margin: 0;
-			border-bottom: 1px solid @lightTrimColor;
 
 			div.heading
 			{
-				padding: 35px 5px 5px 3px;
+				background-color: #fff;
+				margin-top: 20px;
+				padding: 5px 7px 2px 6px;
+				.drop-shadow(0, -2px, 6px, 0.1);
+
+				.mode-icon { float: right; margin: 3px 15px 0 0; }
+
+				ul.info
+				{
+					float: right;
+					list-style: none;
+					li { text-align: right; }
+					li.date-taken { font-weight: bold; }
+					li.photo-count { font-size: 12px; }
+				}
 
 				a.title
 				{
 					clear: both;
+					display: inline-block;
+					padding-top: 7px;
 					color: @boldColor;
 					font-size: 14pt;
 					font-weight: bold;
 					text-decoration: none;
-					text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+					text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 
 					&:hover { color: @hoverColor; }
-				}
-
-				div.photo-count
-				{
-					float: right;
-					font-size: 12px;
 				}
 			}
 
@@ -1295,7 +1304,7 @@ div.post-tag
 			{
 				padding: 10px;
 				font-family: @serifFont;
-				font-size: 14px;
+				font-size: 16px;
 				line-height: 1.2em;
 			}
 
@@ -1303,8 +1312,8 @@ div.post-tag
 			{
 				float: right;
 				list-style: none;
-				margin: 0 20px 0 0;
-				padding: 0 0 15px 10px;
+				margin: 0;
+				padding: 0 6px 0 0;
 
 				@media @small
 				{
@@ -1319,7 +1328,7 @@ div.post-tag
 					display: block;
 					float: left;
 					clear: none;
-					padding: 1px 6px 0 6px;
+					padding: 1px 4px 0 4px;
 					margin-left: 3px;
 					line-height: 1em;
 
@@ -1332,6 +1341,7 @@ div.post-tag
 					a
 					{
 						text-decoration: none;
+						padding-left: 2px;
 
 						@media @small
 						{
@@ -1467,64 +1477,6 @@ div.post-tag
 div.search
 {
 	margin-bottom: 10px;
-}
-
-/* Contact ----------------------------------------------------------------- */
-
-div.contact
-{
-	@labelWidth: 200px;
-
-	text-align: center;
-
-	form
-	{
-		padding: 1em 0;
-		text-align: left;
-
-		label
-		{
-			width: @labelWidth;
-			display: inline-block;
-			text-align: right;
-			font-family: @sanSerifFont;
-			font-weight: bold;
-			vertical-align: top;
-			cursor: pointer;
-			clear: both;
-		}
-		input, textarea
-		{
-			font-family: @sanSerifFont;
-			width: 12em;
-
-			&#mailSubject { width: 20em; }
-			&#sendCopy { width: auto; }
-		}
-		input[type=submit] {  }
-
-		textarea { width: 20em; height: 10em; }
-
-		#recaptcha_image { margin-left: @labelWidth + 4; border: 1px solid @lightTrimColor; }
-		#recaptcha_response_field { width: 20em; }
-
-		ul.captcha-help
-		{
-			display: block;
-			list-style: none;
-			font-family: @sanSerifFont;
-			font-size: 10pt;
-			margin: 0 0 0 @labelWidth + 4;
-			padding: 0;
-
-			li
-			{
-				display: inline;
-				padding-right: 1em;
-			}
-		}
-	}
-
 }
 
 /* Authorize --------------------------------------------------------------- */
