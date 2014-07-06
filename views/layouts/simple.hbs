@@ -1,0 +1,15 @@
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+	{{> head-meta}}
+	<meta content='{{setting.keywords}}' name='keywords'/>
+	{{> head-files}}
+	{{> ga}}
+	{{> twitter}}
+	{{{block "head"}}}
+</head>
+	<body>
+	<div id='content'></div>
+	{{> head-links}}
+	{{{body}}}
+</body>
+</html>

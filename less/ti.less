@@ -1230,15 +1230,54 @@ div.caption
 
 /* Post tag ---------------------------------------------------------------- */
 
+div.post-tag-heading #top
+{
+	position: relative;
+
+	@top: 13px;
+	@right: 70px;
+
+	div.subtitle { margin-top: 7px; line-height: 0.5em; }
+
+	h1 { clear: left; float: none !important; margin: 0; padding: 0; font-size: 40px !important; }
+
+	h3
+	{
+		top: 44px;
+		right: 75px;
+		position: absolute;
+		font-size: 50px;
+		text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.3);
+		font-family: 'Qwigley', Tahoma, Arial;
+		color: @boldColor;
+		letter-spacing: -2px;
+		.opacity(0.5);
+		display: none;
+	}
+	h4
+	{
+		top: 12px;
+		right: 76px;
+		font-size: 11px;
+		position: absolute;
+		color: rgba(255, 255, 255, 0.1);
+		text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+		font-family: 'Oswald', Impact, Arial;
+		letter-spacing: 4px;
+		line-height: 1.2em;
+		text-transform: uppercase;
+	}
+}
+
 div.post-tag
 {
-	margin-bottom: 10px;
+	margin-top: -20px;
 
 	ul.sets
 	{
 		list-style: none;
 		padding: 0;
-		margin: 15px 0 0 0;
+		margin: 0;
 		font-family: @sanSerifFont;
 
 		li.set-summary

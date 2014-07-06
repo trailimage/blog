@@ -1,8 +1,8 @@
 {{#setting.facebook.enabled}}
-{{> facebook-head}}
+{{> head-facebook}}
 {{/setting.facebook.enabled}}
 
-<div id="header" itemscope itemtype ="http://schema.org/BlogPosting" class="content">
+<div id="header" itemscope itemtype="http://schema.org/BlogPosting" class="content">
 	<div id="top">
 	{{#if post.isPartial}}
 		<h1 itemprop="name">{{post.title}}</h1>
@@ -40,7 +40,6 @@
 		<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 	</div>
 	{{/if}}
-
 </div>
 
 {{#post.photos}}
