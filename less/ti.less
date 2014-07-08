@@ -1230,41 +1230,28 @@ div.caption
 
 /* Post tag ---------------------------------------------------------------- */
 
-div.post-tag-heading #top
+div#header.post-tag-heading #top
 {
-	position: relative;
+	height: 65px;
 
-	@top: 13px;
-	@right: 70px;
+	h1, h4 { clear: left; float: none; line-height: 1em; }
 
-	div.subtitle { margin-top: 7px; line-height: 0.5em; }
-
-	h1 { clear: left; float: none !important; margin: 0; padding: 0; font-size: 40px !important; }
-
-	h3
+	h1
 	{
-		top: 44px;
-		right: 75px;
-		position: absolute;
-		font-size: 50px;
-		text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.3);
-		font-family: 'Qwigley', Tahoma, Arial;
-		color: @boldColor;
-		letter-spacing: -2px;
-		.opacity(0.5);
-		display: none;
+		margin: 0 0 0 5px;
+		padding: 2px 0 0 0;
+		font-size: 45px;
+		letter-spacing: 0;
 	}
+
 	h4
 	{
-		top: 12px;
-		right: 76px;
-		font-size: 11px;
-		position: absolute;
+		margin: 3px 0 0 7px;
 		color: rgba(255, 255, 255, 0.1);
 		text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+		font-size: 14px;
 		font-family: 'Oswald', Impact, Arial;
-		letter-spacing: 4px;
-		line-height: 1.2em;
+		letter-spacing: 5px;
 		text-transform: uppercase;
 	}
 }
@@ -1341,7 +1328,7 @@ div.post-tag
 
 			p.summary
 			{
-				padding: 10px;
+				margin: 10px;
 				font-family: @serifFont;
 				font-size: 16px;
 				line-height: 1.2em;
@@ -1354,10 +1341,7 @@ div.post-tag
 				margin: 0;
 				padding: 0 6px 0 0;
 
-				@media @small
-				{
-					margin-top: 10px;
-				}
+				@media @small { margin-top: 10px; }
 
 				li
 				{
@@ -1371,16 +1355,15 @@ div.post-tag
 					margin-left: 3px;
 					line-height: 1em;
 
-					@media @small
-					{
-						font-size: 18pt;
-						padding: 0 3px;
-					}
+					@media @small {	font-size: 18pt; padding: 0 3px; }
 
 					a
 					{
 						text-decoration: none;
-						padding-left: 2px;
+
+						.glyphicon { .opacity(0.2); padding-right: 2px; }
+
+						&:hover .glyphicon { .opacity(1); }
 
 						@media @small
 						{

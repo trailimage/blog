@@ -4,10 +4,8 @@
 
 <div id="header" class="post-tag-heading content">
 	<div id="top">
-		<div class="subtitle">{{tagCount}}</div>
 		<h1>{{tagName}}</h1>
-		<h4>Adventure Photography</h4>
-		<h3>Jason Abbott</h3>
+		<h4>{{tagCount}}</h4>
 	</div>
 </div>
 
@@ -33,7 +31,7 @@
 				<p class="summary">{{description}}</p>
 				<ul class="tags">
 				{{#each tags}}
-					<li>{{{icon 'tag'}}}<a href="/tag/{{makeSlug this}}">{{this}}</a></li>
+					<li><a href="/tag/{{makeSlug this}}">{{{icon 'tag'}}}{{this}}</a></li>
 				{{/each}}
 				</ul>
 			</div>
