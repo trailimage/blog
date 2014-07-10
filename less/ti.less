@@ -1264,6 +1264,8 @@ div#header.post-tag-heading #top
 {
 	height: 65px;
 
+	@media @small { height: 96px; }
+
 	h1, h4 { clear: left; float: none; line-height: 1em; }
 
 	h1
@@ -1272,6 +1274,8 @@ div#header.post-tag-heading #top
 		padding: 2px 0 0 0;
 		font-size: 45px;
 		letter-spacing: 0;
+
+		@media @small { font-size: 56pt; }
 	}
 
 	h4
@@ -1283,6 +1287,8 @@ div#header.post-tag-heading #top
 		font-family: 'Oswald', Impact, Arial;
 		letter-spacing: 5px;
 		text-transform: uppercase;
+
+		@media @small { color: @trimColor; }
 	}
 }
 
@@ -1336,24 +1342,29 @@ div.post-tag
 
 					&:hover { color: @hoverColor; }
 				}
+
+				@media @small
+				{
+					padding-top: 20px;
+					margin-top: 50px;
+
+					a.title { font-size: 36pt; }
+					.mode-icon { display: none; }
+					ul.info li { line-height: 1.2em; font-size: 18pt; &.photo-count { font-size: 18pt; } }
+				}
 			}
 
 			a.thumb
 			{
 				margin: 0 20px 0 0;
 				float: left;
-
-				@media @small { font-size: 18pt; }
-
-				img
-				{
-					@media @small { margin-top: 4px; }
-				}
+				@media @small { margin-top: 10px; zoom: 150%; }
 			}
 
 			a.map
 			{
 				margin-left: -20px;
+				@media @small { display: none; }
 			}
 
 			p.summary
@@ -1363,6 +1374,7 @@ div.post-tag
 				font-size: 16px;
 				line-height: 1.2em;
 				text-align: justify;
+				@media @small { text-align: left; }
 			}
 
 			ul.tags
