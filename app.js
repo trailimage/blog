@@ -86,13 +86,13 @@ function configure()
 	hbs.registerHelper('icon', function(name) { return format.icon(name); });
 	hbs.registerHelper('rot13', function(text) { return format.rot13(text); });
 
+	app.use(wwwhisper(false));
 	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
 	app.use(bodyParser.urlencoded({	extended: true }));
 	app.use(bodyParser.json());
 	app.use(compress());
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
-	app.use(wwwhisper(false));
 
 	library.load(function()
 	{
