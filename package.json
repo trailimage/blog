@@ -27,7 +27,8 @@
 		"redis": ">=0.10.1",
 		"winston-redis": ">=0.2.1",
 		"pdfkit": "*",
-		"xmldom": ">=0.1.19"
+		"xmldom": ">=0.1.19",
+		"connect-wwwhisper": "*"
 	},
 	"repository": {
 		"type": "git",

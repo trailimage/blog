@@ -6,11 +6,13 @@ var format = require('./lib/format.js');
 var Express = require('express');
 var log = require('winston');
 var url = require('url');
+
 //var https = require('https');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
 var cookies = require('cookies');
+var wwwhisper = require('connect-wwwhisper');
 
 setting.isProduction = (process.env.NODE_ENV == 'production');
 setting.redis = url.parse(process.env.REDISCLOUD_URL);
@@ -90,6 +92,7 @@ function configure()
 	app.use(compress());
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
+	app.use(wwwhisper(false));
 
 	library.load(function()
 	{
@@ -100,6 +103,9 @@ function configure()
 	});
 }
 
+/**
+ * @see http://expressjs.com/4x/api.html#router
+ */
 function defineRoutes()
 {
 	/** @type {string} Slug pattern */
@@ -110,16 +116,10 @@ function defineRoutes()
     var postID = ':postID(\\d{17})';
 	var r = require('./lib/controllers/routes.js');
 
+	app.use('/admin', r.admin);
+
 	r.post.addFixes(app);
 
-	app.get('/admin', r.admin.home);
-	app.post('/admin', r.admin.login);
-	app.get('/admin/issue/save', r.admin.saveIssue);
-	app.get('/admin/issue/delete', r.admin.deleteIssue);
-	app.post('/admin/view/delete', r.admin.deleteView);
-	app.post('/admin/track/upload', r.admin.uploadTrack);
-	app.post('/admin/library/reload', r.admin.reloadLibrary);
-	app.post('/admin/photo-tag/reload', r.admin.reloadPhotoTags);
 	app.get('/', r.tag.home);                                       // the latest posts
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
