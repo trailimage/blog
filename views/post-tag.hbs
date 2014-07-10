@@ -1,16 +1,10 @@
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
 	<style type="text/css">
-		#links, #tag-navigation	{ position: fixed; }
+		#bug, #links, #tag-navigation { position: fixed; }
 	</style>
-{{/contentFor}}
-{{#contentFor "afterBody"}}
 	<script type="text/javascript" defer>
-		setTimeout(function()
-		{
-			var $nav = $('#post-tag-navigation');
-			$nav.hide().load('/tag-menu', function() { $nav.fadeIn(); });
-		}, 200);
+		window.onload = function() { $('#post-tag-navigation').load('/tag-menu'); }
 	</script>
 {{/contentFor}}
 
