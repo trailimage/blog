@@ -120,7 +120,7 @@ function defineRoutes()
 	app.post('/admin/track/upload', r.admin.uploadTrack);
 	app.post('/admin/library/reload', r.admin.reloadLibrary);
 	app.post('/admin/photo-tag/reload', r.admin.reloadPhotoTags);
-	app.get('/', r.post.home);                                       // the latest set
+	app.get('/', r.tag.home);                                       // the latest posts
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/authorize', r.authorize.view);
@@ -130,6 +130,7 @@ function defineRoutes()
 	app.get('/issue', r.issue.home);
 	app.get('/issues', r.issue.home);
 	app.get('/issue/:slug'+s, r.issue.view);
+	app.get('/tag-menu', r.tag.menu);
 	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
 	app.get('/photo-tag', r.photo.tags);

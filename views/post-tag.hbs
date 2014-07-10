@@ -1,5 +1,17 @@
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
+	<style type="text/css">
+		#links, #tag-navigation	{ position: fixed; }
+	</style>
+{{/contentFor}}
+{{#contentFor "afterBody"}}
+	<script type="text/javascript" defer>
+		setTimeout(function()
+		{
+			var $nav = $('#post-tag-navigation');
+			$nav.hide().load('/tag-menu', function() { $nav.fadeIn(); });
+		}, 200);
+	</script>
 {{/contentFor}}
 
 <div id="header" class="post-tag-heading content">
@@ -23,9 +35,9 @@
 				<div class="clear"></div>
 			</div>
 
-			<a class="thumb" href="/{{slug}}"><img src="{{thumb.url_n}}" width="{{thumb.width_n}}" height="{{thumb.height_n}}" style="width: {{thumb.width_n}}px; height: {{thumb.height_n}}px;"/></a>
+			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{thumb.url_n}}" width="{{thumb.width_n}}" height="{{thumb.height_n}}" style="width: {{thumb.width_n}}px; height: {{thumb.height_n}}px;"/></a>
 			{{#if photoCoordinates}}
-			<a class="map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.width_n}}x{{mapHeight thumb.width_n thumb.height_n}}&key={{../../setting.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.width_n}}x{{mapHeight thumb.width_n thumb.height_n}}&key={{../../setting.google.apiKey}}&markers={{photoCoordinates}}"/></a>
 			{{/if}}
 			<div class="detail">
 				<p class="summary">{{description}}</p>
@@ -40,5 +52,7 @@
 	{{/posts}}
 	</ul>
 </div>
+
+<div id="post-tag-navigation"></div>
 
 {{>footer}}
