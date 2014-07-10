@@ -86,7 +86,7 @@ function configure()
 	hbs.registerHelper('icon', function(name) { return format.icon(name); });
 	hbs.registerHelper('rot13', function(text) { return format.rot13(text); });
 
-	//app.use(wwwhisper(false));
+	app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
 	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
 	app.use(bodyParser.urlencoded({	extended: true }));
 	app.use(bodyParser.json());
@@ -101,6 +101,17 @@ function configure()
 		//https.createServer(options, app).listen(port);
 		log.info('Listening on port %d', port);
 	});
+}
+
+/**
+ * Only apply middleware to paths matching pattern
+ * @param {RegExp} regex
+ * @param {Function} fn Middleware
+ * @returns {Function}
+ */
+function filter(regex, fn)
+{
+	return function(req, res, next) { if (regex.test(req.path)) { fn(req, res, next); } else { next(); } }
 }
 
 /**
