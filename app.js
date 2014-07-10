@@ -92,7 +92,7 @@ function configure()
 	app.use(compress());
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
-	app.use(wwwhisper(false));
+	//app.use(wwwhisper(false));
 
 	library.load(function()
 	{
