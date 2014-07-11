@@ -82,7 +82,15 @@
 				{
 					$button.prop('disabled', false);
 					waiting = false;
-					$models.showMessage((response.success) ? 'Reloaded' : 'Failed');
+
+					if (response.success)
+					{
+						window.alert('Reloaded:\n' + response.message.replace(/,/g, '\n'));
+					}
+					else
+					{
+						$models.showMessage('Failed');
+					}
 				});
 			});
 
