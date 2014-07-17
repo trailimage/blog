@@ -7,7 +7,6 @@ var Express = require('express');
 var log = require('winston');
 var url = require('url');
 
-//var https = require('https');
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
@@ -38,15 +37,6 @@ configure();
 function configure()
 {
 	require('winston-redis').Redis;
-
-//	var options =
-//	{
-//		key: setting.certificate.privateKey,
-//		cert: setting.certificate.server,
-//		ca: setting.certificate.authority,
-//		requestCert: true,
-//		rejectUnauthorized: false
-//	};
 
 	if (setting.isProduction)
 	{
