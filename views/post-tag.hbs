@@ -1,11 +1,5 @@
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
-	<style type="text/css">
-		#bug, #links, #tag-navigation { position: fixed; }
-	</style>
-	<script type="text/javascript" defer>
-		window.onload = function() { $('#post-tag-navigation').load('/tag-menu'); }
-	</script>
 {{/contentFor}}
 
 <div id="header" class="post-tag-heading content">
@@ -46,7 +40,3 @@
 	{{/posts}}
 	</ul>
 </div>
-
-<div id="post-tag-navigation"></div>
-
-{{>footer}}

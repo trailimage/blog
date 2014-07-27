@@ -86,12 +86,10 @@
 
 {{> navigation}}
 <div class="footer-tags content">{{> post-tags post.tags}}</div>
-<div class='by-line content'><span>by</span>Jason Abbott</div>
+<div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
 
 <div id="footer" class="content">
 	{{#setting.facebook.enabled}}
 	<div class="fb-comments" data-href="http://{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
 	{{/setting.facebook.enabled}}
-	{{> footer}}
 </div>
-

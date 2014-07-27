@@ -1,0 +1,12 @@
+{{#contentFor "head"}}
+	<!--suppress ALL -->
+	<meta name="robots" content="noindex">
+{{/contentFor}}
+
+{{> heading}}
+
+{{! http://www.google.com/cse/setup/advanced?cx=012532665638014192714%3Aeb0vr5on0aw }}
+{{! https://developers.google.com/custom-search/docs/element }}
+<div class="search content">
+	<gcse:searchresults-only linkTarget="_self" webSearchResultSetSize="20"></gcse:searchresults-only>
+</div>

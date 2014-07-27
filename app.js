@@ -59,7 +59,7 @@ function configure()
 	app.set('view engine', 'hbs');
 	app.engine('hbs', hbs.express3(
 	{
-		defaultLayout: __dirname + '/views/layouts/default.hbs',
+		defaultLayout: __dirname + '/views/' + setting.layout.default + '.hbs',
 		partialsDir: __dirname + '/views/partials'
 	}));
 
@@ -132,6 +132,7 @@ function defineRoutes()
 	app.get('/issues', r.issue.home);
 	app.get('/issue/:slug'+s, r.issue.view);
 	app.get('/tag-menu', r.tag.menu);
+	app.get('/search', r.search.view);
 	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
 	app.get('/photo-tag', r.photo.tags);

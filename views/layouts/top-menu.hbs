@@ -13,10 +13,10 @@
 		{{{block "head"}}}
 	</head>
 	<body>
-		<div id='content'></div>
 		{{> head-links}}
 		{{> bug}}
 		{{{body}}}
-		{{{block "afterBody"}}}
+		{{> footer}}
 	</body>
+	{{{block "afterBody"}}}
 </html>
