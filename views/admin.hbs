@@ -50,7 +50,11 @@
 				$views.find('input, button').prop('disabled', true);
 				waiting = true;
 
-				$.post($views.attr('action'), {'contentType': 'application/json', 'data': data}, function(response)
+				console.log(data);
+
+				//{'contentType': 'application/json;charset=UTF-8', 'data': data}
+
+				$.post($views.attr('action'), data, function(response)
 				{
 					$views.find('input, button').prop('disabled', false);
 					waiting = false;
@@ -164,7 +168,6 @@
 </div>
 
 <div id="body">
-
 	<fieldset id="statistics">
 		<legend>Statistics</legend>
 		<ul>
@@ -248,5 +251,4 @@
 			<div class="message"></div>
 		</fieldset>
 	</form>
-
 </div>

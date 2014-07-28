@@ -78,7 +78,7 @@ function configure()
 
 	app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
 	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
-	app.use(bodyParser.urlencoded({	extended: true }));
+	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
 	app.use(compress());
 	app.use(outputCache());
@@ -117,9 +117,12 @@ function defineRoutes()
     var postID = ':postID(\\d{17})';
 	var r = require('./lib/controllers/routes.js');
 
-	app.use('/admin', r.admin);
-
 	r.post.addFixes(app);
+
+	var ac = require('./lib/controllers/admin-controller.js');
+	app.post('/admin/view/delete', ac.deleteView);
+
+	app.use('/admin', r.admin);
 
 	app.get('/', r.tag.home);                                       // the latest posts
 	app.get('/rss', r.rss.view);
