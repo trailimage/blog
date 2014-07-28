@@ -101,7 +101,10 @@ function configure()
  */
 function filter(regex, fn)
 {
-	return function(req, res, next) { if (regex.test(req.path)) { fn(req, res, next); } else { next(); } }
+	return function(req, res, next)
+	{
+		if (regex.test(req.path) && req.method == 'GET') { fn(req, res, next); } else { next(); }
+	}
 }
 
 /**
@@ -118,9 +121,6 @@ function defineRoutes()
 	var r = require('./lib/controllers/routes.js');
 
 	r.post.addFixes(app);
-
-	var ac = require('./lib/controllers/admin-controller.js');
-	app.post('/admin/view/delete', ac.deleteView);
 
 	app.use('/admin', r.admin);
 

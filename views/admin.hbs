@@ -50,11 +50,7 @@
 				$views.find('input, button').prop('disabled', true);
 				waiting = true;
 
-				console.log(data);
-
-				//{'contentType': 'application/json;charset=UTF-8', 'data': data}
-
-				$.post($views.attr('action'), data, function(response)
+				$.post($views.attr('action'), {'contentType': 'application/json;charset=UTF-8', 'form': data}, function(response)
 				{
 					$views.find('input, button').prop('disabled', false);
 					waiting = false;
