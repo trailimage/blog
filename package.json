@@ -9,7 +9,7 @@
 		"email": "dev@trailimage.com"
 	},
 	"engines": {
-		"node": "0.10.x"
+		"node": ">=0.10.30"
 	},
 	"dependencies":
 	{
