@@ -218,6 +218,8 @@ div.next, div.previous
 		display: block;
 		color: @trimColor;
 		text-decoration: none;
+		font-size: 15px;
+		padding-bottom: 2px;
 
 		&:hover { text-decoration: underline; color: desaturate(lighten(@hoverColor, 40%), 20%); }
 	}
@@ -231,14 +233,14 @@ div.next, div.previous
 	li
 	{
 		&.Where { display: none; }
-		&.head { font-size: 15px; font-weight: bold; color: desaturate(lighten(@hoverColor, 40%), 20%); }
-		&.title { font-weight: bold; margin-left: 5px; margin-top: 5px; }
+		&.head { font-size: 17px; font-weight: bold; color: desaturate(lighten(@hoverColor, 40%), 20%); }
+		&.title { font-size: 15px; font-weight: bold; margin: 5px; }
 
 		.glyphicon { margin-right: 5px; color: @trimColor; }
 
 		ul
 		{
-			margin-left: 10px;
+			margin: 2px 0 0 10px;
 
 			li
 			{
@@ -1462,17 +1464,18 @@ div.post-tag
 		{
 			display: block;
 			width: @tabWidth;
-			padding: 2px 0;
+			padding: 5px 0;
 			margin-bottom: 2px;
 			text-align: center;
-			font-size: 18px;
+			font-size: 24px;
 			font-weight: bold;
 			cursor: pointer;
 			text-transform: uppercase;
 			color: #fff;
 			background-color: @trimColor;
 			z-index: 200;
-			//text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+			text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+			.border-radius(0, 0, 4px, 4px);
 
 			&:hover { background-color: @boldColor; }
 			&.selected { color: #400;; background-color: rgba(255, 255, 255, 0.9); }
@@ -1483,7 +1486,7 @@ div.post-tag
 	{
 		float: left;
 		margin: 0;
-		width: @contentWidth - (@viewWidth + 5);
+		width: @contentWidth - (@viewWidth + 7);
 		overflow: hidden;
 
 		div
@@ -1498,6 +1501,8 @@ div.post-tag
 				display: block;
 				padding-left: 5px;
 				white-space: nowrap;
+				font-size: 14px;
+				line-height: 1.3em;
 
 				&.selected
 				{
@@ -1585,15 +1590,17 @@ div.authorize
 
 .not-found
 {
-	background-image: url('http://farm9.staticflickr.com/8354/8330402329_62e9864311_c.jpg');
+	height: @contentWidth;
+	background-image: url('https://farm3.staticflickr.com/2911/14343924188_3eb2a469f0_b.jpg');
 
 	p
 	{
-		font-size: 24pt;
+		font-size: 45px;
 		text-align: center;
 		line-height: 1.5em;
-		padding: 0.5em 0;
+		padding: 1em;
 		color: #fff;
+		text-shadow: 0 0 8px rgba(0, 0, 0, 1);
 	}
 }
 
