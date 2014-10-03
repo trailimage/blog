@@ -128,8 +128,8 @@ function defineRoutes()
 	app.get('/js/menu.js', r.menu.view);
 	app.get('/sitemap.xml', r.sitemap.view);
     app.get('/exif/'+photoID, r.photo.exif);
-	app.get('/issue', r.issue.home);
-	app.get('/issues', r.issue.home);
+	app.get('/issue', r.issue.view);
+	app.get('/issues', r.issue.view);
 	app.get('/issue/:slug'+s, r.issue.view);
 	app.get('/tag-menu', r.tag.menu);
 	app.get('/search', r.search.view);

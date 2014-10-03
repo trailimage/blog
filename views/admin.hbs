@@ -15,7 +15,6 @@
 			var $viewItems = $views.find('input[type=checkbox]');
 			var $models = $('#models');
 			var $tracks = $('#tracks');
-			var $issues = $('#issues');
 			var waiting = false;
 
 			$views.find('.select-all').click(function()  { $viewItems.prop('checked', true); });
@@ -90,59 +89,6 @@
 					else
 					{
 						$models.showMessage('Failed');
-					}
-				});
-			});
-
-
-			$issues.find('select').change(function()
-			{
-				var $selected = $issues.find('option:selected');
-
-				$('#issue-doc').val($selected.val());
-				$('#issue-slug').val($selected.text());
-			});
-
-			$issues.find('button').click(function()
-			{
-				var $selected = $issues.find('option:selected');
-				var action = $(this).data('action');
-				var slug = $('#issue-slug').val();
-				var docID = $('#issue-doc').val();
-
-				$.ajax({
-					dataType: 'json',
-					url: '/admin/issue/'+action+'/',
-					data: {'slug': slug, 'docID': docID, 'oldSlug': $selected.text() },
-					success: function(response)
-					{
-						if (response.success)
-						{
-							switch (action)
-							{
-								case 'save':
-									if ($selected.text() == 'New')
-									{
-										// add option
-										$issues.showMessage('Added ' + slug).find('select').append($('<option/>').val(docID).html(slug));
-									}
-									else
-									{
-										// update option
-										$selected.text(slug);
-										$selected.val(docID);
-										$issues.showMessage('Updated ' + slug);
-									}
-									break;
-								case 'delete':
-									$issues.showMessage('Deleted ' + slug).find('li[value=' + docID + ']').remove();
-									break;
-							}
-						}
-						else
-						{
-							$issues.showMessage('Failed to ' + action + ' ' + slug);
-						}
 					}
 				});
 			});
@@ -225,25 +171,6 @@
 			<div class="buttons">
 				<input id="gpxFile" name="gpx" type="file"/>
 				<button type="submit" data-action="upload">Upload</button>
-			</div>
-			<div class="message"></div>
-		</fieldset>
-	</form>
-
-	<form id="issues" method="post">
-		<fieldset>
-			<legend>Issues</legend>
-			<select>
-				<option>New</option>
-				{{#each issues}}
-					<option value="{{this}}">{{@key}}</option>
-				{{/each}}
-			</select>
-			<input type="text" id="issue-slug" placeholder="Slug"/>
-			<input type="text" id="issue-doc" placeholder="Document ID"/>
-			<div class="buttons">
-				<button type="submit" data-action="delete">Delete</button>
-				<button type="submit" data-action="save">Save</button>
 			</div>
 			<div class="message"></div>
 		</fieldset>
