@@ -22,7 +22,7 @@
 	<div id="postDate" itemprop="dateCreated">{{post.dateTaken}}</div>
 	{{/if}}
 
-	<div class="fb-like" data-href="http://{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+	<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 	{{#if post.video}}
 	<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
@@ -90,6 +90,6 @@
 
 <div id="footer" class="content">
 	{{#setting.facebook.enabled}}
-	<div class="fb-comments" data-href="http://{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
+	<div class="fb-comments" data-href="http://www.{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
 	{{/setting.facebook.enabled}}
 </div>
