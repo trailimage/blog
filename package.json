@@ -15,7 +15,7 @@
 	{
 		"express": ">=4.4.5",
 		"express-hbs": ">=0.7.0",
-		"body-parser": ">=1.4.3",
+		"body-parser": ">=1.10",
 		"compression": ">=1.0",
 		"cookies": ">=0.4.0",
 		"uglify-js": ">=2.4.0",
