@@ -75,13 +75,13 @@
 						$('#duration').html(hoursAndMinutes(hours));
 						$('#top-speed').html(topSpeed.toFixed(1));
 						$('#avg-speed').html(avgSpeed.toFixed(1));
-
-						if (selected) { showPhoto(selected, preview); }
 					}
 					else
 					{
 						$summary.hide();
 					}
+
+					if (selected) { showPhoto(selected, preview); }
 				},
 						200);
 			});
@@ -92,7 +92,7 @@
 			map.data.addListener('mouseover', function(event)
 			{
 				map.data.overrideStyle(event.feature, {icon: '/img/camera-marker.png'});
-		});
+			});
 
 			map.data.addListener('mouseout', function(event)
 			{
