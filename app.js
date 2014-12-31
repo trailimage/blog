@@ -120,6 +120,7 @@ function defineRoutes()
 	r.post.addFixes(app);
 
 	app.use('/admin', r.admin);
+	app.use('/api/v1', r.api);
 
 	app.get('/', r.tag.home);                                       // the latest posts
 	app.get('/rss', r.rss.view);
