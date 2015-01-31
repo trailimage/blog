@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for server}" />
-    <file url="PROJECT" libraries="{Flickr, Google Maps, Node.js Dependencies for server, Node.js v1.0.4 Core Modules, Trail Image, geoJSON}" />
+    <file url="PROJECT" libraries="{EcmaScript 6, Flickr, Google Maps, Node.js Dependencies for server, Node.js v1.0.4 Core Modules, Trail Image, Winston Logs, geoJSON}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
