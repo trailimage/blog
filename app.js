@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
@@ -30,7 +32,7 @@ var library = require('./lib/models/library.js');
 var hbs = require('express-hbs');
 var app = Express();
 /** @type {Number} */
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 configure();
 
