@@ -27,8 +27,7 @@
 		"winston-redis": ">=0.2.1",
 		"pdfkit": "*",
 		"xmldom": ">=0.1.19",
-		"connect-wwwhisper": "git://github.com/Jason-Abbott/connect-wwwhisper.git#master",
-        "lodash": ">=3.0"
+		"connect-wwwhisper": "git://github.com/Jason-Abbott/connect-wwwhisper.git#master"
 	},
 	"repository": {
 		"type": "git",
