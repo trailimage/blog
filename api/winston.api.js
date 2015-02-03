@@ -1,30 +1,17 @@
 /**
- * @type {Object}
- */
-Winston = {};
-
-/**
- * @type {Object}
- */
-Winston.prototype.Log = {};
-
-/**
- *
  * @param {String} message
- * @param {...String} [args]
+ * @param {...String|Number} [args]
  */
-Winston.Log.prototype.info = function(message, args) {};
+winston.prototype.info = function(message, args) {};
 
 /**
- *
  * @param {String} message
- * @param {...String} [args]
+ * @param {...String|Number} [args]
  */
-Winston.Log.prototype.warn = function(message, args) {};
+winston.prototype.warn = function(message, args) {};
 
 /**
- *
  * @param {String} message
- * @param {...String} [args]
+ * @param {...String|Number} [args]
  */
-Winston.Log.prototype.error = function(message, args) {};
+winston.prototype.error = function(message, args) {};

@@ -15,5 +15,6 @@
     <orderEntry type="library" name="Node.js v1.0.4 Core Modules" level="application" />
     <orderEntry type="library" name="EcmaScript 6" level="project" />
     <orderEntry type="library" name="Winston Logs" level="project" />
+    <orderEntry type="library" name="Redis" level="project" />
   </component>
 </module>
