@@ -6,6 +6,7 @@
 var setting = require('./lib/settings.js');
 var format = require('./lib/format.js');
 var Express = require('express');
+/** @type {winston|Object} */
 var log = require('winston');
 var url = require('url');
 
@@ -15,8 +16,8 @@ var bodyParser = require('body-parser');
 var cookies = require('cookies');
 var wwwhisper = require('connect-wwwhisper');
 
-setting.isProduction = (process.env.NODE_ENV == 'production');
-setting.redis = url.parse(process.env.REDISCLOUD_URL);
+setting.isProduction = true; // (process.env['NODE_ENV'] == 'production');
+setting.redis = url.parse(process.env['REDISCLOUD_URL']);
 setting.redis.auth = setting.redis.auth.split(":")[1];
 setting.cacheOutput = setting.isProduction;
 
@@ -32,7 +33,7 @@ var library = require('./lib/models/library.js');
 var hbs = require('express-hbs');
 var app = Express();
 /** @type {Number} */
-const port = process.env.PORT || 3000;
+const port = process.env['PORT'] || 3000;
 
 configure();
 
