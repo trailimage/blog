@@ -1,6 +1,7 @@
-{{#setting.facebook.enabled}}
+{{#contentFor "head"}}
+	<script src='/js/post.js' type='text/javascript' defer></script>
+{{/contentFor}}
 {{> head-facebook}}
-{{/setting.facebook.enabled}}
 
 <div id="header" itemscope itemtype="http://schema.org/BlogPosting" class="content">
 	<div id="top">
@@ -89,7 +90,5 @@
 <div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
 
 <div id="footer" class="content">
-	{{#setting.facebook.enabled}}
 	<div class="fb-comments" data-href="http://www.{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
-	{{/setting.facebook.enabled}}
 </div>

@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 var cookies = require('cookies');
 var wwwhisper = require('connect-wwwhisper');
 
-setting.isProduction = true; // (process.env['NODE_ENV'] == 'production');
+setting.isProduction = (process.env['NODE_ENV'] == 'production');
 setting.redis = url.parse(process.env['REDISCLOUD_URL']);
 setting.redis.auth = setting.redis.auth.split(":")[1];
 setting.cacheOutput = setting.isProduction;
@@ -37,14 +37,11 @@ const port = process.env['PORT'] || 3000;
 
 configure();
 
-function configure()
-{
+function configure() {
 	require('winston-redis').Redis;
 
-	if (setting.isProduction)
-	{
-        log.add(log.transports.Redis,
-		{
+	if (setting.isProduction) {
+        log.add(log.transports.Redis, {
 			host: setting.redis.hostname,
 			port: setting.redis.port,
 			auth: setting.redis.auth,
@@ -60,8 +57,7 @@ function configure()
 	 * @see http://mustache.github.com/mustache.5.html
 	 */
 	app.set('view engine', 'hbs');
-	app.engine('hbs', hbs.express3(
-	{
+	app.engine('hbs', hbs.express3({
 		defaultLayout: __dirname + '/views/' + setting.layout.default + '.hbs',
 		partialsDir: __dirname + '/views/partials'
 	}));
@@ -87,8 +83,7 @@ function configure()
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
 
-	library.load(function()
-	{
+	library.load(function()	{
 		defineRoutes();
 		app.listen(port);
 		//https.createServer(options, app).listen(port);
@@ -102,16 +97,14 @@ function configure()
  * @param {Function} fn Middleware
  * @returns {Function}
  */
-function filter(regex, fn)
-{
+function filter(regex, fn) {
 	return function(req, res, next) { if (regex.test(req.path)) { fn(req, res, next); } else { next(); }}
 }
 
 /**
  * @see http://expressjs.com/4x/api.html#router
  */
-function defineRoutes()
-{
+function defineRoutes() {
 	/** @type {string} Slug pattern */
 	var s = '([\\w\\d-]{4,})';
     /** @type {string} Flickr photo ID pattern */
@@ -129,7 +122,7 @@ function defineRoutes()
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/authorize', r.authorize.view);
-	app.get('/js/menu.js', r.menu.view);
+	app.get('/js/menu-data.js', r.menu.view);
 	app.get('/sitemap.xml', r.sitemap.view);
     app.get('/exif/'+photoID, r.photo.exif);
 	app.get('/issue', r.issue.view);
