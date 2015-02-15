@@ -90,7 +90,7 @@ redis.prototype.set = function(key, value) {};
  * @param {String} key
  * @param {String} hashKey
  * @param {String} value
- * @param {function()} [callback]
+ * @param {function(Boolean|String|Object)} [callback]
  * @see http://redis.io/commands/hset
  */
 redis.prototype.hset = function(key, hashKey, value, callback) {};
