@@ -2,9 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for server}" />
-    <file url="file://$PROJECT_DIR$/views/layouts/default.hbs" libraries="{jquery}" />
-    <file url="PROJECT" libraries="{Flickr, Node.js v0.10.22 Core Modules}" />
+    <file url="PROJECT" libraries="{Flickr}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
-
