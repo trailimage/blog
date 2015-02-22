@@ -49,7 +49,7 @@
 
 					if (response.success) {
 						$views.find('input:checked').parent().remove();
-						$views.showMessage('Done');
+						window.alert('Unloaded:\n' + response.message.replace(/,/g, '\n'));
 					} else {
 						$views.showMessage('Failed')
 					}

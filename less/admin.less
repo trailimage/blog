@@ -7,41 +7,33 @@
 @borderColor: #aaa;
 @linkColor: #800;
 
-html
-{
+html {
 	padding: 0;
 	margin: 0;
 }
 
-body
-{
+body {
 	background-color: #eee;
 	font-family: @sanSerifFont;
 	margin: 0;
 	padding: 0;
 }
 
-label
-{
+label {
 	cursor: pointer;
 }
 
-ul
-{
+ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 
-	li
-	{
-		padding: 0 3px;
-	}
+	li { padding: 0 3px; }
 }
 
 div.clear-fix { clear: both; }
 
-fieldset
-{
+fieldset {
 	position: relative;
 	border: 1px solid @borderColor;
 	.rounded(4px);
@@ -49,40 +41,32 @@ fieldset
 
 	input, select { font-family: @sanSerifFont; font-size: 16px; }
 
-	legend
-	{
+	legend {
 		margin-left: 10px;
 		font-weight: bold;
 	}
 
-	label
-	{
-		display: block;
-	}
+	label { display: block; }
 
-	select
-	{
+	select {
 		margin: 4px;
 		display: block;
 		width: auto;
 	}
 
-	input[type=text]
-	{
+	input[type=text] {
 		margin: 4px;
 		display: block;
 		width: auto;
 		padding: 1px 2px;
 	}
 
-	.buttons
-	{
+	.buttons {
 		text-align: right;
 		padding-right: 5px;
 	}
 
-	.message
-	{
+	.message {
 		position: absolute;
 		bottom: 4px;
 		left: 4px;
@@ -90,14 +74,12 @@ fieldset
 		color: @linkColor;
 	}
 
-	&.busy
-	{
+	&.busy {
 		cursor: wait !important;
 	}
 }
 
-.scroll
-{
+.scroll {
 	border-top: 1px solid @borderColor;
 	border-bottom: 1px solid @borderColor;
 	overflow-x: hidden;
@@ -107,8 +89,7 @@ fieldset
 	max-height: 200px;
 }
 
-#body
-{
+#body {
 	position: absolute;
 	left: 475px;
 	top: 0;
@@ -117,34 +98,28 @@ fieldset
 	padding: 10px;
 
 	#statistics, #api-keys { float: right; clear: right; width: 200px; }
-	#views fieldset, #issues fieldset, #models, #tracks fieldset
-	{
+	#views fieldset, #issues fieldset, #models, #tracks fieldset {
 		width: 47%;
-		li
-		{
+		li {
 			cursor: pointer;
 			&:hover	{ color: @linkColor; }
 		}
 	}
 
-	#issues fieldset
-	{
-		input[type=text]
-		{
+	#issues fieldset {
+		input[type=text] {
 			width: 25em;
 		}
 	}
 
-	#models
-	{
+	#models {
 		text-align: center;
 
 		legend { text-align: left; }
 	}
 }
 
-#logs
-{
+#logs {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -155,17 +130,14 @@ fieldset
 	overflow-y: scroll;
 	border-right: 1px solid @borderColor;
 
-	table
-	{
+	table {
 		border-collapse: collapse;
 		padding: 0;
 		margin: 0;
 		font-size: 12px;
 
-		tr
-		{
-			&.head
-			{
+		tr {
+			&.head {
 				text-align: center;
 				background-color: #000;
 				color: #fff;
@@ -177,15 +149,13 @@ fieldset
 			&.warn { td { background-color: #ffe; }}
 			&:hover	{ td { color: #80a; }}
 
-			td
-			{
+			td {
 				border-bottom: 1px solid @borderColor;
 				margin: 0;
 				padding: 2px 4px;
 				line-height: 1em;
 
-				&.timestamp
-				{
+				&.timestamp {
 					text-align: right;
 					padding-right: 6px;
 					color: #666;
@@ -198,8 +168,7 @@ fieldset
 	}
 }
 
-p.stats
-{
+p.stats {
 	text-align: center;
 	font-weight: normal;
 	font-family: Verdana, Arial, sans-serif;
@@ -209,40 +178,34 @@ p.stats
 }
 
 
-div.message
-{
+div.message {
 	text-align: center;
 	font-size: 30px;
 	color: #800;
 }
 
-form#login
-{
+form#login {
 	font-size: 30px;
 	margin: 120px auto;
 	width: 700px;
 
-	fieldset
-	{
+	fieldset {
 		border: 1px solid #999;
 		background-color: #f9f9f9;
 		.rounded(4px);
 
-		.row
-		{
+		.row {
 			margin: 15px 0;
 		}
 
-		label
-		{
+		label {
 			width: 150px;
 			text-align: right;
 			display: inline-block;
 			padding-right: 15px;
 		}
 
-		input
-		{
+		input {
 			font-size: 30px;
 			border: 1px solid #999;
 			padding: 2px 8px;

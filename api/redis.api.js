@@ -10,10 +10,11 @@ redis.prototype.del = function(key, callback) {};
  * Removes the specified fields from the hash stored at key. Specified fields that
  * do not exist within this hash are ignored. If key does not exist, it is treated
  * as an empty hash and this command returns 0.
- * @param {String} key
- * @param {String|String[]} hashKey
+ * @param {String|String[]} key Key or array of key plus hash keys
+ * @param {String|String[]|function(number)} hashKey or callback
  * @param {function(number)} [callback] Number of keys removed
  * @see http://redis.io/commands/hdel
+ * @see https://github.com/mranney/node_redis/issues/369
  */
 redis.prototype.hdel = function(key, hashKey, callback) {};
 
