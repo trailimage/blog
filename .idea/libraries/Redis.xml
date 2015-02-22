@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Redis" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/api/redis.api.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/api/redis.api.js" />
+    </CLASSES>
+    <DOCUMENTATION>
+      <root url="http://redis.io/commands" />
+    </DOCUMENTATION>
+    <SOURCES />
+  </library>
+</component>
