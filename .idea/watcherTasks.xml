@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectTasksOptions">
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="--no-color --yui-compress &quot;$ProjectFileDir$\less\ti.less&quot; &quot;$ProjectFileDir$\public\css\ti.css&quot;" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Compiles .less files into .css files" />
@@ -27,7 +27,7 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="&quot;$ProjectFileDir$\public-js\client.js&quot; &quot;$ProjectFileDir$\public-js\jquery.animate-colors.js&quot; &quot;$ProjectFileDir$\public-js\jquery.lazyload.js&quot; -o &quot;$ProjectFileDir$\public\js\ti.js&quot; -c" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Compress Javascript" />
@@ -55,4 +55,3 @@
     </TaskOptions>
   </component>
 </project>
-
