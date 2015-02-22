@@ -1,21 +1,7 @@
-$(function() { prepareMenu(); preparePhotos(); });
-
-function preparePhotos()
-{
-	var $photos = $('.photo');
-
-	$photos.find('img').lazyload();
-	$photos.find('.exif').mouseenter(function()
-	{
-		var $exif = $(this);
-		$exif.off('mouseenter')
-			 .html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-			 .load($exif.data('url'));
-	});
-}
-
-function prepareMenu()
-{
+/**
+ * Menu data are loaded in menu-script.hbs referenced as /js/menu-data.js only available on post pages
+ */
+$(function() {
 	var css = 'selected',
 		$title = $('#menu-title'),
 		$rootList = $('#menu-root'),
@@ -25,11 +11,9 @@ function prepareMenu()
 		selection = loadMenuSelection(['When', null]);
 
 	$title
-		.one('click', function()
-		{
+		.one('click', function() {
 			// populate menu on first click
-			for (var root in TrailImage.menu)
-			{
+			for (var root in TrailImage.menu) {
 				var $li = $('<li>').text(root);
 				$rootList.append($li);
 				if (root == selection[0]) { $li.addClass(css); loadTags(selection); }
@@ -37,15 +21,15 @@ function prepareMenu()
 		})
 		.click(toggleMenu);
 
-	$rootList.on('click', 'li', function()
-	{
+	$rootList.on('click', 'li', function(event) {
+		event.stopPropagation();
 		var $li = $(this);
 		selection = [$li.text(), null];
 		menuSelect($rootList, $li, loadTags, selection);
 	});
 
-	$tagList.on('click', 'li', function()
-	{
+	$tagList.on('click', 'li', function(event) {
+		event.stopPropagation();
 		var $li = $(this);
 		selection[1] = $li.text();
 		menuSelect($tagList, $li, loadPosts, selection);
@@ -55,10 +39,17 @@ function prepareMenu()
 		.on('click', 'li.post', showSelection)
 		.on('mouseover', 'li.post', function() { $description.html($(this).data('description')); })
 		.on('mouseout', function() { $description.empty(); })
-}
 
-function toggleMenu()
-{
+	// always hide menu when clicking anywhere else on the screen
+	$('html').click(function(event) { toggleMenu(event, true); });
+});
+
+/**
+ *
+ * @param event
+ * @param {Boolean} [forceHide] Optionally force hide otherwise detect from CSS
+ */
+function toggleMenu(event, forceHide) {
 	// toggle menu visibility
 	var css = 'selected';
 	var $title = $('#menu-title');
@@ -68,27 +59,18 @@ function toggleMenu()
 	var show = function() { $title.addClass(css); $menu.show(); $up.show(); $down.hide(); };
 	var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
-	if ($title.hasClass(css))
-	{
-		hide();
-	}
-	else
-	{
-		show();
-		$('.content:not(#header), .map').one('click', hide);
-	}
+	event.stopPropagation();
+
+	if (forceHide === undefined) { forceHide = $title.hasClass(css); }
+	if (forceHide) { hide(); } else { show(); }
 }
 
-function showSelection()
-{
+function showSelection() {
 	var slug = $(this).data('slug');
 
-	if (typeof loadPostTrack != 'undefined')
-	{
+	if (typeof loadPostTrack != 'undefined') {
 		loadPostTrack(slug);
-	}
-	else
-	{
+	} else {
 		window.location.href = '/' + slug;
 	}
 	toggleMenu();
@@ -101,8 +83,7 @@ function showSelection()
  * @param {function(string[])} loader
  * @param {String[]} selection
  */
-function menuSelect($list, $clicked, loader, selection)
-{
+function menuSelect($list, $clicked, loader, selection) {
 	$list.find('li').removeClass('selected');
 	loader(selection);
 	$clicked.addClass('selected');
@@ -112,8 +93,7 @@ function menuSelect($list, $clicked, loader, selection)
 /**
  * @param {String[]} selection
  */
-function loadTags(selection)
-{
+function loadTags(selection) {
 	var $tagList = $('#menu-tag');
 	/** @type {TrailImage.Tag[]} */
 	var tags = TrailImage.menu[selection[0]];
@@ -122,40 +102,37 @@ function loadTags(selection)
 
 	if (selection[1] == null) { selection[1] = tags[0].title; }
 
-	for (var i = 0; i < tags.length; i++)
-	{
+	for (var i = 0; i < tags.length; i++) {
 		var $li = $('<li>').text(tags[i].title);
 		$tagList.append($li);
 		if (tags[i].title == selection[1]) { $li.addClass('selected'); loadPosts(selection); }
 	}
 }
 
-function loadPosts(selection)
-{
+/**
+ *
+ * @param selection
+ */
+function loadPosts(selection) {
 	var $postList = $('#menu-post');
 	/** @type {TrailImage.Tag[]} */
 	var tags = TrailImage.menu[selection[0]];
 
 	$postList.empty();
 
-	for (var i = 0; i < tags.length; i++)
-	{
-		if (tags[i].title == selection[1])
-		{
+	for (var i = 0; i < tags.length; i++) {
+		if (tags[i].title == selection[1]) {
 			var ids = tags[i].posts;
 
-			for (var j = 0; j < ids.length; j++)
-			{
+			for (var j = 0; j < ids.length; j++) {
 				var post = TrailImage.post[ids[j]];
 				var title = post.title;
 
-				if (post.part && j < (ids.length - 1) && title == TrailImage.post[ids[j + 1]].title)
-				{
+				if (post.part && j < (ids.length - 1) && title == TrailImage.post[ids[j + 1]].title) {
 					// found part in series followed by at least one more part in the same series
 					var $ol = $('<ol>');
 
-					while (j < ids.length && TrailImage.post[ids[j]].title == title)
-					{
+					while (j < ids.length && TrailImage.post[ids[j]].title == title) {
 						post = TrailImage.post[ids[j]];
 
 						$ol.prepend($('<li>')
@@ -176,9 +153,7 @@ function loadPosts(selection)
 						.addClass('series')
 						.html('<span class="mode-icon ' + post.icon + '"></span>' + post.title)
 						.append($ol));
-				}
-				else
-				{
+				} else {
 					// if series part is orphaned within a tag then show full title
 					if (post.part) { title += ': ' + post.subTitle; }
 
@@ -193,15 +168,13 @@ function loadPosts(selection)
 	}
 }
 
-function loadMenuSelection(ifNone)
-{
+function loadMenuSelection(ifNone) {
 	var re = new RegExp('\\bmenu=([^;\\b]+)', 'gi');
 	var match = re.exec(document.cookie);
 	return (match == null) ? ifNone : match[1].split(',');
 }
 
-function saveMenuSelection(selection)
-{
+function saveMenuSelection(selection) {
 	if (typeof selection === 'string') { selection = [selection, null]; }
 	document.cookie = 'menu=' + selection.join();
 }

@@ -1,0 +1,331 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/Users/Jason/AppData/Roaming/DeLorme.old/Topo10/Router/RoadEdits.tbl",
+			"settings":
+			{
+				"buffer_size": 3845,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Program Files/LinkShellExtension/Doc/linkshellextension.html",
+			"settings":
+			{
+				"buffer_size": 180170,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Jason/Intel/Logs/IntelRST.log",
+			"settings":
+			{
+				"buffer_size": 23718,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 490.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"Package Control: meteor",
+				"Package Control: Remove Repository"
+			]
+		],
+		"width": 571.0
+	},
+	"console":
+	{
+		"height": 252.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2deb499853c4371624f5a07e27c334aa' + 'bf8c4e67d14fb0525ba4f89698a6d7e1'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/dev/Trail Image/server",
+		"/D/dev/Trail Image/server/less"
+	],
+	"file_history":
+	[
+		"/C/Users/Jason/AppData/Roaming/DeLorme/Topo10/Router/Router/RoadEdits.tbl",
+		"/C/Users/Jason/AppData/Roaming/DeLorme/Topo10/Router/RoadEdits.tbl",
+		"/C/AdwCleaner/AdwCleaner[R6].txt",
+		"/D/GPS/DeLorme Docs/Projects/Abbott 2015.tpx",
+		"/F/SeriesDefaults.xml",
+		"/C/Users/Jason/AppData/Local/DeLorme/Topo10/Logs/Error.log",
+		"/C/Users/Jason/AppData/Local/DeLorme/Topo10/Logs/CheckApp1.log",
+		"/C/Users/Jason/AppData/Local/DeLorme/Topo10/Logs/dmcRouter.log",
+		"/C/Program Files (x86)/DeLorme/Topo North America 10.0/WMM-2010.dat",
+		"/C/Users/Jason/AppData/Local/DeLorme/Topo10/Logs/Topo.log",
+		"/D/dev/forks/meteor/todos/client/templates/app-body.html",
+		"/E/Users/Jason/.WebStorm9/config/colors/Trail Image.icls",
+		"/D/dev/giteor/.meteor/local/build/programs/web.browser/program.json",
+		"/E/Temporary/Temp1_bootstrap-3.3.2.zip/bootstrap-3.3.2/package.json",
+		"/E/Temporary/Temp1_bootstrap-3.3.2.zip/bootstrap-3.3.2/README.md",
+		"/D/dev/meteor/packages/meteor-tool/1.1.0-winr.1/mt-os.windows.x86_32/tools/package-version-parser.js",
+		"/D/dev/forks/meteor/todos_bench/client/templates/app-body.js",
+		"/D/dev/meteor/packages/meteor-tool/1.1.0-winr.0/mt-os.windows.x86_32/tools/package-version-parser.js",
+		"/E/Users/Jason/.WebStorm9/config/templates/lua.xml",
+		"/E/Users/Jason/.WebStorm9/system/conversion/jingo8f1a9fdf.xml",
+		"/D/dev/meteor/packages/meteor-tool/1.1.0-winr.1/os/packages/meteor-tool.js",
+		"/D/dev/meteor/packages/meteor-tool/1.1.0-winr.1/mt-os.windows.x86_32/tools/commands.js",
+		"/E/Users/Jason/Chat Logs/barnkirk1897886059.xml",
+		"/E/Users/Jason/Chat Logs/FromWork 2004-01-27/cisakson@yahoo.com.xml",
+		"/E/Users/Jason/Google Drive/Development/test-code.lua",
+		"/E/Users/Jason/.WebStorm9/config/options/markdown.xml",
+		"/E/Users/Jason/.WebStorm9/config/options/keymap.xml",
+		"/E/Users/Jason/.WebStorm9/config/options/find.recents.xml",
+		"/E/Users/Jason/.WebStorm9/config/options/code.style.schemes.xml",
+		"/E/Users/Jason/.WebStorm9/config/options/editor.xml",
+		"/D/dev/Trail Image/server/package.json",
+		"/E/Users/Jason/.WebStorm9/config/quicklists/Deployment.xml",
+		"/D/dev/giteor/hello.css",
+		"/D/dev/giteor/hello.html",
+		"/D/dev/node-proxy/node_modules/http-proxy/lib/http-proxy/common.js",
+		"/D/dev/node-proxy/node_modules/http-proxy/index.js",
+		"/D/dev/node-proxy/node_modules/http-proxy/lib/http-proxy.js",
+		"/D/dev/node-proxy/node_modules/http-proxy/lib/http-proxy/passes/web-incoming.js",
+		"/D/dev/node-proxy/node_modules/http-proxy/package.json",
+		"/D/dev/node-proxy/node_modules/node-http-proxy/lib/proxy-master.js",
+		"/D/dev/node-proxy/node_modules/node-http-proxy/lib/proxy-server.js",
+		"/D/dev/node-proxy/node_modules/node-http-proxy/index.js",
+		"/D/dev/forks/feed/lib/feed.js",
+		"/D/dev/forks/jingo-wiki/Home.md",
+		"/C/Users/Jason/AppData/Roaming/Adobe/Lightroom/Modules/CostcoExport.lrplugin/alloyphoto.config.lua",
+		"/C/Users/Jason/AppData/Roaming/Adobe/Lightroom/Modules/CostcoExport.lrplugin/CostcoAPI.lua",
+		"/D/dev/Trail Image/server/lib/enum.js",
+		"/D/dev/Trail Image/server/less/elements.less",
+		"/D/dev/Trail Image/server/lib/format.js",
+		"/C/Users/Jason/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/D/dev/Trail Image/server/trail-image.sublime-project",
+		"/C/Users/Jason/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Jason/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/Jason/AppData/Roaming/DeLorme.old/Topo10/Router/RoadEdits.tbl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3845,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Program Files/LinkShellExtension/Doc/linkshellextension.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 180170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Jason/Intel/Logs/IntelRST.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23718,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "trail-image.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 245.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

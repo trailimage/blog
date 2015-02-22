@@ -135,27 +135,28 @@ Post.prototype.photoCount;
  */
 Post.prototype.photoCoordinates;
 
-// Tag ------------------------------------------------------------------------
+// Photo Tag ------------------------------------------------------------------
 
 /**
  * @constructor
  */
-Tag = {}
+PhotoTag = {};
 
 /**
  * @type {String}
  */
-Tag.prototype.title;
+PhotoTag.prototype.key;
 
 /**
- * @type {String}
+ * @type {function} callback
  */
-Tag.prototype.description;
+PhotoTag.prototype.reload = function(callback) {};
 
 /**
- * @type {String[]}
+ * @type {function} callback
  */
-Tag.prototype.posts;
+PhotoTag.prototype.load = function(callback) {};
+
 
 // Library --------------------------------------------------------------------
 
@@ -170,17 +171,17 @@ Library = {};
 Library.prototype.key;
 
 /**
- * @type {Object.<Tag>}
+ * @type {Map.<String, PostTag>}
  */
 Library.prototype.tags;
 
 /**
- * @type {Post[]}
+ * @type {Map.<Number, Post>}
  */
 Library.prototype.posts;
 
 /**
- * @type {Object.<String>}
+ * @type {Map.<String, String>}
  */
 Library.prototype.photoTags;
 
