@@ -1,16 +1,13 @@
 {{#contentFor "head"}}
 	<script type='text/javascript'>
-
 		/**
 		 * @param {string} message
 		 */
-		$.fn.showMessage = function(message)
-		{
+		$.fn.showMessage = function(message) {
 			return this.each(function() { $(this).find('.message').html(message).show(); });
 		};
 
-		$(document).ready(function()
-		{
+		$(document).ready(function() {
 			var $views = $('#views');
 			var $viewItems = $views.find('input[type=checkbox]');
 			var $models = $('#models');
@@ -20,16 +17,14 @@
 			$views.find('.select-all').click(function()  { $viewItems.prop('checked', true); });
 			$views.find('.select-none').click(function() { $viewItems.prop('checked', false); });
 
-			$tracks.submit(function()
-			{
+			$tracks.submit(function() {
 				$.ajax({
 					url: $tracks.attr('action'),
 					type: 'POST',
 					data: new FormData(this),
 					processData: false,
 					contentType: false,
-					success: function(response, status, jqXHR)
-					{
+					success: function(response, status, jqXHR) {
 						$tracks.find('select, input, button').prop('disabled', false);
 						$tracks.showMessage((response.success) ? 'Done' : 'Failed');
 					}
@@ -40,8 +35,7 @@
 				return false;
 			});
 
-			$views.submit(function()
-			{
+			$views.submit(function() {
 				if (waiting) { return false; }
 
 				var data = $views.serializeObject();
@@ -49,27 +43,21 @@
 				$views.find('input, button').prop('disabled', true);
 				waiting = true;
 
-				$.post($views.attr('action'), {'contentType': 'application/json;charset=UTF-8', 'form': data}, function(response)
-				{
+				$.post($views.attr('action'), {'contentType': 'application/json;charset=UTF-8', 'form': data}, function(response) {
 					$views.find('input, button').prop('disabled', false);
 					waiting = false;
 
-					if (response.success)
-					{
+					if (response.success) {
 						$views.find('input:checked').parent().remove();
 						$views.showMessage('Done');
-					}
-					else
-					{
+					} else {
 						$views.showMessage('Failed')
 					}
 				});
-
 				return false;
 			});
 
-			$models.find('button').click(function()
-			{
+			$models.find('button').click(function() {
 				if (waiting) { return; }
 
 				var $button = $(this);
@@ -77,17 +65,13 @@
 				$button.prop('disabled', true);
 				waiting = true;
 
-				$.post('/admin/' + $button.data('url'), function(response)
-				{
+				$.post('/admin/' + $button.data('url'), function(response) {
 					$button.prop('disabled', false);
 					waiting = false;
 
-					if (response.success)
-					{
+					if (response.success) {
 						window.alert('Reloaded:\n' + response.message.replace(/,/g, '\n'));
-					}
-					else
-					{
+					} else {
 						$models.showMessage('Failed');
 					}
 				});

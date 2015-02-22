@@ -2,59 +2,9 @@
 	<meta name="robots" content="noindex">
 	<script src="/js/history/html4+html5/jquery.history.js" defer></script>
 	<script type='text/javascript'>
-		function init()
-		{
-			if (typeof jQuery !== 'function') { window.setTimeout(init, 200); return; }
-
-			var $view = $('#photo-tag');
-			var selected = '{{selected}}';
-			var id = 'item-' + selected.substr(0, 1).toLowerCase();
-			var $list = $view.find('#' + id);
-			var $link = $list.find('#link-' + selected);
-			var $li = $view.find('li[data-for=' + id + ']');
-
-			$list.show();
-			$link.addClass('selected');
-			$li.addClass('selected');
-
-			load($link);
-
-			$view.find('li').click(function(e)
-			{
-				$li.removeClass('selected');
-				$li = $(this);
-				$li.addClass('selected');
-
-				$list.hide();
-				$list =	$('#'+ $li.data('for'));
-				$list.show();
-			});
-
-			$view.find('#tag-index a').click(function(e)
-			{
-				e.stopPropagation();
-				e.preventDefault();
-				$link.removeClass('selected');
-				$link = $(this);
-				$link.addClass('selected');
-				load($link);
-
-				History.pushState(
-					null,
-					'Trail Image photos tagged with "' + $link.html() + '"',
-					$link.attr('href').replace('/search', '')
-				);
-			});
-		}
-
-		function load(link)
-		{
-			$('#wait').show();
-			$('#thumbs').load(link.attr('href'), function()	{ $('#wait').hide(); });
-		}
-
-		init();
+		var selectedTag = '{{selected}}';
 	</script>
+	<script src="/js/photo-tag.js" defer></script>
 {{/contentFor}}
 
 {{> heading}}

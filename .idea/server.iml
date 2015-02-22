@@ -6,10 +6,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Flickr" level="project" />
     <orderEntry type="library" name="Node.js Dependencies for server" level="project" />
-    <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="Node.js v0.10.22 Core Modules" level="application" />
+    <orderEntry type="library" name="geoJSON" level="project" />
+    <orderEntry type="library" name="Google Maps" level="project" />
+    <orderEntry type="library" name="Trail Image" level="project" />
+    <orderEntry type="library" name="Flickr" level="project" />
+    <orderEntry type="library" name="EcmaScript 6" level="project" />
+    <orderEntry type="library" name="Winston Logs" level="project" />
+    <orderEntry type="library" name="Redis" level="project" />
+    <orderEntry type="library" name="Node.js v1.2.0 Core Modules" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>
-
