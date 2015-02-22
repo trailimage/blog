@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69a767e5-cc1c-4764-923d-9e7d3ff7ad47" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\server.iml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/admin-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/admin-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin.hbs" afterPath="$PROJECT_DIR$/views/admin.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/less/admin.less" afterPath="$PROJECT_DIR$/less/admin.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/adapters/hash.js" afterPath="$PROJECT_DIR$/lib/adapters/hash.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/library.js" afterPath="$PROJECT_DIR$/lib/models/library.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/map.css" afterPath="$PROJECT_DIR$/public/css/map.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/redis.api.js" afterPath="$PROJECT_DIR$/api/redis.api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/ti.css" afterPath="$PROJECT_DIR$/public/css/ti.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trail-image.sublime-workspace" afterPath="$PROJECT_DIR$/trail-image.sublime-workspace" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="server.iws" />
@@ -64,8 +53,8 @@
       <file leaf-file-name="hash.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/adapters/hash.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3051643" vertical-offset="4340" max-vertical-offset="5808">
-              <caret line="215" column="17" selection-start-line="215" selection-start-column="17" selection-end-line="215" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.15023474" vertical-offset="4340" max-vertical-offset="5808">
+              <caret line="206" column="16" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -132,7 +121,7 @@
       </map>
     </option>
     <push-targets>
-      <push-target-info repo="$PROJECT_DIR$" source="ES6" target-remote="origin" target-branch="ES6" />
+      <push-target-info repo="$PROJECT_DIR$" source="ES6" target-remote="github" target-branch="master" />
     </push-targets>
   </component>
   <component name="IdeDocumentHistory">
@@ -521,12 +510,6 @@
       <option name="number" value="Default" />
       <updated>1391100054228</updated>
     </task>
-    <task id="LOCAL-00073" summary="fix rumination photo tags&#10;">
-      <created>1401651808725</created>
-      <option name="number" value="00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1401651808725</updated>
-    </task>
     <task id="LOCAL-00074" summary="add wrong link exception&#10;">
       <created>1402362848360</created>
       <option name="number" value="00074" />
@@ -815,7 +798,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424030829173</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="fix redis.hdel issue">
+      <created>1424648637022</created>
+      <option name="number" value="00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1424648637022</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers>
       <GitHub shared="false" url="github.com">
         <commitMessageFormat>{id} {summary}</commitMessageFormat>
@@ -836,12 +825,13 @@
     <frame x="185" y="33" width="1795" height="1477" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910052" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927758" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27908745" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27515998" sideWeight="0.6716102" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27515998" sideWeight="0.6716102" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294036" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32984582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -851,7 +841,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32623574" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27756655" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910052" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2174905" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -876,7 +865,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="fix photo tag layout" />
     <MESSAGE value="remove issue stuff" />
     <MESSAGE value="new avatar" />
     <MESSAGE value="add www to fb widgets" />
@@ -901,7 +889,8 @@
     <MESSAGE value="sorting redis layer" />
     <MESSAGE value="brace formatting" />
     <MESSAGE value="js work" />
-    <option name="LAST_COMMIT_MESSAGE" value="js work" />
+    <MESSAGE value="fix redis.hdel issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix redis.hdel issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1279,8 +1268,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/adapters/hash.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3051643" vertical-offset="4340" max-vertical-offset="5808">
-          <caret line="215" column="17" selection-start-line="215" selection-start-column="17" selection-end-line="215" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.15023474" vertical-offset="4340" max-vertical-offset="5808">
+          <caret line="206" column="16" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
           <folding />
         </state>
       </provider>
