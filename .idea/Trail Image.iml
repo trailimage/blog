@@ -17,5 +17,6 @@
     <orderEntry type="library" name="Redis" level="project" />
     <orderEntry type="library" name="Node.js v1.2.0 Core Modules" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="Node.js v1.3.0 Core Modules" level="application" />
   </component>
 </module>

@@ -57,7 +57,7 @@ function configure() {
 	 * @see http://mustache.github.com/mustache.5.html
 	 */
 	app.set('view engine', 'hbs');
-	app.engine('hbs', hbs.express3({
+	app.engine('hbs', hbs.express4({
 		defaultLayout: __dirname + '/views/' + setting.layout.default + '.hbs',
 		partialsDir: __dirname + '/views/partials'
 	}));

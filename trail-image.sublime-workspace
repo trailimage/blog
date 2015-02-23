@@ -22,14 +22,6 @@
 				"buffer_size": 180170,
 				"line_ending": "Windows"
 			}
-		},
-		{
-			"file": "/C/Users/Jason/Intel/Logs/IntelRST.log",
-			"settings":
-			{
-				"buffer_size": 23718,
-				"line_ending": "Windows"
-			}
 		}
 	],
 	"build_system": "",
@@ -73,6 +65,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Jason/Intel/Logs/IntelRST.log",
+		"/D/dev/Trail Image/server/.idea/jsLibraryMappings.xml",
+		"/D/dev/Trail Image/server/.idea/codeStyleSettings.xml",
 		"/C/Users/Jason/AppData/Roaming/DeLorme/Topo10/Router/Router/RoadEdits.tbl",
 		"/C/Users/Jason/AppData/Roaming/DeLorme/Topo10/Router/RoadEdits.tbl",
 		"/C/AdwCleaner/AdwCleaner[R6].txt",
@@ -160,7 +155,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -188,7 +183,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -211,34 +206,6 @@
 						"settings":
 						{
 							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/Jason/Intel/Logs/IntelRST.log",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23718,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
