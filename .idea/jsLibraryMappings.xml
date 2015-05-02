@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{Node.js Dependencies for server}" />
-    <file url="PROJECT" libraries="{EcmaScript 6, Flickr, Google Maps, Node.js Dependencies for server, Node.js v1.3.0 Core Modules, Redis, Trail Image, Winston Logs, geoJSON, jquery}" />
-    <includedPredefinedLibrary name="Node.js Globals" />
+    <file url="file://$PROJECT_DIR$" libraries="{server node_modules}" />
   </component>
 </project>

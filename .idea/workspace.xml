@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/less/ti.less" line="1293" mnemonic="1" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="69a767e5-cc1c-4764-923d-9e7d3ff7ad47" name="Default" comment="">
-<<<<<<< HEAD
+    <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/server_node_modules.xml" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\Trail Image.iml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\codeStyleSettings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\dictionaries\Jason.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\inspectionProfiles\Project_Default.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\inspectionProfiles\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\EcmaScript_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\Flickr.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\Google_Maps.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\Node_js_Dependencies_for_server.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\Redis.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\Trail_Image.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\Winston_Logs.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\libraries\geoJSON.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\watcherTasks.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\server\.idea\webResources.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-=======
->>>>>>> ES6
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trail-image.sublime-workspace" afterPath="$PROJECT_DIR$/trail-image.sublime-workspace" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,10 +41,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
-    <option name="PATCH_PATH" value="D:\dev\Trail Image\server" />
-  </component>
-  <component name="DaemonCodeAnalyzer">
-    <disable_hints />
+    <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -35,103 +49,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-<<<<<<< HEAD
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.225806" vertical-offset="0" max-vertical-offset="990">
-              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-=======
-      <file leaf-file-name="admin-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2362" max-vertical-offset="4730">
-              <caret line="135" column="14" selection-start-line="135" selection-start-column="14" selection-end-line="135" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.068252325">
+              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output-cache.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/output-cache.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1522" max-vertical-offset="4114">
-              <caret line="83" column="57" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
->>>>>>> ES6
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< HEAD
-      <file leaf-file-name="admin-controller.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22378717" vertical-offset="2508" max-vertical-offset="4796">
-              <caret line="127" column="1" selection-start-line="127" selection-start-column="1" selection-end-line="127" selection-end-column="1" />
-=======
-      <file leaf-file-name="hash.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/adapters/hash.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11580595" vertical-offset="4340" max-vertical-offset="5808">
-              <caret line="204" column="3" selection-start-line="204" selection-start-column="3" selection-end-line="204" selection-end-column="3" />
->>>>>>> ES6
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< HEAD
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2684" max-vertical-offset="3498">
-              <caret line="122" column="30" selection-start-line="122" selection-start-column="30" selection-end-line="122" selection-end-column="30" />
-=======
-      <file leaf-file-name="post.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/post.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="10714">
-              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
->>>>>>> ES6
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< HEAD
-      <file leaf-file-name="search.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/search.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="242" max-vertical-offset="374">
-              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-=======
-      <file leaf-file-name="library.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/library.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="9042">
-              <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.less" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/less/admin.less">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="4950">
-              <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="3674">
-              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
->>>>>>> ES6
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -139,159 +71,45 @@
       </file>
     </leaf>
   </component>
-  <component name="FindManager">
-    <FindUsagesManager>
-      <setting name="OPEN_NEW_TAB" value="false" />
-    </FindUsagesManager>
-  </component>
   <component name="Git.Settings">
-<<<<<<< HEAD
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-=======
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="Jason Abbott" />
-      </list>
-    </option>
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
-    <push-targets>
-      <push-target-info repo="$PROJECT_DIR$" source="ES6" target-remote="github" target-branch="master" />
-    </push-targets>
->>>>>>> ES6
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-<<<<<<< HEAD
         <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
-=======
-        <option value="811f264b/scratch" />
-        <option value="$PROJECT_DIR$/api/winston.api.js" />
-        <option value="$PROJECT_DIR$/lib/settings.js" />
-        <option value="$PROJECT_DIR$/lib/adapters/flickr.js" />
-        <option value="$PROJECT_DIR$/lib/adapters/sql.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/about-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/api-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/authorize-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/issue-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/map-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/menu-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/pdf-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/photo-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/post-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/rss-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/search-controller.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/sitemap-controller.js" />
-        <option value="$PROJECT_DIR$/lib/enum.js" />
-        <option value="$PROJECT_DIR$/lib/extensions.js" />
-        <option value="$PROJECT_DIR$/lib/output-cache.js" />
-        <option value="$PROJECT_DIR$/lib/models/photo.js" />
-        <option value="$PROJECT_DIR$/lib/models/post.js" />
-        <option value="$PROJECT_DIR$/lib/models/post-tag.js" />
-        <option value="$PROJECT_DIR$/lib/models/map.js" />
-        <option value="$PROJECT_DIR$/lib/format.js" />
-        <option value="$PROJECT_DIR$/lib/models/photo-tag.js" />
-        <option value="$PROJECT_DIR$/public-js/client.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/tag-controller.js" />
-        <option value="$PROJECT_DIR$/public-js/post.js" />
-        <option value="$PROJECT_DIR$/views/menu-script.hbs" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/views/post.hbs" />
-        <option value="$PROJECT_DIR$/views/photo-tag.hbs" />
-        <option value="$PROJECT_DIR$/public-js/photo-tag.js" />
-        <option value="$PROJECT_DIR$/views/partials/head-files.hbs" />
-        <option value="$PROJECT_DIR$/views/partials/twitter.hbs" />
-        <option value="$PROJECT_DIR$/views/authorize.hbs" />
-        <option value="$PROJECT_DIR$/views/map.hbs" />
-        <option value="$PROJECT_DIR$/views/partials/menu-script.hbs" />
-        <option value="$PROJECT_DIR$/views/layouts/top-menu.hbs" />
-        <option value="$PROJECT_DIR$/views/layouts/empty.hbs" />
-        <option value="$PROJECT_DIR$/public/js/map.js" />
-        <option value="$PROJECT_DIR$/public-js/map.js" />
-        <option value="$PROJECT_DIR$/public-js/top-menu.js" />
-        <option value="$PROJECT_DIR$/lib/models/library.js" />
-        <option value="$PROJECT_DIR$/less/admin.less" />
-        <option value="$PROJECT_DIR$/views/admin.hbs" />
-        <option value="$PROJECT_DIR$/lib/controllers/admin-controller.js" />
-        <option value="$PROJECT_DIR$/node_modules/redis/index.js" />
-        <option value="$PROJECT_DIR$/api/redis.api.js" />
-        <option value="$PROJECT_DIR$/lib/adapters/hash.js" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBowerSettings">
-    <exe-path />
-    <config-path />
-  </component>
->>>>>>> ES6
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
   <component name="NamedScopeManager">
-    <scope name="Client Script" pattern="file:public-js/*" />
+    <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="185" />
-    <option name="y" value="33" />
-    <option name="width" value="1795" />
-    <option name="height" value="1477" />
-<<<<<<< HEAD
-=======
+    <option name="x" value="132" />
+    <option name="y" value="39" />
+    <option name="width" value="1958" />
+    <option name="height" value="1468" />
   </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Error handlingJavaScript</id>
-          </State>
-          <State>
-            <id>GeneralJavaScript</id>
-          </State>
-          <State>
-            <id>JavaScript</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>JSUnusedLocalSymbols</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
->>>>>>> ES6
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="false" id="Update" />
+    <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
-  </component>
-  <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
-      <showLibraryContents ProjectPane="true" />
+      <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource />
@@ -300,41 +118,13 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-<<<<<<< HEAD
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -344,17 +134,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-=======
-              <option name="myItemId" value="views" />
->>>>>>> ES6
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -363,1133 +142,84 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="216" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="206" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="75" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="219" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="185" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app.js" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="recentsLimit" value="5" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="182" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SLHS/account-renewal-cnaa" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="171" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="971" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="172" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="171" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="FullScreen" value="false" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="131" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="1005" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
-    <property name="options.lastSelected" value="settings.nodejs" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="options.searchVisible" value="true" />
-    <property name="SearchEverywhereHistory" value="" />
-<<<<<<< HEAD
-    <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunManager" selected="Node.js.Trail Image">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" working-dir="$PROJECT_DIR$">
-      <method />
-    </configuration>
-    <configuration default="false" name="Trail Image" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
-=======
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="121" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="133" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="135" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="945" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="183" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="195" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="198" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="758" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="JavaScriptLanguageLevel" value="ES6" />
-    <property name="JavaScriptPreferStrict" value="true" />
-    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="editorconfig.notification" value="Applied .editorconfig settings" />
-    <property name="com.intellij.ide.scratch.ScratchpadManager" value="JavaScript 1.5&#10;TEXT" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\dev\Trail Image\server\public\img" />
-      <recent name="D:\dev\Trail Image\server\views\partials" />
-      <recent name="D:\dev\Trail Image\server\views\layouts" />
-      <recent name="D:\dev\Trail Image\server\lib\adapters" />
-      <recent name="D:\dev\Trail Image\server\public" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\dev\Trail Image\server\ssl" />
-      <recent name="D:\dev\Trail Image\server\public\js" />
-      <recent name="D:\dev\Trail Image\server\lib" />
-      <recent name="D:\dev\Trail Image\server\adapters" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Node.js.Trail Image">
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" working-dir="$PROJECT_DIR$">
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptNodeJsTraceType" factoryName="Spy-js for Node.js" config="" node="" node-params="" app="" app-params="" working-dir="$PROJECT_DIR$" proxy-port="3547" pass-parent-env="true">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
       <method />
     </configuration>
-    <configuration default="false" name="Trail Image" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="$PROJECT_DIR$/../../iojs/iojs" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
-      <RunnerSettings RunnerId="Basic" />
-      <RunnerSettings RunnerId="NodeJS.debug" />
->>>>>>> ES6
-      <RunnerSettings RunnerId="NodeJS.run" />
-      <RunnerSettings RunnerId="debuggableProgram" />
-      <ConfigurationWrapper RunnerId="Basic" />
-      <ConfigurationWrapper RunnerId="NodeJS.debug" />
-      <ConfigurationWrapper RunnerId="NodeJS.run" />
-      <ConfigurationWrapper RunnerId="debuggableProgram" />
+    <configuration default="false" name="Trail Image" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="$PROJECT_DIR$/../../apps/iojs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <method />
     </configuration>
-    <configuration default="false" name="Trail Image Spy" type="JavaScriptNodeJsTraceType" factoryName="Spy-js for Node.js" config="" node="$PROJECT_DIR$/../../nodejs/node.exe" node-params="" app="app.js" app-params="" working-dir="$PROJECT_DIR$" proxy-port="3547" pass-parent-env="true">
-      <envs />
-      <RunnerSettings RunnerId="JavaScriptTraceRunner" />
-      <ConfigurationWrapper RunnerId="JavaScriptTraceRunner" />
-      <method />
-    </configuration>
-    <list size="2">
+    <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Node.js.Trail Image" />
-      <item index="1" class="java.lang.String" itemvalue="Spy-js for Node.js.Trail Image Spy" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <configuration useDefault="false">C:\Users\jason\AppData\Roaming\Subversion</configuration>
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-    <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\dev\Trail Image\server" />
-          <option name="myCopyRoot" value="C:\dev\Trail Image\server" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\dev\Trail Image\server" />
-          <option name="myCopyRoot" value="C:\dev\Trail Image\server" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="69a767e5-cc1c-4764-923d-9e7d3ff7ad47" name="Default" comment="" />
-<<<<<<< HEAD
-      <created>1424649001684</created>
+      <changelist id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="" />
+      <created>1430604145633</created>
       <option name="number" value="Default" />
-      <updated>1424649001684</updated>
+      <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00001" summary="dav">
-      <created>1424649061998</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1424649061998</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
-=======
-      <created>1391100054228</created>
-      <option name="number" value="Default" />
-      <updated>1391100054228</updated>
-    </task>
-    <task id="LOCAL-00075" summary="SSL only for flickr calls&#10;">
-      <created>1402768761297</created>
-      <option name="number" value="00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1402768761298</updated>
-    </task>
-    <task id="LOCAL-00076" summary="workaround Flickr API bug by sorting tag search on relevance&#10;">
-      <created>1402802270810</created>
-      <option name="number" value="00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1402802270810</updated>
-    </task>
-    <task id="LOCAL-00077" summary="certificate key generation tests&#10;">
-      <created>1403112168191</created>
-      <option name="number" value="00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1403112168192</updated>
-    </task>
-    <task id="LOCAL-00078" summary="certificate key generation tests&#10;">
-      <created>1403142270814</created>
-      <option name="number" value="00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1403142270814</updated>
-    </task>
-    <task id="LOCAL-00079" summary="certificate key generation tests&#10;">
-      <created>1403655498838</created>
-      <option name="number" value="00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1403655498838</updated>
-    </task>
-    <task id="LOCAL-00080" summary="one approach to hiding issue overlay&#10;">
-      <created>1403749134499</created>
-      <option name="number" value="00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1403749134499</updated>
-    </task>
-    <task id="LOCAL-00081" summary="fix admin auth&#10;">
-      <created>1403758397799</created>
-      <option name="number" value="00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1403758397799</updated>
-    </task>
-    <task id="LOCAL-00082" summary="new tag list page&#10;">
-      <created>1404509705707</created>
-      <option name="number" value="00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1404509705707</updated>
-    </task>
-    <task id="LOCAL-00083" summary="new post tag page and better parallelism&#10;">
-      <created>1404676388212</created>
-      <option name="number" value="00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1404676388212</updated>
-    </task>
-    <task id="LOCAL-00084" summary="post tag page work&#10;">
-      <created>1404684251698</created>
-      <option name="number" value="00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1404684251698</updated>
-    </task>
-    <task id="LOCAL-00085" summary="post tag page work&#10;">
-      <created>1404784923370</created>
-      <option name="number" value="00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1404784923370</updated>
-    </task>
-    <task id="LOCAL-00086" summary="post tag page&#10;">
-      <created>1404966436735</created>
-      <option name="number" value="00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1404966436735</updated>
-    </task>
-    <task id="LOCAL-00087" summary="mobile css&#10;">
-      <created>1404967203966</created>
-      <option name="number" value="00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1404967203966</updated>
-    </task>
-    <task id="LOCAL-00088" summary="automatically reload tags related to new posts&#10;">
-      <created>1405101718223</created>
-      <option name="number" value="00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1405101718223</updated>
-    </task>
-    <task id="LOCAL-00089" summary="log message just to push new release&#10;">
-      <created>1405102748341</created>
-      <option name="number" value="00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1405102748341</updated>
-    </task>
-    <task id="LOCAL-00090" summary="fix search and layout tweaks">
-      <created>1406490862804</created>
-      <option name="number" value="00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1406490862804</updated>
-    </task>
-    <task id="LOCAL-00091" summary="missed file">
-      <created>1406491261511</created>
-      <option name="number" value="00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1406491261511</updated>
-    </task>
-    <task id="LOCAL-00092" summary="figuring out problem with posting app/json through jquery">
-      <created>1406521122167</created>
-      <option name="number" value="00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1406521122167</updated>
-    </task>
-    <task id="LOCAL-00093" summary="cleaner 404 handling">
-      <created>1407460068827</created>
-      <option name="number" value="00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1407460068827</updated>
-    </task>
-    <task id="LOCAL-00094" summary="more 500 handling">
-      <created>1407553022368</created>
-      <option name="number" value="00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1407553022368</updated>
-    </task>
-    <task id="LOCAL-00095" summary="remove unused method">
-      <created>1408807105747</created>
-      <option name="number" value="00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1408807105747</updated>
-    </task>
-    <task id="LOCAL-00096" summary="fix photo tag layout">
-      <created>1410630869538</created>
-      <option name="number" value="00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1410630869538</updated>
-    </task>
-    <task id="LOCAL-00097" summary="remove issue stuff">
-      <created>1412300342515</created>
-      <option name="number" value="00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1412300342515</updated>
-    </task>
-    <task id="LOCAL-00098" summary="new avatar">
-      <created>1415677917253</created>
-      <option name="number" value="00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1415677917253</updated>
-    </task>
-    <task id="LOCAL-00099" summary="add www to fb widgets">
-      <created>1416366581769</created>
-      <option name="number" value="00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1416366581769</updated>
-    </task>
-    <task id="LOCAL-00100" summary="push for no reason">
-      <created>1419282852078</created>
-      <option name="number" value="00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1419282852078</updated>
-    </task>
-    <task id="LOCAL-00101" summary="dependency updates">
-      <created>1419284321318</created>
-      <option name="number" value="00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1419284321318</updated>
-    </task>
-    <task id="LOCAL-00102" summary="better handling for flickr.photos.getAllContexts SSL error">
-      <created>1419455537825</created>
-      <option name="number" value="00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1419455537825</updated>
-    </task>
-    <task id="LOCAL-00103" summary="add missing winston log reference">
-      <created>1419554541909</created>
-      <option name="number" value="00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1419554541909</updated>
-    </task>
-    <task id="LOCAL-00104" summary="additional logging for the Flickr SSL error response">
-      <created>1419620570823</created>
-      <option name="number" value="00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1419620570823</updated>
-    </task>
-    <task id="LOCAL-00105" summary="change admin style to better show Flickr error response and improved Clean-CSS plugin">
-      <created>1419622248200</created>
-      <option name="number" value="00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1419622248201</updated>
-    </task>
-    <task id="LOCAL-00106" summary="allow map photo selection even when no route is plotted">
-      <created>1419623128946</created>
-      <option name="number" value="00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1419623128946</updated>
-    </task>
-    <task id="LOCAL-00107" summary="update jquery and generalize flickr retry code">
-      <created>1419712110188</created>
-      <option name="number" value="00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1419712110188</updated>
-    </task>
-    <task id="LOCAL-00108" summary="fix function.apply() call in retry logic">
-      <created>1419722912853</created>
-      <option name="number" value="00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1419722912853</updated>
-    </task>
-    <task id="LOCAL-00109" summary="log retry success condition">
-      <created>1419735483844</created>
-      <option name="number" value="00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1419735483844</updated>
-    </task>
-    <task id="LOCAL-00110" summary="initial API work">
-      <created>1419995604822</created>
-      <option name="number" value="00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1419995604823</updated>
-    </task>
-    <task id="LOCAL-00111" summary="fix for new year that has no posts yet">
-      <created>1420075812761</created>
-      <option name="number" value="00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1420075812761</updated>
-    </task>
-    <task id="LOCAL-00112" summary="new avatars">
-      <created>1420769952439</created>
-      <option name="number" value="00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1420769952439</updated>
-    </task>
-    <task id="LOCAL-00113" summary="update avatars">
-      <created>1420772059636</created>
-      <option name="number" value="00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1420772059636</updated>
-    </task>
-    <task id="LOCAL-00114" summary="nodeunit test begin">
-      <created>1420843418035</created>
-      <option name="number" value="00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1420843418035</updated>
-    </task>
-    <task id="LOCAL-00115" summary="ES6 updates">
-      <created>1422680933195</created>
-      <option name="number" value="00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1422680933195</updated>
-    </task>
-    <task id="LOCAL-00116" summary="revert lodash additions">
-      <created>1422742279537</created>
-      <option name="number" value="00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1422742279537</updated>
-    </task>
-    <task id="LOCAL-00117" summary="bug fixes">
-      <created>1422840872199</created>
-      <option name="number" value="00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1422840872199</updated>
-    </task>
-    <task id="LOCAL-00118" summary="sorting redis layer">
-      <created>1422935348934</created>
-      <option name="number" value="00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1422935348941</updated>
-    </task>
-    <task id="LOCAL-00119" summary="brace formatting">
-      <created>1423194527433</created>
-      <option name="number" value="00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1423194527433</updated>
-    </task>
-    <task id="LOCAL-00120" summary="brace formatting">
-      <created>1424022545034</created>
-      <option name="number" value="00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1424022545034</updated>
-    </task>
-    <task id="LOCAL-00121" summary="js work">
-      <created>1424030829173</created>
-      <option name="number" value="00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1424030829173</updated>
-    </task>
-    <task id="LOCAL-00122" summary="fix redis.hdel issue">
-      <created>1424648637022</created>
-      <option name="number" value="00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1424648637022</updated>
-    </task>
-    <task id="LOCAL-00123" summary="fix redis.hdel issue">
-      <created>1424648744612</created>
-      <option name="number" value="00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1424648744612</updated>
-    </task>
-    <option name="localTasksCounter" value="124" />
-    <servers>
-      <GitHub shared="false" url="github.com">
-        <commitMessageFormat>{id} {summary}</commitMessageFormat>
-        <password />
-        <token>df9ddf9bdf9cdfcedfccdf9adf9ddfccdf99dfcfdfccdf9ddfc8dfcfdf9edf9adfcbdfcedf9adf9fdf9bdf9cdf98dfcfdf9edf9ddf93df98dfcbdfc9dfccdf93df99df92dfcbdf9fdf9edf98dfc9df9f</token>
-        <option name="loginAnonymously" value="false" />
-        <option name="repoAuthor" value="Jason-Abbott" />
-        <option name="repoName" value="Trail-Image" />
-        <option name="shouldFormatCommitMessage" value="false" />
-        <option name="useHttpAuthentication" value="false" />
-        <option name="useProxy" value="false" />
-        <option name="user" value="Jason-Abbott" />
-        <username />
-      </GitHub>
-    </servers>
->>>>>>> ES6
   </component>
   <component name="ToolWindowManager">
-    <frame x="185" y="33" width="1795" height="1477" extended-state="0" />
+    <frame x="132" y="39" width="1958" height="1468" extended-state="0" />
     <editor active="true" />
     <layout>
-<<<<<<< HEAD
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910052" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24960753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16404887" sideWeight="0.6716102" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886598" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32910052" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927758" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27908745" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20750383" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27515998" sideWeight="0.6716102" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294036" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="LuaJ" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32984582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44587433" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
->>>>>>> ES6
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32623574" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886598" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27756655" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
->>>>>>> ES6
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2174905" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-<<<<<<< HEAD
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32837406" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-=======
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
->>>>>>> ES6
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_NEW_TODO" value="false" />
-    <option name="myTodoPanelSettings">
-      <TodoPanelSettings />
-    </option>
-<<<<<<< HEAD
-    <MESSAGE value="module updates" />
-    <MESSAGE value="dav" />
-    <option name="LAST_COMMIT_MESSAGE" value="dav" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-    <MESSAGE value="remove issue stuff" />
-    <MESSAGE value="new avatar" />
-    <MESSAGE value="add www to fb widgets" />
-    <MESSAGE value="push for no reason" />
-    <MESSAGE value="dependency updates" />
-    <MESSAGE value="better handling for flickr.photos.getAllContexts SSL error" />
-    <MESSAGE value="add missing winston log reference" />
-    <MESSAGE value="additional logging for the Flickr SSL error response" />
-    <MESSAGE value="change admin style to better show Flickr error response and improved Clean-CSS plugin" />
-    <MESSAGE value="allow map photo selection even when no route is plotted" />
-    <MESSAGE value="update jquery and generalize flickr retry code" />
-    <MESSAGE value="fix function.apply() call in retry logic" />
-    <MESSAGE value="log retry success condition" />
-    <MESSAGE value="initial API work" />
-    <MESSAGE value="fix for new year that has no posts yet" />
-    <MESSAGE value="new avatars" />
-    <MESSAGE value="update avatars" />
-    <MESSAGE value="nodeunit test begin" />
-    <MESSAGE value="ES6 updates" />
-    <MESSAGE value="revert lodash additions" />
-    <MESSAGE value="bug fixes" />
-    <MESSAGE value="sorting redis layer" />
-    <MESSAGE value="brace formatting" />
-    <MESSAGE value="js work" />
-    <MESSAGE value="fix redis.hdel issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix redis.hdel issue" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/lib/routes/admin-route.js</url>
-          <line>55</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="256" />
-    </breakpoint-manager>
-    <watches-manager>
-      <configuration name="NodeJSConfigurationType">
-        <watch expression="process" language="JavaScript" />
-      </configuration>
-    </watches-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/partials/twitter.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05378973" vertical-offset="0" max-vertical-offset="818">
-          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/ga.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.081987575" vertical-offset="0" max-vertical-offset="805">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/heading.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="2596" max-vertical-offset="3410">
-          <caret line="118" column="30" selection-start-line="118" selection-start-column="30" selection-end-line="118" selection-end-column="30" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.10757946" vertical-offset="0" max-vertical-offset="818">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/photo-tag.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.081987575" vertical-offset="0" max-vertical-offset="814">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="242" max-vertical-offset="374">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.18935837" vertical-offset="0" max-vertical-offset="1278">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/express-hbs/test/issues.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3684211" vertical-offset="0" max-vertical-offset="6446">
-          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/enum.js">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="814">
-          <caret line="4" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.3325359" vertical-offset="6322" max-vertical-offset="8360">
-          <caret line="300" column="11" selection-start-line="300" selection-start-column="11" selection-end-line="300" selection-end-column="11" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/404.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="2596" max-vertical-offset="3058">
-          <caret line="118" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/about.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0658385" vertical-offset="0" max-vertical-offset="1232">
-          <caret line="39" column="42" selection-start-line="39" selection-start-column="42" selection-end-line="39" selection-end-column="42" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/authorize.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="792">
-          <caret line="17" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.05378973" vertical-offset="0" max-vertical-offset="818">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/cse.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31578946" vertical-offset="0" max-vertical-offset="1496">
-          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/exif.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="814">
-          <caret line="4" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="849">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/script.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="2596" max-vertical-offset="3058">
-          <caret line="118" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1278">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/blank.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.050632913" vertical-offset="0" max-vertical-offset="869">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="792">
-          <caret line="17" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="814">
-          <caret line="4" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-=======
-        <state vertical-scroll-proportion="0.2850412" vertical-offset="0" max-vertical-offset="1518">
-          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/side-menu.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05378973" vertical-offset="0" max-vertical-offset="818">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
->>>>>>> ES6
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/menu-files.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="0.0" vertical-offset="2596" max-vertical-offset="3058">
-          <caret line="118" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.068252325">
+          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/search.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="792">
-          <caret line="17" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2596" max-vertical-offset="3058">
-          <caret line="118" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/search.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="792">
-          <caret line="17" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-=======
-        <state vertical-scroll-proportion="0.02494331" vertical-offset="0" max-vertical-offset="882">
-          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/menu-script.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09977324" vertical-offset="0" max-vertical-offset="882">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/empty.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12471655" vertical-offset="0" max-vertical-offset="882">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/head-facebook.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2494331" vertical-offset="0" max-vertical-offset="882">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/navigation.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07482993" vertical-offset="0" max-vertical-offset="882">
-          <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/top-menu.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04988662" vertical-offset="0" max-vertical-offset="882">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/head-meta.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02494331" vertical-offset="0" max-vertical-offset="882">
-          <caret line="1" column="41" selection-start-line="1" selection-start-column="41" selection-end-line="1" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/head-links.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1265">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/head-files.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.050632913" vertical-offset="0" max-vertical-offset="869">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/admin.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19954649" vertical-offset="0" max-vertical-offset="882">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/photo-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3325359" vertical-offset="2230" max-vertical-offset="4532">
-          <caret line="114" column="24" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/photo-search.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10757946" vertical-offset="0" max-vertical-offset="818">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public-js/map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.39759037" vertical-offset="1309" max-vertical-offset="3608">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/map.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07594936" vertical-offset="0" max-vertical-offset="869">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public-js/top-menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8433735" vertical-offset="0" max-vertical-offset="4070">
-          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/menu.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02494331" vertical-offset="0" max-vertical-offset="882">
-          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.051643193" vertical-offset="0" max-vertical-offset="1278">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="11286">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/less/admin.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="4950">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
->>>>>>> ES6
-          <folding />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/views/search.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="242" max-vertical-offset="374">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-=======
-    <entry file="file://$PROJECT_DIR$/lib/controllers/menu-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14457831" vertical-offset="0" max-vertical-offset="913">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/sitemap-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04819277" vertical-offset="0" max-vertical-offset="913">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="3674">
-          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/library.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="9042">
-          <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
->>>>>>> ES6
-          <folding />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2684" max-vertical-offset="3498">
-          <caret line="122" column="30" selection-start-line="122" selection-start-column="30" selection-end-line="122" selection-end-column="30" />
-=======
-    <entry file="file://$PROJECT_DIR$/lib/models/post.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="10714">
-          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/tag-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04819277" vertical-offset="0" max-vertical-offset="2266">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/format.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3888889" vertical-offset="10100" max-vertical-offset="11000">
-          <caret line="475" column="31" selection-start-line="475" selection-start-column="31" selection-end-line="475" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redis/lib/commands.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0722892" vertical-offset="2805" max-vertical-offset="3718">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redis/lib/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="913">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redis/lib/queue.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1430">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/redis.api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2486">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redis/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3422222" vertical-offset="0" max-vertical-offset="28380">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2362" max-vertical-offset="4730">
-          <caret line="135" column="14" selection-start-line="135" selection-start-column="14" selection-end-line="135" selection-end-column="14" />
->>>>>>> ES6
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/output-cache.js">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-        <state vertical-scroll-proportion="-9.225806" vertical-offset="0" max-vertical-offset="990">
-          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-=======
-        <state vertical-scroll-proportion="0.0" vertical-offset="1522" max-vertical-offset="4114">
-          <caret line="83" column="57" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
->>>>>>> ES6
-          <folding />
-        </state>
-      </provider>
-    </entry>
-<<<<<<< HEAD
-    <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22378717" vertical-offset="2508" max-vertical-offset="4796">
-          <caret line="127" column="1" selection-start-line="127" selection-start-column="1" selection-end-line="127" selection-end-column="1" />
-=======
-    <entry file="file://$PROJECT_DIR$/lib/adapters/hash.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11580595" vertical-offset="4340" max-vertical-offset="5808">
-          <caret line="204" column="3" selection-start-line="204" selection-start-column="3" selection-end-line="204" selection-end-column="3" />
->>>>>>> ES6
-          <folding />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <last-edited>Client Script</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-          <order>
-            <scope name="Client Script" />
-          </order>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

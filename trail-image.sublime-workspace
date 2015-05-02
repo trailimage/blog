@@ -8,26 +8,23 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/Jason/AppData/Roaming/DeLorme.old/Topo10/Router/RoadEdits.tbl",
+			"file": "node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
 			"settings":
 			{
-				"buffer_size": 3845,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Program Files/LinkShellExtension/Doc/linkshellextension.html",
-			"settings":
-			{
-				"buffer_size": 180170,
-				"line_ending": "Windows"
+				"buffer_size": 4758,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 490.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -65,6 +62,19 @@
 	],
 	"file_history":
 	[
+		"/D/dev/Trail Image/server/node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
+		"/D/dev/Trail Image/server/node_modules/body-parser/node_modules/debug/node.js",
+		"/D/dev/Trail Image/server/node_modules/uglify-js/tools/node.js",
+		"/C/Users/Jason/AppData/Roaming/DeLorme.old/Topo10/Router/RoadEdits.tbl",
+		"/D/dev/Trail Image/server/.idea/watcherTasks.xml",
+		"/C/Program Files/LinkShellExtension/Doc/linkshellextension.html",
+		"/C/Users/Jason/.WebStorm10/config/disabled_plugins.txt",
+		"/E/Users/Jason/Dropbox/iccu.txt",
+		"/C/ProgramData/Adobe/CameraRaw/GPU/Camera Raw GPU Config.txt",
+		"/E/Temporary/people-support-log.txt",
+		"/E/Users/Jason/.WebStorm8/config/codestyles/Default _1_.xml",
+		"/C/AdwCleaner/Quarantine/Quarantine.txt",
+		"/C/HaxLogs.txt",
 		"/C/Users/Jason/Intel/Logs/IntelRST.log",
 		"/D/dev/Trail Image/server/.idea/jsLibraryMappings.xml",
 		"/D/dev/Trail Image/server/.idea/codeStyleSettings.xml",
@@ -155,16 +165,16 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/Jason/AppData/Roaming/DeLorme.old/Topo10/Router/RoadEdits.tbl",
+					"file": "node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3845,
+						"buffer_size": 4758,
 						"regions":
 						{
 						},
@@ -177,35 +187,7 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Program Files/LinkShellExtension/Doc/linkshellextension.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 180170,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -252,6 +234,7 @@
 	{
 		"height": 0.0
 	},
+	"pinned_build_system": "",
 	"project": "trail-image.sublime-project",
 	"replace":
 	{
@@ -261,6 +244,7 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -269,6 +253,7 @@
 	"select_project":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -277,6 +262,7 @@
 	"select_symbol":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
