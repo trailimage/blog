@@ -3,17 +3,15 @@
 	"description": "Trail Image server",
 	"version": "1.0.0",
 	"private": true,
-	"author":
-	{
+	"author": {
 		"name": "Jason Abbott",
 		"email": "dev@trailimage.com"
 	},
 	"engines": {
 		"iojs": ">=1.0"
 	},
-	"dependencies":
-	{
-		"express": "^4.*",
+	"dependencies":	{
+		"express": "^4.0",
 		"express-hbs": "^0.8.4",
 		"body-parser": "^1.10",
 		"compression": "^1.2",
