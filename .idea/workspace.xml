@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/admin-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/admin-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="server.iws" />
@@ -179,7 +178,13 @@
       <option name="project" value="LOCAL" />
       <updated>1430604751049</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="trap null log message">
+      <created>1430605192249</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1430605192249</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -214,7 +219,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="fix .idea files and references" />
     <MESSAGE value="check null log message" />
-    <option name="LAST_COMMIT_MESSAGE" value="check null log message" />
+    <MESSAGE value="trap null log message" />
+    <option name="LAST_COMMIT_MESSAGE" value="trap null log message" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
