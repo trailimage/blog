@@ -1,7 +1,7 @@
 {
 	"name": "trail-image",
 	"description": "Trail Image server",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"private": true,
 	"author": {
 		"name": "Jason Abbott",
@@ -15,7 +15,7 @@
 		"express-hbs": "^0.8.4",
 		"body-parser": "^1.10",
 		"compression": "^1.2",
-		"cookies": "^0.4.0",
+		"cookies": "^0.5.0",
 		"uglify-js": "^2.4.0",
 		"formidable": "^1.0.14",
 		"feed": "git://github.com/jpmonette/feed.git#master",

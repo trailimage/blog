@@ -45,12 +45,11 @@
 
 {{#post.photos}}
 
-<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
+<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px; max-width: 100%;'>
 	<a name="{{id}}"></a>
 	<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
-		<img src="{{url_s}}" alt="{{title}}"
-			width="{{width_l}}" height="{{height_l}}" itemprop="url"
-			style="width: {{width_l}}px; height: {{height_l}}px;"
+		<img src="{{url_s}}" alt="{{title}}" itemprop="url"
+			style="width: {{width_l}}px; max-width: 100%; height: auto;"
 			data-original="{{url_l}}"/>
 	</a>
 

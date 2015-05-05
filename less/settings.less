@@ -1,5 +1,9 @@
 /* http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
 
+@break-tiny: 768px;
+@break-small: 1024px;
+@break-large: 1200px;
+
 /* https://github.com/acdvorak/intellij-lessc-plugin */
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
@@ -16,13 +20,23 @@
 @hoverColor: #910;
 @footnoteColor: #900;
 /* http://codepen.io/ericrasch/pen/HzoEx and http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
-@small: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
+/*
+@tiny: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
 		~"only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
 		~"only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px)",
 		~"only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)";
 
-a
-{
+@small: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
+		 ~"only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
+		 ~"only screen and (-o-min-device-pixel-ratio: 3/2) and (min-width: 700px) and (max-width: 1200px)",
+		 ~"only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)";
+*/
+
+@tiny: ~"only screen and (max-width: 649px)";
+@small: ~"only screen and (min-width: 650px) and (max-width: 1024px)";
+
+
+a {
 	text-decoration: underline;
 	&:link { color: #453; }
 	&:visited { color: #453; }
@@ -30,8 +44,7 @@ a
 	&:active { color: #964; }
 }
 
-.mode-icon
-{
+.mode-icon {
 	@modeSize: 20px;
 
 	width: @modeSize;
