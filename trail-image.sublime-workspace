@@ -16,12 +16,12 @@
 			}
 		},
 		{
-			"contents": "Mr. Slick, your invitation was perhaps uninteresting because, to many of us, you seemed no more than another random rabble-rouser. We see those all the time in Idaho news and issue forums, proclaiming death and judgment for any who decline their ironic notion of divine love. Attempting to reason with the intentionally irrational is unlikely to produce edification. They are, strictly speaking, beneath contempt.\n\nIn spite of being active in Christian apologetics for decades, I’d never heard of you (I was more in the Van Til or Rushdoony camp). A quick internet search suggests you may be an impertinent man. Perhaps the politely pugnacious Hitchens would have suited your style. I notice Doug Wilson (another Van Til guy), up north, managed to debate and carry on a dialog with him.\n\nIf you wish to raise your radio program’s profile, you don’t need any of us. Do as Pastor Wilson and engage with those who, like yourself, make a practice of bellicose rhetoric. I’m sure they’ll return your call.",
+			"file": "/D/Lightroom/lightroom.ahk",
 			"settings":
 			{
-				"buffer_size": 1000,
+				"buffer_size": 177,
 				"line_ending": "Windows",
-				"name": "Mr. Slick, your invitation was perhaps uninteresti"
+				"name": "+z::"
 			}
 		}
 	],
@@ -207,23 +207,24 @@
 				},
 				{
 					"buffer": 1,
+					"file": "/D/Lightroom/lightroom.ahk",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1000,
+						"buffer_size": 177,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1000,
-								0
+								125,
+								125
 							]
 						],
 						"settings":
 						{
-							"auto_name": "Mr. Slick, your invitation was perhaps uninteresti",
+							"auto_name": "+z::",
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
