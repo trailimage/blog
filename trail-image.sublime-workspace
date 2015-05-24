@@ -8,20 +8,11 @@
 	"buffers":
 	[
 		{
-			"file": "node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
+			"file": "/E/Users/Jason/Downloads/hwxml/xml/aa12/2262/aa122262.xml",
 			"settings":
 			{
-				"buffer_size": 4758,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/Lightroom/lightroom.ahk",
-			"settings":
-			{
-				"buffer_size": 177,
-				"line_ending": "Windows",
-				"name": "+z::"
+				"buffer_size": 36635,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -72,6 +63,10 @@
 	"file_history":
 	[
 		"/D/dev/Trail Image/server/node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
+		"/D/Lightroom/lightroom.ahk",
+		"/E/Users/Jason/Downloads/hwxml/xml/aa10/0180/aa100180.xml",
+		"/E/Users/Jason/Downloads/hwxml/categories/cat1001.xml",
+		"/E/Users/Jason/Downloads/hwxml/categories/cat1005.xml",
 		"/D/dev/Trail Image/server/node_modules/body-parser/node_modules/debug/node.js",
 		"/D/dev/Trail Image/server/node_modules/uglify-js/tools/node.js",
 		"/C/Users/Jason/AppData/Roaming/DeLorme.old/Topo10/Router/RoadEdits.tbl",
@@ -174,61 +169,32 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
+					"file": "/E/Users/Jason/Downloads/hwxml/xml/aa12/2262/aa122262.xml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4758,
+						"buffer_size": 36635,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								25003,
+								25003
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/XML/XML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/D/Lightroom/lightroom.ahk",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								125,
-								125
-							]
-						],
-						"settings":
-						{
-							"auto_name": "+z::",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6864.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

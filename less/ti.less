@@ -96,6 +96,7 @@ div.next, div.previous {
 	position: absolute;
 	font-family: @sanSerifFont;
 	font-size: 16px;
+	text-rendering: optimizeLegibility;
 
 	@media @small, @tiny { display: none; }
 
@@ -133,6 +134,7 @@ div.next, div.previous {
 		color: rgba(255, 255, 255, 0.1);
 		text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
 		font-family: 'Oswald', Impact, Arial;
+		text-rendering: optimizeLegibility;
 		font-weight: normal;
 		line-height: 1em;
 	}
@@ -170,6 +172,7 @@ div.next, div.previous {
 		text-decoration: none;
 		font-size: 15px;
 		padding-bottom: 2px;
+		text-rendering: optimizeLegibility;
 
 		&:hover, &:active { text-decoration: underline; color: desaturate(lighten(@hoverColor, 40%), 20%); }
 	}
@@ -323,6 +326,7 @@ div.next, div.previous {
 		z-index: 200;
 		background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 95);
 		border-bottom: 1px solid @lightTrimColor;
+		text-rendering: optimizeLegibility;
 
 		@media @tiny { background-position: right -15px; }
 
@@ -426,6 +430,7 @@ div.next, div.previous {
 		margin: 0 45px;
 		padding: 0.5em 1em;
 		color: @boldColor;
+		text-rendering: optimizeLegibility;
 
 		p { margin: 0; padding: 0; }
 
@@ -511,6 +516,7 @@ div.tag-wrapper {
 			margin: 0;
 			line-height: @height - 4;
 			vertical-align: bottom;
+			text-rendering: optimizeLegibility;
 
 			@media @small, @tiny {
 				font-size: 16px;
@@ -1080,7 +1086,12 @@ div.caption {
 div#header.post-tag-heading #top {
 	height: 65px;
 
-	h1, h4 { clear: left; float: none; line-height: 1em; }
+	h1, h4 {
+		clear: left;
+		float: none;
+		line-height: 1em;
+		text-rendering: optimizeLegibility;
+	}
 
 	h1 {
 		margin: 0 0 0 5px;
@@ -1146,6 +1157,7 @@ div.post-tag {
 					font-weight: bold;
 					text-decoration: none;
 					text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+					text-rendering: optimizeLegibility;
 
 					&:hover { color: @hoverColor; }
 				}
