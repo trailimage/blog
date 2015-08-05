@@ -8,11 +8,12 @@
 	"buffers":
 	[
 		{
-			"file": "/E/Users/Jason/Downloads/hwxml/xml/aa12/2262/aa122262.xml",
+			"file": "/D/Lightroom/facebook-export.lua",
 			"settings":
 			{
-				"buffer_size": 36635,
-				"line_ending": "Windows"
+				"buffer_size": 287,
+				"line_ending": "Windows",
+				"name": "{LUA= if Title ~= '' then"
 			}
 		}
 	],
@@ -62,6 +63,8 @@
 	],
 	"file_history":
 	[
+		"/D/Lightroom/Plugins/people-support-jfriedl-20150430.6.lrplugin/OpenDialog.lua",
+		"/E/Users/Jason/Downloads/hwxml/xml/aa12/2262/aa122262.xml",
 		"/D/dev/Trail Image/server/node_modules/connect-wwwhisper/node_modules/connect/node_modules/debug/node.js",
 		"/D/Lightroom/lightroom.ahk",
 		"/E/Users/Jason/Downloads/hwxml/xml/aa10/0180/aa100180.xml",
@@ -174,27 +177,28 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/E/Users/Jason/Downloads/hwxml/xml/aa12/2262/aa122262.xml",
+					"file": "/D/Lightroom/facebook-export.lua",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 36635,
+						"buffer_size": 287,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								25003,
-								25003
+								159,
+								159
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/XML/XML.tmLanguage"
+							"auto_name": "{LUA= if Title ~= '' then",
+							"syntax": "Packages/Lua/Lua.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6864.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

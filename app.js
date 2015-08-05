@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access

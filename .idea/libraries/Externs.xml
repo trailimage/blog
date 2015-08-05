@@ -1,12 +1,12 @@
 <component name="libraryTable">
-  <library name="Flickr" type="javaScript">
+  <library name="Externs" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/api/flickr.api.js" />
+        <item url="file://$PROJECT_DIR$/api" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/api/flickr.api.js" />
+      <root url="file://$PROJECT_DIR$/api" />
     </CLASSES>
     <SOURCES />
   </library>
