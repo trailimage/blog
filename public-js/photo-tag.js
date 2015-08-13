@@ -41,6 +41,8 @@ $(function() {
 });
 
 function loadPhotoTag(link) {
-	$('#wait').show();
-	$('#thumbs').load(link.attr('href'), function()	{ $('#wait').hide(); });
+	if (link.length > 0) {
+		$('#wait').show();
+		$('#thumbs').load(link.attr('href'), function() { $('#wait').hide(); });
+	}
 }
