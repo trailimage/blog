@@ -11,8 +11,7 @@ var TrailImage = { menu: {}, post: {} };
 {{/each}}
 
 {{#each library.posts}}
-	TrailImage.post['{{this.id}}'] =
-	{
+	TrailImage.post['{{this.id}}'] = {
 		'slug': '{{this.slug}}',
 		'title': '{{this.title}}',
 		'icon': '{{this.mode}}',

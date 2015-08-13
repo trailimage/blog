@@ -1,6 +1,7 @@
-{{#setting.facebook.enabled}}
+{{#contentFor "head"}}
+	<script src='/js/post.js' type='text/javascript' defer></script>
+{{/contentFor}}
 {{> head-facebook}}
-{{/setting.facebook.enabled}}
 
 <div id="header" itemscope itemtype="http://schema.org/BlogPosting" class="content">
 	<div id="top">
@@ -44,12 +45,11 @@
 
 {{#post.photos}}
 
-<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px;'>
+<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px; max-width: 100%;'>
 	<a name="{{id}}"></a>
 	<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
-		<img src="{{url_s}}" alt="{{title}}"
-			width="{{width_l}}" height="{{height_l}}" itemprop="url"
-			style="width: {{width_l}}px; height: {{height_l}}px;"
+		<img src="{{url_s}}" alt="{{title}}" itemprop="url"
+			style="width: {{width_l}}px; max-width: 100%; height: auto;"
 			data-original="{{url_l}}"/>
 	</a>
 
@@ -89,7 +89,5 @@
 <div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
 
 <div id="footer" class="content">
-	{{#setting.facebook.enabled}}
 	<div class="fb-comments" data-href="http://www.{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
-	{{/setting.facebook.enabled}}
 </div>
