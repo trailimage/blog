@@ -590,13 +590,20 @@ div.gas {
 div.video {
 	margin: 0 auto 1px auto;
 
-	@media @small, @tiny { display: none; }
+	@maxWidth: 1032px;
+	@minWidth: 650px;
+	@ratio: @minWidth / @maxWidth;
+	@tooWide: (@maxWidth - @minWidth) / 2;
+
+	@media @small, @tiny {
+		margin: -100px -@tooWide -70px -@tooWide;
+		padding: 0;
+		transform: scale(unit(@ratio), unit(@ratio));
+	}
 
 	iframe {
 		background-color: #000;
 		padding: 4px;
-
-		@media @small, @tiny { padding: 1px; }
 	}
 }
 
