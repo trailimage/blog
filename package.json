@@ -8,7 +8,7 @@
 		"email": "dev@trailimage.com"
 	},
 	"engines": {
-		"nodejs": ">=4.0"
+		"node": ">=4.0.0"
 	},
 	"dependencies":	{
 		"express": "^4.0",
