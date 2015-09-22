@@ -62,18 +62,18 @@ function configure() {
 		partialsDir: __dirname + '/views/partials'
 	}));
 
-	hbs.registerHelper('formatCaption', function(text) { return format.story(text); });
-	hbs.registerHelper('formatTitle', function(text) { return format.text(text); });
-	hbs.registerHelper('add', function(a, b) { return (a * 1) + b; });
-	hbs.registerHelper('subtract', function(a, b) { return (a * 1) - b });
-	hbs.registerHelper('makeSlug', function(text) { return format.slug(text); });
-	hbs.registerHelper('makeTagList', function(list) { return format.tagList(list); });
-	hbs.registerHelper('formatLogTime', function(text) { return format.logTime(text); });
-	hbs.registerHelper('formatISO8601', function(text) { return format.iso8601time(text); });
-	hbs.registerHelper('formatFraction', function(text) { return format.fraction(text); });
-	hbs.registerHelper('mapHeight', function(width, height) { return height > width ? 200 : height;	});
-	hbs.registerHelper('icon', function(name) { return format.icon(name); });
-	hbs.registerHelper('rot13', function(text) { return format.rot13(text); });
+	hbs.registerHelper('formatCaption', text => format.story(text));
+	hbs.registerHelper('formatTitle', text => format.text(text));
+	hbs.registerHelper('add', (a, b) => (a * 1) + b);
+	hbs.registerHelper('subtract', (a, b) => (a * 1) - b);
+	hbs.registerHelper('makeSlug', text => format.slug(text));
+	hbs.registerHelper('makeTagList', list => format.tagList(list));
+	hbs.registerHelper('formatLogTime', text => format.logTime(text));
+	hbs.registerHelper('formatISO8601', text => format.iso8601time(text));
+	hbs.registerHelper('formatFraction', text => format.fraction(text));
+	hbs.registerHelper('mapHeight', (width, height) => height > width ? 200 : height);
+	hbs.registerHelper('icon', name => format.icon(name));
+	hbs.registerHelper('rot13', text => format.rot13(text));
 
 	app.use(filter(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false)));
 	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
@@ -83,7 +83,7 @@ function configure() {
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/public'));
 
-	library.load(function()	{
+	library.load(() => {
 		defineRoutes();
 		app.listen(port);
 		//https.createServer(options, app).listen(port);
@@ -106,12 +106,12 @@ function filter(regex, fn) {
  */
 function defineRoutes() {
 	/** @type {string} Slug pattern */
-	var s = '([\\w\\d-]{4,})';
-    /** @type {string} Flickr photo ID pattern */
-    var photoID = ':photoID(\\d{10,11})';
-    /** @type {string} Flickr set ID pattern */
-    var postID = ':postID(\\d{17})';
-	var r = require('./lib/controllers/routes.js');
+	let s = '([\\w\\d-]{4,})';
+	/** @type {string} Flickr photo ID pattern */
+	let photoID = ':photoID(\\d{10,11})';
+	/** @type {string} Flickr set ID pattern */
+	let postID = ':postID(\\d{17})';
+	let r = require('./lib/controllers/routes.js');
 
 	r.post.addFixes(app);
 

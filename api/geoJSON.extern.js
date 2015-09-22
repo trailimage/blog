@@ -8,22 +8,22 @@ GeoJSON = {};
 /**
  * @type {String}
  */
-GeoJSON.prototype.type;
+GeoJSON.prototype.type = null;
 
 /**
  * @type {GeoJSON.CoordinateReferenceSystem}
  */
-GeoJSON.prototype.crs;
+GeoJSON.prototype.crs = null;
 
 /**
  * @type {GeoJSON.Feature[]}
  */
-GeoJSON.prototype.features;
+GeoJSON.prototype.features = [];
 
 /**
  * @type {Array}
  */
-GeoJSON.prototype.bbox;
+GeoJSON.prototype.bbox = [];
 
 
 // Geometries -----------------------------------------------------------------
@@ -32,12 +32,12 @@ GeoJSON.prototype.bbox;
  * @type {Object}
  * @extends {GeoJSON}
  */
-GeoJSON.prototype.Geometry;
+GeoJSON.prototype.Geometry = {};
 
 /**
  * @type {Array}
  */
-GeoJSON.Geometry.prototype.coordinates;
+GeoJSON.Geometry.prototype.coordinates = {};
 
 // Feature --------------------------------------------------------------------
 
@@ -45,22 +45,22 @@ GeoJSON.Geometry.prototype.coordinates;
  * @type {Object}
  * @extends {GeoJSON}
  */
-GeoJSON.prototype.Feature;
+GeoJSON.prototype.Feature = {};
 
 /**
  * @type {GeoJSON.Geometry}
  */
-GeoJSON.Feature.prototype.geometry;
+GeoJSON.Feature.prototype.geometry = null;
 
 /**
  * @type {String}
  */
-GeoJSON.Feature.prototype.id;
+GeoJSON.Feature.prototype.id = null;
 
 /**
  * @type {Object}
  */
-GeoJSON.Feature.prototype.properties;
+GeoJSON.Feature.prototype.properties = null;
 
 // Coordinate reference system ------------------------------------------------
 
@@ -68,9 +68,9 @@ GeoJSON.Feature.prototype.properties;
  * @type {Object}
  * @extends {GeoJSON}
  */
-GeoJSON.prototype.CoordinateReferenceSystem;
+GeoJSON.prototype.CoordinateReferenceSystem = {};
 
 /**
  * @type {Object}
  */
-GeoJSON.CoordinateReferenceSystem.prototype.properties;
+GeoJSON.CoordinateReferenceSystem.prototype.properties = null;
