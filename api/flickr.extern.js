@@ -199,124 +199,124 @@ Flickr.prototype.Collection;
 /**
  * @type {String}
  */
-Flickr.Collection.prototype.id;
+Flickr.Collection.prototype.id = null;
 
 /**
  * @type {String}
  */
-Flickr.Collection.prototype.title;
+Flickr.Collection.prototype.title = null;
 
 /**
  * @type {String}
  */
-Flickr.Collection.prototype.description;
+Flickr.Collection.prototype.description = null;
 
 /**
  * @type {String}
  */
-Flickr.Collection.prototype.iconlarge;
+Flickr.Collection.prototype.iconlarge = null;
 
 /**
  * @type {String}
  */
-Flickr.Collection.prototype.iconsmall;
+Flickr.Collection.prototype.iconsmall = null;
 
 /**
  * @type {Flickr.Collection[]}
  */
-Flickr.Collection.prototype.collection;
+Flickr.Collection.prototype.collection = [];
 
 /**
  * @type {Flickr.SetSummary[]}
  */
-Flickr.Collection.prototype.set;
+Flickr.Collection.prototype.set = [];
 
 // SetSummary -----------------------------------------------------------------
 
 /**
  * @type {Object}
  */
-Flickr.prototype.SetSummary;
+Flickr.prototype.SetSummary = null;
 
 /**
  * @type {String}
  */
-Flickr.SetSummary.prototype.id;
+Flickr.SetSummary.prototype.id = null;
 
 /**
  * @type {String}
  */
-Flickr.SetSummary.prototype.title;
+Flickr.SetSummary.prototype.title = null;
 
 /**
  * @type {String}
  */
-Flickr.SetSummary.prototype.description;
+Flickr.SetSummary.prototype.description = null;
 
 // Response -------------------------------------------------------------------
 
 /**
  * @type {Object}
  */
-Flickr.prototype.Response;
+Flickr.prototype.Response = null;
 
 /**
  * @type {Flickr.SetPhotos|Flickr.SetInfo}
  */
-Flickr.Response.prototype.photoset;
+Flickr.Response.prototype.photoset = null;
 
 /**
  * @type {Flickr.MemberSet[]}
  */
-Flickr.Response.prototype.set;
+Flickr.Response.prototype.set = [];
 
 /**
  * @type {Flickr.Tree}
  */
-Flickr.Response.prototype.collections;
+Flickr.Response.prototype.collections = null;
 
 /**
  * @type {Flickr.PhotoInfo}
  */
-Flickr.Response.prototype.photo;
+Flickr.Response.prototype.photo = null;
 
 /**
  * @type {Flickr.SizeList}
  */
-Flickr.Response.prototype.sizes;
+Flickr.Response.prototype.sizes = null;
 
 /**
  * @type {Flickr.Status}
  */
-Flickr.Response.prototype.stat;
+Flickr.Response.prototype.stat = null;
 
 /**
  * @type {Integer}
  */
-Flickr.Response.prototype.code;
+Flickr.Response.prototype.code = 0;
 
 
 /**
  * @type {String}
  */
-Flickr.Response.prototype.message;
+Flickr.Response.prototype.message = null;
 
 /**
  * @type {Flickr.SearchResult}
  */
-Flickr.Response.prototype.photos;
+Flickr.Response.prototype.photos = null;
 
 // Content --------------------------------------------------------------------
 
 /**
  * @type {Object}
  */
-Flickr.prototype.Content;
+Flickr.prototype.Content = null;
 
 /**
  * @type {String}
  */
-Flickr.Content.prototype._content;
+Flickr.Content.prototype._content = null;
 
 // Exif -----------------------------------------------------------------------
 
@@ -324,49 +324,49 @@ Flickr.Content.prototype._content;
  * @type {Object}
  * @see http://www.flickr.com/services/api/explore/flickr.photos.getExif
  */
-Flickr.prototype.PhotoExif;
+Flickr.prototype.PhotoExif = null;
 
 /**
  * @type {Flickr.PhotoSummary}
  */
-Flickr.PhotoExif.prototype.photo;
+Flickr.PhotoExif.prototype.photo = null;
 
 /**
  * @type {Flickr.Exif[]}
  */
-Flickr.PhotoExif.photo.prototype.exif;
+Flickr.PhotoExif.photo.prototype.exif = [];
 
 /**
  * @type {Object}
  * @see http://www.flickr.com/services/api/explore/flickr.photos.getExif
  */
-Flickr.prototype.Exif;
+Flickr.prototype.Exif = null;
 
 
 /**
  * @type {Enum.ExifSpace}
  */
-Flickr.Exif.prototype.tagspace;
+Flickr.Exif.prototype.tagspace = null;
 
 /**
  * @type {Number}
  */
-Flickr.Exif.prototype.tagspaceid;
+Flickr.Exif.prototype.tagspaceid = 0;
 
 /**
  * @type {Flickr.ExifTag|String}
  */
-Flickr.Exif.prototype.tag;
+Flickr.Exif.prototype.tag = null;
 
 /**
  * @type {String}
  */
-Flickr.Exif.prototype.label;
+Flickr.Exif.prototype.label = null;
 
 /**
  * @type {Flickr.Content}
  */
-Flickr.Exif.prototype.raw;
+Flickr.Exif.prototype.raw = null;
 
 // Size -----------------------------------------------------------------------
 
@@ -374,37 +374,37 @@ Flickr.Exif.prototype.raw;
  * @type {Object}
  * @see http://www.flickr.com/services/api/flickr.photos.getSizes.html
  */
-Flickr.prototype.Size;
+Flickr.prototype.Size = null;
 
 /**
  * @type {String}
  */
-Flickr.Size.prototype.label;
+Flickr.Size.prototype.label = null;
 
 /**
  * @type {int}
  */
-Flickr.Size.prototype.width;
+Flickr.Size.prototype.width = 0;
 
 /**
  * @type {int}
  */
-Flickr.Size.prototype.height;
+Flickr.Size.prototype.height = 0;
 
 /**
  * @type {String}
  */
-Flickr.Size.prototype.source;
+Flickr.Size.prototype.source = null;
 
 /**
  * @type {String}
  */
-Flickr.Size.prototype.url;
+Flickr.Size.prototype.url = null;
 
 /**
  * @type {Flickr.Media}
  */
-Flickr.Size.prototype.media;
+Flickr.Size.prototype.media = null;
 
 // SizeList ------------------------------------------------------------------
 
@@ -413,12 +413,12 @@ Flickr.Size.prototype.media;
  * @extends {Flickr.Usage}
  * @see http://www.flickr.com/services/api/flickr.photos.getSizes.html
  */
-Flickr.prototype.SizeList;
+Flickr.prototype.SizeList = null;
 
 /**
  * @type {Flickr.Size[]}
  */
-Flickr.SizeList.prototype.size;
+Flickr.SizeList.prototype.size = [];
 
 // MemberSet ------------------------------------------------------------------
 
@@ -426,57 +426,57 @@ Flickr.SizeList.prototype.size;
  * @type {Object}
  * @see http://www.flickr.com/services/api/flickr.photos.getAllContexts.html
  */
-Flickr.prototype.MemberSet;
+Flickr.prototype.MemberSet = null;
 
 /**
  * @type {String}
  */
-Flickr.MemberSet.prototype.id;
+Flickr.MemberSet.prototype.id = null;
 
 /**
  * @type {String}
  */
-Flickr.MemberSet.prototype.title;
+Flickr.MemberSet.prototype.title = null;
 
 /**
  * @type {String}
  */
-Flickr.MemberSet.prototype.primary;
+Flickr.MemberSet.prototype.primary = null;
 
 /**
  * @type {String}
  */
-Flickr.MemberSet.prototype.secret;
+Flickr.MemberSet.prototype.secret = null;
 
 /**
  * @type {String}
  */
-Flickr.MemberSet.prototype.server;
+Flickr.MemberSet.prototype.server = null;
 
 /**
  * @type {int}
  */
-Flickr.MemberSet.prototype.farm;
+Flickr.MemberSet.prototype.farm = 0;
 
 /**
  * @type {int}
  */
-Flickr.MemberSet.prototype.view_count;
+Flickr.MemberSet.prototype.view_count = 0;
 
 /**
  * @type {int}
  */
-Flickr.MemberSet.prototype.comment_count;
+Flickr.MemberSet.prototype.comment_count = 0;
 
 /**
  * @type {int}
  */
-Flickr.MemberSet.prototype.count_photo;
+Flickr.MemberSet.prototype.count_photo = 0;
 
 /**
  * @type {int}
  */
-Flickr.MemberSet.prototype.count_video;
+Flickr.MemberSet.prototype.count_video = 0;
 
 // PhotoMembership ------------------------------------------------------------
 
@@ -484,12 +484,12 @@ Flickr.MemberSet.prototype.count_video;
  * @type {Object}
  * @see http://www.flickr.com/services/api/flickr.photos.getAllContexts.html
  */
-Flickr.prototype.PhotoMembership;
+Flickr.prototype.PhotoMembership = null;
 
 /**
  * @type {Flickr.MemberSet[]}
  */
-Flickr.PhotoMembership.prototype.set;
+Flickr.PhotoMembership.prototype.set = [];
 
 // URL ------------------------------------------------------------------------
 
@@ -497,39 +497,39 @@ Flickr.PhotoMembership.prototype.set;
  * @type {Object}
  * @extends {Flickr.Content}
  */
-Flickr.prototype.URL;
+Flickr.prototype.URL = null;
 
 /**
  * @type {String}
  */
-Flickr.URL.prototype.type;
+Flickr.URL.prototype.type = null;
 
 // LocationPermission ---------------------------------------------------------
 
 /**
  * @type {Object}
  */
-Flickr.prototype.LocationPermission;
+Flickr.prototype.LocationPermission = null;
 
 /**
  * @type {Flickr.Boolean}
  */
-Flickr.LocationPermission.prototype.ispublic;
+Flickr.LocationPermission.prototype.ispublic = false;
 
 /**
  * @type {Flickr.Boolean}
  */
-Flickr.LocationPermission.prototype.iscontant;
+Flickr.LocationPermission.prototype.iscontant = false;
 
 /**
  * @type {Flickr.Boolean}
  */
-Flickr.LocationPermission.prototype.isfriend;
+Flickr.LocationPermission.prototype.isfriend = false;
 
 /**
  * @type {Flickr.Boolean}
  */
-Flickr.LocationPermission.prototype.isfamily;
+Flickr.LocationPermission.prototype.isfamily = false;
 
 // Place ----------------------------------------------------------------------
 
@@ -537,17 +537,17 @@ Flickr.LocationPermission.prototype.isfamily;
  * @type {Object}
  * @extends {Flickr.Content}
  */
-Flickr.prototype.Place;
+Flickr.prototype.Place = null;
 
 /**
  * @type {String}
  */
-Flickr.Place.prototype.place_id;
+Flickr.Place.prototype.place_id = null;
 
 /**
  * @type {String}
  */
-Flickr.Place.prototype.woeid;
+Flickr.Place.prototype.woeid = null;
 
 // Location -------------------------------------------------------------------
 
@@ -555,42 +555,42 @@ Flickr.Place.prototype.woeid;
  * @type {Object}
  * @extends {Flickr.Place}
  */
-Flickr.prototype.Location;
+Flickr.prototype.Location = null;
 
 /**
  * @type {Number}
  */
-Flickr.Location.prototype.latitude;
+Flickr.Location.prototype.latitude = 0;
 
 /**
  * @type {Number}
  */
-Flickr.Location.prototype.longitude;
+Flickr.Location.prototype.longitude = 0;
 
 /**
  * @type {Number}
  */
-Flickr.Location.prototype.accuracy;
+Flickr.Location.prototype.accuracy = 0;
 
 /**
  * @type {Number}
  */
-Flickr.Location.prototype.context;
+Flickr.Location.prototype.context = 0;
 
 /**
  * @type {Flickr.Place}
  */
-Flickr.Location.prototype.county;
+Flickr.Location.prototype.county = null;
 
 /**
  * @type {Flickr.Place}
  */
-Flickr.Location.prototype.region;
+Flickr.Location.prototype.region = null;
 
 /**
  * @type {Flickr.Place}
  */
-Flickr.Location.prototype.country;
+Flickr.Location.prototype.country = null;
 
 // TagSummary -----------------------------------------------------------------
 

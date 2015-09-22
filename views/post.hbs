@@ -5,83 +5,83 @@
 
 <div id="header" itemscope itemtype="http://schema.org/BlogPosting" class="content">
 	<div id="top">
-	{{#if post.isPartial}}
-		<h1 itemprop="name">{{post.title}}</h1>
-		<div class='subTitle'>
-			<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
-			{{post.subTitle}}
-		</div>
-	{{else}}
-		<h1 itemprop="name">{{post.title}}</h1>
-	{{/if}}
+		{{#if post.isPartial}}
+			<h1 itemprop="name">{{post.title}}</h1>
+			<div class='subTitle'>
+				<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
+				{{post.subTitle}}
+			</div>
+		{{else}}
+			<h1 itemprop="name">{{post.title}}</h1>
+		{{/if}}
 		<!--googleoff: index-->
 		{{> menu}}
 		<!--googleon: index-->
 	</div>
 
 	{{#if post.dateTaken}}
-	<div id="postDate" itemprop="dateCreated">{{post.dateTaken}}</div>
+		<div id="postDate" itemprop="dateCreated">{{post.dateTaken}}</div>
 	{{/if}}
 
 	<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 	{{#if post.video}}
-	<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
+		<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
 	{{/if}}
 
 	{{#if post.description}}
-	<blockquote class="synopsis"><p itemprop="description">{{post.description}}<p></blockquote>
+		<blockquote class="synopsis"><p itemprop="description">{{post.description}}<p></blockquote>
 	{{/if}}
 
 	{{> post-tags post.tags}}
 	{{> navigation}}
 
 	{{#if post.photoCoordinates}}
-	<div class='map'>
-		<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
-	</div>
+		<div class='map'>
+			<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+		</div>
 	{{/if}}
 </div>
 
 {{#post.photos}}
 
-<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px; max-width: 100%;'>
-	<a name="{{id}}"></a>
-	<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
-		<img src="{{url_s}}" alt="{{title}}" itemprop="url"
-			style="width: {{width_l}}px; max-width: 100%; height: auto;"
-			data-original="{{url_l}}"/>
-	</a>
+	<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px; max-width: 100%;'>
+		<a name="{{id}}"></a>
+		<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
+			<img src="{{url_s}}" alt="{{title}}" itemprop="url"
+			     style="width: {{width_l}}px; max-width: 100%; height: auto;"
+			     data-original="{{url_l}}"/>
+		</a>
 
-    <div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
+		<div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
 
-	{{#if tags}}
-	<div class="tags">
-		{{{icon 'tags'}}}
-		<h4>More photos like this</h4>
-		{{{makeTagList tags}}}
+		{{#if tags}}
+			<div class="tags">
+				{{{icon 'tags'}}}
+				<h4>More photos like this</h4>
+				{{{makeTagList tags}}}
+			</div>
+		{{/if}}
+
+		{{#if longitude}}
+			<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+		{{/if}}
+
+		{{#if title}}
+			<p><span itemprop="name">{{{formatTitle title}}}</span></p>
+		{{/if}}
 	</div>
-	{{/if}}
 
-	{{#if longitude}}
-		<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
-	{{/if}}
-
-	{{#if title}}
-		<p><span itemprop="name">{{{formatTitle title}}}</span></p>
-	{{/if}}
-</div>
-
-<div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
+	<div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
 
 {{/post.photos}}
 
 {{#if post.video}}
-<a name="video">
-<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
-	<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
-</div>
-</a>
+	<a name="video">
+		<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
+			<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</a>
 {{/if}}
 
 {{> navigation}}

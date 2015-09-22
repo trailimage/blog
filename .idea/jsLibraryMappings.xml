@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{server node_modules}" />
-    <file url="PROJECT" libraries="{Externs, Node.js v4.1.0 Core Modules}" />
+    <file url="PROJECT" libraries="{Externs, Node.js v0.10.36 Core Modules, Node.js v1.0.4 Core Modules, Node.js v1.2.0 Core Modules, Node.js v1.3.0 Core Modules, Node.js v1.6.4 Core Modules, Node.js v1.8.1 Core Modules, Node.js v2.0.1 Core Modules}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
