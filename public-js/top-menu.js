@@ -38,7 +38,7 @@ $(function() {
 	$postList
 		.on('click', 'li.post', showSelection)
 		.on('mouseover', 'li.post', function() { $description.html($(this).data('description')); })
-		.on('mouseout', function() { $description.empty(); })
+		.on('mouseout', function() { $description.empty(); });
 
 	// always hide menu when clicking anywhere else on the screen
 	$('html').click(function(event) { toggleMenu(event, true); });
