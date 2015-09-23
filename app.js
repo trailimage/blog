@@ -3,23 +3,16 @@
 /**
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-var setting = require('./lib/settings.js');
+let setting = require('./lib/settings.js');
 var format = require('./lib/format.js');
 var Express = require('express');
-/** @type {winston|Object} */
-var log = require('winston');
-var url = require('url');
+let log = require('./lib/log.js');
 
 // middleware
 var compress = require('compression');
 var bodyParser = require('body-parser');
 var cookies = require('cookies');
 var wwwhisper = require('connect-wwwhisper');
-
-setting.isProduction = (process.env['NODE_ENV'] == 'production');
-setting.redis = url.parse(process.env['REDISCLOUD_URL']);
-setting.redis.auth = setting.redis.auth.split(":")[1];
-setting.cacheOutput = setting.isProduction;
 
 // these depend on the redis settings
 var outputCache = require('./lib/output-cache.js');
@@ -38,16 +31,6 @@ const port = process.env['PORT'] || 3000;
 configure();
 
 function configure() {
-	require('winston-redis').Redis;
-
-	if (setting.isProduction) {
-        log.add(log.transports.Redis, {
-			host: setting.redis.hostname,
-			port: setting.redis.port,
-			auth: setting.redis.auth,
-			length: 10000
-		});
-	}
 	log.error('Restarting %s application', (setting.isProduction) ? 'production' : 'development');
 
 	// http://expressjs.com/4x/api.html#app-settings
@@ -63,7 +46,7 @@ function configure() {
 	}));
 
 	hbs.registerHelper('formatCaption', text => format.story(text));
-	hbs.registerHelper('formatTitle', text => format.text(text));
+	hbs.registerHelper('formatTitle', text => format.typography(text));
 	hbs.registerHelper('add', (a, b) => (a * 1) + b);
 	hbs.registerHelper('subtract', (a, b) => (a * 1) - b);
 	hbs.registerHelper('makeSlug', text => format.slug(text));
@@ -98,7 +81,7 @@ function configure() {
  * @returns {Function}
  */
 function filter(regex, fn) {
-	return function(req, res, next) { if (regex.test(req.path)) { fn(req, res, next); } else { next(); }}
+	return (req, res, next) => { if (regex.test(req.path)) { fn(req, res, next); } else { next(); }}
 }
 
 /**
@@ -106,12 +89,12 @@ function filter(regex, fn) {
  */
 function defineRoutes() {
 	/** @type {string} Slug pattern */
-	let s = '([\\w\\d-]{4,})';
+	const s = '([\\w\\d-]{4,})';
 	/** @type {string} Flickr photo ID pattern */
-	let photoID = ':photoID(\\d{10,11})';
+	const photoID = ':photoID(\\d{10,11})';
 	/** @type {string} Flickr set ID pattern */
-	let postID = ':postID(\\d{17})';
-	let r = require('./lib/controllers/routes.js');
+	const postID = ':postID(\\d{17})';
+	const r = require('./lib/controllers/routes.js');
 
 	r.post.addFixes(app);
 
