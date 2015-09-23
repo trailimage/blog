@@ -47,8 +47,8 @@
       <file leaf-file-name="format.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/format.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68670887">
-              <caret line="493" column="7" selection-start-line="493" selection-start-column="7" selection-end-line="493" selection-end-column="7" />
+            <state vertical-scroll-proportion="-7.0142407">
+              <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -527,7 +527,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442983132338</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="es6 updates">
+      <created>1442983186128</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1442983186128</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -969,8 +975,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/format.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68670887">
-          <caret line="493" column="7" selection-start-line="493" selection-start-column="7" selection-end-line="493" selection-end-column="7" />
+        <state vertical-scroll-proportion="-7.0142407">
+          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
           <folding />
         </state>
       </provider>
