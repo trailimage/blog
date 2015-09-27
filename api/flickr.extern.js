@@ -997,7 +997,7 @@ Flickr.PhotoSummary.prototype.farm = 0;
 Flickr.PhotoSummary.prototype.title = null;
 
 /**
- * @type {Flickr.Boolean}
+ * @type {Flickr.Boolean|Boolean}
  */
 Flickr.PhotoSummary.prototype.isprimary = null;
 
@@ -1071,26 +1071,26 @@ Flickr.PhotoSummary.prototype.woeid = null;
 
 /**
  * If passed "geo" extra
- * @type {Flickr.Boolean}
+ * @type {Flickr.Boolean|Boolean}
  */
 Flickr.PhotoSummary.prototype.geo_is_family = null;
 
 /**
  * If passed "geo" extra
- * @type {Flickr.Boolean}
+ * @type {Flickr.Boolean|Boolean}
  */
 Flickr.PhotoSummary.prototype.geo_is_friend = null;
 
 /**
  * If passed "geo" extra
- * @type {Flickr.Boolean}
+ * @type {Flickr.Boolean|Boolean}
  */
 Flickr.PhotoSummary.prototype.geo_is_contact = null;
 
 
 /**
  * If passed "geo" extra
- * @type {Flickr.Boolean}
+ * @type {Flickr.Boolean|Boolean}
  */
 Flickr.PhotoSummary.prototype.geo_is_public = null;
 
