@@ -48,7 +48,7 @@ body {
 
 .fb-like {
 	position: relative;
-	padding: 4px 0 2px 7px;
+	padding: 15px 0 2px 15px;
 	height: 22px;
 	/*overflow: hidden;*/
 	z-index: 20;
@@ -170,8 +170,8 @@ div.next, div.previous {
 		display: block;
 		color: @trimColor;
 		text-decoration: none;
-		font-size: 15px;
-		padding-bottom: 2px;
+		font-size: 17px;
+		padding-bottom: 4px;
 		text-rendering: optimizeLegibility;
 
 		&:hover, &:active { text-decoration: underline; color: desaturate(lighten(@hoverColor, 40%), 20%); }
@@ -392,16 +392,16 @@ div.next, div.previous {
 	.videoLink {
 		position: absolute;
 		right: 8px;
-		top: @headerHeight + 6;
-		height: 16px;
+		top: @headerHeight + 13;
+		height: 20px;
 		text-transform: uppercase;
 		text-decoration: none;
 		letter-spacing: 1px;
 		font-size: 12px;
-		line-height: 12px;
+		line-height: 16px;
 		z-index: 21;
 		color: #fff;
-		padding: 1px 4px 0;
+		padding: 4px 6px 0 8px;
 		.gradient(#800, #810, #966);
 		.rounded(3px);
 		.opacity(0.7);
@@ -422,13 +422,12 @@ div.next, div.previous {
 	.synopsis {
 		background-color: rgba(255, 255, 255, 0.5);
 		font-weight: normal;
-		line-height: 1em;
-		font-family: @sanSerifFont;
-		letter-spacing: -0.5px;
+		line-height: 1.1em;
+		font-family: @serifFont;
 		font-size: 15px;
 		text-align: justify;
-		margin: 0 45px;
-		padding: 0.5em 1em;
+		margin: 15px 35px 25px 35px;
+		padding: 1em 2em;
 		color: @boldColor;
 		text-rendering: optimizeLegibility;
 
@@ -467,8 +466,8 @@ div.by-line {
 }
 
 div.tag-wrapper {
-	@height: 17px;
-	@mobileHeight: @height + 13;
+	@height: 22px;
+	@mobileHeight: @height + 10;
 
 	width: 100%;
 	height: @height;
@@ -875,8 +874,8 @@ div.caption {
 		margin: 0;
 		padding: 0 2em 0.3em 2em;
 
-		&:first-child, &.first { text-indent: 0; padding-top: 0.2em; }
-		&:last-child { padding-bottom: 1em; }
+		&:first-child, &.first { text-indent: 0; padding-top: 1.4em; }
+		&:last-child { padding-bottom: 2em; }
 
 		@media @small, @tiny { padding: 0 1em 0.3em 1em; }
 

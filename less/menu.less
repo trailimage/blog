@@ -1,8 +1,7 @@
 @import "elements";
 @import "settings";
 
-#menu-title
-{
+#menu-title {
 	position: absolute;
 	font-family: @sanSerifFont;
 	font-size: 16px;
@@ -11,8 +10,8 @@
 	background-color: #fff;
 	cursor: pointer;
 	color: #4e584c;
-	line-height: 1em;
-	padding: 2px 25px 1px 6px;
+	line-height: 20px;
+	padding: 2px 25px 1px 8px;
 	border: 1px solid @trimColor;
 	text-decoration: none;
 	z-index: 205;
@@ -20,24 +19,21 @@
 
 	&:hover { color: @hoverColor; }
 
-	.glyphicon
-	{
+	.glyphicon {
 		position: absolute;
 		right: 5px;
-		top: 3px;
+		top: 5px;
 
 		&.glyphicon-chevron-up { display: none; top: 2px; }
 	}
 
-	&.selected
-	{
+	&.selected {
 		border-bottom-color: #fff;
 		.border-radius(3px, 0, 0, 3px);
 	}
 }
 
-#menu
-{
+#menu {
 	@itemHeight: 24px;
 
 	position: absolute;
