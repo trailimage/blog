@@ -1,4 +1,4 @@
-var flickr = require('../lib/adapters/flickr.js');
+var flickr = require('./flickr.js');
 
 exports['calculate'] = function(test)
 {
