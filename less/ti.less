@@ -19,9 +19,7 @@ body {
 	line-height: 1.3em;
 	background: #222 url(/img/topo-map-tile.jpg) repeat;
 
-	@media @small, @tiny { background-image: none; }
-	@media @tiny { background-color: #000; }
-	@media @small { background-color: #fff; }
+	@media @small { background-image: none; background-color: #fff; }
 }
 
 .content {
@@ -34,8 +32,7 @@ body {
 	background-color: rgba(255, 255, 255, 0.9);
 	width: @contentWidth;
 
-	@media @small, @tiny { background: none; }
-	@media @tiny { width: 100%; }
+	@media @small { background: none; }
 }
 
 .clear { clear: both; }
@@ -56,8 +53,6 @@ body {
 
 div.fb-comments {
 	width: 100%;
-
-	@media @tiny { background-color: #ddd; }
 
 	.fbFeedBackContent {
 		.fbFeedBackContentHeader {
@@ -98,7 +93,7 @@ div.next, div.previous {
 	font-size: 16px;
 	text-rendering: optimizeLegibility;
 
-	@media @small, @tiny { display: none; }
+	@media @small { display: none; }
 
 	h4 {
 		color: #777;
@@ -126,7 +121,7 @@ div.next, div.previous {
 	left: 5px;
 	text-decoration: none;
 
-	@media @small, @tiny { display: none; }
+	@media @small { display: none; }
 
 	h1, h2, h3 {
 		margin: 0 0 0 10px;
@@ -164,7 +159,7 @@ div.next, div.previous {
 	left: 50%;
 	margin-left: (@contentWidth / 2) + 8;
 
-	@media @small, @tiny { display: none; }
+	@media @small { display: none; }
 
 	a {
 		display: block;
@@ -304,17 +299,17 @@ div.next, div.previous {
 #header {
 	position: relative;
 
-	#menu-title	{ bottom: 3px; left: 6px; }
-	#menu {
-		top: 66px;
+	#menu-title	{
+		bottom: 3px;
 		left: 6px;
-		@media @tiny { display: none; }
+		@media @small { bottom: 8px; left: 8px; }
 	}
+	#menu { top: 66px; left: 6px; }
 
 	&.simple #top {
 		height: @headerHeight - 25;
 		background-position: (@contentWidth - 90) -15px;
-		@media @tiny { background-position: right -15px; }
+		@media @small { background-position: right -15px; }
 	}
 
 	#top {
@@ -328,7 +323,7 @@ div.next, div.previous {
 		border-bottom: 1px solid @lightTrimColor;
 		text-rendering: optimizeLegibility;
 
-		@media @tiny { background-position: right -15px; }
+		@media @small { background-position: right 0; height: @mobileHeaderHeight; margin-bottom: 20px; }
 
 		h1 {
 			margin-left: 7px;
@@ -342,6 +337,8 @@ div.next, div.previous {
 			float: left;
 			vertical-align: top;
 			margin-top: 5px;
+
+			@media @small { font-size: 40px; }
 
 			.glyphicon {
 				padding: 0 5px 0 1px;
@@ -359,9 +356,7 @@ div.next, div.previous {
 			line-height: 18px;
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 
-			//@media @tiny {
-			//	font-size: 20pt;
-			//}
+			@media @small { padding-top: 5px; }
 
 			.parts {
 				display: block;
@@ -387,6 +382,7 @@ div.next, div.previous {
 		font-weight: bold;
 		font-size: 14px;
 		color: lighten(@boldColor, 10%);
+		@media @small { font-size: 18px; top: @mobileHeaderHeight - 36; right: 68px; }
 	}
 
 	.videoLink {
@@ -411,12 +407,8 @@ div.next, div.previous {
 		&:hover { .opacity(1); }
 
 		@media @small {
-			top: @headerHeight + 4;
-			right: 4px;
-			height: 19px;
-			padding: 4px 4px 0 8px;
+			top: @mobileHeaderHeight + 18;
 		}
-		@media @tiny { display: none; }
 	}
 
 	.synopsis {
@@ -434,8 +426,13 @@ div.next, div.previous {
 
 		p { margin: 0; padding: 0; }
 
-		@media @small, @tiny { text-align: left; margin-top: 5px; }
-		@media @tiny { color: #eee; background-color: #444; }
+		@media @small {
+			font-size: 18px;
+			text-align: left;
+			margin-top: 0;
+			margin-bottom: 5px;
+			padding: 1em 0.25em;
+		}
 	}
 
 	div.map {
@@ -447,7 +444,7 @@ div.next, div.previous {
 		padding: 0;
 		margin: 0;
 
-		@media @small, @tiny { display: none; }
+		@media @small { display: none; }
 	}
 }
 
@@ -468,7 +465,7 @@ div.by-line {
 
 div.tag-wrapper {
 	@height: 22px;
-	@mobileHeight: @height + 10;
+	@mobileHeight: @height + 14;
 
 	width: 100%;
 	height: @height;
@@ -483,12 +480,9 @@ div.tag-wrapper {
 	line-height: 10px;
 	.drop-shadow(0, 0, 2px, 0.4);
 
-	@media @small, @tiny {
+	@media @small {
 		height: @mobileHeight;
 		line-height: @mobileHeight - 5;
-	}
-	@media @tiny {
-		background-color: #666;
 	}
 
 	.glyphicon {
@@ -498,7 +492,7 @@ div.tag-wrapper {
 		font-size: @height - 6;
 		color: rgba(255, 255, 255, 0.4);
 
-		@media @small, @tiny { font-size: @mobileHeight - 9; top: 5px; }
+		@media @small { font-size: @mobileHeight - 9; top: 5px; right: 10px; }
 	}
 
 	ul.tags {
@@ -518,8 +512,8 @@ div.tag-wrapper {
 			vertical-align: bottom;
 			text-rendering: optimizeLegibility;
 
-			@media @small, @tiny {
-				font-size: 16px;
+			@media @small {
+				font-size: 20px;
 				padding-top: 3px;
 				line-height: @mobileHeight - 8;
 			}
@@ -530,7 +524,7 @@ div.tag-wrapper {
 				font-weight: bold;
 				text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
 
-				@media @small, @tiny { display: none; }
+				@media @small { display: none; }
 			}
 
 			a {
@@ -546,7 +540,7 @@ div.tag-wrapper {
 					background-color: darken(@trimColor, 10%);
 				}
 
-				@media @small, @tiny {
+				@media @small {
 					height: @mobileHeight - 8;
 					color: @trimColor;
 					background-color: rgba(255, 255, 255, 0.7);
@@ -934,10 +928,10 @@ div.caption {
 		position: relative;
 		border-top: 1px solid @trimColor;
 		background-color: darken(@lightColor, 5%);
-		padding: 0 20px 6px 0;
+		padding: 5px 20px 10px 0;
 		font-family: @sanSerifFont;
 		font-size: 13px;
-		margin-top: 8px;
+		margin-top: 20px;
 		cursor: help;
 
 		.glyphicon {
@@ -965,6 +959,7 @@ div.caption {
 			margin: 0;
 			font-size: 13px;
 			line-height: 15px;
+			font-weight: bold;
 			padding: 0;
 			vertical-align: bottom;
 
