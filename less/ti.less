@@ -19,7 +19,7 @@ body {
 	line-height: 1.3em;
 	background: #222 url(/img/topo-map-tile.jpg) repeat;
 
-	@media @mobile { color: #ddd; }
+	@media @mobile { color: @mobileTextColor; }
 }
 
 .content {
@@ -1140,8 +1140,6 @@ div.post-tag {
 			padding: 0;
 			margin: 0;
 
-			@media @tiny { background-color: #222; }
-
 			div.heading {
 				background-color: #fff;
 				margin-top: 20px;
@@ -1175,9 +1173,10 @@ div.post-tag {
 					&:hover { color: @hoverColor; }
 				}
 
-				@media @tiny {
+				@media @mobile {
 					background-color: #333;
 					a.title, ul.info { color: #fff; }
+					a:hover { color: @mobileHoverColor; }
 					.mode-icon { display: none; }
 				}
 			}
@@ -1199,13 +1198,10 @@ div.post-tag {
 				line-height: 1.2em;
 				text-align: justify;
 
-				@media @mobile, @tiny { text-align: left; }
-
-				@media @tiny {
-					font-size: 18px;
-					color: #ddd;
-					margin: 0;
-					padding: 10px 5px 0 10px;
+				@media @mobile {
+					text-align: left;
+					color: @mobileTextColor;
+					font-size: 20px;
 				}
 			}
 
@@ -1215,10 +1211,13 @@ div.post-tag {
 				margin: 0;
 				padding: 10px 6px 10px 0;
 
-				@media @mobile, @tiny { padding-left: 7px; }
+				@media @mobile {
+					padding-left: 7px;
+					padding-bottom: 20px;
+				}
 
 				li {
-					font-size: 9pt;
+					font-size: 16px;
 					font-weight: normal;
 					color: #888;
 					display: block;
@@ -1228,7 +1227,8 @@ div.post-tag {
 					margin-left: 3px;
 					line-height: 1em;
 
-					@media @mobile, @tiny {
+					@media @mobile {
+						font-size: 18px;
 						padding: 0 1px;
 						margin: 0 0 10px 0;
 					}
@@ -1240,24 +1240,13 @@ div.post-tag {
 
 						&:hover .glyphicon { .opacity(1); }
 
-						@media @mobile, @tiny {
-							font-size: 12pt;
-							padding: 3px 8px 2px 5px;
-							.glyphicon { margin: 4px 0 0 0; }
-							.rounded(4px);
-						}
-
 						@media @mobile {
-							background-color: #fff;
-							border: 1px solid @lightTrimColor;
-						}
-
-						@media @tiny {
-							color: #ddd;
-							background-color: #666;
+							color: #fff;
+							padding: 3px 8px 2px 6px;
+							background-color: #888;
 							border: 1px solid #000;
-
-							.glyphicon { color: #fff; }
+							.glyphicon { margin: 4px 0 0 0; }
+							.rounded(6px);
 						}
 					}
 				}
