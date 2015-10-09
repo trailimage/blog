@@ -19,7 +19,7 @@ body {
 	line-height: 1.3em;
 	background: #222 url(/img/topo-map-tile.jpg) repeat;
 
-	@media @small { background-image: none; background-color: #fff; }
+	@media @mobile { color: #ddd; }
 }
 
 .content {
@@ -32,7 +32,7 @@ body {
 	background-color: rgba(255, 255, 255, 0.9);
 	width: @contentWidth;
 
-	@media @small { background: none; }
+	@media @mobile { background: none; }
 }
 
 .clear { clear: both; }
@@ -93,7 +93,7 @@ div.next, div.previous {
 	font-size: 16px;
 	text-rendering: optimizeLegibility;
 
-	@media @small { display: none; }
+	@media @mobile { display: none; }
 
 	h4 {
 		color: #777;
@@ -121,7 +121,7 @@ div.next, div.previous {
 	left: 5px;
 	text-decoration: none;
 
-	@media @small { display: none; }
+	@media @mobile { display: none; }
 
 	h1, h2, h3 {
 		margin: 0 0 0 10px;
@@ -159,7 +159,7 @@ div.next, div.previous {
 	left: 50%;
 	margin-left: (@contentWidth / 2) + 8;
 
-	@media @small { display: none; }
+	@media @mobile { display: none; }
 
 	a {
 		display: block;
@@ -302,14 +302,14 @@ div.next, div.previous {
 	#menu-title	{
 		bottom: 3px;
 		left: 6px;
-		@media @small { bottom: 8px; left: 8px; }
+		@media @mobile { bottom: 8px; left: 8px; }
 	}
 	#menu { top: 66px; left: 6px; }
 
 	&.simple #top {
 		height: @headerHeight - 25;
 		background-position: (@contentWidth - 90) -15px;
-		@media @small { background-position: right -15px; }
+		@media @mobile { background-position: right -15px; }
 	}
 
 	#top {
@@ -323,7 +323,7 @@ div.next, div.previous {
 		border-bottom: 1px solid @lightTrimColor;
 		text-rendering: optimizeLegibility;
 
-		@media @small { background-position: right 0; height: @mobileHeaderHeight; margin-bottom: 20px; }
+		@media @mobile { background-position: right 0; height: @mobileHeaderHeight; margin-bottom: 20px; }
 
 		h1 {
 			margin-left: 7px;
@@ -338,7 +338,7 @@ div.next, div.previous {
 			vertical-align: top;
 			margin-top: 5px;
 
-			@media @small { font-size: 40px; }
+			@media @mobile { font-size: 40px; }
 
 			.glyphicon {
 				padding: 0 5px 0 1px;
@@ -356,7 +356,7 @@ div.next, div.previous {
 			line-height: 18px;
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 
-			@media @small { padding-top: 5px; }
+			@media @mobile { padding-top: 5px; }
 
 			.parts {
 				display: block;
@@ -382,7 +382,7 @@ div.next, div.previous {
 		font-weight: bold;
 		font-size: 14px;
 		color: lighten(@boldColor, 10%);
-		@media @small { font-size: 18px; top: @mobileHeaderHeight - 36; right: 68px; }
+		@media @mobile { font-size: 18px; top: @mobileHeaderHeight - 36; right: 68px; }
 	}
 
 	.videoLink {
@@ -406,7 +406,7 @@ div.next, div.previous {
 
 		&:hover { .opacity(1); }
 
-		@media @small {
+		@media @mobile {
 			top: @mobileHeaderHeight + 18;
 		}
 	}
@@ -426,7 +426,9 @@ div.next, div.previous {
 
 		p { margin: 0; padding: 0; }
 
-		@media @small {
+		@media @mobile {
+			color: #ddd;
+			background-color: transparent;
 			font-size: 18px;
 			text-align: left;
 			margin-top: 0;
@@ -444,7 +446,7 @@ div.next, div.previous {
 		padding: 0;
 		margin: 0;
 
-		@media @small { display: none; }
+		@media @mobile { display: none; }
 	}
 }
 
@@ -480,7 +482,8 @@ div.tag-wrapper {
 	line-height: 10px;
 	.drop-shadow(0, 0, 2px, 0.4);
 
-	@media @small {
+	@media @mobile {
+		background-color: #666;
 		height: @mobileHeight;
 		line-height: @mobileHeight - 5;
 	}
@@ -492,7 +495,7 @@ div.tag-wrapper {
 		font-size: @height - 6;
 		color: rgba(255, 255, 255, 0.4);
 
-		@media @small { font-size: @mobileHeight - 9; top: 5px; right: 10px; }
+		@media @mobile { font-size: @mobileHeight - 9; top: 5px; right: 10px; }
 	}
 
 	ul.tags {
@@ -512,7 +515,7 @@ div.tag-wrapper {
 			vertical-align: bottom;
 			text-rendering: optimizeLegibility;
 
-			@media @small {
+			@media @mobile {
 				font-size: 20px;
 				padding-top: 3px;
 				line-height: @mobileHeight - 8;
@@ -524,7 +527,7 @@ div.tag-wrapper {
 				font-weight: bold;
 				text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
 
-				@media @small { display: none; }
+				@media @mobile { display: none; }
 			}
 
 			a {
@@ -540,7 +543,7 @@ div.tag-wrapper {
 					background-color: darken(@trimColor, 10%);
 				}
 
-				@media @small {
+				@media @mobile {
 					height: @mobileHeight - 8;
 					color: @trimColor;
 					background-color: rgba(255, 255, 255, 0.7);
@@ -565,7 +568,7 @@ div.tag-wrapper {
 		.drop-shadow(0, 0, 7px, 0.6);
 	}
 
-	@media @small, @tiny {
+	@media @mobile, @tiny {
 		margin: 0;
 		div.tag-wrapper { .box-shadow(none); }
 	}
@@ -589,7 +592,7 @@ div.video {
 	@ratio: @minWidth / @maxWidth;
 	@tooWide: (@maxWidth - @minWidth) / 2;
 
-	@media @small, @tiny {
+	@media @mobile, @tiny {
 		margin: -100px -@tooWide -70px -@tooWide;
 		padding: 0;
 		transform: scale(unit(@ratio), unit(@ratio));
@@ -618,7 +621,7 @@ div.photo {
 		.drop-shadow(0, 0, 10px, 0.4);
 	}
 
-	@media @small, @tiny {
+	@media @mobile, @tiny {
 		margin: 0 auto 10px auto;
 		padding: 0;
 
@@ -643,7 +646,7 @@ div.photo {
 		text-align: left;
 		font-size: 15px;
 
-		@media @small, @tiny { left: 0; }
+		@media @mobile, @tiny { left: 0; }
 
 		h4 {
 			display: none;
@@ -691,7 +694,7 @@ div.photo {
 		.opacity(0.6);
 		.border-radius(0, 0, 3px);
 
-		@media @small, @tiny { top: 0; right: 0; }
+		@media @mobile, @tiny { top: 0; right: 0; }
 
 		p, .glyphicon {
 			cursor: progress;
@@ -797,7 +800,7 @@ div.photo {
 			padding: 0 10px 1px 10px;
 		}
 
-		@media @small {
+		@media @mobile {
 			span { padding-top: 2px; background-color: rgba(255, 255, 255, 0.7); }
 		}
 
@@ -824,7 +827,7 @@ div.caption {
 	padding: 4px 0 0 0;
 	font-size: @fontSize;
 
-	@media @small, @tiny { padding-top: 0; font-size: @fontSize + 6; line-height: 1.2em; }
+	@media @mobile, @tiny { padding-top: 0; font-size: @fontSize + 6; line-height: 1.2em; }
 
 	sup	{
 		color: @footnoteColor;
@@ -834,7 +837,7 @@ div.caption {
 		font-size: 18px;
 		cursor: help;
 
-		//@media @small, @tiny { font-size: 40px; }
+		@media @mobile { color: #f44; }
 	}
 
 	.tab { display: inline-block; width: 2em; }
@@ -872,7 +875,7 @@ div.caption {
 		&:first-child, &.first { text-indent: 0; padding-top: 1.4em; }
 		&:last-child { padding-bottom: 2em; }
 
-		@media @small, @tiny { padding: 0 1em 0.3em 1em; }
+		@media @mobile, @tiny { padding: 0 1em 0.3em 1em; }
 
 		&.quip {
 			&:first-child, &.first { text-indent: 2em; }
@@ -973,10 +976,14 @@ div.caption {
 			.opacity(1);
 		}
 
-		@media @small, @tiny {
+		@media @mobile {
 			padding: 4px 0 10px 0;
+			background-color: #555;
+			color: #eee;
 
 			.glyphicon { display: none; }
+
+			a { color: #eef; }
 
 			p {
 				text-indent: -(@mobileIndent + 15);
@@ -1192,7 +1199,7 @@ div.post-tag {
 				line-height: 1.2em;
 				text-align: justify;
 
-				@media @small, @tiny { text-align: left; }
+				@media @mobile, @tiny { text-align: left; }
 
 				@media @tiny {
 					font-size: 18px;
@@ -1208,7 +1215,7 @@ div.post-tag {
 				margin: 0;
 				padding: 10px 6px 10px 0;
 
-				@media @small, @tiny { padding-left: 7px; }
+				@media @mobile, @tiny { padding-left: 7px; }
 
 				li {
 					font-size: 9pt;
@@ -1221,7 +1228,7 @@ div.post-tag {
 					margin-left: 3px;
 					line-height: 1em;
 
-					@media @small, @tiny {
+					@media @mobile, @tiny {
 						padding: 0 1px;
 						margin: 0 0 10px 0;
 					}
@@ -1233,14 +1240,14 @@ div.post-tag {
 
 						&:hover .glyphicon { .opacity(1); }
 
-						@media @small, @tiny {
+						@media @mobile, @tiny {
 							font-size: 12pt;
 							padding: 3px 8px 2px 5px;
 							.glyphicon { margin: 4px 0 0 0; }
 							.rounded(4px);
 						}
 
-						@media @small {
+						@media @mobile {
 							background-color: #fff;
 							border: 1px solid @lightTrimColor;
 						}
@@ -1431,7 +1438,7 @@ div.authorize {
 	width: @contentWidth;
 	background-color: rgba(255, 255, 255, 0.2);
 
-	@media @small { background: #444; }
+	@media @mobile { background: #444; }
 	@media @tiny { width: 100%; border-top: 1px solid #000; }
 
 	.inner-shadow(0, 2px, 2px, 0.1);

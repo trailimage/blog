@@ -17,7 +17,7 @@
 	z-index: 205;
 	.rounded(3px);
 
-	@media @small { font-size: 20px; padding: 6px 32px 5px 15px; }
+	@media @mobile { font-size: 20px; padding: 6px 32px 5px 15px; }
 
 	&:hover {
 		color: @hoverColor;
@@ -28,12 +28,12 @@
 		right: 5px;
 		top: 5px;
 
-		@media @small { top: 8px; }
+		@media @mobile { top: 8px; }
 
 		&.glyphicon-chevron-up {
 			display: none;
 			top: 2px;
-			@media @small { top: 5px; }
+			@media @mobile { top: 5px; }
 		}
 	}
 
@@ -56,7 +56,7 @@
 	.drop-shadow(0, 4px, 6px, 0.5);
 	.border-radius(3px, 3px, 3px, 0);
 
-	@media @small {
+	@media @mobile {
 		.border-radius();
 		.drop-shadow(0, 0, 0, 0);
 		margin-left: 2px;
@@ -72,14 +72,14 @@
 		max-height: 275px;
 		overflow-y: auto;
 		overflow-x: hidden;
-		@media @small { font-weight: bold; max-height: 400px; padding: 0; }
+		@media @mobile { font-weight: bold; max-height: 400px; padding: 0; }
 
 		li {
 			position: relative;
 			display: block;
 			font-size: 16px;
 			padding: 0 6px;
-			@media @small { padding: 10px 6px; }
+			@media @mobile { padding: 10px 6px; }
 		}
 	}
 
@@ -90,7 +90,7 @@
 		cursor: pointer;
 		white-space: nowrap;
 
-		@media @small { margin-right: 0; text-align: center; }
+		@media @mobile { margin-right: 0; text-align: center; }
 
 		&:after {
 			left: 100%;
@@ -104,12 +104,12 @@
 			border-color: rgba(0, 0, 0, 0);
 			border-width: @itemHeight / 2;
 			margin-top: @itemHeight / -2;
-			@media @small { display: none; }
+			@media @mobile { display: none; }
 		}
 
 		&:hover {
 			background-color: yellow;
-			@media @small { .rounded(15px); }
+			@media @mobile { .rounded(15px); }
 			&:after {
 				border-left-color: yellow;
 			}
@@ -118,7 +118,7 @@
 		&.selected {
 			color: #fff;
 			background-color: @boldColor;
-			@media @small { .rounded(15px); }
+			@media @mobile { .rounded(15px); }
 			&:after {
 				border-left-color: @boldColor;
 			}
@@ -138,14 +138,14 @@
 		.mode-icon {
 			margin-right: 5px;
 			.opacity(0.7);
-			@media @small { display: none; }
+			@media @mobile { display: none; }
 		}
 
 		li {
 			padding-left: 27px;
 			text-indent: -27px;
 
-			@media @small { padding-left: 15px; text-indent: -10px; }
+			@media @mobile { padding-left: 15px; text-indent: -10px; }
 
 			&.series {
 				margin-top: 5px;
@@ -189,6 +189,6 @@
 		background-color: #eee;
 		.border-radius(0, 4px, 4px, 0);
 
-		@media @small { display: none; }
+		@media @mobile { display: none; }
 	}
 }
