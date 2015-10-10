@@ -7,7 +7,7 @@
 	<div id="top">
 		{{#if post.isPartial}}
 			<h1 itemprop="name">{{post.title}}</h1>
-			<div class='subTitle'>
+			<div class='subtitle'>
 				<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
 				{{post.subTitle}}
 			</div>
@@ -20,13 +20,13 @@
 	</div>
 
 	{{#if post.dateTaken}}
-		<div id="postDate" itemprop="dateCreated">{{post.dateTaken}}</div>
+		<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
 	{{/if}}
 
 	<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 	{{#if post.video}}
-		<a class="videoLink" href="#video">{{{icon 'film'}}}jump to the video</a>
+		<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
 	{{/if}}
 
 	{{#if post.description}}

@@ -1,26 +1,25 @@
-/* http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
-
-@break-tiny: 768px;
-@break-small: 1024px;
-@break-large: 1200px;
-
 /* https://github.com/acdvorak/intellij-lessc-plugin */
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
 @fontSize: 17px;
 @headerHeight: 70px;
-@mobileHeaderHeight: @headerHeight + 25;
+@mobileHeaderHeight: @headerHeight + 15;
 @imageWidth: 1034px;	/* includes borders */
 @contentWidth: 650px;
-@mobileWidth: 1024px;
-@mobileTextColor: #ddd;
-@mobileHoverColor: #e5e;
 @boldColor: #524948;
 @trimColor: #747e73;
 @lightTrimColor: #bfc1bf;
 @lightColor: #dfe1df;
 @hoverColor: #910;
 @footnoteColor: #900;
+
+@mobileWidth: 1024px;
+@mobileTextColor: #ddd;
+@mobileHoverColor: #e5e;
+@mobileFootnoteColor: #f44;
+@mobileLinkColor: #77f;
+
+/* http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
 /* http://codepen.io/ericrasch/pen/HzoEx and http://blog.scur.pl/2012/06/variable-media-queries-less-css/ */
 /*
 @tiny: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)",
@@ -34,9 +33,7 @@
 		 ~"only screen and (min-device-pixel-ratio: 1.5) and (min-width: 700px) and (max-width: 1200px)";
 */
 
-@tiny: ~"only screen and (max-width: 649px)";
-@mobile: ~"only screen and (min-width: 650px) and (max-width: 1024px)";
-
+@mobile: ~"only screen and (max-width: 1024px)";
 
 a {
 	text-decoration: underline;

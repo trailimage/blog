@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="--no-color --clean-css=&quot;--compatibility=ie8 --advanced&quot; &quot;$ProjectFileDir$\less\ti.less&quot; &quot;$ProjectFileDir$\public\css\ti.css&quot;" />
+      <option name="arguments" value="--no-color --clean-css=&quot;--advanced&quot; &quot;$ProjectFileDir$\less\ti.less&quot; &quot;$ProjectFileDir$\public\css\ti.css&quot;" />
       <option name="checkSyntaxErrors" value="false" />
       <option name="description" value="Compiles .less files into .css files" />
-      <option name="exitCodeBehavior" value="ALWAYS" />
+      <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="less" />
       <option name="immediateSync" value="true" />
       <option name="name" value="LESS" />
