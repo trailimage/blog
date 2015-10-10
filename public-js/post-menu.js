@@ -4,9 +4,10 @@
 $(function() {
 	var css = 'selected',
 		$button = $('#post-menu-button'),
-		$rootList = $('#menu-root'),
-		$tagList = $('#menu-tag'),
-		$postList = $('#menu-post'),
+		$menu = $('#post-menu'),
+		$rootList = $('#menu-roots'),
+		$tagList = $('#menu-tags'),
+		$postList = $('#menu-posts'),
 		$description = $('#post-description'),
 		selection = loadMenuSelection(['When', null]);
 
@@ -42,139 +43,133 @@ $(function() {
 
 	// always hide menu when clicking anywhere else on the screen
 	$('html').click(function(event) { toggleMenu(event, true); });
-});
 
-/**
- *
- * @param event
- * @param {Boolean} [forceHide] Optionally force hide otherwise detect from CSS
- */
-function toggleMenu(event, forceHide) {
-	// toggle menu visibility
-	var css = 'selected';
-	var $title = $('#post-menu-button');
-	var $up = $title.find('.glyphicon-chevron-up');
-	var $down = $title.find('.glyphicon-chevron-down');
-	var $menu = $('#post-menu');
-	var show = function() { $title.addClass(css); $menu.show(); $up.show(); $down.hide(); };
-	var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
+	/**
+	 * @param {Object} [event]
+	 * @param {Boolean} [forceHide] Optionally force hide otherwise detect from CSS
+	 */
+	function toggleMenu(event, forceHide) {
+		// toggle menu visibility
+		var css = 'selected';
+		var $up = $button.find('.glyphicon-chevron-up');
+		var $down = $button.find('.glyphicon-chevron-down');
+		var show = function() { $button.addClass(css); $menu.show(); $up.show(); $down.hide(); };
+		var hide = function() { $button.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
-	event.stopPropagation();
+		event.stopPropagation();
 
-	if (forceHide === undefined) { forceHide = $title.hasClass(css); }
-	if (forceHide) { hide(); } else { show(); }
-}
-
-function showSelection() {
-	var slug = $(this).data('slug');
-
-	if (typeof loadPostTrack != 'undefined') {
-		loadPostTrack(slug);
-	} else {
-		window.location.href = '/' + slug;
+		if (forceHide === undefined) { forceHide = $button.hasClass(css); }
+		if (forceHide) { hide(); } else { show(); }
 	}
-	toggleMenu();
-}
 
-/**
- *
- * @param {jQuery} $list
- * @param {jQuery} $clicked
- * @param {function(string[])} loader
- * @param {String[]} selection
- */
-function menuSelect($list, $clicked, loader, selection) {
-	$list.find('li').removeClass('selected');
-	loader(selection);
-	$clicked.addClass('selected');
-	saveMenuSelection(selection);
-}
+	function showSelection() {
+		var slug = $(this).data('slug');
 
-/**
- * @param {String[]} selection
- */
-function loadTags(selection) {
-	var $tagList = $('#menu-tag');
-	/** @type {TrailImage.Tag[]} */
-	var tags = TrailImage.menu[selection[0]];
-
-	$tagList.empty();
-
-	if (selection[1] == null) { selection[1] = tags[0].title; }
-
-	for (var i = 0; i < tags.length; i++) {
-		var $li = $('<li>').text(tags[i].title);
-		$tagList.append($li);
-		if (tags[i].title == selection[1]) { $li.addClass('selected'); loadPosts(selection); }
+		if (typeof loadPostTrack !== 'undefined') {
+			loadPostTrack(slug);
+		} else {
+			window.location.href = '/' + slug;
+		}
+		toggleMenu();
 	}
-}
 
-/**
- *
- * @param selection
- */
-function loadPosts(selection) {
-	var $postList = $('#post-menu');
-	/** @type {TrailImage.Tag[]} */
-	var tags = TrailImage.menu[selection[0]];
+	/**
+	 * @param {jQuery} $list
+	 * @param {jQuery} $clicked
+	 * @param {function(string[])} loader
+	 * @param {String[]} selected
+	 */
+	function menuSelect($list, $clicked, loader, selected) {
+		$list.find('li').removeClass('selected');
+		loader(selected);
+		$clicked.addClass('selected');
+		saveMenuSelection(selected);
+	}
 
-	$postList.empty();
+	/**
+	 * @param {String[]} selected
+	 */
+	function loadTags(selected) {
+		/** @type {TrailImage.Tag[]} */
+		var tags = TrailImage.menu[selected[0]];
 
-	for (var i = 0; i < tags.length; i++) {
-		if (tags[i].title == selection[1]) {
-			var ids = tags[i].posts;
+		$tagList.empty();
 
-			for (var j = 0; j < ids.length; j++) {
-				var post = TrailImage.post[ids[j]];
-				var title = post.title;
+		if (selected[1] == null) { selected[1] = tags[0].title; }
 
-				if (post.part && j < (ids.length - 1) && title == TrailImage.post[ids[j + 1]].title) {
-					// found part in series followed by at least one more part in the same series
-					var $ol = $('<ol>');
+		for (var i = 0; i < tags.length; i++) {
+			var $li = $('<li>').text(tags[i].title);
+			$tagList.append($li);
+			if (tags[i].title == selected[1]) { $li.addClass('selected'); loadPosts(selected); }
+		}
+	}
 
-					while (j < ids.length && TrailImage.post[ids[j]].title == title) {
+	/**
+	 * @param {String[]} selected
+	 */
+	function loadPosts(selected) {
+		/** @type {TrailImage.Tag[]} */
+		var tags = TrailImage.menu[selected[0]];
+
+		// reset list of posts in third column
+		$postList.empty();
+
+		for (var i = 0; i < tags.length; i++) {
+			if (tags[i].title == selected[1]) {
+				var ids = tags[i].posts;
+
+				for (var j = 0; j < ids.length; j++) {
+					var post = TrailImage.post[ids[j]];
+					var title = post.title;
+
+					if (post.part && j < (ids.length - 1) && title == TrailImage.post[ids[j + 1]].title) {
+						// found part in series followed by at least one more part in the same series
+						var $ol = $('<ol>');
+
+						while (j < ids.length && TrailImage.post[ids[j]].title == title) {
+							post = TrailImage.post[ids[j]];
+
+							$ol.prepend($('<li>')
+								.addClass('post')
+								.attr('value', post.part)
+								.html(post.subTitle)
+								.data('description', post.description)
+								.data('slug', post.slug));
+
+							j++;
+						}
+
+						j--;
+
 						post = TrailImage.post[ids[j]];
 
-						$ol.prepend($('<li>')
+						$postList.append($('<li>')
+							.addClass('series')
+							.html('<span class="mode-icon ' + post.icon + '"></span>' + post.title)
+							.append($ol));
+					} else {
+						// if series part is orphaned within a tag then show full title
+						if (post.part) { title += ': ' + post.subTitle; }
+
+						$postList.append($('<li>')
 							.addClass('post')
-							.attr('value', post.part)
-							.html(post.subTitle)
+							.html('<span class="mode-icon ' + post.icon + '"></span>' + title)
 							.data('description', post.description)
 							.data('slug', post.slug));
-
-						j++;
 					}
-
-					j--;
-
-					post = TrailImage.post[ids[j]];
-
-					$postList.append($('<li>')
-						.addClass('series')
-						.html('<span class="mode-icon ' + post.icon + '"></span>' + post.title)
-						.append($ol));
-				} else {
-					// if series part is orphaned within a tag then show full title
-					if (post.part) { title += ': ' + post.subTitle; }
-
-					$postList.append($('<li>')
-						.addClass('post')
-						.html('<span class="mode-icon ' + post.icon + '"></span>' + title)
-						.data('description', post.description)
-						.data('slug', post.slug));
 				}
 			}
 		}
 	}
-}
 
-function loadMenuSelection(ifNone) {
-	var re = new RegExp('\\bmenu=([^;\\b]+)', 'gi');
-	var match = re.exec(document.cookie);
-	return (match == null) ? ifNone : match[1].split(',');
-}
+	function loadMenuSelection(ifNone) {
+		var re = new RegExp('\\bmenu=([^;\\b]+)', 'gi');
+		var match = re.exec(document.cookie);
+		return (match === null) ? ifNone : match[1].split(',');
+	}
 
-function saveMenuSelection(selection) {
-	if (typeof selection === 'string') { selection = [selection, null]; }
-	document.cookie = 'menu=' + selection.join();
-}
+	function saveMenuSelection(selected) {
+		if (typeof selected === 'string') { selected = [selected, null]; }
+		document.cookie = 'menu=' + selected.join();
+	}
+});

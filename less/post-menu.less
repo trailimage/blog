@@ -17,8 +17,6 @@
 	z-index: 205;
 	.rounded(3px);
 
-	@media @mobile { font-size: 20px; padding: 6px 32px 5px 15px; }
-
 	&:hover {
 		color: @hoverColor;
 	}
@@ -56,14 +54,7 @@
 	.drop-shadow(0, 4px, 6px, 0.5);
 	.border-radius(3px, 3px, 3px, 0);
 
-	@media @mobile {
-		.border-radius();
-		.drop-shadow(0, 0, 0, 0);
-		margin-left: 2px;
-		margin-top: 19px;
-	}
-
-	#menu-root, #menu-tag, #menu-post {
+	#menu-roots, #menu-tags, #menu-posts {
 		float: left;
 		display: block;
 		list-style-type: none;
@@ -83,14 +74,12 @@
 		}
 	}
 
-	#menu-root li, #menu-tag li {
+	#menu-roots li, #menu-tags li {
 		line-height: @itemHeight;
 		height: @itemHeight;
 		margin-right: @itemHeight / 2;
 		cursor: pointer;
 		white-space: nowrap;
-
-		@media @mobile { margin-right: 0; text-align: center; }
 
 		&:after {
 			left: 100%;
@@ -125,14 +114,14 @@
 		}
 	}
 
-	#menu-root {
+	#menu-roots {
 		width: 15%;
 	}
-	#menu-tag {
+	#menu-tags {
 		width: 30%;
 	}
 
-	#menu-post {
+	#menu-posts {
 		width: 55%;
 
 		.mode-icon {
@@ -188,7 +177,5 @@
 		color: #000;
 		background-color: #eee;
 		.border-radius(0, 4px, 4px, 0);
-
-		@media @mobile { display: none; }
 	}
 }
