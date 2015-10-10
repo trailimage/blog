@@ -10,14 +10,14 @@
 		#bug, #links, #tag-navigation { position: fixed; }
 	</style>
 	<script type="text/javascript" defer>
-		window.onload = function() { $('#post-tag-navigation').load('/tag-menu'); }
+		window.addEventListener('load', function() { $('#post-tag-menu').load('/tag-menu'); });
 	</script>
 </head>
 <body>
 	{{> head-links}}
 	{{> bug}}
 	{{{body}}}
-	<div id="post-tag-navigation"></div>
+	<div id="post-tag-menu"></div>
 	{{> load-mobile-menu }}
 	{{> footer}}
 </body>
