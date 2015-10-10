@@ -1,2 +1,57 @@
 @import "elements";
 @import "settings";
+
+#mobile-menu-button {
+
+}
+
+#mobile-menu {
+	top: @mobileHeaderHeight;
+	width: @contentWidth;
+	position: absolute;
+	font-family: @sanSerifFont;
+	font-size: 24px;
+	line-height: 1em;
+	color: @mobileTextColor;
+	background-color: #000;
+	z-index: 300;
+	margin: 0 auto;
+
+	ul {
+		li {
+			padding: 10px 0;
+			a {
+				color: @mobileTextColor;
+				text-decoration: none;
+			}
+		}
+
+		&.links {
+			position: absolute;
+			top: 10px;
+			right: 20px;
+			text-align: right;
+
+		}
+
+		&.tag-list {
+			margin: 10px 20px;
+			float: left;
+			li {
+				white-space: nowrap;
+				.glyphicon { padding-right: 10px; }
+			}
+		}
+	}
+
+	.tags {
+		float: left;
+		margin: 10px;
+		ul {
+			display: none;
+			&.when {
+				display: block;
+			}
+		}
+	}
+}
