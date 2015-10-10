@@ -2,7 +2,8 @@
 @import "elements";
 @import "glyphicons";
 @import "settings";
-@import "menu";
+@import "post-menu";
+@import "mobile-menu";
 
 html {
 	overflow-y: scroll;
@@ -343,12 +344,13 @@ div.next, div.previous {
 #header {
 	position: relative;
 
-	#menu-title	{
+	// most menu settings are in post-menu.less
+	#post-menu-button {
 		bottom: 3px;
 		left: 6px;
 		@media @mobile { display: none; }
 	}
-	#menu { top: 66px; left: 6px; }
+	#post-menu { top: 66px; left: 6px; }
 
 	&.simple #top {
 		height: @headerHeight - 25;

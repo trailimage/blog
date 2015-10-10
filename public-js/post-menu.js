@@ -3,14 +3,14 @@
  */
 $(function() {
 	var css = 'selected',
-		$title = $('#menu-title'),
+		$button = $('#post-menu-button'),
 		$rootList = $('#menu-root'),
 		$tagList = $('#menu-tag'),
 		$postList = $('#menu-post'),
 		$description = $('#post-description'),
 		selection = loadMenuSelection(['When', null]);
 
-	$title
+	$button
 		.one('click', function() {
 			// populate menu on first click
 			for (var root in TrailImage.menu) {
@@ -52,10 +52,10 @@ $(function() {
 function toggleMenu(event, forceHide) {
 	// toggle menu visibility
 	var css = 'selected';
-	var $title = $('#menu-title');
+	var $title = $('#post-menu-button');
 	var $up = $title.find('.glyphicon-chevron-up');
 	var $down = $title.find('.glyphicon-chevron-down');
-	var $menu = $('#menu');
+	var $menu = $('#post-menu');
 	var show = function() { $title.addClass(css); $menu.show(); $up.show(); $down.hide(); };
 	var hide = function() { $title.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
@@ -114,7 +114,7 @@ function loadTags(selection) {
  * @param selection
  */
 function loadPosts(selection) {
-	var $postList = $('#menu-post');
+	var $postList = $('#post-menu');
 	/** @type {TrailImage.Tag[]} */
 	var tags = TrailImage.menu[selection[0]];
 

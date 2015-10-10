@@ -27,40 +27,14 @@
       <option name="workingDir" value="$FileDir$" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="false">
-      <option name="arguments" value="&quot;$ProjectFileDir$\public-js\client.js&quot; &quot;$ProjectFileDir$\public-js\jquery.animate-colors.js&quot; &quot;$ProjectFileDir$\public-js\jquery.lazyload.js&quot; -o &quot;$ProjectFileDir$\public\js\ti.js&quot; -c" />
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="post-menu.js -o &quot;../public/js/post-menu.js&quot; -c" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Compress Javascript" />
       <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="js" />
       <option name="immediateSync" value="true" />
-      <option name="name" value="Uglify" />
-      <option name="output" value="" />
-      <option name="outputFilters">
-        <array>
-          <FilterInfo>
-            <option name="description" value="lessc error format" />
-            <option name="name" value="lessc" />
-            <option name="regExp" value="$MESSAGE$$FILE_PATH$?:$LINE$:$COLUMN$" />
-          </FilterInfo>
-        </array>
-      </option>
-      <option name="outputFromStdout" value="false" />
-      <option name="passParentEnvs" value="true" />
-      <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
-      <option name="scopeName" value="Project Files" />
-      <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$FileDir$" />
-      <envs />
-    </TaskOptions>
-    <TaskOptions isEnabled="false">
-      <option name="arguments" value="&quot;$ProjectFileDir$\public-js\photo-tag.js&quot; -o &quot;$ProjectFileDir$\public\js\photo-tag.js&quot; -c" />
-      <option name="checkSyntaxErrors" value="true" />
-      <option name="description" value="Compress Javascript" />
-      <option name="exitCodeBehavior" value="ERROR" />
-      <option name="fileExtension" value="js" />
-      <option name="immediateSync" value="true" />
-      <option name="name" value="Uglify Tags" />
+      <option name="name" value="Uglify post menu script" />
       <option name="output" value="" />
       <option name="outputFilters">
         <array>
@@ -76,7 +50,33 @@
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
       <option name="scopeName" value="Script Source" />
       <option name="trackOnlyRoot" value="false" />
-      <option name="workingDir" value="$FileDir$" />
+      <option name="workingDir" value="$ProjectFileDir$\public-js\" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="post.js jquery.lazyload.js -o &quot;../public/js/post.js&quot; -c" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="Compress Javascript" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Uglify lazyload script" />
+      <option name="output" value="" />
+      <option name="outputFilters">
+        <array>
+          <FilterInfo>
+            <option name="description" value="lessc error format" />
+            <option name="name" value="lessc" />
+            <option name="regExp" value="$MESSAGE$$FILE_PATH$?:$LINE$:$COLUMN$" />
+          </FilterInfo>
+        </array>
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
+      <option name="scopeName" value="Script Source" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$\public-js\" />
       <envs />
     </TaskOptions>
   </component>

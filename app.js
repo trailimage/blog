@@ -99,7 +99,7 @@ function defineRoutes() {
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/authorize', r.authorize.view);
-	app.get('/js/menu-data.js', r.menu.view);
+	app.get('/js/post-menu-data.js', r.menu.data);
 	app.get('/sitemap.xml', r.sitemap.view);
     app.get('/exif/'+photoID, r.photo.exif);
 	app.get('/issue', r.issue.view);
