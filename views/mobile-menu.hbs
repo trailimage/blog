@@ -1,25 +1,23 @@
-<div id="mobile-navigation">
-	<ul class="links">
-		<li><a href="/about">About</a></li>
-		<li><a href="/photo-tag">Photo Tags</a></li>
-		<li><a href="/ruminations">Ruminations</a></li>
-		<li><a href="/rss" class="feed-icon">RSS Feed</a></li>
-		<li><a href="https://twitter.com/trailimage">Twitter</a></li>
-	</ul>
+<ul class="links">
+	<li><a href="/about">About</a></li>
+	<li><a href="/photo-tag">Photo Tags</a></li>
+	<li><a href="/ruminations">Ruminations</a></li>
+	<li><a href="/rss" class="feed-icon">RSS Feed</a></li>
+	<li><a href="https://twitter.com/trailimage">Twitter</a></li>
+</ul>
 
-	<ul class="tag-list">
+<ul class="tag-list">
 {{#each library.tags}}
-		<li class="{{this.title}}">{{{icon this.icon}}}{{this.title}}</li>
+	<li class="{{this.title}}">{{{icon this.icon}}}{{this.title}}</li>
 {{/each}}
-	</ul>
+</ul>
 
-	<div class="tags">
+<div class="tags">
 {{#each library.tags}}
-		<ul class="{{this.title}}">
-		{{#this.tags}}
-			<li><a href="/tag/{{this.slug}}">{{this.title}}</a>({{this.posts.length}})</li>
-		{{/this.tags}}
-		</ul>
+	<ul class="{{this.title}}">
+	{{#this.tags}}
+		<li><a href="/tag/{{this.slug}}">{{this.title}}</a>({{this.posts.length}})</li>
+	{{/this.tags}}
+	</ul>
 {{/each}}
-	</div>
 </div>

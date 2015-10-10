@@ -105,5 +105,31 @@
       <option name="workingDir" value="$ProjectFileDir$\public-js\" />
       <envs />
     </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="mobile-menu.js -o &quot;../public/js/mobile-menu.js&quot; -c --screw-ie8" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="Compress Javascript" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Uglify mobile menu script" />
+      <option name="output" value="" />
+      <option name="outputFilters">
+        <array>
+          <FilterInfo>
+            <option name="description" value="lessc error format" />
+            <option name="name" value="lessc" />
+            <option name="regExp" value="$MESSAGE$$FILE_PATH$?:$LINE$:$COLUMN$" />
+          </FilterInfo>
+        </array>
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
+      <option name="scopeName" value="Script Source" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$\public-js\" />
+      <envs />
+    </TaskOptions>
   </component>
 </project>
