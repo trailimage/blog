@@ -77,21 +77,49 @@ div.fb-comments {
 
 		}
 	}
+
+	@media @mobile {
+		background-color: @mobileTextColor;
+	}
 }
 
 /* Navigation -------------------------------------------------------------- */
 
+#nav-top {
+	@media @mobile {
+		div.next, div.previous {
+			margin-top: -100px;
+		}
+	}
+}
+
+#nav-bottom {
+	@media @mobile {
+		div.next, div.previous {
+			margin-top: 50px;
+		}
+	}
+}
+
 div.next {
 	left: 50%;
 	margin-left: (@contentWidth / 2) + 10;
-	@media @mobile { left: 0; }
+	@media @mobile {
+		right: 10px;
+		margin: 0;
+		text-align: right;
+	}
 }
 
 div.previous {
 	right: 50%;
 	margin-right: (@contentWidth / 2) + 10;
 	text-align: right;
-	@media @mobile { right: 0; }
+	@media @mobile {
+		left: 10px;
+		margin: 0;
+		text-align: left;
+	}
 }
 
 div.next, div.previous {
@@ -101,6 +129,7 @@ div.next, div.previous {
 	font-family: @sanSerifFont;
 	font-size: 16px;
 	text-rendering: optimizeLegibility;
+	z-index: 250;
 
 	h4 {
 		color: #777;
@@ -116,7 +145,15 @@ div.next, div.previous {
 	a {
 		color: #ddd;
 		text-decoration: none;
-		&:hover { color: desaturate(lighten(@hoverColor, 30%), 20%); text-decoration: underline; }
+
+		&:hover {
+			color: desaturate(lighten(@hoverColor, 30%), 20%);
+		}
+	}
+
+	@media @mobile {
+		width: auto;
+		a { color: @mobileLinkColor; }
 	}
 }
 
@@ -409,7 +446,7 @@ div.next, div.previous {
 		color: lighten(@boldColor, 10%);
 
 		@media @mobile {
-			color: @mobileTextColor;
+			color: darken(@mobileTextColor, 30%);
 			font-size: 18px;
 			top: @mobileHeaderHeight + 10;
 			right: 10px;
@@ -438,7 +475,8 @@ div.next, div.previous {
 		&:hover { .opacity(1); }
 
 		@media @mobile {
-			top: @mobileHeaderHeight + 18;
+			//top: @mobileHeaderHeight + 18;
+			display: none;
 		}
 	}
 
@@ -462,9 +500,9 @@ div.next, div.previous {
 			background-color: transparent;
 			font-size: 18px;
 			text-align: left;
-			margin-top: 0;
-			margin-bottom: 5px;
-			padding: 1em 0.25em;
+			// space for navigation
+			padding: 0;
+			margin: 10px 40px 85px 40px;
 		}
 	}
 
@@ -494,6 +532,11 @@ div.by-line {
 	p { padding: 15px 20px 20px 0; }
 
 	span { font-size: 35px; padding-right: 5px; }
+
+	@media @mobile {
+		text-align: center;
+		color: @mobileTextColor;
+	}
 }
 
 div.tag-wrapper {
@@ -526,7 +569,12 @@ div.tag-wrapper {
 		font-size: @height - 6;
 		color: rgba(255, 255, 255, 0.4);
 
-		@media @mobile { font-size: @mobileHeight - 9; top: 5px; right: 10px; }
+		@media @mobile {
+			font-size: @mobileHeight - 9;
+			top: 5px;
+			right: 10px;
+			color: rgba(255, 255, 200, 0.4);
+		}
 	}
 
 	ul.tags {
@@ -547,7 +595,7 @@ div.tag-wrapper {
 			text-rendering: optimizeLegibility;
 
 			@media @mobile {
-				font-size: 20px;
+				font-size: 17px;
 				padding-top: 3px;
 				line-height: @mobileHeight - 8;
 			}
@@ -580,10 +628,11 @@ div.tag-wrapper {
 					background-color: rgba(255, 255, 255, 0.7);
 					padding: 0 8px;
 					border: 1px solid @trimColor;
-					.rounded(4px);
+					.rounded(8px);
 
 					&:hover, &:active {
 						color: @hoverColor;
+						padding: 0 12px;
 						background-color: #fff;
 					}
 				}
@@ -901,6 +950,16 @@ div.caption {
 			line-height: 1.1em;
 			color: #444;
 		}
+
+		@media @mobile {
+			margin-bottom: 0;
+			text-align: left;
+			p {
+				color: @mobileTextColor;
+				line-height: 1.3em;
+				padding: 0 3em 0.5em 3em;
+			}
+		}
 	}
 
 	p {
@@ -938,7 +997,7 @@ div.caption {
 			//margin-bottom: 1em;
 			font-size: 18px;
 
-			.dropCap {
+			.drop-cap {
 				font-size: 36pt;
 				padding: 0 3px 0 0;
 				float: left;
@@ -1020,9 +1079,10 @@ div.caption {
 		@media @mobile {
 			padding: 4px 0 10px 0;
 			border: none;
-			background-color: #444;
+			background-color: #333;
 			margin: 6px 0 35px 0;
 			color: @mobileTextColor;
+			pointer-events: none;
 
 			.opacity(1);
 

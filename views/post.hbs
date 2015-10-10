@@ -34,7 +34,7 @@
 	{{/if}}
 
 	{{> post-tags post.tags}}
-	{{> navigation}}
+	<div id="nav-top">{{> navigation}}</div>
 
 	{{#if post.photoCoordinates}}
 		<div class='map'>
@@ -84,7 +84,7 @@
 	</a>
 {{/if}}
 
-{{> navigation}}
+<div id="nav-bottom">{{> navigation}}</div>
 <div class="footer-tags content">{{> post-tags post.tags}}</div>
 <div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
 
