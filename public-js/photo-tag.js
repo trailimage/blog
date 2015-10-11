@@ -43,6 +43,9 @@ $(function() {
 function loadPhotoTag(link) {
 	if (link.length > 0) {
 		$('#wait').show();
-		$('#thumbs').load(link.attr('href'), function() { $('#wait').hide(); });
+		$('#thumbs').load(link.attr('href'), function() {
+			$('#wait').hide();
+			window.scrollTo(0, 0);
+		});
 	}
 }

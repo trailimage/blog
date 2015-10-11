@@ -1084,7 +1084,6 @@ div.caption {
 			background-color: #333;
 			margin: 6px 0 35px 0;
 			color: @mobileTextColor;
-			pointer-events: none;
 
 			.opacity(1);
 
@@ -1396,6 +1395,9 @@ div.post-tag {
 	@thumbWidth: 150px;
 	@tabWidth: 40px;
 	@viewWidth: (@thumbWidth + 5) * 3;
+	@mobileTabWidth: 28px;
+
+	@media @mobile { a { color: @mobileLinkColor; } }
 
 	#flickr-logo {
 		position: absolute;
@@ -1405,6 +1407,8 @@ div.post-tag {
 		text-decoration: none;
 		display: block;
 		text-align: center;
+
+		@media @mobile { top: -60px; }
 	}
 
 	#wait {
@@ -1444,6 +1448,19 @@ div.post-tag {
 			&:hover { background-color: @boldColor; }
 			&.selected { color: #400;; background-color: rgba(255, 255, 255, 0.9); }
 		}
+
+		@media @mobile {
+			margin: 0;
+
+			li {
+				width: @mobileTabWidth;
+				background-color: #444;
+				text-shadow: none;
+				padding: 25px 0;
+				.rounded(0);
+
+			}
+		}
 	}
 
 	#tag-index {
@@ -1470,6 +1487,23 @@ div.post-tag {
 				}
 			}
 		}
+
+		@media @mobile {
+			border-right: 1px solid #333;
+			width: @contentWidth - (@viewWidth + @mobileTabWidth + 7);
+
+			div {
+				a {
+					font-size: 16px;
+					line-height: 3em;
+					text-align: right;
+					
+					&.selected {
+						background-color: #444;
+					}
+				}
+			}
+		}
 	}
 
 	#thumbs {
@@ -1480,7 +1514,7 @@ div.post-tag {
 		h4 {
 			margin: 10px 0;
 			padding: 0;
-			font-family: 'Oswald', Impact, Arial;
+			font-family: @headerFont;
 			font-weight: 700;
 			font-size: 22px;
 			color: @boldColor; /* 423938 or 5e685c */
@@ -1494,15 +1528,18 @@ div.post-tag {
 			img { margin: 0; padding: 0; border: 1px solid @trimColor; }
 			&:hover img { border-color: @hoverColor; }
 		}
+
+		@media @mobile {
+			h4 {
+				color: @mobileTextColor;
+				font-weight: 400;
+				text-shadow: none;
+			}
+			a {
+				img { border: none; }
+			}
+		}
 	}
-}
-
-/* Search ------------------------------------------------------------------ */
-
-/* http://www.google.com/cse/setup/advanced?cx=012532665638014192714%3Aeb0vr5on0aw */
-div.search
-{
-
 }
 
 /* Authorize --------------------------------------------------------------- */

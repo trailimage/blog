@@ -6,6 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public-js/photo-tag.js" afterPath="$PROJECT_DIR$/public-js/photo-tag.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/photo-tag.js" afterPath="$PROJECT_DIR$/public/js/photo-tag.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/ti.css" afterPath="$PROJECT_DIR$/public/css/ti.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/less/ti.less" afterPath="$PROJECT_DIR$/less/ti.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -32,18 +34,18 @@
       <file leaf-file-name="ti.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/less/ti.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6335283">
-              <caret line="1205" column="20" selection-start-line="1205" selection-start-column="20" selection-end-line="1205" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.6978558">
+              <caret line="1499" column="20" selection-start-line="1499" selection-start-column="20" selection-end-line="1499" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.less" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/less/settings.less">
+      <file leaf-file-name="photo-tag.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.4193548">
-              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -105,7 +107,6 @@
         <option value="$PROJECT_DIR$/public-js/post.js" />
         <option value="$PROJECT_DIR$/public-js/jquery.lazyload.js" />
         <option value="$PROJECT_DIR$/views/map.hbs" />
-        <option value="$PROJECT_DIR$/public-js/photo-tag.js" />
         <option value="$PROJECT_DIR$/api/jquery-extern.js" />
         <option value="$PROJECT_DIR$/views/partials/post-menu.hbs" />
         <option value="$PROJECT_DIR$/less/post-menu.less" />
@@ -117,6 +118,7 @@
         <option value="$PROJECT_DIR$/lib/format.js" />
         <option value="$PROJECT_DIR$/views/mobile-menu.hbs" />
         <option value="$PROJECT_DIR$/public-js/mobile-menu.js" />
+        <option value="$PROJECT_DIR$/public-js/photo-tag.js" />
         <option value="$PROJECT_DIR$/less/ti.less" />
       </list>
     </option>
@@ -240,7 +242,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="less" />
+              <option name="myItemId" value="public-js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -321,12 +323,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00001" summary="fix .idea files and references">
-      <created>1430604540446</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1430604540446</updated>
     </task>
     <task id="LOCAL-00002" summary="check null log message">
       <created>1430604751049</created>
@@ -616,7 +612,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444531965539</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="mobile menu layout">
+      <created>1444532952924</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1444532952947</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TodoView">
@@ -942,13 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.020813623">
-          <caret line="1" column="39" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/map.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12865497">
@@ -1127,16 +1122,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/less/settings.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4193548">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.064327486">
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/less/ti.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6335283">
-          <caret line="1205" column="20" selection-start-line="1205" selection-start-column="20" selection-end-line="1205" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.6978558">
+          <caret line="1499" column="20" selection-start-line="1499" selection-start-column="20" selection-end-line="1499" selection-end-column="20" />
           <folding />
         </state>
       </provider>
