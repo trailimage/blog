@@ -4,21 +4,18 @@
 	<meta content='{{setting.keywords}}' name='keywords'/>
 	{{> head-files}}
 	{{> ga}}
-	{{> twitter}}
 	{{{block "head"}}}
 	<style type="text/css">
 		#bug, #links, #tag-navigation { position: fixed; }
 	</style>
-	<script type="text/javascript" defer>
-		window.addEventListener('load', function() { $('#post-tag-menu').load('/tag-menu'); });
+	<script type="text/javascript">
+		window.feature = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{setting.timestamp}} };
 	</script>
 </head>
 <body>
 	{{> head-links}}
 	{{> bug}}
 	{{{body}}}
-	<div id="post-tag-menu"></div>
-	{{> load-mobile-menu }}
 	{{> footer}}
 </body>
 {{{block "afterBody"}}}

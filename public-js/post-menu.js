@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Menu data are loaded in menu-script.hbs referenced as /js/menu-data.js only available on post pages
  */

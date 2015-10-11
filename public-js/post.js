@@ -1,3 +1,5 @@
+'use strict';
+
 $(function() {
 	// setup EXIF and map mouse-overs and lazy-loading
 	var $photos = $('.photo');

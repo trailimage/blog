@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @var {String} selectedTag Defined in photo-tag.hbs
  */

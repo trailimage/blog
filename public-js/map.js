@@ -1,3 +1,5 @@
+'use strict';
+
 var ti = {
 	timer: 0,
 	/** @type {google.maps.Map} */

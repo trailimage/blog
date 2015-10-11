@@ -6,17 +6,17 @@
 	{{else}}
 		<meta content='{{setting.keywords}}' name='keywords'/>
 	{{/if}}
+		<script type="text/javascript">
+			window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{setting.timestamp}} };
+		</script>
 		{{> head-files}}
-		{{> post-menu-files}}
 		{{> ga}}
-		{{> twitter}}
 		{{{block "head"}}}
 	</head>
 	<body>
 		{{> head-links}}
 		{{> bug}}
 		{{{body}}}
-		{{> load-mobile-menu }}
 		{{> footer}}
 	</body>
 	{{{block "afterBody"}}}
