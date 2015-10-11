@@ -6,9 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/mobile-menu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/less/mobile-menu.less" afterPath="$PROJECT_DIR$/less/mobile-menu.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/less/ti.less" afterPath="$PROJECT_DIR$/less/ti.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public-js/mobile-menu.js" afterPath="$PROJECT_DIR$/public-js/mobile-menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/mobile-menu.js" afterPath="$PROJECT_DIR$/public/js/mobile-menu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/ti.css" afterPath="$PROJECT_DIR$/public/css/ti.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="server.iws" />
@@ -40,21 +40,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="photo-tag.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
+      <file leaf-file-name="mobile-menu.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public-js/mobile-menu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.041627247">
+              <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mobile-menu.less" pinned="false" current-in-tab="true">
+      <file leaf-file-name="photo-tag.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mobile-menu.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/less/mobile-menu.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15009746">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state vertical-scroll-proportion="-1.4193548">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -125,10 +135,10 @@
         <option value="$PROJECT_DIR$/public-js/post-menu.js" />
         <option value="$PROJECT_DIR$/lib/format.js" />
         <option value="$PROJECT_DIR$/views/mobile-menu.hbs" />
-        <option value="$PROJECT_DIR$/public-js/mobile-menu.js" />
         <option value="$PROJECT_DIR$/public-js/photo-tag.js" />
         <option value="$PROJECT_DIR$/less/ti.less" />
         <option value="$PROJECT_DIR$/less/mobile-menu.less" />
+        <option value="$PROJECT_DIR$/public-js/mobile-menu.js" />
       </list>
     </option>
   </component>
@@ -141,8 +151,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="92" />
-    <option name="y" value="34" />
+    <option name="x" value="69" />
+    <option name="y" value="23" />
     <option name="width" value="1715" />
     <option name="height" value="1463" />
   </component>
@@ -318,12 +328,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00003" summary="trap null log message">
-      <created>1430605192249</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1430605192249</updated>
     </task>
     <task id="LOCAL-00004" summary=".idea updates">
       <created>1430605497203</created>
@@ -613,7 +617,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444534151180</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="missed script">
+      <created>1444534345077</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1444534345077</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView">
@@ -626,7 +636,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="92" y="34" width="1715" height="1463" extended-state="0" />
+    <frame x="69" y="23" width="1715" height="1463" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21582733" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -683,7 +693,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add text-rendering: optimizeLegibility;" />
     <MESSAGE value="pointless changes" />
     <MESSAGE value="show video in mobile view" />
     <MESSAGE value="add some arrow functions, update node, sanitize more camera info" />
@@ -708,7 +717,8 @@
     <MESSAGE value="mobile menu" />
     <MESSAGE value="mobile menu layout" />
     <MESSAGE value="mobile photo tags" />
-    <option name="LAST_COMMIT_MESSAGE" value="mobile photo tags" />
+    <MESSAGE value="missed script" />
+    <option name="LAST_COMMIT_MESSAGE" value="missed script" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1075,14 +1085,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public-js/mobile-menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20813623">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/mobile-menu.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08576998">
@@ -1115,14 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/less/ti.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.516129">
@@ -1133,8 +1127,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/less/mobile-menu.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15009746">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state vertical-scroll-proportion="-1.4193548">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public-js/photo-tag.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public-js/mobile-menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041627247">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
           <folding />
         </state>
       </provider>

@@ -29,8 +29,6 @@ $(function() {
 		$tagList = $menu.find('.tag-list li');
 		$menu.find('.close').click(function() { $menu.hide(0, function() { visible = false; }); });
 
-		console.log($tagList.find('li.' + selection));
-
 		// make initial selection
 		$tags.find('ul.' + selection).show();
 		$tagList.filter('li.' + selection).addClass(css);
