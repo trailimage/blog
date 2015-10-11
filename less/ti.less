@@ -1318,7 +1318,7 @@ div.post-tag {
 				@media @mobile {
 					background-color: #333;
 					a.title, ul.info { color: #fff; }
-					a:hover { color: @mobileHoverColor; }
+					a:active { color: @mobileHoverColor; }
 					.mode-icon { display: none; }
 				}
 			}
@@ -1358,6 +1358,7 @@ div.post-tag {
 				}
 
 				li {
+					position: relative;
 					font-size: 16px;
 					font-weight: normal;
 					color: #888;
@@ -1368,26 +1369,32 @@ div.post-tag {
 					margin-left: 3px;
 					line-height: 1em;
 
-					@media @mobile {
-						font-size: 18px;
-						padding: 0 1px;
-						margin: 0 0 10px 0;
-					}
-
 					a {
 						text-decoration: none;
-
 						.glyphicon { .opacity(0.2); padding-right: 2px; }
-
 						&:hover .glyphicon { .opacity(1); }
+					}
 
-						@media @mobile {
+					@media @mobile {
+						font-size: 18px;
+						padding: 0 1px 0 7px;
+						margin: 0 0 10px 0;
+
+						a {
 							color: #fff;
-							padding: 3px 8px 2px 6px;
-							background-color: #888;
-							border: 1px solid #000;
-							.glyphicon { margin: 4px 0 0 0; }
-							.rounded(6px);
+							padding: 4px 12px 3px 30px;
+							background-color: #666;
+							border: none;
+
+							.glyphicon {
+								position: absolute;
+								left: 15px;
+								top: 0;
+								margin-right: 3px;
+							}
+							.rounded(12px);
+
+							&:active .glyphicon { color: @mobileActiveColor; .opacity(1); }
 						}
 					}
 				}
@@ -1402,7 +1409,12 @@ div.post-tag {
 	@viewWidth: (@thumbWidth + 5) * 3;
 	@mobileTabWidth: 28px;
 
-	@media @mobile { a { color: @mobileLinkColor; } }
+	@media @mobile {
+		a {
+			color: @mobileLinkColor;
+			&:active { color: @mobileActiveColor; }
+		}
+	}
 
 	#flickr-logo {
 		position: absolute;
