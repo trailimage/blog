@@ -16,9 +16,14 @@
 }
 
 #mobile-menu {
-	top: @mobileHeaderHeight;
+	@headerSize: 65px;
+	@selectColor: #333;
+
+	top: 0;
+	bottom: 0;
 	width: @contentWidth;
 	position: absolute;
+	min-height: 500px;
 	font-family: @sanSerifFont;
 	font-size: 24px;
 	line-height: 1em;
@@ -28,9 +33,20 @@
 	margin: 0 auto;
 	display: none;
 
+	h1 {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		font-size: 30px;
+		font-family: @headerFont;
+		margin: 0;
+		padding: 0;
+	}
+
 	ul {
 		li {
 			padding: 14px 0;
+			cursor: pointer;
 			a {
 				color: @mobileTextColor;
 				text-decoration: none;
@@ -39,7 +55,7 @@
 
 		&.links {
 			position: absolute;
-			top: 10px;
+			top: 80px;
 			right: 20px;
 			text-align: right;
 
@@ -54,14 +70,18 @@
 		}
 
 		&.tag-list {
-			margin: 10px 20px;
+			margin: @headerSize 0 0 0;
 			float: left;
 			li {
 				white-space: nowrap;
+				padding: 20px;
 				.glyphicon {
 					font-size: 18px;
 					padding-right: 10px;
 					color: @mobileLinkColor;
+				}
+				&.selected {
+					background-color: @selectColor;
 				}
 			}
 		}
@@ -69,23 +89,33 @@
 
 	.tags {
 		float: left;
-		margin: 10px;
+		margin: @headerSize 0;
 		ul {
+			padding: 0;
+			margin: 0;
 			display: none;
-			&.when {
-				display: block;
+			background-color: @selectColor;
+
+			li {
+				padding: 10px 20px;
+				.count {
+					font-size: smaller;
+					padding-left: 10px;
+					color: #666;
+				}
 			}
 		}
 	}
 
 	.close {
 		position: absolute;
-		bottom: 10px;
+		top: 20px;
 		right: 20px;
-		cursor: pointer;
 
 		.glyphicon {
+			cursor: pointer;
 			font-size: 48px;
+			color: #fff;
 		}
 	}
 }

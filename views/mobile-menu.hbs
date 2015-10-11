@@ -1,3 +1,5 @@
+<div class="close">{{{icon 'remove'}}}</div>
+
 <ul class="links">
 	<li><a href="/">Home {{{icon 'home'}}}</a></li>
 	<li><a href="/about">About {{{icon 'info-sign'}}}</a></li>
@@ -8,20 +10,20 @@
 	<li><a href="https://twitter.com/trailimage">Twitter {{{icon 'comment'}}}</a></li>
 </ul>
 
+<h1>View Other Adventures</h1>
+
 <ul class="tag-list">
 {{#each library.tags}}
-	<li class="{{this.title}}">{{{icon this.icon}}}{{this.title}}</li>
+	<li class="{{lowerCase this.title}}">{{{icon this.icon}}}{{this.title}}</li>
 {{/each}}
 </ul>
 
 <div class="tags">
 {{#each library.tags}}
-	<ul class="{{this.title}}">
+	<ul class="{{lowerCase this.title}}">
 	{{#this.tags}}
-		<li><a href="/tag/{{this.slug}}">{{this.title}}</a>({{this.posts.length}})</li>
+		<li><a href="/tag/{{this.slug}}">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
 	{{/this.tags}}
 	</ul>
 {{/each}}
 </div>
-
-<div class="close">{{{icon 'menu-up'}}}</div>

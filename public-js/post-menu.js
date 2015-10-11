@@ -50,7 +50,6 @@ $(function() {
 	 */
 	function toggleMenu(event, forceHide) {
 		// toggle menu visibility
-		var css = 'selected';
 		var $up = $button.find('.glyphicon-chevron-up');
 		var $down = $button.find('.glyphicon-chevron-down');
 		var show = function() { $button.addClass(css); $menu.show(); $up.show(); $down.hide(); };
@@ -80,9 +79,9 @@ $(function() {
 	 * @param {String[]} selected
 	 */
 	function menuSelect($list, $clicked, loader, selected) {
-		$list.find('li').removeClass('selected');
+		$list.find('li').removeClass(css);
 		loader(selected);
-		$clicked.addClass('selected');
+		$clicked.addClass(css);
 		saveMenuSelection(selected);
 	}
 
@@ -100,7 +99,7 @@ $(function() {
 		for (var i = 0; i < tags.length; i++) {
 			var $li = $('<li>').text(tags[i].title);
 			$tagList.append($li);
-			if (tags[i].title == selected[1]) { $li.addClass('selected'); loadPosts(selected); }
+			if (tags[i].title == selected[1]) { $li.addClass(css); loadPosts(selected); }
 		}
 	}
 
@@ -162,12 +161,20 @@ $(function() {
 		}
 	}
 
+	/**
+	 * @param {String[]} ifNone Root and post tags to load if no cookie is found
+	 * @returns {String[]}
+	 */
 	function loadMenuSelection(ifNone) {
 		var re = new RegExp('\\bmenu=([^;\\b]+)', 'gi');
 		var match = re.exec(document.cookie);
 		return (match === null) ? ifNone : match[1].split(',');
 	}
 
+	/**
+	 * Menu root and tag selection
+	 * @param {String|String[]} selected
+	 */
 	function saveMenuSelection(selected) {
 		if (typeof selected === 'string') { selected = [selected, null]; }
 		document.cookie = 'menu=' + selected.join();
