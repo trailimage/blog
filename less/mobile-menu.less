@@ -6,7 +6,7 @@
 }
 
 #mobile-menu {
-	top: @mobileHeaderHeight;
+	top: 50px;
 	width: @contentWidth;
 	position: absolute;
 	font-family: @sanSerifFont;
@@ -19,7 +19,7 @@
 
 	ul {
 		li {
-			padding: 10px 0;
+			padding: 14px 0;
 			a {
 				color: @mobileTextColor;
 				text-decoration: none;
@@ -32,6 +32,14 @@
 			right: 20px;
 			text-align: right;
 
+			li {
+				.glyphicon {
+					font-size: 18px;
+					padding-left: 10px;
+					color: darken(@mobileTextColor, 50%);
+				}
+			}
+
 		}
 
 		&.tag-list {
@@ -39,7 +47,11 @@
 			float: left;
 			li {
 				white-space: nowrap;
-				.glyphicon { padding-right: 10px; }
+				.glyphicon {
+					font-size: 18px;
+					padding-right: 10px;
+					color: @mobileLinkColor;
+				}
 			}
 		}
 	}
@@ -52,6 +64,16 @@
 			&.when {
 				display: block;
 			}
+		}
+	}
+
+	.close {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		.glyphicon {
+			font-size: 48px;
+			color: #faa;
 		}
 	}
 }
