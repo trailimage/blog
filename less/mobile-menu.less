@@ -4,13 +4,11 @@
 #mobile-menu-button {
 	position: absolute;
 	z-index: 300;
-	top: 10px;
-	right: 10px;
-	width: 50px;
-	height: 50px;
-	background-color: #fff;
+	top: 0;
+	right: 0;
 
 	.glyphicon {
+		padding: 10px;
 		font-size: 50px;
 		color: @mobileTextColor;
 		cursor: pointer;
@@ -18,7 +16,7 @@
 }
 
 #mobile-menu {
-	top: 50px;
+	top: @mobileHeaderHeight;
 	width: @contentWidth;
 	position: absolute;
 	font-family: @sanSerifFont;
@@ -82,13 +80,12 @@
 
 	.close {
 		position: absolute;
-		bottom: 20px;
+		bottom: 10px;
 		right: 20px;
 		cursor: pointer;
 
 		.glyphicon {
 			font-size: 48px;
-			color: #faa;
 		}
 	}
 }
