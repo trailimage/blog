@@ -106,7 +106,7 @@ function defineRoutes() {
 	app.get('/issues', r.issue.view);
 	app.get('/issue/:slug'+s, r.issue.view);
 	app.get('/tag-menu', r.tag.menu);
-	app.get('/mobile-menu', r.menu.mobile)
+	app.get('/mobile-menu', r.menu.mobile);
 	app.get('/search', r.search.view);
 	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug

@@ -15,6 +15,14 @@
 				"line_ending": "Windows",
 				"name": "{LUA= if Title ~= '' then"
 			}
+		},
+		{
+			"file": "/E/Users/.WebStorm10/config/options/code.style.schemes.xml",
+			"settings":
+			{
+				"buffer_size": 144,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -172,7 +180,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -196,6 +204,34 @@
 						{
 							"auto_name": "{LUA= if Title ~= '' then",
 							"syntax": "Packages/Lua/Lua.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/E/Users/.WebStorm10/config/options/code.style.schemes.xml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 144,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

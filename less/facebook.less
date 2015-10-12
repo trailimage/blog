@@ -1,0 +1,41 @@
+@import "elements";
+@import "settings";
+
+#fb-root { position: absolute; }
+
+.fb-script { position: absolute; }
+
+.fb-like {
+	position: relative;
+	padding: 13px 0 2px 15px;
+	height: 22px;
+	/*overflow: hidden;*/
+	z-index: 20;
+
+	@media @mobile { display: none;	}
+}
+
+div.fb-comments {
+	width: 100%;
+
+	.fbFeedBackContent {
+		.fbFeedBackContentHeader {
+			div.fbModeratorOptions {
+				margin-left: 10px !important;
+			}
+		}
+		form.mainContentForm {
+			img.viewerProfilePic { }
+			label.fbCommentButton { }
+		}
+
+		div.fbFooterBorder
+		{
+
+		}
+	}
+
+	@media @mobile {
+		background-color: @mobileTextColor;
+	}
+}

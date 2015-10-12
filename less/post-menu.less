@@ -1,6 +1,17 @@
 @import "elements";
 @import "settings";
 
+#header {
+	#post-menu-button {
+		bottom: 3px;
+		left: 6px;
+		@media @mobile {
+			display: none;
+		}
+	}
+	#post-menu { top: 66px; left: 6px; }
+}
+
 #post-menu-button {
 	position: absolute;
 	font-family: @sanSerifFont;
