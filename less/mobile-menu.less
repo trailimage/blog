@@ -89,10 +89,13 @@
 
 	.tags {
 		float: left;
+		position: relative;
+		width: 300px;
 		margin: @headerSize 0;
 		height: @menuHeight - 30;
 		overflow-y: auto;
 		overflow-x: hidden;
+		z-index: 90;
 
 		ul {
 			padding: 0;
@@ -102,6 +105,7 @@
 
 			li {
 				font-size: 20px;
+				text-align: center;
 				padding: 15px 20px;
 				.count {
 					font-size: smaller;
@@ -110,5 +114,15 @@
 				}
 			}
 		}
+	}
+
+	.glyphicon-chevron-down {
+		color: #666;
+		display: none;
+		font-size: 50px;
+		position: absolute;
+		top: @menuHeight - 55;
+		left: 115px;
+		z-index: 100;
 	}
 }

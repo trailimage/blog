@@ -1,11 +1,11 @@
 'use strict';
 
 $(function() {
-	var css = 'selected';
 	var $button = $('#mobile-menu-button');
 	var $menu = $('#mobile-menu');
-	var $tags = null;
-	var $tagList = null;
+	var $tags = $menu.find('.tags');
+	var $down = $menu.find('.glyphicon-chevron-down');
+	var tagHeight = $tags.height();
 	var prepared = false;
 	var visible = false;
 	var selection = loadMenuSelection('when');
@@ -25,25 +25,36 @@ $(function() {
 		visible = true;
 		if (prepared) { return; }
 
-		$tags = $menu.find('.tags');
-		$tagList = $menu.find('.tag-list li');
+		var css = 'selected';
+		var $tagList = $menu.find('.tag-list li');
+		var $down = $menu.find('.glyphicon-chevron-down');
+
 		$menu.find('.close').click(function() { $menu.hide(0, function() { visible = false; }); });
 
 		// make initial selection
-		$tags.find('ul.' + selection).show();
+		$tags.find('ul.' + selection).show(0, toggleArrow);
 		$tagList.filter('li.' + selection).addClass(css);
 
 		$tagList.click(function() {
 			var $tag = $(this);
 			var tagClass = $tag.attr('class');
+
+			$down.hide();
 			$tags.find('ul').hide();
-			$tags.find('ul.' + tagClass).show();
+			$tags.find('ul.' + tagClass).show(0, toggleArrow);
 			$tagList.removeClass(css);
 			$tag.addClass(css);
 			saveMenuSelection(tagClass);
 		});
 
 		prepared = true;
+	}
+
+	/**
+	 * Show down arrow if list of tags exceeds display area
+	 */
+	function toggleArrow() {
+		if ($(this).height() > tagHeight) {	$down.show(); }
 	}
 
 	/**
