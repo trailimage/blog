@@ -1388,9 +1388,9 @@ div.post-tag {
 						margin: 0 0 10px 0;
 
 						a {
-							color: #fff;
+							color: #999;
 							padding: 4px 12px 3px 30px;
-							background-color: #666;
+							background-color: rgba(100, 100, 100, 0.4);
 							border: none;
 
 							.glyphicon {
@@ -1401,7 +1401,10 @@ div.post-tag {
 							}
 							.rounded(12px);
 
-							&:active .glyphicon { color: @mobileActiveColor; .opacity(1); }
+							&:active {
+								color: @mobileActiveColor;
+								.glyphicon { color: @mobileActiveColor; .opacity(1); }
+							}
 						}
 					}
 				}
