@@ -11,5 +11,8 @@ $(function() {
 		$exif.off('mouseenter')
 			 .html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
 			 .load($exif.data('url'));
-	})
+	});
+	$photos.find('.info').click(function() {
+		$(this).addClass('selected');
+	});
 });

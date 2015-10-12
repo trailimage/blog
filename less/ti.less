@@ -710,6 +710,8 @@ div.photo {
 		.drop-shadow(0, 0, 10px, 0.4);
 	}
 
+	.info { display: none; }
+
 	@media @mobile {
 		margin: 0 auto 10px auto;
 		padding: 0;
@@ -719,6 +721,35 @@ div.photo {
 			padding: 0;
 			.box-shadow(none);
 			width: auto;
+		}
+
+		// show info when touched
+		.info {
+			//position: absolute;
+			//display: block;
+			//width: 200px;
+			//height: 100px;
+			//top: 0;
+			//bottom: 0;
+			//right: 0;
+			//
+			//.glyphicon {
+			//	display: block;
+			//	width: 80px;
+			//	height: 80px;
+			//	position: absolute;
+			//	right: 20px;
+			//	bottom: -10px;
+			//	color: rgba(255, 255, 255, 0.6);
+			//	font-size: 80px;
+			//}
+			//
+			//&.selected {
+			//	background-color: rgba(0, 0, 0, 0.6);
+			//	.glyphicon {
+			//		color: @mobileActiveColor;
+			//	}
+			//}
 		}
 	}
 
@@ -1090,7 +1121,7 @@ div.caption {
 			border: none;
 			background-color: #333;
 			margin: 6px 0 35px 0;
-			color: @mobileTextColor;
+			color: darken(@mobileTextColor, 30%);
 
 			.opacity(1);
 
