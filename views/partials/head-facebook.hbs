@@ -1,19 +1,14 @@
-{{#contentFor "head"}}
-	{{! https://developers.facebook.com/docs/reference/opengraph/object-type/article/ }}
-	{{! https://developers.facebook.com/tools/debug/og/ }}
-	<meta property='og:title' content='{{post.name}}'/>
-	<meta property='fb:app_id' content='{{setting.facebook.appID}}'/>
-	<meta property='fb:admins' content='{{setting.facebook.adminID}}' />
-	<meta property='og:url' content='http://www.{{setting.domain}}/{{post.slug}}/'/>
-	<meta property='og:image' content='{{post.bigThumb}}'/>
-	<meta property='og:type' content='article'/>
-	<meta property='article:published_time' content='{{formatISO8601 post.createdOn}}'/>
-	<meta property='article:modified_time' content='{{formatISO8601 post.updatedOn}}'/>
-	<meta property='article:author' content='{{setting.facebook.authorURL}}'/>
-	{{#if video}}
-	<meta property='og:video' content='http://youtu.be/{{post.video.id}}'/>
-	{{/if}}
-{{/contentFor}}
-
-{{! script is loaded in /js/responsive.js }}
-<div id="fb-root"></div>
+{{! https://developers.facebook.com/docs/reference/opengraph/object-type/article/ }}
+{{! https://developers.facebook.com/tools/debug/og/ }}
+<meta property='og:title' content='{{post.name}}'/>
+<meta property='fb:app_id' content='{{setting.facebook.appID}}'/>
+<meta property='fb:admins' content='{{setting.facebook.adminID}}' />
+<meta property='og:url' content='http://www.{{setting.domain}}/{{post.slug}}/'/>
+<meta property='og:image' content='{{post.bigThumb}}'/>
+<meta property='og:type' content='article'/>
+<meta property='article:published_time' content='{{formatISO8601 post.createdOn}}'/>
+<meta property='article:modified_time' content='{{formatISO8601 post.updatedOn}}'/>
+<meta property='article:author' content='{{setting.facebook.authorURL}}'/>
+{{#if video}}
+<meta property='og:video' content='http://youtu.be/{{post.video.id}}'/>
+{{/if}}
