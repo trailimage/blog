@@ -13,16 +13,17 @@
 	</script>
 </head>
 <body>
-	<div id="header" class="content simple">
+	<div id="header" class="content{{#if headerCSS}} {{headerCSS}}{{/if}}">
 		<!--googleoff: index-->
 		<div id="mobile-menu"></div>
 		<!--googleon: index-->
 		<div id="top-bar">
-			{{{block "title"}}}
+			<h1>{{title}}</h1>
+			{{#if subtitle}}<h4>{{subtitle}}</h4>{{/if}}
 			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
 		</div>
 	</div>
-	{{> head-links}}
+	{{> side-menu}}
 	{{> bug}}
 	{{{body}}}
 	{{> footer}}

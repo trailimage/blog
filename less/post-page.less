@@ -1,14 +1,53 @@
 @import "elements";
 @import "settings";
 
-#header {
+@postHeaderHeight: @headerHeight + 15;
+
+#header.post-header {
+	#top-bar {
+		height: @postHeaderHeight;
+		width: 100%;
+		position: relative;
+		padding: 0;
+		margin: 0;
+		z-index: 200;
+		background-position: (@contentWidth - 95);
+
+		h1 {
+			float: left;
+			//.glyphicon {
+			//	padding: 0 5px 0 1px;
+			//	.opacity(0.8);
+			//}
+		}
+
+		.subtitle {
+			font-family: @sanSerifFont;
+			color: @boldColor;
+			letter-spacing: -1px;
+			padding: 0 0 0 7px;
+			font-size: 22px;
+			float: left;
+			line-height: 18px;
+			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+
+			.parts {
+				display: block;
+				font-size: 15px;
+				padding: 2px 0 0 1px;
+				line-height: 18px;
+				letter-spacing: 0;
+			}
+		}
+	}
+
 	#post-date, .video-link {
 		position: absolute;
 		font-family: @sanSerifFont;
 	}
 
 	#post-date {
-		top: @headerHeight - 26;
+		top: @postHeaderHeight - 26;
 		right: 63px;
 		z-index: 200;
 		font-weight: bold;
@@ -26,7 +65,7 @@
 	.video-link {
 		position: absolute;
 		right: 15px;
-		top: @headerHeight + 14;
+		top: @postHeaderHeight + 14;
 		height: 20px;
 		text-transform: uppercase;
 		text-decoration: none;

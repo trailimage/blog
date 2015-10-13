@@ -45,7 +45,7 @@ function configure() {
 	 */
 	app.set('view engine', 'hbs');
 	app.engine('hbs', hbs.express4({
-		defaultLayout: __dirname + '/views/' + template.layout.sideMenu + '.hbs',
+		defaultLayout: __dirname + '/views/' + template.layout.main + '.hbs',
 		partialsDir: __dirname + '/views/partials'
 	}));
 

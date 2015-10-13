@@ -85,35 +85,19 @@ body {
 	}
 }
 
-// used in heading.hbs, post.hbs and post-tag.hbs
 #header {
 	position: relative;
 
 	// header without subtitle or date
-	&.simple #top-bar {
-		height: @headerHeight - 25;
-		background-position: (@contentWidth - 90) -15px;
-
-		@media @mobile {
-			// mobile headers are all the same size
-			background-image: none;
-			height: @mobileHeaderHeight;
-		}
-	}
-
 	#top-bar {
 		height: @headerHeight;
-		width: 100%;
-		position: relative;
-		padding: 0;
-		margin: 0;
-		z-index: 200;
-		background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 95);
+		background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
 		border-bottom: 1px solid @lightTrimColor;
 		text-rendering: optimizeLegibility;
 
 		h1 {
-			margin-left: 7px;
+			//margin: 5px 0 0 7px;
+			padding: 8px 0 0 10px;
 			font-family: @headerFont;
 			letter-spacing: -1px;
 			font-weight: 700;
@@ -121,33 +105,7 @@ body {
 			line-height: 1em;
 			color: @boldColor; /* 423938 or 5e685c */
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-			float: left;
 			vertical-align: top;
-			margin-top: 5px;
-
-			.glyphicon {
-				padding: 0 5px 0 1px;
-				.opacity(0.8);
-			}
-		}
-
-		.subtitle {
-			font-family: @sanSerifFont;
-			color: @boldColor;
-			letter-spacing: -1px;
-			padding: 0 0 0 7px;
-			font-size: 22px;
-			float: left;
-			line-height: 18px;
-			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-
-			.parts {
-				display: block;
-				font-size: 15px;
-				padding: 2px 0 0 1px;
-				line-height: 18px;
-				letter-spacing: 0;
-			}
 		}
 
 		@media @mobile {
@@ -180,6 +138,12 @@ body {
 		}
 
 		a { color: #4e584c; }
+
+		@media @mobile {
+			// mobile headers are all the same size
+			background-image: none;
+			height: @mobileHeaderHeight;
+		}
 	}
 }
 

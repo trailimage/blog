@@ -1,98 +1,116 @@
-{{#contentFor "head"}}
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+	{{> head-meta}}
+	{{#if keywords}}
+		<meta content='Adventure, Scenery, Photography, {{keywords}}' name='keywords'/>
+	{{else}}
+		<meta content='{{setting.keywords}}' name='keywords'/>
+	{{/if}}
+	<script type="text/javascript">
+		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{setting.timestamp}} };
+	</script>
+	{{> head-files}}
+	{{> head-facebook}}
+	{{> ga}}
 	<script src='/js/post.js' type='text/javascript' defer></script>
-{{/contentFor}}
-{{> head-facebook}}
-
-<div id="header" itemscope itemtype="http://schema.org/BlogPosting" class="content">
-	<!--googleoff: index-->
-	{{> mobile-menu}}
-	<!--googleon: index-->
-	<div id="top-bar">
-		{{#if post.isPartial}}
-			<h1 itemprop="name">{{post.title}}</h1>
-			<div class='subtitle'>
-				<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
-				{{post.subTitle}}
-			</div>
-		{{else}}
-			<h1 itemprop="name">{{post.title}}</h1>
-		{{/if}}
+</head>
+<body>
+	{{> side-menu}}
+	{{> bug}}
+	<div id="header" itemscope itemtype="http://schema.org/BlogPosting" class="post-header content">
 		<!--googleoff: index-->
-		{{> post-menu}}
+		<div id="mobile-menu"></div>
 		<!--googleon: index-->
+		<div id="top-bar">
+			{{#if post.isPartial}}
+				<h1 itemprop="name">{{post.title}}</h1>
+				<div class='subtitle'>
+					<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
+					{{post.subTitle}}
+				</div>
+			{{else}}
+				<h1 itemprop="name">{{post.title}}</h1>
+			{{/if}}
+			<!--googleoff: index-->
+			{{> post-menu}}
+			<!--googleon: index-->
+			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
+		</div>
+
+		{{#if post.dateTaken}}
+			<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
+		{{/if}}
+
+		<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+
+		{{#if post.video}}
+			<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
+		{{/if}}
+
+		{{#if post.description}}
+			<blockquote class="synopsis"><p itemprop="description">{{post.description}}<p></blockquote>
+		{{/if}}
+
+		{{> post-tags post.tags}}
+		<div id="nav-top">{{> navigation}}</div>
+
+		{{#if post.photoCoordinates}}
+			<div class='map'>
+				<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+			</div>
+		{{/if}}
 	</div>
 
-	{{#if post.dateTaken}}
-		<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
-	{{/if}}
+	{{#post.photos}}
 
-	<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+		<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px; max-width: 100%;'>
+			<a name="{{id}}"></a>
+			<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
+				<img src="{{url_s}}" alt="{{title}}" itemprop="url"
+				     style="width: {{width_l}}px; max-width: 100%; height: auto;"
+				     data-original="{{url_l}}"/>
+			</a>
+
+			<div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
+
+			{{#if tags}}
+				<div class="tags">
+					{{{icon 'tags'}}}
+					<h4>More photos like this</h4>
+					{{{makeTagList tags}}}
+				</div>
+			{{/if}}
+
+			{{#if longitude}}
+				<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+			{{/if}}
+
+			{{#if title}}
+				<p><span itemprop="name">{{{formatTitle title}}}</span></p>
+			{{/if}}
+
+			<div class="info">{{{icon 'info-sign'}}}</div>
+		</div>
+
+		<div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
+
+	{{/post.photos}}
 
 	{{#if post.video}}
-		<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
-	{{/if}}
-
-	{{#if post.description}}
-		<blockquote class="synopsis"><p itemprop="description">{{post.description}}<p></blockquote>
-	{{/if}}
-
-	{{> post-tags post.tags}}
-	<div id="nav-top">{{> navigation}}</div>
-
-	{{#if post.photoCoordinates}}
-		<div class='map'>
-			<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
-		</div>
-	{{/if}}
-</div>
-
-{{#post.photos}}
-
-	<div class="photo" itemscope itemtype="http://schema.org/ImageObject" style='width: {{width_l}}px; max-width: 100%;'>
-		<a name="{{id}}"></a>
-		<a name="{{index}}" rel="nofollow" href="{{url_k}}" title="Click to enlarge (photo {{index}})">
-			<img src="{{url_s}}" alt="{{title}}" itemprop="url"
-			     style="width: {{width_l}}px; max-width: 100%; height: auto;"
-			     data-original="{{url_l}}"/>
-		</a>
-
-		<div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
-
-		{{#if tags}}
-			<div class="tags">
-				{{{icon 'tags'}}}
-				<h4>More photos like this</h4>
-				{{{makeTagList tags}}}
+		<a name="video">
+			<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
+				<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
 			</div>
-		{{/if}}
+		</a>
+	{{/if}}
 
-		{{#if longitude}}
-			<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
-		{{/if}}
+	<div id="nav-bottom">{{> navigation}}</div>
+	<div class="footer-tags content">{{> post-tags post.tags}}</div>
+	<div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
 
-		{{#if title}}
-			<p><span itemprop="name">{{{formatTitle title}}}</span></p>
-		{{/if}}
-
-		<div class="info">{{{icon 'info-sign'}}}</div>
+	<div id="footer" class="content">
+		<div class="fb-comments" data-href="http://www.{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
 	</div>
-
-	<div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
-
-{{/post.photos}}
-
-{{#if post.video}}
-	<a name="video">
-		<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
-			<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
-		</div>
-	</a>
-{{/if}}
-
-<div id="nav-bottom">{{> navigation}}</div>
-<div class="footer-tags content">{{> post-tags post.tags}}</div>
-<div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
-
-<div id="footer" class="content">
-	<div class="fb-comments" data-href="http://www.{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
-</div>
+	{{> footer}}
+</body>
+</html>
