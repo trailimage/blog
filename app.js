@@ -4,6 +4,7 @@
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
 const setting = require('./lib/settings.js');
+const template = require('./lib/template.js');
 const Express = require('express');
 const log = require('./lib/log.js');
 
@@ -44,7 +45,7 @@ function configure() {
 	 */
 	app.set('view engine', 'hbs');
 	app.engine('hbs', hbs.express4({
-		defaultLayout: __dirname + '/views/' + setting.layout.default + '.hbs',
+		defaultLayout: __dirname + '/views/' + template.layout.sideMenu + '.hbs',
 		partialsDir: __dirname + '/views/partials'
 	}));
 

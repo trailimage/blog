@@ -13,10 +13,18 @@
 	</script>
 </head>
 <body>
+	<div id="header" class="content simple">
+		<!--googleoff: index-->
+		<div id="mobile-menu"></div>
+		<!--googleon: index-->
+		<div id="top-bar">
+			{{{block "title"}}}
+			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
+		</div>
+	</div>
 	{{> head-links}}
 	{{> bug}}
 	{{{body}}}
 	{{> footer}}
 </body>
-{{{block "afterBody"}}}
 </html>

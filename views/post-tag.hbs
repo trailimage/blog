@@ -2,11 +2,16 @@
 	<meta name="robots" content="noindex">
 {{/contentFor}}
 
+{{#contentFor "title"}}
+	<h1>{{tagName}}</h1>
+	<h4>{{tagCount}}</h4>
+{{/contentFor}}
+
 <div id="header" class="post-tag-heading content">
 	<!--googleoff: index-->
 	{{> mobile-menu}}
 	<!--googleon: index-->
-	<div id="top">
+	<div id="top-bar">
 		<h1>{{tagName}}</h1>
 		<h4>{{tagCount}}</h4>
 	</div>

@@ -1,4 +1,9 @@
-{{#contentFor "head"}}
+<html>
+<head>
+	{{> head-meta}}
+	{{> head-files}}
+	<meta content='{{setting.keywords}}' name='keywords'/>
+	{{> menu-files}}
 	<meta name="robots" content="noindex">
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<link href='http://fonts.googleapis.com/css?family=Orbitron:700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -8,17 +13,19 @@
 		var mapPhotoID = {{photoID}};
 	</script>
 	<script src='/js/map.js' type='text/javascript' defer></script>
-{{/contentFor}}
-
-<div id="map-canvas"></div>
-{{> post-menu}}
-<div id="summary">
-	Miles
-	<div class="lcd" id="distance">0</div>
-	Hours
-	<div class="lcd" id="duration">0</div>
-	Top Speed
-	<div class="lcd" id="top-speed">0</div>
-	Avg Speed
-	<div class="lcd" id="avg-speed">0</div>
-</div>
+</head>
+<body>
+	<div id="map-canvas"></div>
+	{{> post-menu}}
+	<div id="summary">
+		Miles
+		<div class="lcd" id="distance">0</div>
+		Hours
+		<div class="lcd" id="duration">0</div>
+		Top Speed
+		<div class="lcd" id="top-speed">0</div>
+		Avg Speed
+		<div class="lcd" id="avg-speed">0</div>
+	</div>
+</body>
+</html>

@@ -1,4 +1,16 @@
-{{#contentFor "head"}}
+<html>
+<head>
+	<title>Administration</title>
+	<!--suppress ALL -->
+	<meta name="robots" content="noindex">
+	<link href='/css/admin.css' rel='stylesheet' type='text/css'/>
+	<link href='/img/favicon.ico' rel='shortcut icon'/>
+	<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
+	<link rel="apple-touch-icon" href='/img/apple-touch-icon-57x57.png' />
+	<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
+	<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
+	<script src='/js/jquery.serialize-object.min.js' type='text/javascript'></script>
 	<script type='text/javascript'>
 		/**
 		 * @param {string} message
@@ -78,85 +90,87 @@
 			});
 		});
 	</script>
-{{/contentFor}}
+</head>
+<body>
+	<div id="logs">
+		<table>
+			<tbody>
+			{{#each logs}}
+				<tr class='head'><td colspan='2'>{{@key}}</td></tr>
+				{{#this}}
+				<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
+				{{/this}}
+			{{/each}}
+			</tbody>
+		</table>
+	</div>
 
-<div id="logs">
-	<table>
-		<tbody>
-		{{#each logs}}
-			<tr class='head'><td colspan='2'>{{@key}}</td></tr>
-			{{#this}}
-			<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
-			{{/this}}
-		{{/each}}
-		</tbody>
-	</table>
-</div>
-
-<div id="body">
-	<fieldset id="statistics">
-		<legend>Statistics</legend>
-		<ul>
-			<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
-			<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://www.trailimage.com/&authuser=0'>Google Webmaster</a></li>
-			<li><a href='https://www.bing.com/webmaster/home/dashboard?url=http%3A%2F%2Fwww.trailimage.com%2F'>Bing Webmaster</a></li>
-			<li><a href='/wwwhisper/admin/'>WWWHisper</a></li>
-			<li><a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a></li>
-			<li><a href='https://www.flickr.com/photos/trailimage/stats/'>Flickr Statistics</a></li>
-			<li><a href='http://www.panoramio.com/user/5644534/stats'>Panoramio Statistics</a></li>
-		</ul>
-		<div class="message"></div>
-	</fieldset>
-
-	<fieldset id="api-keys">
-		<legend>API Keys</legend>
-		<ul>
-			<li><a href='https://cloud.google.com/console#/project/{{setting.google.projectID}}'>Map API</a></li>
-			<li><a href='https://www.flickr.com/services/apps/{{setting.flickr.appID}}/key'>Flickr API</a></li>
-		</ul>
-		<div class="buttons">
-			<button>Flickr Token</button>
-		</div>
-		<div class="message"></div>
-	</fieldset>
-
-	<fieldset id="models">
-		<legend>Cached Models</legend>
-		<button data-url="library/reload">Reload Library</button><button data-url="photo-tag/reload">Reload Photo Tags</button>
-		<div class="message"></div>
-	</fieldset>
-
-	<form id="views" action="/admin/view/delete">
-		<fieldset>
-			<legend>Cached Views</legend>
-			<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
-			<div class="scroll">
-				<ul>
-			{{#views}}
-					<li><label><input name='post{{@index}}' value='{{this}}' type='checkbox'/>{{this}}</label></li>
-			{{/views}}
-				</ul>
-			</div>
-			<div class="buttons"><button type="submit">Delete</button></div>
+	<div id="body">
+		<fieldset id="statistics">
+			<legend>Statistics</legend>
+			<ul>
+				<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{setting.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
+				<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://www.trailimage.com/&authuser=0'>Google Webmaster</a></li>
+				<li><a href='https://www.bing.com/webmaster/home/dashboard?url=http%3A%2F%2Fwww.trailimage.com%2F'>Bing Webmaster</a></li>
+				<li><a href='/wwwhisper/admin/'>WWWHisper</a></li>
+				<li><a href='https://www.facebook.com/insights/?sk=wo_{{setting.facebook.siteID}}'>Facebook Insights</a></li>
+				<li><a href='https://www.flickr.com/photos/trailimage/stats/'>Flickr Statistics</a></li>
+				<li><a href='http://www.panoramio.com/user/5644534/stats'>Panoramio Statistics</a></li>
+			</ul>
 			<div class="message"></div>
 		</fieldset>
-	</form>
 
-	<form id="tracks" action="/admin/track/upload">
-		<fieldset>
-			<legend>Tracks</legend>
-			<label>Post<select id="gpxPost" name="post">
-			{{#library.posts}}
-				{{#unless previousIsPart}}
-					<option value="{{id}}">{{#if isPartial}}{{title}}{{else}}{{name}}{{/if}}</option>
-				{{/unless}}
-			{{/library.posts}}
-			</select></label>
+		<fieldset id="api-keys">
+			<legend>API Keys</legend>
+			<ul>
+				<li><a href='https://cloud.google.com/console#/project/{{setting.google.projectID}}'>Map API</a></li>
+				<li><a href='https://www.flickr.com/services/apps/{{setting.flickr.appID}}/key'>Flickr API</a></li>
+			</ul>
 			<div class="buttons">
-				<input id="gpxFile" name="gpx" type="file"/>
-				<button type="submit" data-action="upload">Upload</button>
+				<button>Flickr Token</button>
 			</div>
 			<div class="message"></div>
 		</fieldset>
-	</form>
-</div>
+
+		<fieldset id="models">
+			<legend>Cached Models</legend>
+			<button data-url="library/reload">Reload Library</button><button data-url="photo-tag/reload">Reload Photo Tags</button>
+			<div class="message"></div>
+		</fieldset>
+
+		<form id="views" action="/admin/view/delete">
+			<fieldset>
+				<legend>Cached Views</legend>
+				<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
+				<div class="scroll">
+					<ul>
+				{{#views}}
+						<li><label><input name='post{{@index}}' value='{{this}}' type='checkbox'/>{{this}}</label></li>
+				{{/views}}
+					</ul>
+				</div>
+				<div class="buttons"><button type="submit">Delete</button></div>
+				<div class="message"></div>
+			</fieldset>
+		</form>
+
+		<form id="tracks" action="/admin/track/upload">
+			<fieldset>
+				<legend>Tracks</legend>
+				<label>Post<select id="gpxPost" name="post">
+				{{#library.posts}}
+					{{#unless previousIsPart}}
+						<option value="{{id}}">{{#if isPartial}}{{title}}{{else}}{{name}}{{/if}}</option>
+					{{/unless}}
+				{{/library.posts}}
+				</select></label>
+				<div class="buttons">
+					<input id="gpxFile" name="gpx" type="file"/>
+					<button type="submit" data-action="upload">Upload</button>
+				</div>
+				<div class="message"></div>
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>

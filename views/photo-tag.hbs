@@ -7,7 +7,9 @@
 	<script src="/js/photo-tag.js" defer></script>
 {{/contentFor}}
 
-{{> heading}}
+{{#contentFor "title"}}
+	<h1>{{{title}}}</h1>
+{{/contentFor}}
 
 <div id="photo-tag" class="content">
 	<div id="wait">&nbsp;</div>
