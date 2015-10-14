@@ -13,6 +13,10 @@
 
 		h1, .subtitle { float: left; }
 
+		h1 {
+			padding-top: 4px;
+		}
+
 		.subtitle {
 			font-family: @sanSerifFont;
 			color: @boldColor;
@@ -34,6 +38,7 @@
 		@media @mobile {
 			height: @mobileHeaderHeight;
 
+			h1 { padding-top: 10px; }
 			.subtitle {
 				padding-top: 8px;
 				color: @mobileTextColor;
@@ -264,7 +269,7 @@ div.tag-wrapper {
 			display: inline-block;
 			padding: 0;
 			margin: 0;
-			line-height: @height - 4;
+			line-height: @height - 2;
 			vertical-align: bottom;
 			text-rendering: optimizeLegibility;
 
@@ -275,7 +280,7 @@ div.tag-wrapper {
 			}
 
 			&.label {
-				padding-bottom: 4px;
+				padding-bottom: 2px;
 				margin-left: 0;
 				font-weight: bold;
 				text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
