@@ -88,7 +88,6 @@ body {
 #header {
 	position: relative;
 
-	// header without subtitle or date
 	#top-bar {
 		height: @headerHeight;
 		background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
@@ -97,7 +96,7 @@ body {
 
 		h1 {
 			//margin: 5px 0 0 7px;
-			padding: 8px 0 0 10px;
+			padding: 10px 0 0 10px;
 			font-family: @headerFont;
 			letter-spacing: -1px;
 			font-weight: 700;
@@ -119,21 +118,12 @@ body {
 			z-index: 200;
 
 			h1 {
-				margin-top: 10px;
+				//margin-top: 10px;
 				font-size: 38px;
 				font-weight: 400;
 				letter-spacing: 1px;
 				color: @mobileTextColor;
 				text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-			}
-			.subtitle {
-				padding-top: 8px;
-				color: @mobileTextColor;
-				text-shadow: none;
-
-				.parts {
-					padding-bottom: 2px;
-				}
 			}
 		}
 

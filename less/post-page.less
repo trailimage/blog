@@ -6,20 +6,12 @@
 #header.post-header {
 	#top-bar {
 		height: @postHeaderHeight;
-		width: 100%;
-		position: relative;
 		padding: 0;
 		margin: 0;
 		z-index: 200;
 		background-position: (@contentWidth - 95);
 
-		h1 {
-			float: left;
-			//.glyphicon {
-			//	padding: 0 5px 0 1px;
-			//	.opacity(0.8);
-			//}
-		}
+		h1, .subtitle { float: left; }
 
 		.subtitle {
 			font-family: @sanSerifFont;
@@ -27,7 +19,6 @@
 			letter-spacing: -1px;
 			padding: 0 0 0 7px;
 			font-size: 22px;
-			float: left;
 			line-height: 18px;
 			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 
@@ -37,6 +28,20 @@
 				padding: 2px 0 0 1px;
 				line-height: 18px;
 				letter-spacing: 0;
+			}
+		}
+
+		@media @mobile {
+			height: @mobileHeaderHeight;
+
+			.subtitle {
+				padding-top: 8px;
+				color: @mobileTextColor;
+				text-shadow: none;
+
+				.parts {
+					padding-bottom: 2px;
+				}
 			}
 		}
 	}
@@ -57,7 +62,7 @@
 		@media @mobile {
 			color: darken(@mobileTextColor, 30%);
 			font-size: 18px;
-			top: -25px;
+			top: -@mobileHeaderHeight + 30;
 			right: 10px;
 		}
 	}
