@@ -12,11 +12,7 @@
 		background-position: (@contentWidth - 95);
 
 		h1, .subtitle { float: left; }
-
-		h1 {
-			padding-top: 4px;
-		}
-
+		h1 { padding-top: 4px; }
 		.subtitle {
 			font-family: @sanSerifFont;
 			color: @boldColor;
@@ -355,7 +351,7 @@ div.photo {
 	padding: 0 9px 0 0;
 	z-index: 100;
 
-	img	{
+	img {
 		border: 1px solid #000;
 		background-color: #fff;
 		padding: 4px;
@@ -364,8 +360,6 @@ div.photo {
 		z-index: 20;
 		.drop-shadow(0, 0, 10px, 0.4);
 	}
-
-	.info { display: none; }
 
 	@media @mobile {
 		margin: 0 auto 10px auto;
@@ -376,35 +370,6 @@ div.photo {
 			padding: 0;
 			.box-shadow(none);
 			width: auto;
-		}
-
-		// show info when touched
-		.info {
-			//position: absolute;
-			//display: block;
-			//width: 200px;
-			//height: 100px;
-			//top: 0;
-			//bottom: 0;
-			//right: 0;
-			//
-			//.glyphicon {
-			//	display: block;
-			//	width: 80px;
-			//	height: 80px;
-			//	position: absolute;
-			//	right: 20px;
-			//	bottom: -10px;
-			//	color: rgba(255, 255, 255, 0.6);
-			//	font-size: 80px;
-			//}
-			//
-			//&.selected {
-			//	background-color: rgba(0, 0, 0, 0.6);
-			//	.glyphicon {
-			//		color: @mobileActiveColor;
-			//	}
-			//}
 		}
 	}
 
@@ -420,8 +385,6 @@ div.photo {
 		display: none;
 		text-align: left;
 		font-size: 15px;
-
-		@media @mobile { left: 0; }
 
 		h4 {
 			display: none;
@@ -456,7 +419,6 @@ div.photo {
 
 	div.exif {
 		position: absolute;
-		top: 5px;
 		right: 5px;
 		color: #fff;
 		background-color: #000;
@@ -464,15 +426,9 @@ div.photo {
 		font-family: @sanSerifFont;
 		font-size: 15px;
 		font-weight: normal;
-		display: none;
 		text-align: center;
-		.opacity(0.6);
-		.border-radius(0, 0, 3px);
-
-		@media @mobile { top: 0; right: 0; }
 
 		p, .glyphicon {
-			cursor: progress;
 			font-weight: normal;
 		}
 
@@ -510,6 +466,44 @@ div.photo {
 				&.software { margin-top: 10px; }
 			}
 		}
+
+		@media @desktop {
+			top: 5px;
+			display: none;
+			.opacity(0.6);
+			.border-radius(0, 0, 3px);
+
+			p, .glyphicon { cursor: progress; }
+			p.mobile { display: none; }
+		}
+
+		@media @mobile {
+			display: none;
+			bottom: -15px;
+			right: 0;
+			height: 50px;
+			width: 150px;
+			.border-radius(0, 0, 30px, 30px);
+			.opacity(0.4);
+
+			.glyphicon {
+				color: @mobileTextColor;
+				font-size: 30px;
+				top: 10px;
+				left: 20px;
+			}
+			p {
+				font-size: 20px;
+				line-height: 47px;
+				margin-left: 20px;
+				&.desktop { display: none; }
+			}
+
+		    &:active {
+			    .glyphicon { color: @mobileActiveColor; }
+			    .opacity(1);
+		    }
+		}
 	}
 
 	a.map {
@@ -539,21 +533,25 @@ div.photo {
 			color: rgba(0, 0, 0, 0.4);
 		}
 
-		@media @mobile { display: none; }
+		@media @mobile {
+			display: none;
+		}
 	}
 
-	&:hover, &:active {
-		a.map {
-			.opacity(0.7);
-			.glyphicon { color: rgba(255, 0, 0, 0.5); }
+	@media @desktop {
+		&:hover, &:active {
+			a.map {
+				.opacity(0.7);
+				.glyphicon { color: rgba(255, 0, 0, 0.5); }
 
-			&:hover, &:active {
-				.opacity(1);
-				.glyphicon { color: rgba(255, 0, 0, 1); }
+				&:hover, &:active {
+					.opacity(1);
+					.glyphicon { color: rgba(255, 0, 0, 1); }
+				}
 			}
+			div.exif, div.tags { display: block; }
+			p span { color: #000; }
 		}
-		div.exif, div.tags { display: block; }
-		p span { color: #000; }
 	}
 
 	p {
@@ -578,8 +576,6 @@ div.photo {
 		}
 
 		@media @mobile {
-			//margin-top: -20px;
-
 			span {
 				border: none;
 				.rounded(15px);

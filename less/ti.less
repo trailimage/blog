@@ -89,10 +89,9 @@ body {
 	position: relative;
 
 	#top-bar {
+		z-index: 300;
 		position: relative;
 		height: @headerHeight;
-		background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
-		border-bottom: 1px solid @lightTrimColor;
 		text-rendering: optimizeLegibility;
 
 		h1 {
@@ -107,9 +106,13 @@ body {
 			vertical-align: top;
 		}
 
+		@media @desktop {
+			background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
+			border-bottom: 1px solid @lightTrimColor;
+		}
+
 		@media @mobile {
 			height: @mobileHeaderHeight;
-			background-image: none;
 			background-color: #666;
 			border-bottom: none;
 			position: fixed;
@@ -128,12 +131,6 @@ body {
 		}
 
 		a { color: #4e584c; }
-
-		@media @mobile {
-			// mobile headers are all the same size
-			background-image: none;
-			height: @mobileHeaderHeight;
-		}
 	}
 }
 

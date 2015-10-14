@@ -73,7 +73,7 @@
 				     data-original="{{url_l}}"/>
 			</a>
 
-			<div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p>Camera Settings</p></div>
+			<div class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p class="desktop">Camera Settings</p><p class="mobile">Photo Info</p></div>
 
 			{{#if tags}}
 				<div class="tags">
@@ -90,8 +90,6 @@
 			{{#if title}}
 				<p><span itemprop="name">{{{formatTitle title}}}</span></p>
 			{{/if}}
-
-			<div class="info">{{{icon 'info-sign'}}}</div>
 		</div>
 
 		<div class="caption content" itemprop="description">{{{formatCaption description._content}}}</div>
