@@ -1,14 +1,14 @@
 {
-  "name": "Trail Image",
-  "icons": [
+	"name": "Trail Image",
+	"icons": [
 	{
-	  "src": "/img/launch-icon-114x114.png",
-	  "sizes": "144x144",
-	  "type": "image/png",
-	  "density": 0.75
+		"src": "/img/launch-icon-114x114.png",
+		"sizes": "144x144",
+		"type": "image/png",
+		"density": 0.75
 	}
-  ],
-  "start_url": "/",
-  "display": "standalone",
-  "orientation": "portrait"
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"orientation": "portrait"
 }

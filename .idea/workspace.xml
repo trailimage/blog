@@ -6,16 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/manifest.json" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\server\redis.bat" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\server\trail-image.sublime-project" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\server\trail-image.sublime-workspace" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/head-files.hbs" afterPath="$PROJECT_DIR$/views/partials/head-files.hbs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/head-meta.hbs" afterPath="$PROJECT_DIR$/views/partials/head-meta.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest.json" afterPath="$PROJECT_DIR$/manifest.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\server\public\img\apple-touch-icon-114x114.png" afterPath="$PROJECT_DIR$/public/img/launch-icon-114x114.png" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\server\public\img\apple-touch-icon-57x57.png" afterPath="$PROJECT_DIR$/public/img/launch-icon-57x57.png" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\server\public\img\apple-touch-icon-72x72.png" afterPath="$PROJECT_DIR$/public/img/launch-icon-72x72.png" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,28 +27,7 @@
     <favorites_list name="server" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manifest.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1290324">
-              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="head-files.hbs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/partials/head-files.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.017432647">
-              <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -123,8 +94,8 @@
         <option value="$PROJECT_DIR$/less/ti.less" />
         <option value="$PROJECT_DIR$/less/post-page.less" />
         <option value="$PROJECT_DIR$/views/partials/head-meta.hbs" />
-        <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/views/partials/head-files.hbs" />
+        <option value="$PROJECT_DIR$/manifest.json" />
       </list>
     </option>
   </component>
@@ -137,8 +108,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="186" />
-    <option name="y" value="48" />
+    <option name="x" value="206" />
+    <option name="y" value="39" />
     <option name="width" value="2061" />
     <option name="height" value="1463" />
   </component>
@@ -187,6 +158,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -207,7 +179,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -283,12 +254,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00019" summary="fix poetry formatting">
-      <created>1443051515202</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1443051515202</updated>
     </task>
     <task id="LOCAL-00020" summary="redix logging fix">
       <created>1443051834052</created>
@@ -578,7 +543,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444785114513</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="create launch icon and android app mode">
+      <created>1444836413395</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1444836413396</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TodoView">
@@ -591,7 +562,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="186" y="48" width="2061" height="1463" extended-state="0" />
+    <frame x="206" y="39" width="2061" height="1463" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17865883" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -628,7 +599,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add camera parsing" />
     <MESSAGE value="override oauth connection to support proxy" />
     <MESSAGE value="hash base" />
     <MESSAGE value="some refactors" />
@@ -653,7 +623,8 @@
     <MESSAGE value="style fix" />
     <MESSAGE value="disable mobile scaling, styling tweaks" />
     <MESSAGE value="mobile photo info" />
-    <option name="LAST_COMMIT_MESSAGE" value="mobile photo info" />
+    <MESSAGE value="create launch icon and android app mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="create launch icon and android app mode" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -982,14 +953,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1290324">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/button-icons.psd">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1024,15 +987,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08716323">
           <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/partials/head-files.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.017432647">
-          <caret line="1" column="74" selection-start-line="1" selection-start-column="74" selection-end-line="1" selection-end-column="74" />
-          <folding />
+        <state vertical-scroll-proportion="0.15689382">
+          <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manifest.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06973059">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
     </entry>
