@@ -33,15 +33,16 @@
 			{{else}}
 				<h1 itemprop="name">{{post.title}}</h1>
 			{{/if}}
+
+			{{#if post.dateTaken}}
+				<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
+			{{/if}}
+
 			<!--googleoff: index-->
 			{{> post-menu}}
 			<!--googleon: index-->
 			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
 		</div>
-
-		{{#if post.dateTaken}}
-			<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
-		{{/if}}
 
 		<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 

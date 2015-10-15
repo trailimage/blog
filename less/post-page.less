@@ -63,7 +63,7 @@
 		@media @mobile {
 			color: darken(@mobileTextColor, 30%);
 			font-size: 18px;
-			top: -@mobileHeaderHeight + 30;
+			top: @mobileHeaderHeight + 10;
 			right: 10px;
 		}
 	}
@@ -115,7 +115,7 @@
 			text-align: left;
 			// space for navigation
 			padding: 0;
-			margin: 40px 40px 85px 40px;
+			margin: 35px 40px -40px 40px;
 		}
 	}
 
@@ -195,8 +195,10 @@ div.next, div.previous {
 		color: #ddd;
 		text-decoration: none;
 
-		&:hover {
-			color: desaturate(lighten(@hoverColor, 30%), 20%);
+		@media @desktop {
+			&:hover {
+				color: desaturate(lighten(@hoverColor, 30%), 20%);
+			}
 		}
 	}
 
@@ -235,6 +237,7 @@ div.tag-wrapper {
 		background-color: #555;
 		height: @mobileHeight;
 		line-height: @mobileHeight - 5;
+		margin-top: 115px;
 	}
 
 	.glyphicon {
@@ -292,9 +295,11 @@ div.tag-wrapper {
 				background-color: lighten(@trimColor, 7%);
 				color: #fff;
 
-				&:hover {
-					color: desaturate(lighten(@hoverColor, 55%), 20%);
-					background-color: darken(@trimColor, 10%);
+				@media @desktop {
+					&:hover {
+						color: desaturate(lighten(@hoverColor, 55%), 20%);
+						background-color: darken(@trimColor, 10%);
+					}
 				}
 
 				@media @mobile {
