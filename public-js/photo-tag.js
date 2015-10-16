@@ -4,6 +4,7 @@
  * @var {String} selectedTag Defined in photo-tag.hbs
  */
 $(function() {
+	var css = 'selected';
 	var $view = $('#photo-tag');
 	var id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
 	var $list = $view.find('#' + id);
@@ -11,15 +12,15 @@ $(function() {
 	var $li = $view.find('li[data-for=' + id + ']');
 
 	$list.show();
-	$link.addClass('selected');
-	$li.addClass('selected');
+	$link.addClass(css);
+	$li.addClass(css);
 
 	loadPhotoTag($link);
 
 	$view.find('li').click(function(e) {
-		$li.removeClass('selected');
+		$li.removeClass(css);
 		$li = $(this);
-		$li.addClass('selected');
+		$li.addClass(css);
 
 		$list.hide();
 		$list =	$('#'+ $li.data('for'));
@@ -29,9 +30,9 @@ $(function() {
 	$view.find('#tag-index a').click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		$link.removeClass('selected');
+		$link.removeClass(css);
 		$link = $(this);
-		$link.addClass('selected');
+		$link.addClass(css);
 		loadPhotoTag($link);
 
 		History.pushState(
@@ -40,14 +41,18 @@ $(function() {
 			$link.attr('href').replace('/search', '')
 		);
 	});
-});
 
-function loadPhotoTag(link) {
-	if (link.length > 0) {
-		$('#wait').show();
-		$('#thumbs').load(link.attr('href'), function() {
-			$('#wait').hide();
-			window.scrollTo(0, 0);
-		});
+	/**
+	 *
+	 * @param {String} link
+	 */
+	function loadPhotoTag(link) {
+		if (link.length > 0) {
+			$('#wait').show();
+			$('#thumbs').load(link.attr('href'), function() {
+				$('#wait').hide();
+				window.scrollTo(0, 0);
+			});
+		}
 	}
-}
+});
