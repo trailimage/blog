@@ -133,7 +133,7 @@
 	}
 }
 
-/* Variations for post features -------------------------------------------- */
+/* Feature variations ------------------------------------------------------ */
 
 body.has-date {
 	@media @mobile {
@@ -149,18 +149,9 @@ body.has-date {
 	}
 }
 
-body.has-tags {
-
-}
-
-body.has-map {
-
-}
-
-body.has-nav {
-
-}
-
+body.has-tags {}
+body.has-map {}
+body.has-nav {}
 
 /* Navigation -------------------------------------------------------------- */
 
@@ -485,9 +476,9 @@ div.photo {
 			}
 		}
 
+		// list of EXIF values
 		ul {
 			list-style: none;
-			cursor: help;
 			margin: 4px 4px 6px 8px;
 			padding: 0;
 
@@ -509,33 +500,56 @@ div.photo {
 
 			p, .glyphicon { cursor: progress; }
 			p.mobile { display: none; }
+
+		    ul { cursor: help; }
 		}
 
 		@media @mobile {
-			display: none;
+			// EXIF tag is info button on mobile
 			bottom: -15px;
 			right: 0;
-			height: 50px;
-			width: 150px;
+			height: 60px;
+			width: 88px;
 			.border-radius(0, 0, 30px, 30px);
 			.opacity(0.4);
 
 			.glyphicon {
 				color: @mobileTextColor;
 				font-size: 30px;
-				top: 10px;
+				top: 15px;
 				left: 20px;
 			}
 			p {
+				font-family: @headerFont;
 				font-size: 20px;
-				line-height: 47px;
-				margin-left: 20px;
+				line-height: 57px;
+				margin-left: 25px;
 				&.desktop { display: none; }
 			}
 
-		    &:active {
-			    .glyphicon { color: @mobileActiveColor; }
+		    &.loading {
+			    background-color: @mobileActiveColor;
 			    .opacity(1);
+
+			    .glyphicon {
+				    color: #444;
+				    font-size: 40px;
+				    top: 15px;
+				    left: 20px;
+			    }
+			    p { display: none; }
+		    }
+
+		    &.loaded {
+			    background-color: #000;
+			    .opacity(0.8);
+			    bottom: 2px;
+			    height: auto;
+			    width: 180px;
+			    .border-radius(0, 0, 0, 0);
+			    ul {
+				    margin: 10px;
+			    }
 		    }
 		}
 	}
