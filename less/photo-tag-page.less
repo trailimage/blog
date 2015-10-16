@@ -60,10 +60,14 @@
 			background-color: @trimColor;
 			z-index: 200;
 			text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-			.border-radius(0, 0, 4px, 4px);
+		}
 
-			&:hover { background-color: @boldColor; }
-			&.selected { color: #400;; background-color: rgba(255, 255, 255, 0.9); }
+		@media @desktop {
+			li {
+				.border-radius(0, 0, 4px, 4px);
+				&:hover { background-color: @boldColor; }
+				&.selected { color: #400; background-color: rgba(255, 255, 255, 0.9); }
+			}
 		}
 
 		@media @mobile {
@@ -74,7 +78,8 @@
 				background-color: #444;
 				text-shadow: none;
 				padding: 25px 0;
-				.rounded(0);
+				&:active { background-color: @mobileActiveColor; }
+				&.selected { color: #444; background-color: @mobileActiveColor; }
 
 			}
 		}
@@ -98,7 +103,11 @@
 				white-space: nowrap;
 				font-size: 14px;
 				line-height: 1.3em;
+			}
+		}
 
+		@media @desktop {
+			a {
 				&.selected {
 					background-color: #ff9;
 				}
@@ -114,12 +123,13 @@
 
 			div {
 				a {
-					font-size: 18px;
+					font-size: 22px;
 					line-height: 3em;
 					text-align: right;
 
 					&.selected {
-						background-color: #444;
+						font-weight: 700;
+						color: @mobileActiveColor;
 					}
 				}
 			}

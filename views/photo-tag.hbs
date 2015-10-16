@@ -2,13 +2,10 @@
 	<meta name="robots" content="noindex">
 	<script src="/js/history/html4+html5/jquery.history.js" defer></script>
 	<script type='text/javascript'>
+		{{! expose routed tag to script }}
 		var selectedTag = '{{selected}}';
 	</script>
 	<script src="/js/photo-tag.js" defer></script>
-{{/contentFor}}
-
-{{#contentFor "title"}}
-	<h1>{{{title}}}</h1>
 {{/contentFor}}
 
 <div id="photo-tag" class="content">
