@@ -4,11 +4,12 @@
 @postHeaderHeight: @headerHeight + 15;
 
 #header.post-header {
+	z-index: 300;
 	#top-bar {
 		height: @postHeaderHeight;
 		padding: 0;
 		margin: 0;
-		z-index: 200;
+		z-index: 300;
 		background-position: (@contentWidth - 95);
 
 		h1, .subtitle { float: left; }
@@ -53,9 +54,9 @@
 	}
 
 	#post-date {
-		top: @postHeaderHeight - 26;
+		top: 40px;
 		right: 63px;
-		z-index: 200;
+		z-index: 500;
 		font-weight: bold;
 		font-size: 14px;
 		color: lighten(@boldColor, 10%);
@@ -63,7 +64,7 @@
 		@media @mobile {
 			color: darken(@mobileTextColor, 30%);
 			font-size: 18px;
-			top: @mobileHeaderHeight + 10;
+			top: -30px;
 			right: 10px;
 		}
 	}
@@ -115,7 +116,7 @@
 			text-align: left;
 			// space for navigation
 			padding: 0;
-			margin: 35px 40px -40px 40px;
+			margin: 20px 40px;
 		}
 	}
 
@@ -131,6 +132,35 @@
 		@media @mobile { display: none; }
 	}
 }
+
+/* Variations for post features -------------------------------------------- */
+
+body.has-date {
+	@media @mobile {
+		#header.post-header {
+			.synopsis {
+				margin-top: 40px;
+			}
+		}
+
+		div.tag-wrapper {
+			margin-top: 80px;
+		}
+	}
+}
+
+body.has-tags {
+
+}
+
+body.has-map {
+
+}
+
+body.has-nav {
+
+}
+
 
 /* Navigation -------------------------------------------------------------- */
 
@@ -237,7 +267,6 @@ div.tag-wrapper {
 		background-color: #555;
 		height: @mobileHeight;
 		line-height: @mobileHeight - 5;
-		margin-top: 115px;
 	}
 
 	.glyphicon {
