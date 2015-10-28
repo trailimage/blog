@@ -10,6 +10,9 @@
 	"engines": {
 		"node": ">=4.0.0"
 	},
+	"scripts": {
+		"webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o src/fonts/webfont.css"
+	},
 	"dependencies":	{
 		"express": "^4.0",
 		"express-hbs": "^0.8.4",
@@ -27,6 +30,16 @@
 		"pdfkit": "*",
 		"xmldom": "^0.1.19",
 		"connect-wwwhisper": "git+http://github.com/Trail-Image/connect-wwwhisper#master"
+	},
+	"devDependencies": {
+		"bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
+		"gulp": "^3.8.0",
+		"merge2": "^0.3.1",
+		"gulp-concat": "^2.5.2",
+		"gulp-uglify": "^1.1.0",
+		"gulp-less": "^3.0.0",
+		"gulp-minify-css": "^1.1.0",
+		"webfont-dl": "0.1.2"
 	},
 	"repository": {
 		"type": "git",

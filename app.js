@@ -59,7 +59,7 @@ function configure() {
 	app.use(bodyParser.json());
 	app.use(compress());
 	app.use(outputCache());
-	app.use(Express.static(__dirname + '/public'));
+	app.use(Express.static(__dirname + '/dist'));
 
 	library.load(() => {
 		defineRoutes();

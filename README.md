@@ -19,3 +19,17 @@ Environment Variables
 <tr><td>SMTP_PASSWORD</td><td>Base64</td><td></td></tr>
 <tr><td>SMTP_RECIPIENT</td><td>Base64</td><td></td></tr>
 </table>
+
+## Fonts
+[Google Fonts](http://www.google.com/fonts/) are pre-downloaded using
+[webfont-dl](https://github.com/mmastrac/webfont-dl). A `webfont` script in `package.json`
+performs the download. To enable the script, first run
+
+```
+npm install -g webfont-dl
+```
+Then run the script itself with
+```
+npm run webfont
+```
+It shouldn't need to be run, though, unless there's a change to the fonts used.
