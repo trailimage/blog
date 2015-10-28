@@ -5,129 +5,18 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="fix sitemap">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/droidsans-60c19fbe5f4af0b46f619c431c51c437f66de039.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/droidsans-b777f1a998aaa467eb74ebe1960bd0e94f1648dc.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/droidsans-ea469d63bf279daeb58f104d71e6e0f0d62f93af.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/lora-101b41c4d985d4e5b5addbed77bbedfc1d55d89a.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/lora-1a8afcedca7a52c5550e70a93be5debf9fe67053.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/lora-8cb007ce1b4ab51ebb6fa924761bffc8d1a2bbac.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/lora-a7c0221c4af81bc46aeab2847e42cfb2acb08ad1.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/oswald-013bc116a6bd2706c5928844a8494d87be2cabae.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/oswald-638ee1161844a8c5af864a55df10e6e38f106ea0.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/oswald-641e7f512fab8283a2a459253c6e3a148216997e.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/oswald-e8e798a5c33eb9a2d5eca5d90487fee27e52911c.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/qwigley-5dd966487ab6dea0ea56e59c7531bff7d9f4f39a.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/qwigley-78a1541010b37cc8c45db8d9f299de5b1324d0ee.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/css/admin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/droidsans-417b4273a457f6ff1df0c20de14646fa4c85728f.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gulpfile.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/lora-bd5e4d171078310db332cc5022dae1f70ebeb529.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/css/map.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/js/map.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/js/mobile-menu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/oswald-b75a5f8ae70a5d4e0128dc59f5588d9959eed659.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/js/photo-tag.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/js/post-menu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/js/post.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/qwigley-74394ad7a710d5a7bb845c47ab00d88a451ac2cf.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/js/responsive.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/css/ti.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/fonts/webfont.css" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\georgia.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\georgiab.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\georgiai.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\georgiaz.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\tahoma.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\tahomabd.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\trebuc.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\trebucbd.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\trebucbi.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\trebucit.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\verdana.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\verdanab.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\verdanai.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\fonts\verdanaz.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\less\glyphicons.less" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\css\admin.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\css\map.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\css\ti.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\fonts\glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\fonts\glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\fonts\glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\fonts\glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\fonts\glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\image\favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\image\left-quote.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\image\logo.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\image\topo-map-tile.jpg" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\js\map.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\js\mobile-menu.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\js\photo-tag.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\js\post-menu.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\js\post.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\js\responsive.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\script\blog.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\script\oauth.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\script\sha1.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\dev\Trail Image\public\style\blog.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+    <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/models/size.js" />
+      <change type="DELETED" beforePath="D:\dev\Trail Image\watchers.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/flickr.extern.js" afterPath="$PROJECT_DIR$/api/flickr.extern.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr.js" afterPath="$PROJECT_DIR$/lib/providers/flickr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/head-files.hbs" afterPath="$PROJECT_DIR$/views/partials/head-files.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/photo.js" afterPath="$PROJECT_DIR$/lib/models/photo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/post.hbs" afterPath="$PROJECT_DIR$/views/post.hbs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/post.js" afterPath="$PROJECT_DIR$/lib/models/post.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/settings.less" afterPath="$PROJECT_DIR$/src/less/settings.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/ti.css" afterPath="$PROJECT_DIR$/dist/css/ti.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\fonts\honda.ttf" afterPath="$PROJECT_DIR$/src/fonts/honda.ttf" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\fonts\suzuki.ttf" afterPath="$PROJECT_DIR$/src/fonts/suzuki.ttf" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\fonts\yamaha.ttf" afterPath="$PROJECT_DIR$/src/fonts/yamaha.ttf" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\app-logo.psd" afterPath="$PROJECT_DIR$/src/img/app-logo.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\arrow.psd" afterPath="$PROJECT_DIR$/src/img/arrow.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\button-icons.psd" afterPath="$PROJECT_DIR$/src/img/button-icons.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\fold.psd" afterPath="$PROJECT_DIR$/src/img/fold.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\icon.psd" afterPath="$PROJECT_DIR$/src/img/icon.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\logo.psd" afterPath="$PROJECT_DIR$/src/img/logo.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\modes.png" afterPath="$PROJECT_DIR$/src/img/modes.png" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\next.psd" afterPath="$PROJECT_DIR$/src/img/next.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\images\twitter.psd" afterPath="$PROJECT_DIR$/src/img/twitter.psd" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\about-page.less" afterPath="$PROJECT_DIR$/src/less/about-page.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\admin.less" afterPath="$PROJECT_DIR$/src/less/admin.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\elements.less" afterPath="$PROJECT_DIR$/src/less/elements.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\facebook.less" afterPath="$PROJECT_DIR$/src/less/facebook.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\google-search.less" afterPath="$PROJECT_DIR$/src/less/google-search.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\map.less" afterPath="$PROJECT_DIR$/src/less/map.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\mobile-menu.less" afterPath="$PROJECT_DIR$/src/less/mobile-menu.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\photo-tag-page.less" afterPath="$PROJECT_DIR$/src/less/photo-tag-page.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\post-menu.less" afterPath="$PROJECT_DIR$/src/less/post-menu.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\post-page.less" afterPath="$PROJECT_DIR$/src/less/post-page.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\post-tag-page.less" afterPath="$PROJECT_DIR$/src/less/post-tag-page.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\reset.less" afterPath="$PROJECT_DIR$/src/less/reset.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\settings.less" afterPath="$PROJECT_DIR$/src/less/settings.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\side-menu.less" afterPath="$PROJECT_DIR$/src/less/side-menu.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\less\ti.less" afterPath="$PROJECT_DIR$/src/less/ti.less" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\jquery.lazyload.js" afterPath="$PROJECT_DIR$/src/js/jquery.lazyload.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\map.js" afterPath="$PROJECT_DIR$/src/js/map.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\mobile-menu.js" afterPath="$PROJECT_DIR$/src/js/mobile-menu.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\photo-tag.js" afterPath="$PROJECT_DIR$/src/js/photo-tag.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\post-menu.js" afterPath="$PROJECT_DIR$/src/js/post-menu.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\post.js" afterPath="$PROJECT_DIR$/src/js/post.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public-js\responsive.js" afterPath="$PROJECT_DIR$/src/js/responsive.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\BingSiteAuth.xml" afterPath="$PROJECT_DIR$/dist/BingSiteAuth.xml" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\dojo.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/dojo.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\extjs.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/extjs.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\jquery.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/jquery.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\mootools.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/mootools.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\native.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/native.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\right.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/right.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html4+html5\zepto.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html4+html5/zepto.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\dojo.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/dojo.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\extjs.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/extjs.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\jquery.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/jquery.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\mootools.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/mootools.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\native.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/native.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\right.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/right.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\history\html5\zepto.history.js" afterPath="$PROJECT_DIR$/dist/js/history/html5/zepto.history.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\js\jquery.serialize-object.min.js" afterPath="$PROJECT_DIR$/dist/js/jquery.serialize-object.min.js" />
-      <change type="MOVED" beforePath="D:\dev\Trail Image\public\robots.txt" afterPath="$PROJECT_DIR$/dist/robots.txt" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -148,41 +37,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="gulpfile.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <file leaf-file-name="ti.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/less/ti.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.14611872">
-              <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+            <state vertical-scroll-proportion="-3.548387">
+              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-stream/index.js">
+      <file leaf-file-name="settings.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/less/settings.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.967742">
+              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/models/post.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.25799087">
+              <caret line="383" column="26" selection-start-line="383" selection-start-column="26" selection-end-line="383" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="format.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/format.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+              <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.451612">
-              <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ti.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/css/ti.css">
+      <file leaf-file-name="photo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/models/photo.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="3950" selection-start-line="1" selection-start-column="3950" selection-end-line="1" selection-end-column="3950" />
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="size.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/models/size.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/post.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.677419">
+              <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -206,14 +125,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/partials/head-mobile.hbs" />
-        <option value="$PROJECT_DIR$/less/google-search.less" />
-        <option value="$PROJECT_DIR$/less/side-menu.less" />
-        <option value="$PROJECT_DIR$/less/facebook.less" />
-        <option value="$PROJECT_DIR$/less/about-page.hbs" />
         <option value="$PROJECT_DIR$/less/about-page.less" />
         <option value="$PROJECT_DIR$/lib/controllers/photo-controller.js" />
-        <option value="$PROJECT_DIR$/lib/models/post.js" />
         <option value="$PROJECT_DIR$/views/partials/mobile-menu.hbs" />
         <option value="$PROJECT_DIR$/views/partials/header.hbs" />
         <option value="$PROJECT_DIR$/lib/settings.js" />
@@ -238,25 +151,31 @@
         <option value="$PROJECT_DIR$/less/settings.less" />
         <option value="$PROJECT_DIR$/less/ti.less" />
         <option value="$PROJECT_DIR$/views/partials/head-meta.hbs" />
-        <option value="$PROJECT_DIR$/views/partials/head-files.hbs" />
         <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/lib/controllers/tag-controller.js" />
         <option value="$PROJECT_DIR$/less/mobile-menu.less" />
         <option value="$PROJECT_DIR$/public-js/photo-tag.js" />
         <option value="$PROJECT_DIR$/views/photo-tag.hbs" />
         <option value="$PROJECT_DIR$/less/photo-tag-page.less" />
-        <option value="$PROJECT_DIR$/views/post.hbs" />
         <option value="$PROJECT_DIR$/public-js/post.js" />
         <option value="$PROJECT_DIR$/less/post-page.less" />
         <option value="$PROJECT_DIR$/lib/controllers/sitemap-controller.js" />
         <option value="$PROJECT_DIR$/lib/models/library.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/src/less/settings.less" />
-        <option value="$PROJECT_DIR$/src/less/ti.less" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-stream/index.js" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/views/partials/head-files.hbs" />
+        <option value="$PROJECT_DIR$/src/less/ti.less" />
+        <option value="$PROJECT_DIR$/src/less/settings.less" />
+        <option value="$PROJECT_DIR$/api/flickr.extern.js" />
+        <option value="$PROJECT_DIR$/lib/models/size.js" />
+        <option value="$PROJECT_DIR$/lib/models/photo-list.js" />
+        <option value="$PROJECT_DIR$/lib/providers/flickr.js" />
+        <option value="$PROJECT_DIR$/views/post.hbs" />
+        <option value="$PROJECT_DIR$/lib/models/photo.js" />
+        <option value="$PROJECT_DIR$/lib/models/post.js" />
       </list>
     </option>
   </component>
@@ -398,11 +317,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Trail Image" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Trail Image" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -486,12 +419,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00027" summary="add camera parsing">
-      <created>1443493114152</created>
-      <option name="number" value="00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1443493114152</updated>
     </task>
     <task id="LOCAL-00028" summary="override oauth connection to support proxy">
       <created>1443732505117</created>
@@ -781,7 +708,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446065303936</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="fix script concatenation">
+      <created>1446065719150</created>
+      <option name="number" value="00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1446065719150</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TodoView">
@@ -795,7 +728,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -805,7 +738,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.24175824" sideWeight="0.4972106" order="2" side_tool="false" content_ui="tabs" x="25" y="-543" width="1109" height="491" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32417583" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17855257" sideWeight="0.24835165" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17855257" sideWeight="0.75164837" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17855257" sideWeight="0.75164837" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32857144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -833,7 +766,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix menu load" />
     <MESSAGE value="mobile menu" />
     <MESSAGE value="mobile menu layout" />
     <MESSAGE value="mobile photo tags" />
@@ -858,7 +790,8 @@
     <MESSAGE value="photo tag selector formatting" />
     <MESSAGE value="fix sitemap" />
     <MESSAGE value="configure for gulp build" />
-    <option name="LAST_COMMIT_MESSAGE" value="configure for gulp build" />
+    <MESSAGE value="fix script concatenation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix script concatenation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -893,62 +826,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/response.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/head-facebook.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10459588">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/post-menu.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04680851">
-          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/responsive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06797116">
-          <caret line="44" column="11" selection-start-line="44" selection-start-column="11" selection-end-line="44" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/post-menu.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09361702">
-          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/elements.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keygen.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/keygen-options.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1070,27 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/post.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/photo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/post.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controllers/sitemap-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.067175575">
@@ -1118,34 +974,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/partials/head-files.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26035503">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="119" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1552511">
-          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/less/facebook.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0752">
           <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/settings.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1185,14 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/css/ti.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="3950" selection-start-line="1" selection-start-column="3950" selection-end-line="1" selection-end-column="3950" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/js/jquery.serialize-object.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1201,34 +1025,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/ti.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0721893">
-          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/js/photo-tag.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-stream/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.451612">
-          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1249,10 +1049,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/log.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10045662">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/css/ti.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.977169">
+          <caret line="0" column="33769" selection-start-line="0" selection-start-column="33769" selection-end-line="0" selection-end-column="33769" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/head-files.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.052071005">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14611872">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.35159817">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-stream/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4520548">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26035503">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07534247">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/less/ti.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.548387">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers/pdf-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.305026">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/post-tag.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/less/settings.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.967742">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/flickr.extern.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07534247">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/extensions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05022831">
+          <caret line="2" column="3" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="358" column="14" selection-start-line="358" selection-start-column="14" selection-end-line="358" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/post.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.677419">
+          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/size.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/format.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/photo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/post.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25799087">
+          <caret line="383" column="26" selection-start-line="383" selection-start-column="26" selection-end-line="383" selection-end-column="26" />
           <folding />
         </state>
       </provider>

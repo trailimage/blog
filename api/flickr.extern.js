@@ -7,7 +7,7 @@
 /**
  * @type {Object}
  */
-Flickr = {
+var Flickr = {
 	/**
 	 * @enum {String}
 	 */
@@ -1035,15 +1035,15 @@ Flickr.PhotoSummary.prototype.datetakengranularity = null;
 
 /**
  * If passed "geo" extra
- * @type {Number}
+ * @type {String}
  */
-Flickr.PhotoSummary.prototype.latitude = 0;
+Flickr.PhotoSummary.prototype.latitude = null;
 
 /**
  * If passed "geo" extra
- * @type {Number}
+ * @type {String}
  */
-Flickr.PhotoSummary.prototype.longitude = 0;
+Flickr.PhotoSummary.prototype.longitude = null;
 
 /**
  * If passed "geo" extra
