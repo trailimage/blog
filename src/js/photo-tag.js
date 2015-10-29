@@ -23,7 +23,7 @@ $(function() {
 		$li.addClass(css);
 
 		$list.hide();
-		$list =	$('#'+ $li.data('for'));
+		$list = $('#'+ $li.data('for'));
 		$list.show();
 	});
 
@@ -44,12 +44,12 @@ $(function() {
 
 	/**
 	 *
-	 * @param {String} link
+	 * @param {jQuery} link
 	 */
-	function loadPhotoTag(link) {
-		if (link.length > 0) {
+	function loadPhotoTag($link) {
+		if ($link.length > 0) {
 			$('#wait').show();
-			$('#thumbs').load(link.attr('href'), function() {
+			$('#thumbs').load($link.attr('href'), function() {
 				$('#wait').hide();
 				window.scrollTo(0, 0);
 			});
