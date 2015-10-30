@@ -1443,6 +1443,6 @@ Flickr.SearchResult.prototype.perpage = 0;
 Flickr.SearchResult.prototype.total = 0;
 
 /**
- * @type {PhotoSummary[]}
+ * @type {Flickr.PhotoSummary[]}
  */
 Flickr.SearchResult.prototype.photo = [];

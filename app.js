@@ -113,7 +113,7 @@ function defineRoutes() {
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
 	app.get('/photo-tag', r.photo.tags);
 	app.get('/photo-tag/:tagSlug', r.photo.tags);
-	app.get('/photo-tag/search/:tagSlug', r.photo.search);
+	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
 	app.get('/featured', r.post.featured);
 	app.get('/'+photoID, r.photo.view);                                 // links with bare Flickr photo ID
 	app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
