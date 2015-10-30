@@ -32,7 +32,7 @@ configure();
 //- Private methods -----------------------------------------------------------
 
 function configure() {
-	const library = require('./lib/models/library.js');
+	const Library = require('./lib/models/library.js');
 	const format = require('./lib/format.js');
 
 	log.error('Restarting %s application', (setting.isProduction) ? 'production' : 'development');
@@ -61,7 +61,7 @@ function configure() {
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/dist'));
 
-	library.load(() => {
+	Library.load(() => {
 		defineRoutes();
 		app.listen(port);
 		//https.createServer(options, app).listen(port);
