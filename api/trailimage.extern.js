@@ -140,7 +140,7 @@ Post.prototype.photoCoordinates;
 /**
  * @constructor
  */
-PhotoTag = {};
+var PhotoTag = {};
 
 /**
  * @type {String}
