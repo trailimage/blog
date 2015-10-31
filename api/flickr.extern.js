@@ -339,7 +339,7 @@ Flickr.Response.prototype.photo = null;
 Flickr.Response.prototype.sizes = null;
 
 /**
- * @type {Flickr.Status}
+ * @type {Flickr.Status|String}
  */
 Flickr.Response.prototype.stat = null;
 

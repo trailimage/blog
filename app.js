@@ -14,6 +14,25 @@ const bodyParser = require('body-parser');
 const cookies = require('cookies');
 const wwwhisper = require('connect-wwwhisper');
 
+const RedisProvider = require('./lib/providers/redis-cache.js');
+const FlickrProvider = require('./lib/providers/flickr-db.js');
+
+config.provider.cache = new RedisProvider(config.env('REDISCLOUD_URL'));
+config.provider.library = new FlickrProvider({
+	key: env('FLICKR_KEY'),
+	userID: '60950751@N04',
+	appID: '72157631007435048',
+	secret: env('FLICKR_SECRET'),
+	token: env('FLICKR_TOKEN'),
+	tokenSecret: env('FLICKR_TOKEN_SECRET'),
+	defaultCollection: '72157630885395608',
+	photoSet: {
+		featured: '72157631638576162',
+		poetry: '72157632729508554'
+	}
+});
+
+
 // these depend on the redis settings
 const outputCache = require('./lib/output-cache.js');
 
