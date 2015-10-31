@@ -3,7 +3,7 @@
 /**
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-const setting = require('./lib/settings.js');
+const config = require('./lib/config.js');
 const template = require('./lib/template.js');
 const Express = require('express');
 const log = require('./lib/log.js');
@@ -35,7 +35,7 @@ function configure() {
 	const Library = require('./lib/models/library.js');
 	const format = require('./lib/format.js');
 
-	log.error('Restarting %s application', (setting.isProduction) ? 'production' : 'development');
+	log.error('Restarting %s application', (config.isProduction) ? 'production' : 'development');
 
 	// http://expressjs.com/4x/api.html#app-settings
 	app.set('views', __dirname + '/views');
@@ -54,7 +54,7 @@ function configure() {
 	}
 
 	app.use(filter(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false)));
-	app.use(cookies.express([setting.flickr.userID, setting.facebook.adminID]));
+	app.use(cookies.express([config.flickr.userID, config.facebook.adminID]));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
 	app.use(compress());
