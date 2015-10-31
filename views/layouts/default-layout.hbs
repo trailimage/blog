@@ -1,7 +1,7 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 	{{> head-meta}}
-	<meta content='{{setting.keywords}}' name='keywords'/>
+	<meta content='{{config.keywords}}' name='keywords'/>
 	{{> head-files}}
 	{{> ga}}
 	{{{block "head"}}}
@@ -9,7 +9,7 @@
 		#bug, #links, #tag-navigation { position: fixed; }
 	</style>
 	<script type="text/javascript">
-		window.feature = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{setting.timestamp}} };
+		window.feature = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{config.timestamp}} };
 	</script>
 </head>
 <body>

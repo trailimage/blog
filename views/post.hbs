@@ -4,10 +4,10 @@
 	{{#if keywords}}
 		<meta content='Adventure, Scenery, Photography, {{keywords}}' name='keywords'/>
 	{{else}}
-		<meta content='{{setting.keywords}}' name='keywords'/>
+		<meta content='{{config.keywords}}' name='keywords'/>
 	{{/if}}
 	<script type="text/javascript">
-		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{setting.timestamp}} };
+		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
 	</script>
 	{{> head-files}}
 	{{> head-facebook}}
@@ -45,7 +45,7 @@
 			<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
 		{{/if}}
 
-		<div class="fb-like" data-href="http://www.{{setting.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+		<div class="fb-like" data-href="http://www.{{config.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 		{{#if post.video}}
 			<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
@@ -62,7 +62,7 @@
 
 		{{#if post.photoCoordinates}}
 			<div class='map'>
-				<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{setting.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+				<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 			</div>
 		{{/if}}
 	</div>
@@ -113,7 +113,7 @@
 	<div class='by-line content'><p><span>by</span>Jason Abbott</p></div>
 
 	<div id="footer" class="content">
-		<div class="fb-comments" data-href="http://www.{{setting.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
+		<div class="fb-comments" data-href="http://www.{{config.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
 	</div>
 	{{> footer}}
 </body>
