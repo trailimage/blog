@@ -112,10 +112,7 @@ function injectDependencies() {
 		featureSets: [
 			{ id: '72157632729508554', title: 'Ruminations' }
 		],
-		photoSet: {
-			featured: '72157631638576162',
-			poetry: '72157632729508554'
-		},
+		excludeSets: ['72157631638576162'],
 		oauth: {
 			url: `http://${config.domain}/authorize`
 		}

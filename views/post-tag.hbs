@@ -16,9 +16,9 @@
 				<div class="clear"></div>
 			</div>
 
-			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{thumb.url_n}}" width="{{thumb.width_n}}" height="{{thumb.height_n}}" style="width: {{thumb.width_n}}px; height: {{thumb.height_n}}px;"/></a>
+			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{thumb.size.preview.url}}" width="{{thumb.size.preview.width}}" height="{{thumb.size.preview.height}}" style="width: {{thumb.size.preview.width}}px; height: {{thumb.size.preview.height}}px;"/></a>
 			{{#if photoCoordinates}}
-			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.width_n}}x{{mapHeight thumb.width_n thumb.height_n}}&key={{../../setting.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.size.preview.width}}x{{mapHeight thumb.size.preview.width thumb.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
 			{{/if}}
 			<div class="detail">
 				<p class="summary">{{description}}</p>
