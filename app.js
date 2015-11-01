@@ -25,7 +25,7 @@ function createWebService() {
 
 	Library.load(() => {
 		// library must be loaded before routes are defined
-		defineRoutes();
+		defineRoutes(app);
 		app.listen(port);
 		//https.createServer(options, app).listen(port);
 		log.info('Listening on port %d', port);
@@ -109,10 +109,15 @@ function injectDependencies() {
 		secret: config.env('FLICKR_SECRET'),
 		token: config.env('FLICKR_TOKEN'),
 		tokenSecret: config.env('FLICKR_TOKEN_SECRET'),
-		defaultCollection: '72157630885395608',
+		featureSets: [
+			{ id: '72157632729508554', title: 'Ruminations' }
+		],
 		photoSet: {
 			featured: '72157631638576162',
 			poetry: '72157632729508554'
+		},
+		oauth: {
+			url: `http://${config.domain}/authorize`
 		}
 	});
 }
@@ -120,7 +125,7 @@ function injectDependencies() {
 /**
  * @see http://expressjs.com/4x/api.html#router
  */
-function defineRoutes() {
+function defineRoutes(app) {
 	/** @type {string} Slug pattern */
 	const s = '([\\w\\d-]{4,})';
 	/** @type {string} Flickr photo ID pattern */

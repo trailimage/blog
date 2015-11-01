@@ -1,3 +1,16 @@
+/**
+ * Flickr set to be featured
+ */
+FeatureSet = {};
+/**
+ * @type {String}
+ */
+FeatureSet.prototype.id = null;
+/**
+ * @type {String}
+ */
+FeatureSet.prototype.title = null;
+
 // Post -----------------------------------------------------------------------
 
 /**
