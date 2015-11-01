@@ -69,7 +69,7 @@ function applyMiddleware(app) {
 	const outputCache = require('./lib/output-cache.js');
 
 	app.use(filter(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false)));
-	app.use(cookies.express([config.flickr.userID, config.facebook.adminID]));
+	//app.use(cookies.express([config.flickr.userID, config.facebook.adminID]));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
 	app.use(compress());
@@ -103,12 +103,12 @@ function injectDependencies() {
 
 	config.provider.cacheHost = new RedisProvider(redisUrl);
 	config.provider.library = new FlickrProvider({
-		key: env('FLICKR_KEY'),
+		key: config.env('FLICKR_KEY'),
 		userID: '60950751@N04',
 		appID: '72157631007435048',
-		secret: env('FLICKR_SECRET'),
-		token: env('FLICKR_TOKEN'),
-		tokenSecret: env('FLICKR_TOKEN_SECRET'),
+		secret: config.env('FLICKR_SECRET'),
+		token: config.env('FLICKR_TOKEN'),
+		tokenSecret: config.env('FLICKR_TOKEN_SECRET'),
 		defaultCollection: '72157630885395608',
 		photoSet: {
 			featured: '72157631638576162',
