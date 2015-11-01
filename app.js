@@ -93,9 +93,15 @@ function filter(regex, fn) {
 function injectDependencies() {
 	const RedisProvider = require('./lib/providers/redis-cache.js');
 	const FlickrProvider = require('./lib/providers/flickr-lib.js');
-	let redisHost = config.env('REDISCLOUD_URL');
+	let redisUrl = config.env('REDISCLOUD_URL');
 
-	config.provider.cache = new RedisProvider(redisHost);
+	if (config.isProduction) {
+		// replace default log provider with Redis
+		const RedisLog = require('./lib/providers/redis-log.js');
+		config.provider.log = new RedisLog(redisUrl);
+	}
+
+	config.provider.cacheHost = new RedisProvider(redisUrl);
 	config.provider.library = new FlickrProvider({
 		key: env('FLICKR_KEY'),
 		userID: '60950751@N04',
@@ -109,14 +115,6 @@ function injectDependencies() {
 			poetry: '72157632729508554'
 		}
 	});
-
-	if (config.isProduction) {
-		const RedisLog = require('./lib/providers/redis-log.js');
-		config.provider.log = new RedisLog(redisHost);
-	} else {
-		const ConsoleLog = require('./lib/providers/console-log.js');
-		config.provider.log = new ConsoleLog();
-	}
 }
 
 /**
