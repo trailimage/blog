@@ -3,7 +3,7 @@
 
 @postHeaderHeight: @headerHeight + 15;
 
-#header.post-header {
+header.post-header {
 	z-index: 300;
 	#top-bar {
 		height: @postHeaderHeight;
@@ -143,7 +143,7 @@ body.has-date {
 			}
 		}
 
-		div.tag-wrapper {
+		nav.tag-wrapper {
 			margin-top: 80px;
 		}
 	}
@@ -237,7 +237,7 @@ div.next, div.previous {
 
 /* Tags -------------------------------------------------------------------- */
 
-div.tag-wrapper {
+nav.tag-wrapper {
 	@height: 22px;
 	@mobileHeight: @height + 14;
 
@@ -369,7 +369,7 @@ div.video {
 	}
 }
 
-div.photo {
+figure {
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
@@ -398,7 +398,7 @@ div.photo {
 		}
 	}
 
-	div.tags {
+	nav.tags {
 		position: absolute;
 		left: 5px;
 		bottom: 100px;
@@ -442,7 +442,7 @@ div.photo {
 		}
 	}
 
-	div.exif {
+	aside.exif {
 		position: absolute;
 		top: 5px;
 		right: 5px;
@@ -612,12 +612,12 @@ div.photo {
 					.glyphicon { color: rgba(255, 0, 0, 1); }
 				}
 			}
-			div.info-button, div.exif, div.tags { display: block; }
-			p span { color: #000; }
+			div.info-button, aside.exif, nav.tags { display: block; }
+			figcaption span { color: #000; }
 		}
 	}
 
-	p {
+	figcaption {
 		display: block;
 		position: relative;
 		font-family: @sanSerifFont;
@@ -868,13 +868,13 @@ div.caption {
 .footer-tags {
 	margin: 0 auto;
 
-	div.tag-wrapper {
+	nav.tag-wrapper {
 		.drop-shadow(0, 0, 7px, 0.6);
 	}
 
 	@media @mobile {
 		margin: 0;
-		div.tag-wrapper { .box-shadow(none); }
+		nav.tag-wrapper { .box-shadow(none); }
 	}
 }
 
