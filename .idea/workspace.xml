@@ -6,10 +6,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/droidsans-60c19fbe5f4af0b46f619c431c51c437f66de039.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/droidsans-b777f1a998aaa467eb74ebe1960bd0e94f1648dc.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/droidsans-ea469d63bf279daeb58f104d71e6e0f0d62f93af.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/honda.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/lora-101b41c4d985d4e5b5addbed77bbedfc1d55d89a.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/lora-1a8afcedca7a52c5550e70a93be5debf9fe67053.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/lora-8cb007ce1b4ab51ebb6fa924761bffc8d1a2bbac.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/lora-a7c0221c4af81bc46aeab2847e42cfb2acb08ad1.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/oswald-013bc116a6bd2706c5928844a8494d87be2cabae.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/oswald-638ee1161844a8c5af864a55df10e6e38f106ea0.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/oswald-641e7f512fab8283a2a459253c6e3a148216997e.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/oswald-e8e798a5c33eb9a2d5eca5d90487fee27e52911c.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/qwigley-5dd966487ab6dea0ea56e59c7531bff7d9f4f39a.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/qwigley-78a1541010b37cc8c45db8d9f299de5b1324d0ee.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/suzuki.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/yamaha.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/droidsans-417b4273a457f6ff1df0c20de14646fa4c85728f.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/lora-bd5e4d171078310db332cc5022dae1f70ebeb529.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/oswald-b75a5f8ae70a5d4e0128dc59f5588d9959eed659.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/fonts/qwigley-74394ad7a710d5a7bb845c47ab00d88a451ac2cf.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/post.js" afterPath="$PROJECT_DIR$/dist/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/post.js" afterPath="$PROJECT_DIR$/src/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/post-tag.hbs" afterPath="$PROJECT_DIR$/views/post-tag.hbs" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,38 +51,7 @@
     <favorites_list name="server" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="post.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/post.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="17.741936">
-              <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post-tag.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/post-tag.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8387096">
-              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/js/post.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07603686">
-              <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -260,39 +251,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -331,6 +290,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="javascript.nodejs.core.library.configured.version" value="4.1.0" />
     <property name="nodejs_interpreter_path" value="D:\dev\app\nodejs\node.exe" />
+    <property name="js-jscs-nodeInterpreter" value="D:\dev\app\nodejs\node.exe" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -360,6 +320,24 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
     <configuration default="false" name="Trail Image" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="D:/apps/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <method />
     </configuration>
@@ -378,12 +356,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00038" summary="mobile styling">
-      <created>1444492144182</created>
-      <option name="number" value="00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1444492144182</updated>
     </task>
     <task id="LOCAL-00039" summary="mobile styling">
       <created>1444494727841</created>
@@ -673,7 +645,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446500713364</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="fix image lazy load to use new markup">
+      <created>1446501476166</created>
+      <option name="number" value="00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1446501476166</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TodoView">
@@ -687,7 +665,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -697,7 +675,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.24175824" sideWeight="0.4972106" order="2" side_tool="false" content_ui="tabs" x="25" y="-380" width="1109" height="328" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.26578072" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="1927" y="-253" width="1893" height="240" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1780243" sideWeight="0.28935698" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780243" sideWeight="0.710643" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780243" sideWeight="0.710643" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32705098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -747,7 +725,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="mobile photo info start" />
     <MESSAGE value="divide hbs files" />
     <MESSAGE value="null reference fixes" />
     <MESSAGE value="refactor templates" />
@@ -772,7 +749,8 @@
     <MESSAGE value="semantic tgs" />
     <MESSAGE value="exif tag and zoom cursor" />
     <MESSAGE value="microformat relations" />
-    <option name="LAST_COMMIT_MESSAGE" value="microformat relations" />
+    <MESSAGE value="fix image lazy load to use new markup" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix image lazy load to use new markup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -808,13 +786,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/models/post-tag.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4520548">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/library.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1181,26 +1152,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/post.hbs">
+    <entry file="file://$PROJECT_DIR$/src/js/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="17.741936">
-          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.30414745">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/post-tag.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8387096">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.026284348">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/post.js">
+    <entry file="file://$PROJECT_DIR$/views/post.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07603686">
-          <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+        <state vertical-scroll-proportion="-0.6571087">
+          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/output-cache.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3571428">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
