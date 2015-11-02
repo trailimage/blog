@@ -17,9 +17,9 @@
 			</header>
 
 			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{thumb.size.preview.url}}" width="{{thumb.size.preview.width}}" height="{{thumb.size.preview.height}}" style="width: {{thumb.size.preview.width}}px; height: {{thumb.size.preview.height}}px;"/></a>
-			{{#if photoCoordinates}}
+		{{#if photoCoordinates}}
 			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.size.preview.width}}x{{mapHeight thumb.size.preview.width thumb.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
-			{{/if}}
+		{{/if}}
 			<section class="detail">
 				<p class="summary">{{description}}</p>
 				<ul class="tags">

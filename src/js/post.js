@@ -2,7 +2,7 @@
 
 $(function() {
 	// setup EXIF and map mouse-overs and lazy-loading
-	var $photos = $('.photo');
+	var $photos = $('figure');
 
 	$photos.find('img').lazyload();
 	$photos.find('.mobile-button').on('click', function() {
