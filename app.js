@@ -43,13 +43,14 @@ function defineViews(app) {
 	const format = require('./lib/format.js');
 	const template = require('./lib/template.js');
 	const engine = 'hbs';
+	const root = __dirname;
 
 	// http://expressjs.com/4x/api.html#app-settings
-	app.set('views', __dirname + '/views');
+	app.set('views', root + '/views');
 	app.set('view engine', engine);
 	app.engine(engine, hbs.express4({
-		defaultLayout: __dirname + '/views/' + template.layout.main + '.hbs',
-		partialsDir: __dirname + '/views/partials'
+		defaultLayout: root + '/views/' + template.layout.main + '.hbs',
+		partialsDir: root + '/views/partials'
 	}));
 
 	// formatting methods for the views
@@ -72,7 +73,7 @@ function applyMiddleware(app) {
 	//app.use(cookies.express([config.flickr.userID, config.facebook.adminID]));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
-	app.use(compress());
+	app.use(compress({}));
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/dist'));
 }
@@ -113,6 +114,7 @@ function injectDependencies() {
 			{ id: '72157632729508554', title: 'Ruminations' }
 		],
 		excludeSets: ['72157631638576162'],
+		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
 		oauth: {
 			url: `http://${config.domain}/authorize`
 		}
