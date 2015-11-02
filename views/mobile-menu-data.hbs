@@ -1,11 +1,11 @@
 <ul class="links">
-	<li><a href="/">Home {{{icon 'home'}}}</a></li>
-	<li><a href="/about">About {{{icon 'info-sign'}}}</a></li>
-	<li><a href="/photo-tag">Photo Tags {{{icon 'tags'}}}</a></li>
+	<li><a href="/" rel="home">Home {{{icon 'home'}}}</a></li>
+	<li><a href="/about" rel="author">About {{{icon 'info-sign'}}}</a></li>
+	<li><a href="/photo-tag" rel="search">Photo Tags {{{icon 'tags'}}}</a></li>
 	<li><a href="/ruminations">Ruminations {{{icon 'leaf'}}}</a></li>
 {{! contact-link}}
-	<li><a href="/rss" class="feed-icon">RSS Feed {{{icon 'fire'}}}</a></li>
-	<li><a href="https://twitter.com/trailimage">Twitter {{{icon 'comment'}}}</a></li>
+	<li><a href="/rss" class="feed-icon" rel="alternate" type="application/rss+xml">RSS Feed {{{icon 'fire'}}}</a></li>
+	<li><a href="https://twitter.com/trailimage" rel="me">Twitter {{{icon 'comment'}}}</a></li>
 </ul>
 
 <ul class="tag-list">
@@ -20,7 +20,7 @@
 {{#each library.tags}}
 	<ul class="{{lowerCase this.title}}">
 	{{#this.tags}}
-		<li><a href="/tag/{{this.slug}}">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
+		<li><a href="/tag/{{this.slug}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
 	{{/this.tags}}
 	</ul>
 {{/each}}

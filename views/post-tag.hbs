@@ -3,10 +3,10 @@
 {{/contentFor}}
 
 <div class="post-tag content">
-	<ul class="sets">
+	<section class="posts">
 	{{#posts}}
-		<li class="set-summary">
-			<div class="heading">
+		<article class="summary">
+			<header class="post">
 				<ul class="info">
 					<li class="date-taken">{{dateTaken}}</li>
   {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
@@ -14,22 +14,22 @@
 				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
 				<span class="mode-icon {{{mode}}}"></span>
 				<div class="clear"></div>
-			</div>
+			</header>
 
 			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{thumb.size.preview.url}}" width="{{thumb.size.preview.width}}" height="{{thumb.size.preview.height}}" style="width: {{thumb.size.preview.width}}px; height: {{thumb.size.preview.height}}px;"/></a>
 			{{#if photoCoordinates}}
 			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.size.preview.width}}x{{mapHeight thumb.size.preview.width thumb.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
 			{{/if}}
-			<div class="detail">
+			<section class="detail">
 				<p class="summary">{{description}}</p>
 				<ul class="tags">
 				{{#each tags}}
-					<li><a href="/tag/{{makeSlug this}}">{{{icon 'tag'}}}{{this}}</a></li>
+					<li><a href="/tag/{{makeSlug this}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
 				{{/each}}
 				</ul>
-			</div>
+			</section>
 			<div class="clear"></div>
-		</li>
+		</article>
 	{{/posts}}
-	</ul>
+	</section>
 </div>

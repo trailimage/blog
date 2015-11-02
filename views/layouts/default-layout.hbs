@@ -9,13 +9,15 @@
 		#bug, #links, #tag-navigation { position: fixed; }
 	</style>
 	<script type="text/javascript">
+		{{! features determine which scripts to load }}
 		window.feature = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{config.timestamp}} };
 	</script>
 </head>
 <body>
-	<header class="content{{#if headerCSS}} {{headerCSS}}{{/if}}">
+	{{! adjust header size for some pages }}
+	<header class="page content{{#if headerCSS}} {{headerCSS}}{{/if}}">
 		<!--googleoff: index-->
-		<div id="mobile-menu"></div>
+		<nav id="mobile-menu"></nav>
 		<!--googleon: index-->
 		<div id="top-bar">
 			<h1>{{title}}</h1>
