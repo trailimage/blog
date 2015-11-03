@@ -1,14 +1,21 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 	{{> head-meta}}
-	{{#if keywords}}
-		<meta content='Adventure, Scenery, Photography, {{keywords}}' name='keywords'/>
-	{{else}}
-		<meta content='{{config.keywords}}' name='keywords'/>
-	{{/if}}
+{{#if keywords}}
+	<meta content='Adventure, Scenery, Photography, {{keywords}}' name='keywords'/>
+{{else}}
+	<meta content='{{config.keywords}}' name='keywords'/>
+{{/if}}
 	<script type="text/javascript">
 		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
 	</script>
+	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
+{{#if post.previousIsPart}}
+	<link rel="prev" href="/{{post.previous.slug}}" />
+{{/if}}
+{{#if post.nextIsPart}}
+	<link rel="next" href="/{{post.next.slug}}" />
+{{/if}}
 	{{> head-files}}
 	{{> head-facebook}}
 	{{> ga}}
@@ -25,15 +32,15 @@
 		<nav id="mobile-menu"></nav>
 		<!--googleon: index-->
 		<div id="top-bar">
-			{{#if post.isPartial}}
-				<h1 itemprop="name">{{post.title}}</h1>
-				<div class='subtitle'>
-					<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
-					{{post.subTitle}}
-				</div>
-			{{else}}
-				<h1 itemprop="name">{{post.title}}</h1>
-			{{/if}}
+		{{#if post.isPartial}}
+			<h1 itemprop="name">{{post.title}}</h1>
+			<div class='subtitle'>
+				<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
+				{{post.subTitle}}
+			</div>
+		{{else}}
+			<h1 itemprop="name">{{post.title}}</h1>
+		{{/if}}
 
 			<!--googleoff: index-->
 			{{> post-menu}}
@@ -41,31 +48,31 @@
 			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
 		</div>
 
-		{{#if post.dateTaken}}
-		{{! outside top-bar to avoid its fixed positioning }}
-			<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
-		{{/if}}
+	{{#if post.dateTaken}}
+	{{! outside top-bar to avoid its fixed positioning }}
+		<div id="post-date" itemprop="dateCreated">{{post.dateTaken}}</div>
+	{{/if}}
 
 		<div class="fb-like" data-href="http://www.{{config.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
-		{{#if post.video}}
-			<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
-		{{/if}}
+	{{#if post.video}}
+		<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
+	{{/if}}
 
-		{{#if post.description}}
-			<blockquote class="synopsis">
-				<p itemprop="description">{{post.description}}<p>
-			</blockquote>
-		{{/if}}
+	{{#if post.description}}
+		<blockquote class="synopsis">
+			<p itemprop="description">{{post.description}}<p>
+		</blockquote>
+	{{/if}}
 
 		{{> post-tags post.tags}}
 		<nav id="nav-top">{{> navigation}}</nav>
 
-		{{#if post.photoCoordinates}}
-			<div class='map'>
-				<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
-			</div>
-		{{/if}}
+	{{#if post.photoCoordinates}}
+		<div class='map'>
+			<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+		</div>
+	{{/if}}
 	</header>
 
 	{{#post.photos}}
