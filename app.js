@@ -93,7 +93,7 @@ function filter(regex, fn) {
  */
 function injectDependencies() {
 	const RedisProvider = require('./lib/providers/redis/redis-cache.js');
-	const FlickrProvider = require('./lib/providers/flickr/flickr-lib.js');
+	const FlickrProvider = require('./lib/providers/flickr/flickr-data.js');
 	let redisUrl = config.env('REDISCLOUD_URL');
 
 	if (config.isProduction) {
