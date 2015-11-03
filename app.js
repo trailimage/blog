@@ -92,7 +92,7 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const RedisProvider = require('./lib/providers/redis/redis-cache.js');
+	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrData = require('./lib/providers/flickr/flickr-data.js');
 	let redisUrl = config.env('REDISCLOUD_URL');
 
@@ -102,7 +102,7 @@ function injectDependencies() {
 		config.provider.log = new RedisLog(redisUrl);
 	}
 
-	config.provider.cacheHost = new RedisProvider(redisUrl);
+	config.provider.cacheHost = new RedisCache(redisUrl);
 	config.provider.data = new FlickrData({
 		key: config.env('FLICKR_KEY'),
 		userID: '60950751@N04',
