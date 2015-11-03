@@ -7,11 +7,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/photo-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/photo-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/factory-base.js" afterPath="$PROJECT_DIR$/lib/models/factory-base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/data-base.js" afterPath="$PROJECT_DIR$/lib/providers/data-base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/library.js" afterPath="$PROJECT_DIR$/lib/models/library.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/size.js" afterPath="$PROJECT_DIR$/lib/models/size.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/manager.js" afterPath="$PROJECT_DIR$/lib/providers/manager.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="103" column="31" selection-start-line="103" selection-start-column="31" selection-end-line="103" selection-end-column="31" />
+              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -46,7 +47,17 @@
         <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="172" column="6" selection-start-line="172" selection-start-column="6" selection-end-line="173" selection-end-column="40" />
+              <caret line="155" column="14" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -65,8 +76,8 @@
       <file leaf-file-name="flickr-factory.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4585254">
-              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.10138249">
+              <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -76,17 +87,7 @@
         <entry file="file://$PROJECT_DIR$/lib/models/library.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="199" column="11" selection-start-line="199" selection-start-column="11" selection-end-line="199" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="size.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/size.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+              <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -127,7 +128,6 @@
         <option value="$PROJECT_DIR$/views/tag-menu.hbs" />
         <option value="$PROJECT_DIR$/views/post-tag.hbs" />
         <option value="$PROJECT_DIR$/src/js/post.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
         <option value="$PROJECT_DIR$/lib/models/photo-tag.js" />
         <option value="$PROJECT_DIR$/lib/providers/library-cache.js" />
@@ -148,20 +148,21 @@
         <option value="$PROJECT_DIR$/lib/cache/cache-base.js" />
         <option value="$PROJECT_DIR$/lib/cache/memory-cache.js" />
         <option value="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" />
-        <option value="$PROJECT_DIR$/lib/providers/manager.js" />
         <option value="$PROJECT_DIR$/lib/models/post-tag.js" />
-        <option value="$PROJECT_DIR$/lib/models/size.js" />
         <option value="$PROJECT_DIR$/lib/models/photo.js" />
         <option value="$PROJECT_DIR$/lib/models/post.js" />
         <option value="$PROJECT_DIR$/lib/models/exif.js" />
-        <option value="$PROJECT_DIR$/lib/models/library.js" />
         <option value="$PROJECT_DIR$/lib/models/factory.js" />
         <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-lib.js" />
         <option value="$PROJECT_DIR$/lib/providers/library-provider.js" />
-        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
         <option value="$PROJECT_DIR$/lib/models/factory-base.js" />
-        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
         <option value="$PROJECT_DIR$/lib/providers/data-base.js" />
+        <option value="$PROJECT_DIR$/lib/models/size.js" />
+        <option value="$PROJECT_DIR$/lib/providers/manager.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/lib/models/library.js" />
+        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
+        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
       </list>
     </option>
   </component>
@@ -364,8 +365,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../json-services" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
-    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
     <property name="JavaScriptLanguageLevel" value="ES6" />
     <property name="JavaScriptPreferStrict" value="true" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
@@ -390,6 +390,7 @@
     <property name="javascript.nodejs.core.library.configured.version" value="4.1.0" />
     <property name="nodejs_interpreter_path" value="D:\dev\app\nodejs\node.exe" />
     <property name="js-jscs-nodeInterpreter" value="D:\dev\app\nodejs\node.exe" />
+    <property name="Node.Profiling.V8Profiler.Path" value="" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -440,7 +441,7 @@
     <configuration default="false" name="Trail Image" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="D:/apps/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <method />
     </configuration>
-    <configuration default="false" name="Other" type="NodeJSConfigurationType" factoryName="Node.js" singleton="false" path-to-node="$PROJECT_DIR$/../app/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+    <configuration default="false" name="Other" type="NodeJSConfigurationType" factoryName="Node.js" singleton="true" path-to-node="$PROJECT_DIR$/../app/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <method />
     </configuration>
     <list size="2">
@@ -455,12 +456,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00047" summary="mobile menu layout">
-      <created>1444526355370</created>
-      <option name="number" value="00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1444526355370</updated>
     </task>
     <task id="LOCAL-00048" summary="mobile menu layout">
       <created>1444527608274</created>
@@ -750,7 +745,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446577115198</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="factory pattern checkpoint">
+      <created>1446577960859</created>
+      <option name="number" value="00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1446577960859</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TodoView">
@@ -775,10 +776,11 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.26578072" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="1927" y="-253" width="1893" height="240" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1780243" sideWeight="0.28935698" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780243" sideWeight="0.710643" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3255814" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3248337" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="V8 CPU Profiling" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="26" y="-994" width="1046" height="593" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="26" y="-994" width="1046" height="593" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1006,6 +1008,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3548387">
           <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,14 +1031,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3329493">
           <caret line="155" column="4" selection-start-line="155" selection-start-column="4" selection-end-line="155" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.050691243">
-          <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1151,22 +1146,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/manager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15189873">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20276497">
-          <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/post-tag.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15207373">
@@ -1175,18 +1154,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/size.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/post.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.07603686">
           <caret line="105" column="24" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1201,14 +1173,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10138249">
           <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/library.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="199" column="11" selection-start-line="199" selection-start-column="11" selection-end-line="199" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -1243,10 +1207,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
+    <entry file="file://$PROJECT_DIR$/lib/models/size.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10138249">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/manager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43087557">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10483871">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="172" column="6" selection-start-line="172" selection-start-column="6" selection-end-line="173" selection-end-column="40" />
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/library.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="36" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1254,15 +1250,23 @@
     <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="31" selection-start-line="103" selection-start-column="31" selection-end-line="103" selection-end-column="31" />
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="155" column="14" selection-start-line="155" selection-start-column="14" selection-end-line="155" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4585254">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.10138249">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
           <folding />
         </state>
       </provider>
