@@ -7,10 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-base.js" afterPath="$PROJECT_DIR$/lib/cache/cache-base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-helper.js" afterPath="$PROJECT_DIR$/lib/cache/cache-helper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/photo-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/photo-controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/factory-base.js" afterPath="$PROJECT_DIR$/lib/models/factory-base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/post.js" afterPath="$PROJECT_DIR$/lib/models/post.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
     </list>
@@ -33,11 +31,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="data-base.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
+      <file leaf-file-name="photo-controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/controllers/photo-controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+              <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flickr-data.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="187" column="30" selection-start-line="187" selection-start-column="30" selection-end-line="187" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="factory-base.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="80" column="26" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -46,8 +64,8 @@
       <file leaf-file-name="flickr-factory.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07603686">
-              <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.4343318">
+              <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -72,7 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/less/ti.less" />
         <option value="$PROJECT_DIR$/views/layouts/default-layout.hbs" />
         <option value="$PROJECT_DIR$/src/less/post-page.less" />
         <option value="$PROJECT_DIR$/src/less/post-tag-page.less" />
@@ -120,6 +137,7 @@
         <option value="$PROJECT_DIR$/lib/cache/cache-base.js" />
         <option value="$PROJECT_DIR$/lib/cache/cache-helper.js" />
         <option value="$PROJECT_DIR$/lib/models/post.js" />
+        <option value="$PROJECT_DIR$/lib/controllers/photo-controller.js" />
         <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
         <option value="$PROJECT_DIR$/lib/models/factory-base.js" />
         <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
@@ -394,12 +412,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00051" summary="mobile photo tags">
-      <created>1444534151180</created>
-      <option name="number" value="00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1444534151180</updated>
     </task>
     <task id="LOCAL-00052" summary="missed script">
       <created>1444534345077</created>
@@ -689,7 +701,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446585580615</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="factory complete">
+      <created>1446586309580</created>
+      <option name="number" value="00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1446586309580</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TodoView">
@@ -718,7 +736,7 @@
       <window_info id="V8 CPU Profiling" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="26" y="-994" width="1351" height="593" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="26" y="-994" width="1351" height="593" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -764,7 +782,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="create launch icon and android app mode" />
     <MESSAGE value="mobile style tweaks" />
     <MESSAGE value="fix mobile header spacing" />
     <MESSAGE value="change mobile wait overlay" />
@@ -789,7 +806,8 @@
     <MESSAGE value="factory pattern checkpoint" />
     <MESSAGE value="fix updatePostPhotos()" />
     <MESSAGE value="factory checkpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="factory checkpoint" />
+    <MESSAGE value="factory complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="factory complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -825,13 +843,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/post-menu-data.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/tag-menu.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10513739">
@@ -1190,34 +1201,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
+    <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0103687">
-          <caret line="154" column="37" selection-start-line="154" selection-start-column="37" selection-end-line="154" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.28225806">
+          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
+    <entry file="file://$PROJECT_DIR$/lib/controllers/photo-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="187" column="30" selection-start-line="187" selection-start-column="30" selection-end-line="187" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4170507">
-          <caret line="111" column="21" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="26" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07603686">
-          <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.4343318">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
           <folding />
         </state>
       </provider>
