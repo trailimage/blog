@@ -6,17 +6,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/models/video.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-base.js" afterPath="$PROJECT_DIR$/lib/cache/cache-base.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-helper.js" afterPath="$PROJECT_DIR$/lib/cache/cache-helper.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/factory-base.js" afterPath="$PROJECT_DIR$/lib/models/factory-base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/post-tag.js" afterPath="$PROJECT_DIR$/lib/models/post-tag.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/post.js" afterPath="$PROJECT_DIR$/lib/models/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/data-base.js" afterPath="$PROJECT_DIR$/lib/providers/data-base.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" afterPath="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,67 +37,17 @@
         <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="flickr-data.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="126" column="14" selection-start-line="126" selection-start-column="14" selection-end-line="126" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="flickr-factory.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="flickr-factory.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="136" column="6" selection-start-line="136" selection-start-column="6" selection-end-line="136" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="redis-cache.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/providers/redis/redis-cache.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/post.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post-tag.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/post-tag.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cache-helper.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/cache/cache-helper.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25345623">
-              <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.07603686">
+              <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -168,15 +114,15 @@
         <option value="$PROJECT_DIR$/lib/controllers/tag-controller.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/lib/providers/data-base.js" />
-        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
         <option value="$PROJECT_DIR$/lib/models/post-tag.js" />
-        <option value="$PROJECT_DIR$/lib/cache/cache-helper.js" />
         <option value="$PROJECT_DIR$/lib/models/video.js" />
-        <option value="$PROJECT_DIR$/lib/models/post.js" />
-        <option value="$PROJECT_DIR$/lib/models/factory-base.js" />
-        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
         <option value="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" />
         <option value="$PROJECT_DIR$/lib/cache/cache-base.js" />
+        <option value="$PROJECT_DIR$/lib/cache/cache-helper.js" />
+        <option value="$PROJECT_DIR$/lib/models/post.js" />
+        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-data.js" />
+        <option value="$PROJECT_DIR$/lib/models/factory-base.js" />
+        <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js" />
       </list>
     </option>
   </component>
@@ -448,12 +394,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00050" summary="mobile menu layout">
-      <created>1444532952924</created>
-      <option name="number" value="00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1444532952947</updated>
     </task>
     <task id="LOCAL-00051" summary="mobile photo tags">
       <created>1444534151180</created>
@@ -743,7 +683,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446583846827</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="factory checkpoint">
+      <created>1446585580615</created>
+      <option name="number" value="00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1446585580615</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TodoView">
@@ -818,7 +764,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="mobile photo info" />
     <MESSAGE value="create launch icon and android app mode" />
     <MESSAGE value="mobile style tweaks" />
     <MESSAGE value="fix mobile header spacing" />
@@ -843,7 +788,8 @@
     <MESSAGE value="restructure folders and begin factory" />
     <MESSAGE value="factory pattern checkpoint" />
     <MESSAGE value="fix updatePostPhotos()" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix updatePostPhotos()" />
+    <MESSAGE value="factory checkpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="factory checkpoint" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -869,7 +815,7 @@
           <option name="timeStamp" value="128" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="205" />
+      <option name="time" value="207" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -1110,14 +1056,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/photo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10138249">
-          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/template.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10138249">
@@ -1188,14 +1126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="14" selection-start-line="126" selection-start-column="14" selection-end-line="126" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/size.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11478261">
@@ -1212,42 +1142,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
+    <entry file="file://$PROJECT_DIR$/lib/cache/cache-base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14086956">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/post-tag.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/post.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="136" column="6" selection-start-line="136" selection-start-column="6" selection-end-line="136" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.43087557">
+          <caret line="17" column="53" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/providers/redis/redis-cache.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9124424">
+          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/cache/cache-helper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27880183">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/post-tag.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40552995">
+          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/post.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.4331796">
+          <caret line="267" column="72" selection-start-line="267" selection-start-column="72" selection-end-line="267" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/photo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8248848">
+          <caret line="72" column="6" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0103687">
+          <caret line="154" column="37" selection-start-line="154" selection-start-column="37" selection-end-line="154" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1255,23 +1201,23 @@
     <entry file="file://$PROJECT_DIR$/lib/providers/data-base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cache/cache-base.js">
+    <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07652174">
-          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.4170507">
+          <caret line="111" column="21" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cache/cache-helper.js">
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25345623">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.07603686">
+          <caret line="111" column="24" selection-start-line="111" selection-start-column="24" selection-end-line="111" selection-end-column="24" />
           <folding />
         </state>
       </provider>
