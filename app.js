@@ -67,7 +67,7 @@ function applyMiddleware(app) {
 	const bodyParser = require('body-parser');
 	const cookies = require('cookies');
 	const wwwhisper = require('connect-wwwhisper');
-	const outputCache = require('./lib/output-cache.js');
+	const outputCache = require('./lib/cache/output-cache.js');
 
 	app.use(filter(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false)));
 	//app.use(cookies.express([config.flickr.userID, config.facebook.adminID]));
@@ -92,13 +92,13 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const RedisProvider = require('./lib/providers/redis-cache.js');
-	const FlickrProvider = require('./lib/providers/flickr-lib.js');
+	const RedisProvider = require('./lib/providers/redis/redis-cache.js');
+	const FlickrProvider = require('./lib/providers/flickr/flickr-lib.js');
 	let redisUrl = config.env('REDISCLOUD_URL');
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
-		const RedisLog = require('./lib/providers/redis-log.js');
+		const RedisLog = require('./lib/providers/redis/redis-log.js');
 		config.provider.log = new RedisLog(redisUrl);
 	}
 
