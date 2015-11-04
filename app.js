@@ -98,7 +98,7 @@ function injectDependencies() {
 		config.provider.log = new RedisLog(redisUrl);
 	}
 
-	config.provider.cacheHost = new RedisCache(redisUrl);
+	//config.provider.cacheHost = new RedisCache(redisUrl);
 	config.provider.data = new FlickrData({
 		key: flickrKey,
 		userID: '60950751@N04',
