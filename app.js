@@ -75,7 +75,7 @@ function applyMiddleware(app) {
 
 	app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
 	//app.use(Cookies.express(keepCookie));
-	app.use(/^\/admin/, [bodyParser.urlencoded({ extended: true }), bodyParser.json()]);
+	app.use('/admin', [bodyParser.urlencoded({ extended: true }), bodyParser.json()]);
 	//app.use(bodyParser.urlencoded({ extended: true }));
 	//app.use(bodyParser.json());
 	app.use(compress({}));
