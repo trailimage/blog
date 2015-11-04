@@ -73,7 +73,7 @@ function applyMiddleware(app) {
 	const wwwhisper = require('connect-wwwhisper');
 	const outputCache = require('./lib/cache/output-cache.js');
 
-	app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
+	//app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
 	//app.use(Cookies.express(keepCookie));
 	app.use('/admin', [bodyParser.urlencoded({ extended: true }), bodyParser.json()]);
 	//app.use(bodyParser.urlencoded({ extended: true }));
