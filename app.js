@@ -6,6 +6,7 @@
  */
 const config = require('./lib/config.js');
 const Express = require('express');
+const cookieEncryption = [config.facebook.adminID];
 
 injectDependencies();
 createWebService();
@@ -61,31 +62,25 @@ function defineViews(app) {
 
 /**
  * @param app
+ * @see http://expressjs.com/api.html#app.use
  */
 function applyMiddleware(app) {
+	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const cookies = require('cookies');
+	/** @see https://github.com/pillarjs/cookies/blob/master/README.md */
+	//const Cookies = require('cookies');
 	const wwwhisper = require('connect-wwwhisper');
 	const outputCache = require('./lib/cache/output-cache.js');
 
-	app.use(filter(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false)));
-	//app.use(cookies.express([config.flickr.userID, config.facebook.adminID]));
-	app.use(bodyParser.urlencoded({ extended: true }));
-	app.use(bodyParser.json());
+	app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
+	//app.use(Cookies.express(keepCookie));
+	app.use(/^\/admin/, [bodyParser.urlencoded({ extended: true }), bodyParser.json()]);
+	//app.use(bodyParser.urlencoded({ extended: true }));
+	//app.use(bodyParser.json());
 	app.use(compress({}));
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/dist'));
-}
-
-/**
- * Only apply middleware to paths matching pattern
- * @param {RegExp} regex
- * @param {Function} fn Middleware
- * @returns {Function}
- */
-function filter(regex, fn) {
-	return (req, res, next) => { if (regex.test(req.path)) { fn(req, res, next); } else { next(); }}
 }
 
 /**
@@ -94,7 +89,8 @@ function filter(regex, fn) {
 function injectDependencies() {
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrData = require('./lib/providers/flickr/flickr-data.js');
-	let redisUrl = config.env('REDISCLOUD_URL');
+	const redisUrl = config.env('REDISCLOUD_URL');
+	const flickrKey = config.env('FLICKR_KEY');
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
@@ -104,7 +100,7 @@ function injectDependencies() {
 
 	config.provider.cacheHost = new RedisCache(redisUrl);
 	config.provider.data = new FlickrData({
-		key: config.env('FLICKR_KEY'),
+		key: flickrKey,
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		secret: config.env('FLICKR_SECRET'),
@@ -119,10 +115,13 @@ function injectDependencies() {
 			url: `http://${config.domain}/authorize`
 		}
 	});
+
+	cookieEncryption.push(flickrKey);
 }
 
 /**
  * @see http://expressjs.com/4x/api.html#router
+ * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app) {
 	/** @type {string} Slug pattern */
@@ -145,9 +144,8 @@ function defineRoutes(app) {
 	app.get('/js/post-menu-data.js', r.menu.data);
 	app.get('/sitemap.xml', r.sitemap.view);
    app.get('/exif/'+photoID, r.photo.exif);
-	app.get('/issue', r.issue.view);
-	app.get('/issues', r.issue.view);
-	app.get('/issue/:slug'+s, r.issue.view);
+	app.get('/issues?', r.issue.view);
+	app.get('/issues?/:slug'+s, r.issue.view);
 	app.get('/tag-menu', r.tag.menu);
 	app.get('/mobile-menu', r.menu.mobile);
 	app.get('/search', r.search.view);
