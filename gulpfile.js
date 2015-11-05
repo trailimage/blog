@@ -15,15 +15,24 @@ const jsPath = './src/js/';
  * @see https://github.com/jonathanepollack/gulp-minify-css
  * @see https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
  */
-gulp.task('less', function() {
+gulp.task('less-main', () => LESS('ti'));
+gulp.task('less-map', () => LESS('map'));
+gulp.task('less', ['less-main','less-map']);
+
+/**
+ * Combine web fonts and transpile LESS
+ * @param {String} name CSS file name
+ * @returns {jQuery.Promise}
+ */
+function LESS(name) {
 	return merge(
 		gulp.src('./src/fonts/webfont.css'),
-		gulp.src('./src/less/ti.less').pipe(less({ paths: [bsPath + 'less' ] }))
+		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
 	)
 		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0	}))
-		.pipe(concat('ti.css'))
+		.pipe(concat(name + '.css'))
 		.pipe(gulp.dest(dist + 'css'));
-});
+}
 
 // copy font files
 gulp.task('fonts', function() {
