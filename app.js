@@ -89,6 +89,7 @@ function applyMiddleware(app) {
 function injectDependencies() {
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrData = require('./lib/providers/flickr/flickr-data.js');
+	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const flickrKey = config.env('FLICKR_KEY');
 
@@ -108,15 +109,24 @@ function injectDependencies() {
 		key: flickrKey,
 		userID: '60950751@N04',
 		appID: '72157631007435048',
-		secret: config.env('FLICKR_SECRET'),
-		token: config.env('FLICKR_TOKEN'),
-		tokenSecret: config.env('FLICKR_TOKEN_SECRET'),
 		featureSets: [
 			{ id: '72157632729508554', title: 'Ruminations' }
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
 		oauth: {
+			token: config.env('FLICKR_TOKEN'),
+			secret: config.env('FLICKR_SECRET'),
+			tokenSecret: config.env('FLICKR_TOKEN_SECRET'),
+			url: `http://${config.domain}/authorize`
+		}
+	});
+
+	config.provider.file = new GoogleFile({
+		oauth: {
+			token: config.env('GOOGLE_TOKEN'),
+			accessToken: config.env('GOOGLE_ACCESS_TOKEN'),
+			refreshToken: config.env('GOOGLE_REFRESH_TOKEN'),
 			url: `http://${config.domain}/authorize`
 		}
 	});
@@ -142,12 +152,12 @@ function defineRoutes(app) {
 	}
 
 	app.use('/admin', r.admin);
+	app.use('/auth', r.auth);
 	app.use('/api/v1', r.api);
 
 	app.get('/', r.tag.home);                                         // the latest posts
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
-	app.get('/authorize', r.authorize.view);
 	app.get('/js/post-menu-data.js', r.menu.data);
 	app.get('/sitemap.xml', r.sitemap.view);
    app.get('/exif/'+photoID, r.photo.exif);
