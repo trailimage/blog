@@ -138,7 +138,9 @@ function defineRoutes(app) {
 	const postID = ':postID(\\d{17})';
 	const r = require('./lib/controllers/routes.js');
 
-	r.post.addFixes(app);
+	for (let i in config.redirects) {
+		app.get(i, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, config.redirects[i]); });
+	}
 
 	app.use('/admin', r.admin);
 	app.use('/api/v1', r.api);
@@ -160,7 +162,6 @@ function defineRoutes(app) {
 	app.get('/photo-tag', r.photo.tags);
 	app.get('/photo-tag/:tagSlug', r.photo.tags);
 	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
-	app.get('/featured', r.post.featured);
 	app.get('/'+photoID, r.photo.view);                                 // links with bare Flickr photo ID
 	app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
 	app.get('/'+postID+'/'+photoID, r.post.flickrID);
