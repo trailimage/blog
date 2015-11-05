@@ -17,7 +17,6 @@ function createWebService() {
 	const app = Express();
 	/** @type {Number} */
 	const port = process.env['PORT'] || 3000;
-	// requires dependency injection
 	const log = config.provider.log;
 
 	log.error('Restarting %s application', (config.isProduction) ? 'production' : 'development');
@@ -103,7 +102,7 @@ function injectDependencies() {
 		// Redis won't work from behind proxy
 		config.provider.cacheHost = new RedisCache(redisUrl);
 	} else {
-		config.provider.log.info('Proxy detected — reverting to default cache provider');
+		config.provider.log.info('Proxy detected — using default cache provider');
 	}
 	config.provider.data = new FlickrData({
 		key: flickrKey,
@@ -138,14 +137,14 @@ function defineRoutes(app) {
 	const postID = ':postID(\\d{17})';
 	const r = require('./lib/controllers/routes.js');
 
-	for (let i in config.redirects) {
-		app.get(i, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, config.redirects[i]); });
+	for (let slug in config.redirects) {
+		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
 
 	app.use('/admin', r.admin);
 	app.use('/api/v1', r.api);
 
-	app.get('/', r.tag.home);                                       // the latest posts
+	app.get('/', r.tag.home);                                         // the latest posts
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/authorize', r.authorize.view);
