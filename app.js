@@ -4,6 +4,7 @@
  * Application entry point
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
+const is = require('./lib/is.js');
 const config = require('./lib/config.js');
 const Express = require('express');
 const cookieEncryption = [config.facebook.adminID];
@@ -98,7 +99,12 @@ function injectDependencies() {
 		config.provider.log = new RedisLog(redisUrl);
 	}
 
-	config.provider.cacheHost = new RedisCache(redisUrl);
+	if (is.empty(config.proxy)) {
+		// Redis won't work from behind proxy
+		config.provider.cacheHost = new RedisCache(redisUrl);
+	} else {
+		config.provider.log.info('Proxy detected — reverting to default cache provider');
+	}
 	config.provider.data = new FlickrData({
 		key: flickrKey,
 		userID: '60950751@N04',
