@@ -118,16 +118,19 @@ function injectDependencies() {
 			token: config.env('FLICKR_TOKEN'),
 			secret: config.env('FLICKR_SECRET'),
 			tokenSecret: config.env('FLICKR_TOKEN_SECRET'),
-			url: `http://${config.domain}/authorize`
+			url: `http://${config.domain}/auth/flickr`
 		}
 	});
 
 	config.provider.file = new GoogleFile({
+		apiKey: config.env('GOOGLE_DRIVE_KEY'),
+		clientID: config.env('GOOGLE_CLIENT_ID'),
 		oauth: {
 			token: config.env('GOOGLE_TOKEN'),
-			accessToken: config.env('GOOGLE_ACCESS_TOKEN'),
-			refreshToken: config.env('GOOGLE_REFRESH_TOKEN'),
-			url: `http://${config.domain}/authorize`
+			secret: config.env('GOOGLE_SECRET'),
+			accessToken: process.env['GOOGLE_ACCESS_TOKEN'],
+			refreshToken: process.env['GOOGLE_REFRESH_TOKEN'],
+			url: `http://${config.domain}/auth/google`
 		}
 	});
 
