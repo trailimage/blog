@@ -18,15 +18,14 @@ function createWebService() {
 	const port = process.env['PORT'] || 3000;
 	const log = config.provider.log;
 
-	log.error('Restarting %s application', (config.isProduction) ? 'production' : 'development');
+	log.info('Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
 	applyMiddleware(app);
 
 	if (config.provider.needsAuth) {
-		const r = require('./lib/controllers/routes.js');
-
-		app.use('/auth', r.auth);
+		// must authenticate before normal routes are available
+		defineAuthRoutes(app);
 		app.listen(port);
 		log.info('Listening for authentication on port %d', port);
 	} else {
@@ -156,6 +155,7 @@ function defineRoutes(app) {
 
 	app.use('/admin', r.admin);
 	app.use('/api/v1', r.api);
+	app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
 		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
@@ -187,4 +187,16 @@ function defineRoutes(app) {
 	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
 	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
 	app.get('/:slug'+s, r.post.view);
+}
+
+/**
+ * If a provider isn't authenticated then all paths route to authentication pages
+ * @param app
+ */
+function defineAuthRoutes(app) {
+	const c = require('./lib/controllers/authorize-controller.js');
+
+	app.get('/auth/flickr', c.flickr);
+	app.get('/auth/google', c.google);
+	app.get('*', c.view);
 }
