@@ -24,13 +24,17 @@ function createWebService() {
 	defineViews(app);
 	applyMiddleware(app);
 
-	Library.load(() => {
-		// library must be loaded before routes are defined
-		defineRoutes(app);
-		app.listen(port);
-		//https.createServer(options, app).listen(port);
-		log.info('Listening on port %d', port);
-	});
+	if (false && config.provider.needsAuth) {
+
+	} else {
+		Library.load(() => {
+			// library must be loaded before routes are defined
+			defineRoutes(app);
+			app.listen(port);
+			//https.createServer(options, app).listen(port);
+			log.info('Listening on port %d', port);
+		});
+	}
 }
 
 /**
@@ -113,16 +117,17 @@ function injectDependencies() {
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		oauth: new OAuthOptions(1,
-			config.env('FLICKR_KEY'),
+		auth: new OAuthOptions(1,
+			config.env('FLICKR_API_KEY'),
 			config.env('FLICKR_SECRET'),
 			`http://${config.domain}/auth/flickr`,
-			process.env['FLICKR_ACCESS_TOKEN'])
+			process.env['FLICKR_ACCESS_TOKEN'],
+			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
 	config.provider.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
-		oauth: new OAuthOptions(2,
+		auth: new OAuthOptions(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
 			`http://${config.domain}/auth/google`,
@@ -138,13 +143,9 @@ function injectDependencies() {
 function defineRoutes(app) {
 	const r = require('./lib/controllers/routes.js');
 
-	app.use('/admin', r.admin);
-	app.use('/auth', r.auth);
-	app.use('/api/v1', r.api);
-
 	if (config.provider.needsAuth) {
 		// show authentication pages
-
+		app.use('/auth', r.auth);
 	} else {
 		// map normal routes
 		/** @type {string} Slug pattern */
@@ -153,6 +154,9 @@ function defineRoutes(app) {
 		const photoID = ':photoID(\\d{10,11})';
 		/** @type {string} Flickr set ID pattern */
 		const postID = ':postID(\\d{17})';
+
+		app.use('/admin', r.admin);
+		app.use('/api/v1', r.api);
 
 		for (let slug in config.redirects) {
 			app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
