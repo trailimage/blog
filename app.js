@@ -92,7 +92,6 @@ function injectDependencies() {
 	const FlickrData = require('./lib/providers/flickr/flickr-photo.js');
 	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
-	const flickrKey = config.env('FLICKR_KEY');
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
@@ -107,7 +106,6 @@ function injectDependencies() {
 		config.provider.log.info('Proxy detected — using default cache provider');
 	}
 	config.provider.photo = new FlickrData({
-		key: flickrKey,
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -115,24 +113,22 @@ function injectDependencies() {
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		oauth: new OAuthOptions(
-			config.env('FLICKR_TOKEN'),
-			process.env['FLICKR_SECRET'],
+		oauth: new OAuthOptions(1,
+			config.env('FLICKR_KEY'),
+			config.env('FLICKR_SECRET'),
 			`http://${config.domain}/auth/flickr`,
-			process.env['FLICKR_TOKEN_SECRET'])
+			process.env['FLICKR_ACCESS_TOKEN'])
 	});
 
 	config.provider.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
-		oauth: new OAuthOptions(
+		oauth: new OAuthOptions(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
 			`http://${config.domain}/auth/google`,
 			process.env['GOOGLE_ACCESS_TOKEN'],
 			process.env['GOOGLE_REFRESH_TOKEN'])
 	});
-
-	cookieEncryption.push(flickrKey);
 }
 
 /**
@@ -140,47 +136,53 @@ function injectDependencies() {
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app) {
-	/** @type {string} Slug pattern */
-	const s = '([\\w\\d-]{4,})';
-	/** @type {string} Flickr photo ID pattern */
-	const photoID = ':photoID(\\d{10,11})';
-	/** @type {string} Flickr set ID pattern */
-	const postID = ':postID(\\d{17})';
 	const r = require('./lib/controllers/routes.js');
-
-	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
-	}
 
 	app.use('/admin', r.admin);
 	app.use('/auth', r.auth);
 	app.use('/api/v1', r.api);
 
-	app.get('/', r.tag.home);                                         // the latest posts
-	app.get('/rss', r.rss.view);
-	app.get('/about', r.about.view);
-	app.get('/js/post-menu-data.js', r.menu.data);
-	app.get('/sitemap.xml', r.sitemap.view);
-   app.get('/exif/'+photoID, r.photo.exif);
-	app.get('/issues?', r.issue.view);
-	app.get('/issues?/:slug'+s, r.issue.view);
-	app.get('/tag-menu', r.tag.menu);
-	app.get('/mobile-menu', r.menu.mobile);
-	app.get('/search', r.search.view);
-	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
-	app.get('/photo-tag', r.photo.tags);
-	app.get('/photo-tag/:tagSlug', r.photo.tags);
-	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
-	app.get('/'+photoID, r.photo.view);                                 // links with bare Flickr photo ID
-	app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
-	app.get('/'+postID+'/'+photoID, r.post.flickrID);
-	app.get('/:slug'+s+'/pdf', r.pdf.view);
-	app.get('/:slug'+s+'/map', r.map.view);
-	app.get('/:slug'+s+'/map/'+photoID, r.map.view);
-	app.get('/:slug'+s+'/geo.json', r.map.json);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
-	app.get('/:slug'+s, r.post.view);
+	if (config.provider.needsAuth) {
+		// show authentication pages
+
+	} else {
+		// map normal routes
+		/** @type {string} Slug pattern */
+		const s = '([\\w\\d-]{4,})';
+		/** @type {string} Flickr photo ID pattern */
+		const photoID = ':photoID(\\d{10,11})';
+		/** @type {string} Flickr set ID pattern */
+		const postID = ':postID(\\d{17})';
+
+		for (let slug in config.redirects) {
+			app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
+		}
+		app.get('/', r.tag.home);                                         // the latest posts
+		app.get('/rss', r.rss.view);
+		app.get('/about', r.about.view);
+		app.get('/js/post-menu-data.js', r.menu.data);
+		app.get('/sitemap.xml', r.sitemap.view);
+		app.get('/exif/'+photoID, r.photo.exif);
+		app.get('/issues?', r.issue.view);
+		app.get('/issues?/:slug'+s, r.issue.view);
+		app.get('/tag-menu', r.tag.menu);
+		app.get('/mobile-menu', r.menu.mobile);
+		app.get('/search', r.search.view);
+		app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
+		app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
+		app.get('/photo-tag', r.photo.tags);
+		app.get('/photo-tag/:tagSlug', r.photo.tags);
+		app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
+		app.get('/'+photoID, r.photo.view);                                 // links with bare Flickr photo ID
+		app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
+		app.get('/'+postID+'/'+photoID, r.post.flickrID);
+		app.get('/:slug'+s+'/pdf', r.pdf.view);
+		app.get('/:slug'+s+'/map', r.map.view);
+		app.get('/:slug'+s+'/map/'+photoID, r.map.view);
+		app.get('/:slug'+s+'/geo.json', r.map.json);
+		app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
+		app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
+		app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
+		app.get('/:slug'+s, r.post.view);
+	}
 }
