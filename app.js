@@ -126,7 +126,7 @@ function injectDependencies() {
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		clientID: config.env('GOOGLE_CLIENT_ID'),
 		oauth: {
-			token: config.env('GOOGLE_TOKEN'),
+			//token: process.env['GOOGLE_TOKEN'],
 			secret: config.env('GOOGLE_SECRET'),
 			accessToken: process.env['GOOGLE_ACCESS_TOKEN'],
 			refreshToken: process.env['GOOGLE_REFRESH_TOKEN'],
