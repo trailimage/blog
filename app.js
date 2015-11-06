@@ -87,8 +87,9 @@ function applyMiddleware(app) {
  * Inject provider dependencies
  */
 function injectDependencies() {
+	const OAuthOptions = require('./lib/auth/oauth-options.js');
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
-	const FlickrData = require('./lib/providers/flickr/flickr-data.js');
+	const FlickrData = require('./lib/providers/flickr/flickr-photo.js');
 	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const flickrKey = config.env('FLICKR_KEY');
@@ -105,7 +106,7 @@ function injectDependencies() {
 	} else {
 		config.provider.log.info('Proxy detected — using default cache provider');
 	}
-	config.provider.data = new FlickrData({
+	config.provider.photo = new FlickrData({
 		key: flickrKey,
 		userID: '60950751@N04',
 		appID: '72157631007435048',
@@ -114,24 +115,21 @@ function injectDependencies() {
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		oauth: {
-			token: config.env('FLICKR_TOKEN'),
-			secret: config.env('FLICKR_SECRET'),
-			tokenSecret: config.env('FLICKR_TOKEN_SECRET'),
-			url: `http://${config.domain}/auth/flickr`
-		}
+		oauth: new OAuthOptions(
+			config.env('FLICKR_TOKEN'),
+			process.env['FLICKR_SECRET'],
+			`http://${config.domain}/auth/flickr`,
+			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
 	config.provider.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
-		clientID: config.env('GOOGLE_CLIENT_ID'),
-		oauth: {
-			//token: process.env['GOOGLE_TOKEN'],
-			secret: config.env('GOOGLE_SECRET'),
-			accessToken: process.env['GOOGLE_ACCESS_TOKEN'],
-			refreshToken: process.env['GOOGLE_REFRESH_TOKEN'],
-			url: `http://${config.domain}/auth/google`
-		}
+		oauth: new OAuthOptions(
+			config.env('GOOGLE_CLIENT_ID'),
+			config.env('GOOGLE_SECRET'),
+			`http://${config.domain}/auth/google`,
+			process.env['GOOGLE_ACCESS_TOKEN'],
+			process.env['GOOGLE_REFRESH_TOKEN'])
 	});
 
 	cookieEncryption.push(flickrKey);
