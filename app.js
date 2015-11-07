@@ -124,7 +124,7 @@ function injectDependencies() {
 		auth: new OAuthOptions(1,
 			config.env('FLICKR_API_KEY'),
 			config.env('FLICKR_SECRET'),
-			`http://${config.domain}/auth/flickr`,
+			`http://www.${config.domain}/auth/flickr`,
 			process.env['FLICKR_ACCESS_TOKEN'],
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
@@ -134,7 +134,7 @@ function injectDependencies() {
 		auth: new OAuthOptions(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
-			`http://${config.domain}/auth/google`,
+			`http://www.${config.domain}/auth/google`,
 			process.env['GOOGLE_ACCESS_TOKEN'],
 			process.env['GOOGLE_REFRESH_TOKEN'])
 	});
@@ -155,7 +155,7 @@ function defineRoutes(app) {
 
 	app.use('/admin', r.admin);
 	app.use('/api/v1', r.api);
-	app.use('/auth', r.auth);
+	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
 		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
