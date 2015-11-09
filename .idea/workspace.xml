@@ -6,25 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/auth/oauth-base.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/cache/cache-item.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/auth/oauth-options.js" afterPath="$PROJECT_DIR$/lib/auth/oauth-options.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-base.js" afterPath="$PROJECT_DIR$/lib/cache/cache-base.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-helper.js" afterPath="$PROJECT_DIR$/lib/cache/cache-helper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/memory-cache.js" afterPath="$PROJECT_DIR$/lib/cache/memory-cache.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/authorize-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/authorize-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/map-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/map-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/post.js" afterPath="$PROJECT_DIR$/lib/models/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/dropbox/dropbox-file.js" afterPath="$PROJECT_DIR$/lib/providers/dropbox/dropbox-file.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/github/github-file.js" afterPath="$PROJECT_DIR$/lib/providers/github/github-file.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/manager.js" afterPath="$PROJECT_DIR$/lib/providers/manager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/photo-base.js" afterPath="$PROJECT_DIR$/lib/providers/photo-base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/cache-item.js" afterPath="$PROJECT_DIR$/lib/cache/cache-item.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/output-cache.js" afterPath="$PROJECT_DIR$/lib/cache/output-cache.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" afterPath="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/providers/file-base.js" afterPath="$PROJECT_DIR$/lib/providers/track-base.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/providers/google/google-file.js" afterPath="$PROJECT_DIR$/lib/providers/google/google-tracks.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,31 +31,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="google-tracks.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/providers/google/google-tracks.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="69" selection-start-line="37" selection-start-column="69" selection-end-line="37" selection-end-column="69" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="track-base.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="track-base.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/providers/track-base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.51843315">
               <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cache-helper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cache-helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/cache/cache-helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.170507">
-              <caret line="204" column="68" selection-start-line="204" selection-start-column="68" selection-end-line="204" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="181" column="3" selection-start-line="181" selection-start-column="3" selection-end-line="181" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -79,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/lib/cache/cache-item.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -89,7 +65,17 @@
         <entry file="file://$PROJECT_DIR$/lib/providers/redis/redis-cache.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+              <caret line="214" column="6" selection-start-line="214" selection-start-column="6" selection-end-line="214" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="output-cache.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/cache/output-cache.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="175" column="43" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -99,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/lib/cache/cache-base.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="145" column="10" selection-start-line="145" selection-start-column="10" selection-end-line="145" selection-end-column="10" />
+              <caret line="149" column="6" selection-start-line="149" selection-start-column="6" selection-end-line="149" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -164,7 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/providers/instagram/instagram-data.js" />
         <option value="$PROJECT_DIR$/lib/models/map.js" />
         <option value="$PROJECT_DIR$/lib/map/map-object.js" />
         <option value="$PROJECT_DIR$/lib/map/geo-json.js" />
@@ -209,12 +194,13 @@
         <option value="$PROJECT_DIR$/lib/models/post.js" />
         <option value="$PROJECT_DIR$/lib/providers/google/google-tracks.js" />
         <option value="$PROJECT_DIR$/lib/controllers/map-controller.js" />
-        <option value="$PROJECT_DIR$/lib/cache/cache-item.js" />
-        <option value="$PROJECT_DIR$/lib/cache/cache-helper.js" />
         <option value="$PROJECT_DIR$/lib/cache/memory-cache.js" />
-        <option value="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" />
         <option value="$PROJECT_DIR$/lib/cache/cache-base.js" />
         <option value="$PROJECT_DIR$/lib/providers/track-base.js" />
+        <option value="$PROJECT_DIR$/lib/providers/redis/redis-cache.js" />
+        <option value="$PROJECT_DIR$/lib/cache/cache-item.js" />
+        <option value="$PROJECT_DIR$/lib/cache/output-cache.js" />
+        <option value="$PROJECT_DIR$/lib/cache/cache-helper.js" />
       </list>
     </option>
   </component>
@@ -497,12 +483,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00082" summary="fewer errors checkpoint">
-      <created>1446247445340</created>
-      <option name="number" value="00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1446247445340</updated>
     </task>
     <task id="LOCAL-00083" summary="fewer errors checkpoint">
       <created>1446247573966</created>
@@ -792,7 +772,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447102483306</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="map checkpoint">
+      <created>1447107439967</created>
+      <option name="number" value="00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1447107439967</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TodoView">
@@ -869,7 +855,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix photo tag load on startup" />
     <MESSAGE value="fixed photo tag names" />
     <MESSAGE value="restructure folders and begin factory" />
     <MESSAGE value="factory pattern checkpoint" />
@@ -894,7 +879,8 @@
     <MESSAGE value="google drive checkpoint" />
     <MESSAGE value="oauth checkpoint" />
     <MESSAGE value="final oauth fixes and photo provider fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="final oauth fixes and photo provider fixes" />
+    <MESSAGE value="map checkpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="map checkpoint" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1220,26 +1206,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cache/output-cache.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3329493">
-          <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/providers/google/google-tracks.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="69" selection-start-line="37" selection-start-column="69" selection-end-line="37" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/map/map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1260,10 +1230,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/redis/redis-cache.js">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/4.1.0/core-modules/zlib.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+        <state vertical-scroll-proportion="2.965438">
+          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1271,7 +1241,23 @@
     <entry file="file://$PROJECT_DIR$/lib/cache/cache-base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="10" selection-start-line="145" selection-start-column="10" selection-end-line="145" selection-end-column="10" />
+          <caret line="149" column="6" selection-start-line="149" selection-start-column="6" selection-end-line="149" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/cache/cache-item.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/redis/redis-cache.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="214" column="6" selection-start-line="214" selection-start-column="6" selection-end-line="214" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1284,34 +1270,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/4.1.0/core-modules/zlib.js">
+    <entry file="file://$PROJECT_DIR$/lib/map/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.965438">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/track-base.js">
+    <entry file="file://$PROJECT_DIR$/lib/cache/output-cache.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cache/cache-item.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <caret line="175" column="43" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/cache/cache-helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.170507">
-          <caret line="204" column="68" selection-start-line="204" selection-start-column="68" selection-end-line="204" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="181" column="3" selection-start-line="181" selection-start-column="3" selection-end-line="181" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/track-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51843315">
+          <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
           <folding />
         </state>
       </provider>
