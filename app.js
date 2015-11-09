@@ -97,8 +97,8 @@ function applyMiddleware(app) {
 function injectDependencies() {
 	const OAuthOptions = require('./lib/auth/oauth-options.js');
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
-	const FlickrData = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleTracks = require('./lib/providers/google/google-tracks.js');
+	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
+	const GoogleMap = require('./lib/providers/google/google-map.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 
 	if (config.isProduction) {
@@ -113,7 +113,7 @@ function injectDependencies() {
 	} else {
 		config.provider.log.info('Proxy detected — using default cache provider');
 	}
-	config.provider.photo = new FlickrData({
+	config.provider.photo = new FlickrPhoto({
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -129,7 +129,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	config.provider.tracks = new GoogleTracks({
+	config.provider.map = new GoogleMap({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
