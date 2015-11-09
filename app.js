@@ -98,7 +98,7 @@ function injectDependencies() {
 	const OAuthOptions = require('./lib/auth/oauth-options.js');
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrData = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleFile = require('./lib/providers/google/google-file.js');
+	const GoogleTracks = require('./lib/providers/google/google-tracks.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 
 	if (config.isProduction) {
@@ -129,8 +129,9 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	config.provider.file = new GoogleFile({
+	config.provider.tracks = new GoogleTracks({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
+		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
@@ -198,5 +199,6 @@ function defineAuthRoutes(app) {
 
 	app.get('/auth/flickr', c.flickr);
 	app.get('/auth/google', c.google);
+	// all other routes begin authentication process
 	app.get('*', c.view);
 }
