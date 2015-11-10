@@ -35,11 +35,6 @@ function createWebService() {
 			// library must be loaded before routes are defined
 			defineRoutes(app);
 			app.listen(port);
-
-			config.provider.map.load('dagger-falls-i-freeze', item => {
-				let x = item;
-			});
-
 			//https.createServer(options, app).listen(port);
 			log.info('Listening on port %d', port);
 		});
