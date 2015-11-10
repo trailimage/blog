@@ -7,7 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/google/google-map.js" afterPath="$PROJECT_DIR$/lib/providers/google/google-map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/map/gpx-location.js" afterPath="$PROJECT_DIR$/lib/map/gpx-location.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,21 +38,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map-base.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="map-base.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/map/map-base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.3156682">
+              <caret line="98" column="14" selection-start-line="98" selection-start-column="14" selection-end-line="98" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map-controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="geo-point.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/map/geo-point.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gpx-location.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/map/gpx-location.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="map-controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13824885">
-              <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="3" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -122,12 +142,12 @@
         <option value="$PROJECT_DIR$/lib/auth/oauth-options.js" />
         <option value="$PROJECT_DIR$/lib/map/geo-track.js" />
         <option value="$PROJECT_DIR$/lib/map/gpx-line.js" />
-        <option value="$PROJECT_DIR$/lib/map/gpx-location.js" />
         <option value="$PROJECT_DIR$/lib/map/map-base.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/lib/cache/output-cache.js" />
         <option value="$PROJECT_DIR$/lib/controllers/map-controller.js" />
         <option value="$PROJECT_DIR$/lib/providers/google/google-map.js" />
+        <option value="$PROJECT_DIR$/lib/map/gpx-location.js" />
       </list>
     </option>
   </component>
@@ -447,12 +467,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00089" summary="photo tag load support">
-      <created>1446505057830</created>
-      <option name="number" value="00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1446505057831</updated>
-    </task>
     <task id="LOCAL-00090" summary="fix photo tag load on startup">
       <created>1446507937902</created>
       <option name="number" value="00090" />
@@ -741,7 +755,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447189955157</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="map checkpoint">
+      <created>1447191830008</created>
+      <option name="number" value="00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1447191830009</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TodoView">
@@ -868,13 +888,8 @@
           <line>368</line>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/lib/controllers/map-controller.js</url>
-          <line>46</line>
-          <option name="timeStamp" value="313" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="314" />
+      <option name="time" value="315" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -1156,14 +1171,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/map/geo-point.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70886075">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/map/gpx-helper.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.96202534">
@@ -1204,14 +1211,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/map/gpx-location.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2281106">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/map/geo-track.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13018434">
@@ -1244,6 +1243,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="3" selection-start-line="46" selection-start-column="3" selection-end-line="46" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/providers/google/google-map.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1252,18 +1259,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/map/map-base.js">
+    <entry file="file://$PROJECT_DIR$/lib/map/geo-point.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
+    <entry file="file://$PROJECT_DIR$/lib/map/gpx-location.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13824885">
-          <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/map/map-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3156682">
+          <caret line="98" column="14" selection-start-line="98" selection-start-column="14" selection-end-line="98" selection-end-column="14" />
           <folding />
         </state>
       </provider>
