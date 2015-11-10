@@ -108,9 +108,9 @@ function injectDependencies() {
 	}
 
 	if (is.empty(config.proxy)) {
-		// Redis won't work from behind proxy
 		config.provider.cacheHost = new RedisCache(redisUrl);
 	} else {
+		// Redis won't work from behind proxy
 		config.provider.log.info('Proxy detected — using default cache provider');
 	}
 	config.provider.photo = new FlickrPhoto({
