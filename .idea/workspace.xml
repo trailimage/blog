@@ -7,10 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/map.js" afterPath="$PROJECT_DIR$/dist/js/map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/config.js" afterPath="$PROJECT_DIR$/lib/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/map-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/map-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/map.js" afterPath="$PROJECT_DIR$/src/js/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/map.css" afterPath="$PROJECT_DIR$/dist/css/map.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/map.less" afterPath="$PROJECT_DIR$/src/less/map.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/map.hbs" afterPath="$PROJECT_DIR$/views/map.hbs" />
     </list>
     <ignored path="server.iws" />
@@ -32,41 +30,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/map.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="74" selection-start-line="74" selection-start-column="74" selection-end-line="74" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="map.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/map.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.677419">
-              <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+            <state vertical-scroll-proportion="-12.774194">
+              <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map-controller.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.937788">
-              <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.less" pinned="false" current-in-tab="false">
+      <file leaf-file-name="map.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/less/map.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.548387">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.6308244">
+              <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -135,13 +113,13 @@
         <option value="$PROJECT_DIR$/lib/map/map-base.js" />
         <option value="$PROJECT_DIR$/lib/enum.js" />
         <option value="$PROJECT_DIR$/lib/providers/google/google-map.js" />
-        <option value="$PROJECT_DIR$/src/less/map.less" />
         <option value="$PROJECT_DIR$/lib/map/geo-track.js" />
         <option value="$PROJECT_DIR$/lib/map/gpx-line.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
-        <option value="$PROJECT_DIR$/views/map.hbs" />
         <option value="$PROJECT_DIR$/src/js/map.js" />
         <option value="$PROJECT_DIR$/lib/controllers/map-controller.js" />
+        <option value="$PROJECT_DIR$/views/map.hbs" />
+        <option value="$PROJECT_DIR$/src/less/map.less" />
       </list>
     </option>
   </component>
@@ -354,6 +332,7 @@
     <property name="nodejs_interpreter_path" value="D:\dev\app\nodejs\node.exe" />
     <property name="js-jscs-nodeInterpreter" value="D:\dev\app\nodejs\node.exe" />
     <property name="Node.Profiling.V8Profiler.Path" value="" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/dev/Trail Image/views/map.hbs" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -420,12 +399,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00096" summary="factory pattern checkpoint">
-      <created>1446577960859</created>
-      <option name="number" value="00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1446577960859</updated>
     </task>
     <task id="LOCAL-00097" summary="factory pattern checkpoint">
       <created>1446578472168</created>
@@ -715,7 +688,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447280029772</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="option to prevent gpx download">
+      <created>1447280411100</created>
+      <option name="number" value="00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1447280411100</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="TodoView">
@@ -792,7 +771,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix size field" />
     <MESSAGE value="fix RSS" />
     <MESSAGE value="fix photo tag search anchor link" />
     <MESSAGE value="next/prev header links" />
@@ -817,7 +795,8 @@
     <MESSAGE value="map formatting" />
     <MESSAGE value="map formatting checkpoint" />
     <MESSAGE value="fix gpx speed calc" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix gpx speed calc" />
+    <MESSAGE value="option to prevent gpx download" />
+    <option name="LAST_COMMIT_MESSAGE" value="option to prevent gpx download" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1198,14 +1177,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/map.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.548387">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/map/gpx-location.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.1658986">
@@ -1214,9 +1185,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15207373">
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.050691243">
           <caret line="74" column="74" selection-start-line="74" selection-start-column="74" selection-end-line="74" selection-end-column="74" />
           <folding />
         </state>
@@ -1224,16 +1203,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/map.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.677419">
-          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+        <state vertical-scroll-proportion="-12.774194">
+          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
+    <entry file="file://$PROJECT_DIR$/src/less/map.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.937788">
-          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.6308244">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
           <folding />
         </state>
       </provider>
