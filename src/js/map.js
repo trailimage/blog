@@ -60,6 +60,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 			ti.miles += event.feature.getProperty('distance');
 			ti.hours += event.feature.getProperty('duration');
 
+			// properties defined in Track.parse()
 			speed = parseFloat(event.feature.getProperty('topSpeed'));
 
 			if (speed > ti.topSpeed) { ti.topSpeed = speed; }
