@@ -15,9 +15,10 @@ var ti = {
 };
 
 /**
- * mapSlug and mapPhotoID are supplied by map.hbs
+ * mapSlug, mapPhotoID and allowDownload are supplied by map.hbs
  * @type {Number} mapPhotoID
  * @type {String} mapSlug
+ * @type {Boolean} allowDownload
  */
 google.maps.event.addDomListener(window, 'load', function() {
 	var canvas = document.getElementById('map-canvas');
@@ -83,7 +84,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 			if (ti.miles > 0) {
 				// implies a track exist
 				$summary.show();
-				$gpxLink.show();
+				if (allowDownload) { $gpxLink.show(); }
 				$('#distance').html(ti.miles.toFixed(1));
 				$('#duration').html(hoursAndMinutes(ti.hours));
 
