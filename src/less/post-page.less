@@ -236,6 +236,24 @@ div.next, div.previous {
 	}
 }
 
+/* Light box --------------------------------------------------------------- */
+
+#light-box {
+	display: none;
+	position: fixed;
+	overflow: hidden;
+	z-index: 1000;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #000;
+
+	img {
+		cursor: move;
+	}
+}
+
 /* Tags -------------------------------------------------------------------- */
 
 nav.tag-wrapper {
@@ -626,7 +644,7 @@ figure {
 		font-family: @sanSerifFont;
 		font-size: 12px;
 		letter-spacing: 0.5px;
-		color: #666;
+		color: #555;
 		text-decoration: none;
 		position: absolute;
 		bottom: -10px;

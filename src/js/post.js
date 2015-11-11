@@ -6,8 +6,15 @@
 $(function() {
 	// setup EXIF and map mouse-overs and lazy-loading
 	var $photos = $('figure');
+	var $lb = $('#light-box');
 
+	$lb.on('click', function() { $lb.hide(); });
 	$photos.find('img').lazyload();
+	$photos.find('img').on('click', function() {
+		var $img = $(this);
+		$lb.find('img').attr('src', $img.data('enlarge'));
+		$lb.show();
+	});
 	$photos.find('.mobile-button').on('click', function() {
 		showExif.call(this);
 	});
@@ -29,6 +36,10 @@ $(function() {
 		//		$exif.removeClass('loading').addClass('loaded');
 		//	});
 	});
+
+	function repload() {
+
+	}
 
 	/**
 	 * @param {Boolean} [removeButton] Whether to remove button after showing EXIF
