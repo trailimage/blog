@@ -4,7 +4,7 @@
 	{{> head-files}}
 	<meta content='{{config.keywords}}' name='keywords'/>
 	<meta name="robots" content="noindex">
-	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<link href='/css/map.css' rel='stylesheet' type='text/css'/>
 	<script type='text/javascript'>
 		var mapSlug = '{{slug}}';
@@ -14,17 +14,17 @@
 </head>
 <body>
 	<div id="map-canvas"></div>
-	<a id="gpx-download" href="/{{slug}}/gpx">Download GPX</a>
+	<a id="gpx-download" href="/{{slug}}/gpx">Download GPX {{{icon 'save'}}}</a>
 	{{> post-menu}}
-	<div id="summary">
-		Miles
-		<div class="lcd" id="distance">0</div>
-		Hours
-		<div class="lcd" id="duration">0</div>
-		Top Speed
-		<div class="lcd" id="top-speed">0</div>
-		Avg Speed
-		<div class="lcd" id="avg-speed">0</div>
-	</div>
+	<dl id="summary">
+		<dt>Track Miles</dt>
+		<dd id="distance">0</dd>
+		<dt>Track Hours</dt>
+		<dd id="duration">0</dd>
+		<dt id="top-speed-label">Top Speed</dt>
+		<dd id="top-speed">0</dd>
+		<dt id="avg-speed-label">Avg Speed</dt>
+		<dd id="avg-speed">0</dd>
+	</dl>
 </body>
 </html>

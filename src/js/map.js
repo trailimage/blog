@@ -33,19 +33,21 @@ google.maps.event.addDomListener(window, 'load', function() {
 	 * @see http://mapicons.nicolasmollet.com/
 	 */
 	ti.map.data.setStyle(function(feature) {
-		if (parseInt(feature.getProperty('id')) == mapPhotoID)	{ selected = feature; }
+		if (parseInt(feature.getProperty('id')) == mapPhotoID) { selected = feature; }
 
 		return {
-			icon: '/img/blue-marker.png',
-			label: 'test',
+			icon: '/img/orange-marker.png',
 			clickable: (feature.getGeometry() instanceof google.maps.Data.Point),
 			strokeWeight: 2,
 			strokeColor: 'red'
 		};
 	});
 
+	/**
+	 * Listen for features being added to the Google map
+	 */
 	ti.map.data.addListener('addfeature', function(event) {
-		clearTimeout(ti.timer);
+		window.clearTimeout(ti.timer);
 
 		ti.geo = event.feature.getGeometry();
 
@@ -67,17 +69,35 @@ google.maps.event.addDomListener(window, 'load', function() {
 			ti.avgSpeed = ((ti.avgSpeed * (ti.count - 1)) + speed) / ti.count;
 		}
 
-		ti.timer = setTimeout(function() {
+		/**
+		 * Set a timer to complete the map when all features have been added
+		 * @type {Number}
+		 */
+		ti.timer = window.setTimeout(function() {
 			ti.map.fitBounds(ti.bounds);
 
 			var $summary = $('#summary');
+			var $gpxLink = $('#gpx-download');
 
 			if (ti.miles > 0) {
+				// implies a track exist
 				$summary.show();
+				$gpxLink.show();
 				$('#distance').html(ti.miles.toFixed(1));
 				$('#duration').html(hoursAndMinutes(ti.hours));
-				$('#top-speed').html(ti.topSpeed.toFixed(1));
-				$('#avg-speed').html(ti.avgSpeed.toFixed(1));
+
+				if (ti.topSpeed > 0) {
+					$('#top-speed').html(ti.topSpeed.toFixed(1));
+				} else {
+					$('#top-speed,#top-speed-label').hide();
+				}
+
+				if (ti.avgSpeed > 0) {
+					$('#avg-speed').html(ti.avgSpeed.toFixed(1));
+				} else {
+					$('#avg-speed,#avg-speed-label').hide();
+				}
+
 			} else {
 				$summary.hide();
 			}
@@ -87,7 +107,9 @@ google.maps.event.addDomListener(window, 'load', function() {
 		200);
 	});
 
-	/** @see https://developers.google.com/maps/documentation/javascript/examples/layer-data-dragndrop */
+	/**
+	 * @see https://developers.google.com/maps/documentation/javascript/examples/layer-data-dragndrop
+	 */
 	ti.map.data.addListener('click', function(event) {	showPhoto(event.feature, preview); });
 
 	ti.map.data.addListener('mouseover', function(event) {
