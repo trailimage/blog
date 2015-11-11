@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * @see http://www.appelsiini.net/projects/lazyload
+ */
 $(function() {
 	// setup EXIF and map mouse-overs and lazy-loading
 	var $photos = $('figure');

@@ -79,43 +79,44 @@
 
 	<figure itemscope itemtype="http://schema.org/ImageObject" style='width: {{size.normal.width}}px; max-width: 100%;'>
 		{{! links from photo tag search are anchored to ID }}
-		<a name="{{id}}"></a>
-		<a name="{{index}}" rel="nofollow" href="{{size.big.url}}" title="Click to enlarge (photo {{index}})">
-			<img src="{{size.preview.url}}" alt="{{title}}" itemprop="url"
-			     style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
-			     data-original="{{size.normal.url}}"/>
-		</a>
-
+		<a name="{{id}}"></a><a name="{{index}}"></a>
+		<img src="{{size.preview.url}}" alt="{{title}}" itemprop="url"
+			  style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
+		     data-original="{{size.normal.url}}"
+		     data-enlarge="{{size.big.url}}"/>
 		<aside class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p class="desktop">Camera Settings</p><p class="mobile">Info</p></aside>
 
-		{{#if tags}}
-			<nav class="tags">
-				{{{icon 'tags'}}}
-				<h4>More photos like this</h4>
-				{{{makeTagList tags}}}
-			</nav>
-		{{/if}}
+	{{#if tags}}
+		<nav class="tags">
+			{{{icon 'tags'}}}
+			<h4>More photos like this</h4>
+			{{{makeTagList tags}}}
+		</nav>
+	{{/if}}
 
-		{{#if longitude}}
-			<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
-		{{/if}}
+	{{#if longitude}}
+		<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+	{{/if}}
 
-		{{#if title}}
-			<figcaption><span itemprop="name">{{{formatTitle title}}}</span></figcaption>
-		{{/if}}
+	{{#if title}}
+		<figcaption><span itemprop="name">{{{formatTitle title}}}</span></figcaption>
+	{{/if}}
+	{{#if sourceUrl}}
+		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
+	{{/if}}
 	</figure>
 
 	<div class="caption content" itemprop="description">{{{formatCaption description}}}</div>
 
 	{{/post.photos}}
 
-	{{#if post.video}}
-		<a name="video">
-			<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
-				<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</a>
-	{{/if}}
+{{#if post.video}}
+	<a name="video">
+		<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
+			<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
+		</div>
+	</a>
+{{/if}}
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
 	<div class="footer-tags content">{{> post-tags post.tags}}</div>

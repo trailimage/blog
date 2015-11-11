@@ -1227,6 +1227,12 @@ Flickr.PhotoSummary.prototype.height_o = null;
  */
 Flickr.PhotoSummary.prototype.width_o = null;
 
+/**
+ * If passed "path_alias" extra
+ * @type {String}
+ */
+Flickr.PhotoSummary.prototype.pathalias = null;
+
 
 // PhotoSetPhotos -------------------------------------------------------------
 
