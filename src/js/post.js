@@ -45,10 +45,8 @@ $(function() {
 		var loaded = $img.data('big-loaded');
 		var width = parseInt($img.data('big-width'));
 		var height = parseInt($img.data('big-height'));
-		var clickX = event.offsetX / $img.width();
-		var clickY = event.offsetY / $img.height();
-		var top = ((window.innerHeight - height) * clickY).toFixed(0);
-		var left = ((window.innerWidth - width) * clickX).toFixed(0);
+		var top = topFromRatio(height, event.offsetY / $img.height());
+		var left = leftFromRatio(width, event.offsetX / $img.width());
 
 		//console.log('top: ' + top + ', left: ' + left);
 
@@ -72,19 +70,18 @@ $(function() {
 
 		// set up panning
 		$lb.show(0, disablePageScroll).on('mousemove', function(event) {
-			var posX = event.clientX / window.innerWidth;
-			var posY = event.clientY / window.innerHeight;
-
-			top = ((window.innerHeight - height) * posY).toFixed(1);
-			left = ((window.innerWidth - width) * posX).toFixed(1);
-
-			//console.log(posY);
-			//console.log('top: ' + top + ', left: ' + left);
-
+			top = topFromRatio(height, event.clientY / window.innerHeight);
+			left = leftFromRatio(width, event.clientX / window.innerWidth);
 			$big.css({ top: top + 'px', left: left + 'px'});
-			//
-			//console.log(left);
 		});
+	}
+
+	function topFromRatio(height, ratio) {
+		return ((window.innerHeight - height) * ratio).toFixed(0);
+	}
+
+	function leftFromRatio(width, ratio) {
+		return ((window.innerWidth - width) * ratio).toFixed(0);
 	}
 
 	/**

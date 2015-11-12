@@ -32,8 +32,8 @@
       <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7718894">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.13824885">
+              <caret line="48" column="67" selection-start-line="48" selection-start-column="67" selection-end-line="48" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -429,12 +429,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00103" summary="fix photo tag search anchor link">
-      <created>1446594659564</created>
-      <option name="number" value="00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1446594659564</updated>
-    </task>
     <task id="LOCAL-00104" summary="next/prev header links">
       <created>1446595170121</created>
       <option name="number" value="00104" />
@@ -723,7 +717,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447350754804</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="lightbox checkpoint">
+      <created>1447352301725</created>
+      <option name="number" value="00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1447352301725</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1218,8 +1218,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7718894">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.13824885">
+          <caret line="48" column="67" selection-start-line="48" selection-start-column="67" selection-end-line="48" selection-end-column="67" />
           <folding />
         </state>
       </provider>
