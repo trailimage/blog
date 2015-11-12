@@ -8,7 +8,7 @@ $(function() {
 	var $photos = $('figure');
 	var $lb = $('#light-box');
 
-	$lb.on('click', function() { $lb.hide(); });
+	$lb.on('click', function() { $lb.off('mousemove').hide(); });
 	$photos.find('img').lazyload();
 	$photos.find('img').on('click', lightBox);
 	$photos.find('.mobile-button').on('click', function() {
@@ -39,20 +39,29 @@ $(function() {
 	function lightBox() {
 		var $img = $(this);           // post image
 		var $big = $lb.find('img');   // light box image
+		var loaded = $img.data('big-loaded');
 
-		$big
-			.attr('src', $img.attr('src'))
-			.height($img.data('big-height'))
-			.width($img.data('big-width'));
-		$lb.show();
+		if (loaded === undefined) { loaded = false; }
 
-		// create detached image element to pre-load big
-		$('<img />')
-			.bind('load', function() {
-				// re-assign big image to light box once it's loaded
-				$big.attr('src', this.src);
-			})
-			.attr('src', $img.data('big'));
+		if (loaded) {
+			$big.attr('src', $img.data('big'));
+		} else {
+			// assign lower resolution image while the bigger one is loading
+			$big.attr('src', $img.data('original'));
+
+			$('<img />')
+				.bind('load', function() {
+					// assign big image to light box once it's loaded
+					$big.attr('src', this.src);
+					$img.data('big-loaded', true);
+				})
+				.attr('src', $img.data('big'));
+		}
+		$big.height($img.data('big-height')).width($img.data('big-width'));
+
+		$lb.show().on('mousemove', function(event) {
+			
+		});
 	}
 
 	/**
