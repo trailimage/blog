@@ -33,9 +33,6 @@ $(function() {
 		//	});
 	});
 
-	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
-	function enablePageScroll() { $('html').css('overflow', 'auto'); }
-
 	/**
 	 * Show light box for clicked image
 	 */
@@ -45,10 +42,6 @@ $(function() {
 		var loaded = $img.data('big-loaded');
 		var width = parseInt($img.data('big-width'));
 		var height = parseInt($img.data('big-height'));
-		var top = topFromRatio(height, event.offsetY / $img.height());
-		var left = leftFromRatio(width, event.offsetX / $img.width());
-
-		//console.log('top: ' + top + ', left: ' + left);
 
 		if (loaded === undefined) { loaded = false; }
 
@@ -66,23 +59,31 @@ $(function() {
 				})
 				.attr('src', $img.data('big'));
 		}
-		$big.height(height).width(width).css({ top: top + 'px', left: left + 'px'});
+		$big.height(height).width(width).css({
+			top: topFromEvent(height, event) + 'px',
+			left: leftFromEvent(width, event) + 'px'
+		});
 
 		// set up panning
 		$lb.show(0, disablePageScroll).on('mousemove', function(event) {
-			top = topFromRatio(height, event.clientY / window.innerHeight);
-			left = leftFromRatio(width, event.clientX / window.innerWidth);
-			$big.css({ top: top + 'px', left: left + 'px'});
+			$big.css({
+				top: topFromEvent(height, event) + 'px',
+				left: leftFromEvent(width, event) + 'px'
+			});
 		});
 	}
 
-	function topFromRatio(height, ratio) {
+	function topFromEvent(height, event) {
+		var ratio = ((event.clientY / window.innerHeight));
 		return ((window.innerHeight - height) * ratio).toFixed(0);
 	}
-
-	function leftFromRatio(width, ratio) {
+	function leftFromEvent(width, event) {
+		var ratio = ((event.clientX / window.innerWidth));
 		return ((window.innerWidth - width) * ratio).toFixed(0);
 	}
+
+	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
+	function enablePageScroll() { $('html').css('overflow', 'auto'); }
 
 	/**
 	 * @param {Boolean} [removeButton] Whether to remove button after showing EXIF
