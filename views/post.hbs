@@ -82,10 +82,10 @@
 	<figure itemscope itemtype="http://schema.org/ImageObject" style='width: {{size.normal.width}}px; max-width: 100%;'>
 		{{! links from photo tag search are anchored to ID }}
 		<a name="{{id}}"></a><a name="{{index}}"></a>
-		<img src="{{size.preview.url}}" alt="{{title}}" itemprop="url"
+		{{! data-original attribute supports jquery.lazyload }}
+		<img src="{{size.preview.url}}" alt="{{title}}" itemprop="url" data-original="{{size.normal.url}}"
 			  style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
-		     data-original="{{size.normal.url}}"
-		     data-enlarge="{{size.big.url}}"/>
+		     data-big="{{size.big.url}}" data-big-width="{{size.big.width}}" data-big-height="{{size.big.height}}"/>
 		<aside class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p class="desktop">Camera Settings</p><p class="mobile">Info</p></aside>
 
 	{{#if tags}}

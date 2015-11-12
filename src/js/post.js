@@ -10,11 +10,7 @@ $(function() {
 
 	$lb.on('click', function() { $lb.hide(); });
 	$photos.find('img').lazyload();
-	$photos.find('img').on('click', function() {
-		var $img = $(this);
-		$lb.find('img').attr('src', $img.data('enlarge'));
-		$lb.show();
-	});
+	$photos.find('img').on('click', lightBox);
 	$photos.find('.mobile-button').on('click', function() {
 		showExif.call(this);
 	});
@@ -37,8 +33,26 @@ $(function() {
 		//	});
 	});
 
-	function repload() {
+	/**
+	 * Show light box for clicked image
+	 */
+	function lightBox() {
+		var $img = $(this);           // post image
+		var $big = $lb.find('img');   // light box image
 
+		$big
+			.attr('src', $img.attr('src'))
+			.height($img.data('big-height'))
+			.width($img.data('big-width'));
+		$lb.show();
+
+		// create detached image element to pre-load big
+		$('<img />')
+			.bind('load', function() {
+				// re-assign big image to light box once it's loaded
+				$big.attr('src', this.src);
+			})
+			.attr('src', $img.data('big'));
 	}
 
 	/**
@@ -54,7 +68,5 @@ $(function() {
 				.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
 				.load($exif.data('url'))
 		);
-
-
 	}
 });
