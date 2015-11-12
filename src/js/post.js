@@ -8,7 +8,7 @@ $(function() {
 	var $photos = $('figure');
 	var $lb = $('#light-box');
 
-	$lb.on('click', function() { $lb.off('mousemove').hide(); });
+	$lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
 	$photos.find('img').lazyload();
 	$photos.find('img').on('click', lightBox);
 	$photos.find('.mobile-button').on('click', function() {
@@ -33,13 +33,22 @@ $(function() {
 		//	});
 	});
 
+	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
+	function enablePageScroll() { $('html').css('overflow', 'auto'); }
+
 	/**
 	 * Show light box for clicked image
 	 */
-	function lightBox() {
+	function lightBox(event) {
 		var $img = $(this);           // post image
 		var $big = $lb.find('img');   // light box image
 		var loaded = $img.data('big-loaded');
+		var width = parseInt($img.data('big-width'));
+		var height = parseInt($img.data('big-height'));
+		var top = ((window.innerHeight - height) / 2).toFixed(1);
+		var left = ((window.innerWidth - width) / 2).toFixed(1);
+		var clickX = event.offsetX / $img.width();
+		var clickY = event.offsetY / $img.height();
 
 		if (loaded === undefined) { loaded = false; }
 
@@ -57,10 +66,10 @@ $(function() {
 				})
 				.attr('src', $img.data('big'));
 		}
-		$big.height($img.data('big-height')).width($img.data('big-width'));
+		$big.height(height).width(width).css({ top: top + 'px', left: left + 'px'});
+		// set up panning
+		$lb.show(0, disablePageScroll).on('mousemove', function(event) {
 
-		$lb.show().on('mousemove', function(event) {
-			
 		});
 	}
 
