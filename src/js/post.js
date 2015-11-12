@@ -97,19 +97,19 @@ $(function() {
 	}
 
 	/**
+	 * Function simplified from
+	 *   lengthDiff = (w - i) / 2
+	 *   ratio = lengthDiff / (w / 2)
+	 *   fromCenter = (w / 2) - m
+	 *   offset = lengthDiff - (fromCenter * ratio)
 	 * @param {Number} m Mouse position
 	 * @param {Number} w Window dimension
 	 * @param {Number} i Image dimension
 	 * @returns {String}
 	 */
 	function positionFromEvent(m, w, i) {
-		var fromCenter = (w / 2) - m;
-		var diff = (w - i) / 2;
-		var offset = diff + fromCenter;
-		var max = 30;
-		var min = (w - i) - max;
-		if (offset > max) { offset = max; }	else if (offset < min) { offset = min; }
-		return offset.toFixed(0) + 'px';
+//		console.log('fromCenter: ' + fromCenter + ', diff: ' + diff + ', offset: ' + offset + ', alt: ' + alt);
+		return (m - ((m * i) / w)).toFixed(0) + 'px';
 	}
 
 	function disablePageScroll() { $('html').css('overflow', 'hidden'); }

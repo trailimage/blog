@@ -32,18 +32,8 @@
       <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4585254">
-              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/post.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.548387">
-              <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
+            <state vertical-scroll-proportion="-1.546083">
+              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -52,8 +42,8 @@
       <file leaf-file-name="post-page.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/less/post-page.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.16129">
-              <caret line="247" column="11" selection-start-line="247" selection-start-column="11" selection-end-line="247" selection-end-column="11" />
+            <state vertical-scroll-proportion="-6.774194">
+              <caret line="238" column="10" selection-start-line="238" selection-start-column="10" selection-end-line="238" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -419,12 +409,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00106" summary="route pattern tweak">
-      <created>1446659574438</created>
-      <option name="number" value="00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1446659574438</updated>
-    </task>
     <task id="LOCAL-00107" summary="memory cache fixes checkpoint">
       <created>1446675804928</created>
       <option name="number" value="00107" />
@@ -713,7 +697,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447353832437</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="lightbox version 1">
+      <created>1447357900247</created>
+      <option name="number" value="00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1447357900247</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TodoView">
@@ -790,7 +780,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="route pattern tweak" />
     <MESSAGE value="memory cache fixes checkpoint" />
     <MESSAGE value="memory cache fixes" />
     <MESSAGE value="restore prod settings" />
@@ -815,7 +804,8 @@
     <MESSAGE value="link back to flickr for each image" />
     <MESSAGE value="image enlarge checkpoint" />
     <MESSAGE value="lightbox checkpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="lightbox checkpoint" />
+    <MESSAGE value="lightbox version 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="lightbox version 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -841,7 +831,7 @@
           <option name="timeStamp" value="128" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="331" />
+      <option name="time" value="332" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -1175,14 +1165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/post-page.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.16129">
-          <caret line="247" column="11" selection-start-line="247" selection-start-column="11" selection-end-line="247" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/jquery.lazyload.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1201,16 +1183,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/post.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.548387">
-          <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.1577061">
+          <caret line="71" column="23" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/less/post-page.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.774194">
+          <caret line="238" column="10" selection-start-line="238" selection-start-column="10" selection-end-line="238" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4585254">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        <state vertical-scroll-proportion="-1.546083">
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
           <folding />
         </state>
       </provider>
