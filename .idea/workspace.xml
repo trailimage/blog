@@ -7,10 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/ti.css" afterPath="$PROJECT_DIR$/dist/css/ti.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/post.js" afterPath="$PROJECT_DIR$/dist/js/post.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/post.js" afterPath="$PROJECT_DIR$/src/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/post-page.less" afterPath="$PROJECT_DIR$/src/less/post-page.less" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,8 +32,8 @@
       <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40552995">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7718894">
+              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -431,12 +429,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00102" summary="fix RSS">
-      <created>1446593822739</created>
-      <option name="number" value="00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1446593822739</updated>
-    </task>
     <task id="LOCAL-00103" summary="fix photo tag search anchor link">
       <created>1446594659564</created>
       <option name="number" value="00103" />
@@ -725,7 +717,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447348780965</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="lightbox checkpoint">
+      <created>1447350754803</created>
+      <option name="number" value="00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1447350754804</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1220,8 +1218,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40552995">
-          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7718894">
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding />
         </state>
       </provider>

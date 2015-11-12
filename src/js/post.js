@@ -45,10 +45,12 @@ $(function() {
 		var loaded = $img.data('big-loaded');
 		var width = parseInt($img.data('big-width'));
 		var height = parseInt($img.data('big-height'));
-		var top = ((window.innerHeight - height) / 2).toFixed(1);
-		var left = ((window.innerWidth - width) / 2).toFixed(1);
 		var clickX = event.offsetX / $img.width();
 		var clickY = event.offsetY / $img.height();
+		var top = ((window.innerHeight - height) * clickY).toFixed(0);
+		var left = ((window.innerWidth - width) * clickX).toFixed(0);
+
+		//console.log('top: ' + top + ', left: ' + left);
 
 		if (loaded === undefined) { loaded = false; }
 
@@ -67,9 +69,21 @@ $(function() {
 				.attr('src', $img.data('big'));
 		}
 		$big.height(height).width(width).css({ top: top + 'px', left: left + 'px'});
+
 		// set up panning
 		$lb.show(0, disablePageScroll).on('mousemove', function(event) {
+			var posX = event.clientX / window.innerWidth;
+			var posY = event.clientY / window.innerHeight;
 
+			top = ((window.innerHeight - height) * posY).toFixed(1);
+			left = ((window.innerWidth - width) * posX).toFixed(1);
+
+			//console.log(posY);
+			//console.log('top: ' + top + ', left: ' + left);
+
+			$big.css({ top: top + 'px', left: left + 'px'});
+			//
+			//console.log(left);
 		});
 	}
 
