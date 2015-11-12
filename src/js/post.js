@@ -1,19 +1,17 @@
 'use strict';
 
 /**
+ * Set up lazy loading and light box for post images
+ * Depends on post images having data-original, data-big, data-big-width and data-big-height attributes
  * @see http://www.appelsiini.net/projects/lazyload
  */
 $(function() {
-	// setup EXIF and map mouse-overs and lazy-loading
 	var $photos = $('figure');
 	var $lb = $('#light-box');
 
 	$lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
-	$photos.find('img').lazyload();
-	$photos.find('img').on('click', lightBox);
-	$photos.find('.mobile-button').on('click', function() {
-		showExif.call(this);
-	});
+	$photos.find('img').on('click', lightBox).lazyload();
+	$photos.find('.mobile-button').on('click', function() { showExif.call(this); });
 	$photos.find('.exif-button').on('mouseover', function() {
 		showExif.call(this, true);
 
@@ -34,7 +32,7 @@ $(function() {
 	});
 
 	/**
-	 * Show light box for clicked image
+	 * Show simple light box for clicked image
 	 */
 	function lightBox(event) {
 		var $img = $(this);           // post image
@@ -42,10 +40,21 @@ $(function() {
 		var loaded = $img.data('big-loaded');
 		var width = parseInt($img.data('big-width'));
 		var height = parseInt($img.data('big-height'));
+		/**
+		 * Update image position within light box
+		 * @param {MouseEvent} event
+		 */
+		var updatePosition = function(event) {
+			$big.css({
+				top: topFromEvent(height, event),
+				left: leftFromEvent(width, event)
+			});
+		};
 
 		if (loaded === undefined) { loaded = false; }
 
 		if (loaded) {
+			// assign directly if big image has already been loaded
 			$big.attr('src', $img.data('big'));
 		} else {
 			// assign lower resolution image while the bigger one is loading
@@ -59,27 +68,48 @@ $(function() {
 				})
 				.attr('src', $img.data('big'));
 		}
-		$big.height(height).width(width).css({
-			top: topFromEvent(height, event) + 'px',
-			left: leftFromEvent(width, event) + 'px'
-		});
 
-		// set up panning
-		$lb.show(0, disablePageScroll).on('mousemove', function(event) {
-			$big.css({
-				top: topFromEvent(height, event) + 'px',
-				left: leftFromEvent(width, event) + 'px'
-			});
-		});
+		$big.height(height).width(width);
+		// position based on initial click
+		updatePosition(event);
+		// set up panning within light box
+		$lb.show(0, disablePageScroll).on('mousemove', updatePosition);
 	}
 
+	/**
+	 * Position of lightbox image based on mouse
+	 * @param {Number} height Image height
+	 * @param {MouseEvent} event
+	 * @returns {String}
+	 */
 	function topFromEvent(height, event) {
-		var ratio = ((event.clientY / window.innerHeight));
-		return ((window.innerHeight - height) * ratio).toFixed(0);
+		return positionFromEvent(event.clientY, window.innerHeight, height);
 	}
+
+	/**
+	 * Position of lightbox image based on mouse
+	 * @param {Number} width Image width
+	 * @param {MouseEvent} event
+	 * @returns {String}
+	 */
 	function leftFromEvent(width, event) {
-		var ratio = ((event.clientX / window.innerWidth));
-		return ((window.innerWidth - width) * ratio).toFixed(0);
+		return positionFromEvent(event.clientX, window.innerWidth, width);
+	}
+
+	/**
+	 * @param {Number} m Mouse position
+	 * @param {Number} w Window dimension
+	 * @param {Number} i Image dimension
+	 * @returns {String}
+	 */
+	function positionFromEvent(m, w, i) {
+		var fromCenter = (w / 2) - m;
+		var diff = (w - i) / 2;
+		var offset = diff + fromCenter;
+		var max = 30;
+		var min = (w - i) - max;
+		if (offset > max) { offset = max; }	else if (offset < min) { offset = min; }
+		return offset.toFixed(0) + 'px';
 	}
 
 	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
@@ -94,9 +124,9 @@ $(function() {
 		var url = $photo.data('exif');
 
 		$exif.parent().append($('<div>')
-				.addClass('exif')
-				.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-				.load($exif.data('url'))
+			.addClass('exif')
+			.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
+			.load($exif.data('url'))
 		);
 	}
 });
