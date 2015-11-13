@@ -109,7 +109,17 @@ $(function() {
 	 */
 	function positionFromEvent(m, w, i) {
 //		console.log('fromCenter: ' + fromCenter + ', diff: ' + diff + ', offset: ' + offset + ', alt: ' + alt);
-		return (m - ((m * i) / w)).toFixed(0) + 'px';
+		//w = w * 0.9;
+		var diff = (w - i) / 2;
+		var ratio = diff / (w / 2);
+		var fromCenter = (w / 2) - m;
+		var offset = diff - (fromCenter * ratio);
+
+		console.log(ratio);
+
+		return offset.toFixed(0) + 'px';
+
+		//return (m - ((m * i) / w)).toFixed(0) + 'px';
 	}
 
 	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
