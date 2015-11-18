@@ -146,6 +146,19 @@ $(function() {
 
 	/**
 	 * @param {String} forImage
+	 *
+	 *  ┏━━━━━━━━┯━━━━━━━━━━━━━━━━┓
+	 *  ┃        ┊ extra          ┃
+	 *  ┃   ╔════╧═══╤════════╗   ┃
+	 *  ┃   ║        ┊ from   ║   ┃
+	 *  ┃   ║        ┼ center ║   ┃
+	 *  ┃   ║ window          ║   ┃
+	 *  ┃   ╚═════════════════╝   ┃
+	 *  ┃ image                   ┃
+	 *  ┗━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	 *  Pan ratio maps mouse position from window center to the number of pixels
+	 *  to offset in the extra overlap
+	 *
 	 * @constructor
 	 */
 	function Length(forImage) {
@@ -182,7 +195,8 @@ $(function() {
 
 	/**
 	 * Calculate ratio for this dimension
-	 * Leading number is factor by which to accelerate panning
+	 * Leading number is factor by which to accelerate panning so edge of image is visible before
+	 * cursor reaches edge of window
 	 * @return {Number}
 	 */
 	Length.prototype.ratio = function() {
@@ -210,7 +224,9 @@ $(function() {
 		if (this.needsToPan) {
 			// pan image using length with biggest ratio
 			// or if one dimension needs no panning then use the other dimension
-			this.height.panRatio = this.width.panRatio = (this.height.extra < this.width.extra && this.width.extra < 0) ? this.width.ratio() : this.height.ratio();
+			this.height.panRatio = this.width.panRatio = (this.width.extra < this.height.extra && this.width.extra < 0)
+				? this.width.ratio()
+				: this.height.ratio();
 		}
 	};
 });
