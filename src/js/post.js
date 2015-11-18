@@ -33,21 +33,47 @@ $(function() {
 
 	/**
 	 * Simple light box for clicked image
+	 * Post image has HTML data attributes defining the big image URL and dimensions
+	 * @param {MouseEvent} event
 	 */
 	function lightBox(event) {
-		var $img = $(this);           // post image
-		var $big = $lb.find('img');   // light box image
+		/** @type {jQuery} Post image */
+		var $img = $(this);
+		/** @type {jQuery} Big image */
+		var $big = $lb.find('img');
+		/** @type {Boolean} Whether big image is already browser cached */
 		var loaded = $img.data('big-loaded');
-		var width = parseInt($img.data('big-width'));
-		var height = parseInt($img.data('big-height'));
+		/** @type {Size} */
+		var size = new Size($img.data('big-width'), $img.data('big-height'));
+
+		/**
+		 * Update image position and panning speed to accomodate window size
+		 * @param {MouseEvent} event
+		 */
+		var updateSize = function(event) {
+			var cursor = 'zoom-out';
+
+			size.update();
+
+			if (size.needsToPan) {
+				cursor = 'move';
+				$lb.on('mousemove', updatePosition);
+			} else {
+				$lb.off('mousemove', updatePosition);
+			}
+			// set initial position
+			updatePosition(event);
+			$big.css('cursor', cursor);
+		};
+
 		/**
 		 * Update image position within light box
 		 * @param {MouseEvent} event
 		 */
 		var updatePosition = function(event) {
 			$big.css({
-				top: topFromEvent(height, event),
-				left: leftFromEvent(width, event)
+				top: size.height.CSS(event.clientY),
+				left: size.width.CSS(event.clientX)
 			});
 		};
 
@@ -59,7 +85,7 @@ $(function() {
 		} else {
 			// assign lower resolution image while the bigger one is loading
 			$big.attr('src', $img.data('original'));
-
+			// load photo in detached element
 			$('<img />')
 				.bind('load', function() {
 					// assign big image to light box once it's loaded
@@ -69,63 +95,18 @@ $(function() {
 				.attr('src', $img.data('big'));
 		}
 
-		$big.height(height).width(width);
+		$big.height(size.height.image).width(size.width.image);
+
 		// position based on initial click
-		updatePosition(event);
-		// set up panning within light box
-		$lb.show(0, disablePageScroll).on('mousemove', updatePosition);
-	}
+		updateSize(event);
 
-	/**
-	 * Position of lightbox image based on mouse
-	 * @param {Number} height Image height
-	 * @param {MouseEvent} event
-	 * @returns {String}
-	 */
-	function topFromEvent(height, event) {
-		return positionFromEvent(event.clientY, window.innerHeight, height);
-	}
-
-	/**
-	 * Position of lightbox image based on mouse
-	 * @param {Number} width Image width
-	 * @param {MouseEvent} event
-	 * @returns {String}
-	 */
-	function leftFromEvent(width, event) {
-		return positionFromEvent(event.clientX, window.innerWidth, width);
-	}
-
-	/**
-	 * Function simplified from
-	 *   lengthDiff = (w - i) / 2
-	 *   ratio = lengthDiff / (w / 2)
-	 *   fromCenter = (w / 2) - m
-	 *   offset = lengthDiff - (fromCenter * ratio)
-	 * @param {Number} m Mouse event position
-	 * @param {Number} w Window dimension
-	 * @param {Number} i Image dimension
-	 * @returns {String}
-	 */
-	function positionFromEvent(m, w, i) {
-//		console.log('fromCenter: ' + fromCenter + ', diff: ' + diff + ', offset: ' + offset + ', alt: ' + alt);
-		var diff = (w - i) / 2;
-
-		if (i < w) {
-			// image is smaller than window
-			return diff + 'px';
-		} else {
-			var ratio = 2 * ((w - i) / w);   // 2 * (diff / (w / 2))
-			var fromCenter = (w / 2) - m;
-			var offset = diff - (fromCenter * ratio);
-
-			return offset.toFixed(0) + 'px';
-		}
-		//return (m - ((m * i) / w)).toFixed(0) + 'px';
+		$lb.show(0, disablePageScroll);
+		// update panning calculations if window resizes
+		$(window).resize(updateSize);
 	}
 
 	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
-	function enablePageScroll() { $('html').css('overflow', 'auto'); }
+	function enablePageScroll() { $('html').css('overflow', 'auto'); $(window).off('resize'); }
 
 	/**
 	 * @param {Boolean} [removeButton] Whether to remove button after showing EXIF
@@ -141,4 +122,96 @@ $(function() {
 			.load($exif.data('url'))
 		);
 	}
+
+// - Size classes -------------------------------------------------------------
+
+	/**
+	 *
+	 * @param {String} imageWidth
+	 * @param {String} imageHeight
+	 * @constructor
+	 */
+	function Size(imageWidth, imageHeight) {
+		/** @type {Length} */
+		this.width = new Length(imageWidth);
+		/** @type {Length} */
+		this.height = new Length(imageHeight);
+		/**
+		 * Whether image needs to pan
+		 * @type {Boolean}
+		 */
+		this.needsToPan = false;
+	}
+
+	/**
+	 * @param {String} forImage
+	 * @constructor
+	 */
+	function Length(forImage) {
+		/**
+		 * Image edge length
+		 * @type {Number}
+		 */
+		this.image = parseInt(forImage);
+		/**
+		 * Window edge length
+		 * @type {Number}
+		 */
+		this.window = 0;
+		/**
+		 * How much longer is window edge
+		 * @type {Number}
+		 */
+		this.extra = 0;
+		/**
+		 * Ratio of mouse to image movement pixels for panning
+		 * @type {Number}
+		 */
+		this.panRatio = 0;
+	}
+
+	/**
+	 * Update window dimension and calculate how much larger it is than image
+	 * @param {Number} forWindow
+	 */
+	Length.prototype.update = function(forWindow) {
+		this.window = forWindow;
+		this.extra = (this.window - this.image) / 2;
+	};
+
+	/**
+	 * Calculate ratio for this dimension
+	 * Leading number is factor by which to accelerate panning
+	 * @return {Number}
+	 */
+	Length.prototype.ratio = function() {
+		return 2 * ((this.window - this.image) / this.window);
+	};
+
+	/**
+	 * Get CSS image offset based on mouse position
+	 * @param {Number} m
+	 * @returns {String}
+	 */
+	Length.prototype.CSS = function(m) {
+		var subtract = (this.extra > 0) ? 0 : ((this.window / 2) - m) * this.panRatio;
+		return (this.extra - subtract).toFixed(0) + 'px';
+	};
+
+	/**
+	 *
+	 */
+	Size.prototype.update = function() {
+		this.height.update(window.innerHeight);
+		this.width.update(window.innerWidth);
+		this.needsToPan = this.width.extra < 0 || this.height.extra < 0;
+
+		if (this.needsToPan) {
+			// pan image using length with biggest ratio
+			// or if one dimension needs no panning then use the other dimension
+			this.height.panRatio = this.width.panRatio = (this.height.extra < this.width.extra && this.width.extra < 0)
+				? this.width.ratio()
+				: this.height.ratio();
+		}
+	};
 });
