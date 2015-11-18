@@ -81,14 +81,14 @@
 
 	{{#post.photos}}
 
-	<figure itemscope itemtype="http://schema.org/ImageObject" style='width: {{size.normal.width}}px; max-width: 100%;'>
+	<figure itemscope itemtype="http://schema.org/ImageObject" title="Click to enlarge image {{index}}" data-exif="/exif/{{id}}" style='width: {{size.normal.width}}px; max-width: 100%;'>
 		{{! links from photo tag search are anchored to ID }}
 		<a name="{{id}}"></a><a name="{{index}}"></a>
 		{{! data-original attribute supports jquery.lazyload }}
 		<img src="{{size.preview.url}}" alt="{{title}}" itemprop="url" data-original="{{size.normal.url}}"
-			  style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
+			 style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
 		     data-big="{{size.big.url}}" data-big-width="{{size.big.width}}" data-big-height="{{size.big.height}}"/>
-		<aside class="exif" data-url="/exif/{{id}}">{{{icon 'camera'}}}<p class="desktop">Camera Settings</p><p class="mobile">Info</p></aside>
+		<div class="info-button">{{{icon 'camera'}}}<p>Camera Settings</p></div>
 
 	{{#if tags}}
 		<nav class="tags">
@@ -108,6 +108,7 @@
 	{{#if sourceUrl}}
 		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
 	{{/if}}
+		<div class="mobile-button">{{{icon 'camera'}}}<p>Info</p></div>
 	</figure>
 
 	<div class="caption content" itemprop="description">{{{formatCaption description}}}</div>

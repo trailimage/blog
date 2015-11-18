@@ -12,15 +12,15 @@ $(function() {
 	$lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
 	$photos.find('img').on('click', lightBox).lazyload();
 	$photos.find('.mobile-button').on('click', function() { showExif.call(this); });
-	$photos.find('.exif-button').on('mouseover', function() {
-		showExif.call(this, true);
+	$photos.find('.info-button').one('mouseover', function() {
+		var $button = $(this);
 
-		var $exif = $(this);
-
-		$exif.parent().append($('<div>')
-			.addClass('exif')
+		$button
+			.addClass('loading')
 			.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-			.load($exif.data('url')));
+			.load($button.parent().data('exif'), function() {
+				$button.removeClass('loading').addClass('loaded');
+			});
 		// EXIF DIV has a data-url property for loading details
 		//$exif.off('mouseenter click')
 		//	.addClass('loading')
@@ -116,7 +116,7 @@ $(function() {
 	function showExif(removeButton) {
 		var $button = $(this);
 		var $photo = $button.parent();
-		var url = $photo.data('exif');
+		var url = $photo.data('url');
 
 		$exif.parent().append($('<div>')
 			.addClass('exif')
