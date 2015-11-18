@@ -70,7 +70,7 @@
 
 	{{#if post.photoCoordinates}}
 		<div class='map'>
-			<a href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 		</div>
 	{{/if}}
 	</header>

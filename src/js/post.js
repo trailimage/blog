@@ -32,7 +32,7 @@ $(function() {
 	});
 
 	/**
-	 * Show simple light box for clicked image
+	 * Simple light box for clicked image
 	 */
 	function lightBox(event) {
 		var $img = $(this);           // post image
@@ -102,23 +102,25 @@ $(function() {
 	 *   ratio = lengthDiff / (w / 2)
 	 *   fromCenter = (w / 2) - m
 	 *   offset = lengthDiff - (fromCenter * ratio)
-	 * @param {Number} m Mouse position
+	 * @param {Number} m Mouse event position
 	 * @param {Number} w Window dimension
 	 * @param {Number} i Image dimension
 	 * @returns {String}
 	 */
 	function positionFromEvent(m, w, i) {
 //		console.log('fromCenter: ' + fromCenter + ', diff: ' + diff + ', offset: ' + offset + ', alt: ' + alt);
-		//w = w * 0.9;
 		var diff = (w - i) / 2;
-		var ratio = diff / (w / 2);
-		var fromCenter = (w / 2) - m;
-		var offset = diff - (fromCenter * ratio);
 
-		console.log(ratio);
+		if (i < w) {
+			// image is smaller than window
+			return diff + 'px';
+		} else {
+			var ratio = 2 * ((w - i) / w);   // 2 * (diff / (w / 2))
+			var fromCenter = (w / 2) - m;
+			var offset = diff - (fromCenter * ratio);
 
-		return offset.toFixed(0) + 'px';
-
+			return offset.toFixed(0) + 'px';
+		}
 		//return (m - ((m * i) / w)).toFixed(0) + 'px';
 	}
 
