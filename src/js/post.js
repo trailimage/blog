@@ -20,8 +20,7 @@ $(function() {
 		$exif.parent().append($('<div>')
 			.addClass('exif')
 			.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-			.load($exif.data('url'))
-		);
+			.load($exif.data('url')));
 		// EXIF DIV has a data-url property for loading details
 		//$exif.off('mouseenter click')
 		//	.addClass('loading')
@@ -72,8 +71,7 @@ $(function() {
 		 */
 		var updatePosition = function(event) {
 			$big.css({
-				top: size.height.CSS(event.clientY),
-				left: size.width.CSS(event.clientX)
+				top: size.height.CSS(event.clientY), left: size.width.CSS(event.clientX)
 			});
 		};
 
@@ -106,7 +104,11 @@ $(function() {
 	}
 
 	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
-	function enablePageScroll() { $('html').css('overflow', 'auto'); $(window).off('resize'); }
+
+	function enablePageScroll() {
+		$('html').css('overflow', 'auto');
+		$(window).off('resize');
+	}
 
 	/**
 	 * @param {Boolean} [removeButton] Whether to remove button after showing EXIF
@@ -119,8 +121,7 @@ $(function() {
 		$exif.parent().append($('<div>')
 			.addClass('exif')
 			.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-			.load($exif.data('url'))
-		);
+			.load($exif.data('url')));
 	}
 
 // - Size classes -------------------------------------------------------------
@@ -209,9 +210,7 @@ $(function() {
 		if (this.needsToPan) {
 			// pan image using length with biggest ratio
 			// or if one dimension needs no panning then use the other dimension
-			this.height.panRatio = this.width.panRatio = (this.height.extra < this.width.extra && this.width.extra < 0)
-				? this.width.ratio()
-				: this.height.ratio();
+			this.height.panRatio = this.width.panRatio = (this.height.extra < this.width.extra && this.width.extra < 0) ? this.width.ratio() : this.height.ratio();
 		}
 	};
 });
