@@ -7,11 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/ti.css" afterPath="$PROJECT_DIR$/dist/css/ti.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/post.js" afterPath="$PROJECT_DIR$/dist/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/post.js" afterPath="$PROJECT_DIR$/src/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/post-page.less" afterPath="$PROJECT_DIR$/src/less/post-page.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/post.hbs" afterPath="$PROJECT_DIR$/views/post.hbs" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -402,12 +397,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00110" summary="restore prod settings">
-      <created>1446679201685</created>
-      <option name="number" value="00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1446679201685</updated>
-    </task>
     <task id="LOCAL-00111" summary="don't use redis cache if proxy detected">
       <created>1446742984790</created>
       <option name="number" value="00111" />
@@ -696,7 +685,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447802867031</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="lightbox sizing">
+      <created>1447805614392</created>
+      <option name="number" value="00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1447805614392</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TodoView">
@@ -773,7 +768,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="don't use redis cache if proxy detected" />
     <MESSAGE value="move redirect config" />
     <MESSAGE value="fix map data retrieval" />
     <MESSAGE value="geo checkpoint" />
@@ -798,7 +792,8 @@
     <MESSAGE value="lightbox position fixes" />
     <MESSAGE value="fox footnote and blockquote spacing" />
     <MESSAGE value="fixed post tags and incorrect video frame" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed post tags and incorrect video frame" />
+    <MESSAGE value="lightbox sizing" />
+    <option name="LAST_COMMIT_MESSAGE" value="lightbox sizing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
