@@ -8,14 +8,7 @@
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/ti.css" afterPath="$PROJECT_DIR$/dist/css/ti.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/post.js" afterPath="$PROJECT_DIR$/dist/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/photo-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/photo-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/exif.js" afterPath="$PROJECT_DIR$/lib/models/exif.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js" afterPath="$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/regex.js" afterPath="$PROJECT_DIR$/lib/regex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/post.js" afterPath="$PROJECT_DIR$/src/js/post.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/post-page.less" afterPath="$PROJECT_DIR$/src/less/post-page.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/post.hbs" afterPath="$PROJECT_DIR$/views/post.hbs" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,48 +32,28 @@
       <file leaf-file-name="post.hbs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/post.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.806452">
-              <caret line="95" column="16" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+            <state vertical-scroll-proportion="-4.967742">
+              <caret line="88" column="29" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="post-page.less" pinned="false" current-in-tab="false">
+      <file leaf-file-name="post-page.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/less/post-page.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.7419353">
-              <caret line="511" column="34" selection-start-line="511" selection-start-column="34" selection-end-line="511" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.7055151">
+              <caret line="500" column="23" selection-start-line="500" selection-start-column="23" selection-end-line="500" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="flickr-photo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="factory-base.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="4" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="post.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20927468">
-              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="11" column="62" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -152,9 +125,9 @@
         <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js" />
         <option value="$PROJECT_DIR$/views/post.hbs" />
         <option value="$PROJECT_DIR$/src/js/post.js" />
-        <option value="$PROJECT_DIR$/src/less/post-page.less" />
         <option value="$PROJECT_DIR$/lib/models/exif.js" />
         <option value="$PROJECT_DIR$/lib/regex.js" />
+        <option value="$PROJECT_DIR$/src/less/post-page.less" />
       </list>
     </option>
   </component>
@@ -722,14 +695,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20636152" sideWeight="0.5027894" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17741935" sideWeight="0.41272303" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738557" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20170675" sideWeight="0.4972106" order="2" side_tool="false" content_ui="tabs" x="686" y="680" width="1098" height="157" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20170675" sideWeight="0.4972106" order="2" side_tool="false" content_ui="tabs" x="686" y="680" width="1098" height="157" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.321955" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.3644647" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.6355353" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.3644315" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.6355685" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32428238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498753" sideWeight="0.4972847" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31885183" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="731" y="528" width="1438" height="627" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31885183" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="731" y="528" width="1438" height="627" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -775,7 +748,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="flickr as provider" />
     <MESSAGE value="class pattern" />
     <MESSAGE value="logging provider" />
     <MESSAGE value="rest parameters" />
@@ -800,7 +772,8 @@
     <MESSAGE value="calc photo date standard deviation checkpoint" />
     <MESSAGE value="calc photo date standard deviation" />
     <MESSAGE value="make map settings more configurable" />
-    <option name="LAST_COMMIT_MESSAGE" value="make map settings more configurable" />
+    <MESSAGE value="exif checkpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="exif checkpoint" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1145,34 +1118,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/post.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.806452">
-          <caret line="95" column="16" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/providers/photo-base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="4" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1189,14 +1138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/post-page.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.7419353">
-          <caret line="511" column="34" selection-start-line="511" selection-start-column="34" selection-end-line="511" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1227,8 +1168,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20927468">
-          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="62" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.94411415">
+          <caret line="111" column="4" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44470868">
+          <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/post.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.967742">
+          <caret line="88" column="29" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/less/post-page.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7055151">
+          <caret line="500" column="23" selection-start-line="500" selection-start-column="23" selection-end-line="500" selection-end-column="23" />
           <folding />
         </state>
       </provider>
