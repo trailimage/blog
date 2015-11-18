@@ -31,7 +31,7 @@
 		"winston-redis": "^1.0.0",
 		"pdfkit": "*",
 		"xmldom": "^0.1.19",
-		"connect-wwwhisper": "git+http://github.com/Trail-Image/connect-wwwhisper#master"
+		"connect-wwwhisper": "^0.1.13"
 	},
 	"devDependencies": {
 		"bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
