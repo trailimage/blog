@@ -69,6 +69,8 @@
 		<nav id="nav-top">{{> navigation}}</nav>
 
 	{{#if post.photoCoordinates}}
+		{{! https://developers.google.com/maps/documentation/static-maps/ }}
+		{{! 640 is maximum width of free API: https://developers.google.com/maps/documentation/static-maps/intro#Imagesizes }}
 		<div class='map'>
 			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 		</div>
