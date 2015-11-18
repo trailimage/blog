@@ -11,7 +11,19 @@ $(function() {
 
 	$lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
 	$photos.find('img').on('click', lightBox).lazyload();
-	$photos.find('.mobile-button').on('click', function() { showExif.call(this); });
+	$photos.find('.mobile-button').on('click', function() {
+		var $m = $(this);
+		var $fig = $m.parent();
+
+		$('<div />')
+			.addClass('mobile-info')
+			.load($fig.data('exif'), function() {
+				$m.hide();
+				$(this).appendTo($fig);
+			});
+			//.appendTo($fig);
+
+	});
 	$photos.find('.info-button').one('mouseover', function() {
 		var $button = $(this);
 
