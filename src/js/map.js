@@ -39,8 +39,9 @@ google.maps.event.addDomListener(window, 'load', function() {
 		return {
 			icon: '/img/orange-marker.png',
 			clickable: (feature.getGeometry() instanceof google.maps.Data.Point),
-			strokeWeight: 2,
-			strokeColor: 'red'
+			strokeWeight: 3,
+			strokeColor: '#08f',
+			strokeOpacity: 0.7
 		};
 	});
 

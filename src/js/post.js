@@ -169,7 +169,7 @@ $(function() {
 	 *  ║ image                   ║
 	 *  ╚═════════════════════════╝
 	 *  Pan ratio maps mouse position from window center to the number of pixels
-	 *  to offset in the extra overlap
+	 *  to offset against the image overlap
 	 *
 	 * @constructor
 	 */
@@ -185,7 +185,7 @@ $(function() {
 		 */
 		this.window = 0;
 		/**
-		 * How much longer is window edge
+		 * How much longer is window edge (usually a negative number)
 		 * @type {Number}
 		 */
 		this.extra = 0;

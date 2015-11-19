@@ -35,7 +35,6 @@ function createWebService() {
 			// library must be loaded before routes are defined
 			defineRoutes(app);
 			app.listen(port);
-			//https.createServer(options, app).listen(port);
 			log.info('Listening on port %d', port);
 		});
 	}
@@ -78,10 +77,14 @@ function applyMiddleware(app) {
 	const bodyParser = require('body-parser');
 	/** @see https://github.com/pillarjs/cookies/blob/master/README.md */
 	//const Cookies = require('cookies');
-	const wwwhisper = require('connect-wwwhisper');
 	const outputCache = require('./lib/cache/output-cache.js');
 
-	app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
+	if (config.usePersona) {
+		// use wwwhisper middleware to authenticate some routes
+		// https://devcenter.heroku.com/articles/wwwhisper
+		const wwwhisper = require('connect-wwwhisper');
+		app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
+	}
 	//app.use(Cookies.express(keepCookie));
 	app.use('/admin', [bodyParser.urlencoded({ extended: true }), bodyParser.json()]);
 	//app.use(bodyParser.urlencoded({ extended: true }));
