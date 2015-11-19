@@ -159,15 +159,15 @@ $(function() {
 	/**
 	 * @param {String} forImage
 	 *
-	 *  ┏━━━━━━━━┯━━━━━━━━━━━━━━━━┓
-	 *  ┃        ┊ extra          ┃
-	 *  ┃   ╔════╧═══╤════════╗   ┃
-	 *  ┃   ║        ┊ from   ║   ┃
-	 *  ┃   ║        ┼ center ║   ┃
-	 *  ┃   ║ window          ║   ┃
-	 *  ┃   ╚═════════════════╝   ┃
-	 *  ┃ image                   ┃
-	 *  ┗━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	 *  ╔════════╤════════════════╗
+	 *  ║        │ extra          ║
+	 *  ║   ╔════╧═══╤════════╗   ║
+	 *  ║   ║        │ from   ║   ║
+	 *  ║   ║        ┼ center ║   ║
+	 *  ║   ║ window          ║   ║
+	 *  ║   ╚═════════════════╝   ║
+	 *  ║ image                   ║
+	 *  ╚═════════════════════════╝
 	 *  Pan ratio maps mouse position from window center to the number of pixels
 	 *  to offset in the extra overlap
 	 *
