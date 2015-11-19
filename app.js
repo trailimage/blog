@@ -7,7 +7,6 @@
 const is = require('./lib/is.js');
 const config = require('./lib/config.js');
 const Express = require('express');
-const cookieEncryption = [config.facebook.adminID];
 
 injectDependencies();
 createWebService();
@@ -75,8 +74,6 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	/** @see https://github.com/pillarjs/cookies/blob/master/README.md */
-	//const Cookies = require('cookies');
 	const outputCache = require('./lib/cache/output-cache.js');
 
 	if (config.usePersona) {
@@ -85,10 +82,8 @@ function applyMiddleware(app) {
 		const wwwhisper = require('connect-wwwhisper');
 		app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
 	}
-	//app.use(Cookies.express(keepCookie));
-	app.use('/admin', [bodyParser.urlencoded({ extended: true }), bodyParser.json()]);
-	//app.use(bodyParser.urlencoded({ extended: true }));
-	//app.use(bodyParser.json());
+	// needed to parse admin page posts
+	app.use('/admin', bodyParser.urlencoded({ extended: false }));
 	app.use(compress({}));
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/dist'));
@@ -155,6 +150,7 @@ function injectDependencies() {
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app) {
+	const Enum = require('./lib/enum.js');
 	const r = require('./lib/controllers/routes.js');
 	/** @type {string} Slug pattern */
 	const s = '([\\w\\d-]{4,})';
@@ -170,7 +166,8 @@ function defineRoutes(app) {
 	for (let slug in config.redirects) {
 		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
-	app.get('/', r.tag.home);                                         // the latest posts
+	// the latest posts
+	app.get('/', r.tag.home);
 	app.get('/rss', r.rss.view);
 	app.get('/about', r.about.view);
 	app.get('/js/post-menu-data.js', r.menu.data);
@@ -182,13 +179,16 @@ function defineRoutes(app) {
 	app.get('/mobile-menu', r.menu.mobile);
 	app.get('/search', r.search.view);
 	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);       // old blog links with format /YYYY/MM/slug
+	// old blog links with format /YYYY/MM/slug
+	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);
 	app.get('/photo-tag', r.photo.tags);
 	app.get('/photo-tag/:tagSlug', r.photo.tags);
 	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
-	app.get('/'+photoID, r.photo.view);                                 // links with bare Flickr photo ID
-	app.get('/'+postID, r.post.flickrID);                               // links with bare Flickr set ID
-	app.get('/'+postID+'/'+photoID, r.post.flickrID);
+	// links with bare photo provider ID
+	app.get('/'+photoID, r.photo.view);
+	// links with bare photo provider set ID
+	app.get('/'+postID, r.post.providerID);
+	app.get('/'+postID+'/'+photoID, r.post.providerID);
 	app.get('/:slug'+s+'/pdf', r.pdf.view);
 	app.get('/:slug'+s+'/map', r.map.view);
 	app.get('/:slug'+s+'/gpx', r.map.download);

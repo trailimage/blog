@@ -6,11 +6,7 @@
 	<link href='/css/admin.css' rel='stylesheet' type='text/css'/>
 	<link href='/img/favicon.ico' rel='shortcut icon'/>
 	<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
-	<link rel="apple-touch-icon" href='/img/apple-touch-icon-57x57.png' />
-	<link rel="apple-touch-icon" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
-	<link rel="apple-touch-icon" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
 	<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js' type='text/javascript'></script>
-	<script src='/js/jquery.serialize-object.min.js' type='text/javascript'></script>
 	<script type='text/javascript'>
 		/**
 		 * @param {string} message
@@ -20,92 +16,92 @@
 		};
 
 		$(document).ready(function() {
-			var $views = $('#views');
-			var $viewItems = $views.find('input[type=checkbox]');
-			var $models = $('#models');
-			var $tracks = $('#tracks');
-			var waiting = false;
-
-			$views.find('.select-all').click(function()  { $viewItems.prop('checked', true); });
-			$views.find('.select-none').click(function() { $viewItems.prop('checked', false); });
-
-			$tracks.submit(function() {
-				$.ajax({
-					url: $tracks.attr('action'),
-					type: 'POST',
-					data: new FormData(this),
-					processData: false,
-					contentType: false,
-					success: function(response, status, jqXHR) {
-						$tracks.find('select, input, button').prop('disabled', false);
-						$tracks.showMessage((response.success) ? 'Done' : 'Failed');
-					}
-				});
-
-				$tracks.find('select, input, button').prop('disabled', true);
-
-				return false;
-			});
-
-			$views.submit(function() {
-				if (waiting) { return false; }
-
-				var data = $views.serializeObject();
-
-				$views.find('input, button').prop('disabled', true);
-				waiting = true;
-
-				$.post($views.attr('action'), {'contentType': 'application/json;charset=UTF-8', 'form': data}, function(response) {
-					$views.find('input, button').prop('disabled', false);
-					waiting = false;
-
-					if (response.success) {
-						$views.find('input:checked').parent().remove();
-						window.alert('Unloaded:\n' + response.message.replace(/,/g, '\n'));
-					} else {
-						$views.showMessage('Failed')
-					}
-				});
-				return false;
-			});
-
-			$models.find('button').click(function() {
-				if (waiting) { return; }
-
-				var $button = $(this);
-
-				$button.prop('disabled', true);
-				waiting = true;
-
-				$.post('/admin/' + $button.data('url'), function(response) {
-					$button.prop('disabled', false);
-					waiting = false;
-
-					if (response.success) {
-						window.alert('Reloaded:\n' + response.message.replace(/,/g, '\n'));
-					} else {
-						$models.showMessage('Failed');
-					}
-				});
-			});
+			handlePost($('#views'));
+			handlePost($('#models'));
 		});
+
+		function handlePost($form) {
+			$form.submit(function() {
+				var disable = 'select, button';
+				var $checkbox = $form.find('input[type=checkbox]');
+				var data = {
+					selected: $form.find('select').val(),
+					checked: $checkbox.length > 0 ? $checkbox.checked : false
+				};
+
+				$form.find(disable).prop('disabled', true);
+
+				$.post($form.attr('action'), data, function(response) {
+					$form.find(disable).prop('disabled', false);
+
+					if (response.success) {
+						//$form.find('select').parent().remove();
+						window.alert('Updated:\n' + response.message.replace(/,/g, '\n'));
+					} else {
+						$form.find('.message').html('Failed').show();
+					}
+				});
+				return false;
+			});
+		}
 	</script>
 </head>
 <body>
-	<div id="logs">
+	<div id="caching" class="column">
+		<h2>Caching</h2>
+
+		<form id="models" action="/admin/model/reload">
+			<fieldset id="models">
+				<legend>Models</legend>
+			{{#if models}}
+				<button type="submit">Reload</button>
+				<select name="models" multiple>
+					{{#models}}
+						<option value="{{this}}">{{this}}</option>
+					{{/models}}
+				</select>
+			{{/if}}
+				<div class="message"></div>
+			</fieldset>
+		</form>
+
+		<form id="views" action="/admin/view/delete">
+			<fieldset>
+				<legend>Views</legend>
+			{{#if views}}
+				<button type="submit">Delete</button>
+				<select name="views" multiple>
+					{{#views}}
+						<option value="{{this}}">{{this}}</option>
+					{{/views}}
+				</select>
+				<input id="track" type="checkbox" name="include-track"/><label for="track">Also delete map</label>
+			{{else}}
+				No views are cached
+			{{/if}}
+				<div class="message"></div>
+			</fieldset>
+		</form>
+	</div>
+
+{{#if logs}}
+	<div class="column" id="logs">
+		<h2>Logs</h2>
 		<table>
 			<tbody>
 			{{#each logs}}
 				<tr class='head'><td colspan='2'>{{@key}}</td></tr>
 				{{#this}}
-				<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
+					<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
 				{{/this}}
 			{{/each}}
 			</tbody>
 		</table>
 	</div>
+{{/if}}
 
-	<div id="body">
+	<div class="column" id="reference">
+		<h2>APIs and Statistics</h2>
 		<fieldset id="statistics">
 			<legend>Statistics</legend>
 			<ul>
@@ -126,51 +122,7 @@
 				<li><a href='https://cloud.google.com/console#/project/{{config.google.projectID}}'>Map API</a></li>
 				<li><a href='https://www.flickr.com/services/apps/{{config.flickr.appID}}/key'>Flickr API</a></li>
 			</ul>
-			<div class="buttons">
-				<button>Flickr Token</button>
-			</div>
-			<div class="message"></div>
 		</fieldset>
-
-		<fieldset id="models">
-			<legend>Cached Models</legend>
-			<button data-url="library/reload">Reload Library</button><button data-url="photo-tag/reload">Reload Photo Tags</button>
-			<div class="message"></div>
-		</fieldset>
-
-		<form id="views" action="/admin/view/delete">
-			<fieldset>
-				<legend>Cached Views</legend>
-				<div class="buttons">Select <button type="button" class="select-all">All</button><button type="button" class="select-none">None</button></div>
-				<div class="scroll">
-					<ul>
-				{{#views}}
-						<li><label><input name='post{{@index}}' value='{{this}}' type='checkbox'/>{{this}}</label></li>
-				{{/views}}
-					</ul>
-				</div>
-				<div class="buttons"><button type="submit">Delete</button></div>
-				<div class="message"></div>
-			</fieldset>
-		</form>
-
-		<form id="tracks" action="/admin/track/upload">
-			<fieldset>
-				<legend>Tracks</legend>
-				<label>Post<select id="gpxPost" name="post">
-				{{#library.posts}}
-					{{#unless previousIsPart}}
-						<option value="{{id}}">{{#if isPartial}}{{title}}{{else}}{{name}}{{/if}}</option>
-					{{/unless}}
-				{{/library.posts}}
-				</select></label>
-				<div class="buttons">
-					<input id="gpxFile" name="gpx" type="file"/>
-					<button type="submit" data-action="upload">Upload</button>
-				</div>
-				<div class="message"></div>
-			</fieldset>
-		</form>
 	</div>
 </body>
 </html>

@@ -1,11 +1,11 @@
+@import "settings";
 @import "elements";
-@import "glyphicons";
+@import "@{bs-path}glyphicons.less";
 
 /* https://github.com/acdvorak/intellij-lessc-plugin */
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
 @serifFont: 'Lora', Georgia, Times;
 @borderColor: #aaa;
-@linkColor: #800;
 
 html {
 	padding: 0;
@@ -23,55 +23,41 @@ label {
 	cursor: pointer;
 }
 
-ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-
-	li { padding: 0 3px; }
+a {
+	text-decoration: none;
+	&:hover { text-decoration: underline; }
 }
-
-div.clear-fix { clear: both; }
 
 fieldset {
 	position: relative;
 	border: 1px solid @borderColor;
 	.rounded(4px);
-	padding: 5px 0;
+	padding: 5px 10px 10px 10px;
+	margin-top: 10px;
 
 	input, select { font-family: @sanSerifFont; font-size: 16px; }
 
 	legend {
 		margin-left: 10px;
 		font-weight: bold;
+		color: #009;
 	}
-
-	label { display: block; }
 
 	select {
 		margin: 4px;
+		padding: 4px;
 		display: block;
 		width: auto;
-	}
-
-	input[type=text] {
-		margin: 4px;
-		display: block;
-		width: auto;
-		padding: 1px 2px;
-	}
-
-	.buttons {
-		text-align: right;
-		padding-right: 5px;
 	}
 
 	.message {
 		position: absolute;
 		bottom: 4px;
-		left: 4px;
+		right: 8px;
 		display: none;
-		color: @linkColor;
+		font-size: 20px;
+		font-weight: bold;
+		color: #f80;
 	}
 
 	&.busy {
@@ -79,43 +65,13 @@ fieldset {
 	}
 }
 
-.scroll {
-	border-top: 1px solid @borderColor;
-	border-bottom: 1px solid @borderColor;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	margin: 4px 0;
-	background-color: #fff;
-	max-height: 200px;
-}
+div.column {
+	width: 33%;
+	float: left;
+	margin: 10px;
 
-#body {
-	position: absolute;
-	left: 475px;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	padding: 10px;
-
-	#statistics, #api-keys { float: right; clear: right; width: 200px; }
-	#views fieldset, #issues fieldset, #models, #tracks fieldset {
-		width: 47%;
-		li {
-			cursor: pointer;
-			&:hover	{ color: @linkColor; }
-		}
-	}
-
-	#issues fieldset {
-		input[type=text] {
-			width: 25em;
-		}
-	}
-
-	#models {
-		text-align: center;
-
-		legend { text-align: left; }
+	form {
+		button { float: right; }
 	}
 }
 
@@ -124,7 +80,6 @@ fieldset {
 	left: 0;
 	top: 0;
 	bottom: 0;
-	width: 475px;
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -163,57 +118,6 @@ fieldset {
 					letter-spacing: -1px;
 					cursor: pointer;
 				}
-			}
-		}
-	}
-}
-
-p.stats {
-	text-align: center;
-	font-weight: normal;
-	font-family: Verdana, Arial, sans-serif;
-	line-height: 1.2em;
-	font-size: 8pt;
-	margin: 4px;
-}
-
-
-div.message {
-	text-align: center;
-	font-size: 30px;
-	color: #800;
-}
-
-form#login {
-	font-size: 30px;
-	margin: 120px auto;
-	width: 700px;
-
-	fieldset {
-		border: 1px solid #999;
-		background-color: #f9f9f9;
-		.rounded(4px);
-
-		.row {
-			margin: 15px 0;
-		}
-
-		label {
-			width: 150px;
-			text-align: right;
-			display: inline-block;
-			padding-right: 15px;
-		}
-
-		input {
-			font-size: 30px;
-			border: 1px solid #999;
-			padding: 2px 8px;
-			.rounded(4px);
-
-			&.button
-			{
-				float: right;
 			}
 		}
 	}
