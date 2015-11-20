@@ -57,8 +57,12 @@ describe('Formatting', ()=> {
 		expect(format.typography(u)).is.null;
 		expect(format.typography('')).is.null;
 		expect(format.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
+		expect(format.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
 	});
 	it('creates glyphicons', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
-	})
+	});
+	it('formats photo captions', ()=> {
+		// TODO: create tests
+	});
 });

@@ -6,15 +6,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Full_Test.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/format.test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/is.test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/regex.test.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/test-flickr.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/format.js" afterPath="$PROJECT_DIR$/lib/format.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/regex.js" afterPath="$PROJECT_DIR$/lib/regex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/authorize-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/authorize-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/format.test.js" afterPath="$PROJECT_DIR$/test/format.test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/regex.test.js" afterPath="$PROJECT_DIR$/test/regex.test.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/providers/google/google-map.js" afterPath="$PROJECT_DIR$/lib/providers/google/google-gpx.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,110 +33,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="admin-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="133" column="34" selection-start-line="133" selection-start-column="34" selection-end-line="133" selection-end-column="34" />
-              <folding>
-                <marker date="1448035228238" expanded="true" signature="2757:2794" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="flickr-photo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model-cache.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/cache/model-cache.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="10" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="10" />
-              <folding>
-                <marker date="1448035228233" expanded="true" signature="125:210" placeholder="/** Manage model cache ...*/" />
-                <marker date="1448035228233" expanded="true" signature="228:2123" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="231:413" placeholder="/** Raw posts and collection heirarchy from source ...*/" />
-                <marker date="1448035228233" expanded="true" signature="441:730" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="469:691" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="505:685" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="581:654" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="697:727" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="733:811" placeholder="/** Parsed photo tags ...*/" />
-                <marker date="1448035228233" expanded="true" signature="843:948" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="871:915" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="921:945" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="951:1040" placeholder="/** Photo tags are cached directly, not queued ...*/" />
-                <marker date="1448035228233" expanded="true" signature="1100:1148" placeholder="/** @param {function(Boolean)} callback ...*/" />
-                <marker date="1448035228233" expanded="true" signature="1183:1286" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1211:1252" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1258:1283" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1304:1334" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1337:1391" placeholder="/** Add value to cache queue ...*/" />
-                <marker date="1448035228233" expanded="true" signature="1415:1466" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1469:1580" placeholder="/** Add item to pending cache ...*/" />
-                <marker date="1448035228233" expanded="true" signature="1614:1664" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1667:1713" placeholder="/** @param {String} name ...*/" />
-                <marker date="1448035228233" expanded="true" signature="1767:1804" placeholder="/** Write cache ...*/" />
-                <marker date="1448035228233" expanded="true" signature="1821:1910" placeholder="{...}" />
-                <marker date="1448035228233" expanded="true" signature="1913:1937" placeholder="/**...*/" />
-                <marker date="1448035228233" expanded="true" signature="1985:2009" placeholder="/**...*/" />
-                <marker date="1448035228233" expanded="true" signature="2055:2079" placeholder="/**...*/" />
-                <marker date="1448035228233" expanded="true" signature="2265:2423" placeholder="/** The parent key under which all library objects are cached ...*/" />
-                <marker date="1448035228233" expanded="true" signature="2505:2643" placeholder="/** Root element name in the hash referenced by the parent cacheKey ...*/" />
-                <marker date="1448035228233" expanded="true" signature="2668:2772" placeholder="/** Queue library source data for caching while it's being lazy-loaded ...*/" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="library.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/models/library.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.548387">
-              <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="format.test.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="format.test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/format.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16359447">
-              <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="format.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/format.js">
+      <file leaf-file-name="regex.test.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/regex.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="273" column="2" selection-start-line="273" selection-start-column="2" selection-end-line="273" selection-end-column="2" />
-              <folding>
-                <marker date="1448041367545" expanded="true" signature="8040:8152" placeholder="..." />
-                <marker date="1448041367545" expanded="true" signature="11622:11718" placeholder="..." />
-                <marker date="1448041367545" expanded="true" signature="12997:13088" placeholder="..." />
-              </folding>
+            <state vertical-scroll-proportion="0.10138249">
+              <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,7 +72,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/providers/manager.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/api/google_maps_api.js" />
         <option value="$PROJECT_DIR$/lib/providers/firebase/firebase-map.js" />
@@ -208,11 +117,12 @@
         <option value="$PROJECT_DIR$/lib/providers/photo-base.js" />
         <option value="$PROJECT_DIR$/views/admin.hbs" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/test/regex.test.js" />
         <option value="$PROJECT_DIR$/test/is.test.js" />
         <option value="$PROJECT_DIR$/lib/format.js" />
-        <option value="$PROJECT_DIR$/test/format.test.js" />
         <option value="$PROJECT_DIR$/lib/regex.js" />
+        <option value="$PROJECT_DIR$/lib/providers/google/google-gpx.js" />
+        <option value="$PROJECT_DIR$/test/format.test.js" />
+        <option value="$PROJECT_DIR$/test/regex.test.js" />
       </list>
     </option>
   </component>
@@ -376,34 +286,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Trail Image" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -627,12 +509,6 @@
       <created>1430604145633</created>
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
-    </task>
-    <task id="LOCAL-00117" summary="geo checkpoint">
-      <created>1446754132498</created>
-      <option name="number" value="00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1446754132498</updated>
     </task>
     <task id="LOCAL-00118" summary="geo checkpoint">
       <created>1446756351272</created>
@@ -922,31 +798,16 @@
       <option name="project" value="LOCAL" />
       <updated>1447977613680</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="begin mocha tests">
+      <created>1448041456898</created>
+      <option name="number" value="00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1448041456898</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Full_Test - 2015.11.20 at 10h 29m 56s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="Full_Test - 2015.11.20 at 10h 34m 19s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="Full_Test - 2015.11.20 at 10h 40m 06s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="Full_Test - 2015.11.20 at 10h 40m 35s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="Full_Test - 2015.11.20 at 10h 41m 18s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="Full_Test - 2015.11.20 at 10h 41m 50s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
-    <history-entry file="Full_Test - 2015.11.20 at 10h 42m 27s.xml">
-      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
-    </history-entry>
     <history-entry file="Full_Test - 2015.11.20 at 10h 42m 55s.xml">
       <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
@@ -954,6 +815,27 @@
       <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
     <history-entry file="Full_Test - 2015.11.20 at 10h 43m 50s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 49m 39s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 49m 43s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 49m 51s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 50m 05s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 50m 54s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 54m 20s.xml">
+      <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="Full_Test - 2015.11.20 at 10h 54m 37s.xml">
       <configuration name="Full Test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
   </component>
@@ -968,11 +850,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780243" sideWeight="0.33813748" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780243" sideWeight="0.66186255" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1780243" sideWeight="0.66186255" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20659341" sideWeight="0.5027894" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1780243" sideWeight="0.28460687" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32705098" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -982,7 +865,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="481" y="-1070" width="1424" height="593" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1031,7 +913,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix map menu position" />
     <MESSAGE value="add orbitron font to download" />
     <MESSAGE value="google drive checkpoint" />
     <MESSAGE value="oauth checkpoint" />
@@ -1056,7 +937,8 @@
     <MESSAGE value="fix panning diagram for smaller character set" />
     <MESSAGE value="make persona auth optional and color map track line" />
     <MESSAGE value="admin checkpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="admin checkpoint" />
+    <MESSAGE value="begin mocha tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="begin mocha tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1091,27 +973,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/controllers/map-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15207373">
-          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/map.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.052568696">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/map.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47311828">
-          <caret line="18" column="54" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/js/post.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1210,6 +1071,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11392405">
           <caret line="35" column="43" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,6 +1122,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38018432">
           <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1439,6 +1302,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21428572">
           <caret line="74" column="43" selection-start-line="74" selection-start-column="43" selection-end-line="74" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1483,14 +1347,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/regex.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07603686">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/less/admin.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.026284348">
@@ -1515,10 +1371,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/regex.js">
+    <entry file="file://$PROJECT_DIR$/lib/providers/google/google-gpx.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18087557">
-          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.43087557">
+          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/manager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10138249">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/map/map-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -1537,8 +1409,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/format.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16359447">
-          <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/regex.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2926267">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/regex.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10138249">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
           <folding />
         </state>
       </provider>

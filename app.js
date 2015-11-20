@@ -111,7 +111,7 @@ function injectDependencies() {
 	const OAuthOptions = require('./lib/auth/oauth-options.js');
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleMap = require('./lib/providers/google/google-map.js');
+	const GoogleMap = require('./lib/providers/google/google-gpx.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
