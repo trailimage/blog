@@ -17,6 +17,28 @@ describe('Formatting', ()=> {
 		expect(format.hourOfDay(2)).equals('AM 2');
 		expect(format.hourOfDay(14)).equals('PM 2');
 	});
+	it.skip('formats timestamp according to ISO 8601', ()=> {
+
+	});
+	it.skip('obfuscates characters as HTML entities', ()=> {
+
+	});
+	it.skip('converts timestamp to Date', ()=> {
+
+	});
+	it.skip('ROT-13 encodes text', ()=> {
+
+	});
+	it.skip('Base 64 encodes text', ()=> {
+
+	});
+	it.skip('Base 64 decodes text', ()=> {
+
+	});
+	it('adds .remove() method to strings', ()=> {
+		expect('string').to.have.property('remove');
+		expect(('some text').remove('text')).equals('some ');
+	});
 	it('adds leading zeros to reach total digit length', ()=> {
 		expect(format.leadingZeros(2, 0)).equals('2');
 		expect(format.leadingZeros(2, 1)).equals('2');
@@ -51,7 +73,7 @@ describe('Formatting', ()=> {
 	it('extracts numbers from strings', ()=> {
 		expect(format.parseNumber('hey 34')).equals(34);
 		expect(format.parseNumber('wow 28.9')).equals(28.9);
-		//expect(format.parseNumber('nothing')).equals(NaN);
+		expect(format.parseNumber('nothing')).to.be.NaN;
 	});
 	it('substitutes nicer typography', ()=> {
 		expect(format.typography(u)).is.null;
@@ -62,7 +84,7 @@ describe('Formatting', ()=> {
 	it('creates glyphicons', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
 	});
-	it('formats photo captions', ()=> {
-		// TODO: create tests
+	it.skip('formats photo captions', ()=> {
+
 	});
 });

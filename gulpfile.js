@@ -17,18 +17,21 @@ const jsPath = './src/js/';
  * @see https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
  */
 gulp.task('less-main', () => LESS('ti'));
-gulp.task('less-map', () => LESS('map'));
+gulp.task('less-map', () => LESS('map', 'mapfont'));
 gulp.task('less-admin', () => LESS('admin'));
 gulp.task('less', ['less-main','less-map','less-admin']);
 
 /**
  * Combine web fonts and transpile LESS
  * @param {String} name CSS file name
+ * @param {String} [fontFile]
  * @returns {jQuery.Promise}
  */
-function LESS(name) {
+function LESS(name, fontFile) {
+	if (fontFile === undefined) { fontFile = 'webfont'; }
+
 	return merge(
-		gulp.src('./src/fonts/webfont.css'),
+		gulp.src('./src/fonts/' + fontFile + '.css'),
 		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
 	)
 		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0	}))
@@ -69,7 +72,7 @@ gulp.task('watch', ()=> {
 // https://github.com/sindresorhus/gulp-mocha
 // http://mochajs.org/#reporters
 gulp.task('test', ()=> {
-	return gulp.src('./test/*.test.js', { read: false })
+	return gulp.src('./test/**/*.test.js', { read: false })
 		// gulp-mocha needs filepaths so you can't have any plugins before it
 		.pipe(mocha({reporter: 'spec'}));
 });
