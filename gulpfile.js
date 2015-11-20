@@ -5,6 +5,7 @@ const less = require('gulp-less');
 const merge = require('merge2');
 const minifyCSS = require('gulp-minify-css');
 const concat = require('gulp-concat');
+const mocha = require('gulp-mocha');
 const uglify = require('gulp-uglify');
 const dist = './dist/';
 const bsPath = './node_modules/bootstrap/';
@@ -36,7 +37,7 @@ function LESS(name) {
 }
 
 // copy font files
-gulp.task('fonts', function() {
+gulp.task('fonts', ()=> {
 	return merge(
 		gulp.src(bsPath + 'fonts/*.*'),
 		gulp.src('./src/fonts/!(webfont.css)')
@@ -46,13 +47,13 @@ gulp.task('fonts', function() {
 
 gulp.task('script', ['script-post','script-other']);
 
-gulp.task('script-other', function() {
+gulp.task('script-other', ()=> {
 	return gulp.src(jsPath + '!(jquery.lazyload.js|post.js)')
 		.pipe(uglify())
 		.pipe(gulp.dest(dist + 'js'));
 });
 
-gulp.task('script-post', function() {
+gulp.task('script-post', ()=> {
 	return gulp.src([jsPath + 'jquery.lazyload.js', jsPath + 'post.js'])
 		.pipe(concat('post.js'))
 		.pipe(uglify())
@@ -60,9 +61,17 @@ gulp.task('script-post', function() {
 });
 
 // act on changes
-gulp.task('watch', function() {
+gulp.task('watch', ()=> {
 	gulp.watch('./src/less/*.less', ['less']);
 	gulp.watch('./src/js/*.js', ['script']);
+});
+
+// https://github.com/sindresorhus/gulp-mocha
+// http://mochajs.org/#reporters
+gulp.task('test', ()=> {
+	return gulp.src('./test/*.test.js', { read: false })
+		// gulp-mocha needs filepaths so you can't have any plugins before it
+		.pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('default', ['less', 'script']);
