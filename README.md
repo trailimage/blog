@@ -2,6 +2,8 @@ Trail Image
 ===========
 Flickr front-end with Reddis Cloud caching
 
+[![Build Status](https://travis-ci.org/Jason-Abbott/Trail-Image.svg?branch=master)](https://travis-ci.org/Jason-Abbott/Trail-Image)
+
 Externs
 =======
 https://github.com/google/closure-compiler/tree/master/contrib/externs
