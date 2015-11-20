@@ -80,13 +80,28 @@ function applyMiddleware(app) {
 		// use wwwhisper middleware to authenticate some routes
 		// https://devcenter.heroku.com/articles/wwwhisper
 		const wwwhisper = require('connect-wwwhisper');
-		app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
+
+		//app.use(/\/admin|\/wwwhisper/gi, wwwhisper(false));
+		app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
+		//app.use(['/admin','/wwwhisper'], wwwhisper(false));
 	}
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/dist'));
+}
+
+/**
+ * This should be what Express already supports but it isn't behaving as expected
+ * @param {RegExp} regex
+ * @param {Function} fn Middleware
+ * @returns {Function} Wrapper
+ */
+function filter(regex, fn) {
+	return (req, res, next) => {
+		if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
+	}
 }
 
 /**
