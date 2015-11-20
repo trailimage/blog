@@ -35,8 +35,8 @@
 					$form.find(disable).prop('disabled', false);
 
 					if (response.success) {
-						//$form.find('select').parent().remove();
-						window.alert('Updated:\n' + response.message.replace(/,/g, '\n'));
+						var msg = response.message;
+						window.alert((msg != "") ? 'Success:\n' + msg.replace(/,/g, '\n') : 'No new data found');
 					} else {
 						$form.find('.message').html('Failed').show();
 					}

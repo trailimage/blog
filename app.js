@@ -82,8 +82,8 @@ function applyMiddleware(app) {
 		const wwwhisper = require('connect-wwwhisper');
 		app.use(/^\/(admin|wwwhisper)(?!.*(delete|load)$)/, wwwhisper(false));
 	}
-	// needed to parse admin page posts
-	app.use('/admin', bodyParser.urlencoded({ extended: false }));
+	// needed to parse admin page posts with extended enabled for form select arrays
+	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
 	app.use(outputCache());
 	app.use(Express.static(__dirname + '/dist'));
