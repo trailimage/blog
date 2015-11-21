@@ -43,7 +43,7 @@
 				<legend>Models</legend>
 			{{#if models}}
 				<button type="submit">Reload</button>
-				<select name="models" multiple>
+				<select name="models">
 				{{#models}}
 					<option value="{{this}}">{{this}}</option>
 				{{/models}}
@@ -59,15 +59,32 @@
 				<legend>Views</legend>
 			{{#if views}}
 				<button type="submit">Delete</button>
-				<select name="views" size="15" multiple>
+				<select name="views" size="12" multiple>
 				{{#views}}
 					<option value="{{this}}">{{this}}</option>
 				{{/views}}
 				</select>
 				<input type="hidden" name="remove-matches" value="true"/>
-				<input id="track" type="checkbox" name="include-track"/><label for="track">Also delete map</label>
 			{{else}}
 				No views are cached
+			{{/if}}
+				<div class="message"></div>
+			</fieldset>
+		</form>
+
+		<form id="maps" action="/admin/map/delete">
+			<fieldset>
+				<legend>Maps</legend>
+			{{#if maps}}
+				<button type="submit">Delete</button>
+				<select name="maps" size="12" multiple>
+				{{#maps}}
+					<option value="{{this}}">{{this}}</option>
+				{{/maps}}
+				</select>
+				<input type="hidden" name="remove-matches" value="true"/>
+			{{else}}
+				No maps are cached
 			{{/if}}
 				<div class="message"></div>
 			</fieldset>

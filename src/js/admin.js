@@ -3,24 +3,19 @@
 $(function() {
 	handlePost($('#views'));
 	handlePost($('#models'));
+	handlePost($('#maps'));
 
 	function handlePost($form) {
 		$form.submit(function() {
 			var disable = 'select, button';
 			var $select = $form.find('select');
-			var $checkbox = $form.find('input[type=checkbox]');
 			var remove = $form.find('input[name=remove-matches]').val() == 'true';
-
-			var data = {
-				selected: $select.val(),
-				checked: $checkbox.length > 0 ? $checkbox.checked : false
-			};
 
 			$form.find(disable).prop('disabled', true);
 			$form.css('cursor', 'wait');
 			$form.find('.message').hide();
 
-			$.post($form.attr('action'), data, function(response) {
+			$.post($form.attr('action'), { selected: $select.val() }, function(response) {
 				$form.find(disable).prop('disabled', false);
 				$form.css('cursor', 'auto');
 
