@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Jason-Abbott/Trail-Image.svg?branch=master)](https://travis-ci.org/Jason-Abbott/Trail-Image)
+[![Code Climate](https://codeclimate.com/github/Jason-Abbott/Trail-Image/badges/gpa.svg)](https://codeclimate.com/github/Jason-Abbott/Trail-Image)
 
 # Overview
 Frictionless photo blogging platform that leverages existing social media and cloud storage to dynamically generate an engaging and responsive story experience.
