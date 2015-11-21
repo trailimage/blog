@@ -65,7 +65,7 @@ header.page.post-header {
 		@media @mobile {
 			color: darken(@mobileTextColor, 30%);
 			font-size: 18px;
-			top: -30px;
+			top: -18px;
 			right: 10px;
 		}
 	}
@@ -117,7 +117,7 @@ header.page.post-header {
 			text-align: left;
 			// space for navigation
 			padding: 0;
-			margin: 20px 40px;
+			margin: 30px 40px 20px 40px;
 		}
 	}
 
@@ -550,12 +550,16 @@ figure {
 			text-align: right;
 			margin-right: 5px;
 		}
+		&.loading {
+			p { margin-right: 15px; }
+		}
+
 		@media @desktop { display: none; }
 	}
 
 	div.mobile-info {
-		right: 5px;
-		bottom: 5px;
+		right: 0;
+		bottom: 40px;
 		padding: 20px;
 		position: absolute;
 		background-color: rgba(0, 0, 0, 0.5);

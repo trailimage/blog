@@ -11,36 +11,41 @@ $(function() {
 
 	$lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
 	$photos.find('img').on('click', lightBox).lazyload();
-	$photos.find('.mobile-button').on('click', function() {
+	$photos.find('.mobile-button').on('touchstart', function() {
 		var $m = $(this);
 		var $fig = $m.parent();
+		var content = $m.html();
+
+		$m.addClass('loading').html(iconHtml('hourglass', '…'));
 
 		$('<div />')
 			.addClass('mobile-info')
 			.load($fig.data('exif'), function() {
-				$m.hide();
-				$(this).appendTo($fig);
+				var $info = $(this);
+				$m.hide().removeClass('loading').html(content);
+				$info
+					.appendTo($fig)
+					.one('touchstart', function(event) {
+						event.stopPropagation();
+						event.preventDefault();
+						$info.hide();
+						$m.show();
+					});
 			});
-			//.appendTo($fig);
-
 	});
 	$photos.find('.info-button').one('mouseover', function() {
 		var $button = $(this);
-
 		$button
 			.addClass('loading')
-			.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
+			.html(iconHtml('download', 'Loading …'))
 			.load($button.parent().data('exif'), function() {
 				$button.removeClass('loading').addClass('loaded');
 			});
-		// EXIF DIV has a data-url property for loading details
-		//$exif.off('mouseenter click')
-		//	.addClass('loading')
-		//	.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-		//	.load($exif.data('url'), function() {
-		//		$exif.removeClass('loading').addClass('loaded');
-		//	});
 	});
+
+	function iconHtml(name, text) {
+		return '<span class="glyphicon glyphicon-' + name + '"></span><p>' + text + '</p>'
+	}
 
 	/**
 	 * Simple light box for clicked image
@@ -120,20 +125,6 @@ $(function() {
 	function enablePageScroll() {
 		$('html').css('overflow', 'auto');
 		$(window).off('resize');
-	}
-
-	/**
-	 * @param {Boolean} [removeButton] Whether to remove button after showing EXIF
-	 */
-	function showExif(removeButton) {
-		var $button = $(this);
-		var $photo = $button.parent();
-		var url = $photo.data('url');
-
-		$exif.parent().append($('<div>')
-			.addClass('exif')
-			.html('<span class="glyphicon glyphicon-download"></span><p>Loading …</p>')
-			.load($exif.data('url')));
 	}
 
 // - Size classes -------------------------------------------------------------

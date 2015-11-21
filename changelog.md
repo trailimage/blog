@@ -8,11 +8,13 @@
 - Common OAuth2 methods for providers
 - Javascript zoom on post images instead of link to Flickr size
 - Lazy-load GPX files from cloud drive instead of uploading
+- Separate management of cached GeoJSON
 
 ## Bug Fixes
 - Trailing quote wasn't converted to curly quote if preceded by a comma
 - Search page is broken
 - Fail-over cache to in-memory if unable to access web-based provider
+- Re-position map overlays to avoid overlaps
 
 # 1.x
 Initial work.
