@@ -7,9 +7,12 @@ $(function() {
 	function handlePost($form) {
 		$form.submit(function() {
 			var disable = 'select, button';
+			var $select = $form.find('select');
 			var $checkbox = $form.find('input[type=checkbox]');
+			var remove = $form.find('input[name=remove-matches]').val() == 'true';
+
 			var data = {
-				selected: $form.find('select').val(),
+				selected: $select.val(),
 				checked: $checkbox.length > 0 ? $checkbox.checked : false
 			};
 
@@ -22,8 +25,15 @@ $(function() {
 				$form.css('cursor', 'auto');
 
 				if (response.success) {
-					var msg = response.message;
-					window.alert((msg != "") ? 'Success:\n' + msg.replace(/,/g, '\n') : 'No new data found');
+					var slugs = response.message.split(',');
+					if (remove) {
+						for (var i = 0; i < slugs.length; i++) {
+							$select.find('option[value="' + slugs[i] + '"]').remove();
+						}
+					}
+					window.alert((slugs.length > 0 && slugs[0] != "")
+						? 'Success:\n' + slugs.join('\n')
+						: 'No new data found');
 				} else {
 					$form.find('.message').html('Failed').show();
 				}

@@ -7,22 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/admin.css" afterPath="$PROJECT_DIR$/dist/css/admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/css/ti.css" afterPath="$PROJECT_DIR$/dist/css/ti.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/js/admin.js" afterPath="$PROJECT_DIR$/dist/js/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/cache/output-cache.js" afterPath="$PROJECT_DIR$/lib/cache/output-cache.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/admin-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/admin-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/menu-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/menu-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/sitemap-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/sitemap-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/tag-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/tag-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/format.js" afterPath="$PROJECT_DIR$/lib/format.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/log/winston-log.js" afterPath="$PROJECT_DIR$/lib/log/winston-log.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/providers/redis/redis-log.js" afterPath="$PROJECT_DIR$/lib/providers/redis/redis-log.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/template.js" afterPath="$PROJECT_DIR$/lib/template.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/models/library.js" afterPath="$PROJECT_DIR$/lib/models/library.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/regex.js" afterPath="$PROJECT_DIR$/lib/regex.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/admin.js" afterPath="$PROJECT_DIR$/src/js/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/admin.less" afterPath="$PROJECT_DIR$/src/less/admin.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/format.test.js" afterPath="$PROJECT_DIR$/test/format.test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/admin.hbs" afterPath="$PROJECT_DIR$/views/admin.hbs" />
     </list>
     <ignored path="server.iws" />
@@ -44,31 +33,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="admin-controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin-controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21806167">
-              <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="114" column="41" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output-cache.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/cache/output-cache.js">
+      <file leaf-file-name="admin.hbs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/admin.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state vertical-scroll-proportion="-2.0">
+              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/admin.js">
+      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flickr-factory.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.23594266">
+              <caret line="149" column="14" selection-start-line="149" selection-start-column="14" selection-end-line="149" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="regex.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/regex.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="library.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/models/library.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="150" column="7" selection-start-line="150" selection-start-column="7" selection-end-line="150" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -93,7 +112,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/lib/cache/cache-item.js" />
-        <option value="$PROJECT_DIR$/lib/models/library.js" />
         <option value="$PROJECT_DIR$/lib/map/geo-track.js" />
         <option value="$PROJECT_DIR$/lib/models/photo.js" />
         <option value="$PROJECT_DIR$/lib/models/factory-base.js" />
@@ -105,7 +123,6 @@
         <option value="$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js" />
         <option value="$PROJECT_DIR$/views/post.hbs" />
         <option value="$PROJECT_DIR$/lib/models/exif.js" />
-        <option value="$PROJECT_DIR$/lib/regex.js" />
         <option value="$PROJECT_DIR$/src/less/post-page.less" />
         <option value="$PROJECT_DIR$/src/js/post.js" />
         <option value="$PROJECT_DIR$/lib/cache/model-cache.js" />
@@ -135,14 +152,16 @@
         <option value="$PROJECT_DIR$/lib/providers/redis/redis-log.js" />
         <option value="$PROJECT_DIR$/lib/log/winston-log.js" />
         <option value="$PROJECT_DIR$/src/less/admin.less" />
-        <option value="$PROJECT_DIR$/views/admin.hbs" />
-        <option value="$PROJECT_DIR$/src/js/admin.js" />
         <option value="$PROJECT_DIR$/lib/enum.js" />
         <option value="$PROJECT_DIR$/lib/controllers/menu-controller.js" />
         <option value="$PROJECT_DIR$/lib/template.js" />
         <option value="$PROJECT_DIR$/lib/controllers/sitemap-controller.js" />
         <option value="$PROJECT_DIR$/lib/controllers/tag-controller.js" />
         <option value="$PROJECT_DIR$/lib/controllers/admin-controller.js" />
+        <option value="$PROJECT_DIR$/src/js/admin.js" />
+        <option value="$PROJECT_DIR$/views/admin.hbs" />
+        <option value="$PROJECT_DIR$/lib/models/library.js" />
+        <option value="$PROJECT_DIR$/lib/regex.js" />
       </list>
     </option>
   </component>
@@ -730,22 +749,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="206" y="34" width="2056" height="1472" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.32592592" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.67407405" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20636152" sideWeight="0.5027894" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32378003" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17741935" sideWeight="0.41272303" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32660976" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.66769946" sideWeight="0.4972106" order="2" side_tool="false" content_ui="tabs" x="6" y="676" width="1980" height="862" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498753" sideWeight="0.4972847" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="true" show_stripe_button="true" weight="0.66821706" sideWeight="0.4972106" order="2" side_tool="false" content_ui="tabs" x="-3" y="638" width="1998" height="909" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21223858" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.32521185" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18653366" sideWeight="0.6747881" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32378003" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498753" sideWeight="0.4972847" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2680093" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="731" y="528" width="1438" height="627" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26821706" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="731" y="528" width="1438" height="627" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -790,7 +809,6 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix redis auth" />
     <MESSAGE value="app loads again" />
     <MESSAGE value="flickr size field fixes" />
     <MESSAGE value="fix missing view config" />
@@ -815,7 +833,8 @@
     <MESSAGE value="rename code climate file" />
     <MESSAGE value="remove duplicate font files, minify admin script" />
     <MESSAGE value="tweak" />
-    <option name="LAST_COMMIT_MESSAGE" value="tweak" />
+    <MESSAGE value="admin view cache invalidation" />
+    <option name="LAST_COMMIT_MESSAGE" value="admin view cache invalidation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -840,11 +859,16 @@
           <line>368</line>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/lib/controllers/admin-controller.js</url>
+          <line>125</line>
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="301" />
+      <option name="time" value="304" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -853,13 +877,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/regex.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10543131">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/cache/cache-item.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -923,13 +940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.017557861">
-          <caret line="276" column="33" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/factory-base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.017557861">
@@ -941,13 +951,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/regex.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.017557861">
-          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1046,14 +1049,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17478053">
           <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03508772">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,14 +1176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/cache/output-cache.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controllers/menu-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1754386">
@@ -1213,22 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22649223">
-          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controllers/tag-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.5506608">
@@ -1237,10 +1208,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/cache/output-cache.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2183021">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controllers/admin-controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21806167">
-          <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="41" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0">
+          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.054024257">
+          <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/models/library.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="150" column="7" selection-start-line="150" selection-start-column="7" selection-end-line="150" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/regex.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-factory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23594266">
+          <caret line="149" column="14" selection-start-line="149" selection-start-column="14" selection-end-line="149" selection-end-column="14" />
           <folding />
         </state>
       </provider>

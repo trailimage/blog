@@ -16,8 +16,8 @@
 			<legend>Statistics</legend>
 			<ul>
 				<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{config.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
-				<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://www.trailimage.com/&authuser=0'>Google Webmaster</a></li>
-				<li><a href='https://www.bing.com/webmaster/home/dashboard?url=http%3A%2F%2Fwww.trailimage.com%2F'>Bing Webmaster</a></li>
+				<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://www.{{config.domain}}/&authuser=0'>Google Webmaster</a></li>
+				<li><a href='https://www.bing.com/webmaster/home/dashboard?url=http%3A%2F%2Fwww.{{config.domain}}%2F'>Bing Webmaster</a></li>
 				<li><a href='/wwwhisper/admin/'>WWWHisper</a></li>
 				<li><a href='https://www.facebook.com/insights/?sk=wo_{{config.facebook.siteID}}'>Facebook Insights</a></li>
 				<li><a href='https://www.flickr.com/photos/trailimage/stats/'>Flickr Statistics</a></li>
@@ -36,7 +36,7 @@
 	</div>
 
 	<div id="caching" class="column">
-		<h2>Caching</h2>
+		<h2>Cache Contents</h2>
 
 		<form id="models" action="/admin/model/reload">
 			<fieldset id="models">
@@ -44,10 +44,11 @@
 			{{#if models}}
 				<button type="submit">Reload</button>
 				<select name="models" multiple>
-					{{#models}}
-						<option value="{{this}}">{{this}}</option>
-					{{/models}}
+				{{#models}}
+					<option value="{{this}}">{{this}}</option>
+				{{/models}}
 				</select>
+				<input type="hidden" name="remove-matches" value="false"/>
 			{{/if}}
 				<div class="message"></div>
 			</fieldset>
@@ -59,10 +60,11 @@
 			{{#if views}}
 				<button type="submit">Delete</button>
 				<select name="views" size="15" multiple>
-					{{#views}}
-						<option value="{{this}}">{{this}}</option>
-					{{/views}}
+				{{#views}}
+					<option value="{{this}}">{{this}}</option>
+				{{/views}}
 				</select>
+				<input type="hidden" name="remove-matches" value="true"/>
 				<input id="track" type="checkbox" name="include-track"/><label for="track">Also delete map</label>
 			{{else}}
 				No views are cached
@@ -77,12 +79,12 @@
 		<h2>Logs</h2>
 		<table>
 			<tbody>
-			{{#each logs}}
+		{{#each logs}}
 				<tr class='head'><td colspan='2'>{{@key}}</td></tr>
-				{{#this}}
-					<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
-				{{/this}}
-			{{/each}}
+			{{#this}}
+				<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
+			{{/this}}
+		{{/each}}
 			</tbody>
 		</table>
 	</div>
