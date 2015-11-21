@@ -3,10 +3,12 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const format = require('../lib/format.js');
+// http://www.lipsum.com/
+const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 let u;   // undefined
 
 describe('Formatting', ()=> {
-	it('converts date to simple string', ()=> {
+	it('display date as MMM d, YYYY', ()=> {
 		// month value is zero-based
 		expect(format.date(new Date(1973,2,15))).equals('March 15, 1973');
 	});
@@ -17,6 +19,11 @@ describe('Formatting', ()=> {
 		expect(format.hourOfDay(2)).equals('AM 2');
 		expect(format.hourOfDay(14)).equals('PM 2');
 	});
+	it('truncates IPv6 to v4', ()=> {
+		expect(format.IPv6('::1')).equals('127.0.0.1');
+		expect(format.IPv6('192.12.15.3')).equals('192.12.15.3');
+		expect(format.IPv6('::abf2:192.12.15.3')).equals('192.12.15.3');
+	});
 	it.skip('formats timestamp according to ISO 8601', ()=> {
 
 	});
@@ -26,15 +33,20 @@ describe('Formatting', ()=> {
 	it.skip('converts timestamp to Date', ()=> {
 
 	});
-	it.skip('ROT-13 encodes text', ()=> {
 
+	// http://rot13.com/
+	it('ROT-13 encodes text', ()=> {
+		expect(format.rot13('Neque porro quisquam est qui dolorem ipsum')).equals('Ardhr cbeeb dhvfdhnz rfg dhv qbyberz vcfhz');
 	});
-	it.skip('Base 64 encodes text', ()=> {
 
+	// https://www.base64encode.org/
+	it('base 64 encodes text', ()=> {
+		expect(format.encodeBase64('Neque porro quisquam est qui dolorem ipsum')).equals('TmVxdWUgcG9ycm8gcXVpc3F1YW0gZXN0IHF1aSBkb2xvcmVtIGlwc3Vt');
 	});
-	it.skip('Base 64 decodes text', ()=> {
+	it('base 64 decodes text', ()=> {
+		expect(format.decodeBase64('TmVxdWUgcG9ycm8gcXVpc3F1YW0gZXN0IHF1aSBkb2xvcmVtIGlwc3Vt')).equals('Neque porro quisquam est qui dolorem ipsum');
+	});
 
-	});
 	it('adds .remove() method to strings', ()=> {
 		expect('string').to.have.property('remove');
 		expect(('some text').remove('text')).equals('some ');

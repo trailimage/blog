@@ -10,6 +10,31 @@
 	<script src='/js/admin.js' type='text/javascript'></script>
 </head>
 <body>
+	<div class="column" id="reference">
+		<h2>APIs and Statistics</h2>
+		<fieldset id="statistics">
+			<legend>Statistics</legend>
+			<ul>
+				<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{config.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
+				<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://www.trailimage.com/&authuser=0'>Google Webmaster</a></li>
+				<li><a href='https://www.bing.com/webmaster/home/dashboard?url=http%3A%2F%2Fwww.trailimage.com%2F'>Bing Webmaster</a></li>
+				<li><a href='/wwwhisper/admin/'>WWWHisper</a></li>
+				<li><a href='https://www.facebook.com/insights/?sk=wo_{{config.facebook.siteID}}'>Facebook Insights</a></li>
+				<li><a href='https://www.flickr.com/photos/trailimage/stats/'>Flickr Statistics</a></li>
+				<li><a href='http://www.panoramio.com/user/5644534/stats'>Panoramio Statistics</a></li>
+			</ul>
+			<div class="message"></div>
+		</fieldset>
+
+		<fieldset id="api-keys">
+			<legend>API Keys</legend>
+			<ul>
+				<li><a href='https://cloud.google.com/console#/project/{{config.google.projectID}}'>Map API</a></li>
+				<li><a href='https://www.flickr.com/services/apps/{{config.flickr.appID}}/key'>Flickr API</a></li>
+			</ul>
+		</fieldset>
+	</div>
+
 	<div id="caching" class="column">
 		<h2>Caching</h2>
 
@@ -62,30 +87,5 @@
 		</table>
 	</div>
 {{/if}}
-
-	<div class="column" id="reference">
-		<h2>APIs and Statistics</h2>
-		<fieldset id="statistics">
-			<legend>Statistics</legend>
-			<ul>
-				<li><a href='https://www.google.com/analytics/web/#report/visitors-overview/a{{config.google.analyticsID}}w43724061p43759940/'>Google Analytics</a></li>
-				<li><a href='https://www.google.com/webmasters/tools/dashboard?hl=en&siteUrl=http://www.trailimage.com/&authuser=0'>Google Webmaster</a></li>
-				<li><a href='https://www.bing.com/webmaster/home/dashboard?url=http%3A%2F%2Fwww.trailimage.com%2F'>Bing Webmaster</a></li>
-				<li><a href='/wwwhisper/admin/'>WWWHisper</a></li>
-				<li><a href='https://www.facebook.com/insights/?sk=wo_{{config.facebook.siteID}}'>Facebook Insights</a></li>
-				<li><a href='https://www.flickr.com/photos/trailimage/stats/'>Flickr Statistics</a></li>
-				<li><a href='http://www.panoramio.com/user/5644534/stats'>Panoramio Statistics</a></li>
-			</ul>
-			<div class="message"></div>
-		</fieldset>
-
-		<fieldset id="api-keys">
-			<legend>API Keys</legend>
-			<ul>
-				<li><a href='https://cloud.google.com/console#/project/{{config.google.projectID}}'>Map API</a></li>
-				<li><a href='https://www.flickr.com/services/apps/{{config.flickr.appID}}/key'>Flickr API</a></li>
-			</ul>
-		</fieldset>
-	</div>
 </body>
 </html>

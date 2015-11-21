@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @param {string} message
- */
-$.fn.showMessage = function(message) {
-	return this.each(function() { $(this).find('.message').html(message).show(); });
-};
-
 $(function() {
 	handlePost($('#views'));
 	handlePost($('#models'));
@@ -21,9 +14,12 @@ $(function() {
 			};
 
 			$form.find(disable).prop('disabled', true);
+			$form.css('cursor', 'wait');
+			$form.find('.message').hide();
 
 			$.post($form.attr('action'), data, function(response) {
 				$form.find(disable).prop('disabled', false);
+				$form.css('cursor', 'auto');
 
 				if (response.success) {
 					var msg = response.message;
