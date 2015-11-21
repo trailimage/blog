@@ -1,11 +1,10 @@
 {
   "name": "trail-image",
   "description": "Trail Image server",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "author": {
-	"name": "Jason Abbott",
-	"email": "dev@trailimage.com"
+	"name": "Jason Abbott"
   },
   "engines": {
 	"node": ">=5.0.0"

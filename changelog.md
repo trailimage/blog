@@ -1,3 +1,10 @@
+# 2.0.1
+## Features
+- Show progress while GPX file is downloaded and parsed
+
+## Bug Fixes
+- Can't delete cached map for post series
+
 # 2.0.0
 ## Features
 - Upgrade engine dependency to Node 5.x from 4.x
@@ -6,6 +13,7 @@
 - Add semantic attributes to HTML
 - Create classes to support GeoJSON structures
 - Common OAuth2 methods for providers
+- Upgrade to jQuery 2.x
 - Javascript zoom on post images instead of link to Flickr size
 - Lazy-load GPX files from cloud drive instead of uploading
 - Separate management of cached GeoJSON
