@@ -20,7 +20,6 @@ function createWebService() {
 	log.info('Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
-	applyMiddleware(app);
 
 	if (config.provider.needsAuth) {
 		// must authenticate before normal routes are available
@@ -29,6 +28,8 @@ function createWebService() {
 		log.info('Listening for authentication on port %d', port);
 	} else {
 		const Library = require('./lib/models/library.js');
+
+		applyMiddleware(app);
 
 		Library.load(() => {
 			// library must be loaded before routes are defined
@@ -111,7 +112,7 @@ function injectDependencies() {
 	const OAuthOptions = require('./lib/auth/oauth-options.js');
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleMap = require('./lib/providers/google/google-gpx.js');
+	const GoogleGPX = require('./lib/providers/google/google-gpx.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
@@ -148,7 +149,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	config.provider.map = new GoogleMap({
+	config.provider.map = new GoogleGPX({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
