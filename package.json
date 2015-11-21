@@ -11,8 +11,8 @@
 	"node": ">=5.0.0"
   },
   "scripts": {
-	"webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o src/fonts/webfont.css",
-	"mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Lora:400,700,400italic|Orbitron:700'\" --css-rel=./fonts -o src/fonts/mapfont.css"
+	"webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+	"mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
   },
   "dependencies": {
 	"body-parser": "^1.10",

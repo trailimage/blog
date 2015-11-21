@@ -7,44 +7,7 @@
 	<link href='/img/favicon.ico' rel='shortcut icon'/>
 	<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
 	<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js' type='text/javascript'></script>
-	<script type='text/javascript'>
-		/**
-		 * @param {string} message
-		 */
-		$.fn.showMessage = function(message) {
-			return this.each(function() { $(this).find('.message').html(message).show(); });
-		};
-
-		$(document).ready(function() {
-			handlePost($('#views'));
-			handlePost($('#models'));
-		});
-
-		function handlePost($form) {
-			$form.submit(function() {
-				var disable = 'select, button';
-				var $checkbox = $form.find('input[type=checkbox]');
-				var data = {
-					selected: $form.find('select').val(),
-					checked: $checkbox.length > 0 ? $checkbox.checked : false
-				};
-
-				$form.find(disable).prop('disabled', true);
-
-				$.post($form.attr('action'), data, function(response) {
-					$form.find(disable).prop('disabled', false);
-
-					if (response.success) {
-						var msg = response.message;
-						window.alert((msg != "") ? 'Success:\n' + msg.replace(/,/g, '\n') : 'No new data found');
-					} else {
-						$form.find('.message').html('Failed').show();
-					}
-				});
-				return false;
-			});
-		}
-	</script>
+	<script src='/js/admin.js' type='text/javascript'></script>
 </head>
 <body>
 	<div id="caching" class="column">

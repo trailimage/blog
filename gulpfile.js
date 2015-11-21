@@ -24,34 +24,25 @@ gulp.task('less', ['less-main','less-map','less-admin']);
 /**
  * Combine web fonts and transpile LESS
  * @param {String} name CSS file name
- * @param {String} [fontFile]
+ * @param {String} [fontFile] File created by npm webfont-dl script
  * @returns {jQuery.Promise}
  */
 function LESS(name, fontFile) {
 	if (fontFile === undefined) { fontFile = 'webfont'; }
 
 	return merge(
-		gulp.src('./src/fonts/' + fontFile + '.css'),
+		gulp.src('./dist/fonts/' + fontFile + '.css'),
 		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
 	)
-		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0	}))
+		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0 }))
 		.pipe(concat(name + '.css'))
 		.pipe(gulp.dest(dist + 'css'));
 }
 
-// copy font files
-gulp.task('fonts', ()=> {
-	return merge(
-		gulp.src(bsPath + 'fonts/*.*'),
-		gulp.src('./src/fonts/!(webfont.css)')
-	)
-		.pipe(gulp.dest(dist + 'fonts'))
-});
-
-gulp.task('script', ['script-post','script-other']);
+gulp.task('script', ['script-post','script-other','script-admin']);
 
 gulp.task('script-other', ()=> {
-	return gulp.src(jsPath + '!(jquery.lazyload.js|post.js)')
+	return gulp.src(jsPath + '!(jquery.lazyload.js|post.js|admin.js)')
 		.pipe(uglify())
 		.pipe(gulp.dest(dist + 'js'));
 });
@@ -59,6 +50,12 @@ gulp.task('script-other', ()=> {
 gulp.task('script-post', ()=> {
 	return gulp.src([jsPath + 'jquery.lazyload.js', jsPath + 'post.js'])
 		.pipe(concat('post.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest(dist + 'js'));
+});
+
+gulp.task('script-admin', ()=> {
+	return gulp.src([jsPath + 'admin.js'])
 		.pipe(uglify())
 		.pipe(gulp.dest(dist + 'js'));
 });
