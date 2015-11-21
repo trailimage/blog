@@ -2,18 +2,16 @@ engines:
   rubocop:
     enabled: false
   golint:
-    enabled: true
+    enabled: false
   gofmt:
-    enabled: true
-  eslint:
+    enabled: fale
+  eslint:s
     enabled: true
   csslint:
     enabled: true
 ratings:
    paths:
-     - src/**
      - lib/**
-     - "**.js"
 exclude_paths:
   - test/**/*
   - api/**/*
