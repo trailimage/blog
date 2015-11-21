@@ -31,7 +31,7 @@ function LESS(name, fontFile) {
 	if (fontFile === undefined) { fontFile = 'webfont'; }
 
 	return merge(
-		gulp.src('./dist/fonts/' + fontFile + '.css'),
+		gulp.src(dist + 'fonts/' + fontFile + '.css'),
 		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
 	)
 		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0 }))
