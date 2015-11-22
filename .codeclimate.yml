@@ -1,7 +1,10 @@
+# http://docs.codeclimate.com/article/296-engines-available-engines
 engines:
   eslint:
     enabled: true
   csslint:
+    enabled: true
+  nodesecurity:
     enabled: true
 ratings:
   paths:
@@ -11,4 +14,5 @@ exclude_paths:
   - api/**/*
   - dist/**/*
   - temp/**/*
+  - views/**/*
   - .idea/**/*
