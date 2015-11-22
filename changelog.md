@@ -1,3 +1,7 @@
+# 2.1.0
+## Features
+- Download post as PDF
+
 # 2.0.1
 ## Features
 - Show progress while GPX file is downloaded and parsed
@@ -27,4 +31,4 @@
 - Re-position map overlays to avoid overlaps
 
 # 1.x
-Initial work.
+A few years of work
