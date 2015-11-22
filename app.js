@@ -7,6 +7,9 @@
 const is = require('./lib/is.js');
 const config = require('./lib/config.js');
 const Express = require('express');
+const npm = require('./package.json');
+
+config.repoUrl = npm.repository.url;
 
 injectDependencies();
 createWebService();
