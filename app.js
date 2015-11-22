@@ -121,7 +121,7 @@ function injectDependencies() {
 		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
 	}
 
-	if (true || config.isProduction) {
+	if (config.isProduction) {
 		// replace default log provider with Redis
 		const RedisLog = require('./lib/providers/redis/redis-log.js');
 		config.provider.log = new RedisLog(redisUrl);

@@ -1,9 +1,11 @@
 # 2.0.1
 ## Features
 - Show progress while GPX file is downloaded and parsed
+- Change footer to show GitHub version
 
 ## Bug Fixes
 - Can't delete cached map for post series
+- Remove debug code that was forcing Redis cache
 
 # 2.0.0
 ## Features
