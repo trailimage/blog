@@ -6,10 +6,13 @@
 ## Features
 - Show progress while GPX file is downloaded and parsed
 - Change footer to show GitHub version
+- Tweak map track and point colors
 
 ## Bug Fixes
 - Can't delete cached map for post series
 - Remove debug code that was forcing Redis cache
+- Don't sort null arary in admin view
+- Remove IDE workspace settings from source control
 
 # 2.0.0
 ## Features
