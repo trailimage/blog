@@ -7,10 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-area.js" afterPath="$PROJECT_DIR$/lib/print/print-area.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-book.js" afterPath="$PROJECT_DIR$/lib/print/print-book.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-caption.js" afterPath="$PROJECT_DIR$/lib/print/print-caption.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-image.js" afterPath="$PROJECT_DIR$/lib/print/print-image.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-page.js" afterPath="$PROJECT_DIR$/lib/print/print-page.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,20 +29,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="print-controller.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="print-controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/controllers/print-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.17741935">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="print-book.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="print-book.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28225806">
+            <state vertical-scroll-proportion="0.0">
               <caret line="107" column="6" selection-start-line="107" selection-start-column="6" selection-end-line="107" selection-end-column="6" />
               <folding />
             </state>
@@ -55,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
+              <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -75,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
+              <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -171,10 +169,10 @@
         <option value="$PROJECT_DIR$/lib/config.js" />
         <option value="$PROJECT_DIR$/lib/print/print-image-well.js" />
         <option value="$PROJECT_DIR$/lib/controllers/print-controller.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-page.js" />
         <option value="$PROJECT_DIR$/lib/print/print-area.js" />
         <option value="$PROJECT_DIR$/lib/print/print-image.js" />
         <option value="$PROJECT_DIR$/lib/print/print-caption.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-page.js" />
         <option value="$PROJECT_DIR$/lib/print/print-book.js" />
       </list>
     </option>
@@ -515,12 +513,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00129" summary="oauth checkpoint">
-      <created>1446854603243</created>
-      <option name="number" value="00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1446854603243</updated>
-    </task>
     <task id="LOCAL-00130" summary="final oauth fixes and photo provider fixes">
       <created>1447102483305</created>
       <option name="number" value="00130" />
@@ -809,7 +801,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448315222123</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary="pdf checkpoint">
+      <created>1448317971927</created>
+      <option name="number" value="00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1448317971927</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1302,14 +1300,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/print-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/print/print-area.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1326,22 +1316,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/print/print-image.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1350,10 +1324,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28225806">
+        <state vertical-scroll-proportion="0.0">
           <caret line="107" column="6" selection-start-line="107" selection-start-column="6" selection-end-line="107" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers/print-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17741935">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
           <folding />
         </state>
       </provider>
