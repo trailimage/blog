@@ -7,9 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/print-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/print-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-area.js" afterPath="$PROJECT_DIR$/lib/print/print-area.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-book.js" afterPath="$PROJECT_DIR$/lib/print/print-book.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-caption.js" afterPath="$PROJECT_DIR$/lib/print/print-caption.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-image.js" afterPath="$PROJECT_DIR$/lib/print/print-image.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-page.js" afterPath="$PROJECT_DIR$/lib/print/print-page.js" />
     </list>
     <ignored path="server.iws" />
@@ -44,8 +45,8 @@
       <file leaf-file-name="print-book.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12672812">
-              <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+            <state vertical-scroll-proportion="3.0668204">
+              <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -55,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
+              <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -65,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
+              <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -75,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/lib/print/print-image.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+              <caret line="48" column="3" selection-start-line="48" selection-start-column="3" selection-end-line="50" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -150,12 +151,12 @@
         <option value="$PROJECT_DIR$/test/providers/google/google-file.test.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
         <option value="$PROJECT_DIR$/lib/print/print-image-well.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-area.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-image.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-book.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-caption.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-page.js" />
         <option value="$PROJECT_DIR$/lib/controllers/print-controller.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-area.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-caption.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-image.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-page.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-book.js" />
       </list>
     </option>
   </component>
@@ -495,12 +496,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00127" summary="oauth checkpoint">
-      <created>1446846519794</created>
-      <option name="number" value="00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1446846519794</updated>
-    </task>
     <task id="LOCAL-00128" summary="oauth checkpoint">
       <created>1446853537276</created>
       <option name="number" value="00128" />
@@ -789,7 +784,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448312263061</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="pdf checkpoint">
+      <created>1448313184720</created>
+      <option name="number" value="00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1448313184720</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1289,38 +1290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-area.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-image.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="4" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controllers/print-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1329,10 +1298,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-area.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08755761">
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-image.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="3" selection-start-line="48" selection-start-column="3" selection-end-line="50" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="25" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12672812">
-          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+        <state vertical-scroll-proportion="3.0668204">
+          <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
           <folding />
         </state>
       </provider>
