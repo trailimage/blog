@@ -6,6 +6,7 @@
 ## Bug Fixes
 - Can't delete cached map for post series
 - Remove debug code that was forcing Redis cache
+- Don't sort null arary in admin view
 
 # 2.0.0
 ## Features
