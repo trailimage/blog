@@ -2,7 +2,7 @@
 
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const google = require('../../../lib/providers/google/google-gpx.js');
+const google = require('../../../lib/providers/google/google-file.js');
 
 describe('Google GPX Provider', ()=> {
 	it.skip('retrieves GPX file from a Google Drive folder', ()=> {
