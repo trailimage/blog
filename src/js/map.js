@@ -40,7 +40,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 			icon: '/img/orange-marker.png',
 			clickable: (feature.getGeometry() instanceof google.maps.Data.Point),
 			strokeWeight: 3,
-			strokeColor: '#08f',
+			strokeColor: '#06f',
 			strokeOpacity: 0.7
 		};
 	});
@@ -81,6 +81,8 @@ google.maps.event.addDomListener(window, 'load', function() {
 
 			var $summary = $('#summary');
 			var $gpxLink = $('#gpx-download');
+			// give map tiles an extra moment to load
+			window.setTimeout(function() { $('#map-wait').remove(); }, 700);
 
 			if (ti.miles > 0) {
 				// implies a track exist

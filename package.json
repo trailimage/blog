@@ -1,12 +1,12 @@
 {
   "name": "trail-image",
   "description": "Trail Image server",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "author": {
-	"name": "Jason Abbott",
-	"email": "dev@trailimage.com"
+	"name": "Jason Abbott"
   },
+  "license": "MIT",
   "engines": {
 	"node": ">=5.0.0"
   },
@@ -24,7 +24,6 @@
 	"feed": "git+http://github.com/jpmonette/feed.git#master",
 	"googleapis": "^2.0.0",
 	"oauth": "^0.9.0",
-	"pdfkit": "*",
 	"redis": "^2.0.0",
 	"request": "^2.64.0",
 	"uglify-js": "^2.4.0",

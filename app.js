@@ -7,6 +7,9 @@
 const is = require('./lib/is.js');
 const config = require('./lib/config.js');
 const Express = require('express');
+const npm = require('./package.json');
+
+config.repoUrl = npm.repository.url;
 
 injectDependencies();
 createWebService();
@@ -121,7 +124,7 @@ function injectDependencies() {
 		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
 	}
 
-	if (true || config.isProduction) {
+	if (config.isProduction) {
 		// replace default log provider with Redis
 		const RedisLog = require('./lib/providers/redis/redis-log.js');
 		config.provider.log = new RedisLog(redisUrl);
