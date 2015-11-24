@@ -13,6 +13,7 @@
 - Remove debug code that was forcing Redis cache
 - Don't sort null arary in admin view
 - Remove IDE workspace settings from source control
+- Correct error logging for GPX download
 
 # 2.0.0
 ## Features
