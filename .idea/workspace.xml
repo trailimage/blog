@@ -4,20 +4,24 @@
     <option name="SCOPE_TYPE" value="2" />
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/lib/print/shape-element.js" line="5" mnemonic="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="pdf checkpoint">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/print/photo-page.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/print/text-element.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+    <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/print/element-group.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/print/rectangle-element.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/print/shape-element.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/print-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/print-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/cover-page.js" afterPath="$PROJECT_DIR$/lib/print/cover-page.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/image-element.js" afterPath="$PROJECT_DIR$/lib/print/image-element.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/photo-page.js" afterPath="$PROJECT_DIR$/lib/print/photo-page.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-book.js" afterPath="$PROJECT_DIR$/lib/print/print-book.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-caption.js" afterPath="$PROJECT_DIR$/lib/print/print-caption.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-image-well.js" afterPath="$PROJECT_DIR$/lib/print/print-image-well.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-element.js" afterPath="$PROJECT_DIR$/lib/print/print-element.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/print-page.js" afterPath="$PROJECT_DIR$/lib/print/print-page.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/print/print-area.js" afterPath="$PROJECT_DIR$/lib/print/print-element.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/print/print-cover.js" afterPath="$PROJECT_DIR$/lib/print/cover-page.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/print/print-footnotes.js" afterPath="$PROJECT_DIR$/lib/print/footnote-element.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/print/print-image.js" afterPath="$PROJECT_DIR$/lib/print/image-element.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/print/print-index.js" afterPath="$PROJECT_DIR$/lib/print/index-page.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/print/text-element.js" afterPath="$PROJECT_DIR$/lib/print/text-element.js" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,41 +42,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="print-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/controllers/print-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="print-book.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+              <caret line="65" column="75" selection-start-line="65" selection-start-column="75" selection-end-line="65" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="text-element.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/print/text-element.js">
+      <file leaf-file-name="print-caption.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="47" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
+              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="print-page.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="print-page.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19282869">
-              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -82,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/lib/print/photo-page.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -92,17 +86,17 @@
         <entry file="file://$PROJECT_DIR$/lib/print/cover-page.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="image-element.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="image-element.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/print/image-element.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.12280702">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,9 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/js/map.js" />
-        <option value="$PROJECT_DIR$/lib/log/log-base.js" />
-        <option value="$PROJECT_DIR$/lib/providers/redis/redis-log.js" />
         <option value="$PROJECT_DIR$/lib/log/winston-log.js" />
         <option value="$PROJECT_DIR$/lib/controllers/post-controller.js" />
         <option value="$PROJECT_DIR$/src/less/admin.less" />
@@ -168,21 +159,24 @@
         <option value="$PROJECT_DIR$/test/providers/google/google-file.test.js" />
         <option value="$PROJECT_DIR$/lib/config.js" />
         <option value="$PROJECT_DIR$/lib/print/print-image-well.js" />
-        <option value="$PROJECT_DIR$/lib/controllers/print-controller.js" />
         <option value="$PROJECT_DIR$/lib/print/print-area.js" />
         <option value="$PROJECT_DIR$/lib/print/print-image.js" />
         <option value="$PROJECT_DIR$/lib/print/print-index.js" />
         <option value="$PROJECT_DIR$/lib/print/print-cover.js" />
         <option value="$PROJECT_DIR$/lib/print/index-page.js" />
         <option value="$PROJECT_DIR$/lib/print/footnote-element.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-book.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-caption.js" />
-        <option value="$PROJECT_DIR$/lib/print/print-element.js" />
-        <option value="$PROJECT_DIR$/lib/print/text-element.js" />
-        <option value="$PROJECT_DIR$/lib/print/cover-page.js" />
-        <option value="$PROJECT_DIR$/lib/print/image-element.js" />
+        <option value="$PROJECT_DIR$/lib/controllers/print-controller.js" />
         <option value="$PROJECT_DIR$/lib/print/photo-page.js" />
+        <option value="$PROJECT_DIR$/lib/print/text-element.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-book.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-element.js" />
+        <option value="$PROJECT_DIR$/lib/print/cover-page.js" />
+        <option value="$PROJECT_DIR$/lib/print/rectangle-element.js" />
+        <option value="$PROJECT_DIR$/lib/print/shape-element.js" />
+        <option value="$PROJECT_DIR$/lib/print/image-element.js" />
+        <option value="$PROJECT_DIR$/lib/print/print-caption.js" />
         <option value="$PROJECT_DIR$/lib/print/print-page.js" />
+        <option value="$PROJECT_DIR$/lib/print/element-group.js" />
       </list>
     </option>
   </component>
@@ -254,8 +248,8 @@
     <data>D:\dev\Trail Image\node_modules\mocha</data>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="139" />
-    <option name="y" value="38" />
+    <option name="x" value="193" />
+    <option name="y" value="30" />
     <option name="width" value="2056" />
     <option name="height" value="1473" />
   </component>
@@ -829,21 +823,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="139" y="38" width="2056" height="1473" extended-state="0" />
+    <frame x="193" y="30" width="2056" height="1473" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17755611" sideWeight="0.3637771" order="2" side_tool="true" content_ui="tabs" x="1079" y="746" width="998" height="413" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17755611" sideWeight="0.6362229" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20604183" sideWeight="0.5027894" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32198143" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32145622" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1780243" sideWeight="0.28460687" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3268784" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26547986" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="1079" y="734" width="875" height="526" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -953,27 +947,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/providers/photo-base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1889401">
-          <caret line="86" column="6" selection-start-line="86" selection-start-column="6" selection-end-line="86" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/flickr/flickr-photo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="9" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.548387">
-          <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/less/admin.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.026284348">
@@ -1262,34 +1235,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.01752988">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-element.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29800797">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controllers/print-controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.05263158">
+          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1297,23 +1246,55 @@
     <entry file="file://$PROJECT_DIR$/lib/print/cover-page.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/image-element.js">
+    <entry file="file://$PROJECT_DIR$/lib/print/print-element.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.3859649">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/print/text-element.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1754386">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/shape-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10526316">
+          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/rectangle-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14035088">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="47" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/element-group.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10526316">
+          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1321,15 +1302,31 @@
     <entry file="file://$PROJECT_DIR$/lib/print/photo-page.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/print/print-page.js">
+    <entry file="file://$PROJECT_DIR$/lib/print/print-book.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19282869">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="75" selection-start-line="65" selection-start-column="75" selection-end-line="65" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/print-caption.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/print/image-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12280702">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
