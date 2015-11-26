@@ -28,21 +28,25 @@
 			"scale": "fill"
 		},
 		"coverTitle": {
+			"inherit": "defaultText",
 			"font": "heading",
 			"fontSize": 40,
 			"top": 1
 		},
 		"coverByLine": {
+			"inherit": "defaultText",
 			"font": "sanSerif",
 			"fontSize": 15
 		},
 		"coverDate": {
+			"inherit": "defaultText",
 			"font": "sanSerif"
 		},
 		"coverSummary": {
+			"inherit": "defaultText",
 			"width": 4,
 			"marginTop": 1
-		}
+		},
 		"coverOverlay": {
 			"top": 0,
 			"bottom": 0,
@@ -53,9 +57,11 @@
 			"margin": 1
 		},
 		"copyrightText": {
+			"inherit": "defaultText",
 			"marginBottom": 0.25
 		},
 		"editionText": {
+			"inherit": "defaultText",
 			"fontSize": 14
 		},
 		"photoWell": {
@@ -65,12 +71,14 @@
 			"minWidth": 2
 		},
 		"pageNumber": {
+			"inherit": "defaultText",
 			"font": "sanSerif",
 			"fontSize": 10,
 			"right": 0.25,
 			"bottom": 0.25
 		},
 		"pageHeading": {
+			"inherit": "defaultText",
 			"font": "sanSerif",
 			"fontSize": 20
 		}
