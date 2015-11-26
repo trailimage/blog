@@ -1,0 +1,73 @@
+{
+	"settings": {
+		"fonts": {
+			"heading": "dist/fonts/oswald-641e7f512fab8283a2a459253c6e3a148216997e.ttf",
+			"serif": "dist/fonts/lora-101b41c4d985d4e5b5addbed77bbedfc1d55d89a.ttf",
+			"sanSerif": "dist/fonts/droidsans-ea469d63bf279daeb58f104d71e6e0f0d62f93af.ttf"
+		},
+		"colors": {
+			"black": [0, 0, 0],
+			"white": [255, 255, 255]
+		}
+	},
+	"rules": {
+		"defaultText": {
+			"font": "serif",
+			"fontSize": 12,
+			"color": "black",
+			"margin": 0.25
+		},
+		"defaultPage": {
+			"margin": 0
+		},
+		"coverPage": {
+			"margin": 1
+		},
+		"coverTitle": {
+			"font": "heading",
+			"fontSize": 40,
+			"top": 1
+		},
+		"coverByLine": {
+			"font": "sanSerif",
+			"fontSize": 15
+		},
+		"coverDate": {
+			"font": "sanSerif"
+		},
+		"coverSummary": {
+			"width": 4,
+			"marginTop": 1
+		}
+		"coverOverlay": {
+			"top": 0,
+			"width": 5,
+			"color": [255, 255, 255, 0.7]
+		},
+		"copyrightPage": {
+			"margin": 1
+		},
+		"copyrightText": {
+			"marginBottom": 0.25
+		},
+		"editionText": {
+			"fontSize": 14
+		},
+		"photoWell": {
+			"backgroundColor": "black"
+		},
+		"caption": {
+			"minWidth": 2
+		},
+		"pageNumber": {
+			"font": "sanSerif",
+			"fontSize": 10,
+			"right": 0.25,
+			"bottom": 0.25
+		},
+		"pageHeading": {
+			"font": "sanSerif",
+			"fontSize": 20
+		}
+	}
+}
