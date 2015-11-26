@@ -18,9 +18,12 @@
 			"margin": 0.25
 		},
 		"defaultPage": {
-			"margin": 0
+			"margin": 0,
+			"width": 11,
+			"height": 8.5
 		},
 		"coverPage": {
+			"inherit": "defaultPage",
 			"margin": 1,
 			"alignContent": "center"
 		},
@@ -54,6 +57,7 @@
 			"color": [255, 255, 255, 0.7]
 		},
 		"copyrightPage": {
+			"inherit": "defaultPage",
 			"margin": 1
 		},
 		"copyrightText": {
