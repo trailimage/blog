@@ -11,194 +11,85 @@ FeatureSet.prototype.id = null;
  */
 FeatureSet.prototype.title = null;
 
-// Post -----------------------------------------------------------------------
+
+PDFStyleConfig = {};
 
 /**
- * @constructor
+ * @type {PDFStyleSettings}
  */
-Post = {};
+PDFStyleConfig.prototype.settings = null;
 
 /**
- * @type {String}
+ * @type {PDFStyleRuleList}
  */
-Post.prototype.id;
+PDFStyleConfig.prototype.rules = null;
+
+PDFStyleSettings = {};
 
 /**
- * @type {String}
+ * @type {Object.<String>}
  */
-Post.prototype.slug;
+PDFStyleSettings.prototype.fonts = null;
 
 /**
- * @type {String}
+ * @type {Object.<Number[]>}
  */
-Post.prototype.seriesSlug;
+PDFStyleSettings.prototype.colors = null;
+
+
+PDFStyleRuleList = {};
 
 /**
- * @type {String}
+ * @type {Object.<PDFStyleRule>}
  */
-Post.prototype.partSlug;
-
-/**
- * @type {String}
- */
-Post.prototype.title;
-
-/**
- * @type {String}
- */
-Post.prototype.subTitle;
+PDFStyleRule = {};
 
 /**
  * @type {String}
  */
-Post.prototype.dateTaken;
+PDFStyleRule.prototype.align = null;
 
 /**
- * @type {Date}
+ * @type {String|Number[]}
  */
-Post.prototype.createdOn;
-
-/**
- * @type {Date}
- */
-Post.prototype.updatedOn;
+PDFStyleRule.prototype.color = null;
 
 /**
  * @type {String}
  */
-Post.prototype.icon;
+PDFStyleRule.prototype.font = null;
 
 /**
- * @type {Flickr.PhotoSummary}
+ * @type {Number}
  */
-Post.prototype.thumb;
+PDFStyleRule.prototype.fontSize = NaN;
 
 /**
- * @type {String}
+ * @type {Number}
  */
-Post.prototype.bigThumb;
+PDFStyleRule.prototype.height = NaN;
 
 /**
- * @type {String}
+ * @type {Number}
  */
-Post.prototype.smallThumb;
+PDFStyleRule.prototype.margin = NaN;
 
 /**
- * @type {Integer}
+ * @type {Number}
  */
-Post.prototype.part;
+PDFStyleRule.prototype.minHeight = NaN;
 
 /**
- * @type {Integer}
+ * @type {Number}
  */
-Post.prototype.totalParts;
-
-/**
- * @type {Boolean}
- */
-Post.prototype.isPartial;
-
-/**
- * @type {Boolean}
- */
-Post.prototype.previousIsPart;
-
-/**
- * @type {Boolean}
- */
-Post.prototype.nextIsPart;
+PDFStyleRule.prototype.minWidth = NaN;
 
 /**
  * @type {String}
  */
-Post.prototype.description;
+PDFStyleRule.prototype.scale = null;
 
 /**
- * @type {Boolean}
+ * @type {Number}
  */
-Post.prototype.chronological;
-
-/**
- * @type {Boolean}
- */
-Post.prototype.isSeriesStart;
-
-/**
- * @type {Post}
- */
-Post.prototype.next;
-
-/**
- * @type {Post}
- */
-Post.prototype.previous;
-
-/**
- * @type {Boolean}
- */
-Post.prototype.photosLoaded;
-
-/**
- * @type {Integer}
- */
-Post.prototype.photoCount;
-
-/**
- * @type {String}
- */
-Post.prototype.photoCoordinates;
-
-// Photo Tag ------------------------------------------------------------------
-
-/**
- * @constructor
- */
-var PhotoTag = {};
-
-/**
- * @type {String}
- */
-PhotoTag.prototype.key;
-
-/**
- * @type {function} callback
- */
-PhotoTag.prototype.reload = function(callback) {};
-
-/**
- * @type {function} callback
- */
-PhotoTag.prototype.load = function(callback) {};
-
-
-// Library --------------------------------------------------------------------
-
-/**
- * @constructor
- */
-Library = {};
-
-/**
- * @type {String}
- */
-Library.prototype.key;
-
-/**
- * @type {Map.<String, PostTag>}
- */
-Library.prototype.tags;
-
-/**
- * @type {Map.<Number, Post>}
- */
-Library.prototype.posts;
-
-/**
- * @type {Map.<String, String>}
- */
-Library.prototype.photoTags;
-
-/**
- * @type {boolean}
- */
-Library.prototype.postInfoLoaded;
+PDFStyleRule.prototype.width = NaN;
