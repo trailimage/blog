@@ -1,3 +1,7 @@
+# 2.0.2
+## Bug Fixes
+- 
+
 # 2.0.1
 ## Features
 - Show progress while GPX file is downloaded and parsed
