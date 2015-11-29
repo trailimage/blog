@@ -1,3 +1,7 @@
+# 2.0.3
+## Bug Fixes
+- Unable to refresh library or photo tags
+
 # 2.0.2
 ## Features
 - Minor layout tweaks
