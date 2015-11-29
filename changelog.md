@@ -2,6 +2,14 @@
 ## Features
 - Download post as PDF
 
+# 2.0.2
+## Features
+- Minor layout tweaks
+
+## Bug Fixes
+- Unable to reload cached GPX track
+- Remove media summary from post description
+
 # 2.0.1
 ## Features
 - Show progress while GPX file is downloaded and parsed
