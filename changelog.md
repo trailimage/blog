@@ -2,21 +2,29 @@
 ## Features
 - Download post as PDF
 
+# 2.0.4
+### Bug Fixes
+- Post descriptions not refreshing when cach is invalidated
+
+# 2.0.3
+### Bug Fixes
+- Unable to refresh library or photo tags
+
 # 2.0.2
-## Features
+### Features
 - Minor layout tweaks
 
-## Bug Fixes
+### Bug Fixes
 - Unable to reload cached GPX track
 - Remove media summary from post description
 
 # 2.0.1
-## Features
+### Features
 - Show progress while GPX file is downloaded and parsed
 - Change footer to show GitHub version
 - Tweak map track and point colors
 
-## Bug Fixes
+### Bug Fixes
 - Can't delete cached map for post series
 - Remove debug code that was forcing Redis cache
 - Don't sort null arary in admin view
@@ -24,7 +32,7 @@
 - Correct error logging for GPX download
 
 # 2.0.0
-## Features
+### Features
 - Upgrade engine dependency to Node 5.x from 4.x
 - Add unit tests (partial)
 - Refactor data modules as dependency injected providers
@@ -36,7 +44,7 @@
 - Lazy-load GPX files from cloud drive instead of uploading
 - Separate management of cached GeoJSON
 
-## Bug Fixes
+### Bug Fixes
 - Trailing quote wasn't converted to curly quote if preceded by a comma
 - Search page is broken
 - Fail-over cache to in-memory if unable to access web-based provider
