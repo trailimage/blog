@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Trail Image" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="$PROJECT_DIR$/../../apps/nodejs/node" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+    <method />
+  </configuration>
+</component>
