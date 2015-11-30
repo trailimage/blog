@@ -78,6 +78,8 @@
 			"inherit": "defaultText",
 			"font": "sanSerif",
 			"fontSize": 10,
+			"width": 0.5,
+			"alignContent": "right",
 			"right": 0.25,
 			"bottom": 0.25
 		},
