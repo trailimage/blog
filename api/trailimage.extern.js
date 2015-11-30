@@ -36,12 +36,22 @@ PDFStyleSettings.prototype.fonts = null;
  */
 PDFStyleSettings.prototype.colors = null;
 
-
-PDFStyleRuleList = {};
-
 /**
  * @type {Object.<PDFStyleRule>}
  */
+PDFStyleRuleList = {};
+
+/**
+ * @type {PDFStyleRule}
+ */
+PDFStyleRuleList.prototype.defaultPage = null;
+
+/**
+ * @type {PDFStyleRule}
+ */
+PDFStyleRuleList.prototype.defaultText = null;
+
+
 PDFStyleRule = {};
 
 /**
@@ -73,6 +83,26 @@ PDFStyleRule.prototype.height = NaN;
  * @type {Number}
  */
 PDFStyleRule.prototype.margin = NaN;
+
+/**
+ * @type {Number}
+ */
+PDFStyleRule.prototype.marginTop = NaN;
+
+/**
+ * @type {Number}
+ */
+PDFStyleRule.prototype.marginRight = NaN;
+
+/**
+ * @type {Number}
+ */
+PDFStyleRule.prototype.marginLeft = NaN;
+
+/**
+ * @type {Number}
+ */
+PDFStyleRule.prototype.marginBottom = NaN;
 
 /**
  * @type {Number}
