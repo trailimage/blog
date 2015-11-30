@@ -7,12 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5c011ae3-b8a0-479e-8a3e-ff1d3d58e898" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/trailimage.extern.js" afterPath="$PROJECT_DIR$/api/trailimage.extern.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controllers/pdf-controller.js" afterPath="$PROJECT_DIR$/lib/controllers/pdf-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/pdf/element-group.js" afterPath="$PROJECT_DIR$/lib/pdf/element-group.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/pdf/elements/image-element.js" afterPath="$PROJECT_DIR$/lib/pdf/elements/image-element.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/pdf/elements/pdf-element.js" afterPath="$PROJECT_DIR$/lib/pdf/elements/pdf-element.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/pdf/pages/pdf-page.js" afterPath="$PROJECT_DIR$/lib/pdf/pages/pdf-page.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/pdf/elements/text-element.js" afterPath="$PROJECT_DIR$/lib/pdf/elements/text-element.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/pdf/pdf-style.js" afterPath="$PROJECT_DIR$/lib/pdf/pdf-style.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdf-style.json" afterPath="$PROJECT_DIR$/pdf-style.json" />
     </list>
     <ignored path="server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,21 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="pdf-style.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pdf-style.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.161291">
-              <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="pdf-controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/controllers/pdf-controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="69" selection-start-line="37" selection-start-column="69" selection-end-line="37" selection-end-column="69" />
+              <caret line="35" column="3" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -57,17 +46,27 @@
         <entry file="file://$PROJECT_DIR$/lib/pdf/pages/pdf-page.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+              <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pdf-style.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pdf-style.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/pdf/pdf-style.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26497695">
-              <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="65" column="45" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rectangle-element.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/pdf/elements/rectangle-element.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -77,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/lib/pdf/element-group.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -87,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/lib/pdf/elements/text-element.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+              <caret line="57" column="31" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -97,17 +96,27 @@
         <entry file="file://$PROJECT_DIR$/lib/pdf/elements/pdf-element.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="244" column="6" selection-start-line="244" selection-start-column="6" selection-end-line="244" selection-end-column="6" />
+              <caret line="121" column="36" selection-start-line="121" selection-start-column="36" selection-end-line="121" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="image-element.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="image-element.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/pdf/elements/image-element.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="6" selection-start-line="101" selection-start-column="6" selection-end-line="101" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.735023">
+              <caret line="29" column="71" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pdf-style.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pdf-style.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-36.903225">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,7 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/lib/controllers/post-controller.js" />
         <option value="$PROJECT_DIR$/src/less/admin.less" />
         <option value="$PROJECT_DIR$/lib/cache/model-cache.js" />
         <option value="$PROJECT_DIR$/lib/cache/output-cache.js" />
@@ -177,17 +185,18 @@
         <option value="$PROJECT_DIR$/lib/print/print-cover.js" />
         <option value="$PROJECT_DIR$/lib/controllers/print-controller.js" />
         <option value="$PROJECT_DIR$/lib/providers/file-base.js" />
-        <option value="$PROJECT_DIR$/lib/pdf/elements/image-element.js" />
         <option value="$PROJECT_DIR$/lib/pdf/pdf-book.js" />
         <option value="$PROJECT_DIR$/lib/pdf/photo-well.js" />
         <option value="$PROJECT_DIR$/lib/pdf/elements/shape-element.js" />
-        <option value="$PROJECT_DIR$/lib/pdf/elements/text-element.js" />
         <option value="$PROJECT_DIR$/lib/pdf/pages/pdf-page.js" />
-        <option value="$PROJECT_DIR$/lib/pdf/elements/pdf-element.js" />
         <option value="$PROJECT_DIR$/lib/pdf/element-group.js" />
         <option value="$PROJECT_DIR$/lib/controllers/pdf-controller.js" />
         <option value="$PROJECT_DIR$/api/trailimage.extern.js" />
+        <option value="$PROJECT_DIR$/pdf-style.json" />
         <option value="$PROJECT_DIR$/lib/pdf/pdf-style.js" />
+        <option value="$PROJECT_DIR$/lib/pdf/elements/text-element.js" />
+        <option value="$PROJECT_DIR$/lib/pdf/elements/pdf-element.js" />
+        <option value="$PROJECT_DIR$/lib/pdf/elements/image-element.js" />
       </list>
     </option>
   </component>
@@ -702,12 +711,6 @@
       <option name="number" value="Default" />
       <updated>1430604145633</updated>
     </task>
-    <task id="LOCAL-00134" summary="map checkpoint">
-      <created>1447114357429</created>
-      <option name="number" value="00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1447114357429</updated>
-    </task>
     <task id="LOCAL-00135" summary="map checkpoint">
       <created>1447185183410</created>
       <option name="number" value="00135" />
@@ -996,7 +999,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448901556500</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="pdf checkpoint">
+      <created>1448912891962</created>
+      <option name="number" value="00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1448912891962</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1056,7 +1065,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32150775" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="481" y="-1070" width="1424" height="593" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.35934067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="481" y="-1070" width="1424" height="593" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1156,7 +1165,7 @@
           <option name="timeStamp" value="128" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="387" />
+      <option name="time" value="392" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -1165,13 +1174,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/is.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07603686">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/regex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2926267">
@@ -1466,62 +1468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/image-element.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="6" selection-start-line="101" selection-start-column="6" selection-end-line="101" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pdf/pages/pdf-page.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/pdf-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="69" selection-start-line="37" selection-start-column="69" selection-end-line="37" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdf-style.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.161291">
-          <caret line="27" column="33" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/text-element.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pdf/element-group.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/pdf-element.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="244" column="6" selection-start-line="244" selection-start-column="6" selection-end-line="244" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3329493">
@@ -1538,10 +1484,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pdf/pages/pdf-page.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers/pdf-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="3" selection-start-line="35" selection-start-column="3" selection-end-line="35" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pdf/element-group.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdf-style.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-36.903225">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/text-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="31" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/pdf/pdf-style.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26497695">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="45" selection-start-line="65" selection-start-column="45" selection-end-line="65" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/rectangle-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/pdf-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="121" column="36" selection-start-line="121" selection-start-column="36" selection-end-line="121" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/pdf/elements/image-element.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.735023">
+          <caret line="29" column="71" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
           <folding />
         </state>
       </provider>

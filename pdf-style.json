@@ -24,7 +24,6 @@
 		},
 		"coverPage": {
 			"inherit": "defaultPage",
-			"margin": 1,
 			"alignContent": "center"
 		},
 		"coverImage": {
@@ -48,7 +47,8 @@
 		"coverSummary": {
 			"inherit": "defaultText",
 			"width": 4,
-			"marginTop": 1
+			"marginTop": 1,
+			"alignContent": "justify"
 		},
 		"coverOverlay": {
 			"top": 0,
