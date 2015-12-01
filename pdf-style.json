@@ -69,10 +69,32 @@
 			"fontSize": 14
 		},
 		"photoWell": {
-			"backgroundColor": "black"
+			"backgroundColor": "black",
+			"scale": "fit",
+			"top": 0,
+			"left": 0
+		},
+		"photoWellTop": {
+			"inherit": "photoWell",
+			"right": 0
+		},
+		"photoWellLeft": {
+			"inherit": "photoWell",
+			"bottom": 0
 		},
 		"caption": {
-			"minWidth": 2
+			"inherit": "defaultText",
+			"bottom": 0,
+			"right": 0
+		},
+		"captionRight": {
+			"inherit": "caption",
+			"minWidth": 2,
+			"top": 0
+		},
+		"captionBottom": {
+			"inherit": "caption",
+			"left": 0
 		},
 		"pageNumber": {
 			"inherit": "defaultText",
