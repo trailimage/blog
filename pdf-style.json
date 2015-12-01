@@ -24,7 +24,6 @@
 		},
 		"coverPage": {
 			"inherit": "defaultPage",
-			"margin": 1,
 			"alignContent": "center"
 		},
 		"coverImage": {
@@ -48,7 +47,8 @@
 		"coverSummary": {
 			"inherit": "defaultText",
 			"width": 4,
-			"marginTop": 1
+			"marginTop": 1,
+			"alignContent": "justify"
 		},
 		"coverOverlay": {
 			"top": 0,
@@ -78,6 +78,8 @@
 			"inherit": "defaultText",
 			"font": "sanSerif",
 			"fontSize": 10,
+			"width": 0.5,
+			"alignContent": "right",
 			"right": 0.25,
 			"bottom": 0.25
 		},
@@ -85,6 +87,9 @@
 			"inherit": "defaultText",
 			"font": "sanSerif",
 			"fontSize": 20
+		},
+		"photoPage": {
+			"inherit": "defaultPage"
 		}
 	}
 }

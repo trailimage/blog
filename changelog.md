@@ -2,9 +2,13 @@
 ## Features
 - Download post as PDF
 
+# 2.0.5
+### Bug Fixes
+- Google Drive credentials not refreshing
+
 # 2.0.4
 ### Bug Fixes
-- Post descriptions not refreshing when cach is invalidated
+- Post descriptions not refreshing when cache is invalidated
 
 # 2.0.3
 ### Bug Fixes
