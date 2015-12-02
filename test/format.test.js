@@ -4,7 +4,7 @@ const mocha = require('mocha');
 const expect = require('chai').expect;
 const format = require('../lib/format.js');
 // http://www.lipsum.com/
-const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 let u;   // undefined
 
 describe('Formatting', ()=> {
@@ -96,7 +96,55 @@ describe('Formatting', ()=> {
 	it('creates glyphicons', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
 	});
-	it.skip('formats photo captions', ()=> {
 
+	it('fixes malformed links', ()=> {
+		let source = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf';
+		let target = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="http://www.idahogeology.org/PDF/Technical_Reports_" rel="nofollow">www.idahogeology.org/PDF/Technical_Reports_</a>(T)/TR-81-1.pdf';
+		target = '<a href="http://www.idahogeology.org/PDF/Technical_Reports_(T)/TR-81-1.pdf">www.idahogeology.org/PDF/Technical_Reports_(T)/TR-81-1.pdf</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+	});
+
+	it('shortens link text to just the domain and page', ()=> {
+		let source = '<a href="http://www.site.com/some/link-thing/that/goes/on">http://www.site.com/some/link-thing/that/goes/on</a>';
+		let target = '<a href="http://www.site.com/some/link-thing/that/goes/on">site.com/&hellip;/on</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.site.com/some/link-thing/that/goes/on">regular link text</a>';
+
+		expect(format.shortenLinkText(source)).equals(source);
+	});
+
+	describe('Photo Captions', ()=> {
+		/**
+		 * Double-space
+		 * @type {string}
+		 */
+		const ds = '\r\n\r\n';
+
+		it('formats block quotes', ()=> {
+			let source = lipsum + ds + '“' + lipsum + '”';
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+
+			source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
+			target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('styles superscripts', ()=> {
+			let source = lipsum + '²';
+			let target = '<p>' + lipsum + '<sup>²</sup></p>';
+			expect(format.caption(source)).equals(target);
+		});
+
+		it.skip('styles quips');
 	});
 });

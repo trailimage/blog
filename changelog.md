@@ -2,6 +2,8 @@
 ### Bug Fixes
 - Correct logging of GPX download error message
 - Trying to zoom an image with no larger size does nothing
+- Not detecting some block quotes (Robert Limbert in "Across Swan Falls Dam")
+- Don't shorten link names that aren't URLs
 
 # 2.0.5
 ### Bug Fixes
