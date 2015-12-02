@@ -817,6 +817,7 @@ div.caption {
 		margin-top: 20px;
 		cursor: help;
 		color: @footnoteColor;
+		counter-reset: note-counter;
 
 		.opacity();
 
@@ -828,9 +829,15 @@ div.caption {
 		li {
 			line-height: 1em;
 			padding-bottom: 5px;
+			counter-increment: note-counter;
 
 			span { color: #444; }
 			a:hover { color: @hoverColor; }
+
+			&.credit {
+				list-style: disc;
+				counter-increment: note-counter - 1;
+			}
 		}
 
 		@media @mobile {
