@@ -117,6 +117,11 @@ describe('Formatting', ()=> {
 		target = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
 
 		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3" rel="nofollow">www.facebook.com/media/set/?set=a.592596880759703.1073741...</a>';
+		target = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
 	});
 
 	it('shortens link text to domain and URL decoded page', ()=> {
@@ -146,6 +151,11 @@ describe('Formatting', ()=> {
 
 		source = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
 		target = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">plosone.org/&hellip;/journal.pone.0032228</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3</a>';
+		target = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">facebook.com/&hellip;/set</a>';
 
 		expect(format.shortenLinkText(source)).equals(target);
 	});
