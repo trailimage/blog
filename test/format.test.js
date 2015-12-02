@@ -133,23 +133,42 @@ describe('Formatting', ()=> {
 		 */
 		const ds = nl + nl;
 
-		it('formats block quotes', ()=> {
-			let source = lipsum + ds + '“' + lipsum + '”' + nl;
+		it('identifies quote at end of text', ()=> {
+			let source = lipsum + ds + '“' + lipsum + '”';
 			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
-
-			expect(format.caption(source)).equals(target);
-
-			source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
-			target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
 
 			expect(format.caption(source)).equals(target);
 		});
 
-		it('formats poems', ()=> {
+		it('identifies paragraphs within a quote', ()=> {
+			let source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies quote within text', ()=> {
+			// text before and after quote
+			let source = lipsum + ds + '“' + lipsum + '”' + ds + lipsum;
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote><p class="first">' + lipsum + '</p>';
+
+			expect(format.caption(source)).equals(target);
+
+//			Jekyll turned to Hyde as the trail hooked right. I’ll let Idaho Adventure Motorcycle Club professional rider Heath explain it from his earlier perspective:
+//
+//				“Almost immediately after that turn, things started getting gnarly. The road changed from a four foot wide band of soft, pillowish sand to a one-and-a-half foot wide band of soft pillowish sand full of rocks — some loose and some very nicely planted … The hill also happened to be really, extremely steep … It took us over an hour to get all five bikes up this 300 yard section”¹
+//
+//Hunter made it through most of that. I was impressed.
+//				___
+//¹ Adventure Rider, “Lessons from the ‘Beef Trail’”: <a href="http://www.advrider.com/forums/showpost.php?p=3680206&postcount=20" rel="nofollow">www.advrider.com/forums/showpost.php?p=3680206&postco...</a>; see also KLR 650 Forums, “Just installed the Rekluse z-Start Pro from Happy Trail”: <a href="https://www.klr650.net/forums/showpost.php?s=b0743c583564050f8c7a2ea0eef04aa6&p=442822&postcount=10" rel="nofollow">www.klr650.net/forums/showpost.php?s=b0743c583564050f8c7a...</a>
+		});
+
+		it('identifies inline poems', ()=> {
+			// no text after
 			let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
 				+ 'And gazed down on the grandeur below' + nl
 				+ 'And thought of the vast army of people' + nl
-				+ 'Who never get out as we go?' + ds
+				+ '· · Who never get out as we go?' + ds
 				+ 'Have you ever trailed into the desert' + nl
 				+ 'Where the hills fade from gold into blue,' + nl
 				+ 'And then thought of some poor other fellow' + nl
@@ -158,13 +177,42 @@ describe('Formatting', ()=> {
 				+ 'Have you ever stood on the top of a mountain<br/>'
 				+ 'And gazed down on the grandeur below<br/>'
 				+ 'And thought of the vast army of people<br/>'
-				+ 'Who never get out as we go?</p><p>'
+				+ '<span class="tab"></span>Who never get out as we go?</p><p>'
 				+ 'Have you ever trailed into the desert<br/>'
 				+ 'Where the hills fade from gold into blue,<br/>'
 				+ 'And then thought of some poor other fellow<br/>'
 				+ 'Who would like to stand alongside of you?</p></blockquote>';
 
 			expect(format.caption(source)).equals(target);
+
+			// text after poem
+			source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+				+ 'And gazed down on the grandeur below' + nl
+				+ 'And thought of the vast army of people.' + ds
+				+ lipsum;
+			target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
+				+ 'Have you ever stood on the top of a mountain<br/>'
+				+ 'And gazed down on the grandeur below<br/>'
+				+ 'And thought of the vast army of people.</p></blockquote>'
+				+ '<p class="first">' + lipsum + '</p>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies captions that are entirely a poem', ()=> {
+			let source = '-' + nl
+				+ 'Begotten Not Born' + nl
+				+ 'Indwelling Transcendence' + nl
+				+ '· · · · Infinite Regress' + nl
+				+ 'Uncertain Progress' + nl
+				+ '-';
+			let target = '<p class="poem">'
+				+ 'Begotten Not Born<br/>'
+				+ 'Indwelling Transcendence<br/>'
+				+ '<span class="tab"></span><span class="tab"></span>Infinite Regress<br/>'
+				+ 'Uncertain Progress</p>';
+
+			expect(format.story(source)).equals(target);
 		});
 
 		it('styles superscripts', ()=> {
@@ -172,8 +220,6 @@ describe('Formatting', ()=> {
 			let target = '<p>' + lipsum + '<sup>²</sup></p>';
 			expect(format.caption(source)).equals(target);
 		});
-
-		it.skip('indents poetry');
 
 		it.skip('styles quips');
 	});

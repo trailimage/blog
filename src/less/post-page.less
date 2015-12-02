@@ -716,6 +716,7 @@ div.caption {
 			color: #444;
 		}
 
+		// poems inline with other caption text
 		&.poem {
 			font-family: @serifFont;
 			line-height: 1.4em;
@@ -753,6 +754,7 @@ div.caption {
 			@media @mobile { padding-top: 0; }
 		}
 		&:last-child { padding-bottom: 2em; }
+		&.first { padding-top: 0.4em; }
 
 		@media @mobile { padding: 0 1em 0.3em 1em; }
 
@@ -768,6 +770,21 @@ div.caption {
 			border: 1px solid #bfc1bf;
 			margin: 0 4em;
 			padding: 1em;
+		}
+
+		// captions that are entirely a poem
+		&.poem {
+			padding-left: 3em;
+			line-height: 1.3em;
+			//margin-bottom: 1em;
+			font-size: 18px;
+
+			.drop-cap {
+				font-size: 36pt;
+				padding: 0 3px 0 0;
+				float: left;
+				line-height: 33pt;
+			}
 		}
 
 		&.haiku {
