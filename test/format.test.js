@@ -97,9 +97,9 @@ describe('Formatting', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
 	});
 
-	it('fixes malformed links', ()=> {
+	it('fixes malformed links and URL decode text', ()=> {
 		let source = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf';
-		let target = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf</a>';
+		let target = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf">www.motoidaho.com/sites/default/files/IAMC Newsletter (4-2011 Issue 2).pdf</a>';
 
 		expect(format.fixMalformedLink(source)).equals(target);
 
@@ -109,9 +109,9 @@ describe('Formatting', ()=> {
 		expect(format.fixMalformedLink(source)).equals(target);
 	});
 
-	it('shortens link text to just the domain and page', ()=> {
-		let source = '<a href="http://www.site.com/some/link-thing/that/goes/on">http://www.site.com/some/link-thing/that/goes/on</a>';
-		let target = '<a href="http://www.site.com/some/link-thing/that/goes/on">site.com/&hellip;/on</a>';
+	it('shortens link text to domain and URL decoded page', ()=> {
+		let source = '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">http://www.site.com/some/link-thing/that/goes/to%20page</a>';
+		let target = '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">site.com/&hellip;/to page</a>';
 
 		expect(format.shortenLinkText(source)).equals(target);
 
@@ -121,14 +121,15 @@ describe('Formatting', ()=> {
 	});
 
 	describe('Photo Captions', ()=> {
+		const nl = '\r\n';
 		/**
 		 * Double-space
 		 * @type {string}
 		 */
-		const ds = '\r\n\r\n';
+		const ds = nl + nl;
 
 		it('formats block quotes', ()=> {
-			let source = lipsum + ds + '“' + lipsum + '”';
+			let source = lipsum + ds + '“' + lipsum + '”' + nl;
 			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
 
 			expect(format.caption(source)).equals(target);
@@ -139,11 +140,35 @@ describe('Formatting', ()=> {
 			expect(format.caption(source)).equals(target);
 		});
 
+		it('formats poems', ()=> {
+			let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+				+ 'And gazed down on the grandeur below' + nl
+				+ 'And thought of the vast army of people' + nl
+				+ 'Who never get out as we go?' + ds
+				+ 'Have you ever trailed into the desert' + nl
+				+ 'Where the hills fade from gold into blue,' + nl
+				+ 'And then thought of some poor other fellow' + nl
+				+ 'Who would like to stand alongside of you?';
+			let target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
+				+ 'Have you ever stood on the top of a mountain<br/>'
+				+ 'And gazed down on the grandeur below<br/>'
+				+ 'And thought of the vast army of people<br/>'
+				+ 'Who never get out as we go?</p><p>'
+				+ 'Have you ever trailed into the desert<br/>'
+				+ 'Where the hills fade from gold into blue,<br/>'
+				+ 'And then thought of some poor other fellow<br/>'
+				+ 'Who would like to stand alongside of you?</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
 		it('styles superscripts', ()=> {
 			let source = lipsum + '²';
 			let target = '<p>' + lipsum + '<sup>²</sup></p>';
 			expect(format.caption(source)).equals(target);
 		});
+
+		it.skip('indents poetry');
 
 		it.skip('styles quips');
 	});
