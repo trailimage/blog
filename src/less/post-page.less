@@ -806,56 +806,31 @@ div.caption {
 		}
 	}
 
-	div.footnotes {
-		@indent: 20px;
-		@mobileIndent: 10px;
-
+	ol.footnotes {
+		list-style-type: decimal;
 		position: relative;
 		border-top: 1px solid @trimColor;
 		background-color: darken(@lightColor, 5%);
-		padding: 5px 20px 10px 0;
+		padding: 10px 20px 10px 40px;
 		font-family: @sanSerifFont;
 		font-size: 13px;
 		margin-top: 20px;
 		cursor: help;
-
-		.glyphicon {
-			color: darken(@lightTrimColor, 6%);
-			position: absolute;
-			right: 6px;
-			top: 3px;
-			font-size: 18px;
-		}
-
-		p {
-			font-family: @sanSerifFont;
-			text-indent: -(@indent + 5);
-			margin: 0 40px;
-			padding: 5px 0 0 @indent;
-			line-height: 1.2em;
-
-			a { }
-		}
-
-		sup {
-			display: inline-block;
-			text-indent: 0;
-			width: @indent;
-			margin: 0;
-			font-size: 13px;
-			line-height: 15px;
-			font-weight: bold;
-			padding: 0;
-			vertical-align: bottom;
-
-			&.title { font-size: @indent; line-height: @indent / 2; vertical-align: bottom; }
-		}
+		color: @footnoteColor;
 
 		.opacity();
 
 		&:hover {
 			background: none;
 			.opacity(1);
+		}
+
+		li {
+			line-height: 1em;
+			padding-bottom: 5px;
+
+			span { color: #444; }
+			a:hover { color: @hoverColor; }
 		}
 
 		@media @mobile {
@@ -870,23 +845,6 @@ div.caption {
 			.glyphicon { display: none; }
 
 			a { color: @mobileLinkColor; }
-
-			p {
-				text-indent: -(@mobileIndent + 15);
-				padding: 5px 0 0 @mobileIndent;
-				font-size: @fontSize;
-				line-height: 0.8em;
-			}
-
-			sup {
-				font-size: 18px;
-				line-height: 21px;
-				width: @mobileIndent + 6;
-				vertical-align: top;
-				padding-right: 4px;
-
-				&.title { font-size: @mobileIndent; line-height: @mobileIndent; vertical-align: bottom; }
-			}
 		}
 	}
 }

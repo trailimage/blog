@@ -88,8 +88,8 @@ describe('Formatting', ()=> {
 		expect(format.parseNumber('nothing')).to.be.NaN;
 	});
 	it('substitutes nicer typography', ()=> {
-		expect(format.typography(u)).is.null;
-		expect(format.typography('')).is.null;
+		expect(format.typography(u)).is.empty;
+		expect(format.typography('')).is.empty;
 		expect(format.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
 		expect(format.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
 	});
@@ -107,6 +107,16 @@ describe('Formatting', ()=> {
 		target = '<a href="http://www.idahogeology.org/PDF/Technical_Reports_(T)/TR-81-1.pdf">www.idahogeology.org/PDF/Technical_Reports_(T)/TR-81-1.pdf</a>';
 
 		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="http://idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2" rel="nofollow">idahohistory.cdmhost.com/cdm/singleitem/collection/p16281...</a>';
+		target = '<a href="http://idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2">idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228" rel="nofollow">www.plosone.org/article/info:doi/10.1371/journal.pone.003...</a>';
+		target = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
 	});
 
 	it('shortens link text to domain and URL decoded page', ()=> {
@@ -121,6 +131,21 @@ describe('Formatting', ()=> {
 
 		source = '<a href="http://www.advrider.com/forums/showthread.php?t=185698" rel="nofollow">www.advrider.com/forums/showthread.php?t=185698</a>';
 		target = '<a href="http://www.advrider.com/forums/showthread.php?t=185698">advrider.com/&hellip;/showthread</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc" rel="nofollow">www.tvbch.com/TVBCH_newsletter_2013-08.doc</a>';
+		target = '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc">tvbch.com/TVBCH_newsletter_2013-08</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://youtu.be/QzdSlYoZitU" rel="nofollow">youtu.be/QzdSlYoZitU</a>';
+		target = '<a href="http://youtu.be/QzdSlYoZitU">youtu.be/QzdSlYoZitU</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
+		target = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">plosone.org/&hellip;/journal.pone.0032228</a>';
 
 		expect(format.shortenLinkText(source)).equals(target);
 	});
@@ -153,14 +178,6 @@ describe('Formatting', ()=> {
 			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote><p class="first">' + lipsum + '</p>';
 
 			expect(format.caption(source)).equals(target);
-
-//			Jekyll turned to Hyde as the trail hooked right. I’ll let Idaho Adventure Motorcycle Club professional rider Heath explain it from his earlier perspective:
-//
-//				“Almost immediately after that turn, things started getting gnarly. The road changed from a four foot wide band of soft, pillowish sand to a one-and-a-half foot wide band of soft pillowish sand full of rocks — some loose and some very nicely planted … The hill also happened to be really, extremely steep … It took us over an hour to get all five bikes up this 300 yard section”¹
-//
-//Hunter made it through most of that. I was impressed.
-//				___
-//¹ Adventure Rider, “Lessons from the ‘Beef Trail’”: <a href="http://www.advrider.com/forums/showpost.php?p=3680206&postcount=20" rel="nofollow">www.advrider.com/forums/showpost.php?p=3680206&postco...</a>; see also KLR 650 Forums, “Just installed the Rekluse z-Start Pro from Happy Trail”: <a href="https://www.klr650.net/forums/showpost.php?s=b0743c583564050f8c7a2ea0eef04aa6&p=442822&postcount=10" rel="nofollow">www.klr650.net/forums/showpost.php?s=b0743c583564050f8c7a...</a>
 		});
 
 		it('identifies inline poems', ()=> {
@@ -218,6 +235,20 @@ describe('Formatting', ()=> {
 		it('styles superscripts', ()=> {
 			let source = lipsum + '²';
 			let target = '<p>' + lipsum + '<sup>²</sup></p>';
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies footnotes', ()=> {
+			let source = lipsum + nl
+				+ '___' + nl
+				+ '* Note about photo credit' + nl
+				+ '¹ Some other note' + nl
+				+ '² Last note';
+			let target = '<p>' + lipsum + '</p><ol class="footnotes">'
+				+ '<li class="credit"><span>Note about photo credit</span></li>'
+				+ '<li><span>Some other note</span></li>'
+				+ '<li><span>Last note</span></li></ol>';
+
 			expect(format.caption(source)).equals(target);
 		});
 
