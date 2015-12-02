@@ -118,6 +118,11 @@ describe('Formatting', ()=> {
 		source = '<a href="http://www.site.com/some/link-thing/that/goes/on">regular link text</a>';
 
 		expect(format.shortenLinkText(source)).equals(source);
+
+		source = '<a href="http://www.advrider.com/forums/showthread.php?t=185698" rel="nofollow">www.advrider.com/forums/showthread.php?t=185698</a>';
+		target = '<a href="http://www.advrider.com/forums/showthread.php?t=185698">advrider.com/&hellip;/showthread</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
 	});
 
 	describe('Photo Captions', ()=> {

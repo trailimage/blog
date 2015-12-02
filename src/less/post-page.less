@@ -709,19 +709,25 @@ div.caption {
 		margin: 1em 1em 0 1em;
 		text-align: justify;
 
-		&.poem {
-			font-family: @serifFont;
-			padding-left: 6em;
-			line-height: 1.2em;
-			margin-bottom: 1em;
-			text-align: left;
-		}
-
 		p {
 			padding: 0 4em 0.5em 4em;
 			//text-indent: 0;
 			line-height: 1.1em;
 			color: #444;
+		}
+
+		&.poem {
+			font-family: @serifFont;
+			line-height: 1.4em;
+			text-align: left;
+			background: none;
+			margin-top: 1.5em;
+
+			p {
+				text-align: left;
+				text-indent: 0;
+				padding: 0 0 1.4em 5em;
+			}
 		}
 
 		@media @mobile {
