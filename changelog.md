@@ -1,3 +1,8 @@
+# 2.0.6
+### Bug Fixes
+- Correct logging of GPX download error message
+- Trying to zoom an image with no larger size does nothing
+
 # 2.0.5
 ### Bug Fixes
 - Google Drive credentials not refreshing
@@ -27,7 +32,7 @@
 ### Bug Fixes
 - Can't delete cached map for post series
 - Remove debug code that was forcing Redis cache
-- Don't sort null arary in admin view
+- Don't sort null array in admin view
 - Remove IDE workspace settings from source control
 - Correct error logging for GPX download
 
