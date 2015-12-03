@@ -1,5 +1,5 @@
 # 2.1.0
-## Features
+### Features
 - Download post as PDF
 
 # 2.0.6
