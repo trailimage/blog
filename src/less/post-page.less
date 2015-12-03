@@ -718,10 +718,11 @@ div.caption {
 
 		// poems inline with other caption text
 		&.poem {
+			background-image: url(/img/quote-ornament.png);
+			background-position: left bottom;
 			font-family: @serifFont;
 			line-height: 1.4em;
 			text-align: left;
-			background: none;
 			margin-top: 1.5em;
 
 			p {
@@ -817,7 +818,6 @@ div.caption {
 		margin-top: 20px;
 		cursor: help;
 		color: @footnoteColor;
-		counter-reset: note-counter;
 
 		.opacity();
 
@@ -835,8 +835,10 @@ div.caption {
 			a:hover { color: @hoverColor; }
 
 			&.credit {
-				list-style: disc;
-				counter-increment: note-counter - 1;
+				list-style: none;
+				text-indent: -10px;
+				padding-bottom: 10px;
+				span.glyphicon { color: @footnoteColor; padding-right: 7px; vertical-align: text-top; }
 			}
 		}
 

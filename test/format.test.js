@@ -254,8 +254,18 @@ describe('Formatting', ()=> {
 				+ '* Note about photo credit' + nl
 				+ '¹ Some other note' + nl
 				+ '² Last note';
-			let target = '<p>' + lipsum + '</p><ol class="footnotes">'
-				+ '<li class="credit"><span>Note about photo credit</span></li>'
+			let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
+				+ '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
+				+ '<li><span>Some other note</span></li>'
+				+ '<li><span>Last note</span></li></ol>';
+
+			expect(format.caption(source)).equals(target);
+
+			source = lipsum + nl
+				+ '___' + nl
+				+ '¹ Some other note' + nl
+				+ '² Last note';
+			target = '<p>' + lipsum + '</p><ol class="footnotes">'
 				+ '<li><span>Some other note</span></li>'
 				+ '<li><span>Last note</span></li></ol>';
 
