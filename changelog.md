@@ -1,3 +1,7 @@
+# 2.x.0
+### Features
+- Dynamically load vidoes from provided source
+
 # 2.0.6
 ### Bug Fixes
 - Correct logging of GPX download error message
