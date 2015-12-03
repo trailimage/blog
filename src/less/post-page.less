@@ -709,19 +709,27 @@ div.caption {
 		margin: 1em 1em 0 1em;
 		text-align: justify;
 
-		&.poem {
-			font-family: @serifFont;
-			padding-left: 6em;
-			line-height: 1.2em;
-			margin-bottom: 1em;
-			text-align: left;
-		}
-
 		p {
 			padding: 0 4em 0.5em 4em;
 			//text-indent: 0;
 			line-height: 1.1em;
 			color: #444;
+		}
+
+		// poems inline with other caption text
+		&.poem {
+			background-image: url(/img/quote-ornament.png);
+			background-position: left bottom;
+			font-family: @serifFont;
+			line-height: 1.4em;
+			text-align: left;
+			margin-top: 1.5em;
+
+			p {
+				text-align: left;
+				text-indent: 0;
+				padding: 0 0 1.4em 5em;
+			}
 		}
 
 		@media @mobile {
@@ -747,6 +755,7 @@ div.caption {
 			@media @mobile { padding-top: 0; }
 		}
 		&:last-child { padding-bottom: 2em; }
+		&.first { padding-top: 0.4em; }
 
 		@media @mobile { padding: 0 1em 0.3em 1em; }
 
@@ -764,6 +773,7 @@ div.caption {
 			padding: 1em;
 		}
 
+		// captions that are entirely a poem
 		&.poem {
 			padding-left: 3em;
 			line-height: 1.3em;
@@ -797,56 +807,39 @@ div.caption {
 		}
 	}
 
-	div.footnotes {
-		@indent: 20px;
-		@mobileIndent: 10px;
-
+	ol.footnotes {
+		list-style-type: decimal;
 		position: relative;
 		border-top: 1px solid @trimColor;
 		background-color: darken(@lightColor, 5%);
-		padding: 5px 20px 10px 0;
+		padding: 10px 20px 10px 40px;
 		font-family: @sanSerifFont;
 		font-size: 13px;
 		margin-top: 20px;
 		cursor: help;
-
-		.glyphicon {
-			color: darken(@lightTrimColor, 6%);
-			position: absolute;
-			right: 6px;
-			top: 3px;
-			font-size: 18px;
-		}
-
-		p {
-			font-family: @sanSerifFont;
-			text-indent: -(@indent + 5);
-			margin: 0 40px;
-			padding: 5px 0 0 @indent;
-			line-height: 1.2em;
-
-			a { }
-		}
-
-		sup {
-			display: inline-block;
-			text-indent: 0;
-			width: @indent;
-			margin: 0;
-			font-size: 13px;
-			line-height: 15px;
-			font-weight: bold;
-			padding: 0;
-			vertical-align: bottom;
-
-			&.title { font-size: @indent; line-height: @indent / 2; vertical-align: bottom; }
-		}
+		color: @footnoteColor;
 
 		.opacity();
 
 		&:hover {
 			background: none;
 			.opacity(1);
+		}
+
+		li {
+			line-height: 1em;
+			padding-bottom: 5px;
+			counter-increment: note-counter;
+
+			span { color: #444; }
+			a:hover { color: @hoverColor; }
+
+			&.credit {
+				list-style: none;
+				text-indent: -10px;
+				padding-bottom: 10px;
+				span.glyphicon { color: @footnoteColor; padding-right: 7px; vertical-align: text-top; }
+			}
 		}
 
 		@media @mobile {
@@ -861,23 +854,6 @@ div.caption {
 			.glyphicon { display: none; }
 
 			a { color: @mobileLinkColor; }
-
-			p {
-				text-indent: -(@mobileIndent + 15);
-				padding: 5px 0 0 @mobileIndent;
-				font-size: @fontSize;
-				line-height: 0.8em;
-			}
-
-			sup {
-				font-size: 18px;
-				line-height: 21px;
-				width: @mobileIndent + 6;
-				vertical-align: top;
-				padding-right: 4px;
-
-				&.title { font-size: @mobileIndent; line-height: @mobileIndent; vertical-align: bottom; }
-			}
 		}
 	}
 }

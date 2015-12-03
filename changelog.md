@@ -4,8 +4,11 @@
 
 # 2.0.6
 ### Bug Fixes
-- Correct logging of GPX download error message (chasing intermittent issue)
+- Correct logging of GPX download error message
 - Trying to zoom an image with no larger size does nothing
+- Failing to format poetry (Robert Limbert in "Across Swan Falls Dam")
+- Don't shorten link names that aren't URLs
+- URL decode displayed link names
 
 # 2.0.5
 ### Bug Fixes
