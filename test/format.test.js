@@ -270,6 +270,24 @@ describe('Formatting', ()=> {
 				+ '<li><span>Last note</span></li></ol>';
 
 			expect(format.caption(source)).equals(target);
+
+			source = lipsum + nl
+				+ '___' + nl
+				+ '* 1989 photo by Chuck Scheer from “People of the Plain: Archeologists Trace the Lives of Early Cultures”:'
+				+ '<a href="http://scholarworks.boisestate.edu/cgi/viewcontent.cgi?filename=4&article=1035&context=focus&type=additional"'
+				+ ' rel="nofollow">scholarworks.boisestate.edu/cgi/viewcontent.cgi?filename=...</a>' + nl
+				+ '¹ U.S. Forest Service, “Danskin Rockshelter: Sorting through the Past”: ' + nl
+				+ '<a href="http://www.passportintime.com/danskin-rockshelter.html" rel="nofollow">www.passportintime.com/danskin-rockshelter.html</a>';
+
+			target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
+				+ '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>'
+				+ '1989 photo by Chuck Scheer from “People of the Plain: Archeologists Trace the Lives of Early Cultures”:'
+				+ '<a href="http://scholarworks.boisestate.edu/cgi/viewcontent.cgi?filename=4&article=1035&context=focus&type=additional">'
+				+ 'scholarworks.boisestate.edu/&hellip;/viewcontent</a></span></li>'
+				+ '<li><span>U.S. Forest Service, “Danskin Rockshelter: Sorting through the Past”: '
+				+ '<a href="http://www.passportintime.com/danskin-rockshelter.html">www.passportintime.com/danskin-rockshelter</a></span></li></ol>';
+
+			expect(format.caption(source)).equals(target);
 		});
 
 		it.skip('styles quips');
