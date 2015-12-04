@@ -226,6 +226,20 @@ describe('Formatting', ()=> {
 			expect(format.caption(source)).equals(target);
 		});
 
+		it('identifies haiku', ()=> {
+			let source = 'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
+			let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<span class="glyphicon glyphicon-leaf"></span></p>';
+
+			expect(format.story(source)).equals(target);
+
+			source = 'cows stand chewing' + nl + 'wet meadow grass' + nl + 'while mud swallows wheels' + ds
+				+ 'Here we have Joel "Runs with Cows" Abbott. He did a little loop out among them—kind of became one of them.'
+			target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<span class="glyphicon glyphicon-leaf"></span></p>'
+				+ '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
+
+			expect(format.story(source)).equals(target);
+		});
+
 		it('identifies captions that are entirely a poem', ()=> {
 			let source = '-' + nl
 				+ 'Begotten Not Born' + nl
