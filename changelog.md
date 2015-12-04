@@ -9,6 +9,7 @@
 - Failing to format poetry (Robert Limbert in "Across Swan Falls Dam")
 - Don't shorten link names that aren't URLs
 - URL decode displayed link names
+- Bottom mobile nav items overlapped other elements
 
 # 2.0.5
 ### Bug Fixes
