@@ -4,7 +4,7 @@ const mocha = require('mocha');
 const expect = require('chai').expect;
 const format = require('../lib/format.js');
 // http://www.lipsum.com/
-const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+const lipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 let u;   // undefined
 
 describe('Formatting', ()=> {
@@ -88,15 +88,190 @@ describe('Formatting', ()=> {
 		expect(format.parseNumber('nothing')).to.be.NaN;
 	});
 	it('substitutes nicer typography', ()=> {
-		expect(format.typography(u)).is.null;
-		expect(format.typography('')).is.null;
+		expect(format.typography(u)).is.empty;
+		expect(format.typography('')).is.empty;
 		expect(format.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
 		expect(format.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
 	});
 	it('creates glyphicons', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
 	});
-	it.skip('formats photo captions', ()=> {
 
+	it('fixes malformed links and URL decode text', ()=> {
+		let source = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf';
+		let target = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf">www.motoidaho.com/sites/default/files/IAMC Newsletter (4-2011 Issue 2).pdf</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="http://www.idahogeology.org/PDF/Technical_Reports_" rel="nofollow">www.idahogeology.org/PDF/Technical_Reports_</a>(T)/TR-81-1.pdf';
+		target = '<a href="http://www.idahogeology.org/PDF/Technical_Reports_(T)/TR-81-1.pdf">www.idahogeology.org/PDF/Technical_Reports_(T)/TR-81-1.pdf</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="http://idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2" rel="nofollow">idahohistory.cdmhost.com/cdm/singleitem/collection/p16281...</a>';
+		target = '<a href="http://idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2">idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228" rel="nofollow">www.plosone.org/article/info:doi/10.1371/journal.pone.003...</a>';
+		target = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+
+		source = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3" rel="nofollow">www.facebook.com/media/set/?set=a.592596880759703.1073741...</a>';
+		target = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3</a>';
+
+		expect(format.fixMalformedLink(source)).equals(target);
+	});
+
+	it('shortens link text to domain and URL decoded page', ()=> {
+		let source = '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">http://www.site.com/some/link-thing/that/goes/to%20page</a>';
+		let target = '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">site.com/&hellip;/to page</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.site.com/some/link-thing/that/goes/on">regular link text</a>';
+
+		expect(format.shortenLinkText(source)).equals(source);
+
+		source = '<a href="http://www.advrider.com/forums/showthread.php?t=185698" rel="nofollow">www.advrider.com/forums/showthread.php?t=185698</a>';
+		target = '<a href="http://www.advrider.com/forums/showthread.php?t=185698">advrider.com/&hellip;/showthread</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc" rel="nofollow">www.tvbch.com/TVBCH_newsletter_2013-08.doc</a>';
+		target = '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc">tvbch.com/TVBCH_newsletter_2013-08</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://youtu.be/QzdSlYoZitU" rel="nofollow">youtu.be/QzdSlYoZitU</a>';
+		target = '<a href="http://youtu.be/QzdSlYoZitU">youtu.be/QzdSlYoZitU</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
+		target = '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">plosone.org/&hellip;/journal.pone.0032228</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3</a>';
+		target = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">facebook.com/&hellip;/set</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
+	});
+
+	describe('Photo Captions', ()=> {
+		const nl = '\r\n';
+		/**
+		 * Double-space
+		 * @type {string}
+		 */
+		const ds = nl + nl;
+
+		it('identifies quote at end of text', ()=> {
+			let source = lipsum + ds + '“' + lipsum + '”';
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies paragraphs within a quote', ()=> {
+			let source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies quote within text', ()=> {
+			// text before and after quote
+			let source = lipsum + ds + '“' + lipsum + '”' + ds + lipsum;
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote><p class="first">' + lipsum + '</p>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies inline poems', ()=> {
+			// no text after
+			let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+				+ 'And gazed down on the grandeur below' + nl
+				+ 'And thought of the vast army of people' + nl
+				+ '· · Who never get out as we go?' + ds
+				+ 'Have you ever trailed into the desert' + nl
+				+ 'Where the hills fade from gold into blue,' + nl
+				+ 'And then thought of some poor other fellow' + nl
+				+ 'Who would like to stand alongside of you?';
+			let target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
+				+ 'Have you ever stood on the top of a mountain<br/>'
+				+ 'And gazed down on the grandeur below<br/>'
+				+ 'And thought of the vast army of people<br/>'
+				+ '<span class="tab"></span>Who never get out as we go?</p><p>'
+				+ 'Have you ever trailed into the desert<br/>'
+				+ 'Where the hills fade from gold into blue,<br/>'
+				+ 'And then thought of some poor other fellow<br/>'
+				+ 'Who would like to stand alongside of you?</p></blockquote>';
+
+			expect(format.caption(source)).equals(target);
+
+			// text after poem
+			source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+				+ 'And gazed down on the grandeur below' + nl
+				+ 'And thought of the vast army of people.' + ds
+				+ lipsum;
+			target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
+				+ 'Have you ever stood on the top of a mountain<br/>'
+				+ 'And gazed down on the grandeur below<br/>'
+				+ 'And thought of the vast army of people.</p></blockquote>'
+				+ '<p class="first">' + lipsum + '</p>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies captions that are entirely a poem', ()=> {
+			let source = '-' + nl
+				+ 'Begotten Not Born' + nl
+				+ 'Indwelling Transcendence' + nl
+				+ '· · · · Infinite Regress' + nl
+				+ 'Uncertain Progress' + nl
+				+ '-';
+			let target = '<p class="poem">'
+				+ 'Begotten Not Born<br/>'
+				+ 'Indwelling Transcendence<br/>'
+				+ '<span class="tab"></span><span class="tab"></span>Infinite Regress<br/>'
+				+ 'Uncertain Progress</p>';
+
+			expect(format.story(source)).equals(target);
+		});
+
+		it('styles superscripts', ()=> {
+			let source = lipsum + '²';
+			let target = '<p>' + lipsum + '<sup>²</sup></p>';
+			expect(format.caption(source)).equals(target);
+		});
+
+		it('identifies footnotes', ()=> {
+			let source = lipsum + nl
+				+ '___' + nl
+				+ '* Note about photo credit' + nl
+				+ '¹ Some other note' + nl
+				+ '² Last note';
+			let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
+				+ '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
+				+ '<li><span>Some other note</span></li>'
+				+ '<li><span>Last note</span></li></ol>';
+
+			expect(format.caption(source)).equals(target);
+
+			source = lipsum + nl
+				+ '___' + nl
+				+ '¹ Some other note' + nl
+				+ '² Last note';
+			target = '<p>' + lipsum + '</p><ol class="footnotes">'
+				+ '<li><span>Some other note</span></li>'
+				+ '<li><span>Last note</span></li></ol>';
+
+			expect(format.caption(source)).equals(target);
+		});
+
+		it.skip('styles quips');
 	});
 });
