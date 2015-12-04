@@ -215,14 +215,22 @@ footer.page {
 
 	a.repo {
 		display: block;
-		margin-top: 15px;
 		margin-bottom: 10px;
-		float: right;
 		text-decoration: none;
-
 		span.icon { height: 25px; width: 25px; }
-		img { margin: 0 0 2px 3px; }
-		.opacity(0.3);
-		&:hover { .opacity(1); }
+
+		@media @desktop {
+			float: right;
+			margin-top: 15px;
+			img { margin: 0 0 2px 3px; }
+			.opacity(0.3);
+			&:hover { .opacity(1); }
+		}
+
+		@media @mobile {
+			margin-top: 20px;
+			img { margin: 0 0 2px 1px; }
+		    .scale();
+		}
 	}
 }
