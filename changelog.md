@@ -2,7 +2,11 @@
 ### Features
 - Download post as PDF
 
-# 2.0.6
+## 2.0.7
+### Bug Fixes
+- Haiku formatting error
+
+## 2.0.6
 ### Bug Fixes
 - Correct logging of GPX download error message
 - Trying to zoom an image with no larger size does nothing
@@ -11,19 +15,19 @@
 - URL decode displayed link names
 - Bottom mobile nav items overlapped other elements
 
-# 2.0.5
+## 2.0.5
 ### Bug Fixes
 - Google Drive credentials not refreshing
 
-# 2.0.4
+## 2.0.4
 ### Bug Fixes
 - Post descriptions not refreshing when cache is invalidated
 
-# 2.0.3
+## 2.0.3
 ### Bug Fixes
 - Unable to refresh library or photo tags
 
-# 2.0.2
+## 2.0.2
 ### Features
 - Minor layout tweaks
 
@@ -31,7 +35,7 @@
 - Unable to reload cached GPX track
 - Remove media summary from post description
 
-# 2.0.1
+## 2.0.1
 ### Features
 - Show progress while GPX file is downloaded and parsed
 - Change footer to show GitHub version
