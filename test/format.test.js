@@ -158,6 +158,11 @@ describe('Formatting', ()=> {
 		target = '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">facebook.com/&hellip;/set</a>';
 
 		expect(format.shortenLinkText(source)).equals(target);
+
+		source = '<a href="http://www.trailimage.com/first-ride-to-silver-city/#8" rel="nofollow">www.trailimage.com/first-ride-to-silver-city/#8</a>';
+		target = '<a href="http://www.trailimage.com/first-ride-to-silver-city/#8">trailimage.com/first-ride-to-silver-city</a>';
+
+		expect(format.shortenLinkText(source)).equals(target);
 	});
 
 	describe('Photo Captions', ()=> {
