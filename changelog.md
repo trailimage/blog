@@ -1,10 +1,6 @@
-# 2.x.0
-### Features
-- Dynamically load vidoes from provided source
-
 ## 2.0.7
 ### Bug Fixes
-- Footnotes formatted wrong in some scenarios
+- Haiku formatting error
 
 ## 2.0.6
 ### Bug Fixes

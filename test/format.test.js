@@ -226,6 +226,20 @@ describe('Formatting', ()=> {
 			expect(format.caption(source)).equals(target);
 		});
 
+		it('identifies haiku', ()=> {
+			let source = 'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
+			let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<span class="glyphicon glyphicon-leaf"></span></p>';
+
+			expect(format.story(source)).equals(target);
+
+			source = 'cows stand chewing' + nl + 'wet meadow grass' + nl + 'while mud swallows wheels' + ds
+				+ 'Here we have Joel "Runs with Cows" Abbott. He did a little loop out among them—kind of became one of them.'
+			target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<span class="glyphicon glyphicon-leaf"></span></p>'
+				+ '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
+
+			expect(format.story(source)).equals(target);
+		});
+
 		it('identifies captions that are entirely a poem', ()=> {
 			let source = '-' + nl
 				+ 'Begotten Not Born' + nl
@@ -268,24 +282,6 @@ describe('Formatting', ()=> {
 			target = '<p>' + lipsum + '</p><ol class="footnotes">'
 				+ '<li><span>Some other note</span></li>'
 				+ '<li><span>Last note</span></li></ol>';
-
-			expect(format.caption(source)).equals(target);
-
-			source = lipsum + nl
-				+ '___' + nl
-				+ '* 1989 photo by Chuck Scheer from “People of the Plain: Archeologists Trace the Lives of Early Cultures”:'
-				+ '<a href="http://scholarworks.boisestate.edu/cgi/viewcontent.cgi?filename=4&article=1035&context=focus&type=additional"'
-				+ ' rel="nofollow">scholarworks.boisestate.edu/cgi/viewcontent.cgi?filename=...</a>' + nl
-				+ '¹ U.S. Forest Service, “Danskin Rockshelter: Sorting through the Past”: ' + nl
-				+ '<a href="http://www.passportintime.com/danskin-rockshelter.html" rel="nofollow">www.passportintime.com/danskin-rockshelter.html</a>';
-
-			target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
-				+ '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>'
-				+ '1989 photo by Chuck Scheer from “People of the Plain: Archeologists Trace the Lives of Early Cultures”:'
-				+ '<a href="http://scholarworks.boisestate.edu/cgi/viewcontent.cgi?filename=4&article=1035&context=focus&type=additional">'
-				+ 'scholarworks.boisestate.edu/&hellip;/viewcontent</a></span></li>'
-				+ '<li><span>U.S. Forest Service, “Danskin Rockshelter: Sorting through the Past”: '
-				+ '<a href="http://www.passportintime.com/danskin-rockshelter.html">www.passportintime.com/danskin-rockshelter</a></span></li></ol>';
 
 			expect(format.caption(source)).equals(target);
 		});
