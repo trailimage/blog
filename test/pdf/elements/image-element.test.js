@@ -1,11 +1,12 @@
 'use strict';
 
+const pdfPath = '../../../lib/pdf/';
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Area = require('../../../lib/pdf/elements/element-area.js');
-const Image = require('../../../lib/pdf/elements/image-element.js');
+const Area = require(pdfPath + 'elements/element-area.js');
+const Image = require(pdfPath + 'elements/image-element.js');
 const Size = require('../../../lib/models/photo-size.js');
-const Layout = require('../../../lib/pdf/pdf-layout.js');
+const Layout = require(pdfPath + 'pdf-layout.js');
 
 describe('PDF Image Element', ()=> {
 	let img = new Image();
