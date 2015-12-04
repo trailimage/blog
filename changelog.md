@@ -1,3 +1,7 @@
+## 2.0.8
+### Bug Fixes
+- Link names are shortened incorrectly if they end with an anchor (test created)
+
 ## 2.0.7
 ### Bug Fixes
 - Haiku formatting error
