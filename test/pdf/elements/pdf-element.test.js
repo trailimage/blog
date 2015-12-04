@@ -63,13 +63,13 @@ describe('PDF Element', ()=> {
 
 		/*         20
 		┌──────┬───────────────┐
-		│      5               │
+		│     <5>              │
 		│   ╔══╧═════════╗     │
-		├ 3 ╢          7 ╟ <5> ┤
+		├<3>╢          7 ╟  5  ┤
 		│   ║     12     ║     │ 20
 		│   ╚═════════╤══╝     │
 		│                      │
-		│            <8>       │
+		│             8        │
 		└─────────────┴────────┘
 		<calculated>
 		*/
@@ -78,14 +78,14 @@ describe('PDF Element', ()=> {
 		area.top = area.left = 0;
 
 		// no right or bottom set
-		el.top = 5;
-		el.left = 3;
+		el.right = 5;
+		el.bottom = 8;
 		el.width = 12;
-		el.height = 5;
+		el.height = 7;
 
 		el.positionWithin(area);
 
-		expect(el.right).equals(5);
-		expect(el.bottom).equals(8);
+		expect(el.top).equals(5);
+		expect(el.left).equals(3);
 	});
 });
