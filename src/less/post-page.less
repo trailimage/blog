@@ -167,7 +167,7 @@ body.has-nav {}
 #nav-bottom {
 	@media @mobile {
 		div.next, div.previous {
-			margin-top: 50px;
+			margin-top: -15px;
 		}
 	}
 }
@@ -843,15 +843,19 @@ div.caption {
 		}
 
 		@media @mobile {
-			padding: 4px 0 10px 0;
 			border: none;
 			background-color: #333;
 			margin: 6px 0 35px 0;
-			color: darken(@mobileTextColor, 30%);
+
+			li {
+				span { color: darken(@mobileTextColor, 30%); }
+				&.credit {
+					text-indent: -18px;
+					span.glyphicon { padding-right: 14px; }
+				}
+			}
 
 			.opacity(1);
-
-			.glyphicon { display: none; }
 
 			a { color: @mobileLinkColor; }
 		}
