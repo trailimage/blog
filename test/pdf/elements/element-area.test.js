@@ -15,7 +15,6 @@ describe('PDF Element Area', ()=> {
 	it('indicates if areas overlap', ()=> {
 		let area1 = new ElementArea();
 		let area2 = new ElementArea();
-
 		/*
 		┌───────────┐
 		│ area 1    │
@@ -23,7 +22,7 @@ describe('PDF Element Area', ()=> {
 		│           │
 		│           │
 		└───────────┼───────────┐
-   	            │ area 2    │
+   	                │ area 2    │
 		            │           │
 		            │           │
 		            │           │
@@ -48,7 +47,7 @@ describe('PDF Element Area', ()=> {
 		│           │
 		│           ├───────────┐
 		└───────────┤ area 2    │
-   	            │           │
+   	                │           │
 		            │           │
 		            │           │
 		            └───────────┘
@@ -63,9 +62,9 @@ describe('PDF Element Area', ()=> {
 		│     ┌─────┼─────┐
 		│     │     │     │
 		└─────┼─────┘     │
-   	      │           │
+   	          │           │
 		      │           │
-            └───────────┘
+              └───────────┘
 		*/
 		area2.top = 6;
 		area2.left = 5;

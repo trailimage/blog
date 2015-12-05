@@ -19,7 +19,7 @@ const style = {
 		"defaultText": {
 			"font": "serif",
 			"fontSize": 12,
-			"color": "black",
+			"color": "black"
 		},
 		"defaultPage": {
 			"margin": 0,
