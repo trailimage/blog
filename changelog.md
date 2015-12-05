@@ -1,3 +1,7 @@
+## 2.0.9
+### Features
+- Block analytics referral spam
+
 ## 2.0.8
 ### Bug Fixes
 - Link names are shortened incorrectly if they end with an anchor (test created)

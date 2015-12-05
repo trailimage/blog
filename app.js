@@ -78,7 +78,10 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = require('./lib/cache/output-cache.js');
+	const outputCache = require('./lib/middleware/output-cache.js');
+	const spamBlocker = require('./lib/middleware/referal-blocker.js');
+
+	app.use(spamBlocker.filter);
 
 	if (config.usePersona) {
 		// use wwwhisper middleware to authenticate some routes
@@ -92,7 +95,7 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
-	app.use(outputCache());
+	app.use(outputCache.methods);
 	app.use(Express.static(__dirname + '/dist'));
 }
 

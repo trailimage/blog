@@ -12,18 +12,26 @@ describe('Formatting', ()=> {
 		// month value is zero-based
 		expect(format.date(new Date(1973,2,15))).equals('March 15, 1973');
 	});
+
 	it('formats fractions', ()=> {
 		expect(format.fraction('1/2')).equals('<sup>1</sup>&frasl;<sub>2</sub>');
 	});
+
 	it('shows AM or PM for hour of day', ()=> {
 		expect(format.hourOfDay(2)).equals('AM 2');
 		expect(format.hourOfDay(14)).equals('PM 2');
 	});
+
 	it('truncates IPv6 to v4', ()=> {
 		expect(format.IPv6('::1')).equals('127.0.0.1');
 		expect(format.IPv6('192.12.15.3')).equals('192.12.15.3');
 		expect(format.IPv6('::abf2:192.12.15.3')).equals('192.12.15.3');
 	});
+
+	it('extracts top domain from URL', ()=> {
+		expect(format.topDomain('http://www.microsoft.com')).equals('microsoft.com');
+	});
+
 	it.skip('formats timestamp according to ISO 8601', ()=> {
 
 	});
