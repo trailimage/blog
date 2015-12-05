@@ -13,7 +13,7 @@ describe('Mock Response', ()=> {
 		expect(res.httpStatus).equals(Enum.httpStatus.notFound);
 	});
 
-	it('tracks whether resonse is ended', ()=> {
+	it('tracks whether response is ended', ()=> {
 		res.end();
 		expect(res.ended).is.true;
 	});
