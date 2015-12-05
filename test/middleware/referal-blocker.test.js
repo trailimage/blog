@@ -1,5 +1,6 @@
 'use strict';
 
+require('../mock-config.js');
 const Enum = require('../../lib/enum.js');
 const mocha = require('mocha');
 const expect = require('chai').expect;
@@ -11,12 +12,39 @@ describe('Referal Blocker Middleware', ()=> {
 	let req = new MockRequest();
 	let res = new MockResponse();
 
-	it('flags black-listed URLs', done => {
-		req.referer = 'http://www.microsoft.com';
-
-		blocker.filter(req, res, ()=> {
-			expect(res.status).equals(Enum.httpStatus.notFound);
+	it('blocks black-listed URLs', done => {
+		req.referer = 'http://2323423423.copyrightclaims.org';
+		res.testCallback = error => {
+			expect(error).is.undefined;
+			expect(res.ended).is.true;
+			expect(res.httpStatus).equals(Enum.httpStatus.notFound);
 			done();
-		});
+		};
+		blocker.filter(req, res, res.testCallback);
+	});
+
+	it('allows unlisted URLs', done => {
+		res = new MockResponse();
+		req.referer = 'http://microsoft.com';
+		res.testCallback = error => {
+			expect(error).is.undefined;
+			expect(res.httpStatus).not.equals(Enum.httpStatus.notFound);
+			done();
+		};
+		blocker.filter(req, res, res.testCallback);
+	});
+
+	it('caches black list', done => {
+		const db = require('../../lib/config.js').provider;
+
+		res = new MockResponse();
+		res.testCallback = ()=> {
+			db.cache.getObject('spam-referer', value => {
+				expect(value).to.be.a('array');
+				expect(value.length).at.least(100);
+				done();
+			});
+		};
+		blocker.filter(req, res, res.testCallback);
 	});
 });

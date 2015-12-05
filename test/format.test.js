@@ -30,6 +30,8 @@ describe('Formatting', ()=> {
 
 	it('extracts top domain from URL', ()=> {
 		expect(format.topDomain('http://www.microsoft.com')).equals('microsoft.com');
+		expect(format.topDomain('https://github.com/bjoshuanoah/express-spam-referral-blocker')).equals('github.com');
+		expect(format.topDomain('342342342.copyrightclaims.org')).equals('copyrightclaims.org');
 	});
 
 	it.skip('formats timestamp according to ISO 8601', ()=> {
