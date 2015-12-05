@@ -1,6 +1,7 @@
 ## 2.0.8
 ### Bug Fixes
 - Link names are shortened incorrectly if they end with an anchor (test created)
+- Refresh Google Drive access token before it expires
 
 ## 2.0.7
 ### Bug Fixes
