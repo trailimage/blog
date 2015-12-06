@@ -24,4 +24,6 @@ describe('Redis Cache', ()=> {
 			done();
 		});
 	});
+
+	after(done => { redis.disconnect(); done(); });
 });

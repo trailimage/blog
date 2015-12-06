@@ -1,6 +1,6 @@
 'use strict';
 
-require('../mock-config.js');
+const config = require('../mock-config.js');
 const Enum = require('../../lib/enum.js');
 const mocha = require('mocha');
 const expect = require('chai').expect;

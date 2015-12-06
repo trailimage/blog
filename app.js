@@ -5,6 +5,7 @@
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
 const is = require('./lib/is.js');
+const Enum = require('./lib/enum.js');
 const config = require('./lib/config.js');
 const Express = require('express');
 const npm = require('./package.json');
@@ -20,7 +21,7 @@ function createWebService() {
 	const port = process.env['PORT'] || 3000;
 	const log = config.provider.log;
 
-	log.info('Starting %s application', (config.isProduction) ? 'production' : 'development');
+	log.infoIcon(Enum.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
 
@@ -28,7 +29,7 @@ function createWebService() {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
-		log.info('Listening for authentication on port %d', port);
+		log.infoIcon(Enum.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
 		const Library = require('./lib/models/library.js');
 
@@ -38,7 +39,7 @@ function createWebService() {
 			// library must be loaded before routes are defined
 			defineRoutes(app);
 			app.listen(port);
-			log.info('Listening on port %d', port);
+			log.infoIcon(Enum.icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
 }
