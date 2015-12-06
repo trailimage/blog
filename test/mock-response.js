@@ -14,13 +14,63 @@ class MockResponse {
 		 * @type {function}
 		 */
 		this.testCallback = null;
+		/**
+		 * @type {Object.<String>}
+		 */
+		this.headers = {};
+		/**
+		 * @type {String|Buffer}
+		 */
+		this.content = null;
+
+		this.rendered = {
+			/** @type {String} */
+			template: null,
+			/** @type {Object} */
+			options: null
+		}
 	}
 
 	/**
 	 * @param {Number} value
 	 * @return {MockResponse}
 	 */
-	status(value) { this.httpStatus = value; return this; }
+	status(value) {
+		this.httpStatus = value;
+		return this;
+	}
+
+	/**
+	 * @param {String} key
+	 * @param {String} value
+	 * @return {MockResponse}
+	 */
+	setHeader(key, value) {
+		this.headers[key] = value;
+		return this;
+	}
+
+	/**
+	 * @param {String|Buffer} value
+	 * @return {MockResponse}
+	 */
+	write(value) {
+		this.content = value;
+		return this;
+	}
+
+	/**
+	 *
+	 * @param {String} template
+	 * @param {Object} options
+	 * @param {function(Object, String)} callback
+	 */
+	render(template, options, callback) {
+		this.rendered.template = template;
+		this.rendered.options = options;
+
+		callback(null, JSON.stringify(this.rendered));
+	}
 
 	end() {
 		this.ended = true;
