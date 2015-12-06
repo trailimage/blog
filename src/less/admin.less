@@ -73,6 +73,10 @@ div.column {
 	form {
 		button { float: right; }
 	}
+
+	&#reference {
+		width: 20%;
+	}
 }
 
 #logs {
@@ -101,6 +105,22 @@ div.column {
 				margin: 0;
 				padding: 2px 4px;
 				line-height: 1em;
+
+				&.icon {
+					background-color: #444;
+					font-weight: normal;
+
+					.glyphicon { color: #ccc; }
+					.glyphicon-ban-circle { color: #ccc; }
+					.glyphicon-eye-open { color: #999; }
+					.glyphicon-heart-empty { color: #f00; }
+					.glyphicon-link { color: #fbb; }
+					.glyphicon-lock { color: #0f0; }
+					.glyphicon-log-in { color: #fd0; }
+					.glyphicon-off { color: #09f; }
+					.glyphicon-save { color: #f80; }
+					.glyphicon-save-file { }
+				}
 
 				&.timestamp {
 					text-align: right;
