@@ -2,7 +2,7 @@
 
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Size = require('../../lib/models/size.js');
+const Size = require('../../lib/models/photo-size.js');
 
 describe('Photo Size Model', ()=> {
 	let s = new Size();
