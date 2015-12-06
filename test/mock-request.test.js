@@ -11,4 +11,9 @@ describe('Mock Request', ()=> {
 		req.referer = 'http://2323423423.copyrightclaims.org';
 		expect(req.get('referer')).equals('http://2323423423.copyrightclaims.org');
 	});
+
+	it('allows setting and reading querystring parameters', ()=> {
+		req.params['key'] = 'value';
+		expect(req.params['key']).equals('value');
+	});
 });

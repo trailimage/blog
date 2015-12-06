@@ -97,9 +97,12 @@
 		<table>
 			<tbody>
 		{{#each logs}}
-				<tr class='head'><td colspan='2'>{{@key}}</td></tr>
+				<tr class='head'><td colspan='3'>{{@key}}</td></tr>
 			{{#this}}
-				<tr class='{{level}}'><td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td></tr>
+				<tr class='{{level}}'>
+					<td class='icon'>{{#if iconName}}{{{icon iconName}}}{{/if}}</td>
+					<td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td>
+				</tr>
 			{{/this}}
 		{{/each}}
 			</tbody>

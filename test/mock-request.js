@@ -3,6 +3,7 @@
 class MockRequest {
 	constructor() {
 		this.referer = null;
+		this.params = {};
 	}
 
 	get(field) {
