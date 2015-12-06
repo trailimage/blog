@@ -27,12 +27,23 @@ describe('Mock Response', ()=> {
 		expect(res.content).equals(html);
 	});
 
+	it('captures redirects', ()=> {
+		res.redirect(Enum.httpStatus.permanentRedirect, 'url');
+		expect(res.redirected.status).equals(Enum.httpStatus.permanentRedirect);
+		expect(res.redirected.url).equals('url');
+	});
+
 	it('simulates template rendering', done => {
 		res.render('template', { key1: 'value1', key2: 'value2' }, (err, text) => {
 			expect(err).is.null;
 			expect(res.rendered.template).equals('template');
 			done();
 		});
+	});
+
+	it('provides a 404 convenience method', ()=> {
+		res.notFound();
+		expect(res.httpStatus).equals(Enum.httpStatus.notFound);
 	});
 
 	it('tracks whether response is ended', ()=> {

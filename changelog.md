@@ -1,8 +1,12 @@
 ## 2.0.10
+#### Features
+- Allow icons in log entries
+
 #### Fixes
 - Map back button overlapped map type menu
 - Reloading map doesn't reload track when caching is disabled
 - Memory cache log reference NPE
+- Post tag page may render before all post description are loaded
 - Several new tests
 
 ## 2.0.9

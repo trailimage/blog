@@ -28,7 +28,14 @@ class MockResponse {
 			template: null,
 			/** @type {Object} */
 			options: null
-		}
+		};
+
+		this.redirected = {
+			/** @type {Number} */
+			status: null,
+			/** @type {String} */
+			url: null
+		};
 	}
 
 	/**
@@ -39,6 +46,12 @@ class MockResponse {
 		this.httpStatus = value;
 		return this;
 	}
+
+	/**
+	 * Set status to 404
+	 * @returns {MockResponse}
+	 */
+	notFound() { return this.status(Enum.httpStatus.notFound); }
 
 	/**
 	 * @param {String} key
@@ -57,6 +70,15 @@ class MockResponse {
 	write(value) {
 		this.content = value;
 		return this;
+	}
+
+	/**
+	 * @param {Number} status
+	 * @param {String} url
+	 */
+	redirect(status, url) {
+		this.redirected.status = status;
+		this.redirected.url = url;
 	}
 
 	/**
