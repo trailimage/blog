@@ -2,14 +2,25 @@
 
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const cache = require('../../lib/cache/memory-cache.js');
+const MemoryCache = require('../../lib/cache/memory-cache.js');
+const key = 'test-key';
 
 describe('Memory Cache', ()=> {
-	it.skip('stores a key and value', ()=> {
+	let cache = new MemoryCache();
 
+	it('stores a key and value', done => {
+		cache.add(key, 'value', (err, result) => {
+			expect(err).equals(MemoryCache.ErrorType.None);
+			expect(result).is.true;
+			done();
+		});
 	});
 
-	it.skip('removes a key and its value', ()=> {
-
+	it('removes a key and its value', done => {
+		cache.remove(key, (err, result) => {
+			expect(err).equals(MemoryCache.ErrorType.None);
+			expect(result).equals(1);
+			done();
+		});
 	});
 });
