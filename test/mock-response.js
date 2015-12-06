@@ -9,8 +9,8 @@ class MockResponse {
 		this.httpStatus = Enum.httpStatus.ok;
 		this.ended = false;
 		/**
-		 * Method to be called as both next() in middleware and in the event of ending the response
-		 * otherwise the test will timeout if the resonse is ended
+		 * Method to call when response is complete
+		 * Can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
 		 * @type {function}
 		 */
 		this.testCallback = null;
