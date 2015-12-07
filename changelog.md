@@ -3,7 +3,7 @@
 - Add page for internal server errors
 
 #### Fixes
-- 
+- Circular module dependency was creating NPEs
 
 ## 2.0.11
 #### Fixes
