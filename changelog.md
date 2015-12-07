@@ -1,3 +1,7 @@
+## 2.0.11
+#### Fixes
+- Correct mapping for old blog URL
+
 ## 2.0.10
 #### Features
 - Allow icons in log entries
