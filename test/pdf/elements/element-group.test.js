@@ -9,21 +9,33 @@ const Text = require(pdfPath + 'elements/text-element.js');
 const Size = require('../../../lib/models/photo-size.js');
 const Layout = require(pdfPath + 'pdf-layout.js');
 const style = {
-	"rules": {
-		"testGroup": {
-			"top": 0,
-			"left": 0,
-			"width": 20,
-			"height": 15,
-			"alignContent": Layout.Align.Center
+	rules: {
+		testGroup: {
+			top: 0,
+			left: 0,
+			width: 20,
+			height: 15,
+			alignContent: Layout.Align.Center
 		},
-		"testImage": {
-			"scale": Layout.Scale.Fit
+		testImage: {
+			scale: Layout.Scale.Fit
 		},
-		"testText": {
-			"left": 0,
-			"bottom": 0,
-			"right": 0
+		testText: {
+			left: 0,
+			bottom: 0,
+			right: 0
+		},
+		inner1: {
+			top: 6,
+			left: 5,
+			width: 9,
+			height: 7
+		},
+		inner2: {
+			top: 4,
+			left: 5,
+			width: 4,
+			height: 3
 		}
 	}
 };
@@ -35,7 +47,36 @@ describe('PDF Element Group', ()=> {
 	let text = new Text('testText');
 
 	img.original = new Size();
-	group.add(img);
+	//group.add(img);
+
+	it('updates absolute offsets of child elements', ()=> {
+		/*
+		            ← 20 →
+		┌──────┬──────────────────┬───┐
+		│      6 ───── 9 ─────┤   │   │
+		│      ↓     ├─ 4 ─┤     10*  │
+		├─ 5 → ╔══════════════╗ ┬ │ ┬ │ ↑
+		│      ║ inner1       ║ 4 │ │ │ 15
+		│      ╟─ 5 →┌─────┐  ║ ┼ ┴ │ │ ↓
+		├──────╫ 10*→│  2  │  ║ 3   8 │
+		│      ║     └─────┘  ║ ┴   │ │
+		│      ╚══════════════╝     ┴ │
+		└─────────────────────────────┘ * calculated
+		*/
+		let inner1 = new Group('inner1');
+		let inner2 = new Text('inner2');
+
+		inner1.add(inner2);
+		group.add(inner1);
+
+		group.explicitLayout(layout);
+		group.implicitLayout();
+
+		expect(inner1.absolute.top).equals(6);
+		expect(inner1.absolute.left).equals(5);
+		expect(inner2.absolute.top).equals(10);
+		expect(inner2.absolute.left).equals(10);
+	});
 
 	it('scales and centers child elements', ()=> {
 		/*       ← 20 →

@@ -12,6 +12,40 @@ describe('PDF Element Area', ()=> {
 		a.height = 10;
 		expect(a.isEmpty).is.false;
 	});
+
+	it("adds another element's offsets to its own", ()=> {
+		let a = new ElementArea();
+		let b = new ElementArea();
+		a.top = 10;
+		a.left = 10;
+		b.top = 2;
+		b.left = 4;
+
+		a.add(b);
+
+		expect(a.top).equals(12);
+		expect(a.left).equals(14);
+
+		// handles NaN
+		b.top = NaN;
+		a.add(b);
+
+		expect(a.top).equals(12);
+	});
+
+	it('creates a copy of itself', ()=> {
+		let a = new ElementArea();
+		a.top = 1;
+		a.left = 2;
+		a.width = 3;
+		a.height = 4;
+
+		let b = a.copy();
+
+		expect(b.top).equals(1);
+		expect(b.height).equals(4);
+	});
+
 	it('indicates if areas overlap', ()=> {
 		let area1 = new ElementArea();
 		let area2 = new ElementArea();
@@ -22,7 +56,7 @@ describe('PDF Element Area', ()=> {
 		│           │
 		│           │
 		└───────────┼───────────┐
-   	                │ area 2    │
+   	            │ area 2    │
 		            │           │
 		            │           │
 		            │           │
@@ -47,7 +81,7 @@ describe('PDF Element Area', ()=> {
 		│           │
 		│           ├───────────┐
 		└───────────┤ area 2    │
-   	                │           │
+   	            │           │
 		            │           │
 		            │           │
 		            └───────────┘
@@ -62,9 +96,9 @@ describe('PDF Element Area', ()=> {
 		│     ┌─────┼─────┐
 		│     │     │     │
 		└─────┼─────┘     │
-   	          │           │
+   	      │           │
 		      │           │
-              └───────────┘
+            └───────────┘
 		*/
 		area2.top = 6;
 		area2.left = 5;
