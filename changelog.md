@@ -1,3 +1,10 @@
+## 2.0.12
+#### Features
+- Add page for internal server errors
+
+#### Fixes
+- 
+
 ## 2.0.11
 #### Fixes
 - Correct mapping for old blog URL
