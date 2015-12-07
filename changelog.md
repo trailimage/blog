@@ -2,6 +2,13 @@
 #### Features
 - Download post as PDF
 
+## 2.0.12
+#### Features
+- Add page for internal server errors
+
+#### Fixes
+- Circular module dependency was creating NPEs
+
 ## 2.0.11
 #### Fixes
 - Correct mapping for old blog URL
