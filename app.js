@@ -119,7 +119,7 @@ function injectDependencies() {
 	const OAuthOptions = require('./lib/auth/oauth-options.js');
 	const RedisCache = require('./lib/providers/redis/redis-cache.js');
 	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleGPX = require('./lib/providers/google/google-file.js');
+	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
@@ -156,7 +156,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	config.provider.map = new GoogleGPX({
+	config.provider.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
