@@ -80,7 +80,7 @@ function applyMiddleware(app) {
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
 	const outputCache = require('./lib/middleware/output-cache.js');
-	const spamBlocker = require('./lib/middleware/referal-blocker.js');
+	const spamBlocker = require('./lib/middleware/referral-blocker.js');
 
 	app.use(spamBlocker.filter);
 
