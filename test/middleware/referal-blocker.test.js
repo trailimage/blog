@@ -47,4 +47,8 @@ describe('Referal Blocker Middleware', ()=> {
 		};
 		blocker.filter(req, res, res.testCallback);
 	});
+
+	it.skip('refreshes the cache after a period of time', ()=> {
+		// needs to call private method
+	});
 });

@@ -1,3 +1,7 @@
+## 2.0.13
+#### Fixes
+- Incorrect date check causing unecessary downloads of domain spam list
+
 ## 2.0.12
 #### Features
 - Add page for internal server errors
