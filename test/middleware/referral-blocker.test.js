@@ -1,12 +1,12 @@
 'use strict';
 
-const config = require('../mock-config.js');
-const Enum = require('../../lib/enum.js');
+const mock = require('../mock.js');
+const Enum = mock.app.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const blocker = require('../../lib/middleware/referral-blocker.js');
-const MockRequest = require('../mock-request.js');
-const MockResponse = require('../mock-response.js');
+const MockRequest = mock.Request;
+const MockResponse = mock.Response;
 
 describe('Referral Blocker Middleware', ()=> {
 	let req = new MockRequest();
@@ -35,7 +35,7 @@ describe('Referral Blocker Middleware', ()=> {
 	});
 
 	it('caches black list', done => {
-		const db = require('../../lib/config.js').provider;
+		const db = mock.app.provider;
 
 		res = new MockResponse();
 		res.testCallback = ()=> {

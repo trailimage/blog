@@ -1,15 +1,11 @@
 'use strict';
 
-const is = require('../lib/is.js');
-const Enum = require('../lib/enum.js');
-const format = require('../lib/format.js');
-const config = require('./mock-config.js');
+const app = require('../lib/index.js');
 const FileBase = require('../lib/providers/file-base.js');
 const OAuthOptions = require('../lib/auth/oauth-options.js');
 const extend = require('extend');
 const ServerResponse = require('http').ServerResponse;
 const request = require('request');
-const db = config.provider;
 
 /**
  * Retrieve GPS file for post

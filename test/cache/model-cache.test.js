@@ -1,11 +1,12 @@
 'use strict';
 
+const app = require('../../lib/index.js');
 const config = require('../mock-config.js');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const ModelCache = require('../../lib/cache/model-cache.js');
 const testValue = { key1: 'value1', key2: 'value2' };
-const db = config.provider;
+const db = app.provider;
 
 describe('Model Cache', ()=> {
 	it('only gets cached items if caching is enabled', done => {
