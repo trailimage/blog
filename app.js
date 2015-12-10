@@ -7,7 +7,7 @@
 const app = require('./lib/index.js');
 const is = app.is;
 const Enum = app.enum;
-const config = require('./lib/config.js');
+const config = app.config;
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -32,11 +32,9 @@ function createWebService() {
 		express.listen(port);
 		log.infoIcon(Enum.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
-		const Library = require('./lib/models/library.js');
-
 		applyMiddleware(express);
 
-		Library.load(() => {
+		app.Library.load(() => {
 			// library must be loaded before routes are defined
 			defineRoutes(express);
 			express.listen(port);
@@ -117,8 +115,7 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const OAuthOptions = require('./lib/auth/oauth-options.js');
-	const RedisCache = require('./lib/providers/redis/redis-cache.js');
+	const OAuthOptions = app.Auth.Options;
 	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
 	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
@@ -131,12 +128,11 @@ function injectDependencies() {
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
-		const RedisLog = require('./lib/providers/redis/redis-log.js');
-		app.provider.log = new RedisLog(redisUrl);
+		app.provider.log = new app.Log.Redis(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		app.provider.cacheHost = new RedisCache(redisUrl);
+		app.provider.cacheHost = new app.Cache.Redis(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
 		app.provider.log.info('Proxy detected — using default cache provider');
