@@ -4,10 +4,10 @@
  * Application entry point
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-const app = require('./lib/index.js');
-const is = app.is;
-const Enum = app.enum;
-const config = app.config;
+const lib = require('./lib/index.js');
+const is = lib.is;
+const Enum = lib.enum;
+const config = lib.config;
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -17,27 +17,27 @@ injectDependencies();
 createWebService();
 
 function createWebService() {
-	const express = Express();
+	const app = Express();
 	/** @type {Number} */
 	const port = process.env['PORT'] || 3000;
-	const log = app.provider.log;
+	const log = lib.provider.log;
 
 	log.infoIcon(Enum.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
 
-	defineViews(express);
+	defineViews(app);
 
-	if (app.provider.needsAuth) {
+	if (lib.provider.needsAuth) {
 		// must authenticate before normal routes are available
-		defineAuthRoutes(express);
-		express.listen(port);
+		defineAuthRoutes(app);
+		app.listen(port);
 		log.infoIcon(Enum.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
-		applyMiddleware(express);
+		applyMiddleware(app);
 
-		app.Library.load(() => {
+		lib.Library.load(() => {
 			// library must be loaded before routes are defined
-			defineRoutes(express);
-			express.listen(port);
+			defineRoutes(app);
+			app.listen(port);
 			log.infoIcon(Enum.icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
@@ -51,8 +51,7 @@ function createWebService() {
 function defineViews(express) {
 	/** @type {ExpressHbs} */
 	const hbs = require('express-hbs');
-	const format = app.format;
-	const template = app.template;
+	const format = lib.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -60,7 +59,7 @@ function defineViews(express) {
 	express.set('views', root + '/views');
 	express.set('view engine', engine);
 	express.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + template.layout.main + '.hbs',
+		defaultLayout: root + '/views/' + lib.template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
@@ -71,17 +70,17 @@ function defineViews(express) {
 }
 
 /**
- * @param express
+ * @param app
  * @see http://expressjs.com/api.html#app.use
  */
-function applyMiddleware(express) {
+function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
 	const outputCache = require('./lib/middleware/output-cache.js');
 	const spamBlocker = require('./lib/middleware/referral-blocker.js');
 
-	express.use(spamBlocker.filter);
+	app.use(spamBlocker.filter);
 
 	if (config.usePersona) {
 		// use wwwhisper middleware to authenticate some routes
@@ -89,14 +88,14 @@ function applyMiddleware(express) {
 		const wwwhisper = require('connect-wwwhisper');
 
 		//app.use(/\/admin|\/wwwhisper/gi, wwwhisper(false));
-		express.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
+		app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
 		//app.use(['/admin','/wwwhisper'], wwwhisper(false));
 	}
 	// needed to parse admin page posts with extended enabled for form select arrays
-	express.use('/admin', bodyParser.urlencoded({ extended: true }));
-	express.use(compress({}));
-	express.use(outputCache.methods);
-	express.use(Express.static(__dirname + '/dist'));
+	app.use('/admin', bodyParser.urlencoded({ extended: true }));
+	app.use(compress({}));
+	app.use(outputCache.methods);
+	app.use(Express.static(__dirname + '/dist'));
 }
 
 /**
@@ -115,7 +114,7 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const OAuthOptions = app.Auth.Options;
+	const OAuthOptions = lib.Auth.Options;
 	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
 	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
@@ -128,16 +127,16 @@ function injectDependencies() {
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
-		app.provider.log = new app.Log.Redis(redisUrl);
+		lib.provider.log = new lib.Log.Redis(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		app.provider.cacheHost = new app.Cache.Redis(redisUrl);
+		lib.provider.cacheHost = new lib.Cache.Redis(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
-		app.provider.log.info('Proxy detected — using default cache provider');
+		lib.provider.log.info('Proxy detected — using default cache provider');
 	}
-	app.provider.photo = new FlickrPhoto({
+	lib.provider.photo = new FlickrPhoto({
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -153,7 +152,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	app.provider.file = new GoogleFile({
+	lib.provider.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
@@ -169,8 +168,8 @@ function injectDependencies() {
  * @see http://expressjs.com/4x/api.html#router
  * @see http://expressjs.com/guide/routing.html
  */
-function defineRoutes(express) {
-	const Enum = require('./lib/enum.js');
+function defineRoutes(app) {
+	const Enum = app.enum;
 	const r = require('./lib/controllers/routes.js');
 	/** @type {string} Slug pattern */
 	const s = '([\\w\\d-]{4,})';
@@ -179,45 +178,45 @@ function defineRoutes(express) {
 	/** @type {string} Flickr set ID pattern */
 	const postID = ':postID(\\d{17})';
 
-	express.use('/admin', r.admin);
-	express.use('/api/v1', r.api);
+	app.use('/admin', r.admin);
+	app.use('/api/v1', r.api);
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
-		express.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
+		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
 	// the latest posts
-	express.get('/', r.tag.home);
-	express.get('/rss', r.rss.view);
-	express.get('/about', r.about.view);
-	express.get('/js/post-menu-data.js', r.menu.data);
-	express.get('/sitemap.xml', r.sitemap.view);
-	express.get('/exif/'+photoID, r.photo.exif);
-	express.get('/issues?', r.issue.view);
-	express.get('/issues?/:slug'+s, r.issue.view);
-	express.get('/tag-menu', r.tag.menu);
-	express.get('/mobile-menu', r.menu.mobile);
-	express.get('/search', r.search.view);
-	express.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
+	app.get('/', r.tag.home);
+	app.get('/rss', r.rss.view);
+	app.get('/about', r.about.view);
+	app.get('/js/post-menu-data.js', r.menu.data);
+	app.get('/sitemap.xml', r.sitemap.view);
+	app.get('/exif/'+photoID, r.photo.exif);
+	app.get('/issues?', r.issue.view);
+	app.get('/issues?/:slug'+s, r.issue.view);
+	app.get('/tag-menu', r.tag.menu);
+	app.get('/mobile-menu', r.menu.mobile);
+	app.get('/search', r.search.view);
+	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
 	// old blog links with format /YYYY/MM/slug
-	express.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);
-	express.get('/photo-tag', r.photo.tags);
-	express.get('/photo-tag/:tagSlug', r.photo.tags);
-	express.get('/photo-tag/search/:tagSlug', r.photo.withTag);
+	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);
+	app.get('/photo-tag', r.photo.tags);
+	app.get('/photo-tag/:tagSlug', r.photo.tags);
+	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
 	// links with bare photo provider ID
-	express.get('/'+photoID, r.photo.view);
+	app.get('/'+photoID, r.photo.view);
 	// links with bare photo provider set ID
-	express.get('/'+postID, r.post.providerID);
-	express.get('/'+postID+'/'+photoID, r.post.providerID);
-	express.get('/:slug'+s+'/pdf', r.pdf.view);
-	express.get('/:slug'+s+'/map', r.map.view);
-	express.get('/:slug'+s+'/gpx', r.map.download);
-	express.get('/:slug'+s+'/map/'+photoID, r.map.view);
-	express.get('/:slug'+s+'/geo.json', r.map.json);
-	express.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
-	express.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
-	express.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
-	express.get('/:slug'+s, r.post.view);
+	app.get('/'+postID, r.post.providerID);
+	app.get('/'+postID+'/'+photoID, r.post.providerID);
+	app.get('/:slug'+s+'/pdf', r.pdf.view);
+	app.get('/:slug'+s+'/map', r.map.view);
+	app.get('/:slug'+s+'/gpx', r.map.download);
+	app.get('/:slug'+s+'/map/'+photoID, r.map.view);
+	app.get('/:slug'+s+'/geo.json', r.map.json);
+	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
+	app.get('/:slug'+s, r.post.view);
 }
 
 /**
