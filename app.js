@@ -55,9 +55,9 @@ function defineViews(app) {
 	const root = __dirname;
 
 	// http://expressjs.com/4x/api.html#app-settings
-	express.set('views', root + '/views');
-	express.set('view engine', engine);
-	express.engine(engine, hbs.express4({
+	app.set('views', root + '/views');
+	app.set('view engine', engine);
+	app.engine(engine, hbs.express4({
 		defaultLayout: root + '/views/' + TI.template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
@@ -220,13 +220,13 @@ function defineRoutes(app) {
 
 /**
  * If a provider isn't authenticated then all paths route to authentication pages
- * @param express
+ * @param app
  */
-function defineAuthRoutes(express) {
+function defineAuthRoutes(app) {
 	const c = TI.Controller.authorize;
 
-	express.get('/auth/flickr', c.flickr);
-	express.get('/auth/google', c.google);
+	app.get('/auth/flickr', c.flickr);
+	app.get('/auth/google', c.google);
 	// all other routes begin authentication process
-	express.get('*', c.view);
+	app.get('*', c.view);
 }

@@ -1,6 +1,8 @@
 # 2.1.0
 #### Features
 - Download post as PDF
+#### Fixes
+- Post pages showing map when it should be hidden
 
 ## 2.0.14
 #### Fixes
