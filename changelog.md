@@ -1,7 +1,13 @@
+## 2.0.13
+#### Features
+- Refactor Google OAuth to support different APIs
+- Use indexing modules (namespaces) to remove module require paths
+#### Fixes
+- Incorrect date check causing unecessary downloads of domain spam list
+
 ## 2.0.12
 #### Features
 - Add page for internal server errors
-
 #### Fixes
 - Circular module dependency was creating NPEs
 
@@ -12,7 +18,6 @@
 ## 2.0.10
 #### Features
 - Allow icons in log entries
-
 #### Fixes
 - Map back button overlapped map type menu
 - Reloading map doesn't reload track when caching is disabled
@@ -57,7 +62,6 @@
 ## 2.0.2
 #### Features
 - Minor layout tweaks
-
 #### Fixes
 - Unable to reload cached GPX track
 - Remove media summary from post description
@@ -67,7 +71,6 @@
 - Show progress while GPX file is downloaded and parsed
 - Change footer to show GitHub version
 - Tweak map track and point colors
-
 #### Fixes
 - Can't delete cached map for post series
 - Remove debug code that was forcing Redis cache
@@ -87,7 +90,6 @@
 - Javascript zoom on post images instead of link to Flickr size
 - Lazy-load GPX files from cloud drive instead of uploading
 - Separate management of cached GeoJSON
-
 #### Fixes
 - Trailing quote wasn't converted to curly quote if preceded by a comma
 - Search page is broken

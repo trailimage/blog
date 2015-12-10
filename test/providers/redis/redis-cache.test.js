@@ -1,10 +1,11 @@
 'use strict';
 
-const config = require('../../../lib/config.js');
-const is = require('../../../lib/is.js');
+const TI = require('../../');
+const config = TI.config;
+const is = TI.is;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const RedisCache = require('../../../lib/providers/redis/redis-cache.js');
+const RedisCache = TI.Provider.Cache.Redis;
 const success = 'OK';
 const key = 'test-key';
 

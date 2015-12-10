@@ -4,9 +4,9 @@
  * Application entry point
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-const is = require('./lib/is.js');
-const Enum = require('./lib/enum.js');
-const config = require('./lib/config.js');
+const TI = require('./lib');
+const is = TI.is;
+const config = TI.config;
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -19,27 +19,25 @@ function createWebService() {
 	const app = Express();
 	/** @type {Number} */
 	const port = process.env['PORT'] || 3000;
-	const log = config.provider.log;
+	const log = TI.active.log;
 
-	log.infoIcon(Enum.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
+	log.infoIcon(TI.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
 
-	if (config.provider.needsAuth) {
+	if (TI.active.needsAuth) {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
-		log.infoIcon(Enum.icon.lock, 'Listening for authentication on port %d', port);
+		log.infoIcon(TI.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
-		const Library = require('./lib/models/library.js');
-
 		applyMiddleware(app);
 
-		Library.load(() => {
+		TI.Library.load(() => {
 			// library must be loaded before routes are defined
 			defineRoutes(app);
 			app.listen(port);
-			log.infoIcon(Enum.icon.heartOutline, 'Listening on port %d', port);
+			log.infoIcon(TI.icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
 }
@@ -49,19 +47,18 @@ function createWebService() {
  * @see https://npmjs.org/package/express-hbs
  * @see http://mustache.github.com/mustache.5.html
  */
-function defineViews(app) {
+function defineViews(express) {
 	/** @type {ExpressHbs} */
 	const hbs = require('express-hbs');
-	const format = require('./lib/format.js');
-	const template = require('./lib/template.js');
+	const format = TI.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
 	// http://expressjs.com/4x/api.html#app-settings
-	app.set('views', root + '/views');
-	app.set('view engine', engine);
-	app.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + template.layout.main + '.hbs',
+	express.set('views', root + '/views');
+	express.set('view engine', engine);
+	express.engine(engine, hbs.express4({
+		defaultLayout: root + '/views/' + TI.template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
@@ -79,8 +76,8 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = require('./lib/middleware/output-cache.js');
-	const spamBlocker = require('./lib/middleware/referal-blocker.js');
+	const outputCache = TI.Middleware.outputCache;
+	const spamBlocker = TI.Middleware.referralBlocker;
 
 	app.use(spamBlocker.filter);
 
@@ -116,10 +113,9 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const OAuthOptions = require('./lib/auth/oauth-options.js');
-	const RedisCache = require('./lib/providers/redis/redis-cache.js');
-	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleGPX = require('./lib/providers/google/google-gpx.js');
+	const OAuthOptions = TI.Auth.Options;
+	const FlickrPhoto = TI.Provider.Photo.Flickr;
+	const GoogleFile = TI.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
@@ -130,17 +126,16 @@ function injectDependencies() {
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
-		const RedisLog = require('./lib/providers/redis/redis-log.js');
-		config.provider.log = new RedisLog(redisUrl);
+		TI.active.log = new TI.Provider.Log.Redis(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		config.provider.cacheHost = new RedisCache(redisUrl);
+		TI.active.cacheHost = new TI.Provider.Cache.Redis(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
-		config.provider.log.info('Proxy detected — using default cache provider');
+		TI.active.log.info('Proxy detected — using default cache provider');
 	}
-	config.provider.photo = new FlickrPhoto({
+	TI.active.photo = new FlickrPhoto({
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -156,7 +151,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	config.provider.map = new GoogleGPX({
+	TI.active.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
@@ -173,7 +168,7 @@ function injectDependencies() {
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app) {
-	const Enum = require('./lib/enum.js');
+	const c = TI.Controller;
 	const r = require('./lib/controllers/routes.js');
 	/** @type {string} Slug pattern */
 	const s = '([\\w\\d-]{4,})';
@@ -183,55 +178,55 @@ function defineRoutes(app) {
 	const postID = ':postID(\\d{17})';
 
 	app.use('/admin', r.admin);
-	app.use('/api/v1', r.api);
+	//app.use('/api/v1', r.api);
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
+		app.get('/' + slug, (req, res) => { res.redirect(TI.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
 	// the latest posts
-	app.get('/', r.tag.home);
-	app.get('/rss', r.rss.view);
-	app.get('/about', r.about.view);
-	app.get('/js/post-menu-data.js', r.menu.data);
-	app.get('/sitemap.xml', r.sitemap.view);
-	app.get('/exif/'+photoID, r.photo.exif);
-	app.get('/issues?', r.issue.view);
-	app.get('/issues?/:slug'+s, r.issue.view);
-	app.get('/tag-menu', r.tag.menu);
-	app.get('/mobile-menu', r.menu.mobile);
-	app.get('/search', r.search.view);
-	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
+	app.get('/', c.tag.home);
+	app.get('/rss', c.rss.view);
+	app.get('/about', c.about.view);
+	app.get('/js/post-menu-data.js', c.menu.data);
+	app.get('/sitemap.xml', c.sitemap.view);
+	app.get('/exif/'+photoID, c.photo.exif);
+	app.get('/issues?', c.issue.view);
+	app.get('/issues?/:slug'+s, c.issue.view);
+	app.get('/tag-menu', c.tag.menu);
+	app.get('/mobile-menu', c.menu.mobile);
+	app.get('/search', c.search.view);
+	app.get('/:category(who|what|when|where|tag)/:tag', c.tag.view);
 	// old blog links with format /YYYY/MM/slug
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);
-	app.get('/photo-tag', r.photo.tags);
-	app.get('/photo-tag/:tagSlug', r.photo.tags);
-	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
+	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', c.post.blog);
+	app.get('/photo-tag', c.photo.tags);
+	app.get('/photo-tag/:tagSlug', c.photo.tags);
+	app.get('/photo-tag/search/:tagSlug', c.photo.withTag);
 	// links with bare photo provider ID
-	app.get('/'+photoID, r.photo.view);
+	app.get('/'+photoID, c.photo.view);
 	// links with bare photo provider set ID
-	app.get('/'+postID, r.post.providerID);
-	app.get('/'+postID+'/'+photoID, r.post.providerID);
-	app.get('/:slug'+s+'/pdf', r.pdf.view);
-	app.get('/:slug'+s+'/map', r.map.view);
-	app.get('/:slug'+s+'/gpx', r.map.download);
-	app.get('/:slug'+s+'/map/'+photoID, r.map.view);
-	app.get('/:slug'+s+'/geo.json', r.map.json);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
-	app.get('/:slug'+s, r.post.view);
+	app.get('/'+postID, c.post.providerID);
+	app.get('/'+postID+'/'+photoID, c.post.providerID);
+	app.get('/:slug'+s+'/pdf', c.pdf.view);
+	app.get('/:slug'+s+'/map', c.map.view);
+	app.get('/:slug'+s+'/gpx', c.map.download);
+	app.get('/:slug'+s+'/map/'+photoID, c.map.view);
+	app.get('/:slug'+s+'/geo.json', c.map.json);
+	app.get('/:groupSlug'+s+'/:partSlug'+s, c.post.seriesPost);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', c.map.seriesView);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, c.map.seriesView);
+	app.get('/:slug'+s, c.post.view);
 }
 
 /**
  * If a provider isn't authenticated then all paths route to authentication pages
- * @param app
+ * @param express
  */
-function defineAuthRoutes(app) {
-	const c = require('./lib/controllers/authorize-controller.js');
+function defineAuthRoutes(express) {
+	const c = TI.Controller.authorize;
 
-	app.get('/auth/flickr', c.flickr);
-	app.get('/auth/google', c.google);
+	express.get('/auth/flickr', c.flickr);
+	express.get('/auth/google', c.google);
 	// all other routes begin authentication process
-	app.get('*', c.view);
+	express.get('*', c.view);
 }
