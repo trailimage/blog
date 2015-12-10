@@ -1,6 +1,7 @@
 ## 2.0.13
 #### Features
 - Refactor Google OAuth to support different APIs
+- Use indexing modules (namespaces) to remove module require paths
 #### Fixes
 - Incorrect date check causing unecessary downloads of domain spam list
 
