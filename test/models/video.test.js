@@ -1,11 +1,11 @@
 'use strict';
 
+const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Video = require('../../lib/models/video.js');
 
 describe('Video Model', ()=> {
-	let v = new Video();
+	let v = new TI.Video();
 
 	it('indicates if values are empty', ()=> {
 		expect(v.empty).is.true;

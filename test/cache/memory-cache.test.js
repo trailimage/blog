@@ -1,8 +1,9 @@
 'use strict';
 
+const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const MemoryCache = require('../../lib/cache/memory-cache.js');
+const MemoryCache = TI.Provider.Cache.Memory;
 const hashValue = { key1: 'value1', key2: 'value2' };
 const key = 'test-key';
 

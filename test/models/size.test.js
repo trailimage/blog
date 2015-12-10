@@ -1,11 +1,11 @@
 'use strict';
 
+const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Size = require('../../lib/models/photo-size.js');
 
 describe('Photo Size Model', ()=> {
-	let s = new Size();
+	let s = new TI.PhotoSize();
 
 	it('indicates if values are empty', ()=> {
 		expect(s.empty).is.true;
