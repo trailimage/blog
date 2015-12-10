@@ -19,13 +19,13 @@ function createWebService() {
 	const app = Express();
 	/** @type {Number} */
 	const port = process.env['PORT'] || 3000;
-	const log = TI.log;
+	const log = TI.active.log;
 
 	log.infoIcon(TI.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
 
-	if (TI.provider.needsAuth) {
+	if (TI.active.needsAuth) {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
@@ -114,8 +114,8 @@ function filter(regex, fn) {
  */
 function injectDependencies() {
 	const OAuthOptions = TI.Auth.Options;
-	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
-	const GoogleFile = require('./lib/providers/google/google-file.js');
+	const FlickrPhoto = TI.Provider.Photo.Flickr;
+	const GoogleFile = TI.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
@@ -126,16 +126,16 @@ function injectDependencies() {
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
-		TI.provider.log = new TI.Log.Redis(redisUrl);
+		TI.active.log = new TI.Provider.Log.Redis(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		TI.provider.cacheHost = new TI.Cache.Redis(redisUrl);
+		TI.active.cacheHost = new TI.Provider.Cache.Redis(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
-		TI.provider.log.info('Proxy detected — using default cache provider');
+		TI.active.log.info('Proxy detected — using default cache provider');
 	}
-	TI.provider.photo = new FlickrPhoto({
+	TI.active.photo = new FlickrPhoto({
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -151,7 +151,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	TI.provider.file = new GoogleFile({
+	TI.active.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
@@ -168,6 +168,7 @@ function injectDependencies() {
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app) {
+	const c = TI.Controller;
 	const r = require('./lib/controllers/routes.js');
 	/** @type {string} Slug pattern */
 	const s = '([\\w\\d-]{4,})';
@@ -177,44 +178,44 @@ function defineRoutes(app) {
 	const postID = ':postID(\\d{17})';
 
 	app.use('/admin', r.admin);
-	app.use('/api/v1', r.api);
+	//app.use('/api/v1', r.api);
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
 		app.get('/' + slug, (req, res) => { res.redirect(TI.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
 	// the latest posts
-	app.get('/', r.tag.home);
-	app.get('/rss', r.rss.view);
-	app.get('/about', r.about.view);
-	app.get('/js/post-menu-data.js', r.menu.data);
-	app.get('/sitemap.xml', r.sitemap.view);
-	app.get('/exif/'+photoID, r.photo.exif);
-	app.get('/issues?', r.issue.view);
-	app.get('/issues?/:slug'+s, r.issue.view);
-	app.get('/tag-menu', r.tag.menu);
-	app.get('/mobile-menu', r.menu.mobile);
-	app.get('/search', r.search.view);
-	app.get('/:category(who|what|when|where|tag)/:tag', r.tag.view);
+	app.get('/', c.tag.home);
+	app.get('/rss', c.rss.view);
+	app.get('/about', c.about.view);
+	app.get('/js/post-menu-data.js', c.menu.data);
+	app.get('/sitemap.xml', c.sitemap.view);
+	app.get('/exif/'+photoID, c.photo.exif);
+	app.get('/issues?', c.issue.view);
+	app.get('/issues?/:slug'+s, c.issue.view);
+	app.get('/tag-menu', c.tag.menu);
+	app.get('/mobile-menu', c.menu.mobile);
+	app.get('/search', c.search.view);
+	app.get('/:category(who|what|when|where|tag)/:tag', c.tag.view);
 	// old blog links with format /YYYY/MM/slug
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', r.post.blog);
-	app.get('/photo-tag', r.photo.tags);
-	app.get('/photo-tag/:tagSlug', r.photo.tags);
-	app.get('/photo-tag/search/:tagSlug', r.photo.withTag);
+	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', c.post.blog);
+	app.get('/photo-tag', c.photo.tags);
+	app.get('/photo-tag/:tagSlug', c.photo.tags);
+	app.get('/photo-tag/search/:tagSlug', c.photo.withTag);
 	// links with bare photo provider ID
-	app.get('/'+photoID, r.photo.view);
+	app.get('/'+photoID, c.photo.view);
 	// links with bare photo provider set ID
-	app.get('/'+postID, r.post.providerID);
-	app.get('/'+postID+'/'+photoID, r.post.providerID);
-	app.get('/:slug'+s+'/pdf', r.pdf.view);
-	app.get('/:slug'+s+'/map', r.map.view);
-	app.get('/:slug'+s+'/gpx', r.map.download);
-	app.get('/:slug'+s+'/map/'+photoID, r.map.view);
-	app.get('/:slug'+s+'/geo.json', r.map.json);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, r.post.seriesPost);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', r.map.seriesView);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, r.map.seriesView);
-	app.get('/:slug'+s, r.post.view);
+	app.get('/'+postID, c.post.providerID);
+	app.get('/'+postID+'/'+photoID, c.post.providerID);
+	app.get('/:slug'+s+'/pdf', c.pdf.view);
+	app.get('/:slug'+s+'/map', c.map.view);
+	app.get('/:slug'+s+'/gpx', c.map.download);
+	app.get('/:slug'+s+'/map/'+photoID, c.map.view);
+	app.get('/:slug'+s+'/geo.json', c.map.json);
+	app.get('/:groupSlug'+s+'/:partSlug'+s, c.post.seriesPost);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', c.map.seriesView);
+	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, c.map.seriesView);
+	app.get('/:slug'+s, c.post.view);
 }
 
 /**

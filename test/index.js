@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @type {TrailImageIndex}
+ * @type {AppNamespace}
  */
 const TI = require('../lib');
 
-TI.provider.log = new TI.Log.Null();
+TI.active.log = new TI.Provider.Log.Null();
 
 TI.Mock = class {
 	static get Request() { return require('./mock-request.js'); }

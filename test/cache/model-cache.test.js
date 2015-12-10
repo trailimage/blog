@@ -4,9 +4,9 @@ const TI = require('../');
 const config = TI.config;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const ModelCache = TI.Cache.Model;
+const ModelCache = TI.Provider.Cache.Model;
 const testValue = { key1: 'value1', key2: 'value2' };
-const db = TI.provider;
+const db = TI.active;
 
 describe('Model Cache', ()=> {
 	it('only gets cached items if caching is enabled', done => {

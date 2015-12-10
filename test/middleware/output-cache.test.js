@@ -1,12 +1,11 @@
 'use strict';
 
-/** @type {TrailImageIndex} */
 const TI = require('../');
 const Enum = TI.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const outputCache = TI.Middleware.outputCache;
-const CacheItem = TI.Cache.Item;
+const CacheItem = TI.Provider.Cache.Item;
 
 describe('Output Cache Middleware', ()=> {
 	let req = new TI.Mock.Request();

@@ -32,7 +32,7 @@ describe('Referral Blocker Middleware', ()=> {
 	});
 
 	it('caches black list', done => {
-		const db = TI.provider;
+		const db = TI.active;
 
 		res = new TI.Mock.Response();
 		res.testCallback = ()=> {

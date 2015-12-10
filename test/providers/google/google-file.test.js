@@ -4,7 +4,7 @@ const TI = require('../../');
 const config = TI.config;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const GoogleFile = require('../../../lib/providers/google/google-file.js');
+const GoogleFile = TI.Provider.File.Google;
 const OAuthOptions = TI.Auth.Options;
 
 describe('Google File Provider', ()=> {

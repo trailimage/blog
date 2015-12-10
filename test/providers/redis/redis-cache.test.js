@@ -1,12 +1,11 @@
 'use strict';
 
-/** @type {TrailImageIndex} */
 const TI = require('../../');
 const config = TI.config;
 const is = TI.is;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const RedisCache = TI.Cache.Redis;
+const RedisCache = TI.Provider.Cache.Redis;
 const success = 'OK';
 const key = 'test-key';
 
