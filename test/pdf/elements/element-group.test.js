@@ -1,13 +1,14 @@
 'use strict';
 
-const pdfPath = '../../../lib/pdf/';
+/** @type {RootNamespace} */
+const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Group = require(pdfPath + 'elements/element-group.js');
-const Image = require(pdfPath + 'elements/image-element.js');
-const Text = require(pdfPath + 'elements/text-element.js');
-const Size = require('../../../lib/models/photo-size.js');
-const Layout = require(pdfPath + 'pdf-layout.js');
+const Group = TI.PDF.Element.Group;
+const Image = TI.PDF.Element.Image;
+const Text = TI.PDF.Element.Text;
+const Size = TI.PhotoSize;
+const Layout = TI.PDF.Layout;
 const style = {
 	rules: {
 		testGroup: {

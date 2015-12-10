@@ -1,9 +1,10 @@
 'use strict';
 
+const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Element = require('../../../lib/pdf/elements/pdf-element.js');
-const Area = require('../../../lib/pdf/elements/element-area.js');
+const Element = TI.PDF.Element.Base;
+const Area = TI.PDF.Element.Area;
 
 describe('PDF Element', ()=> {
 	it('returns RGB and A values separately from set RGBA colors', ()=> {

@@ -1,8 +1,9 @@
 'use strict';
 
+const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Layout = require('../../lib/pdf/pdf-layout.js');
+const Layout = TI.PDF.Layout;
 const style = {
 	"settings": {
 		"fonts": {

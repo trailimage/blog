@@ -1,8 +1,9 @@
 'use strict';
 
+const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const ElementArea = require('../../../lib/pdf/elements/element-area.js');
+const ElementArea = TI.PDF.Element.Area;
 
 describe('PDF Element Area', ()=> {
 	it('indicates if area has no values', ()=> {
