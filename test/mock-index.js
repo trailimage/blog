@@ -5,4 +5,5 @@ const NullLog = lib.Log.Null;
 
 app.provider.log = new NullLog();
 
+/** @type {LibraryIndex} */
 module.exports = lib;

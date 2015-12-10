@@ -1,8 +1,9 @@
 'use strict';
 
+const lib = require('../mock-index.js');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const CacheItem = require('../../lib/cache/cache-item.js');
+const CacheItem = lib.Cache.Item;
 const pageContent = '<html><head></head><body>Test Page</body></html>';
 
 describe('Cache Item', ()=> {
