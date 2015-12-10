@@ -1,12 +1,12 @@
 'use strict';
 
-const Enum = require('../lib/enum.js');
-const is = require('../lib/is.js');
+const TI = require('./');
+const is = TI.is;
 
 class MockResponse {
 	constructor() {
 		/** @type {Number} */
-		this.httpStatus = Enum.httpStatus.ok;
+		this.httpStatus = TI.httpStatus.ok;
 		this.ended = false;
 		/**
 		 * Method to call when response is complete
@@ -51,7 +51,7 @@ class MockResponse {
 	 * Set status to 404
 	 * @returns {MockResponse}
 	 */
-	notFound() { return this.status(Enum.httpStatus.notFound); }
+	notFound() { return this.status(TI.httpStatus.notFound); }
 
 	/**
 	 * @param {String} key

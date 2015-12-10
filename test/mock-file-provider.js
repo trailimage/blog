@@ -1,8 +1,8 @@
 'use strict';
 
-const lib = require('./');
+const TI = require('./');
 const FileBase = require('../lib/providers/file-base.js');
-const OAuthOptions = require('../lib/auth/oauth-options.js');
+const OAuthOptions = TI.Auth.Options;
 const extend = require('extend');
 const ServerResponse = require('http').ServerResponse;
 const request = require('request');

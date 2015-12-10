@@ -1,12 +1,12 @@
 'use strict';
 
-/** @type {LibraryIndex} */
-const lib = require('../../');
-const config = lib.config;
-const is = lib.is;
+/** @type {TrailImageIndex} */
+const TI = require('../../');
+const config = TI.config;
+const is = TI.is;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const RedisCache = lib.Cache.Redis;
+const RedisCache = TI.Cache.Redis;
 const success = 'OK';
 const key = 'test-key';
 

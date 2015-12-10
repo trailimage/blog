@@ -1,11 +1,11 @@
 'use strict';
 
-const lib = require('../');
+const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 
 describe('Post Model', ()=> {
-	let p = new lib.Post();
+	let p = new TI.Post();
 
 	it('indicates if it has tags', ()=> {
 		expect(p.hasTags).is.false;

@@ -1,18 +1,16 @@
 'use strict';
 
-/** @type {LibraryIndex} */
-const lib = require('../');
-const Enum = lib.enum;
+/** @type {TrailImageIndex} */
+const TI = require('../');
+const Enum = TI.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const outputCache = lib.Middleware.outputCache;
-const CacheItem = lib.Cache.Item;
-const MockRequest = require('../mock-request.js');
-const MockResponse = require('../mock-response.js');
+const outputCache = TI.Middleware.outputCache;
+const CacheItem = TI.Cache.Item;
 
 describe('Output Cache Middleware', ()=> {
-	let req = new MockRequest();
-	let res = new MockResponse();
+	let req = new TI.Mock.Request();
+	let res = new TI.Mock.Response();
 	const viewSlug = 'test-slug';
 	const pageContent = '<html><head></head><body>Test Page</body></html>';
 

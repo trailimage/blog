@@ -1,9 +1,9 @@
 'use strict';
 
-const lib = require('../');
+const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const CacheItem = lib.Cache.Item;
+const CacheItem = TI.Cache.Item;
 const pageContent = '<html><head></head><body>Test Page</body></html>';
 
 describe('Cache Item', ()=> {

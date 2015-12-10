@@ -1,11 +1,11 @@
 'use strict';
 
-const lib = require('../../');
-const config = lib.config;
+const TI = require('../../');
+const config = TI.config;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const GoogleFile = require('../../../lib/providers/google/google-file.js');
-const OAuthOptions = lib.Auth.Options;
+const OAuthOptions = TI.Auth.Options;
 
 describe('Google File Provider', ()=> {
 	let drive = new GoogleFile({

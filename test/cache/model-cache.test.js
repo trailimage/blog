@@ -1,12 +1,12 @@
 'use strict';
 
-const lib = require('../');
-const config = lib.config;
+const TI = require('../');
+const config = TI.config;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const ModelCache = lib.Cache.Model;
+const ModelCache = TI.Cache.Model;
 const testValue = { key1: 'value1', key2: 'value2' };
-const db = lib.provider;
+const db = TI.provider;
 
 describe('Model Cache', ()=> {
 	it('only gets cached items if caching is enabled', done => {

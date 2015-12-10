@@ -4,10 +4,9 @@
  * Application entry point
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-const lib = require('./lib');
-const is = lib.is;
-const Enum = lib.enum;
-const config = lib.config;
+const TI = require('./lib');
+const is = TI.is;
+const config = TI.config;
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -20,25 +19,25 @@ function createWebService() {
 	const app = Express();
 	/** @type {Number} */
 	const port = process.env['PORT'] || 3000;
-	const log = lib.provider.log;
+	const log = TI.log;
 
-	log.infoIcon(Enum.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
+	log.infoIcon(TI.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
 
-	if (lib.provider.needsAuth) {
+	if (TI.provider.needsAuth) {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
-		log.infoIcon(Enum.icon.lock, 'Listening for authentication on port %d', port);
+		log.infoIcon(TI.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
 		applyMiddleware(app);
 
-		lib.Library.load(() => {
+		TI.Library.load(() => {
 			// library must be loaded before routes are defined
 			defineRoutes(app);
 			app.listen(port);
-			log.infoIcon(Enum.icon.heartOutline, 'Listening on port %d', port);
+			log.infoIcon(TI.icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
 }
@@ -51,7 +50,7 @@ function createWebService() {
 function defineViews(express) {
 	/** @type {ExpressHbs} */
 	const hbs = require('express-hbs');
-	const format = lib.format;
+	const format = TI.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -59,7 +58,7 @@ function defineViews(express) {
 	express.set('views', root + '/views');
 	express.set('view engine', engine);
 	express.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + lib.template.layout.main + '.hbs',
+		defaultLayout: root + '/views/' + TI.template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
@@ -77,8 +76,8 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = lib.MiddleWare.outputCache;
-	const spamBlocker = lib.MiddleWare.referralBlocker;
+	const outputCache = TI.Middleware.outputCache;
+	const spamBlocker = TI.Middleware.referralBlocker;
 
 	app.use(spamBlocker.filter);
 
@@ -114,7 +113,7 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const OAuthOptions = lib.Auth.Options;
+	const OAuthOptions = TI.Auth.Options;
 	const FlickrPhoto = require('./lib/providers/flickr/flickr-photo.js');
 	const GoogleFile = require('./lib/providers/google/google-file.js');
 	const redisUrl = config.env('REDISCLOUD_URL');
@@ -127,16 +126,16 @@ function injectDependencies() {
 
 	if (config.isProduction) {
 		// replace default log provider with Redis
-		lib.provider.log = new lib.Log.Redis(redisUrl);
+		TI.provider.log = new TI.Log.Redis(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		lib.provider.cacheHost = new lib.Cache.Redis(redisUrl);
+		TI.provider.cacheHost = new TI.Cache.Redis(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
-		lib.provider.log.info('Proxy detected — using default cache provider');
+		TI.provider.log.info('Proxy detected — using default cache provider');
 	}
-	lib.provider.photo = new FlickrPhoto({
+	TI.provider.photo = new FlickrPhoto({
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -152,7 +151,7 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	lib.provider.file = new GoogleFile({
+	TI.provider.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
 		auth: new OAuthOptions(2,
@@ -169,7 +168,6 @@ function injectDependencies() {
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app) {
-	const Enum = app.enum;
 	const r = require('./lib/controllers/routes.js');
 	/** @type {string} Slug pattern */
 	const s = '([\\w\\d-]{4,})';
@@ -183,7 +181,7 @@ function defineRoutes(app) {
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(Enum.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
+		app.get('/' + slug, (req, res) => { res.redirect(TI.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
 	// the latest posts
 	app.get('/', r.tag.home);
@@ -224,7 +222,7 @@ function defineRoutes(app) {
  * @param express
  */
 function defineAuthRoutes(express) {
-	const c = require('./lib/controllers/authorize-controller.js');
+	const c = TI.Controller.authorize;
 
 	express.get('/auth/flickr', c.flickr);
 	express.get('/auth/google', c.google);

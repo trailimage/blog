@@ -1,9 +1,9 @@
 'use strict';
 
-const lib = require('../../');
+const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const factory = lib.Factory.Flickr;
+const factory = TI.Factory.Flickr;
 
 describe('Flickr Model Factory', ()=> {
 	it.skip('creates Library from Flickr response', ()=> {

@@ -1,16 +1,16 @@
 'use strict';
 
 /**
- * @type {LibraryIndex}
+ * @type {TrailImageIndex}
  */
-const lib = require('../lib');
+const TI = require('../lib');
 
-lib.provider.log = new lib.Log.Null();
+TI.provider.log = new TI.Log.Null();
 
-lib.Mock = class {
+TI.Mock = class {
 	static get Request() { return require('./mock-request.js'); }
 	static get Response() { return require('./mock-response.js'); }
 };
 
 
-module.exports = lib;
+module.exports = TI;
