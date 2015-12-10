@@ -299,6 +299,11 @@ describe('Formatting', ()=> {
 				+ '<li><span>Last note</span></li></ol>';
 
 			expect(format.caption(source)).equals(target);
+
+			// should ignore trailing newline
+			source += nl;
+
+			expect(format.caption(source)).equals(target);
 		});
 
 		it.skip('styles quips');

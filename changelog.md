@@ -1,3 +1,8 @@
+## 2.0.14
+#### Fixes
+- Trailing return in footnotes breaks formatting
+- Admin screen regression causing map item NPE
+
 ## 2.0.13
 #### Features
 - Refactor Google OAuth to support different APIs
