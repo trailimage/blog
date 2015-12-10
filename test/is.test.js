@@ -2,7 +2,7 @@
 
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const is = require('../lib/is.js');
+const is = require('./').is;
 let u;   // undefined
 
 describe('Identity Evaluations', ()=> {

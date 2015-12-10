@@ -1,10 +1,11 @@
 'use strict';
 
-const config = require('../../mock-config.js');
+const lib = require('../../');
+const config = lib.config;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const GoogleFile = require('../../../lib/providers/google/google-file.js');
-const OAuthOptions = require('../../../lib/auth/oauth-options.js');
+const OAuthOptions = lib.Auth.Options;
 
 describe('Google File Provider', ()=> {
 	let drive = new GoogleFile({

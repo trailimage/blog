@@ -1,6 +1,6 @@
 'use strict';
 
-const app = require('../lib/index.js');
+const lib = require('./');
 const FileBase = require('../lib/providers/file-base.js');
 const OAuthOptions = require('../lib/auth/oauth-options.js');
 const extend = require('extend');

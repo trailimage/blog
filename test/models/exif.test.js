@@ -1,9 +1,9 @@
 'use strict';
 
+const lib = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Exif = require('../../lib/models/exif.js');
-let e = new Exif();
+let e = new lib.EXIF();
 
 describe('EXIF Model', ()=> {
 	before(()=> {

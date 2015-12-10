@@ -4,7 +4,7 @@
  * Application entry point
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-const lib = require('./lib/index.js');
+const lib = require('./lib');
 const is = lib.is;
 const Enum = lib.enum;
 const config = lib.config;
@@ -77,8 +77,8 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = require('./lib/middleware/output-cache.js');
-	const spamBlocker = require('./lib/middleware/referral-blocker.js');
+	const outputCache = lib.MiddleWare.outputCache;
+	const spamBlocker = lib.MiddleWare.referralBlocker;
 
 	app.use(spamBlocker.filter);
 

@@ -1,11 +1,12 @@
 'use strict';
 
-require('../mock-config.js');
-const Enum = require('../../lib/enum.js');
+/** @type {LibraryIndex} */
+const lib = require('../');
+const Enum = lib.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const outputCache = require('../../lib/middleware/output-cache.js');
-const CacheItem = require('../../lib/cache/cache-item');
+const outputCache = lib.Middleware.outputCache;
+const CacheItem = lib.Cache.Item;
 const MockRequest = require('../mock-request.js');
 const MockResponse = require('../mock-response.js');
 

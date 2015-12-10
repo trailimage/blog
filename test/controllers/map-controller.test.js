@@ -1,10 +1,11 @@
 'use strict';
 
-const config = require('../mock-config.js');
-const Enum = require('../../lib/enum.js');
+const lib = require('../');
+const config = lib.config;
+const Enum = lib.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const MapController = require('../../lib/controllers/map-controller.js');
+const MapController = lib.Controller.map;
 const MockRequest = require('../mock-request.js');
 const MockResponse = require('../mock-response.js');
 

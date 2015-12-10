@@ -1,10 +1,12 @@
 'use strict';
 
-const config = require('../../../lib/config.js');
-const is = require('../../../lib/is.js');
+/** @type {LibraryIndex} */
+const lib = require('../../');
+const config = lib.config;
+const is = lib.is;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const RedisCache = require('../../../lib/providers/redis/redis-cache.js');
+const RedisCache = lib.Cache.Redis;
 const success = 'OK';
 const key = 'test-key';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const lib = require('../mock-index.js');
+const lib = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const CacheItem = lib.Cache.Item;

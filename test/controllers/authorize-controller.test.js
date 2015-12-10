@@ -1,7 +1,8 @@
 'use strict';
 
-const config = require('../mock-config.js');
-const Enum = require('../../lib/enum.js');
+const lib = require('../');
+const config = lib.config;
+const Enum = lib.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const AuthController = require('../../lib/controllers/authorize-controller.js');
