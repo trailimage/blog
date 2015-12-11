@@ -5,15 +5,13 @@ const mocha = require('mocha');
 const expect = require('chai').expect;
 const Area = TI.PDF.Element.Area;
 const Image = TI.PDF.Element.Image;
-const Size = TI.PhotoSize;
-const Layout = TI.PDF.Layout;
 
 describe('PDF Image Element', ()=> {
 	let img = new Image();
 	let area = new Area();
 
-	img.original = new Size();
-	img.scaleTo = Layout.Scale.Fit;
+	img.original = new TI.PhotoSize();
+	img.scaleTo = TI.PDF.Scale.Fit;
 	area.top = area.left = 0;
 	area.width = 20;
 	area.height = 15;
@@ -41,8 +39,8 @@ describe('PDF Image Element', ()=> {
 		║  ← 10 →  ║          │            ║← 7.5 → ║            │
 		╚══════════╝──────────┘            ╚════════╝────────────┘
 		*/
-		img.original.width = Layout.inchesToPixels(10);
-		img.original.height = Layout.inchesToPixels(20);
+		img.original.width = TI.PDF.inchesToPixels(10);
+		img.original.height = TI.PDF.inchesToPixels(20);
 
 		img.scale(area);
 
@@ -50,8 +48,8 @@ describe('PDF Image Element', ()=> {
 		expect(img.height).equals(15);
 
 		// image that already fits shouldn't be scaled
-		img.original.width = Layout.inchesToPixels(4);
-		img.original.height = Layout.inchesToPixels(2);
+		img.original.width = TI.PDF.inchesToPixels(4);
+		img.original.height = TI.PDF.inchesToPixels(2);
 
 		img.scale(area);
 
@@ -76,10 +74,10 @@ describe('PDF Image Element', ()=> {
 		                                   ║                     ║
 		                                   ╚═════════════════════╝
 		*/
-		img.original.width = Layout.inchesToPixels(10);
-		img.original.height = Layout.inchesToPixels(20);
+		img.original.width = TI.PDF.inchesToPixels(10);
+		img.original.height = TI.PDF.inchesToPixels(20);
 
-		img.scaleTo = Layout.Scale.Fill;
+		img.scaleTo = TI.PDF.Scale.Fill;
 		img.scale(area);
 
 		expect(img.width).equals(20);
