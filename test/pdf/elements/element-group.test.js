@@ -1,6 +1,5 @@
 'use strict';
 
-/** @type {RootNamespace} */
 const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
@@ -8,7 +7,6 @@ const Group = TI.PDF.Element.Group;
 const Image = TI.PDF.Element.Image;
 const Text = TI.PDF.Element.Text;
 const Size = TI.PhotoSize;
-const Layout = TI.PDF.Layout;
 const style = {
 	rules: {
 		testGroup: {
@@ -16,10 +14,10 @@ const style = {
 			left: 0,
 			width: 20,
 			height: 15,
-			alignContent: Layout.Align.Center
+			alignContent: TI.PDF.Align.Center
 		},
 		testImage: {
-			scale: Layout.Scale.Fit
+			scale: TI.PDF.Scale.Fit
 		},
 		testText: {
 			left: 0,
@@ -42,7 +40,7 @@ const style = {
 };
 
 describe('PDF Element Group', ()=> {
-	let layout = new Layout(style);
+	let layout = new TI.PDF.Layout(style);
 	let group = new Group('testGroup');
 	let img = new Image('testImage');
 	let text = new Text('testText');
@@ -91,8 +89,8 @@ describe('PDF Element Group', ()=> {
 		 ║  ← 10 →  ║          │            │      ║← 7.5 →║      │
 		 ╚══════════╝──────────┘            └──────╚═══════╝──────┘
 		 */
-		img.original.width = Layout.inchesToPixels(10);
-		img.original.height = Layout.inchesToPixels(20);
+		img.original.width = TI.PDF.inchesToPixels(10);
+		img.original.height = TI.PDF.inchesToPixels(20);
 
 		group.explicitLayout(layout);
 		group.implicitLayout();
@@ -122,8 +120,8 @@ describe('PDF Element Group', ()=> {
 		└───────────────────────────┴─────┘            ╚═════════════════════════════════╝
 		               ← 20 →                                         ← 20 →
 		*/
-		img.original.width = Layout.inchesToPixels(17);
-		img.original.height = Layout.inchesToPixels(16);
+		img.original.width = TI.PDF.inchesToPixels(17);
+		img.original.height = TI.PDF.inchesToPixels(16);
 
 		text.right = text.left = text.bottom = 0;
 

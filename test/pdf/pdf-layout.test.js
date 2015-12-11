@@ -3,7 +3,6 @@
 const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Layout = TI.PDF.Layout;
 const style = {
 	"settings": {
 		"fonts": {
@@ -45,17 +44,17 @@ const style = {
 
 describe('PDF Layout', ()=> {
 	it('converts inches to standard PDF pixels', ()=> {
-		expect(Layout.inchesToPixels(1)).equals(72);
-		expect(Layout.inchesToPixels(8.5)).equals(612);
+		expect(TI.PDF.inchesToPixels(1)).equals(72);
+		expect(TI.PDF.inchesToPixels(8.5)).equals(612);
 	});
 
 	it('converts PDF pixels to inches', ()=> {
-		expect(Layout.pixelsToInches(72)).equals(1);
-		expect(Layout.pixelsToInches(612)).equals(8.5);
+		expect(TI.PDF.pixelsToInches(72)).equals(1);
+		expect(TI.PDF.pixelsToInches(612)).equals(8.5);
 	});
 
 	describe('Style', ()=> {
-		let layout = new Layout(style);
+		let layout = new TI.PDF.Layout(style);
 
 		it('substitutes color aliases for actual colors', ()=> {
 			expect(layout.rules.defaultText.color).equals(layout.settings.colors.black);
