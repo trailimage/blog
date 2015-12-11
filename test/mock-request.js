@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * @namespace TI.Mock.Request
+ */
 class MockRequest {
 	constructor() {
 		this.referer = null;

@@ -3,11 +3,11 @@
 const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const ElementArea = TI.PDF.Element.Area;
+const Area = TI.PDF.Element.Offset;
 
-describe('PDF Element Area', ()=> {
+describe('PDF Element Offset', ()=> {
 	it('indicates if area has no values', ()=> {
-		let a = new ElementArea();
+		let a = new Area();
 		expect(a.isEmpty).is.true;
 
 		a.height = 10;
@@ -15,8 +15,8 @@ describe('PDF Element Area', ()=> {
 	});
 
 	it("adds another element's offsets to its own", ()=> {
-		let a = new ElementArea();
-		let b = new ElementArea();
+		let a = new Area();
+		let b = new Area();
 		a.top = 10;
 		a.left = 10;
 		b.top = 2;
@@ -35,7 +35,7 @@ describe('PDF Element Area', ()=> {
 	});
 
 	it('creates a copy of itself', ()=> {
-		let a = new ElementArea();
+		let a = new Area();
 		a.top = 1;
 		a.left = 2;
 		a.width = 3;
@@ -48,8 +48,8 @@ describe('PDF Element Area', ()=> {
 	});
 
 	it('indicates if areas overlap', ()=> {
-		let area1 = new ElementArea();
-		let area2 = new ElementArea();
+		let area1 = new Area();
+		let area2 = new Area();
 		/*
 		┌───────────┐
 		│ area 1    │

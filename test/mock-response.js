@@ -3,6 +3,9 @@
 const TI = require('./');
 const is = TI.is;
 
+/**
+ * @namespace TI.Mock.Response
+ */
 class MockResponse {
 	constructor() {
 		/** @type {Number} */
@@ -15,7 +18,7 @@ class MockResponse {
 		 */
 		this.testCallback = null;
 		/**
-		 * @type {Object.<String>}
+		 * @type {Object.<String, String>}
 		 */
 		this.headers = {};
 		/**
@@ -49,14 +52,14 @@ class MockResponse {
 
 	/**
 	 * Set status to 404
-	 * @returns {MockResponse}
+	 * @returns {TI.Mock.Response|MockResponse}
 	 */
 	notFound() { return this.status(TI.httpStatus.notFound); }
 
 	/**
 	 * @param {String} key
 	 * @param {String} value
-	 * @return {MockResponse}
+	 * @return {TI.Mock.Response|MockResponse}
 	 */
 	setHeader(key, value) {
 		this.headers[key] = value;
@@ -65,7 +68,7 @@ class MockResponse {
 
 	/**
 	 * @param {String|Buffer} value
-	 * @return {MockResponse}
+	 * @return {TI.Mock.Response|MockResponse}
 	 */
 	write(value) {
 		this.content = value;

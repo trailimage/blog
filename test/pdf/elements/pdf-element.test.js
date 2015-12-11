@@ -4,7 +4,7 @@ const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const Element = TI.PDF.Element.Base;
-const Area = TI.PDF.Element.Area;
+const Area = TI.PDF.Element.Offset;
 
 describe('PDF Element', ()=> {
 	it('returns RGB and A values separately from set RGBA colors', ()=> {
