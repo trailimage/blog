@@ -1,16 +1,13 @@
 'use strict';
 
 const TI = require('./');
-const FileBase = require('../lib/providers/file-base.js');
-const OAuthOptions = TI.Auth.Options;
-const extend = require('extend');
-const ServerResponse = require('http').ServerResponse;
+const FileBase = TI.Provider.File.Base;
 const request = require('request');
 
 /**
  * Retrieve GPS file for post
- * @extends {FileBase}
- * @extends {OAuthBase}
+ * @extends {TI.Provider.File.Base}
+ * @extends {TI.Auth.Options}
  */
 class MockFile extends FileBase {
 	constructor(options) {
@@ -19,7 +16,7 @@ class MockFile extends FileBase {
 	}
 
 	/**
-	 * @param {Post} post
+	 * @param {TI.Post} post
 	 * @param {function(String)|ServerResponse} callback Return GPX string
 	 */
 	loadGPX(post, callback) {
@@ -28,7 +25,7 @@ class MockFile extends FileBase {
 
 	/**
 	 * @param {String} url Google URL
-	 * @param {Post} post
+	 * @param {TI.Post} post
 	 * @param {function(String)|ServerResponse} callback Return GPX to method or stream to response
 	 * @private
 	 */
@@ -68,6 +65,6 @@ const defaultMockOptions = {
 	apiKey: null,
 	/** @type {String} */
 	tracksFolder: null,
-	/** @type {OAuthOptions} */
-	auth: new OAuthOptions(2)
+	/** @type {TI.Auth.Options} */
+	auth: new TI.Auth.Options(2)
 };

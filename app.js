@@ -113,7 +113,6 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const OAuthOptions = TI.Auth.Options;
 	const FlickrPhoto = TI.Provider.Photo.Flickr;
 	const GoogleFile = TI.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
@@ -143,7 +142,7 @@ function injectDependencies() {
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		auth: new OAuthOptions(1,
+		auth: new TI.Auth.Options(1,
 			config.env('FLICKR_API_KEY'),
 			config.env('FLICKR_SECRET'),
 			`http://www.${config.domain}/auth/flickr`,
@@ -154,7 +153,7 @@ function injectDependencies() {
 	TI.active.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-		auth: new OAuthOptions(2,
+		auth: new TI.Auth.Options(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
 			`http://www.${config.domain}/auth/google`,
