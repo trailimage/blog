@@ -71,9 +71,9 @@ describe('PDF Element Group', ()=> {
 		group.explicitLayout(layout);
 		//group.implicitLayout();
 
-		expect(inner1.pageOffset.top).equals(6);
-		expect(inner1.pageOffset.left).equals(5);
-		expect(inner2.pageOffset.top).equals(10);
+		expect(inner1.offset.top).equals(6);
+		expect(inner1.offset.left).equals(5);
+		expect(inner2.offset.top).equals(10);
 		//expect(inner2.absolute.left).equals(10);
 	});
 

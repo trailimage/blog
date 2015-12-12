@@ -3,10 +3,10 @@
 const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Area = TI.PDF.Element.Offset;
+const Area = TI.PDF.Element.Area;
 
 describe('PDF Element Offset', ()=> {
-	it('indicates if area has no values', ()=> {
+	it('indicates if offset has no values', ()=> {
 		let a = new Area();
 		expect(a.isEmpty).is.true;
 
@@ -15,23 +15,23 @@ describe('PDF Element Offset', ()=> {
 	});
 
 	it("adds another element's offsets to its own", ()=> {
-		let a = new Area();
-		let b = new Area();
-		a.top = 10;
-		a.left = 10;
-		b.top = 2;
-		b.left = 4;
+		let a1 = new Area();
+		let a2 = new Area();
+		a1.top = 10;
+		a1.left = 10;
+		a2.top = 2;
+		a2.left = 4;
 
-		a.add(b);
+		a1.add(a2);
 
-		expect(a.top).equals(12);
-		expect(a.left).equals(14);
+		expect(a1.top).equals(12);
+		expect(a1.left).equals(14);
 
 		// handles NaN
-		b.top = NaN;
-		a.add(b);
+		a2.top = NaN;
+		a1.add(a2);
 
-		expect(a.top).equals(12);
+		expect(a1.top).equals(12);
 	});
 
 	it('creates a copy of itself', ()=> {
@@ -47,9 +47,9 @@ describe('PDF Element Offset', ()=> {
 		expect(b.height).equals(4);
 	});
 
-	it('indicates if areas overlap', ()=> {
-		let area1 = new Area();
-		let area2 = new Area();
+	it('indicates if offset areas overlap', ()=> {
+		let a1 = new Area();
+		let a2 = new Area();
 		/*
 		┌───────────┐
 		│ area 1    │
@@ -57,23 +57,23 @@ describe('PDF Element Offset', ()=> {
 		│           │
 		│           │
 		└───────────┼───────────┐
-   	            │ area 2    │
+   	                │ area 2    │
 		            │           │
 		            │           │
 		            │           │
 		            └───────────┘
 		*/
-		area1.top = 0;
-		area1.left = 0;
-		area1.width = 10;
-		area1.height = 10;
+		a1.top = 0;
+		a1.left = 0;
+		a1.width = 10;
+		a1.height = 10;
 
-		area2.top = 10;
-		area2.left = 10;
-		area2.width = 10;
-		area2.height = 10;
+		a2.top = 10;
+		a2.left = 10;
+		a2.width = 10;
+		a2.height = 10;
 
-		expect(area1.overlaps(area2)).is.false;
+		expect(a1.overlaps(a2)).is.false;
 
 		/*
 		┌───────────┐
@@ -82,13 +82,13 @@ describe('PDF Element Offset', ()=> {
 		│           │
 		│           ├───────────┐
 		└───────────┤ area 2    │
-   	            │           │
+   	                │           │
 		            │           │
 		            │           │
 		            └───────────┘
 		*/
-		area2.top = 9;
-		expect(area1.overlaps(area2)).is.false;
+		a2.top = 9;
+		expect(a1.overlaps(a2)).is.false;
 
 		/*
 		┌───────────┐
@@ -97,13 +97,13 @@ describe('PDF Element Offset', ()=> {
 		│     ┌─────┼─────┐
 		│     │     │     │
 		└─────┼─────┘     │
-   	      │           │
+   	          │           │
 		      │           │
-            └───────────┘
+              └───────────┘
 		*/
-		area2.top = 6;
-		area2.left = 5;
-		expect(area1.overlaps(area2)).is.true;
+		a2.top = 6;
+		a2.left = 5;
+		expect(a1.overlaps(a2)).is.true;
 
 		/*
 		┌───────────┐
@@ -113,10 +113,10 @@ describe('PDF Element Offset', ()=> {
 		│           │ └─────┘
 		└───────────┘
 		*/
-		area2.top = 4;
-		area2.left = 11;
-		area2.height = 4;
-		area2.width = 5;
-		expect(area1.overlaps(area2)).is.false;
+		a2.top = 4;
+		a2.left = 11;
+		a2.height = 4;
+		a2.width = 5;
+		expect(a1.overlaps(a2)).is.false;
 	});
 });

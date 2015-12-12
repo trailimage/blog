@@ -3,7 +3,7 @@
 const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Area = TI.PDF.Element.Offset;
+const Area = TI.PDF.Element.Area;
 const Image = TI.PDF.Element.Image;
 
 describe('PDF Image Element', ()=> {
