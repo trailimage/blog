@@ -5,7 +5,7 @@ const mocha = require('mocha');
 const expect = require('chai').expect;
 const Group = TI.PDF.Element.Group;
 const Image = TI.PDF.Element.Image;
-const Text = TI.PDF.Element.Text;
+const Rectangle = TI.PDF.Element.Rectangle;
 const Size = TI.PhotoSize;
 const style = {
 	rules: {
@@ -19,7 +19,7 @@ const style = {
 		testImage: {
 			scale: TI.PDF.Scale.Fit
 		},
-		testText: {
+		testRect: {
 			left: 0,
 			bottom: 0,
 			right: 0
@@ -43,7 +43,7 @@ describe('PDF Element Group', ()=> {
 	let layout = new TI.PDF.Layout(style);
 	let group = new Group('testGroup');
 	let img = new Image('testImage');
-	let text = new Text('testText');
+	let rect = new Rectangle('testRect');
 
 	img.original = new Size();
 	//group.add(img);
@@ -63,7 +63,7 @@ describe('PDF Element Group', ()=> {
 		└─────────────────────────────┘ * calculated
 		*/
 		let inner1 = new Group('inner1');
-		let inner2 = new Text('inner2');
+		let inner2 = new Rectangle('inner2');
 
 		inner1.add(inner2);
 		group.add(inner1);
@@ -71,9 +71,9 @@ describe('PDF Element Group', ()=> {
 		group.explicitLayout(layout);
 		//group.implicitLayout();
 
-		expect(inner1.offset.top).equals(6);
-		expect(inner1.offset.left).equals(5);
-		expect(inner2.offset.top).equals(10);
+		expect(inner1.top).equals(6);
+		expect(inner1.left).equals(5);
+		expect(inner2.top).equals(10);
 		//expect(inner2.absolute.left).equals(10);
 	});
 
@@ -123,10 +123,10 @@ describe('PDF Element Group', ()=> {
 		img.original.width = TI.PDF.inchesToPixels(17);
 		img.original.height = TI.PDF.inchesToPixels(16);
 
-		text.right = text.left = text.bottom = 0;
+		rect.right = rect.left = rect.bottom = 0;
 
 		// text height is normally calculated
-		text.height = 2;
+		rect.height = 2;
 
 		//group.implicitLayout(area);
 
