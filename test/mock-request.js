@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @namespace TI.Mock.Request
+ * @alias TI.Mock.Request
  */
 class MockRequest {
 	constructor() {

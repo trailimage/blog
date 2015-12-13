@@ -4,7 +4,7 @@ const TI = require('./');
 const is = TI.is;
 
 /**
- * @namespace TI.Mock.Response
+ * @alias TI.Mock.Response
  */
 class MockResponse {
 	constructor() {
