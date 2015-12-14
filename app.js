@@ -17,7 +17,7 @@ createWebService();
 
 function createWebService() {
 	const app = Express();
-	/** @type {Number} */
+	/** @type Number */
 	const port = process.env['PORT'] || 3000;
 	const log = TI.active.log;
 
@@ -48,7 +48,7 @@ function createWebService() {
  * @see http://mustache.github.com/mustache.5.html
  */
 function defineViews(app) {
-	/** @type {ExpressHbs} */
+	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
 	const format = TI.format;
 	const engine = 'hbs';
@@ -101,7 +101,7 @@ function applyMiddleware(app) {
  * This should be what Express already supports but it isn't behaving as expected
  * @param {RegExp} regex
  * @param {Function} fn Middleware
- * @returns {Function} Wrapper
+ * @returns Function Wrapper
  */
 function filter(regex, fn) {
 	return (req, res, next) => {
