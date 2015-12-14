@@ -4,40 +4,40 @@ const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const style = {
-	"settings": {
-		"fonts": {
-			"heading": "dist/fonts/heading.ttf",
-			"serif": "dist/fonts/serif.ttf",
-			"sanSerif": "dist/fonts/sanSerif.ttf"
+	settings: {
+		fonts: {
+			heading: "dist/fonts/heading.ttf",
+			serif: "dist/fonts/serif.ttf",
+			sanSerif: "dist/fonts/sanSerif.ttf"
 		},
-		"colors": {
-			"black": [0, 0, 0],
-			"white": [255, 255, 255]
+		colors: {
+			black: [0, 0, 0],
+			white: [255, 255, 255]
 		}
 	},
-	"rules": {
-		"defaultText": {
-			"font": "serif",
-			"fontSize": 12,
-			"color": "black"
+	rules: {
+		defaultText: {
+			font: "serif",
+			fontSize: 12,
+			color: "black"
 		},
-		"defaultPage": {
-			"margin": 0,
-			"width": 11,
-			"height": 8.5
+		defaultPage: {
+			margin: 0,
+			width: 11,
+			height: 8.5
 		},
-		"coverPage": {
-			"inherit": "defaultPage",
-			"alignContent": "center"
+		coverPage: {
+			inherit: "defaultPage",
+			alignContent: TI.PDF.Align.Center
 		},
-		"paragraphText": {
-			"inherit": "defaultText",
-			"font": "sanSerif",
-			"fontSize": 15
+		paragraphText: {
+			inherit: "defaultText",
+			font: "sanSerif",
+			fontSize: 15
 		},
-		"quoteText": {
-			"inherit": "paragraphText",
-			"fontSize": 10
+		quoteText: {
+			inherit: "paragraphText",
+			fontSize: 10
 		}
 	}
 };

@@ -14,7 +14,8 @@ const style = {
 			left: 0,
 			width: 20,
 			height: 15,
-			alignContent: TI.PDF.Align.Center
+			alignContent: TI.PDF.Align.Center,
+			verticalAlign: TI.PDF.Align.Middle
 		},
 		testImage: {
 			scale: TI.PDF.Scale.Fit
@@ -24,17 +25,25 @@ const style = {
 			bottom: 0,
 			right: 0
 		},
-		inner1: {
+		inner1a: {
 			top: 6,
 			left: 5,
 			width: 9,
 			height: 7
 		},
-		inner2: {
+		inner2a: {
 			top: 4,
 			left: 5,
 			width: 4,
 			height: 3
+		},
+		inner1b: {
+			width: 14,
+			height: 8
+		},
+		inner2b: {
+			width: 7,
+			height: 5
 		}
 	}
 };
@@ -46,9 +55,8 @@ describe('PDF Element Group', ()=> {
 	let rect = new Rectangle('testRect');
 
 	img.original = new Size();
-	//group.add(img);
 
-	it('updates absolute offsets of child elements', ()=> {
+	it('updates offsets of explicitly positioned child elements', ()=> {
 		/*
 		            ← 20 →
 		┌──────┬──────────────────┬───┐
@@ -62,19 +70,58 @@ describe('PDF Element Group', ()=> {
 		│      ╚══════════════╝     ┴ │
 		└─────────────────────────────┘ * calculated
 		*/
-		let inner1 = new Group('inner1');
-		let inner2 = new Rectangle('inner2');
+		let inner1 = new Group('inner1a');
+		let inner2 = new Rectangle('inner2a');
 
 		inner1.add(inner2);
 		group.add(inner1);
 
 		group.explicitLayout(layout);
-		//group.implicitLayout();
-
+		// style values
 		expect(inner1.top).equals(6);
 		expect(inner1.left).equals(5);
+		// computed values
 		expect(inner2.top).equals(10);
-		//expect(inner2.absolute.left).equals(10);
+		expect(inner2.left).equals(10);
+	});
+
+	it('updates offsets of implicitly positioned child elements', ()=> {
+		/*
+		            ← 20 →
+		┌─────────────────────────────┐ ↑   ↑
+		│   ├──────── 14 ─────────┤   │3.5* 5*
+		│   ╔═════════════════════╗   │ ┴   │
+	  ↑│   ║ (1)┌───────────┐  ↑ ║   │     ┴
+	 15│   ║    │(2)      5 │  8 ║   │
+	  ↓│   ║    │         ↓ │  ↓ ║   │
+		│   ║    └───────────┘    ║   │
+		│   ╚═════════════════════╝   │
+		│        ├──── 7 ────┤        │
+		└─────────────────────────────┘ * calculated
+       ←3*┤
+       ← 6.5* ─┤
+		*/
+		let inner1 = new Group('inner1b');
+		let inner2 = new Rectangle('inner2b');
+
+		group.empty();
+		inner1.add(inner2);
+		group.add(inner1);
+
+		group.explicitLayout(layout);
+		group.implicitLayout();
+		// style values
+		expect(group.alignContent).equals(TI.PDF.Align.Center);
+		expect(group.verticalAlign).equals(TI.PDF.Align.Middle);
+		expect(inner1.width).equals(14);
+		expect(inner1.height).equals(8);
+		expect(inner2.width).equals(7);
+		expect(inner2.height).equals(5);
+		// computed values
+		expect(inner1.top).equals(3.5);
+		expect(inner1.left).equals(3);
+		expect(inner2.top).equals(5);
+		expect(inner2.left).equals(6.5);
 	});
 
 	it.skip('scales and centers child elements', ()=> {
