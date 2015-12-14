@@ -4,6 +4,10 @@
 #### Fixes
 - Post pages showing map when it should be hidden
 
+## 2.0.15
+#### Fixes
+- Better logging for Flickr connectivity issues
+
 ## 2.0.14
 #### Fixes
 - Trailing return in footnotes breaks formatting
