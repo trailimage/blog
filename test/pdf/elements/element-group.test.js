@@ -7,49 +7,8 @@ const Group = TI.PDF.Element.Group;
 const Image = TI.PDF.Element.Image;
 const Rectangle = TI.PDF.Element.Rectangle;
 const Size = TI.PhotoSize;
-const style = {
-	rules: {
-		testGroup: {
-			top: 0,
-			left: 0,
-			width: 20,
-			height: 15,
-			alignContent: TI.PDF.Align.Center,
-			verticalAlign: TI.PDF.Align.Middle
-		},
-		testImage: {
-			scale: TI.PDF.Scale.Fit
-		},
-		testRect: {
-			left: 0,
-			bottom: 0,
-			right: 0
-		},
-		inner1a: {
-			top: 6,
-			left: 5,
-			width: 9,
-			height: 7
-		},
-		inner2a: {
-			top: 4,
-			left: 5,
-			width: 4,
-			height: 3
-		},
-		inner1b: {
-			width: 14,
-			height: 8
-		},
-		inner2b: {
-			width: 7,
-			height: 5
-		}
-	}
-};
 
 describe('PDF Element Group', ()=> {
-	let layout = new TI.PDF.Layout(style);
 	let group = new Group('testGroup');
 	let img = new Image('testImage');
 	let rect = new Rectangle('testRect');
@@ -61,22 +20,29 @@ describe('PDF Element Group', ()=> {
 		            ← 20 →
 		┌──────┬──────────────────┬───┐
 		│      6 ───── 9 ─────┤   │   │
-		│      ↓     ├─ 4 ─┤     10*  │
+		│      ↓     ├─ 4 ─┤    <10>  │
 		├─ 5 → ╔══════════════╗ ┬ │ ┬ │ ↑
 		│      ║ inner1       ║ 4 │ │ │ 15
 		│      ╟─ 5 →┌─────┐  ║ ┼ ┴ │ │ ↓
-		├──────╫ 10*→│  2  │  ║ 3   8 │
+		├──────╫<10>→│  2  │  ║ 3   8 │
 		│      ║     └─────┘  ║ ┴   │ │
 		│      ╚══════════════╝     ┴ │
-		└─────────────────────────────┘ * calculated
+		└─────────────────────────────┘ <calculated>
 		*/
-		let inner1 = new Group('inner1a');
-		let inner2 = new Rectangle('inner2a');
+		const style = {
+			rules: {
+				testGroup: { top: 0, left: 0, width: 20, height: 15 },
+				inner1: { top: 6, left: 5, width: 9, height: 7 },
+				inner2: { top: 4, left: 5, width: 4, height: 3 }
+			}
+		};
+		let inner1 = new Group('inner1');
+		let inner2 = new Rectangle('inner2');
 
 		inner1.add(inner2);
 		group.add(inner1);
 
-		group.explicitLayout(layout);
+		group.explicitLayout(new TI.PDF.Layout(style));
 		// style values
 		expect(inner1.top).equals(6);
 		expect(inner1.left).equals(5);
@@ -85,39 +51,48 @@ describe('PDF Element Group', ()=> {
 		expect(inner2.left).equals(10);
 	});
 
-	it('updates offsets of implicitly positioned child elements', ()=> {
+	it.skip('updates offsets of implicitly positioned child elements', ()=> {
 		/*
 		            ← 20 →
-		┌─────────────────────────────┐ ↑   ↑
-		│   ├──────── 14 ─────────┤   │3.5* 5*
-		│   ╔═════════════════════╗   │ ┴   │
-	  ↑│   ║ (1)┌───────────┐  ↑ ║   │     ┴
+		┌─────────────────────────────┐  ↑    ↑
+		│   ├──────── 14 ─────────┤   │<3.5> <5>
+		│   ╔═════════════════════╗   │  ┴    │
+	  ↑│   ║ (1)┌───────────┐  ↑ ║   │       ┴
 	 15│   ║    │(2)      5 │  8 ║   │
 	  ↓│   ║    │         ↓ │  ↓ ║   │
 		│   ║    └───────────┘    ║   │
 		│   ╚═════════════════════╝   │
 		│        ├──── 7 ────┤        │
-		└─────────────────────────────┘ * calculated
-       ←3*┤
-       ← 6.5* ─┤
+		└─────────────────────────────┘ <calculated>
+       <3>┤
+       <6.5>───┤
 		*/
-		let inner1 = new Group('inner1b');
-		let inner2 = new Rectangle('inner2b');
+		const style = {
+			rules: {
+				testGroup: { top: 0, left: 0, width: 20, height: 15, align: TI.PDF.Align.Center, verticalAlign: TI.PDF.Align.Center },
+				inner1: { width: 14, height: 8 },
+				inner2: { width: 7, height: 5 }
+			}
+		};
+		let inner1 = new Group('inner1');
+		let inner2 = new Rectangle('inner2');
 
 		group.empty();
 		inner1.add(inner2);
 		group.add(inner1);
 
-		group.explicitLayout(layout);
+		group.explicitLayout(new TI.PDF.Layout(style));
 		group.implicitLayout();
 		// style values
-		expect(group.alignContent).equals(TI.PDF.Align.Center);
-		expect(group.verticalAlign).equals(TI.PDF.Align.Middle);
+		expect(group.align.horizontal).equals(TI.PDF.Align.Center);
+		expect(group.align.vertical).equals(TI.PDF.Align.Center);
 		expect(inner1.width).equals(14);
 		expect(inner1.height).equals(8);
 		expect(inner2.width).equals(7);
 		expect(inner2.height).equals(5);
 		// computed values
+		expect(inner1.align.horizontal).equals(TI.PDF.Align.Center);
+		expect(inner1.align.vertical).equals(TI.PDF.Align.Center);
 		expect(inner1.top).equals(3.5);
 		expect(inner1.left).equals(3);
 		expect(inner2.top).equals(5);

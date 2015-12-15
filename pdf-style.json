@@ -24,7 +24,7 @@
 		},
 		"coverPage": {
 			"inherit": "defaultPage",
-			"alignContent": "center"
+			"align": "center"
 		},
 		"coverImage": {
 			"scale": "fill"
@@ -48,7 +48,7 @@
 			"inherit": "defaultText",
 			"width": 4,
 			"marginTop": 1,
-			"alignContent": "justify"
+			"align": "justify"
 		},
 		"coverOverlay": {
 			"top": 0,
@@ -101,7 +101,7 @@
 			"font": "sanSerif",
 			"fontSize": 10,
 			"width": 0.5,
-			"alignContent": "right",
+			"align": "right",
 			"right": 0.25,
 			"bottom": 0.25
 		},

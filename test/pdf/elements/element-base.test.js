@@ -3,12 +3,12 @@
 const TI = require('../../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const Element = TI.PDF.Element.Base;
+const ElementBase = TI.PDF.Element.Base;
 const Area = TI.PDF.Element.Area;
 
 describe('PDF Element', ()=> {
 	it('returns RGB and A values separately from set RGBA colors', ()=> {
-		let el = new Element();
+		let el = new ElementBase();
 		el.color = [10, 10, 10, 0.5];
 
 		expect(el.color).deep.equals([10, 10, 10]);
@@ -20,8 +20,8 @@ describe('PDF Element', ()=> {
 	});
 
 	it('scales width and height for anchored edges', ()=> {
-		let el = new Element();
-		let area = new Area();
+		let el = new ElementBase();
+		let container = new Area();
 
 		/*         20
 		┌──────┬───────────────┐
@@ -36,8 +36,8 @@ describe('PDF Element', ()=> {
 		<calculated>
 		*/
 
-		area.width = area.height = 20;
-		area.top = area.left = 0;
+		container.width = container.height = 20;
+		container.top = container.left = 0;
 
 		// no width or height set
 		el.top = 5;
@@ -45,22 +45,22 @@ describe('PDF Element', ()=> {
 		el.left = 3;
 		el.right = 5;
 
-		el.scale(area);
+		el.scale(container);
 
 		expect(el.width).equals(12);
 		expect(el.height).equals(7);
 
 		// override explicit dimensions to fit area
 		el.width = el.height = 50;
-		el.scale(area);
+		el.scale(container);
 
 		expect(el.width).equals(12);
 		expect(el.height).equals(7);
 	});
 
 	it('calculates edge offset when size and opposite edge are known', ()=> {
-		let el = new Element();
-		let area = new Area();
+		let el = new ElementBase();
+		let container = new Area();
 
 		/*         20
 		┌──────┬───────────────┐
@@ -75,8 +75,8 @@ describe('PDF Element', ()=> {
 		<calculated>
 		*/
 
-		area.width = area.height = 20;
-		area.top = area.left = 0;
+		container.width = container.height = 20;
+		container.top = container.left = 0;
 
 		// no right or bottom set
 		el.right = 5;
@@ -84,9 +84,44 @@ describe('PDF Element', ()=> {
 		el.width = 12;
 		el.height = 7;
 
-		el.positionWithin(area);
+		el.positionWithin(container);
 
 		expect(el.top).equals(5);
 		expect(el.left).equals(3);
+	});
+
+	it('calculates offsets based on alignment', ()=> {
+		let el = new ElementBase();
+		let container = new Area();
+
+		/*         20
+		┌──────┬───────────────┐
+		│     <5>              │
+		│    ╔═╧══════════╗    │
+		├<4>─╢          7 ║    │
+		│    ║     12     ║    │ 20
+		│    ╚═════════╤══╝    │
+		│              │       │
+		│              8       │
+		└──────────────┴───────┘
+		<calculated>
+		*/
+
+		container.width = container.height = 20;
+		container.top = container.left = 0;
+		container.align.horizontal = TI.PDF.Align.Center;
+		container.align.vertical = TI.PDF.Align.Center;
+
+		// no right or bottom set
+		el.bottom = 8;
+		el.width = 12;
+		el.height = 7;
+
+		el.alignWithin(container);
+		el.positionWithin(container);
+
+		// vertical center rule should be overriden by explicit bottom
+		expect(el.top).equals(5);
+		expect(el.left).equals(4);
 	});
 });

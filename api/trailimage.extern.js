@@ -120,6 +120,11 @@ PDFStyleRule.prototype.minWidth = NaN;
 PDFStyleRule.prototype.scale = null;
 
 /**
+ * @type {String}
+ */
+PDFStyleRule.prototype.verticalAlign = null;
+
+/**
  * @type {Number}
  */
 PDFStyleRule.prototype.width = NaN;
