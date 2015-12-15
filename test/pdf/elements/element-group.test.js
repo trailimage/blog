@@ -51,7 +51,7 @@ describe('PDF Element Group', ()=> {
 		expect(inner2.pageLeft).equals(10);
 	});
 
-	it.skip('updates offsets of implicitly positioned child elements', ()=> {
+	it('updates offsets of implicitly positioned child elements', ()=> {
 		/*
 		            ← 20 →
 		┌─────────────────────────────┐  ↑    ↑
@@ -93,13 +93,13 @@ describe('PDF Element Group', ()=> {
 		// computed values
 		expect(inner1.align.horizontal).equals(TI.PDF.Align.Center);
 		expect(inner1.align.vertical).equals(TI.PDF.Align.Center);
-		expect(inner1.top).equals(3.5);
-		expect(inner1.left).equals(3);
-		expect(inner2.top).equals(5);
-		expect(inner2.left).equals(6.5);
+		expect(inner1.pageTop).equals(3.5);
+		expect(inner1.pageLeft).equals(3);
+		expect(inner2.pageTop).equals(5);
+		expect(inner2.pageLeft).equals(6.5);
 	});
 
-	it.skip('scales and centers child elements', ()=> {
+	it('scales and centers child elements', ()=> {
 		/*       ← 20 →
 		 ╔══════════╗
 		 ║ img      ║                       ← 6.25 ┤
@@ -111,11 +111,19 @@ describe('PDF Element Group', ()=> {
 		 ║  ← 10 →  ║          │            │      ║← 7.5 →║      │
 		 ╚══════════╝──────────┘            └──────╚═══════╝──────┘
 		 */
+		const style = {
+			rules: {
+				testGroup: { top: 0, left: 0, width: 20, height: 15, align: TI.PDF.Align.Center },
+				testImage: { scale: TI.PDF.Scale.Fit }
+			}
+		};
+
 		img.original.width = TI.PDF.inchesToPixels(10);
 		img.original.height = TI.PDF.inchesToPixels(20);
 
-		group.explicitLayout(layout);
-		group.implicitLayout();
+		group.empty();
+		group.add(img);
+		group.explicitLayout(new TI.PDF.Layout(style));
 
 		expect(img.width).equals(7.5);
 		expect(img.height).equals(15);
@@ -123,7 +131,7 @@ describe('PDF Element Group', ()=> {
 		expect(img.left).equals(6.25);
 	});
 
-	it('adjusts scalable elements to fit or fill available space', ()=> {
+	it.skip('adjusts scalable elements to fit or fill available space', ()=> {
 		/*
 		 ╔═══════════════════════════╗
 		 ║ img                       ║
@@ -142,6 +150,17 @@ describe('PDF Element Group', ()=> {
 		└───────────────────────────┴─────┘            ╚═════════════════════════════════╝
 		               ← 20 →                                         ← 20 →
 		*/
+		const style = {
+			rules: {
+				testGroup: { top: 0, left: 0, width: 20, height: 15, align: TI.PDF.Align.Center },
+				testImage: { width: 10, height: 20 },
+				testRect: { width: 7, height: 5 }
+			}
+		};
+
+		let img = new Image('testImage');
+		let rect = new Rectangle('testRect');
+
 		img.original.width = TI.PDF.inchesToPixels(17);
 		img.original.height = TI.PDF.inchesToPixels(16);
 
