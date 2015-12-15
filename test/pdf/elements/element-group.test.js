@@ -47,8 +47,8 @@ describe('PDF Element Group', ()=> {
 		expect(inner1.top).equals(6);
 		expect(inner1.left).equals(5);
 		// computed values
-		expect(inner2.top).equals(10);
-		expect(inner2.left).equals(10);
+		expect(inner2.pageTop).equals(10);
+		expect(inner2.pageLeft).equals(10);
 	});
 
 	it.skip('updates offsets of implicitly positioned child elements', ()=> {

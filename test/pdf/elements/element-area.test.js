@@ -24,14 +24,14 @@ describe('PDF Element Offset', ()=> {
 
 		a1.add(a2);
 
-		expect(a1.top).equals(12);
-		expect(a1.left).equals(14);
+		expect(a1.pageTop).equals(12);
+		expect(a1.pageLeft).equals(14);
 
 		// handles NaN
-		a2.top = NaN;
+		a2.pageTop = a2.top = NaN;
 		a1.add(a2);
 
-		expect(a1.top).equals(12);
+		expect(a1.pageTop).equals(12);
 	});
 
 	it('creates a copy of itself', ()=> {

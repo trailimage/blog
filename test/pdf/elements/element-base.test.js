@@ -69,7 +69,7 @@ describe('PDF Element', ()=> {
 		├<3>╢          7 ╟  5  ┤
 		│   ║     12     ║     │ 20
 		│   ╚═════════╤══╝     │
-		│                      │
+		│             │        │
 		│             8        │
 		└─────────────┴────────┘
 		<calculated>
@@ -84,7 +84,7 @@ describe('PDF Element', ()=> {
 		el.width = 12;
 		el.height = 7;
 
-		el.positionWithin(container);
+		el.alignWithin(container);
 
 		expect(el.top).equals(5);
 		expect(el.left).equals(3);
@@ -118,7 +118,6 @@ describe('PDF Element', ()=> {
 		el.height = 7;
 
 		el.alignWithin(container);
-		el.positionWithin(container);
 
 		// vertical center rule should be overriden by explicit bottom
 		expect(el.top).equals(5);
