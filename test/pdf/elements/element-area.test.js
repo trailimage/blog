@@ -7,6 +7,7 @@ const Area = TI.PDF.Element.Area;
 
 describe('PDF Element Offset', ()=> {
 	it('indicates if offset has no values', ()=> {
+		/** @type {TI.PDF.Element.Area} */
 		let a = new Area();
 		expect(a.isEmpty).is.true;
 
@@ -15,7 +16,9 @@ describe('PDF Element Offset', ()=> {
 	});
 
 	it("adds another element's offsets to its own", ()=> {
+		/** @type {TI.PDF.Element.Area} */
 		let a1 = new Area();
+		/** @type {TI.PDF.Element.Area} */
 		let a2 = new Area();
 		a1.top = 10;
 		a1.left = 10;
@@ -35,20 +38,25 @@ describe('PDF Element Offset', ()=> {
 	});
 
 	it('creates a copy of itself', ()=> {
+		/** @type {TI.PDF.Element.Area} */
 		let a = new Area();
 		a.top = 1;
 		a.left = 2;
 		a.width = 3;
 		a.height = 4;
+		a.align.horizontal = TI.PDF.Align.Center;
 
 		let b = a.copy();
 
 		expect(b.top).equals(1);
 		expect(b.height).equals(4);
+		expect(b.align.horizontal).equals(TI.PDF.Align.Center);
 	});
 
 	it('indicates if offset areas overlap', ()=> {
+		/** @type {TI.PDF.Element.Area} */
 		let a1 = new Area();
+		/** @type {TI.PDF.Element.Area} */
 		let a2 = new Area();
 		/*
 		┌───────────┐
