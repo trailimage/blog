@@ -6,7 +6,7 @@ const expect = require('chai').expect;
 const TextElement = TI.PDF.Element.Text;
 const style = {
 	settings: {
-		fonts: { sanSerif: "test/pdf/droidsans.ttf" }
+		fonts: { sanSerif: TI.fontFile }
 	},
 	rules: {
 		defaultText: { font: "sanSerif", fontSize: 12 },

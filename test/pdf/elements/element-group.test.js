@@ -5,6 +5,7 @@ const mocha = require('mocha');
 const expect = require('chai').expect;
 const Group = TI.PDF.Element.Group;
 const Image = TI.PDF.Element.Image;
+const TextElement = TI.PDF.Element.Text;
 const Rectangle = TI.PDF.Element.Rectangle;
 const Size = TI.PhotoSize;
 
@@ -129,6 +130,45 @@ describe('PDF Element Group', ()=> {
 		expect(img.height).equals(15);
 		expect(img.top).equals(0);
 		expect(img.left).equals(6.25);
+	});
+
+	it('positions text elements based on their computed size', ()=> {
+		/*
+		          ← 20 →
+		┌───────────────────────┐       ┌───────────────────────┐
+		│ group                 │       │ group                 │
+		│     ╔═══════════╗     │       │                       │
+		│     ║ text      ║     │   ►   │                       │
+		│     ║           ║     │       │                       │
+		│ ←1→ ║           ║ ←1→ │       │ ╔═══════════════════╗ │
+		│     ╚═══════════╝     │       │1║ text              ║1│
+		└───────────────────────┘       └─╚═══════════════════╝─┘
+		*/
+		const style = {
+			settings: {	fonts: { sanSerif: TI.fontFile }	},
+			rules: {
+				defaultPage: { margin: 0, width: 11, height: 8.5 },
+				defaultText: { left: 1, right: 1, font: "sanSerif", fontSize: 12 },
+				testGroup: { top: 0, left: 0, width: 20, height: 15, verticalAlign: TI.PDF.Align.Bottom }
+			}
+		};
+		let text = new TextElement(TI.lipsum);
+		let layout = new TI.PDF.Layout(style);
+
+		layout.createDocument('Test Title', 'Test Author');
+
+		group.empty();
+		group.add(text);
+
+		expect(text.top).isNaN;
+		expect(text.height).isNaN;
+
+		group.explicitLayout(layout);
+
+		expect(text.left).equals(1);
+		expect(text.bottom).equals(0);
+		expect(text.height).above(0.25);
+		expect(text.top).equals(group.height - text.height);
 	});
 
 	it.skip('adjusts scalable elements to fit or fill available space', ()=> {
