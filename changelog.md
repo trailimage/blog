@@ -1,3 +1,7 @@
+## 2.0.16
+#### Fixes
+- Incorrect slug for some photo tags causing 404s
+
 ## 2.0.15
 #### Fixes
 - Better logging for Flickr connectivity issues

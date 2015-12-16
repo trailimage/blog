@@ -33,6 +33,7 @@ $(function() {
 		$link.removeClass(css);
 		$link = $(this);
 		$link.addClass(css);
+
 		loadPhotoTag($link);
 
 		History.pushState(
@@ -43,13 +44,17 @@ $(function() {
 	});
 
 	/**
-	 *
-	 * @param {jQuery} link
+	 * @param {jQuery} $link
 	 */
 	function loadPhotoTag($link) {
 		if ($link.length > 0) {
 			$('#wait').show();
-			$('#thumbs').load($link.attr('href'), function() {
+			$('#thumbs').load($link.attr('href'), function(response, status) {
+				if (status === 'error') {
+					$(this).empty();
+					$link.removeClass(css);
+					alert('Sorry about that. Looking for "' + $link.html() + '" photos caused an error.');
+				}
 				$('#wait').hide();
 				window.scrollTo(0, 0);
 			});
