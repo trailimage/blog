@@ -1,8 +1,9 @@
 'use strict';
 
+const TI = require('./');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const is = require('./').is;
+const is = TI.is;
 let u;   // undefined
 
 describe('Identity Evaluations', ()=> {

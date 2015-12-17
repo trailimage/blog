@@ -1,6 +1,6 @@
 'use strict';
 
-const TI = require('./');
+const TI = require('./../index');
 const FileBase = TI.Provider.File.Base;
 const request = require('request');
 

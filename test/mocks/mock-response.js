@@ -1,6 +1,6 @@
 'use strict';
 
-const TI = require('./');
+const TI = require('../');
 const is = TI.is;
 
 /**
@@ -8,13 +8,13 @@ const is = TI.is;
  */
 class MockResponse {
 	constructor() {
-		/** @type {Number} */
+		/** @type Number */
 		this.httpStatus = TI.httpStatus.ok;
 		this.ended = false;
 		/**
 		 * Method to call when response is complete
 		 * Can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
-		 * @type {function}
+		 * @type Function
 		 */
 		this.testCallback = null;
 		/**
@@ -22,21 +22,21 @@ class MockResponse {
 		 */
 		this.headers = {};
 		/**
-		 * @type {String|Buffer}
+		 * @type String|Buffer
 		 */
 		this.content = null;
 
 		this.rendered = {
-			/** @type {String} */
+			/** @type String */
 			template: null,
-			/** @type {Object} */
+			/** @type Object */
 			options: null
 		};
 
 		this.redirected = {
-			/** @type {Number} */
+			/** @type Number */
 			status: null,
-			/** @type {String} */
+			/** @type String */
 			url: null
 		};
 	}
