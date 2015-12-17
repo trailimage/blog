@@ -27,9 +27,7 @@ class MockPDFDocument {
 	 * @param {String} path
 	 * @param {String} [family]
 	 */
-	registerFont(name, path, family) {
-		this.fonts[name] = path;
-	}
+	registerFont(name, path, family) { this.fonts[name] = path;	}
 
 	/**
 	 * @param {Object} options
