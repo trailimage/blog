@@ -1,6 +1,6 @@
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
-	<script src="/js/history/html4+html5/jquery.history.js" defer></script>
+	<script src="/js/history/html5/jquery.history.js" defer></script>
 	<script type='text/javascript'>
 		{{! expose routed tag to script }}
 		var selectedTag = '{{selected}}';
@@ -21,7 +21,7 @@
 	{{#each tags}}
 		<div id="item-{{@key}}">
 		{{#each this}}
-			<a id="link-{{@key}}" rel="nofollow" href="/photo-tag/search/{{@key}}">{{this}}</a>
+			<a id="link-{{@key}}" rel="nofollow" href="/photo-tag/search/{{encode @key}}">{{this}}</a>
 		{{/each}}
 		</div>
 	{{/each}}
