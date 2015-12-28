@@ -1,5 +1,19 @@
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
+	<script type="application/ld+json">
+	{
+		"@context": "http://schema.org",
+		"@type": "WebSite",
+		"url": "http://www.{{config.domain}}/",
+		"logo": "http://www.{{config.domain}}/img/logo.png",
+		"name": "Trail Image",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "http://www.{{config.domain}}/search?q={search_term_string}",
+			"query-input": "required name=search_term_string"
+		}
+	}
+	</script>
 {{/contentFor}}
 
 <div class="post-tag content">

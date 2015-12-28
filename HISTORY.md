@@ -1,3 +1,7 @@
+## 2.0.18
+#### Features
+- SEO
+
 ## 2.0.17
 #### Features
 - Make logged URLs live links

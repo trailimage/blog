@@ -20,6 +20,43 @@
 	{{> head-facebook}}
 	{{> ga}}
 	<script src='/js/post.js' type='text/javascript' defer></script>
+	<script type="application/ld+json">
+	{
+		"@context": "http://schema.org",
+		"@type": "NewsArticle",
+		"mainEntityOfPage":{
+			"@type":"WebPage",
+			"@id":"http://www.{{config.domain}}"
+		},
+		"headline": "{{post.title}}",
+		"image": {
+			"@type": "ImageObject",
+			"url": "{{post.thumb.size.normal.url}}",
+			"height": {{post.thumb.size.normal.height}},
+			"width": {{post.thumb.size.normal.width}}
+		},
+	{{#if post.dateTaken}}
+		"datePublished": "2015-02-05T08:00:00+08:00",
+	{{/if}}
+		"author": {
+			"@type": "Person",
+			"name": "{{post.author}}"
+		},
+		"publisher": {
+			"@type": "Organization",
+			"name": "Trail Image",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "http://www.{{config.domain}}/img/logo.png",
+				"width": 96,
+				"height": 96
+			}
+		}
+	{{#if post.description}},
+	  "description": "{{post.description}}"
+	{{/if}}
+	}
+	</script>
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
 <body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.tags}} has-tags{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
