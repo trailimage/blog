@@ -17,7 +17,7 @@ createWebService();
 
 function createWebService() {
 	const app = Express();
-	/** @type {Number} */
+	/** @type Number */
 	const port = process.env['PORT'] || 3000;
 	const log = TI.active.log;
 
@@ -47,17 +47,17 @@ function createWebService() {
  * @see https://npmjs.org/package/express-hbs
  * @see http://mustache.github.com/mustache.5.html
  */
-function defineViews(express) {
-	/** @type {ExpressHbs} */
+function defineViews(app) {
+	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
 	const format = TI.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
 	// http://expressjs.com/4x/api.html#app-settings
-	express.set('views', root + '/views');
-	express.set('view engine', engine);
-	express.engine(engine, hbs.express4({
+	app.set('views', root + '/views');
+	app.set('view engine', engine);
+	app.engine(engine, hbs.express4({
 		defaultLayout: root + '/views/' + TI.template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
@@ -101,7 +101,7 @@ function applyMiddleware(app) {
  * This should be what Express already supports but it isn't behaving as expected
  * @param {RegExp} regex
  * @param {Function} fn Middleware
- * @returns {Function} Wrapper
+ * @returns Function Wrapper
  */
 function filter(regex, fn) {
 	return (req, res, next) => {
@@ -113,7 +113,6 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const OAuthOptions = TI.Auth.Options;
 	const FlickrPhoto = TI.Provider.Photo.Flickr;
 	const GoogleFile = TI.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
@@ -143,7 +142,7 @@ function injectDependencies() {
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		auth: new OAuthOptions(1,
+		auth: new TI.Auth.Options(1,
 			config.env('FLICKR_API_KEY'),
 			config.env('FLICKR_SECRET'),
 			`http://www.${config.domain}/auth/flickr`,
@@ -154,7 +153,7 @@ function injectDependencies() {
 	TI.active.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-		auth: new OAuthOptions(2,
+		auth: new TI.Auth.Options(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
 			`http://www.${config.domain}/auth/google`,
@@ -220,13 +219,13 @@ function defineRoutes(app) {
 
 /**
  * If a provider isn't authenticated then all paths route to authentication pages
- * @param express
+ * @param app
  */
-function defineAuthRoutes(express) {
+function defineAuthRoutes(app) {
 	const c = TI.Controller.authorize;
 
-	express.get('/auth/flickr', c.flickr);
-	express.get('/auth/google', c.google);
+	app.get('/auth/flickr', c.flickr);
+	app.get('/auth/google', c.google);
 	// all other routes begin authentication process
-	express.get('*', c.view);
+	app.get('*', c.view);
 }

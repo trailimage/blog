@@ -1,39 +1,42 @@
 'use strict';
 
-const TI = require('./');
+const TI = require('../');
 const is = TI.is;
 
+/**
+ * @alias TI.Mock.Response
+ */
 class MockResponse {
 	constructor() {
-		/** @type {Number} */
+		/** @type Number */
 		this.httpStatus = TI.httpStatus.ok;
 		this.ended = false;
 		/**
 		 * Method to call when response is complete
 		 * Can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
-		 * @type {function}
+		 * @type Function
 		 */
 		this.testCallback = null;
 		/**
-		 * @type {Object.<String>}
+		 * @type {Object.<String, String>}
 		 */
 		this.headers = {};
 		/**
-		 * @type {String|Buffer}
+		 * @type String|Buffer
 		 */
 		this.content = null;
 
 		this.rendered = {
-			/** @type {String} */
+			/** @type String */
 			template: null,
-			/** @type {Object} */
+			/** @type Object */
 			options: null
 		};
 
 		this.redirected = {
-			/** @type {Number} */
+			/** @type Number */
 			status: null,
-			/** @type {String} */
+			/** @type String */
 			url: null
 		};
 	}
@@ -49,14 +52,14 @@ class MockResponse {
 
 	/**
 	 * Set status to 404
-	 * @returns {MockResponse}
+	 * @returns {TI.Mock.Response|MockResponse}
 	 */
 	notFound() { return this.status(TI.httpStatus.notFound); }
 
 	/**
 	 * @param {String} key
 	 * @param {String} value
-	 * @return {MockResponse}
+	 * @return {TI.Mock.Response|MockResponse}
 	 */
 	setHeader(key, value) {
 		this.headers[key] = value;
@@ -65,7 +68,7 @@ class MockResponse {
 
 	/**
 	 * @param {String|Buffer} value
-	 * @return {MockResponse}
+	 * @return {TI.Mock.Response|MockResponse}
 	 */
 	write(value) {
 		this.content = value;
