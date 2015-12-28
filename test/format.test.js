@@ -3,6 +3,7 @@
 const TI = require('./');
 const mocha = require('mocha');
 const expect = require('chai').expect;
+const config = TI.config;
 const format = TI.format;
 let u;   // undefined
 
@@ -41,6 +42,26 @@ describe('Formatting', ()=> {
 	});
 	it.skip('converts timestamp to Date', ()=> {
 
+	});
+
+	it('formats log messages', ()=> {
+		let field = 'message';
+		let log = { message: null };
+
+		expect(format.logMessage(log, field)).equals('[no message]');
+
+		log.message = '/autumn-ride-to-boise/gpx not found for 10.180.57.199';
+
+		let output = '<a href="/autumn-ride-to-boise/gpx" target="_blank">/autumn-ride-to-boise/gpx</a>'
+			+ ' not found for <a href="' + config.log.ipLookupUrl + '10.180.57.199" target="_blank">10.180.57.199</a>';
+
+		expect(format.logMessage(log, field)).equals(output);
+
+		log.message  = '/8330346003 not found for 10.230.214.144';
+		output = '/<a href="' + config.log.photoUrl + '8330346003" target="_blank">8330346003</a>'
+			+ ' not found for <a href="' + config.log.ipLookupUrl + '10.230.214.144" target="_blank">10.230.214.144</a>';
+
+		expect(format.logMessage(log, field)).equals(output);
 	});
 
 	// http://rot13.com/
