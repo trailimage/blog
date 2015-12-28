@@ -1,8 +1,10 @@
 ## 2.0.17
 #### Features
 - Make logged URLs live links
+- Incorporate PDF work-to-date
 #### Fixes
 - Legitimate photo not found being retried as if it's a failure
+- Logging host URL as client URL
 
 ## 2.0.16
 #### Fixes
