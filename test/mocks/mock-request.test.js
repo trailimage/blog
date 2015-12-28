@@ -16,4 +16,9 @@ describe('Mock Request', ()=> {
 		req.params['key'] = 'value';
 		expect(req.params['key']).equals('value');
 	});
+
+	it('allows setting and reading header values', ()=> {
+		req.headers['key'] = 'value';
+		expect(req.header('key')).equals('value');
+	});
 });

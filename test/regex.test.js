@@ -1,8 +1,9 @@
 'use strict';
 
+const TI = require('./');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const re = require('../lib/regex.js');
+const re = TI.re;
 let text = `some
 text on more
 than
@@ -16,5 +17,5 @@ describe('Patterns', ()=> {
 
 	it('matches line breaks', ()=> {
 		expect(text.replace(re.lineBreak, '-')).equals('some-text on more-than--one line')
-	})
+	});
 });

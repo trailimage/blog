@@ -348,7 +348,6 @@ Flickr.Response.prototype.stat = null;
  */
 Flickr.Response.prototype.code = 0;
 
-
 /**
  * @type {String}
  */

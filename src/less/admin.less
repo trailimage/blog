@@ -25,7 +25,7 @@ label {
 
 a {
 	text-decoration: none;
-	&:hover { text-decoration: underline; }
+	&:hover { text-decoration: underline !important; }
 }
 
 fieldset {
@@ -98,7 +98,7 @@ div.column {
 
 			&.error	{ td { background-color: #f99; word-break: break-all; }}
 			&.warn { td { background-color: #ffe; }}
-			&:hover	{ td { color: #80a; }}
+			&:hover	{ td { background-color: #fff; }}
 
 			td {
 				border-bottom: 1px solid @borderColor;
@@ -112,13 +112,13 @@ div.column {
 
 					.glyphicon { color: #ccc; }
 					.glyphicon-ban-circle { color: #eee; }
-					.glyphicon-eye-open { color: #999; }
+					.glyphicon-eye-open { color: #5ef; }
 					.glyphicon-heart-empty { color: #f44; }
-					.glyphicon-link { color: #f5b; }
+					.glyphicon-link { color: #f6c; }
 					.glyphicon-lock { color: #0f0; }
 					.glyphicon-log-in { color: #fd0; }
 					.glyphicon-new-window { color: #ff8; }
-					.glyphicon-off { color: #49f; }
+					.glyphicon-off { color: #5af; }
 					.glyphicon-remove { color: #f40; }
 					.glyphicon-save { color: #f94; }
 					.glyphicon-save-file { }
@@ -132,6 +132,10 @@ div.column {
 					white-space: nowrap;
 					letter-spacing: -1px;
 					cursor: pointer;
+				}
+
+				a {
+					color: #44d;
 				}
 			}
 		}
