@@ -124,7 +124,7 @@ function injectDependencies() {
 		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
 	}
 
-	if (config.isProduction) {
+	if (config.isProduction && is.empty(config.proxy)) {
 		// replace default log provider with Redis
 		TI.active.log = new TI.Provider.Log.Redis(redisUrl);
 	}

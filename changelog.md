@@ -1,3 +1,9 @@
+## 2.0.17
+#### Features
+- Make logged URLs live links
+#### Fixes
+- Legitimate photo not found being retried as if it's a failure
+
 ## 2.0.16
 #### Fixes
 - Incorrect slug for some photo tags causing 404s
