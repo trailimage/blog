@@ -23,19 +23,19 @@
 	<div id="fb-root"></div>
 	{{> side-menu}}
 	{{> bug}}
-	<header itemscope itemtype="http://schema.org/BlogPosting" class="page post-header content">
+	<header class="page post-header content">
 		<!--googleoff: index-->
 		<nav id="mobile-menu"></nav>
 		<!--googleon: index-->
 		<div id="top-bar">
 		{{#if post.isPartial}}
-			<h1 itemprop="name">{{post.title}}</h1>
+			<h1>{{post.title}}</h1>
 			<div class='subtitle'>
 				<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
 				{{post.subTitle}}
 			</div>
 		{{else}}
-			<h1 itemprop="name">{{post.title}}</h1>
+			<h1>{{post.title}}</h1>
 		{{/if}}
 
 			<!--googleoff: index-->
@@ -46,10 +46,10 @@
 
 	{{#if post.dateTaken}}
 	{{! outside top-bar to avoid its fixed positioning }}
-		<div id="post-date" itemprop="dateCreated">{{date post.dateTaken}}</div>
+		<div id="post-date">{{date post.dateTaken}}</div>
 	{{/if}}
 
-		<div class="fb-like" data-href="http://www.{{config.domain}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+		<div class="fb-like" data-href="{{config.site.url}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 	{{#if post.video}}
 		<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
@@ -57,7 +57,7 @@
 
 	{{#if post.description}}
 		<blockquote class="synopsis">
-			<p itemprop="description">{{post.description}}<p>
+			<p>{{post.description}}<p>
 		</blockquote>
 	{{/if}}
 
@@ -77,11 +77,11 @@
 
 	{{#post.photos}}
 
-	<figure itemscope itemtype="http://schema.org/ImageObject" title="Click to enlarge image {{index}}" data-exif="/exif/{{id}}" style='width: {{size.normal.width}}px; max-width: 100%;'>
+	<figure itemscope title="Click to enlarge image {{index}}" data-exif="/exif/{{id}}" style='width: {{size.normal.width}}px; max-width: 100%;'>
 		{{! links from photo tag search are anchored to ID }}
 		<a name="{{id}}"></a><a name="{{index}}"></a>
 		{{! data-original attribute supports jquery.lazyload }}
-		<img src="{{size.preview.url}}" alt="{{title}}" itemprop="url" data-original="{{size.normal.url}}"
+		<img src="{{size.preview.url}}" alt="{{title}}" data-original="{{size.normal.url}}"
 			 style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
 		     data-big="{{size.big.url}}" data-big-width="{{size.big.width}}" data-big-height="{{size.big.height}}"/>
 		<div class="info-button">{{{icon 'camera'}}}<p>Camera Settings</p></div>
@@ -99,7 +99,7 @@
 	{{/if}}
 
 	{{#if title}}
-		<figcaption><span itemprop="name">{{{formatTitle title}}}</span></figcaption>
+		<figcaption><span>{{{formatTitle title}}}</span></figcaption>
 	{{/if}}
 	{{#if sourceUrl}}
 		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
@@ -107,14 +107,14 @@
 		<div class="mobile-button">{{{icon 'camera'}}}<p>Info</p></div>
 	</figure>
 
-	<div class="caption content" itemprop="description">{{{formatCaption description}}}</div>
+	<div class="caption content">{{{formatCaption description}}}</div>
 
 	{{/post.photos}}
 
 {{#if post.video}}
 	<a name="video">
-		<div class="video" itemscope itemtype="http://schema.org/VideoObject" style="width: {{{add post.video.width 8}}}px;">
-			<iframe width="{{post.video.width}}" height="{{post.video.height}}" itemprop="url" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
+		<div class="video" style="width: {{{add post.video.width 8}}}px;">
+			<iframe width="{{post.video.width}}" height="{{post.video.height}}" src="http://www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
 		</div>
 	</a>
 {{/if}}
@@ -124,7 +124,7 @@
 	<div class='by-line content'><p rel='author'><span>by</span>Jason Abbott</p></div>
 
 	<footer class="post content">
-		<div class="fb-comments" data-href="http://www.{{config.domain}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
+		<div class="fb-comments" data-href="{{config.site.url}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
 	</footer>
 	{{> footer}}
 </body>

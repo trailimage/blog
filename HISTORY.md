@@ -1,6 +1,7 @@
 ## 2.0.18
 #### Features
-- SEO
+- JSON-LD SEO
+- Switch from gulp-minify-css to gulp-cssnano
 
 ## 2.0.17
 #### Features

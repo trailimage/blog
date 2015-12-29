@@ -78,6 +78,7 @@ function applyMiddleware(app) {
 	const bodyParser = require('body-parser');
 	const outputCache = TI.Middleware.outputCache;
 	const spamBlocker = TI.Middleware.referralBlocker;
+	const statusHelper = TI.Middleware.statusHelper;
 
 	app.use(spamBlocker.filter);
 
@@ -93,6 +94,7 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
+	app.use(statusHelper.methods);
 	app.use(outputCache.methods);
 	app.use(Express.static(__dirname + '/dist'));
 }

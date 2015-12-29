@@ -32,14 +32,6 @@ describe('Output Cache Middleware', ()=> {
 		expect(res.content).equals(item.buffer);
 	});
 
-	it('finds referred client IP for hosted node instances', ()=> {
-		req.connection.remoteAddress = 'remote';
-		expect(req.clientIP()).equals('remote');
-
-		req.headers['x-forwarded-for'] = 'value1, value2';
-		expect(req.clientIP()).equals('value1');
-	});
-
 	// remove test page from cache
 	after(done => { res.removeFromCache(viewSlug, ()=> { done(); }); });
 });

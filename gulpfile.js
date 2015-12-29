@@ -3,7 +3,7 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 const merge = require('merge2');
-const minifyCSS = require('gulp-minify-css');
+const nano = require('gulp-cssnano');
 const concat = require('gulp-concat');
 const mocha = require('gulp-mocha');
 const uglify = require('gulp-uglify');
@@ -34,7 +34,7 @@ function LESS(name, fontFile) {
 		gulp.src(dist + 'fonts/' + fontFile + '.css'),
 		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
 	)
-		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0 }))
+		.pipe(nano())
 		.pipe(concat(name + '.css'))
 		.pipe(gulp.dest(dist + 'css'));
 }
