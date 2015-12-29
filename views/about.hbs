@@ -1,18 +1,5 @@
 {{#contentFor "head"}}
-	<script type="application/ld+json">
-	{
-		"@context": "http://schema.org",
-		"@type": "Person",
-		"name": "{{config.authorName}}",
-		"url": "http://www.{{config.domain}}/",
-		"sameAs" : [
-		   "https://www.facebook.com/jason.e.abbott",
-		   "http://www.flickr.com/photos/boise",
-		   "https://www.youtube.com/user/trailimage",
-		   "https://twitter.com/trailimage"
-		]
-	}
-	</script>
+	{{> json-ld}}
 {{/contentFor}}
 
 <div class="about content">
@@ -56,6 +43,6 @@
 	<p>There we are confronted by the old merism of what matters, truth and beauty. Not caricatures, talking points or trophies, amplified and garish, but a quiet reminder of the significance and insignificance of things.</p>
 	<p>It is this I wish to relay through the small truths of <a href="/photo-tag/history">history</a> or geology that come to hand while developing images to match, I hope, what you would have seen had you stood by when I took them.</p>
 
-	<div class="by-line">&mdash; {{config.authorName}}</div>
+	<div class="by-line">&mdash; {{config.owner.name}}</div>
 	<div class="clear"></div>
 </div>
