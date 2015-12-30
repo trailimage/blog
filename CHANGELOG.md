@@ -4,6 +4,8 @@
 - Make default post tag configurable
 - Switch to JSON-LD
 - Switch from gulp-minify-css to gulp-cssnano
+- Removed view details from models
+- Optimized post tag controller to avoid model interrogations when view is cached
 
 ## 2.0.17
 #### Features

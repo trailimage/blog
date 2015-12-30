@@ -4,7 +4,7 @@
 	<li class="title {{this.title}}">{{{iconForPostTag this.title}}}{{this.title}}
 		<ul>
 		{{#this.tags}}
-			<li><a href="/tag/{{this.slug}}" rel="tag">{{this.title}}</a>({{this.posts.length}})</li>
+			<li><a href="/{{this.slug}}" rel="tag">{{this.title}}</a>({{this.posts.length}})</li>
 		{{/this.tags}}
 		</ul>
 	</li>

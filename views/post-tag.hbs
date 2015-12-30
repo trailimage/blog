@@ -25,7 +25,8 @@
 				<p class="summary">{{description}}</p>
 				<ul class="tags">
 				{{#each tags}}
-					<li><a href="/tag/{{makeSlug this}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
+					{{! posts store their tags as titles keyed to the slug }}
+					<li><a href="/{{@key}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
 				{{/each}}
 				</ul>
 			</section>

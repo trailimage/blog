@@ -9,7 +9,7 @@ describe('Post Model', ()=> {
 
 	it('indicates if it has tags', ()=> {
 		expect(p.hasTags).is.false;
-		p.tags.push('anything');
+		p.tags['whatever'] = 'anything';
 		expect(p.hasTags).is.true;
 	});
 });
