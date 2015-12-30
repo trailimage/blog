@@ -1,6 +1,8 @@
 ## 2.0.18
 #### Features
-- JSON-LD SEO
+- Tag category page for breadcrumb SEO
+- Make default post tag configurable
+- Switch to JSON-LD
 - Switch from gulp-minify-css to gulp-cssnano
 
 ## 2.0.17

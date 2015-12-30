@@ -1,0 +1,12 @@
+{{#contentFor "head"}}
+	{{> json-ld}}
+{{/contentFor}}
+
+<div class="post-tag-category content">
+	{{{iconForPostTag title}}}
+	<ul>
+	{{#each tags}}
+		<li><a href="/{{fullSlug}}" rel="tag">{{title}}</a>({{posts.length}})</li>
+	{{/each}}
+	</ul>
+</div>

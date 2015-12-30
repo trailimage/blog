@@ -13,7 +13,7 @@
   {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
 				</ul>
 				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
-				<span class="mode-icon {{{mode}}}"></span>
+				<span class="mode-icon {{modeIconForPost tags}}"></span>
 				<div class="clear"></div>
 			</header>
 

@@ -127,6 +127,22 @@ describe('Formatting', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
 	});
 
+	it('matches post tags to glyphicons', ()=> {
+		config.style.icon.postTag = { 'Test': 'success', 'default': 'whatever' };
+
+		expect(format.postTagIcon('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
+		// revert to default if provided
+		expect(format.postTagIcon('Nothing')).equals('<span class="glyphicon glyphicon-whatever"></span>');
+
+		// blank if no default
+		delete config.style.icon.postTag['default'];
+		expect(format.postTagIcon('Nothing')).is.empty;
+
+		// blank if no icons defined
+		delete config.style.icon.postTag;
+		expect(format.postTagIcon('Nothing')).is.empty;
+	});
+
 	it('fixes malformed links and URL decode text', ()=> {
 		let source = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf';
 		let target = '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20(4-2011%20Issue%202).pdf">www.motoidaho.com/sites/default/files/IAMC Newsletter (4-2011 Issue 2).pdf</a>';
