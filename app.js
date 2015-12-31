@@ -33,9 +33,9 @@ function createWebService() {
 	} else {
 		applyMiddleware(app);
 
-		TI.Library.load(() => {
+		TI.Library.load(library => {
 			// library must be loaded before routes are defined
-			defineRoutes(app);
+			defineRoutes(app, library);
 			app.listen(port);
 			log.infoIcon(TI.icon.heartOutline, 'Listening on port %d', port);
 		});
@@ -78,6 +78,7 @@ function applyMiddleware(app) {
 	const bodyParser = require('body-parser');
 	const outputCache = TI.Middleware.outputCache;
 	const spamBlocker = TI.Middleware.referralBlocker;
+	const statusHelper = TI.Middleware.statusHelper;
 
 	app.use(spamBlocker.filter);
 
@@ -93,6 +94,7 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
+	app.use(statusHelper.methods);
 	app.use(outputCache.methods);
 	app.use(Express.static(__dirname + '/dist'));
 }
@@ -117,6 +119,9 @@ function injectDependencies() {
 	const GoogleFile = TI.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
+
+	TI.Post.subtitleSeparator = config.style.subtitleSeparator;
+	TI.Post.defaultAuthor = config.owner.name;
 
 	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
 		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
@@ -163,18 +168,22 @@ function injectDependencies() {
 }
 
 /**
+ * @param app
+ * @param {TI.Library} library
  * @see http://expressjs.com/4x/api.html#router
  * @see http://expressjs.com/guide/routing.html
  */
-function defineRoutes(app) {
+function defineRoutes(app, library) {
 	const c = TI.Controller;
 	const r = require('./lib/controllers/routes.js');
-	/** @type {string} Slug pattern */
+	// Slug pattern
 	const s = '([\\w\\d-]{4,})';
-	/** @type {string} Flickr photo ID pattern */
+	// Flickr photo ID pattern
 	const photoID = ':photoID(\\d{10,11})';
-	/** @type {string} Flickr set ID pattern */
+	// Flickr set ID pattern
 	const postID = ':postID(\\d{17})';
+	//
+	const rootPostTag = rootTagRoutePattern(library);
 
 	app.use('/admin', r.admin);
 	//app.use('/api/v1', r.api);
@@ -183,6 +192,7 @@ function defineRoutes(app) {
 	for (let slug in config.redirects) {
 		app.get('/' + slug, (req, res) => { res.redirect(TI.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
+
 	// the latest posts
 	app.get('/', c.tag.home);
 	app.get('/rss', c.rss.view);
@@ -195,7 +205,8 @@ function defineRoutes(app) {
 	app.get('/tag-menu', c.tag.menu);
 	app.get('/mobile-menu', c.menu.mobile);
 	app.get('/search', c.search.view);
-	app.get('/:category(who|what|when|where|tag)/:tag', c.tag.view);
+	app.get('/'+rootPostTag, c.tag.root);
+	app.get('/'+rootPostTag+'/:tag', c.tag.view);
 	// old blog links with format /YYYY/MM/slug
 	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', c.post.blog);
 	app.get('/photo-tag', c.photo.tags);
@@ -215,6 +226,16 @@ function defineRoutes(app) {
 	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', c.map.seriesView);
 	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, c.map.seriesView);
 	app.get('/:slug'+s, c.post.view);
+}
+
+/**
+ * @param {TI.Library} library
+ * @return {String}
+ */
+function rootTagRoutePattern(library) {
+	let rootPostTags = [];
+	for (let name in library.tags) {	rootPostTags.push(library.tags[name].slug); }
+	return ':rootTag(' + rootPostTags.join('|') + ')';
 }
 
 /**

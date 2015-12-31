@@ -3,7 +3,7 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 const merge = require('merge2');
-const minifyCSS = require('gulp-minify-css');
+const nano = require('gulp-cssnano');
 const concat = require('gulp-concat');
 const mocha = require('gulp-mocha');
 const uglify = require('gulp-uglify');
@@ -25,6 +25,7 @@ gulp.task('less', ['less-main','less-map','less-admin']);
  * Combine web fonts and transpile LESS
  * @param {String} name CSS file name
  * @param {String} [fontFile] File created by npm webfont-dl script
+ * @see https://github.com/ben-eb/cssnano
  * @returns {jQuery.Promise}
  */
 function LESS(name, fontFile) {
@@ -34,7 +35,7 @@ function LESS(name, fontFile) {
 		gulp.src(dist + 'fonts/' + fontFile + '.css'),
 		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
 	)
-		.pipe(minifyCSS({ advanced: true, keepSpecialComments: 0 }))
+		.pipe(nano({ discardUnused: false }))
 		.pipe(concat(name + '.css'))
 		.pipe(gulp.dest(dist + 'css'));
 }

@@ -1,5 +1,6 @@
 {{#contentFor "head"}}
 	<meta name="robots" content="noindex">
+	{{> json-ld}}
 {{/contentFor}}
 
 <div class="post-tag content">
@@ -8,23 +9,24 @@
 		<article class="summary">
 			<header class="post">
 				<ul class="info">
-					<li class="date-taken">{{dateTaken}}</li>
+					<li class="date-taken">{{date dateTaken}}</li>
   {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
 				</ul>
 				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
-				<span class="mode-icon {{{mode}}}"></span>
+				<span class="mode-icon {{modeIconForPost tags}}"></span>
 				<div class="clear"></div>
 			</header>
 
-			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{thumb.size.preview.url}}" width="{{thumb.size.preview.width}}" height="{{thumb.size.preview.height}}" style="width: {{thumb.size.preview.width}}px; height: {{thumb.size.preview.height}}px;"/></a>
+			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{coverPhoto.size.preview.url}}" width="{{coverPhoto.size.preview.width}}" height="{{coverPhoto.size.preview.height}}" style="width: {{coverPhoto.size.preview.width}}px; height: {{coverPhoto.size.preview.height}}px;"/></a>
 		{{#if photoCoordinates}}
-			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 thumb.size.preview.width}}x{{mapHeight thumb.size.preview.width thumb.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
 		{{/if}}
 			<section class="detail">
 				<p class="summary">{{description}}</p>
 				<ul class="tags">
 				{{#each tags}}
-					<li><a href="/tag/{{makeSlug this}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
+					{{! posts store their tags as titles keyed to the slug }}
+					<li><a href="/{{@key}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
 				{{/each}}
 				</ul>
 			</section>

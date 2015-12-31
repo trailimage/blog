@@ -1,3 +1,7 @@
+{{#contentFor "head"}}
+	{{> json-ld}}
+{{/contentFor}}
+
 <div class="about content">
 	<section id="right-column">
 		<a class='main-image' href="/hat-point-above-hells-canyon#68"><img src="/img/about.jpg"/></a>
@@ -39,6 +43,6 @@
 	<p>There we are confronted by the old merism of what matters, truth and beauty. Not caricatures, talking points or trophies, amplified and garish, but a quiet reminder of the significance and insignificance of things.</p>
 	<p>It is this I wish to relay through the small truths of <a href="/photo-tag/history">history</a> or geology that come to hand while developing images to match, I hope, what you would have seen had you stood by when I took them.</p>
 
-	<div class="by-line">&mdash; Jason Abbott</div>
+	<div class="by-line">&mdash; {{config.owner.name}}</div>
 	<div class="clear"></div>
 </div>

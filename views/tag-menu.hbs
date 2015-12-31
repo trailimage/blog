@@ -1,10 +1,10 @@
 <ul id="tag-navigation">
 	<li class="head">Other Posts</li>
 {{#each library.tags}}
-	<li class="title {{this.title}}">{{{icon this.icon}}}{{this.title}}
+	<li class="title {{this.title}}">{{{iconForPostTag this.title}}}{{this.title}}
 		<ul>
 		{{#this.tags}}
-			<li><a href="/tag/{{this.slug}}" rel="tag">{{this.title}}</a>({{this.posts.length}})</li>
+			<li><a href="/{{this.slug}}" rel="tag">{{this.title}}</a>({{this.posts.length}})</li>
 		{{/this.tags}}
 		</ul>
 	</li>

@@ -1,7 +1,8 @@
 'use strict';
 
 /**
- * @var {String} selectedTag Defined in photo-tag.hbs
+ * @external selectedTag Defined in photo-tag.hbs
+ * @external siteName
  */
 $(function() {
 	var css = 'selected';
@@ -38,7 +39,7 @@ $(function() {
 
 		History.pushState(
 			null,
-			'Trail Image photos tagged with "' + $link.html() + '"',
+			siteName + ' photos tagged with "' + $link.html() + '"',
 			$link.attr('href').replace('/search', '')
 		);
 	});
