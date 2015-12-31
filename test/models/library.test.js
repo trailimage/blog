@@ -17,14 +17,12 @@ describe('Library Model', ()=> {
 		child.title = 'Child Name';
 		child.slug = 'child-slug';
 
-		t.tags.push(child);
+		t.addChild(child);
 
 		l.tags[t.title] = t;
 
 		// find root tag
 		expect(l.tagWithSlug('slug')).equals(t);
-		// find child tag
-		expect(l.tagWithSlug('slug','child-slug')).equals(child);
 		// find child tag with URL format
 		expect(l.tagWithSlug('slug/child-slug')).equals(child);
 
