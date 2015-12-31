@@ -14,18 +14,21 @@
 	<url>
 		<loc>{{../config.site.url}}/{{this.slug}}</loc>
 		<changefreq>monthly</changefreq>
+		<priority>0.8</priority>
 	</url>
 {{/each}}
 {{#each tags}}
 	<url>
 		<loc>{{../config.site.url}}/{{this}}</loc>
 		<changefreq>monthly</changefreq>
+		<priority>0.5</priority>
 	</url>
 {{/each}}
 {{#each photoTags}}
 	<url>
 		<loc>{{../config.site.url}}/photo-tag/{{@key}}</loc>
 		<changefreq>monthly</changefreq>
+		<priority>0.2</priority>
 	</url>
 {{/each}}
 </urlset>
