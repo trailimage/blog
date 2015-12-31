@@ -1,5 +1,5 @@
 {
-  "name": "trail-image",
+  "name": "@trailimage/blog",
   "description": "Trail Image blog",
   "version": "2.0.19",
   "private": false,
@@ -27,6 +27,7 @@
     "pdfkit": "^0.7.2",
     "redis": "^2.0.0",
     "request": "^2.64.0",
+	 "@trailimage/is": "git+https://github.com/Trail-Image/is.git#master",
     "uglify-js": "^2.4.0",
     "winston": "^2.0.0",
     "winston-redis": "^1.0.0",
