@@ -1,3 +1,7 @@
+## 2.0.19
+#### Fixes
+- Post tags broken in mobile menu (regression)
+
 ## 2.0.18
 #### Features
 - Tag category page for breadcrumb SEO

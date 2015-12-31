@@ -1,8 +1,8 @@
 {
   "name": "trail-image",
-  "description": "Trail Image server",
-  "version": "2.0.18",
-  "private": true,
+  "description": "Trail Image blog",
+  "version": "2.0.19",
+  "private": false,
   "author": {
     "name": "Jason Abbott"
   },
@@ -47,10 +47,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jason-Abbott/Trail-Image.git"
+    "url": "https://github.com/Trail-Image/blog.git"
   },
   "main": "index",
   "bugs": {
-    "url": "https://github.com/Jason-Abbott/Trail-Image/issues"
+    "url": "https://github.com/Trail-Image/blog/issues"
   }
 }
