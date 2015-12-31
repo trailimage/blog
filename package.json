@@ -27,6 +27,7 @@
     "pdfkit": "^0.7.2",
     "redis": "^2.0.0",
     "request": "^2.64.0",
+	 "@trailimage/enum": "git+https://github.com/Trail-Image/enum.git#master",
 	 "@trailimage/is": "git+https://github.com/Trail-Image/is.git#master",
     "uglify-js": "^2.4.0",
     "winston": "^2.0.0",
