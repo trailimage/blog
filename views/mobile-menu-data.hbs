@@ -20,7 +20,7 @@
 {{#each library.tags}}
 	<ul class="{{lowerCase this.title}}">
 	{{#this.tags}}
-		<li><a href="/tag/{{this.slug}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
+		<li><a href="/{{this.slug}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
 	{{/this.tags}}
 	</ul>
 {{/each}}
