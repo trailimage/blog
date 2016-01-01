@@ -123,6 +123,13 @@ function injectDependencies() {
 	TI.Post.subtitleSeparator = config.style.subtitleSeparator;
 	TI.Post.defaultAuthor = config.owner.name;
 
+	TI.Map.Track.maxPossibleSpeed = config.map.maxPossibleSpeed;
+	TI.Map.Track.maxDeviationFeet = config.map.maxDeviationFeet;
+
+	TI.Map.Location.privacy.check = config.map.checkPrivacy;
+	TI.Map.Location.privacy.miles = config.map.privacyMiles;
+	TI.Map.Location.privacy.miles = config.map.privacyCenter;
+
 	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
 		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
 		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
