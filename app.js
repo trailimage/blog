@@ -4,9 +4,9 @@
  * Application entry point
  * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
  */
-const TI = require('./lib');
-const is = TI.is;
-const config = TI.config;
+const Blog = require('./lib');
+const is = Blog.is;
+const config = Blog.config;
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -19,25 +19,25 @@ function createWebService() {
 	const app = Express();
 	/** @type Number */
 	const port = process.env['PORT'] || 3000;
-	const log = TI.active.log;
+	const log = Blog.active.log;
 
-	log.infoIcon(TI.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
+	log.infoIcon(Blog.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
 
 	defineViews(app);
 
-	if (TI.active.needsAuth) {
+	if (Blog.active.needsAuth) {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
-		log.infoIcon(TI.icon.lock, 'Listening for authentication on port %d', port);
+		log.infoIcon(Blog.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
 		applyMiddleware(app);
 
-		TI.Library.load(library => {
+		Blog.Library.load(library => {
 			// library must be loaded before routes are defined
 			defineRoutes(app, library);
 			app.listen(port);
-			log.infoIcon(TI.icon.heartOutline, 'Listening on port %d', port);
+			log.infoIcon(Blog.icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
 }
@@ -50,7 +50,7 @@ function createWebService() {
 function defineViews(app) {
 	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
-	const format = TI.format;
+	const format = Blog.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -58,7 +58,7 @@ function defineViews(app) {
 	app.set('views', root + '/views');
 	app.set('view engine', engine);
 	app.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + TI.template.layout.main + '.hbs',
+		defaultLayout: root + '/views/' + Blog.template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
@@ -76,9 +76,9 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = TI.Middleware.outputCache;
-	const spamBlocker = TI.Middleware.referralBlocker;
-	const statusHelper = TI.Middleware.statusHelper;
+	const outputCache = Blog.Middleware.outputCache;
+	const spamBlocker = Blog.Middleware.referralBlocker;
+	const statusHelper = Blog.Middleware.statusHelper;
 
 	app.use(spamBlocker.filter);
 
@@ -115,20 +115,22 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const FlickrPhoto = TI.Provider.Photo.Flickr;
-	const GoogleFile = TI.Provider.File.Google;
+	const FlickrPhoto = Blog.Provider.Photo.Flickr;
+	const GoogleFile = Blog.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
-	TI.Post.subtitleSeparator = config.style.subtitleSeparator;
-	TI.Post.defaultAuthor = config.owner.name;
+	Blog.Post.subtitleSeparator = config.style.subtitleSeparator;
+	Blog.Post.defaultAuthor = config.owner.name;
 
-	TI.Map.Track.maxPossibleSpeed = config.map.maxPossibleSpeed;
-	TI.Map.Track.maxDeviationFeet = config.map.maxDeviationFeet;
+	Blog.Map.Track.maxPossibleSpeed = config.map.maxPossibleSpeed;
+	Blog.Map.Track.maxDeviationFeet = config.map.maxDeviationFeet;
 
-	TI.Map.Location.privacy.check = config.map.checkPrivacy;
-	TI.Map.Location.privacy.miles = config.map.privacyMiles;
-	TI.Map.Location.privacy.miles = config.map.privacyCenter;
+	Blog.Map.Location.privacy.check = config.map.checkPrivacy;
+	Blog.Map.Location.privacy.miles = config.map.privacyMiles;
+	Blog.Map.Location.privacy.miles = config.map.privacyCenter;
+
+	Blog.PDF.httpProxy = config.proxy;
 
 	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
 		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
@@ -137,16 +139,16 @@ function injectDependencies() {
 
 	if (config.isProduction && is.empty(config.proxy)) {
 		// replace default log provider with Redis
-		TI.active.log = new TI.Provider.Log.Redis(redisUrl);
+		Blog.active.log = new Blog.Provider.Log.Redis(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		TI.active.cacheHost = new TI.Provider.Cache.Redis(redisUrl);
+		Blog.active.cacheHost = new Blog.Provider.Cache.Redis(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
-		TI.active.log.info('Proxy detected — using default cache provider');
+		Blog.active.log.info('Proxy detected — using default cache provider');
 	}
-	TI.active.photo = new FlickrPhoto({
+	Blog.active.photo = new FlickrPhoto({
 		userID: '60950751@N04',
 		appID: '72157631007435048',
 		featureSets: [
@@ -154,7 +156,7 @@ function injectDependencies() {
 		],
 		excludeSets: ['72157631638576162'],
 		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		auth: new TI.Auth.Options(1,
+		auth: new Blog.Auth.Options(1,
 			config.env('FLICKR_API_KEY'),
 			config.env('FLICKR_SECRET'),
 			`http://www.${config.domain}/auth/flickr`,
@@ -162,10 +164,10 @@ function injectDependencies() {
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
 
-	TI.active.file = new GoogleFile({
+	Blog.active.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),
 		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-		auth: new TI.Auth.Options(2,
+		auth: new Blog.Auth.Options(2,
 			config.env('GOOGLE_CLIENT_ID'),
 			config.env('GOOGLE_SECRET'),
 			`http://www.${config.domain}/auth/google`,
@@ -176,12 +178,12 @@ function injectDependencies() {
 
 /**
  * @param app
- * @param {TI.Library} library
+ * @param {Blog.Library} library
  * @see http://expressjs.com/4x/api.html#router
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app, library) {
-	const c = TI.Controller;
+	const c = Blog.Controller;
 	const r = require('./lib/controllers/routes.js');
 	// Slug pattern
 	const s = '([\\w\\d-]{4,})';
@@ -197,7 +199,7 @@ function defineRoutes(app, library) {
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(TI.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
+		app.get('/' + slug, (req, res) => { res.redirect(Blog.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
 	}
 
 	// the latest posts
@@ -236,7 +238,7 @@ function defineRoutes(app, library) {
 }
 
 /**
- * @param {TI.Library} library
+ * @param {Blog.Library} library
  * @return {String}
  */
 function rootTagRoutePattern(library) {
@@ -250,7 +252,7 @@ function rootTagRoutePattern(library) {
  * @param app
  */
 function defineAuthRoutes(app) {
-	const c = TI.Controller.authorize;
+	const c = Blog.Controller.authorize;
 
 	app.get('/auth/flickr', c.flickr);
 	app.get('/auth/google', c.google);

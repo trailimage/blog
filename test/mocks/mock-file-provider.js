@@ -6,8 +6,8 @@ const request = require('request');
 
 /**
  * Retrieve GPS file for post
- * @extends {TI.Provider.File.Base}
- * @extends {TI.Auth.Options}
+ * @extends {Blog.Provider.File.Base}
+ * @extends {Blog.Auth.Options}
  */
 class MockFile extends FileBase {
 	constructor(options) {
@@ -16,7 +16,7 @@ class MockFile extends FileBase {
 	}
 
 	/**
-	 * @param {TI.Post} post
+	 * @param {Blog.Post} post
 	 * @param {function(String)|ServerResponse} callback Return GPX string
 	 */
 	loadGPX(post, callback) {
@@ -25,7 +25,7 @@ class MockFile extends FileBase {
 
 	/**
 	 * @param {String} url Google URL
-	 * @param {TI.Post} post
+	 * @param {Blog.Post} post
 	 * @param {function(String)|ServerResponse} callback Return GPX to method or stream to response
 	 * @private
 	 */
@@ -65,6 +65,6 @@ const defaultMockOptions = {
 	apiKey: null,
 	/** @type {String} */
 	tracksFolder: null,
-	/** @type {TI.Auth.Options} */
+	/** @type {Blog.Auth.Options} */
 	auth: new TI.Auth.Options(2)
 };

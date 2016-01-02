@@ -52,14 +52,14 @@ class MockResponse {
 
 	/**
 	 * Set status to 404
-	 * @returns {TI.Mock.Response|MockResponse}
+	 * @returns {Blog.Mock.Response|MockResponse}
 	 */
 	notFound() { return this.status(TI.httpStatus.notFound); }
 
 	/**
 	 * @param {String} key
 	 * @param {String} value
-	 * @return {TI.Mock.Response|MockResponse}
+	 * @return {Blog.Mock.Response|MockResponse}
 	 */
 	setHeader(key, value) {
 		this.headers[key] = value;
@@ -68,7 +68,7 @@ class MockResponse {
 
 	/**
 	 * @param {String|Buffer} value
-	 * @return {TI.Mock.Response|MockResponse}
+	 * @return {Blog.Mock.Response|MockResponse}
 	 */
 	write(value) {
 		this.content = value;
