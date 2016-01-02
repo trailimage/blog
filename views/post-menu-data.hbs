@@ -14,7 +14,7 @@ var TrailImage = { menu: {}, post: {} };
 	TrailImage.post['{{this.id}}'] = {
 		'slug': '{{this.slug}}',
 		'title': '{{this.title}}',
-		'icon': '{{this.mode}}',
+		'icon': '{{modeIconForPost this.tags}}',
 		'description': '{{this.description}}'
 	{{#this.isPartial}},
 		'subTitle': '{{this.subTitle}}',

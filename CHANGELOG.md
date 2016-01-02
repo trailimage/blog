@@ -1,3 +1,8 @@
+## 2.0.20
+#### Fixes
+- Handle missing primary image in Flickr set and fix poetry formatting
+- Wrong travel mode icons in top menu
+
 ## 2.0.19
 #### Fixes
 - Post tags broken in mobile menu (regression)

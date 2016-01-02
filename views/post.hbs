@@ -4,13 +4,15 @@
 	<script type="text/javascript">
 		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
 	</script>
+{{#unless post.feature}}
 	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
-{{#if post.previousIsPart}}
+	{{#if post.previousIsPart}}
 	<link rel="prev" href="/{{post.previous.slug}}" />
-{{/if}}
-{{#if post.nextIsPart}}
+	{{/if}}
+	{{#if post.nextIsPart}}
 	<link rel="next" href="/{{post.next.slug}}" />
-{{/if}}
+	{{/if}}
+{{/unless}}
 	{{> head-files}}
 	{{> head-facebook}}
 	{{> ga}}
@@ -61,16 +63,17 @@
 		</blockquote>
 	{{/if}}
 
+	{{#unless post.feature}}
 		{{> post-tags post.tags}}
 		<nav id="nav-top">{{> navigation}}</nav>
-
-	{{#if post.photoCoordinates}}
+		{{#if post.photoCoordinates}}
 		{{! https://developers.google.com/maps/documentation/static-maps/ }}
 		{{! 640 is maximum width of free API: https://developers.google.com/maps/documentation/static-maps/intro#Imagesizes }}
 		<div class='map'>
 			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
 		</div>
-	{{/if}}
+		{{/if}}
+	{{/unless}}
 	</header>
 
 	<div id="light-box"><img src="/img/topo-map-tile.jpg"/></div>
@@ -120,8 +123,10 @@
 {{/if}}
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
+{{#unless post.feature}}
 	<div class="footer-tags content">{{> post-tags post.tags}}</div>
-	<div class='by-line content'><p rel='author'><span>by</span>Jason Abbott</p></div>
+{{/unless}}
+	<div class='by-line content'><p rel='author'><span>by</span>{{config.owner.name}}</p></div>
 
 	<footer class="post content">
 		<div class="fb-comments" data-href="{{config.site.url}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
