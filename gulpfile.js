@@ -5,7 +5,6 @@ const less = require('gulp-less');
 const merge = require('merge2');
 const nano = require('gulp-cssnano');
 const concat = require('gulp-concat');
-const mocha = require('gulp-mocha');
 const uglify = require('gulp-uglify');
 const dist = './dist/';
 const bsPath = './node_modules/bootstrap/';
@@ -65,14 +64,6 @@ gulp.task('script-admin', ()=> {
 gulp.task('watch', ()=> {
 	gulp.watch('./src/less/*.less', ['less']);
 	gulp.watch('./src/js/*.js', ['script']);
-});
-
-// https://github.com/sindresorhus/gulp-mocha
-// http://mochajs.org/#reporters
-gulp.task('test', ()=> {
-	return gulp.src('./test/**/*.test.js', { read: false })
-		// gulp-mocha needs filepaths so you can't have any plugins before it
-		.pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('default', ['less', 'script']);
