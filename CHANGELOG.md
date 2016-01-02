@@ -1,3 +1,7 @@
+## 2.0.20
+#### Fixes
+- Featured set is treated as exluded set so not getting all info loaded
+
 ## 2.0.19
 #### Fixes
 - Post tags broken in mobile menu (regression)
