@@ -25,6 +25,7 @@
 		"googleapis": "^2.0.0",
 		"redis": "^2.0.0",
 		"@trailimage/blog-core": "git+https://github.com/Trail-Image/blog-core.git#master",
+		"@trailimage/flickr-photo-provider": "git+https://github.com/Trail-Image/flickr-photo-provider.git#master",
 		"@trailimage/json-ld": "git+https://github.com/Trail-Image/json-ld.git#master",
 		"@trailimage/pdf": "git+https://github.com/Trail-Image/pdf.git#master",
 		"uglify-js": "^2.4.0",
