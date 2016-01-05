@@ -20,6 +20,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="true" />
+      <option name="passParentEnvs" value="true" />
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/lessc.cmd" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
@@ -45,6 +46,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
       <option name="scopeName" value="Script Source" />
       <option name="trackOnlyRoot" value="false" />
@@ -70,6 +72,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
       <option name="scopeName" value="Script Source" />
       <option name="trackOnlyRoot" value="false" />
@@ -95,6 +98,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
       <option name="scopeName" value="Script Source" />
       <option name="trackOnlyRoot" value="false" />
@@ -120,6 +124,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
       <option name="scopeName" value="Script Source" />
       <option name="trackOnlyRoot" value="false" />
@@ -145,6 +150,7 @@
         </array>
       </option>
       <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
       <option name="program" value="$USER_HOME$/AppData/Roaming/npm/uglifyjs.cmd" />
       <option name="scopeName" value="Script Source" />
       <option name="trackOnlyRoot" value="false" />
