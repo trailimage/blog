@@ -28,7 +28,6 @@
 		"@trailimage/json-ld": "git+https://github.com/Trail-Image/json-ld.git#master",
 		"@trailimage/pdf": "git+https://github.com/Trail-Image/pdf.git#master",
 		"uglify-js": "^2.4.0",
-		"winston": "^2.0.0",
 		"winston-redis": "^1.0.0"
 	},
 	"devDependencies": {
