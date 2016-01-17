@@ -1,6 +1,7 @@
 /.idea/workspace.xml
 /.idea/jsLibraryMappings.xml
 /.idea/eslintPlugin.xml
+/.idea/*.iml
 node_modules/
 profile/
 
