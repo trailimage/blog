@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/Trail-Image/blog.svg?branch=master)](https://travis-ci.org/Trail-Image/blog)
 [![Code Climate](https://codeclimate.com/github/Trail-Image/blog/badges/gpa.svg)](https://codeclimate.com/github/Trail-Image/blog)
 [![David](https://david-dm.org/Trail-Image/blog.svg)](https://david-dm.org/Trail-Image/blog)
+[![npm version](https://badge.fury.io/js/%40trailimage%2Fblog-core.svg)](https://badge.fury.io/js/%40trailimage%2Fblog-core)
 
 # Overview
 Frictionless photo blogging platform that leverages existing social media and cloud storage to dynamically generate an engaging and responsive story experience.
