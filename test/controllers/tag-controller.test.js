@@ -1,7 +1,7 @@
 'use strict';
 
 const TI = require('../');
-const config = TI.config;
+const config = TI.Blog;
 const Enum = TI.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;

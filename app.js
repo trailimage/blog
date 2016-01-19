@@ -132,7 +132,7 @@ function injectDependencies() {
 	Blog.Map.Location.privacy.miles = config.map.privacyMiles;
 	Blog.Map.Location.privacy.miles = config.map.privacyCenter;
 
-	Blog.PDF.httpProxy = config.proxy;
+	//Blog.PDF.httpProxy = config.proxy;
 	FlickrProvider.httpProxy = config.proxy;
 	GoogleProvider.httpProxy = config.proxy;
 
@@ -154,7 +154,7 @@ function injectDependencies() {
 	}
 
 	/** @type FlickrProvider.Options */
-	let o = FlickrProvider.Options;
+	let o = FlickrProvider.Options();
 
 	o.userID = '60950751@N04';
 	o.appID = '72157631007435048';
