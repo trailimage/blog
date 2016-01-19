@@ -115,8 +115,10 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const FlickrPhoto = require('@trailimage/flickr-photo-provider');
-	const GoogleFile = require('@trailimage/google-file-provider');
+	const FlickrProvider = require('@trailimage/flickr-photo-provider');
+	const GoogleProvider = require('@trailimage/google-file-provider');
+	const RedisProvider = require('@trailimage/redis-cache-provider');
+
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
@@ -148,21 +150,24 @@ function injectDependencies() {
 		// Redis won't work from behind proxy
 		Blog.active.log.info('Proxy detected — using default cache provider');
 	}
-	Blog.active.photo = new FlickrPhoto({
-		userID: '60950751@N04',
-		appID: '72157631007435048',
-		featureSets: [
-			{ id: '72157632729508554', title: 'Ruminations' }
-		],
-		excludeSets: ['72157631638576162'],
-		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		auth: new Blog.Auth.Options(1,
-			config.env('FLICKR_API_KEY'),
-			config.env('FLICKR_SECRET'),
-			`http://www.${config.domain}/auth/flickr`,
-			process.env['FLICKR_ACCESS_TOKEN'],
-			process.env['FLICKR_TOKEN_SECRET'])
-	});
+
+	/** @type FlickrProvider.Options */
+	let o = FlickrProvider.Options;
+
+	o.userID = '60950751@N04';
+	o.appID = '72157631007435048';
+	o.featureSets.push({ id: '72157632729508554', title: 'Ruminations' });
+	o.excludeSets.push('72157631638576162');
+
+	o.auth.clientID = config.env('FLICKR_API_KEY');
+	o.auth.clientSecret = config.env('FLICKR_SECRET');
+	o.auth.url.callback = `http://www.${config.domain}/auth/flickr`;
+	o.auth.accessToken = process.env['FLICKR_ACCESS_TOKEN'];
+	o.auth.tokenSecret = process.env['FLICKR_TOKEN_SECRET'];
+
+	Blog.active.photo = new FlickrProvider.Photo(o);
+
+
 
 	Blog.active.file = new GoogleFile({
 		apiKey: config.env('GOOGLE_DRIVE_KEY'),

@@ -27,6 +27,8 @@
 	  	"@trailimage/google-file-provider": "^1.0.0",
 		"@trailimage/json-ld-factory": "^1.0.0",
 		"@trailimage/output-cache": "^1.0.0",
+		"@trailimage/redis-cache-provider": "^1.0.0",
+		"@trailimage/redis-log-provider": "^1.0.0",
 		"@trailimage/pdf": "^0.5.0",
 		"@trailimage/spam-block": "^1.0.0",
 		"uglify-js": "^2.4.0"

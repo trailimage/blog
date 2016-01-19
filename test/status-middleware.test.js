@@ -1,6 +1,6 @@
 'use strict';
 
-const TI = require('../');
+const TI = require('index');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const statusHelper = TI.Middleware.statusHelper;
