@@ -26,6 +26,7 @@
 		"@trailimage/flickr-photo-provider": "^1.0.0",
 	  	"@trailimage/google-file-provider": "^1.0.0",
 		"@trailimage/json-ld": "^1.0.0",
+		"@trailimage/output-cache": "^1.0.0",
 		"@trailimage/pdf": "^0.5.0",
 		"uglify-js": "^2.4.0"
 	},

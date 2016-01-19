@@ -115,8 +115,8 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const FlickrPhoto = Blog.Provider.Photo.Flickr;
-	const GoogleFile = Blog.Provider.File.Google;
+	const FlickrPhoto = require('@trailimage/flickr-photo-provider');
+	const GoogleFile = require('@trailimage/google-file-provider');
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 

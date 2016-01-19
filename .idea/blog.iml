@@ -9,5 +9,8 @@
     <orderEntry type="library" name="Node.js v5.4.1 Core Modules" level="application" />
     <orderEntry type="library" name="server node_modules" level="project" />
     <orderEntry type="library" name="Externs" level="project" />
+    <orderEntry type="library" name="Chai" level="application" />
+    <orderEntry type="library" name="Mocha" level="application" />
+    <orderEntry type="library" name="Node.js v5.3.0 Core Modules" level="application" />
   </component>
 </module>
