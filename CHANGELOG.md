@@ -1,3 +1,7 @@
+## 2.1.0
+#### Features
+- Modularize
+
 ## 2.0.20
 #### Fixes
 - Handle missing primary image in Flickr set and fix poetry formatting
