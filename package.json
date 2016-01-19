@@ -22,13 +22,12 @@
 		"express": "^4.0",
 		"express-hbs": "^0.8.4",
 		"feed": "^0.2.6",
-		"redis": "^2.0.0",
-		"@trailimage/blog-core": "^1.0.5",
+		"@trailimage/blog-core": "^1.0.11",
 		"@trailimage/flickr-photo-provider": "^1.0.0",
+	  	"@trailimage/google-file-provider": "^1.0.0",
 		"@trailimage/json-ld": "^1.0.0",
 		"@trailimage/pdf": "^0.5.0",
-		"uglify-js": "^2.4.0",
-		"winston-redis": "^1.0.0"
+		"uglify-js": "^2.4.0"
 	},
 	"devDependencies": {
 		"bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
