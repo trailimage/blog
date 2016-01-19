@@ -115,9 +115,9 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const FlickrProvider = require('@trailimage/flickr-photo-provider');
-	const GoogleProvider = require('@trailimage/google-file-provider');
-	const RedisProvider = require('@trailimage/redis-cache-provider');
+	const FlickrProvider = require('@trailimage/flickr-provider');
+	const GoogleProvider = require('@trailimage/google-provider');
+	const RedisProvider = require('@trailimage/redis-provider');
 
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
@@ -133,6 +133,8 @@ function injectDependencies() {
 	Blog.Map.Location.privacy.miles = config.map.privacyCenter;
 
 	Blog.PDF.httpProxy = config.proxy;
+	FlickrProvider.httpProxy = config.proxy;
+	GoogleProvider.httpProxy = config.proxy;
 
 	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
 		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
@@ -141,11 +143,11 @@ function injectDependencies() {
 
 	if (config.isProduction && is.empty(config.proxy)) {
 		// replace default log provider with Redis
-		Blog.active.log = new Blog.Provider.Log.Redis(redisUrl);
+		Blog.active.log = new RedisProvider.Log(redisUrl);
 	}
 
 	if (is.empty(config.proxy)) {
-		Blog.active.cacheHost = new Blog.Provider.Cache.Redis(redisUrl);
+		Blog.active.cacheHost = new RedisProvider.Cache(redisUrl);
 	} else {
 		// Redis won't work from behind proxy
 		Blog.active.log.info('Proxy detected — using default cache provider');
@@ -167,18 +169,18 @@ function injectDependencies() {
 
 	Blog.active.photo = new FlickrProvider.Photo(o);
 
+	o = GoogleProvider.Options();
 
+	o.apiKey = config.env('GOOGLE_DRIVE_KEY');
+	o.tracksFolder = '0B0lgcM9JCuSbMWluNjE4LVJtZWM';
 
-	Blog.active.file = new GoogleFile({
-		apiKey: config.env('GOOGLE_DRIVE_KEY'),
-		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-		auth: new Blog.Auth.Options(2,
-			config.env('GOOGLE_CLIENT_ID'),
-			config.env('GOOGLE_SECRET'),
-			`http://www.${config.domain}/auth/google`,
-			process.env['GOOGLE_ACCESS_TOKEN'],
-			process.env['GOOGLE_REFRESH_TOKEN'])
-	});
+	o.auth.clientID = config.env('GOOGLE_CLIENT_ID');
+	o.auth.clientSecret = config.env('GOOGLE_SECRET');
+	o.auth.url.callback = `http://www.${config.domain}/auth/google`;
+	o.auth.accessToken = process.env['GOOGLE_ACCESS_TOKEN'];
+	o.auth.refreshToken = process.env['GOOGLE_REFRESH_TOKEN'];
+
+	Blog.active.file = new GoogleProvider.File(o);
 }
 
 /**
