@@ -76,8 +76,8 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = Blog.Middleware.outputCache;
-	const spamBlocker = Blog.Middleware.referralBlocker;
+	const outputCache = require('@trailimage/output-cache');
+	const spamBlocker = require('@trailimage/spam-block');
 	const statusHelper = Blog.Middleware.statusHelper;
 
 	app.use(spamBlocker.filter);
