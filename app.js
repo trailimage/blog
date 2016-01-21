@@ -78,7 +78,7 @@ function applyMiddleware(app) {
 	const bodyParser = require('body-parser');
 	const outputCache = require('@trailimage/output-cache');
 	const spamBlocker = require('@trailimage/spam-block');
-	const statusHelper = Blog.Middleware.statusHelper;
+	const statusHelper = require('./lib/status-middleware.js');
 
 	app.use(spamBlocker.filter);
 
@@ -119,7 +119,6 @@ function injectDependencies() {
 	const GoogleProvider = require('@trailimage/google-provider');
 	const RedisProvider = require('@trailimage/redis-provider');
 
-	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
 	Blog.Post.subtitleSeparator = config.style.subtitleSeparator;
@@ -141,20 +140,24 @@ function injectDependencies() {
 		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
 	}
 
+	/** @type RedisProvider.Config */
+	let c = new RedisProvider.Config();
+	c.url = config.env('REDISCLOUD_URL');
+
 	if (config.isProduction && is.empty(config.proxy)) {
 		// replace default log provider with Redis
-		Blog.active.log = new RedisProvider.Log(redisUrl);
+		Blog.active.log = new RedisProvider.Log(c);
 	}
 
 	if (is.empty(config.proxy)) {
-		Blog.active.cacheHost = new RedisProvider.Cache(redisUrl);
+		Blog.active.cacheHost = new RedisProvider.Cache(c);
 	} else {
 		// Redis won't work from behind proxy
 		Blog.active.log.info('Proxy detected — using default cache provider');
 	}
 
 	/** @type FlickrProvider.Config */
-	let c = FlickrProvider.Config();
+	c = FlickrProvider.Config();
 
 	c.userID = '60950751@N04';
 	c.appID = '72157631007435048';
