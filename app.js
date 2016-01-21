@@ -153,34 +153,34 @@ function injectDependencies() {
 		Blog.active.log.info('Proxy detected — using default cache provider');
 	}
 
-	/** @type FlickrProvider.Options */
-	let o = FlickrProvider.Options();
+	/** @type FlickrProvider.Config */
+	let c = FlickrProvider.Config();
 
-	o.userID = '60950751@N04';
-	o.appID = '72157631007435048';
-	o.featureSets.push({ id: '72157632729508554', title: 'Ruminations' });
-	o.excludeSets.push('72157631638576162');
+	c.userID = '60950751@N04';
+	c.appID = '72157631007435048';
+	c.featureSets.push({ id: '72157632729508554', title: 'Ruminations' });
+	c.excludeSets.push('72157631638576162');
 
-	o.auth.clientID = config.env('FLICKR_API_KEY');
-	o.auth.clientSecret = config.env('FLICKR_SECRET');
-	o.auth.url.callback = `http://www.${config.domain}/auth/flickr`;
-	o.auth.accessToken = process.env['FLICKR_ACCESS_TOKEN'];
-	o.auth.tokenSecret = process.env['FLICKR_TOKEN_SECRET'];
+	c.auth.clientID = config.env('FLICKR_API_KEY');
+	c.auth.clientSecret = config.env('FLICKR_SECRET');
+	c.auth.url.callback = `http://www.${config.domain}/auth/flickr`;
+	c.auth.accessToken = process.env['FLICKR_ACCESS_TOKEN'];
+	c.auth.tokenSecret = process.env['FLICKR_TOKEN_SECRET'];
 
-	Blog.active.photo = new FlickrProvider.Photo(o);
+	Blog.active.photo = new FlickrProvider.Photo(c);
 
-	o = GoogleProvider.Options();
+	c = GoogleProvider.Config();
 
-	o.apiKey = config.env('GOOGLE_DRIVE_KEY');
-	o.tracksFolder = '0B0lgcM9JCuSbMWluNjE4LVJtZWM';
+	c.apiKey = config.env('GOOGLE_DRIVE_KEY');
+	c.tracksFolder = '0B0lgcM9JCuSbMWluNjE4LVJtZWM';
 
-	o.auth.clientID = config.env('GOOGLE_CLIENT_ID');
-	o.auth.clientSecret = config.env('GOOGLE_SECRET');
-	o.auth.url.callback = `http://www.${config.domain}/auth/google`;
-	o.auth.accessToken = process.env['GOOGLE_ACCESS_TOKEN'];
-	o.auth.refreshToken = process.env['GOOGLE_REFRESH_TOKEN'];
+	c.auth.clientID = config.env('GOOGLE_CLIENT_ID');
+	c.auth.clientSecret = config.env('GOOGLE_SECRET');
+	c.auth.url.callback = `http://www.${config.domain}/auth/google`;
+	c.auth.accessToken = process.env['GOOGLE_ACCESS_TOKEN'];
+	c.auth.refreshToken = process.env['GOOGLE_REFRESH_TOKEN'];
 
-	Blog.active.file = new GoogleProvider.File(o);
+	Blog.active.file = new GoogleProvider.File(c);
 }
 
 /**
