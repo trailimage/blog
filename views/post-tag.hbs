@@ -5,33 +5,39 @@
 
 <div class="post-tag content">
 	<section class="posts">
-	{{#posts}}
-		<article class="summary">
-			<header class="post">
-				<ul class="info">
-					<li class="date-taken">{{date dateTaken}}</li>
-  {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
-				</ul>
-				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
-				<span class="mode-icon {{modeIconForPost tags}}"></span>
-				<div class="clear"></div>
-			</header>
+		{{#posts}}
+			<article class="summary">
+				<header class="post">
+					<ul class="info">
+						<li class="date-taken">{{date dateTaken}}</li>
+						{{#if photoCount}}
+							<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
+					</ul>
+					<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span
+							class="subtitle">{{subTitle}}</span>{{/if}}</a>
+					<span class="mode-icon {{modeIconForPost tags}}"></span>
+					<div class="clear"></div>
+				</header>
 
-			<a class="thumb" title="View story" href="/{{slug}}"><img src="{{coverPhoto.size.preview.url}}" width="{{coverPhoto.size.preview.width}}" height="{{coverPhoto.size.preview.height}}" style="width: {{coverPhoto.size.preview.width}}px; height: {{coverPhoto.size.preview.height}}px;"/></a>
-		{{#if photoCoordinates}}
-			<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
-		{{/if}}
-			<section class="detail">
-				<p class="summary">{{description}}</p>
-				<ul class="tags">
-				{{#each tags}}
-					{{! posts store their tags as titles keyed to the slug }}
-					<li><a href="/{{@key}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
-				{{/each}}
-				</ul>
-			</section>
-			<div class="clear"></div>
-		</article>
-	{{/posts}}
+				<a class="thumb" title="View story" href="/{{slug}}"><img src="{{coverPhoto.size.preview.url}}"
+				                                                          width="{{coverPhoto.size.preview.width}}"
+				                                                          height="{{coverPhoto.size.preview.height}}"
+				                                                          style="width: {{coverPhoto.size.preview.width}}px; height: {{coverPhoto.size.preview.height}}px;"/></a>
+				{{#if photoCoordinates}}
+					<a class="map" title="View map" href="/{{slug}}/map" rel="nofollow"><img
+							src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+				{{/if}}
+				<section class="detail">
+					<p class="summary">{{description}}</p>
+					<ul class="tags">
+						{{#each tags}}
+						{{! posts store their tags as titles keyed to the slug }}
+							<li><a href="/{{@key}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
+						{{/each}}
+					</ul>
+				</section>
+				<div class="clear"></div>
+			</article>
+		{{/posts}}
 	</section>
 </div>

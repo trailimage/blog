@@ -50,7 +50,6 @@ function createWebService() {
 function defineViews(app) {
 	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
-	const format = Blog.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -62,10 +61,7 @@ function defineViews(app) {
 		partialsDir: root + '/views/partials'
 	}));
 
-	// formatting methods for the views
-	for (let name in format.helpers) {
-		hbs.registerHelper(name, format.helpers[name]);
-	}
+	Blog.template.assignHelpers(hbs);
 }
 
 /**
@@ -79,6 +75,10 @@ function applyMiddleware(app) {
 	const outputCache = require('@trailimage/output-cache');
 	const spamBlocker = require('@trailimage/spam-block');
 	const statusHelper = require('./lib/status-middleware.js');
+
+	outputCache.enabled = Blog.config.cacheOutput;
+	outputCache.view.config = Blog.config;
+	outputCache.view.description = Blog.config.site.description;
 
 	app.use(spamBlocker.filter);
 
@@ -130,6 +130,9 @@ function injectDependencies() {
 	Blog.Map.Location.privacy.check = config.map.checkPrivacy;
 	Blog.Map.Location.privacy.miles = config.map.privacyMiles;
 	Blog.Map.Location.privacy.miles = config.map.privacyCenter;
+
+	Blog.LinkData.config.owner = config.owner;
+	Blog.LinkData.config.site = config.site;
 
 	//Blog.PDF.httpProxy = config.proxy;
 	FlickrProvider.httpProxy = config.proxy;

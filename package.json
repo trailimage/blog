@@ -22,7 +22,7 @@
 		"express": "^4.0",
 		"express-hbs": "^0.8.4",
 		"feed": "^0.2.6",
-		"@trailimage/blog-core": "^1.1.2",
+		"@trailimage/blog-core": "^1.2.2",
 		"@trailimage/enum": "^1.0.0",
 		"@trailimage/flickr-provider": "^1.0.0",
 		"@trailimage/google-provider": "^1.0.2",
