@@ -27,7 +27,7 @@ function createWebService() {
 
 	if (Blog.active.needsAuth) {
 		// must authenticate before normal routes are available
-		defineAuthRoutes(app);
+		Blog.Controller.authRoutes(app);
 		app.listen(port);
 		log.infoIcon(Blog.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
@@ -35,7 +35,7 @@ function createWebService() {
 
 		Blog.Library.load(library => {
 			// library must be loaded before routes are defined
-			defineRoutes(app, library);
+			Blog.Controller.defaultRoutes(app, library, config, Blog.httpStatus);
 			app.listen(port);
 			log.infoIcon(Blog.icon.heartOutline, 'Listening on port %d', port);
 		});
@@ -115,8 +115,6 @@ function filter(regex, fn) {
  * Inject provider dependencies
  */
 function injectDependencies() {
-	const FlickrProvider = require('@trailimage/flickr-provider');
-	const GoogleProvider = require('@trailimage/google-provider');
 	const RedisProvider = require('@trailimage/redis-provider');
 
 	const geoPrivacy = process.env['GEO_PRIVACY'];
@@ -129,14 +127,10 @@ function injectDependencies() {
 
 	Blog.Map.Location.privacy.check = config.map.checkPrivacy;
 	Blog.Map.Location.privacy.miles = config.map.privacyMiles;
-	Blog.Map.Location.privacy.miles = config.map.privacyCenter;
+	Blog.Map.Location.privacy.center = config.map.privacyCenter;
 
 	Blog.LinkData.config.owner = config.owner;
 	Blog.LinkData.config.site = config.site;
-
-	//Blog.PDF.httpProxy = config.proxy;
-	FlickrProvider.httpProxy = config.proxy;
-	GoogleProvider.httpProxy = config.proxy;
 
 	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
 		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
@@ -146,6 +140,7 @@ function injectDependencies() {
 	/** @type RedisProvider.Config */
 	let c = new RedisProvider.Config();
 	c.url = config.env('REDISCLOUD_URL');
+	c.httpProxy = config.proxy;
 
 	if (config.isProduction && is.empty(config.proxy)) {
 		// replace default log provider with Redis
@@ -159,116 +154,4 @@ function injectDependencies() {
 		Blog.active.log.info('Proxy detected — using default cache provider');
 	}
 
-	/** @type FlickrProvider.Config */
-	c = FlickrProvider.Config();
-
-	c.userID = '60950751@N04';
-	c.appID = '72157631007435048';
-	c.featureSets.push({ id: '72157632729508554', title: 'Ruminations' });
-	c.excludeSets.push('72157631638576162');
-
-	c.auth.clientID = config.env('FLICKR_API_KEY');
-	c.auth.clientSecret = config.env('FLICKR_SECRET');
-	c.auth.url.callback = `http://www.${config.domain}/auth/flickr`;
-	c.auth.accessToken = process.env['FLICKR_ACCESS_TOKEN'];
-	c.auth.tokenSecret = process.env['FLICKR_TOKEN_SECRET'];
-
-	Blog.active.photo = new FlickrProvider.Photo(c);
-
-	c = GoogleProvider.Config();
-
-	c.apiKey = config.env('GOOGLE_DRIVE_KEY');
-	c.tracksFolder = '0B0lgcM9JCuSbMWluNjE4LVJtZWM';
-
-	c.auth.clientID = config.env('GOOGLE_CLIENT_ID');
-	c.auth.clientSecret = config.env('GOOGLE_SECRET');
-	c.auth.url.callback = `http://www.${config.domain}/auth/google`;
-	c.auth.accessToken = process.env['GOOGLE_ACCESS_TOKEN'];
-	c.auth.refreshToken = process.env['GOOGLE_REFRESH_TOKEN'];
-
-	Blog.active.file = new GoogleProvider.File(c);
-}
-
-/**
- * @param app
- * @param {Blog.Library} library
- * @see http://expressjs.com/4x/api.html#router
- * @see http://expressjs.com/guide/routing.html
- */
-function defineRoutes(app, library) {
-	const c = Blog.Controller;
-	const r = require('./lib/controllers/routes.js');
-	// Slug pattern
-	const s = '([\\w\\d-]{4,})';
-	// Flickr photo ID pattern
-	const photoID = ':photoID(\\d{10,11})';
-	// Flickr set ID pattern
-	const postID = ':postID(\\d{17})';
-	//
-	const rootPostTag = rootTagRoutePattern(library);
-
-	app.use('/admin', r.admin);
-	//app.use('/api/v1', r.api);
-	//app.use('/auth', r.auth);
-
-	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(Blog.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
-	}
-
-	// the latest posts
-	app.get('/', c.tag.home);
-	app.get('/rss', c.rss.view);
-	app.get('/about', c.about.view);
-	app.get('/js/post-menu-data.js', c.menu.data);
-	app.get('/sitemap.xml', c.sitemap.view);
-	app.get('/exif/'+photoID, c.photo.exif);
-	app.get('/issues?', c.issue.view);
-	app.get('/issues?/:slug'+s, c.issue.view);
-	app.get('/tag-menu', c.tag.menu);
-	app.get('/mobile-menu', c.menu.mobile);
-	app.get('/search', c.search.view);
-	app.get('/'+rootPostTag, c.tag.root);
-	app.get('/'+rootPostTag+'/:tag', c.tag.view);
-	// old blog links with format /YYYY/MM/slug
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', c.post.blog);
-	app.get('/photo-tag', c.photo.tags);
-	app.get('/photo-tag/:tagSlug', c.photo.tags);
-	app.get('/photo-tag/search/:tagSlug', c.photo.withTag);
-	// links with bare photo provider ID
-	app.get('/'+photoID, c.photo.view);
-	// links with bare photo provider set ID
-	app.get('/'+postID, c.post.providerID);
-	app.get('/'+postID+'/'+photoID, c.post.providerID);
-	app.get('/:slug'+s+'/pdf', c.pdf.view);
-	app.get('/:slug'+s+'/map', c.map.view);
-	app.get('/:slug'+s+'/gpx', c.map.download);
-	app.get('/:slug'+s+'/map/'+photoID, c.map.view);
-	app.get('/:slug'+s+'/geo.json', c.map.json);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, c.post.seriesPost);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', c.map.seriesView);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, c.map.seriesView);
-	app.get('/:slug'+s, c.post.view);
-}
-
-/**
- * @param {Blog.Library} library
- * @return {String}
- */
-function rootTagRoutePattern(library) {
-	let rootPostTags = [];
-	for (let name in library.tags) {	rootPostTags.push(library.tags[name].slug); }
-	return ':rootTag(' + rootPostTags.join('|') + ')';
-}
-
-/**
- * If a provider isn't authenticated then all paths route to authentication pages
- * @param app
- */
-function defineAuthRoutes(app) {
-	const c = Blog.Controller.authorize;
-
-	app.get('/auth/flickr', c.flickr);
-	app.get('/auth/google', c.google);
-	// all other routes begin authentication process
-	app.get('*', c.view);
 }
