@@ -1,12 +1,7 @@
 'use strict';
 
-/**
- * Application entry point
- * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
- */
-const TI = require('./lib');
-const is = TI.is;
-const config = TI.config;
+// http://code.google.com/apis/console/?pli=1#project:1033232213688:access
+const { is, config, format, isProduction, icon, middleware } = require('./lib');
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -21,7 +16,7 @@ function createWebService() {
 	const port = process.env['PORT'] || 3000;
 	const log = TI.active.log;
 
-	log.infoIcon(TI.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
+	log.infoIcon(icon.powerButton, 'Starting %s application', isProduction ? 'production' : 'development');
 
 	defineViews(app);
 
@@ -29,7 +24,7 @@ function createWebService() {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
-		log.infoIcon(TI.icon.lock, 'Listening for authentication on port %d', port);
+		log.infoIcon(icon.lock, 'Listening for authentication on port %d', port);
 	} else {
 		applyMiddleware(app);
 
@@ -37,20 +32,17 @@ function createWebService() {
 			// library must be loaded before routes are defined
 			defineRoutes(app, library);
 			app.listen(port);
-			log.infoIcon(TI.icon.heartOutline, 'Listening on port %d', port);
+			log.infoIcon(icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
 }
 
-/**
- * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
- * @see https://npmjs.org/package/express-hbs
- * @see http://mustache.github.com/mustache.5.html
- */
+// https://github.com/donpark/hbs/blob/master/examples/extend/app.js
+// https://npmjs.org/package/express-hbs
+// http://mustache.github.com/mustache.5.html
 function defineViews(app) {
 	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
-	const format = TI.format;
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -76,11 +68,8 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = TI.Middleware.outputCache;
-	const spamBlocker = TI.Middleware.referralBlocker;
-	const statusHelper = TI.Middleware.statusHelper;
 
-	app.use(spamBlocker.filter);
+	app.use(middleware.referralBlocker.filter);
 
 	if (config.usePersona) {
 		// use wwwhisper middleware to authenticate some routes
@@ -94,26 +83,19 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
-	app.use(statusHelper.methods);
-	app.use(outputCache.methods);
+	app.use(middleware.statusHelper.methods);
+	app.use(middleware.outputCache.methods);
 	app.use(Express.static(__dirname + '/dist'));
 }
 
-/**
- * This should be what Express already supports but it isn't behaving as expected
- * @param {RegExp} regex
- * @param {Function} fn Middleware
- * @returns Function Wrapper
- */
+// this should be what Express already supports but it isn't behaving as expected
 function filter(regex, fn) {
 	return (req, res, next) => {
 		if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
 	}
 }
 
-/**
- * Inject provider dependencies
- */
+// inject provider dependencies
 function injectDependencies() {
 	const FlickrPhoto = TI.Provider.Photo.Flickr;
 	const GoogleFile = TI.Provider.File.Google;
