@@ -1,3 +1,6 @@
+## 2.1.0
+
+
 ## 2.0.21
 #### Fixes
 - Missing URL in og:image meta tag
