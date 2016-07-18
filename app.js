@@ -66,8 +66,9 @@ function applyMiddleware(app) {
 	/** @see https://github.com/expressjs/compression/blob/master/README.md */
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
+   const spamBlocker = require('./lib/middleware/referral-blocker');
 
-	app.use(middleware.referralBlocker.filter);
+	app.use(spamBlocker.filter);
 
 	if (config.usePersona) {
 		// use wwwhisper middleware to authenticate some routes
@@ -131,9 +132,6 @@ function injectDependencies() {
 			process.env['FLICKR_ACCESS_TOKEN'],
 			process.env['FLICKR_TOKEN_SECRET'])
 	});
-
-	TI.active.file = new GoogleFile({
-
 }
 
 /**
