@@ -1,7 +1,8 @@
 'use strict';
 
-// http://code.google.com/apis/console/?pli=1#project:1033232213688:access
-const { is, config, format, isProduction, icon, middleware } = require('./lib');
+const config = require('./lib/config');
+const { icon } = require('./lib/enum');
+const log = require('./lib/logger');
 const Express = require('express');
 const npm = require('./package.json');
 
@@ -11,12 +12,11 @@ injectDependencies();
 createWebService();
 
 function createWebService() {
+   const library = require('./lib/library');
 	const app = Express();
-	/** @type Number */
 	const port = process.env['PORT'] || 3000;
-	const log = TI.active.log;
 
-	log.infoIcon(icon.powerButton, 'Starting %s application', isProduction ? 'production' : 'development');
+	log.infoIcon(icon.powerButton, 'Starting %s application', config.isProduction ? 'production' : 'development');
 
 	defineViews(app);
 
@@ -28,7 +28,7 @@ function createWebService() {
 	} else {
 		applyMiddleware(app);
 
-		TI.Library.load(library => {
+		library.load(library => {
 			// library must be loaded before routes are defined
 			defineRoutes(app, library);
 			app.listen(port);
@@ -43,6 +43,7 @@ function createWebService() {
 function defineViews(app) {
 	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
+   const template = require('./lib/template');
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -50,14 +51,11 @@ function defineViews(app) {
 	app.set('views', root + '/views');
 	app.set('view engine', engine);
 	app.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + TI.template.layout.main + '.hbs',
+		defaultLayout: root + '/views/' + template.layout.main + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
-	// formatting methods for the views
-	for (let name in format.helpers) {
-		hbs.registerHelper(name, format.helpers[name]);
-	}
+   template.assignHelpers(hbs);
 }
 
 /**
@@ -102,9 +100,6 @@ function injectDependencies() {
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
-	TI.Post.subtitleSeparator = config.style.subtitleSeparator;
-	TI.Post.defaultAuthor = config.owner.name;
-
 	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
 		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
 		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
@@ -138,15 +133,7 @@ function injectDependencies() {
 	});
 
 	TI.active.file = new GoogleFile({
-		apiKey: config.env('GOOGLE_DRIVE_KEY'),
-		tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-		auth: new TI.Auth.Options(2,
-			config.env('GOOGLE_CLIENT_ID'),
-			config.env('GOOGLE_SECRET'),
-			`http://www.${config.domain}/auth/google`,
-			process.env['GOOGLE_ACCESS_TOKEN'],
-			process.env['GOOGLE_REFRESH_TOKEN'])
-	});
+
 }
 
 /**
