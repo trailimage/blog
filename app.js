@@ -1,5 +1,6 @@
 'use strict';
 
+const is = require('./lib/is');
 const config = require('./lib/config');
 const { icon } = require('./lib/enum');
 const log = require('./lib/logger');
@@ -96,8 +97,6 @@ function filter(regex, fn) {
 
 // inject provider dependencies
 function injectDependencies() {
-	const FlickrPhoto = TI.Provider.Photo.Flickr;
-	const GoogleFile = TI.Provider.File.Google;
 	const redisUrl = config.env('REDISCLOUD_URL');
 	const geoPrivacy = process.env['GEO_PRIVACY'];
 
