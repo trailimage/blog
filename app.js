@@ -42,7 +42,6 @@ function createWebService() {
 // https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
 function defineViews(app) {
-	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
    const template = require('./lib/template');
 	const engine = 'hbs';
@@ -59,12 +58,9 @@ function defineViews(app) {
    template.assignHelpers(hbs);
 }
 
-/**
- * @param app
- * @see http://expressjs.com/api.html#app.use
- */
+//  http://expressjs.com/api.html#app.use
 function applyMiddleware(app) {
-	/** @see https://github.com/expressjs/compression/blob/master/README.md */
+	// https://github.com/expressjs/compression/blob/master/README.md
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
    const spamBlocker = require('./lib/middleware/referral-blocker');
@@ -194,20 +190,13 @@ function defineRoutes(app, library) {
 	app.get('/:slug'+s, c.post.view);
 }
 
-/**
- * @param {TI.Library} library
- * @return {String}
- */
 function rootTagRoutePattern(library) {
 	let rootPostTags = [];
 	for (let name in library.tags) {	rootPostTags.push(library.tags[name].slug); }
 	return ':rootTag(' + rootPostTags.join('|') + ')';
 }
 
-/**
- * If a provider isn't authenticated then all paths route to authentication pages
- * @param app
- */
+// if a provider isn't authenticated then all paths route to authentication pages
 function defineAuthRoutes(app) {
 	const c = TI.Controller.authorize;
 
