@@ -1,9 +1,8 @@
 'use strict';
 
-const TI = require('./');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const re = TI.re;
+const re = require('../lib/regex');
 let text = `some
 text on more
 than

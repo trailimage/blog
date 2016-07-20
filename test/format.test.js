@@ -1,10 +1,10 @@
 'use strict';
 
-const TI = require('./');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const config = TI.config;
-const format = TI.format;
+const config = require('../lib/config');
+const format = require('../lib/format');
+const { lipsum } = require('./');
 let u;   // undefined
 
 describe('Formatting', ()=> {
@@ -213,37 +213,34 @@ describe('Formatting', ()=> {
 
 	describe('Photo Captions', ()=> {
 		const nl = '\r\n';
-		/**
-		 * Double-space
-		 * @type {string}
-		 */
+		// double-space
 		const ds = nl + nl;
 
 		it('identifies quote at end of text', ()=> {
-			let source = TI.lipsum + ds + '“' + TI.lipsum + '”';
-			let target = '<p>' + TI.lipsum + '</p><blockquote><p>' + TI.lipsum + '</p></blockquote>';
+			let source = lipsum + ds + '“' + lipsum + '”';
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
 
 			expect(format.caption(source)).equals(target);
 		});
 
 		it('identifies paragraphs within a quote', ()=> {
-			let source = TI.lipsum + ds + '“' + TI.lipsum + ds + '“' + TI.lipsum + ds + '“' + TI.lipsum + '”';
-			let target = '<p>' + TI.lipsum + '</p><blockquote><p>' + TI.lipsum + '</p><p>' + TI.lipsum + '</p><p>' + TI.lipsum + '</p></blockquote>';
+			let source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
 
 			expect(format.caption(source)).equals(target);
 		});
 
 		it('identifies quote within text', ()=> {
 			// text before and after quote
-			let source = TI.lipsum + ds + '“' + TI.lipsum + '”' + ds + TI.lipsum;
-			let target = '<p>' + TI.lipsum + '</p><blockquote><p>' + TI.lipsum + '</p></blockquote><p class="first">' + TI.lipsum + '</p>';
+			let source = lipsum + ds + '“' + lipsum + '”' + ds + lipsum;
+			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote><p class="first">' + lipsum + '</p>';
 
 			expect(format.caption(source)).equals(target);
 		});
 
 		it('identifies inline poems', ()=> {
 			// no text after
-			let source = TI.lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+			let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
 				+ 'And gazed down on the grandeur below' + nl
 				+ 'And thought of the vast army of people' + nl
 				+ '· · Who never get out as we go?' + ds
@@ -251,7 +248,7 @@ describe('Formatting', ()=> {
 				+ 'Where the hills fade from gold into blue,' + nl
 				+ 'And then thought of some poor other fellow' + nl
 				+ 'Who would like to stand alongside of you?';
-			let target = '<p>' + TI.lipsum + '</p><blockquote class="poem"><p>'
+			let target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
 				+ 'Have you ever stood on the top of a mountain<br/>'
 				+ 'And gazed down on the grandeur below<br/>'
 				+ 'And thought of the vast army of people<br/>'
@@ -264,15 +261,15 @@ describe('Formatting', ()=> {
 			expect(format.caption(source)).equals(target);
 
 			// text after poem
-			source = TI.lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+			source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
 				+ 'And gazed down on the grandeur below' + nl
 				+ 'And thought of the vast army of people.' + ds
-				+ TI.lipsum;
-			target = '<p>' + TI.lipsum + '</p><blockquote class="poem"><p>'
+				+ lipsum;
+			target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
 				+ 'Have you ever stood on the top of a mountain<br/>'
 				+ 'And gazed down on the grandeur below<br/>'
 				+ 'And thought of the vast army of people.</p></blockquote>'
-				+ '<p class="first">' + TI.lipsum + '</p>';
+				+ '<p class="first">' + lipsum + '</p>';
 
 			expect(format.caption(source)).equals(target);
 		});
@@ -308,29 +305,29 @@ describe('Formatting', ()=> {
 		});
 
 		it('styles superscripts', ()=> {
-			let source = TI.lipsum + '²';
-			let target = '<p>' + TI.lipsum + '<sup>²</sup></p>';
+			let source = lipsum + '²';
+			let target = '<p>' + lipsum + '<sup>²</sup></p>';
 			expect(format.caption(source)).equals(target);
 		});
 
 		it('identifies footnotes', ()=> {
-			let source = TI.lipsum + nl
+			let source = lipsum + nl
 				+ '___' + nl
 				+ '* Note about photo credit' + nl
 				+ '¹ Some other note' + nl
 				+ '² Last note';
-			let target = '<p>' + TI.lipsum + '</p><ol class="footnotes" start="0">'
+			let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
 				+ '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
 				+ '<li><span>Some other note</span></li>'
 				+ '<li><span>Last note</span></li></ol>';
 
 			expect(format.caption(source)).equals(target);
 
-			source = TI.lipsum + nl
+			source = lipsum + nl
 				+ '___' + nl
 				+ '¹ Some other note' + nl
 				+ '² Last note';
-			target = '<p>' + TI.lipsum + '</p><ol class="footnotes">'
+			target = '<p>' + lipsum + '</p><ol class="footnotes">'
 				+ '<li><span>Some other note</span></li>'
 				+ '<li><span>Last note</span></li></ol>';
 
