@@ -1,11 +1,10 @@
 'use strict';
 
-const TI = require('../');
-const Enum = TI.enum;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const outputCache = TI.Middleware.outputCache;
-const CacheItem = TI.Provider.Cache.Item;
+const { mimeType } = require('../lib/enum');
+const middleware = require('../lib/middleware');
+const cache = require('../lib/cache');
 
 describe('Output Cache Middleware', ()=> {
 	let req = new TI.Mock.Request();
@@ -25,7 +24,7 @@ describe('Output Cache Middleware', ()=> {
 
 	it('adds caching headers to compressed content', ()=> {
 		let item = new CacheItem(viewSlug, pageContent);
-		res.sendCompressed(Enum.mimeType.html, item);
+		res.sendCompressed(mimeType.html, item);
 
 		expect(res.headers['Cache-Control']).equals('max-age=86400, public');
 		expect(res.headers['ETag']).to.contain(viewSlug);
