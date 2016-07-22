@@ -5,8 +5,8 @@ const expect = require('chai').expect;
 const e = require('../../lib/enum');
 const viewCache = require('../../lib/middleware/view-cache');
 const cache = require('../../lib/cache');
-const req = require('../mocks/mock-request');
-const res = require('../mocks/mock-response');
+const req = require('../mocks/request.mock');
+const res = require('../mocks/response.mock');
 
 describe('Output Cache Middleware', ()=> {
 	const viewSlug = 'test-slug';

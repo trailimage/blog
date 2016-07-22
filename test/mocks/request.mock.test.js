@@ -2,7 +2,7 @@
 
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const req = require('./mock-request.js');
+const req = require('./request.mock');
 
 describe('Mock Request', ()=> {
 	it('allows setting and reading the referer', ()=> {

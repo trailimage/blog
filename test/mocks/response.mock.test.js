@@ -1,14 +1,14 @@
 'use strict';
 
-const res = require('./mock-response');
+const res = require('./response.mock');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const { httpStatus } = require('../../lib/enum');
+const e = require('../../lib/enum');
 
 describe('Mock Response', ()=> {
 	it('allows setting and reading the HTTP status', ()=> {
-		res.status(httpStatus.NOT_FOUND);
-		expect(res.httpStatus).equals(httpStatus.NOT_FOUND);
+		res.status(e.httpStatus.NOT_FOUND);
+		expect(res.httpStatus).equals(e.httpStatus.NOT_FOUND);
 	});
 
 	it('accepts headers', ()=> {
@@ -26,8 +26,8 @@ describe('Mock Response', ()=> {
 	});
 
 	it('captures redirects', ()=> {
-		res.redirect(httpStatus.PERMANENT_REDIRECT, 'url');
-		expect(res.redirected.status).equals(httpStatus.PERMANENT_REDIRECT);
+		res.redirect(e.httpStatus.PERMANENT_REDIRECT, 'url');
+		expect(res.redirected.status).equals(e.httpStatus.PERMANENT_REDIRECT);
 		expect(res.redirected.url).equals('url');
 	});
 
@@ -41,7 +41,7 @@ describe('Mock Response', ()=> {
 
 	it('provides a 404 convenience method', ()=> {
 		res.notFound();
-		expect(res.httpStatus).equals(httpStatus.NOT_FOUND);
+		expect(res.httpStatus).equals(e.httpStatus.NOT_FOUND);
 	});
 
 	it('tracks whether response is ended', ()=> {
