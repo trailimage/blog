@@ -1,6 +1,6 @@
 'use strict';
 
-const TI = require('../../');
+const TI = require('index');
 const config = TI.config;
 const mocha = require('mocha');
 const expect = require('chai').expect;
