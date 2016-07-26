@@ -9,7 +9,6 @@ const npm = require('./package.json');
 
 config.repoUrl = npm.repository.url;
 
-injectDependencies();
 createWebService();
 
 function createWebService() {
@@ -89,44 +88,6 @@ function filter(regex, fn) {
 	return (req, res, next) => {
 		if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
 	}
-}
-
-// inject provider dependencies
-function injectDependencies() {
-	const redisUrl = config.env('REDISCLOUD_URL');
-	const geoPrivacy = process.env['GEO_PRIVACY'];
-
-	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
-		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
-		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
-	}
-
-	if (config.isProduction && is.empty(config.proxy)) {
-		// replace default log provider with Redis
-		TI.active.log = new TI.Provider.Log.Redis(redisUrl);
-	}
-
-	if (is.empty(config.proxy)) {
-		TI.active.cacheHost = new TI.Provider.Cache.Redis(redisUrl);
-	} else {
-		// Redis won't work from behind proxy
-		TI.active.log.info('Proxy detected — using default cache provider');
-	}
-	TI.active.photo = new FlickrPhoto({
-		userID: '60950751@N04',
-		appID: '72157631007435048',
-		featureSets: [
-			{ id: '72157632729508554', title: 'Ruminations' }
-		],
-		excludeSets: ['72157631638576162'],
-		excludeTags: ['Idaho','United States of America','Abbott','LensTagger','Boise'],
-		auth: new TI.Auth.Options(1,
-			config.env('FLICKR_API_KEY'),
-			config.env('FLICKR_SECRET'),
-			`http://www.${config.domain}/auth/flickr`,
-			process.env['FLICKR_ACCESS_TOKEN'],
-			process.env['FLICKR_TOKEN_SECRET'])
-	});
 }
 
 /**
