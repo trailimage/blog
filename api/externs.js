@@ -86,37 +86,39 @@ Post.prototype.coverPhoto = null;
 Post.prototype.feature = false;
 /** @type {Object.<Category>} */
 Post.prototype.categories = {};
+/** @type {Boolean} */
+Post.prototype.hasCategories = true;
+/** @type {Boolean} */
+Post.prototype.infoLoaded = false;
+/** @type {Boolean} */
+Post.prototype.triedTrack = false;
+/** @type {Boolean} */
+Post.prototype.hasTrack = null;
+/** @type {Post} */
+Post.prototype.next = null;
+/** @type {Post} */
+Post.prototype.previous = null
+/** @type {Number} */
+Post.prototype.part = 0;
+/** @type {Boolean} */
+Post.prototype.isPartial = false;
+/** @type {Boolean} */
+Post.prototype.nextIsPart = false;
+/** @type {Boolean} */
+Post.prototype.previousIsPart = false;
+/** @type {Number} */
+Post.prototype.totalParts = 0;
+/** @type {Boolean} */
+Post.prototype.isSeriesStart = false;
+/** @type {String} */
+Post.prototype.photoCoordinates = null;
 
-//
-// Post.prototype.
-//
-//    id: flickrSet.id,
-//    // whether post pictures occurred at a specific point in time (exceptions are themed sets)
-//    chronological: chronological,
-//    // to restore subtitle to title if ungrouped
-//    originalTitle: flickrSet.title,
-//
-//    // photos are lazy loaded
-//    photosLoaded: false,
-//    photos: [],
-//    photoCount: 0,
-//    coverPhoto: null,
-//
-//    // whether posts is featured in main navigation
-//    feature: false,
-//    categories: {},
-// // whether post has tags
-// get hasCategories() { return Object.keys(this.categories).length > 0; },
-//
-// infoLoaded: false,
-//
-//    // whether an attempt has been made to load GPS track
-//    triedTrack: false,
-//    // whether a GPS track was found
-//    hasTrack: false,
-//
-//    next: null,
-//    previous: null,
+Post.prototype.makeSeriesStart = function() {};
+Post.prototype.ungroup = function() {};
+Post.prototype.addPhotos = function(list) {};
+
+
+
 //
 //    // position of this post in a series
 //    part: 0,
