@@ -1,5 +1,17 @@
 'use strict';
 
+let FlickrOptions = {};
+/**
+ * @param {Flickr.Response} r
+ */
+FlickrOptions.prototype.value = function(r) {};
+/** @type {Boolean} */
+FlickrOptions.prototype.sign = false;
+/** @type {String} */
+FlickrOptions.prototype.error = null;
+/** @type {Object} */
+FlickrOptions.prototype.args = {};
+
 let Categories = {};
 
 
