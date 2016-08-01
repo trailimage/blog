@@ -179,7 +179,7 @@ var Flickr = {
 	}
 };
 
-// API ------------------------------------------------------------------------
+// region API
 
 Flickr.prototype.API = {};
 
@@ -229,7 +229,8 @@ Flickr.API.prototype.per_page = null;
  */
 Flickr.API.prototype.photo_id = null;
 
-// Tree -----------------------------------------------------------------------
+// endregion
+// region Tree
 
 /**
  * @type {Object}
@@ -242,8 +243,8 @@ Flickr.prototype.Tree = {};
  */
 Flickr.Tree.prototype.collection = [];
 
-// Collection -----------------------------------------------------------------
-
+// endregion
+// region Collection
 /**
  * @type {Object}
  */
@@ -284,7 +285,8 @@ Flickr.Collection.prototype.collection = [];
  */
 Flickr.Collection.prototype.set = [];
 
-// SetSummary -----------------------------------------------------------------
+//endregion
+//region SetSummary
 
 /**
  * @type {Object}
@@ -306,7 +308,8 @@ Flickr.SetSummary.prototype.title = null;
  */
 Flickr.SetSummary.prototype.description = null;
 
-// Response -------------------------------------------------------------------
+//endregion
+//region Response
 
 /**
  * @type {Object}
@@ -358,7 +361,8 @@ Flickr.Response.prototype.message = null;
  */
 Flickr.Response.prototype.photos = null;
 
-// Content --------------------------------------------------------------------
+//endregion
+//region Content
 
 /**
  * @type {Object}
@@ -370,7 +374,8 @@ Flickr.prototype.Content = null;
  */
 Flickr.Content.prototype._content = null;
 
-// Exif -----------------------------------------------------------------------
+//endregion
+//region EXIF
 
 /**
  * @type {Object}
@@ -420,7 +425,8 @@ Flickr.Exif.prototype.label = null;
  */
 Flickr.Exif.prototype.raw = null;
 
-// Size -----------------------------------------------------------------------
+//endregion
+//region Size
 
 /**
  * @type {Object}
@@ -458,7 +464,8 @@ Flickr.Size.prototype.url = null;
  */
 Flickr.Size.prototype.media = null;
 
-// SizeList ------------------------------------------------------------------
+//endregion
+//region SizeList
 
 /**
  * @type {Object}
@@ -472,7 +479,8 @@ Flickr.prototype.SizeList = null;
  */
 Flickr.SizeList.prototype.size = [];
 
-// MemberSet ------------------------------------------------------------------
+//endregion
+//region MemberSet
 
 /**
  * @type {Object}
@@ -530,7 +538,8 @@ Flickr.MemberSet.prototype.count_photo = 0;
  */
 Flickr.MemberSet.prototype.count_video = 0;
 
-// PhotoMembership ------------------------------------------------------------
+//endregion
+//region PhotoMembership
 
 /**
  * @type {Object}
@@ -543,7 +552,8 @@ Flickr.prototype.PhotoMembership = null;
  */
 Flickr.PhotoMembership.prototype.set = [];
 
-// URL ------------------------------------------------------------------------
+//endregion
+//region URL
 
 /**
  * @type {Object}
@@ -556,7 +566,8 @@ Flickr.prototype.URL = null;
  */
 Flickr.URL.prototype.type = null;
 
-// LocationPermission ---------------------------------------------------------
+//endregion
+//region LocationPermission
 
 /**
  * @type {Object}
@@ -583,7 +594,8 @@ Flickr.LocationPermission.prototype.isfriend = false;
  */
 Flickr.LocationPermission.prototype.isfamily = false;
 
-// Place ----------------------------------------------------------------------
+//endregion
+//region Place
 
 /**
  * @type {Object}
@@ -601,7 +613,8 @@ Flickr.Place.prototype.place_id = null;
  */
 Flickr.Place.prototype.woeid = null;
 
-// Location -------------------------------------------------------------------
+//endregion
+//region Location
 
 /**
  * @type {Object}
@@ -644,7 +657,8 @@ Flickr.Location.prototype.region = null;
  */
 Flickr.Location.prototype.country = null;
 
-// TagSummary -----------------------------------------------------------------
+//endregion
+//region TagSummary
 
 /**
  * @type {Object}
@@ -672,7 +686,8 @@ Flickr.TagSummary.prototype.raw = null;
  */
 Flickr.TagSummary.prototype.machine_tag = 0;
 
-// Usage ----------------------------------------------------------------------
+//endregion
+//region Usage
 
 /**
  * @type {Object}
@@ -699,7 +714,8 @@ Flickr.Usage.prototype.canprint = null;
  */
 Flickr.Usage.prototype.canshare = null;
 
-// EditAbility ----------------------------------------------------------------
+//endregion
+//region EditAbility
 
 /**
  * @type {Object}
@@ -716,7 +732,8 @@ Flickr.EditAbility.prototype.cancomment = null;
  */
 Flickr.EditAbility.prototype.canaddmeta = null;
 
-// Permission -----------------------------------------------------------------
+//endregion
+//region Permission
 
 /**
  * @type {Object}
@@ -733,7 +750,8 @@ Flickr.Permission.prototype.permcomment = null;
  */
 Flickr.Permission.prototype.permmetadata = null;
 
-// PhotoDates -----------------------------------------------------------------
+//endregion
+//region PhotoDates
 
 /**
  * @type {Object}
@@ -760,7 +778,8 @@ Flickr.PhotoDates.prototype.takengranularity = 0;
  */
 Flickr.PhotoDates.prototype.lastupdate = null;
 
-// Visibility -----------------------------------------------------------------
+//endregion
+//region Visibility
 
 /**
  * @type {Object}
@@ -782,7 +801,8 @@ Flickr.Visibility.prototype.isfriend = null;
  */
 Flickr.Visibility.prototype.isfamily = null;
 
-// Owner ----------------------------------------------------------------------
+//endregion
+//region Owner
 
 /**
  * @type {Object}
@@ -814,7 +834,8 @@ Flickr.Owner.prototype.iconserver = null;
  */
 Flickr.Owner.prototype.iconfarm = 0;
 
-// Photo ----------------------------------------------------------------------
+//endregion
+//region Photo
 
 /**
  * @type {Object}
@@ -963,7 +984,8 @@ Flickr.PhotoInfo.prototype.urls = {};
 Flickr.PhotoInfo.prototype.urls.url = [];
 
 
-// PhotoSummary ---------------------------------------------------------------
+//endregion
+//region PhotoSummary
 
 /**
  * @type {Object}
@@ -1232,8 +1254,8 @@ Flickr.PhotoSummary.prototype.width_o = null;
  */
 Flickr.PhotoSummary.prototype.pathalias = null;
 
-
-// PhotoSetPhotos -------------------------------------------------------------
+//endregion
+//region PhotoSetPhotos
 
 /**
  * @type {Object}
@@ -1296,8 +1318,8 @@ Flickr.SetPhotos.prototype.title = null;
  */
 Flickr.SetPhotos.prototype.total = 0;
 
-
-// PhotoSetInfo ---------------------------------------------------------------
+//endregion
+//region PhotoSetInfo
 
 /**
  * @type {Object}
@@ -1390,7 +1412,8 @@ Flickr.SetInfo.prototype.date_create = 0;
  */
 Flickr.SetInfo.prototype.date_update = 0;
 
-// TagInfo --------------------------------------------------------------------
+//endregion
+//region TagInfo
 
 /**
  * @type {Object}
@@ -1423,7 +1446,8 @@ Flickr.Tag.prototype.clean = null;
  */
 Flickr.Tag.prototype.raw = [];
 
-// Search Results -------------------------------------------------------------
+//endregion
+//region Search Results
 
 Flickr.SearchResult = {};
 
