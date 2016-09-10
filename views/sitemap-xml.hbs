@@ -12,19 +12,19 @@
 	</url>
 {{#each posts}}
 	<url>
-		<loc>{{../config.site.url}}/{{this.slug}}</loc>
+		<loc>{{../config.site.url}}/{{this.key}}</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 {{/each}}
-{{#each tags}}
+{{#each categories}}
 	<url>
 		<loc>{{../config.site.url}}/{{this}}</loc>
 		<changefreq>monthly</changefreq>
 		<priority>0.5</priority>
 	</url>
 {{/each}}
-{{#each photoTags}}
+{{#each tags}}
 	<url>
 		<loc>{{../config.site.url}}/photo-tag/{{@key}}</loc>
 		<changefreq>monthly</changefreq>

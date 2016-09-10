@@ -20,42 +20,45 @@ ViewCacheItem.prototype.buffer = null;
 /** @type {String} */
 ViewCacheItem.prototype.eTag = null;
 
-/** @extends {Express.Request} */
-let TrailImageRequest = {};
+/**
+ * @extends {Express.Request}
+ * @extends {Request}
+ */
+let BlogRequest = {};
 /** @returns {String} */
-TrailImageRequest.prototype.clientIP = function() {};
+BlogRequest.prototype.clientIP = function() {};
 
 
 /** @extends {Express.Response} */
-let TrailImageResponse = {};
-TrailImageResponse.prototype.notFound = function() {};
-TrailImageResponse.prototype.internalError = function() {};
+let BlogResponse = {};
+BlogResponse.prototype.notFound = function() {};
+BlogResponse.prototype.internalError = function() {};
 /**
  * @param {String} slug
  * @param {String|function(function)|Object} p2
  * @param {function(function)} [p3]
  */
-TrailImageResponse.prototype.sendView = function(slug, p2, p3) {};
+BlogResponse.prototype.sendView = function(slug, p2, p3) {};
 /**
  * @param {String} slug
  * @param {function} render
  */
-TrailImageResponse.prototype.sendJson = function(slug, render) {};
+BlogResponse.prototype.sendJson = function(slug, render) {};
 /**
  * @returns {Promise}
  */
-TrailImageResponse.prototype.getCacheKeys = function() {};
+BlogResponse.prototype.getCacheKeys = function() {};
 /**
  * @param {String[]|String} slugs
  * @returns {Promise}
  */
-TrailImageResponse.prototype.removeFromCache = function(slugs) {};
+BlogResponse.prototype.removeFromCache = function(slugs) {};
 /**
  * @param {String} mimeType
  * @param {Object} item
  * @param {Boolean} [cache = true]
  */
-TrailImageResponse.prototype.sendCompressed = function(mimeType, item, cache) {};
+BlogResponse.prototype.sendCompressed = function(mimeType, item, cache) {};
 
 //endregion
 //region Models
@@ -148,6 +151,8 @@ Photo.size.prototype.preview = null;
 Photo.size.prototype.normal = null;
 /** @type {Size} */
 Photo.size.prototype.big = null;
+/** @returns {Promise} */
+Photo.prototype.getEXIF = function() {};
 
 
 let Post = {};
@@ -207,7 +212,9 @@ Post.prototype.ungroup = function() {};
 Post.prototype.empty = function() {};
 /** @returns {String} */
 Post.prototype.name = function() {};
+/** @returns {Promise} */
 Post.prototype.getInfo = function() {};
+/** @returns {Promise} */
 Post.prototype.getPhotos = function() {};
 
 /**
@@ -215,6 +222,11 @@ Post.prototype.getPhotos = function() {};
  * @returns {Boolean}
  */
 Post.prototype.hasKey = function(key) {};
+/**
+ * @param {String} id
+ * @returns {Boolean}
+ */
+Post.prototype.hasPhotoID = function(id) {};
 Post.prototype.serializePhotoCoordinates = function() {};
 
 
@@ -224,7 +236,7 @@ Library.prototype.categories = {};
 /** @type {Post[]} */
 Library.prototype.posts = [];
 /** @type {Object.<String>} */
-Library.prototype.photoTags = {};
+Library.prototype.tags = {};
 /** @type {Boolean} */
 Library.prototype.loaded = false;
 /** @type {Boolean} */

@@ -24,7 +24,7 @@ module.exports = {
    getAllPhotoTags: () => call('tags.getListUserRaw', r => r.who.tags.tag),
    getPhotoSizes: id => call('photos.getSizes', r => r.sizes.size),
    getPhotoContext: id => call('photos.getAllContexts', r => r.set),
-   PHOTO_SEARCH: tags => call('photos.search', r => r.photos.photo),
+   photoSearch: tags => call('photos.search', r => r.photos.photo),
    getSetInfo: id => call('photosets.getInfo', r => {
       const info = r.photoset;
       info.id = id;

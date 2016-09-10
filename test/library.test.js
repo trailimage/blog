@@ -44,8 +44,8 @@ describe('Library', ()=> {
    });
 
    it('includes all photo tags with their full names', ()=> {
-      expect(library.photoTags).to.contain.all.keys(['algae','andersonranchreservoir','dam','horse','jason']);
-      expect(library.photoTags['andersonranchreservoir']).equals('Anderson Ranch Reservoir');
+      expect(library.tags).to.contain.all.keys(['algae','andersonranchreservoir','dam','horse','jason']);
+      expect(library.tags['andersonranchreservoir']).equals('Anderson Ranch Reservoir');
    });
 
    it('has post summaries', ()=> {
@@ -65,6 +65,13 @@ describe('Library', ()=> {
       expect(post2.title).equals('Owyhee Snow and Sand');
       expect(post2.subTitle).equals('Lowlands');
       expect(post2.photoCount).equals(13);
+   });
+
+   it('finds post having a photo', ()=> {
+      return library.getPostWithPhoto('8459503474').then(post => {
+         expect(post).to.exist;
+         expect(post).has.property('id','72157632729508554');
+      });
    });
 
    it('creates list of post keys', ()=> {

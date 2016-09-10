@@ -3,13 +3,14 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const factory = require('../lib/factory');
+const library = require('../lib/library');
 /** @type {Post} */
 let post = null;
 
 factory.inject.flickr = require('./mocks/flickr.mock');
 
 describe('Photos', ()=> {
-   before(() => factory.buildLibrary().then(library => {
+   before(() => factory.buildLibrary().then(()=> {
       post = library.postWithID('72157666685116730');
       return post.getPhotos();
    }));
@@ -33,6 +34,14 @@ describe('Photos', ()=> {
       expect(p.size).to.contain.all.keys(['big','normal','preview']);
       expect(p.size.big.height).equals(2048);
    });
+
+   it('can retrieve EXIF', ()=> library.getEXIF('8459503474').then(exif => {
+      expect(exif).to.exist;
+      expect(exif).has.property('ISO', 400);
+      expect(exif).has.property('artist','Jason Abbott');
+      expect(exif).has.property('model','Nikon D700');
+      expect(exif).has.property('fNumber', 5.6);
+   }));
 
    it('have one designated as primary', ()=> {
       expect(post.photos.find(p => p.primary)).to.exist;
