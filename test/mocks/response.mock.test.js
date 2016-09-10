@@ -48,4 +48,10 @@ describe('Mock Response', ()=> {
 		res.end();
 		expect(res.ended).is.true;
 	});
+
+   it('can be reset and re-used', ()=> {
+      res.reset();
+      expect(res.ended).is.not.true;
+      expect(res.httpStatus).equals(C.httpStatus.OK);
+   });
 });

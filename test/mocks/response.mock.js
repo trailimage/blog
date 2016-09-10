@@ -8,7 +8,7 @@ module.exports = {
    ended: false,
    // method to call when response is complete
    // can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
-   testCallback: null,
+   onEnd: null,
    headers: {},
    content: null,
    rendered: {
@@ -34,6 +34,13 @@ module.exports = {
    },
    end() {
       this.ended = true;
-      if (is.callable(this.testCallback)) { this.testCallback(); }
+      if (is.callable(this.onEnd)) { this.onEnd(); }
+   },
+   reset() {
+      this.httpStatus = C.httpStatus.OK;
+      this.ended = false;
+      this.headers = {};
+      this.content = null;
+      return this;
    }
 };

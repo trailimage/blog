@@ -2,7 +2,7 @@
 
 const is = require('./lib/is');
 const config = require('./lib/config');
-const e = require('./lib/constants');
+const C = require('./lib/constants');
 const log = require('./lib/logger');
 const Express = require('express');
 const npm = require('./package.json');
@@ -16,7 +16,7 @@ function createWebService() {
 	const app = Express();
 	const port = process.env['PORT'] || 3000;
 
-	log.infoIcon(e.icon.powerButton, 'Starting %s application', config.isProduction ? 'production' : 'development');
+	log.infoIcon(C.icon.powerButton, 'Starting %s application', config.isProduction ? 'production' : 'development');
 
 	defineViews(app);
 
@@ -24,7 +24,7 @@ function createWebService() {
 		// must authenticate before normal routes are available
 		defineAuthRoutes(app);
 		app.listen(port);
-		log.infoIcon(e.icon.lock, 'Listening for authentication on port %d', port);
+		log.infoIcon(C.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
 		applyMiddleware(app);
 
@@ -32,7 +32,7 @@ function createWebService() {
 			// library must be loaded before routes are defined
 			defineRoutes(app, library);
 			app.listen(port);
-			log.infoIcon(e.icon.heartOutline, 'Listening on port %d', port);
+			log.infoIcon(C.icon.heartOutline, 'Listening on port %d', port);
 		});
 	}
 }

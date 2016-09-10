@@ -30,6 +30,12 @@ describe('JSON-LD', ()=> {
       expect(schema.articleSection).to.contain('Family')
    });
 
+   it('creates link data for categories', ()=> {
+      const schema = ld.fromCategory(category);
+
+
+   });
+
    it('serializes link data', ()=> {
       const target = '{"author":'
          + '{"name":"Jason Abbott","url":"http://www.trailimage.com/about","sameAs":['

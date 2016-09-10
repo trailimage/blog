@@ -1,48 +1,45 @@
 'use strict';
 
-const TI = require('../');
+const C = require('../../lib/constants');
+const cache = require('../../lib/cache');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const blocker = TI.Middleware.referralBlocker;
+const res = require('../mocks/response.mock');
+const req = require('../mocks/request.mock');
+const blocker = require('../../lib/middleware/referral-blocker');
 
 describe('Referral Blocker Middleware', ()=> {
-	let req = new TI.Mock.Request();
-	let res = new TI.Mock.Response();
-
 	it('blocks black-listed URLs', done => {
 		req.referer = 'http://2323423423.copyrightclaims.org';
-		res.testCallback = error => {
+		res.reset().onEnd = error => {
 			expect(error).is.undefined;
 			expect(res.ended).is.true;
-			expect(res.httpStatus).equals(TI.httpStatus.notFound);
+			expect(res.httpStatus).equals(C.httpStatus.NOT_FOUND);
 			done();
 		};
-		blocker.filter(req, res, res.testCallback);
+		blocker.filter(req, res, res.onEnd);
 	});
 
 	it('allows unlisted URLs', done => {
-		res = new TI.Mock.Response();
 		req.referer = 'http://microsoft.com';
-		res.testCallback = error => {
+		res.reset().onEnd = error => {
 			expect(error).is.undefined;
-			expect(res.httpStatus).not.equals(TI.httpStatus.notFound);
+			expect(res.httpStatus).not.equals(C.httpStatus.NOT_FOUND);
 			done();
 		};
-		blocker.filter(req, res, res.testCallback);
+		blocker.filter(req, res, res.onEnd);
 	});
 
 	it('caches black list', done => {
-		const db = TI.active;
-
-		res = new TI.Mock.Response();
-		res.testCallback = ()=> {
-			db.cache.getObject('spam-referer', value => {
-				expect(value).to.be.a('array');
+		res.reset().onEnd = ()=> {
+			cache.getObject(blocker.cacheKey).then(value => {
+			   expect(value).to.exist;
+				expect(value).to.be.an('array');
 				expect(value.length).at.least(100);
 				done();
 			});
 		};
-		blocker.filter(req, res, res.testCallback);
+		blocker.filter(req, res, res.onEnd);
 	});
 
 	it.skip('refreshes the cache after a period of time', ()=> {
