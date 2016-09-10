@@ -1403,12 +1403,12 @@ Flickr.SetInfo.prototype.count_videos = 0;
 Flickr.SetInfo.prototype.can_comment = 0;
 
 /**
- * @type {String}
+ * @type {Number}
  */
 Flickr.SetInfo.prototype.date_create = 0;
 
 /**
- * @type {String}
+ * @type {Number}
  */
 Flickr.SetInfo.prototype.date_update = 0;
 

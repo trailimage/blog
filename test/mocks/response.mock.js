@@ -1,10 +1,10 @@
 'use strict';
 
-const e = require('../../lib/enum');
+const C = require('../../lib/constants');
 const is = require('../../lib/is');
 
 module.exports = {
-   httpStatus: e.httpStatus.OK,
+   httpStatus: C.httpStatus.OK,
    ended: false,
    // method to call when response is complete
    // can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
@@ -20,7 +20,7 @@ module.exports = {
       url: null
    },
    status(value) { this.httpStatus = value; return this; },
-   notFound() { return this.status(e.httpStatus.NOT_FOUND); },
+   notFound() { return this.status(C.httpStatus.NOT_FOUND); },
    setHeader(key, value) { this.headers[key] = value; return this; },
    write(value) { this.content = value; return this; },
    redirect(status, url) {

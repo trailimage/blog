@@ -2,7 +2,7 @@
 
 const is = require('./lib/is');
 const config = require('./lib/config');
-const e = require('./lib/enum');
+const e = require('./lib/constants');
 const log = require('./lib/logger');
 const Express = require('express');
 const npm = require('./package.json');

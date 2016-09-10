@@ -12,7 +12,53 @@ FlickrOptions.prototype.error = null;
 /** @type {Object} */
 FlickrOptions.prototype.args = {};
 
-let Categories = {};
+
+let Category = {};
+/** @type {String} */
+Category.prototype.title = null;
+/** @type {String} */
+Category.prototype.key = null;
+/** @type {Category[]} */
+Category.prototype.subcategories = [];
+/** @type {Post[]} */
+Category.prototype.posts = [];
+/** @type {Boolean} */
+Category.prototype.isChild = false;
+/** @type {Boolean} */
+Category.prototype.isParent = false;
+/**
+ * @param {Category} subcat
+ */
+Category.prototype.addSubcategory = function(subcat) {};
+/**
+ * @param {String} key
+ * @returns {Category}
+ */
+Category.prototype.subcategory = function(key) {};
+Category.prototype.hasSubcategory = function() {};
+
+
+let EXIF = {};
+/** @type {String} */
+EXIF.prototype.artist = null;
+/** @type {Number} */
+EXIF.prototype.compensation = 0;
+/** @type {Number} */
+EXIF.prototype.time = 0;
+/** @type {Number} */
+EXIF.prototype.fNumber = 0;
+/** @type {Number} */
+EXIF.prototype.focalLength = 0;
+/** @type {Number} */
+EXIF.prototype.ISO = 0;
+/** @type {String} */
+EXIF.prototype.lens = null;
+/** @type {String} */
+EXIF.prototype.model = null;
+/** @type {String} */
+EXIF.prototype.software = null;
+/** @type {Boolean} */
+EXIF.prototype.sanitized = false;
 
 
 let Size = {};
@@ -23,7 +69,8 @@ Size.prototype.width = 0;
 /** @type {Number} */
 Size.prototype.height = 0;
 /** @type {Boolean} */
-Size.prototype.empty = false;
+Size.prototype.isEmpty = false;
+
 
 let Photo = {};
 /** @type {String} */
@@ -54,34 +101,17 @@ Photo.size.prototype.preview = null;
 Photo.size.prototype.normal = null;
 /** @type {Size} */
 Photo.size.prototype.big = null;
-//
-// id: json.id,
-//    index: index + 1,
-//    sourceUrl: linkBase + json.pathalias + '/' + json.id,
-//    title: json.title,
-//    description: json.description._content,
-//    // tag slugs are later updated to proper names
-//    tags: is.empty(json.tags) ? [] : json.tags.split(' '),
-//    dateTaken: format.parseDate(json.datetaken),
-//    latitude: parseFloat(json.latitude),
-//    longitude: parseFloat(json.longitude),
-//    primary: (parseInt(json.isprimary) == 1),
-//    // whether taken date is an outlier compared to other photos in the same post
-//    // http://www.wikihow.com/Calculate-Outliers
-//    outlierDate: false,
-//    size: {
-//    preview: buildPhotoSize(json, this.sizeField.preview),
-//       normal: buildPhotoSize(json, this.sizeField.normal),
-//       big: buildPhotoSize(json, this.sizeField.big)
-// },
-// // comma-delimited list of tags
-// get tagList() { return this.tags.toString(','); }
-
 
 
 let Post = {};
 /** @type {String} */
 Post.prototype.id = null;
+/** @type {String} */
+Post.prototype.key = null;
+/** @type {String} */
+Post.prototype.seriesKey = null;
+/** @type {String} */
+Post.prototype.partKey = null;
 /** @type {Boolean} */
 Post.prototype.chronological = true;
 /** @type {String} */
@@ -127,28 +157,30 @@ Post.prototype.photoCoordinates = null;
 
 Post.prototype.makeSeriesStart = function() {};
 Post.prototype.ungroup = function() {};
-Post.prototype.addPhotos = function(list) {};
+Post.prototype.empty = function() {};
+/** @returns {String} */
+Post.prototype.name = function() {};
+Post.prototype.getInfo = function() {};
+Post.prototype.getPhotos = function() {};
+
+/**
+ * @param {String} key
+ * @returns {Boolean}
+ */
+Post.prototype.hasKey = function(key) {};
+Post.prototype.serializePhotoCoordinates = function() {};
 
 
+let Library = {};
+/** @type {Object.<Category>} */
+Library.prototype.categories = {};
+/** @type {Post[]} */
+Library.prototype.posts = [];
+/** @type {Object.<String>} */
+Library.prototype.photoTags = {};
+/** @type {Boolean} */
+Library.prototype.loaded = false;
+/** @type {Boolean} */
+Library.prototype.postInfoLoaded = false;
 
-//
-//    // position of this post in a series
-//    part: 0,
-//    // whether post is part of a series
-//    isPartial: false,
-//    // whether next post is part of the same series
-//    nextIsPart: false,
-//    // whether previous post is part of the same series
-//    previousIsPart: false,
-//    // total number of posts in series, if any
-//    totalParts: 0,
-//    // whether this post begins a series
-//    isSeriesStart: false,
-//
-//    makeSeriesStart,
-//    ungroup: ungroupPost,
-//
-//    //addPhotos(list) { addPostPhotos(this, list); },
-//    name: postName,
-//    removeDetails() { removePostInfo(this); },
-// addPhotos: addPostPhotos
+Library.prototype.empty = function() {};

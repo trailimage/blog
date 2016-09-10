@@ -2,7 +2,7 @@
 
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const e = require('../../lib/enum');
+const e = require('../../lib/constants');
 const viewCache = require('../../lib/middleware/view-cache');
 const cache = require('../../lib/cache');
 const req = require('../mocks/request.mock');
