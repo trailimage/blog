@@ -67,12 +67,17 @@ describe('Library', ()=> {
       expect(post2.photoCount).equals(13);
    });
 
-   it('finds post having a photo', ()=> {
-      return library.getPostWithPhoto('8459503474').then(post => {
-         expect(post).to.exist;
-         expect(post).has.property('id','72157632729508554');
-      });
-   });
+   it('finds post having a photo', ()=> library.getPostWithPhoto('8459503474').then(post => {
+      expect(post).to.exist;
+      expect(post).has.property('id','72157632729508554');
+   }));
+
+   it('finds photos with tags', ()=> library.getPhotosWithTags('horse').then(photos => {
+      expect(photos).to.exist;
+      expect(photos).is.instanceOf(Array);
+      expect(photos).to.have.length.above(10);
+      expect(photos[0]).to.contain.all.keys(['id','size']);
+   }));
 
    it('creates list of post keys', ()=> {
       const keys = library.postKeys();

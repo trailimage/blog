@@ -12,7 +12,7 @@ config.repoUrl = npm.repository.url;
 createWebService();
 
 function createWebService() {
-   const library = require('./lib/library');
+   const factory = require('./lib/factory');
 	const app = Express();
 	const port = process.env['PORT'] || 3000;
 
@@ -28,12 +28,12 @@ function createWebService() {
 	} else {
 		applyMiddleware(app);
 
-		library.load(library => {
-			// library must be loaded before routes are defined
-			defineRoutes(app, library);
-			app.listen(port);
-			log.infoIcon(C.icon.heartOutline, 'Listening on port %d', port);
-		});
+      factory.buildLibrary().then(library => {
+         // library must be loaded before routes are defined
+         defineRoutes(app, library);
+         app.listen(port);
+         log.infoIcon(C.icon.heartOutline, 'Listening on port %d', port);
+      });
 	}
 }
 
@@ -63,6 +63,8 @@ function applyMiddleware(app) {
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
    const spamBlocker = require('./lib/middleware/referral-blocker');
+   const statusHelper = require('./lib/middleware/status-helper');
+   const viewCache = require('./lib/middleware/view-cache');
 
 	app.use(spamBlocker.filter);
 
@@ -78,8 +80,8 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
-	app.use(middleware.statusHelper.apply);
-	app.use(middleware.outputCache.apply);
+	app.use(statusHelper.apply);
+	app.use(viewCache.apply);
 	app.use(Express.static(__dirname + '/dist'));
 }
 
@@ -113,7 +115,7 @@ function defineRoutes(app, library) {
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(TI.httpStatus.permanentRedirect, '/' + config.redirects[slug]); });
+		app.get('/' + slug, (req, res) => { res.redirect(C.httpStatus.PERMANENT_REDIRECT, '/' + config.redirects[slug]); });
 	}
 
 	// the latest posts

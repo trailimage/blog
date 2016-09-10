@@ -7,6 +7,8 @@ let FlickrOptions = {};
 FlickrOptions.prototype.value = function(r) {};
 /** @type {Boolean} */
 FlickrOptions.prototype.sign = false;
+/** @type {Boolean} */
+FlickrOptions.prototype.allowCache = false;
 /** @type {String} */
 FlickrOptions.prototype.error = null;
 /** @type {Object} */
