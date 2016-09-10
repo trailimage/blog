@@ -27,6 +27,9 @@ module.exports = {
       this.redirected.status = status;
       this.redirected.url = url;
    },
+   /**
+    * Serialize render options rather than actually rendering a view
+    */
    render(template, options, callback) {
       this.rendered.template = template;
       this.rendered.options = options;
@@ -38,6 +41,7 @@ module.exports = {
    },
    reset() {
       this.httpStatus = C.httpStatus.OK;
+      this.onEnd = null;
       this.ended = false;
       this.headers = {};
       this.content = null;

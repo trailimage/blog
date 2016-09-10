@@ -14,6 +14,12 @@ FlickrOptions.prototype.args = {};
 
 //region Middleware
 
+let ViewCacheItem = {};
+/** @type {Buffer} */
+ViewCacheItem.prototype.buffer = null;
+/** @type {String} */
+ViewCacheItem.prototype.eTag = null;
+
 /** @extends {Express.Request} */
 let TrailImageRequest = {};
 /** @returns {String} */

@@ -32,7 +32,7 @@ describe('Referral Blocker Middleware', ()=> {
 
 	it('caches black list', done => {
 		res.reset().onEnd = ()=> {
-			cache.getObject(blocker.cacheKey).then(value => {
+			cache.item(blocker.cacheKey).then(value => {
 			   expect(value).to.exist;
 				expect(value).to.be.an('array');
 				expect(value.length).at.least(100);

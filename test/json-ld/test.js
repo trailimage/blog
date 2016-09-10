@@ -63,9 +63,9 @@ describe('JSON-LD Factory', ()=> {
 	it('creates breadcrumb schemas', ()=> {
 		let ld = Factory.breadcrumb('http://url.com', 'Title');
 
-		expect(ld.item).to.exist;
-		expect(ld.item.id).equals('http://url.com');
-		expect(ld.item.name).equals('Title');
+		expect(ld.create).to.exist;
+		expect(ld.create.id).equals('http://url.com');
+		expect(ld.create.name).equals('Title');
 	});
 
 	it('generates fully qualified URL from a relative path', ()=> {
