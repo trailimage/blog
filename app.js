@@ -50,7 +50,7 @@ function defineViews(app) {
 	app.set('views', root + '/views');
 	app.set('view engine', engine);
 	app.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + template.layout.main + '.hbs',
+		defaultLayout: root + '/views/' + template.layout.MAIN + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
@@ -78,8 +78,8 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
-	app.use(middleware.statusHelper.methods);
-	app.use(middleware.outputCache.methods);
+	app.use(middleware.statusHelper.apply);
+	app.use(middleware.outputCache.apply);
 	app.use(Express.static(__dirname + '/dist'));
 }
 
@@ -119,15 +119,15 @@ function defineRoutes(app, library) {
 	// the latest posts
 	app.get('/', c.tag.home);
 	app.get('/rss', c.rss.view);
-	app.get('/about', c.about.view);
+	app.get('/about', c.ABOUT.view);
 	app.get('/js/post-menu-data.js', c.menu.data);
-	app.get('/sitemap.xml', c.sitemap.view);
-	app.get('/exif/'+photoID, c.photo.exif);
+	app.get('/sitemap.xml', c.SITEMAP.view);
+	app.get('/exif/'+photoID, c.photo.EXIF);
 	app.get('/issues?', c.issue.view);
 	app.get('/issues?/:slug'+s, c.issue.view);
 	app.get('/tag-menu', c.tag.menu);
 	app.get('/mobile-menu', c.menu.mobile);
-	app.get('/search', c.search.view);
+	app.get('/search', c.SEARCH.view);
 	app.get('/'+rootPostTag, c.tag.root);
 	app.get('/'+rootPostTag+'/:tag', c.tag.view);
 	// old blog links with format /YYYY/MM/slug
@@ -159,7 +159,7 @@ function rootTagRoutePattern(library) {
 
 // if a provider isn't authenticated then all paths route to authentication pages
 function defineAuthRoutes(app) {
-	const c = TI.Controller.authorize;
+	const c = TI.Controller.AUTHORIZE;
 
 	app.get('/auth/flickr', c.flickr);
 	app.get('/auth/google', c.google);

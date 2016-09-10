@@ -13,7 +13,7 @@ describe('Output Cache Middleware', ()=> {
 	const pageContent = '<html><head></head><body>Test Page</body></html>';
 
 	// add caching expando methods
-	before(done => { viewCache.methods(req, res, done); });
+	before(done => { viewCache.apply(req, res, done); });
 
 	it.skip('sends already rendered pages from cache', done => {
 		res.sendView(viewSlug, render => {

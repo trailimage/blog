@@ -12,6 +12,47 @@ FlickrOptions.prototype.error = null;
 /** @type {Object} */
 FlickrOptions.prototype.args = {};
 
+//region Middleware
+
+/** @extends {Express.Request} */
+let TrailImageRequest = {};
+/** @returns {String} */
+TrailImageRequest.prototype.clientIP = function() {};
+
+
+/** @extends {Express.Response} */
+let TrailImageResponse = {};
+TrailImageResponse.prototype.notFound = function() {};
+TrailImageResponse.prototype.internalError = function() {};
+/**
+ * @param {String} slug
+ * @param {String|function(function)|Object} p2
+ * @param {function(function)} [p3]
+ */
+TrailImageResponse.prototype.sendView = function(slug, p2, p3) {};
+/**
+ * @param {String} slug
+ * @param {function} render
+ */
+TrailImageResponse.prototype.sendJson = function(slug, render) {};
+/**
+ * @returns {Promise}
+ */
+TrailImageResponse.prototype.getCacheKeys = function() {};
+/**
+ * @param {String[]|String} slugs
+ * @returns {Promise}
+ */
+TrailImageResponse.prototype.removeFromCache = function(slugs) {};
+/**
+ * @param {String} mimeType
+ * @param {Object} item
+ * @param {Boolean} [cache = true]
+ */
+TrailImageResponse.prototype.sendCompressed = function(mimeType, item, cache) {};
+
+//endregion
+//region Models
 
 let Category = {};
 /** @type {String} */
@@ -184,3 +225,5 @@ Library.prototype.loaded = false;
 Library.prototype.postInfoLoaded = false;
 
 Library.prototype.empty = function() {};
+
+//endregion

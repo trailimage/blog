@@ -63,7 +63,7 @@ describe('Flickr', ()=> {
    });
 
    it('searches for photos', ()=> {
-      return flickr.photoSearch('horse').then(json => {
+      return flickr.PHOTO_SEARCH('horse').then(json => {
          expect(json).to.be.instanceOf(Array);
          expect(json[0]).to.include.keys('owner');
          expect(json[0].owner).equals(config.flickr.userID);

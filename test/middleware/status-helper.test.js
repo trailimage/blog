@@ -1,16 +1,14 @@
 'use strict';
 
-const TI = require('../');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const statusHelper = TI.Middleware.statusHelper;
+const res = require('../mocks/response.mock');
+const req = require('../mocks/request.mock');
+const statusHelper = require('../../lib/middleware/status-helper');
 
 describe('Status Helper Middleware', ()=> {
-	let req = new TI.Mock.Request();
-	let res = new TI.Mock.Response();
-
 	// add caching expando methods
-	before(done => { statusHelper.methods(req, res, done); });
+	before(done => { statusHelper.apply(req, res, done); });
 
 	it('finds referred client IP for hosted node instances', ()=> {
 		req.connection.remoteAddress = 'remote';

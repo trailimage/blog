@@ -40,7 +40,7 @@ describe('Mock Response', ()=> {
 	});
 
 	it('provides a 404 convenience method', ()=> {
-		res.notFound();
+		res.NOT_FOUND();
 		expect(res.httpStatus).equals(C.httpStatus.NOT_FOUND);
 	});
 
