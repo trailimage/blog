@@ -1,21 +1,18 @@
 'use strict';
 
-/** @mixin */
-const fields = {
+/** @type {MockRequest} */
+module.exports = {
    referer: null,
    params: {},
    headers: {},
    connection: { remoteAddress: '' },
-};
-/** @mixes fields */
-const methods = {
    get(field) { return this[field]; },
    header(name) { return this.headers[name];	},
    reset() {
-      Object.assign(this, fields);
+      this.referer = null;
+      this.params = {};
+      this.headers = {};
+      this.connection = { remoteAddress: '' };
       return this;
    }
 };
-
-/** @type {MockRequest} */
-module.exports = Object.assign(methods, fields);
