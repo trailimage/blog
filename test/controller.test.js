@@ -4,6 +4,7 @@
 
 const C = require('../lib/constants');
 const config = require('../lib/config');
+const cache = require('../lib/cache');
 const res = require('./mocks/response.mock');
 const req = require('./mocks/request.mock');
 const middleware = require('../lib/middleware');
@@ -44,6 +45,19 @@ function expectJSON() {
    expect(res.rendered.json).has.property('success', true);
    expect(res.rendered.json).has.property('message');
    return res.rendered.json.message;
+}
+
+/**
+ * Run exists() method for each key and confirm it does or does not exist
+ * @param {String[]} keys
+ * @param {Boolean} [exists]
+ * @returns {Promise}
+ */
+function expectInCache(keys, exists = true) {
+   return Promise
+      .all(keys.map(k => cache.view.exists(k)))
+      // all() returns an array of outputs from each method
+      .then(results => { results.forEach(r => expect(r).equals(exists)); })
 }
 
 //endregion
@@ -246,49 +260,40 @@ describe('Controller', ()=> {
    });
 
    describe('Cache', ()=> {
-      const cache = require('../lib/cache');
       const post1Key = 'stanley-lake-snow-hike';
       const post2Key = 'brother-ride-2015/huckleberry-lookout';
+      const postKeys = [ post1Key, post2Key ];
       let oldCacheSetting;
 
       before(() => {
          oldCacheSetting = config.cache.views;
          config.cache.views = true;
-         // add fake views to cache if not already there
+         // add fake views to cache if not already present
          return Promise.all([
             cache.view.addIfMissing(post1Key, '<html><body>Post 1</body></html>'),
-            cache.view.addIfMissing(post2Key, '<html><body>Post 2</body></html>'),
-            cache.view.exists(post1Key),
-            cache.view.exists(post2Key)
-         ]).then(([,,post1Exists, post2Exists ]) => {
-            expect(post1Exists).is.true;
-            expect(post2Exists).is.true;
-         });
+            cache.view.addIfMissing(post2Key, '<html><body>Post 2</body></html>')
+         ]).then(() => expectInCache(postKeys));
       });
 
       it('removes cached views', done => {
          res.onEnd = ()=> {
             const msg = expectJSON();
-            Promise.all([
-               cache.view.exists(post1Key),
-               cache.view.exists(post2Key),
-            ]).then(([ post1Exists, post2Exists ]) => {
-               expect(post1Exists).is.not.true;
-               expect(post2Exists).is.not.true;
-               done();
-            });
+            expect(msg).to.include(post1Key);
+            expect(msg).to.include(post2Key);
+            expectInCache(postKeys, false).then(() => done());
          };
-         req.body.selected = [ post1Key, post2Key ];
+         req.body.selected = postKeys;
          c.cache.deleteView(req, res);
       });
 
-      it('renders mobile menu', done => {
+      it('removes cached JSON', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.MOBILE_MENU_DATA);
             expect(options).has.property('library');
             done();
          };
-         c.menu.mobile(req, res);
+         req.body.selected = postKeys;
+         c.cache.deleteJSON(req, res);
       });
 
       after(()=> { config.cache.views = oldCacheSetting; })
