@@ -5,11 +5,11 @@ const config = require('../lib/config');
 const res = require('./mocks/response.mock');
 const req = require('./mocks/request.mock');
 const mocha = require('mocha');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const controller = require('../lib/controller');
 
 describe('Controller', ()=> {
-   describe('Blog', ()=> {
+   describe('Post', ()=> {
       const oldBlog = 'great-post';
       req.params['year'] = '2014';
       req.params['month'] = '08';
@@ -19,12 +19,6 @@ describe('Controller', ()=> {
          domain: 'blog.test.com',
          redirects: { [oldBlog]: 'still-a-great-post' }
       };
-
-      it('forwards unmatched slugs to blog', ()=> {
-         postController.blog(req, res);
-         expect(res.redirected.status).equals(C.httpStatus.TEMP_REDIRECT);
-         expect(res.redirected.url).equals(`http://${config.blog.domain}/${req.params['year']}/${req.params['month']}/${req.params['slug']}`)
-      });
 
       it('forwards matched slugs to new location', ()=> {
          req.params['slug'] = oldBlog;

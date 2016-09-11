@@ -94,77 +94,83 @@ function filter(regex, fn) {
 
 /**
  * @param app
- * @param {TI.Library} library
+ * @param {Library} library
  * @see http://expressjs.com/4x/api.html#router
  * @see http://expressjs.com/guide/routing.html
  */
 function defineRoutes(app, library) {
-	const c = TI.Controller;
-	const r = require('./lib/controllers/routes.js');
-	// Slug pattern
+	const c = require('./lib/controller');
+	const r = require('./lib/routes');
+	// slug pattern
 	const s = '([\\w\\d-]{4,})';
+   // route placeholders
+   const ph = C.route;
 	// Flickr photo ID pattern
-	const photoID = ':photoID(\\d{10,11})';
+	const photoID = `:${ph.PHOTO_ID}(\\d{10,11})`;
 	// Flickr set ID pattern
-	const postID = ':postID(\\d{17})';
-	//
-	const rootPostTag = rootTagRoutePattern(library);
+	const postID = `:${ph.POST_ID}(\\d{17})`;
+   // post key (slug or path) pattern
+   const postKey = `:${ph.POST_KEY}${s}`;
+   const series = `:${ph.SERIES_KEY}${s}/:${ph.PART_KEY}${s}`;
+	// pattern matching any root category key
+	const rootCategory = ':' + ph.ROOT_CATEGORY + '(' + Object
+      .keys(library.categories)
+      .map(name => library.categories[name].key)
+      .join('|') + ')';
 
 	app.use('/admin', r.admin);
 	//app.use('/api/v1', r.api);
 	//app.use('/auth', r.auth);
 
 	for (let slug in config.redirects) {
-		app.get('/' + slug, (req, res) => { res.redirect(C.httpStatus.PERMANENT_REDIRECT, '/' + config.redirects[slug]); });
+		app.get('/' + slug, (req, res) => {
+		   res.redirect(C.httpStatus.PERMANENT_REDIRECT, '/' + config.redirects[slug]);
+		});
 	}
 
 	// the latest posts
-	app.get('/', c.tag.home);
+	app.get('/', c.post.home);
 	app.get('/rss', c.rss.view);
-	app.get('/about', c.ABOUT.view);
+	app.get('/about', c.about);
 	app.get('/js/post-menu-data.js', c.menu.data);
-	app.get('/sitemap.xml', c.SITEMAP.view);
-	app.get('/exif/'+photoID, c.photo.EXIF);
-	app.get('/issues?', c.issue.view);
-	app.get('/issues?/:slug'+s, c.issue.view);
-	app.get('/tag-menu', c.tag.menu);
+	app.get('/sitemap.xml', c.siteMap);
+	app.get(`/exif/${photoID}`, c.photo.exif);
+	app.get('/issues?', c.issues);
+	app.get('/issues?/:slug'+s, c.issues);
+	app.get('/category-menu', c.menu.category);
 	app.get('/mobile-menu', c.menu.mobile);
-	app.get('/search', c.SEARCH.view);
-	app.get('/'+rootPostTag, c.tag.root);
-	app.get('/'+rootPostTag+'/:tag', c.tag.view);
+	app.get('/search', c.search);
+	app.get(`/${rootCategory}`, c.category.root);
+	app.get(`/${rootCategory}/:${ph.CATEGORY}`, c.category.view);
 	// old blog links with format /YYYY/MM/slug
-	app.get('/:year(\\d{4})/:month(\\d{2})/:slug', c.post.blog);
+	app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.blog);
 	app.get('/photo-tag', c.photo.tags);
-	app.get('/photo-tag/:tagSlug', c.photo.tags);
-	app.get('/photo-tag/search/:tagSlug', c.photo.withTag);
+	app.get(`/photo-tag/:${ph.PHOTO_TAG}`, c.photo.tags);
+	app.get(`/photo-tag/search/:${ph.PHOTO_TAG}`, c.photo.withTag);
 	// links with bare photo provider ID
-	app.get('/'+photoID, c.photo.view);
+	app.get(`/${photoID}`, c.photo.view);
 	// links with bare photo provider set ID
-	app.get('/'+postID, c.post.providerID);
-	app.get('/'+postID+'/'+photoID, c.post.providerID);
-	app.get('/:slug'+s+'/pdf', c.pdf.view);
-	app.get('/:slug'+s+'/map', c.map.view);
-	app.get('/:slug'+s+'/gpx', c.map.download);
-	app.get('/:slug'+s+'/map/'+photoID, c.map.view);
-	app.get('/:slug'+s+'/geo.json', c.map.json);
-	app.get('/:groupSlug'+s+'/:partSlug'+s, c.post.seriesPost);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map', c.map.seriesView);
-	app.get('/:groupSlug'+s+'/:partSlug'+s+'/map/'+photoID, c.map.seriesView);
-	app.get('/:slug'+s, c.post.view);
-}
+	app.get(`/${postID}`, c.post.providerID);
+	app.get(`/${postID}/${photoID}`, c.post.providerID);
 
-function rootTagRoutePattern(library) {
-	let rootPostTags = [];
-	for (let name in library.tags) {	rootPostTags.push(library.tags[name].slug); }
-	return ':rootTag(' + rootPostTags.join('|') + ')';
+	app.get(`/${postKey}/pdf`, c.pdf);
+	app.get(`/${postKey}/map`, c.map.view);
+	app.get(`/${postKey}/gpx`, c.map.download);
+	app.get(`/${postKey}/map/${photoID}`, c.map.view);
+	app.get(`/${postKey}/geo.json`, c.map.json);
+
+   app.get(`/${series}`, c.post.inSeries);
+	app.get(`/${series}/map`, c.map.forSeries);
+	app.get(`/${series}/map/${photoID}`, c.map.forSeries);
+	app.get(`/${postKey}`, c.post.view);
 }
 
 // if a provider isn't authenticated then all paths route to authentication pages
 function defineAuthRoutes(app) {
-	const c = TI.Controller.AUTHORIZE;
+   const c = require('./lib/controller');
 
-	app.get('/auth/flickr', c.flickr);
-	app.get('/auth/google', c.google);
+	app.get('/auth/flickr', c.auth.flickr);
+	app.get('/auth/google', c.auth.google);
 	// all other routes begin authentication process
-	app.get('*', c.view);
+	app.get('*', c.auth.view);
 }

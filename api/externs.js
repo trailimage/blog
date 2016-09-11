@@ -81,13 +81,13 @@ Category.prototype.isParent = false;
 /**
  * @param {Category} subcat
  */
-Category.prototype.addSubcategory = function(subcat) {};
+Category.prototype.add = function(subcat) {};
 /**
  * @param {String} key
  * @returns {Category}
  */
 Category.prototype.subcategory = function(key) {};
-Category.prototype.hasSubcategory = function() {};
+Category.prototype.has = function() {};
 
 
 let EXIF = {};
