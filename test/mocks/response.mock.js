@@ -23,13 +23,14 @@ const fields = {
 };
 /** @mixes fields */
 const methods = {
-   status(value) { this.httpStatus = value; return this; },
+   status(value) { this.httpStatus = value; return this.end(); },
    notFound() { return this.status(C.httpStatus.NOT_FOUND); },
    setHeader(key, value) { this.headers[key] = value; return this; },
    write(value) { this.content = value; return this; },
    redirect(status, url) {
       this.redirected.status = status;
       this.redirected.url = url;
+      this.end();
    },
    /**
     * Serialize render options rather than actually rendering a view
@@ -38,11 +39,18 @@ const methods = {
       delete options['config'];
       this.rendered.template = template;
       this.rendered.options = options;
-      callback(null, util.inspect(this.rendered));
+
+      if (is.callable(callback)) {
+         callback(null, util.inspect(this.rendered));
+      }
+      this.end();
    },
    end() {
-      this.ended = true;
-      if (is.callable(this.onEnd)) { this.onEnd(); }
+      if (!this.ended) {
+         this.ended = true;
+         if (is.callable(this.onEnd)) { this.onEnd(); }
+      }
+      return this;
    },
    reset() {
       Object.assign(this, fields);
