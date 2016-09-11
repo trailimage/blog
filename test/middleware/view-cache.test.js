@@ -20,12 +20,17 @@ describe('View Cache Middleware', ()=> {
 	   cache.view.remove(viewSlug).then(() => { viewCache.apply(req, res, done); });
 	});
 
+   beforeEach(() => {
+      res.reset();
+      req.reset();
+   });
+
    it('compresses new pages and adds to cache', done => {
       res.onEnd = ()=> {
          cache.view.item(viewSlug).then(item => {
             expect(item).to.exist;
             expect(item.eTag).to.contain(viewSlug);
-            expect(item.buffer).has.length.above(1000);
+            expect(item.buffer).to.have.length.above(250);
             done();
          });
       };
@@ -36,7 +41,7 @@ describe('View Cache Middleware', ()=> {
    });
 
 	it('sends already rendered pages from cache', done => {
-	   res.reset().onEnd = done;
+	   res.onEnd = done;
 		res.sendView(viewSlug, ()=> {
 			throw new Error('Attempt to render page that should be cached');
 		});
@@ -44,7 +49,7 @@ describe('View Cache Middleware', ()=> {
 
 	it('adds caching headers to compressed content', ()=> {
 		const item = cache.view.create(viewSlug, pageContent);
-		res.reset().sendCompressed(C.mimeType.HTML, item);
+		res.sendCompressed(C.mimeType.HTML, item);
 
 		expect(res.headers['Cache-Control']).equals('max-age=86400, public');
 		expect(res.headers['ETag']).to.contain(viewSlug);

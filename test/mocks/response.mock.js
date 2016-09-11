@@ -42,8 +42,9 @@ const methods = {
 
       if (is.callable(callback)) {
          callback(null, util.inspect(this.rendered));
+      } else {
+         this.end();
       }
-      this.end();
    },
    end() {
       if (!this.ended) {

@@ -9,9 +9,14 @@ const req = require('../mocks/request.mock');
 const blocker = require('../../lib/middleware/referral-blocker');
 
 describe('Referral Blocker Middleware', ()=> {
+   beforeEach(() => {
+      res.reset();
+      req.reset();
+   });
+
 	it('blocks black-listed URLs', done => {
 		req.referer = 'http://2323423423.copyrightclaims.org';
-		res.reset().onEnd = error => {
+		res.onEnd = error => {
 			expect(error).is.undefined;
 			expect(res.ended).is.true;
 			expect(res.httpStatus).equals(C.httpStatus.NOT_FOUND);
@@ -22,7 +27,7 @@ describe('Referral Blocker Middleware', ()=> {
 
 	it('allows unlisted URLs', done => {
 		req.referer = 'http://microsoft.com';
-		res.reset().onEnd = error => {
+		res.onEnd = error => {
 			expect(error).is.undefined;
 			expect(res.httpStatus).not.equals(C.httpStatus.NOT_FOUND);
 			done();
@@ -31,7 +36,7 @@ describe('Referral Blocker Middleware', ()=> {
 	});
 
 	it('caches black list', done => {
-		res.reset().onEnd = ()=> {
+		res.onEnd = ()=> {
 			cache.item(blocker.cacheKey).then(value => {
 			   expect(value).to.exist;
 				expect(value).to.be.an('array');
