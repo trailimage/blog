@@ -6,8 +6,7 @@ const C = require('../lib/constants');
 const config = require('../lib/config');
 const res = require('./mocks/response.mock');
 const req = require('./mocks/request.mock');
-const statusHelper = require('../lib/middleware/status-helper');
-const viewCache = require('../lib/middleware/view-cache');
+const middleware = require('../lib/middleware');
 const factory = require('../lib/factory');
 const template = require('../lib/template');
 const mocha = require('mocha');
@@ -21,18 +20,18 @@ describe('Controller', ()=> {
    before(done => {
       factory.inject.flickr = require('./mocks/flickr.mock');
       factory.buildLibrary().then(() => {
-         statusHelper.apply(req, res, ()=> {
-            viewCache.apply(req, res, done);
+         middleware.enableStatusHelpers(req, res, ()=> {
+             middleware.enableViewCache(req, res, done);
          });
       });
    });
 
-   describe('Post', ()=> {
-      beforeEach(() => {
-         res.reset();
-         req.reset();
-      });
+   beforeEach(() => {
+      res.reset();
+      req.reset();
+   });
 
+   describe('Post', ()=> {
       it('shows latest', done => {
          res.onEnd = ()=> {
             expect(res.httpStatus).equals(C.httpStatus.OK);
@@ -57,6 +56,23 @@ describe('Controller', ()=> {
          };
          req.params[ph.POST_ID] = config.flickr.featureSets[0].id;
          c.post.providerID(req, res);
+      });
+
+      it('shows post in series', done => {
+         res.onEnd = ()=> {
+            expect(res.httpStatus).equals(C.httpStatus.OK);
+            expect(res.headers).has.property('Content-Encoding', 'gzip');
+            expect(res.rendered).has.property('template','post');
+            expect(res.rendered).has.property('options');
+            expect(res.rendered.options).has.property('title', 'Brother Ride 2015');
+            expect(res.rendered.options).has.property('post');
+            expect(res.rendered.options.post).has.property('id', '72157658679070399');
+            expect(res.rendered.options.post).has.property('chronological', true);
+            done();
+         };
+         req.params[ph.SERIES_KEY] = 'brother-ride-2015';
+         req.params[ph.PART_KEY] = 'huckleberry-lookout';
+         c.post.inSeries(req, res);
       });
 
       it.skip('forwards old blog paths to new location', ()=> {
