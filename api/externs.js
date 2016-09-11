@@ -23,15 +23,17 @@ ViewCacheItem.prototype.buffer = null;
 ViewCacheItem.prototype.eTag = null;
 
 /**
- * @extends {Express.Request}
- * @extends {Request}
+ * @mixes {Express.Request}
+ * @mixes {Request}
  */
 let BlogRequest = {};
 /** @returns {String} */
 BlogRequest.prototype.clientIP = function() {};
 
-
-/** @extends {Express.Response} */
+/**
+ * @mixes {Express.Response}
+ * @mixes {Response}
+ */
 let BlogResponse = {};
 BlogResponse.prototype.notFound = function() {};
 BlogResponse.prototype.internalError = function() {};
@@ -61,6 +63,23 @@ BlogResponse.prototype.removeFromCache = function(slugs) {};
  * @param {Boolean} [cache = true]
  */
 BlogResponse.prototype.sendCompressed = function(mimeType, item, cache) {};
+/** @type {Object} */
+BlogResponse.prototype.redirected = {};
+
+//endregion
+//region Mocks
+
+/** @mixes BlogRequest */
+let MockRequest = {};
+MockRequest.prototype.reset = function() {};
+
+/** @mixes BlogResponse */
+let MockResponse = {};
+MockResponse.prototype.reset = function() {};
+/** @type {Buffer|String} */
+MockResponse.prototype.content = null;
+/** @type {Object} */
+MockResponse.prototype.rendered = null;
 
 //endregion
 //region Models

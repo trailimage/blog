@@ -7,7 +7,7 @@ const req = require('../mocks/request.mock');
 const statusHelper = require('../../lib/middleware/status-helper');
 
 describe('Status Helper Middleware', ()=> {
-	// add caching expando methods
+	// add helper expando methods
 	before(done => { statusHelper.apply(req, res, done); });
 
 	it('finds referred client IP for hosted node instances', ()=> {

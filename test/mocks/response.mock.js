@@ -1,14 +1,15 @@
 'use strict';
 
+const util = require('util');
 const C = require('../../lib/constants');
 const is = require('../../lib/is');
-
-module.exports = {
+/** @mixin */
+const fields = {
    httpStatus: C.httpStatus.OK,
-   ended: false,
    // method to call when response is complete
    // can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
    onEnd: null,
+   ended: false,
    headers: {},
    content: null,
    rendered: {
@@ -18,7 +19,10 @@ module.exports = {
    redirected: {
       status: null,
       url: null
-   },
+   }
+};
+/** @mixes fields */
+const methods = {
    status(value) { this.httpStatus = value; return this; },
    notFound() { return this.status(C.httpStatus.NOT_FOUND); },
    setHeader(key, value) { this.headers[key] = value; return this; },
@@ -31,20 +35,20 @@ module.exports = {
     * Serialize render options rather than actually rendering a view
     */
    render(template, options, callback) {
+      delete options['config'];
       this.rendered.template = template;
       this.rendered.options = options;
-      callback(null, JSON.stringify(this.rendered));
+      callback(null, util.inspect(this.rendered));
    },
    end() {
       this.ended = true;
       if (is.callable(this.onEnd)) { this.onEnd(); }
    },
    reset() {
-      this.httpStatus = C.httpStatus.OK;
-      this.onEnd = null;
-      this.ended = false;
-      this.headers = {};
-      this.content = null;
+      Object.assign(this, fields);
       return this;
    }
 };
+
+/** @type {MockResponse} */
+module.exports = Object.assign(methods, fields);

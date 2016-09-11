@@ -143,7 +143,7 @@ function defineRoutes(app, library) {
 	app.get(`/${rootCategory}`, c.category.root);
 	app.get(`/${rootCategory}/:${ph.CATEGORY}`, c.category.view);
 	// old blog links with format /YYYY/MM/slug
-	app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.blog);
+	app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.date);
 	app.get('/photo-tag', c.photo.tags);
 	app.get(`/photo-tag/:${ph.PHOTO_TAG}`, c.photo.tags);
 	app.get(`/photo-tag/search/:${ph.PHOTO_TAG}`, c.photo.withTag);
