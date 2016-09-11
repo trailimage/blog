@@ -38,6 +38,10 @@ function expectRedirect(path) {
    expect(res.redirected).has.property('url', path);
 }
 
+/**
+ * Expectations for JSON responses
+ * @returns {String|Object} response content
+ */
 function expectJSON() {
    expect(res.httpStatus).equals(C.httpStatus.OK);
    expect(res.headers).has.property('Content-Type', C.mimeType.JSON);
@@ -260,26 +264,23 @@ describe('Controller', ()=> {
    });
 
    describe('Cache', ()=> {
-      const post1Key = 'stanley-lake-snow-hike';
-      const post2Key = 'brother-ride-2015/huckleberry-lookout';
-      const postKeys = [ post1Key, post2Key ];
+      const postKeys = [ 'stanley-lake-snow-hike', 'brother-ride-2015/huckleberry-lookout' ];
+      const jsonKeys = [];
       let oldCacheSetting;
 
       before(() => {
          oldCacheSetting = config.cache.views;
          config.cache.views = true;
          // add fake views to cache if not already present
-         return Promise.all([
-            cache.view.addIfMissing(post1Key, '<html><body>Post 1</body></html>'),
-            cache.view.addIfMissing(post2Key, '<html><body>Post 2</body></html>')
-         ]).then(() => expectInCache(postKeys));
+         return Promise
+            .all(postKeys.map(k => cache.view.addIfMissing(k, '<html><body>' + k + '</body></html>')))
+            .then(() => expectInCache(postKeys));
       });
 
       it('removes cached views', done => {
          res.onEnd = ()=> {
             const msg = expectJSON();
-            expect(msg).to.include(post1Key);
-            expect(msg).to.include(post2Key);
+            postKeys.forEach(k => expect(msg).to.include(k));
             expectInCache(postKeys, false).then(() => done());
          };
          req.body.selected = postKeys;
