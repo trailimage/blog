@@ -138,7 +138,7 @@ function defineRoutes(app, library) {
 	app.get('/category-menu', c.menu.category);
 	app.get('/mobile-menu', c.menu.mobile);
 	app.get('/search', c.search);
-	app.get(`/${rootCategory}`, c.category.root);
+	app.get(`/${rootCategory}`, c.category.list);
 	app.get(`/${rootCategory}/:${ph.CATEGORY}`, c.category.view);
 	// old blog links with format /YYYY/MM/slug
 	app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.date);

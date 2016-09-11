@@ -9,7 +9,7 @@
 </ul>
 
 <ul class="tag-list">
-{{#each library.tags}}
+{{#each library.categories}}
 	<li class="{{lowerCase this.title}}">{{{icon this.icon}}}{{this.title}}</li>
 {{/each}}
 </ul>
@@ -17,10 +17,10 @@
 {{{icon 'chevron-down'}}}
 
 <nav class="tags">
-{{#each library.tags}}
+{{#each library.categories}}
 	<ul class="{{lowerCase this.title}}">
 	{{#this.tags}}
-		<li><a href="/{{this.slug}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
+		<li><a href="/{{this.key}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
 	{{/this.tags}}
 	</ul>
 {{/each}}

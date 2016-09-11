@@ -128,18 +128,18 @@ describe('Formatting', ()=> {
 	});
 
 	it('matches post tags to glyphicons', ()=> {
-		config.style.icon.POST_TAG = { 'Test': 'success', 'default': 'whatever' };
+		config.style.icon.CATEGORY = { 'Test': 'success', 'default': 'whatever' };
 
 		expect(format.postTagIcon('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
 		// revert to default if provided
 		expect(format.postTagIcon('Nothing')).equals('<span class="glyphicon glyphicon-whatever"></span>');
 
 		// blank if no default
-		delete config.style.icon.POST_TAG['default'];
+		delete config.style.icon.CATEGORY['default'];
 		expect(format.postTagIcon('Nothing')).is.empty;
 
 		// blank if no icons defined
-		delete config.style.icon.POST_TAG;
+		delete config.style.icon.CATEGORY;
 		expect(format.postTagIcon('Nothing')).is.empty;
 	});
 
