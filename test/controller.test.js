@@ -37,10 +37,20 @@ function expectRedirect(path) {
    expect(res.redirected).has.property('url', path);
 }
 
+function expectJSON() {
+   expect(res.httpStatus).equals(C.httpStatus.OK);
+   expect(res.headers).has.property('Content-Type', C.mimeType.JSON);
+   expect(res.rendered).has.property('json');
+   expect(res.rendered.json).has.property('success', true);
+   expect(res.rendered.json).has.property('message');
+   return res.rendered.json.message;
+}
+
 //endregion
 
 describe('Controller', ()=> {
    before(done => {
+
       factory.inject.flickr = require('./mocks/flickr.mock');
       factory.buildLibrary().then(() => {
          middleware.enableStatusHelpers(req, res, ()=> {
@@ -233,5 +243,54 @@ describe('Controller', ()=> {
          };
          c.menu.mobile(req, res);
       });
+   });
+
+   describe('Cache', ()=> {
+      const cache = require('../lib/cache');
+      const post1Key = 'stanley-lake-snow-hike';
+      const post2Key = 'brother-ride-2015/huckleberry-lookout';
+      let oldCacheSetting;
+
+      before(() => {
+         oldCacheSetting = config.cache.views;
+         config.cache.views = true;
+         // add fake views to cache if not already there
+         return Promise.all([
+            cache.view.addIfMissing(post1Key, '<html><body>Post 1</body></html>'),
+            cache.view.addIfMissing(post2Key, '<html><body>Post 2</body></html>'),
+            cache.view.exists(post1Key),
+            cache.view.exists(post2Key)
+         ]).then(([,,post1Exists, post2Exists ]) => {
+            expect(post1Exists).is.true;
+            expect(post2Exists).is.true;
+         });
+      });
+
+      it('removes cached views', done => {
+         res.onEnd = ()=> {
+            const msg = expectJSON();
+            Promise.all([
+               cache.view.exists(post1Key),
+               cache.view.exists(post2Key),
+            ]).then(([ post1Exists, post2Exists ]) => {
+               expect(post1Exists).is.not.true;
+               expect(post2Exists).is.not.true;
+               done();
+            });
+         };
+         req.body.selected = [ post1Key, post2Key ];
+         c.cache.deleteView(req, res);
+      });
+
+      it('renders mobile menu', done => {
+         res.onEnd = ()=> {
+            const options = expectTemplate(template.page.MOBILE_MENU_DATA);
+            expect(options).has.property('library');
+            done();
+         };
+         c.menu.mobile(req, res);
+      });
+
+      after(()=> { config.cache.views = oldCacheSetting; })
    });
 });

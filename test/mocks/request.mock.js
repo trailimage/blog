@@ -6,6 +6,8 @@ module.exports = {
    params: {},
    headers: {},
    connection: { remoteAddress: '' },
+   // added by Express body parser
+   body: { selected: [] },
    get(field) { return this[field]; },
    header(name) { return this.headers[name];	},
    reset() {
@@ -13,6 +15,7 @@ module.exports = {
       this.params = {};
       this.headers = {};
       this.connection = { remoteAddress: '' };
+      this.body = { selected: [] };
       return this;
    }
 };

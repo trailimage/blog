@@ -15,7 +15,8 @@ module.exports = {
    content: null,
    rendered: {
       template: null,
-      options: null
+      options: null,
+      json: null
    },
    redirected: {
       status: null,
@@ -29,6 +30,15 @@ module.exports = {
       this.redirected.status = status;
       this.redirected.url = url;
       this.end();
+   },
+   /**
+    * Method added by Express
+    * @param {Object} o
+    */
+   json(o) {
+      this.httpStatus = C.httpStatus.OK;
+      this.rendered.json = o;
+      return this.setHeader('Content-Type', C.mimeType.JSON).end();
    },
    /**
     * Serialize render options rather than actually rendering a view
@@ -61,7 +71,8 @@ module.exports = {
       this.content = null;
       this.rendered = {
          template: null,
-         options: null
+         options: null,
+         json: null
       };
       this.redirected = {
          status: null,
