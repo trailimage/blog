@@ -72,6 +72,8 @@ BlogResponse.prototype.redirected = {};
 /** @mixes BlogRequest */
 let MockRequest = {};
 MockRequest.prototype.reset = function() {};
+/** @type {Object} */
+MockRequest.prototype.connection = {};
 
 /** @mixes BlogResponse */
 let MockResponse = {};
@@ -80,6 +82,8 @@ MockResponse.prototype.reset = function() {};
 MockResponse.prototype.content = null;
 /** @type {Object} */
 MockResponse.prototype.rendered = null;
+/** @type {Boolean} */
+MockResponse.prototype.ended = false;
 
 //endregion
 //region Models

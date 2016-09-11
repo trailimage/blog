@@ -23,7 +23,7 @@ const fields = {
 };
 /** @mixes fields */
 const methods = {
-   status(value) { this.httpStatus = value; return this.end(); },
+   status(value) { this.httpStatus = value; return this; },
    notFound() { return this.status(C.httpStatus.NOT_FOUND); },
    setHeader(key, value) { this.headers[key] = value; return this; },
    write(value) { this.content = value; return this; },
@@ -47,7 +47,9 @@ const methods = {
       }
    },
    end() {
-      if (!this.ended) {
+      if (this.ended) {
+         console.warn('MockResponse.end() called after it already ended');
+      } else {
          this.ended = true;
          if (is.callable(this.onEnd)) { this.onEnd(); }
       }
