@@ -331,5 +331,10 @@ describe('Controller', ()=> {
          c.admin.home(req, res);
       });
 
+      it('invalidates caches when updating library', ()=> {
+        c.admin.updateLibrary().then(changedKeys => {
+           expect(changedKeys).to.exist;
+        })
+      })
    });
 });

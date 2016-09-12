@@ -18,7 +18,7 @@ describe('Factory', ()=> {
       const postKeys = ['owyhee-snow-and-sand/lowlands','kuna-cave-fails-to-impress'];
       library.remove(postKeys);
 
-      return library.reload(false).then(changedKeys => {
+      return library.load(false).then(changedKeys => {
          expect(changedKeys).to.exist;
          expect(changedKeys).to.include(postKeys[0]);
          expect(changedKeys).to.include(postKeys[1]);
