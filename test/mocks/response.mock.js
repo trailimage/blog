@@ -25,6 +25,18 @@ module.exports = {
    status(value) { this.httpStatus = value; return this; },
    notFound() { return this.status(C.httpStatus.NOT_FOUND); },
    setHeader(key, value) { this.headers[key] = value; return this; },
+   /**
+    * Set header value(s)
+    * @param {String|Object} keyOrHash
+    * @param {String} [value]
+    */
+   set(keyOrHash, value) {
+      if (value !== undefined) {
+         this.headers[keyOrHash] = value;
+      } else if (typeof keyOrHash == is.type.OBJECT) {
+         Object.assign(this.headers, keyOrHash)
+      }
+   },
    write(value) { this.content = value; return this; },
    redirect(status, url) {
       this.redirected.status = status;
@@ -55,9 +67,7 @@ module.exports = {
 
    },
    end() {
-      if (this.ended) {
-         console.warn('MockResponse.end() called after it already ended');
-      } else {
+      if (!this.ended) {
          this.ended = true;
          if (is.callable(this.onEnd)) { this.onEnd(); }
       }

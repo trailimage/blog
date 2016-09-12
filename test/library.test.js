@@ -67,6 +67,14 @@ describe('Library', ()=> {
       expect(post2.photoCount).equals(13);
    });
 
+   it('removes posts', ()=> {
+      let post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+      expect(post).to.exist;
+      library.remove(post.key);
+      post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+      expect(post).to.not.exist;
+   });
+
    it('finds post having a photo', ()=> library.getPostWithPhoto('8459503474').then(post => {
       expect(post).to.exist;
       expect(post).has.property('id','72157632729508554');

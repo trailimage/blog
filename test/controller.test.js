@@ -317,4 +317,19 @@ describe('Controller', ()=> {
          config.cache.maps = cacheMapConfig;
       })
    });
+
+   describe('Administration', ()=> {
+      it('renders page with supporting data', done => {
+         res.onEnd = ()=> {
+            const options = expectTemplate(template.page.ADMINISTRATION);
+            expect(res.headers).has.property('Cache-Control', 'no-cache, no-store, must-revalidate');
+            expect(res.headers).has.property('Pragma', 'no-cache');
+            expect(res.headers).has.property('Expires', 0);
+            expect(options).to.contain.all.keys(['json','library','logs','maps','views']);
+            done();
+         };
+         c.admin.home(req, res);
+      });
+
+   });
 });

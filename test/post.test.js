@@ -3,6 +3,7 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const factory = require('../lib/factory');
+const library = require('../lib/library');
 /** @type {Post} */
 let post1 = null;
 /** @type {Post} */
@@ -11,7 +12,7 @@ let post2 = null;
 factory.inject.flickr = require('./mocks/flickr.mock');
 
 describe('Post', ()=> {
-   before(() => factory.buildLibrary().then(library => {
+   before(() => factory.buildLibrary().then(() => {
       post1 = library.postWithID('72157666685116730');
       post2 = library.postWithKey('owyhee-snow-and-sand/lowlands');
       return true;

@@ -41,12 +41,12 @@
 		<form id="models" action="/admin/model/reload">
 			<fieldset id="models">
 				<legend>Models</legend>
-			{{#if models}}
+			{{#if json}}
 				<button type="submit">Reload</button>
 				<select name="models">
-				{{#models}}
+				{{#json}}
 					<option value="{{this}}">{{this}}</option>
-				{{/models}}
+				{{/json}}
 				</select>
 				<input type="hidden" name="remove-matches" value="false"/>
 			{{/if}}

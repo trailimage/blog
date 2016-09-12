@@ -111,6 +111,11 @@ Category.prototype.add = function(subcat) {};
  */
 Category.prototype.subcategory = function(key) {};
 Category.prototype.has = function() {};
+/**
+ * @param {Post} post
+ * @returns {Category}
+ */
+Category.prototype.removePost = function(post) {};
 
 
 let EXIF = {};
