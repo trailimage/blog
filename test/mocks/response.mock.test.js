@@ -16,7 +16,15 @@ describe('Mock Response', ()=> {
 		res.setHeader('expires', 'Tue, 01 Jan 1980 1:00:00 GMT');
 		res.setHeader('pragma', 'no-cache');
 
-		expect(res.headers['pragma']).equals('no-cache');
+		expect(res.headers).has.property('pragma','no-cache');
+
+      res.set({
+         'Fake-Header1': 'header-value1',
+         'Fake-Header2': 'header-value2'
+      });
+
+      expect(res.headers).has.property('Fake-Header1','header-value1');
+      expect(res.headers).has.property('Fake-Header2','header-value2');
 	});
 
 	it('can be written to', ()=> {
@@ -34,13 +42,16 @@ describe('Mock Response', ()=> {
 	it('simulates template rendering', done => {
 		res.render('template', { key1: 'value1', key2: 'value2' }, (err, text) => {
 			expect(err).is.null;
-			expect(res.rendered.template).equals('template');
+			expect(res.rendered).has.property('template', 'template');
+         expect(res.rendered).has.property('options');
+         expect(res.rendered.options).has.property('key1', 'value1');
+         expect(res.rendered.options).has.property('key2', 'value2');
 			done();
 		});
 	});
 
 	it('provides a 404 convenience method', ()=> {
-		res.NOT_FOUND();
+		res.notFound();
 		expect(res.httpStatus).equals(C.httpStatus.NOT_FOUND);
 	});
 
