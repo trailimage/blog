@@ -264,13 +264,17 @@ describe('Controller', ()=> {
    });
 
    describe('Cache', ()=> {
-      const postKeys = [ 'stanley-lake-snow-hike', 'brother-ride-2015/huckleberry-lookout' ];
-      const jsonKeys = [];
-      let oldCacheSetting;
+      const postKeys = ['stanley-lake-snow-hike','brother-ride-2015/huckleberry-lookout'];
+      // TODO support deleting specific hash key
+      const jsonKeys = ['spam-referer','photos.getExif'];
+      const mapKeys = postKeys;
+      let cacheViewConfig;
+      let cacheMapConfig;
 
       before(() => {
-         oldCacheSetting = config.cache.views;
-         config.cache.views = true;
+         cacheViewConfig = config.cache.views;
+         cacheMapConfig = config.cache.maps;
+         config.cache.views = config.cache.maps = true;
          // add fake views to cache if not already present
          return Promise
             .all(postKeys.map(k => cache.view.addIfMissing(k, '<html><body>' + k + '</body></html>')))
@@ -287,16 +291,30 @@ describe('Controller', ()=> {
          c.cache.deleteView(req, res);
       });
 
-      it('removes cached JSON', done => {
+      it('removes cached API JSON', done => {
          res.onEnd = ()=> {
-            const options = expectTemplate(template.page.MOBILE_MENU_DATA);
-            expect(options).has.property('library');
-            done();
+            const msg = expectJSON();
+            jsonKeys.forEach(k => expect(msg).to.include(k));
+            expectInCache(jsonKeys, false).then(() => done());
          };
-         req.body.selected = postKeys;
+         req.body.selected = jsonKeys;
          c.cache.deleteJSON(req, res);
       });
 
-      after(()=> { config.cache.views = oldCacheSetting; })
+      it('removes cached GeoJSON', done => {
+         res.onEnd = ()=> {
+            const msg = expectJSON();
+            mapKeys.forEach(k => expect(msg).to.include(k));
+            expectInCache(mapKeys, false).then(() => done());
+         };
+         req.body.selected = mapKeys;
+         c.cache.deleteMap(req, res);
+      });
+
+      after(()=> {
+         // restore original settings
+         config.cache.views = cacheViewConfig;
+         config.cache.maps = cacheMapConfig;
+      })
    });
 });
