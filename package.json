@@ -21,6 +21,7 @@
     "express": "^4.0",
     "express-hbs": "^1.0.0",
     "feed": "^0.3.0",
+    "google-auth-library": "^0.9.8",
     "googleapis": "^13.0.0",
     "node-fetch": "^1.6.0",
     "oauth": "^0.9.0",

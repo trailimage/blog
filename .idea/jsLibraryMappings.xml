@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{blog/node_modules}" />
-    <file url="PROJECT" libraries="{Externs, chai-DefinitelyTyped, express-DefinitelyTyped, mocha-DefinitelyTyped, node-fetch-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{Externs, chai-DefinitelyTyped, express-DefinitelyTyped, google-drive-realtime-api-DefinitelyTyped, mocha-DefinitelyTyped, node-fetch-DefinitelyTyped}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
