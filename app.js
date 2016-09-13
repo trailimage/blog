@@ -21,7 +21,7 @@ function createWebService() {
 
 	defineViews(app);
 
-	if (TI.active.needsAuth) {
+	if (config.needsAuth) {
 		// must authenticate before normal routes are available
 		route.authentication(app);
 		app.listen(port);

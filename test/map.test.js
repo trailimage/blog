@@ -29,17 +29,22 @@ describe('Map', ()=> {
 		expect(gpx.value(node)).equals('926.90');
 	});
 
+   it('converts between degrees and radians', ()=> {
+      expect(map.toRadians(48)).within(0.83, 0.84);
+      expect(map.toRadians(-122)).within(-2.13, -2.12);
+   });
+
    it('creates geojson feature collection', ()=> {
       const f = map.features();
       expect(f.type).equals(map.type.COLLECTION);
-      expect(f.hasOwnProperty('features')).is.true;
+      expect(f).has.property('features');
    });
 
    it('calculates distance between points', ()=> {
       const p1 = [48.0, -122.0];
       const p2 = [49.0, -121.0];
 
-      expect(map.pointDistance(p1, p2)).within(82, 83);
+      expect(map.pointDistance(p1, p2)).within(82.0, 83.0);
 
       const p3 = [33.9425, -118.4081];
       const p4 = [20.8987, -156.4305];
