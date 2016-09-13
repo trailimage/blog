@@ -65,6 +65,14 @@ BlogResponse.prototype.removeFromCache = function(slugs) {};
 BlogResponse.prototype.sendCompressed = function(mimeType, item, cache) {};
 /** @type {Object} */
 BlogResponse.prototype.redirected = {};
+/**
+ * @param {String|Object} message
+ */
+BlogResponse.prototype.jsonError = function(message) {};
+/**
+ * @param {String} message
+ */
+BlogResponse.prototype.jsonMessage = function(message) {};
 
 //endregion
 //region Mocks

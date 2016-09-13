@@ -18,13 +18,13 @@ describe('Factory', ()=> {
       const postKeys = ['owyhee-snow-and-sand/lowlands','kuna-cave-fails-to-impress'];
       library.remove(postKeys);
 
-      return library.load(false).then(changedKeys => {
-         expect(changedKeys).to.exist;
-         expect(changedKeys).to.include(postKeys[0]);
-         expect(changedKeys).to.include(postKeys[1]);
-         expect(changedKeys).to.include('who/solo');
-         expect(changedKeys).to.include('where/owyhees');
-         expect(changedKeys).to.include('where/kuna-cave');
+      return library.load(false).then(() => {
+         expect(library.changedKeys).is.instanceOf(Array);
+         expect(library.changedKeys).to.include(postKeys[0]);
+         expect(library.changedKeys).to.include(postKeys[1]);
+         expect(library.changedKeys).to.include('who/solo');
+         expect(library.changedKeys).to.include('where/owyhees');
+         expect(library.changedKeys).to.include('where/kuna-cave');
          done();
       });
    })

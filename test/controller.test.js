@@ -68,7 +68,6 @@ function expectInCache(keys, exists = true) {
 
 describe('Controller', ()=> {
    before(done => {
-
       factory.inject.flickr = require('./mocks/flickr.mock');
       factory.buildLibrary().then(() => {
          middleware.enableStatusHelpers(req, res, ()=> {
@@ -241,8 +240,6 @@ describe('Controller', ()=> {
 
    describe('Cache', ()=> {
       const postKeys = ['stanley-lake-snow-hike','brother-ride-2015/huckleberry-lookout'];
-      // TODO support deleting specific hash (child) key
-      const jsonKeys = ['spam-referer','photos.getExif'];
       const mapKeys = postKeys;
       let cacheViewConfig;
       let cacheMapConfig;
@@ -257,24 +254,14 @@ describe('Controller', ()=> {
             .then(() => expectInCache(postKeys));
       });
 
-      it('removes cached views', done => {
+      it('removes cached posts', done => {
          res.onEnd = ()=> {
             const msg = expectJSON();
             postKeys.forEach(k => expect(msg).to.include(k));
             expectInCache(postKeys, false).then(() => done());
          };
          req.body.selected = postKeys;
-         c.cache.deleteView(req, res);
-      });
-
-      it('removes cached API JSON', done => {
-         res.onEnd = ()=> {
-            const msg = expectJSON();
-            jsonKeys.forEach(k => expect(msg).to.include(k));
-            expectInCache(jsonKeys, false).then(() => done());
-         };
-         req.body.selected = jsonKeys;
-         c.cache.deleteJSON(req, res);
+         c.cache.deletePost(req, res);
       });
 
       it('removes cached GeoJSON', done => {
@@ -307,10 +294,13 @@ describe('Controller', ()=> {
          c.admin.home(req, res);
       });
 
-      it('invalidates caches when updating library', ()=> {
-        c.admin.updateLibrary().then(changedKeys => {
-           expect(changedKeys).to.exist;
-        })
+      it('invalidates caches while updating library', done => {
+         res.onEnd = ()=> {
+            const msg = expectJSON();
+            expect(msg).is.instanceOf(Array);
+            done();
+         };
+         c.admin.updateLibrary(req, res);
       })
    });
 });

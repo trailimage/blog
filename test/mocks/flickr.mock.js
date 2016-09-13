@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const flickr = require('../../lib/flickr');
 
 /**
  * @param {String} method Name of Flickr API method to call
@@ -20,6 +21,7 @@ function call(method, transform) {
 }
 
 module.exports = {
+   cache: flickr.cache,
    getCollections: () => call('collections.getTree', r => r.collections.collection),
    getAllPhotoTags: () => call('tags.getListUserRaw', r => r.who.tags.tag),
    getPhotoSizes: id => call('photos.getSizes', r => r.sizes.size),
