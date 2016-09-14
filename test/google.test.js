@@ -4,6 +4,7 @@ const mocha = require('mocha');
 const config = require('../lib/config');
 const { expect } = require('chai');
 const google = require('../lib/google');
+const authConfig = config.google.auth;
 
 describe('Google', ()=> {
    describe('OAuth', ()=> {
@@ -14,7 +15,21 @@ describe('Google', ()=> {
       it('genenerates authorization URL', ()=> {
          const url = google.auth.url();
          expect(url).to.exist;
-         expect(url).to.include(config.google.auth.clientID);
+         expect(url).to.include(authConfig.clientID);
+         expect(url).to.include(config.domain);
+      });
+
+      it('tests for expired access token', ()=> {
+         expect(google.auth.expired()).is.true;
+         authConfig.token.accessExpiration = new Date() + 1;
+         expect(google.auth.expired()).is.false;
+      });
+
+      it('refreshes access token', ()=> {
+         authConfig.token.accessExpiration = new Date() - 1;
+         return google.auth.verify().then(() => {
+            expect(authConfig.token.accessExpiration).to.exist;
+         });
       });
    });
 
