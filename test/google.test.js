@@ -5,7 +5,6 @@ const config = require('../lib/config');
 const { expect } = require('chai');
 const google = require('../lib/google');
 const factory = require('../lib/factory');
-const res = require('./mocks/response.mock');
 const authConfig = config.google.auth;
 
 describe('Google', ()=> {
@@ -44,9 +43,9 @@ describe('Google', ()=> {
          return true;
       }));
 
-      it('stream GPX file to response', ()=> {
-         return google.drive.loadGPX(post, res).then(gpx => {
-            expect(res).to.exist;
+      it('retrieve GPX file content', ()=> {
+         return google.drive.loadGPX(post).then(gpxText => {
+            expect(gpxText).to.exist;
          })
       });
 
