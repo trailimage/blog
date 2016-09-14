@@ -4,6 +4,8 @@ const mocha = require('mocha');
 const config = require('../lib/config');
 const { expect } = require('chai');
 const google = require('../lib/google');
+const factory = require('../lib/factory');
+const res = require('./mocks/response.mock');
 const authConfig = config.google.auth;
 
 describe('Google', ()=> {
@@ -26,32 +28,27 @@ describe('Google', ()=> {
       });
 
       it('refreshes access token', ()=> {
-         authConfig.token.accessExpiration = new Date() - 1;
+         authConfig.token.accessExpiration = null;
          return google.auth.verify().then(() => {
             expect(authConfig.token.accessExpiration).to.exist;
+            expect(authConfig.token.accessExpiration).is.instanceOf(Date);
          });
       });
    });
 
    describe('Drive', ()=> {
-      // let drive = new GoogleFile({
-      //    apiKey: config.env('GOOGLE_DRIVE_KEY'),
-      //    tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-      //    auth: new OAuthOptions(2,
-      //       config.env('GOOGLE_CLIENT_ID'),
-      //       config.env('GOOGLE_SECRET'),
-      //       `http://www.${config.domain}/auth/google`,
-      //       process.env['GOOGLE_ACCESS_TOKEN'],
-      //       process.env['GOOGLE_REFRESH_TOKEN'])
-      // });
+      let post = null;
 
-      it.skip('authenticates Google Drive access', done => {
-         drive.auth.verify(ready => {
-            expect(ready).is.true;
-            done();
+      before(() => factory.buildLibrary().then(library => {
+         post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+         return true;
+      }));
+
+      it('stream GPX file to response', ()=> {
+         return google.drive.loadGPX(post, res).then(gpx => {
+            expect(res).to.exist;
          })
       });
-
 
       it.skip('converts a GPX file to GeoJSON', ()=> {
 
