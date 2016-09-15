@@ -49,8 +49,8 @@ describe('Google', ()=> {
          })
       });
 
-      it.skip('converts a GPX file to GeoJSON', ()=> {
-
-      });
+      // it.skip('converts a GPX file to GeoJSON', ()=> {
+      //
+      // });
    });
 });

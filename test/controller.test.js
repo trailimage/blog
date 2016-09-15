@@ -348,4 +348,50 @@ describe('Controller', ()=> {
          c.admin.updateLibrary(req, res);
       })
    });
+
+   describe('Map', ()=> {
+      it('displays map for post', done => {
+         res.onEnd = ()=> {
+            const options = expectTemplate(template.page.MAP);
+            expect(options).has.property('title', 'Map');
+            expect(options).has.property('slug', 'kuna-cave-fails-to-impress');
+            expect(options).has.property('photoID', 0);
+            expect(options).has.property('post');
+            expect(options.post).has.property('originalTitle', 'Kuna Cave Fails to Impress');
+            done();
+         };
+         req.params[ph.POST_KEY] = 'kuna-cave-fails-to-impress';
+         c.map.forPost(req, res);
+      });
+
+      it('displays map for series', done => {
+         res.onEnd = ()=> {
+            const options = expectTemplate(template.page.MAP);
+            expect(options).has.property('title', 'Map');
+            expect(options).has.property('photoID', 0);
+            expect(options).has.property('post');
+            expect(options.post).has.property('id', '72157658679070399');
+            expect(options.post).has.property('isPartial', true);
+            done();
+         };
+         req.params[ph.SERIES_KEY] = 'brother-ride-2015';
+         req.params[ph.PART_KEY] = 'huckleberry-lookout';
+         c.map.forSeries(req, res);
+      });
+
+      it('downloads GPX', done => {
+         res.onEnd = ()=> {
+            const options = expectTemplate(template.page.MAP);
+            expect(options).has.property('title', 'Map');
+            expect(options).has.property('photoID', 0);
+            expect(options).has.property('post');
+            expect(options.post).has.property('id', '72157658679070399');
+            expect(options.post).has.property('isPartial', true);
+            done();
+         };
+         req.params[ph.POST_KEY] = 'stanley-lake-snow-hike';
+         c.map.download(req, res);
+      });
+
+   });
 });

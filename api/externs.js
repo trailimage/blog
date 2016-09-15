@@ -33,6 +33,7 @@ BlogRequest.prototype.clientIP = function() {};
 /**
  * @mixes {Express.Response}
  * @mixes {Response}
+ * @mixes {Event.EventEmitter}
  */
 let BlogResponse = {};
 BlogResponse.prototype.notFound = function() {};

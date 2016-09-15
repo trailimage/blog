@@ -12,8 +12,7 @@ module.exports = {
    onEnd: null,
    ended: false,
    headers: {},
-   content: new Buffer(''),
-   listeners: {},
+   content: null,
    rendered: {
       template: null,
       options: null,
@@ -68,21 +67,21 @@ module.exports = {
 
    },
    /**
-    * May be called to end streaming
-    * @param {String|Buffer} [chunk]
+    * @param {String|Buffer} chunk
     * @param {String} [encoding]
     * @param {function} [callback]
+    * @see https://nodejs.org/api/stream.html#stream_class_stream_writable
     */
-   end(chunk, encoding, callback) {
-      if (is.value(chunk)) {
-         if (is.callable(callback)) { this.on('finish', callback); }
-         // send to stream writer
-         this.write(chunk, encoding);
-      }
+   write(chunk, encoding = C.encoding.UTF8, callback) {
+      const text = Buffer.isBuffer(chunk) ? chunk.toString(encoding) : chunk;
+      this.content = (this.content === null) ? text : this.content + text;
+      if (is.callable(callback)) { callback(); }
+      return true;
+   },
+
+   end() {
       if (!this.ended) {
          this.ended = true;
-         this.emit('close');
-         this.emit('finish');
          if (is.callable(this.onEnd)) { this.onEnd(); }
       }
       return this;
@@ -92,8 +91,7 @@ module.exports = {
       this.onEnd = null;
       this.ended = false;
       this.headers = {};
-      this.content = new Buffer('');
-      this.listeners = {};
+      this.content = null;
       this.rendered = {
          template: null,
          options: null,
@@ -103,70 +101,6 @@ module.exports = {
          status: null,
          url: null
       };
-      this.defaultEncoding = 'utf8';
       return this;
-   },
-
-   //region Stream and Event
-
-   defaultEncoding: 'utf8',
-   streamStore: new Buffer(''),
-
-   /**
-    * @param {String|Buffer} chunk
-    * @param {String} [encoding]
-    * @param {function} [callback]
-    * @see https://nodejs.org/api/stream.html#stream_class_stream_writable
-    */
-   write(chunk, encoding = this.defaultEncoding, callback) {
-      const buffer = Buffer.isBuffer(chunk) ? chunk : new Buffer(chunk, encoding);
-      this.content = Buffer.concat(this.content, buffer);
-      if (is.callable(callback)) { callback(); }
-      return true;
-   },
-
-   /**
-    * @param {String} eventName
-    * @param {function} listener
-    */
-   on(eventName, listener) {
-      if (is.callable(listener)) {
-         if (!is.defined(this.listeners, eventName)) { this.listeners[eventName] = []; }
-         this.listeners[eventName].push(listener);
-      }
-   },
-
-   /**
-    * @param {String} eventName
-    */
-   emit(eventName) {
-      if (is.defined(this.listeners, eventName)) {
-         this.listeners[eventName].forEach(l => l());
-      }
-   },
-
-   /**
-    * @param {String} eventName
-    * @param {function} listener
-    */
-   removeListener(eventName, listener) {
-      if (is.defined(this.listeners, eventName)) {
-         let list = this.listeners[eventName];
-         const index = list.indexOf(listener);
-         if (index >= 0) { list = list.splice(index, 1); }
-      }
-   },
-
-   /**
-    * @param {String} encoding
-    */
-   setDefaultEncoding(encoding) { this.defaultEncoding = encoding; return this; },
-
-   /**
-    * @see https://nodejs.org/api/stream.html#stream_writable_cork
-    */
-   cork() {},
-   uncork() {},
-
-   //endregion
+   }
 };
