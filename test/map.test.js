@@ -2,10 +2,13 @@
 
 const map = require('../lib/map');
 const mocha = require('mocha');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const DOM = require('xmldom').DOMParser;
+const factory = require('../lib/factory');
+const google = require('./mocks/google.mock');
 
 describe('Map', ()=> {
+   let post = null;
    const gpx = map.gpx;
 	const xml = new DOM().parseFromString('<trkpt lat="43.238334" lon="-116.366600">'
 		+ '<ele>926.90</ele>'
@@ -13,19 +16,26 @@ describe('Map', ()=> {
 		+ '<fix>3d</fix>'
 		+ '</trkpt>');
 
+   before(() => {
+      factory.inject.flickr = require('./mocks/flickr.mock');
+      return factory.buildLibrary().then(library => {
+         post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+      });
+   });
+
 	it('returns first node of given type', ()=> {
-		let node = gpx.firstNode(xml, 'trkpt');
+		const node = gpx.firstNode(xml, 'trkpt');
 		expect(node).is.not.empty;
 	});
 
 	it('converts XML attributes to numbers', ()=> {
-		let node = gpx.firstNode(xml, 'trkpt');
+      const node = gpx.firstNode(xml, 'trkpt');
 		expect(gpx.numberAttribute(node, 'lat')).equals(43.238334);
 		expect(gpx.numberAttribute(node, 'lon')).equals(-116.3666);
 	});
 
 	it('returns node content', ()=> {
-		let node = gpx.firstNode(xml, 'ele');
+      const node = gpx.firstNode(xml, 'ele');
 		expect(gpx.value(node)).equals('926.90');
 	});
 
@@ -75,5 +85,11 @@ describe('Map', ()=> {
          [50, -120]
       ];
       expect(map.length(points)).within(165, 166);
+   });
+
+   it('converts GPX files to GeoJSON', ()=> {
+      return google.drive.loadGPX(post).then(map.featuresFromGPX).then(geo => {
+         expect(geo).to.exist;
+      });
    });
 });

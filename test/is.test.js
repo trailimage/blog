@@ -52,4 +52,11 @@ describe('Identity Evaluations', ()=> {
 		expect(is.callable(function() { let x = 2; })).is.true;
 		expect(is.callable(is)).is.false;
 	});
+   it('identifies cache items', ()=> {
+      const notItem = { nope: false };
+      const item = { buffer: new Buffer(''), eTag: 'some value' };
+      expect(is.cacheItem()).is.false;
+      expect(is.cacheItem(notItem)).is.false;
+      expect(is.cacheItem(item)).is.true;
+   })
 });

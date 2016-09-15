@@ -39,7 +39,7 @@ describe('Middleware', ()=> {
 
       it('caches black list', done => {
          res.onEnd = ()=> {
-            cache.item(middleware.spamBlackListCacheKey).then(value => {
+            cache.getItem(middleware.spamBlackListCacheKey).then(value => {
                expect(value).to.exist;
                expect(value).to.be.an('array');
                expect(value.length).at.least(100);
@@ -70,8 +70,12 @@ describe('Middleware', ()=> {
    describe('View Cache', ()=> {
       const viewSlug = 'test-slug';
       const pageContent = '<html><head></head><body>Test Page</body></html>';
+      let cacheViews = false;
 
-      config.cache.views = true;
+      before(()=> {
+         cacheViews = config.cache.views;
+         config.cache.views = true;
+      });
 
       // remove any left-over test data and add caching expando methods
       before(done => {
@@ -80,13 +84,14 @@ describe('Middleware', ()=> {
 
       it('compresses new pages and adds to cache', done => {
          res.onEnd = ()=> {
-            cache.view.item(viewSlug).then(item => {
+            cache.view.getItem(viewSlug).then(item => {
                expect(item).to.exist;
                expect(item.eTag).to.contain(viewSlug);
                expect(item.buffer).to.have.length.above(250);
                done();
             });
          };
+         res.endOnRender = false;
          res.sendView(viewSlug, render => {
             // mock response echoes back parameters instead of rendering view
             render('test-template', { option1: 'value1', option2: 'value2' });
@@ -104,12 +109,15 @@ describe('Middleware', ()=> {
          const item = cache.view.create(viewSlug, pageContent);
          res.sendCompressed(C.mimeType.HTML, item);
 
-         expect(res.headers['Cache-Control']).equals('max-age=86400, public');
-         expect(res.headers['ETag']).to.contain(viewSlug);
-         expect(res.content).equals(item.buffer);
+         expect(res.headers[C.header.CACHE_CONTROL]).equals('max-age=86400, public');
+         expect(res.headers[C.header.E_TAG]).to.contain(viewSlug);
+         expect(res.content).equals(pageContent);
       });
 
       // remove test page from cache
-      after(() => res.removeFromCache(viewSlug));
+      after(() => {
+         cache.view.remove(viewSlug);
+         config.cache.views = cacheViews;
+      })
    });
 });

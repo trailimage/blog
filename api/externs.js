@@ -93,6 +93,8 @@ MockResponse.prototype.content = null;
 MockResponse.prototype.rendered = null;
 /** @type {Boolean} */
 MockResponse.prototype.ended = false;
+/** @type {Boolean} */
+MockResponse.prototype.endOnRender = false;
 
 //endregion
 //region Models

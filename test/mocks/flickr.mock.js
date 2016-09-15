@@ -8,17 +8,15 @@ const flickr = require('../../lib/flickr');
  * @param {Function} transform Method to transform the result for testing
  * @returns {Promise}
  */
-function call(method, transform) {
-   return new Promise((resolve, reject) => {
-      fs.readFile(__dirname + '/flickr.' + method + '.json', (err, data) => {
-         if (err === null) {
-            resolve(transform(JSON.parse(data)));
-         } else {
-            reject(err);
-         }
-      });
+const call = (method, transform) => new Promise((resolve, reject) => {
+   fs.readFile(__dirname + '/flickr.' + method + '.json', (err, data) => {
+      if (err === null) {
+         resolve(transform(JSON.parse(data)));
+      } else {
+         reject(err);
+      }
    });
-}
+});
 
 module.exports = {
    cache: flickr.cache,

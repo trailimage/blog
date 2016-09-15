@@ -379,7 +379,16 @@ describe('Controller', ()=> {
          c.map.forSeries(req, res);
       });
 
-      it('downloads GPX', done => {
+      it('loads GeoJSON for post', done => {
+         res.onEnd = ()=> {
+            const msg = expectJSON();
+            done();
+         };
+         req.params[ph.POST_KEY] = 'stanley-lake-snow-hike';
+         c.map.json(req, res);
+      });
+
+      it.skip('downloads GPX', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.MAP);
             expect(options).has.property('title', 'Map');

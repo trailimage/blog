@@ -10,6 +10,8 @@ module.exports = {
    // method to call when response is complete
    // can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
    onEnd: null,
+   // whether response should be ended after render is called
+   endOnRender: true,
    ended: false,
    headers: {},
    content: null,
@@ -63,7 +65,7 @@ module.exports = {
       if (is.callable(callback)) {
          callback(null, util.inspect(this.rendered));
       }
-      this.end();
+      if (this.endOnRender) { this.end(); }
 
    },
    /**

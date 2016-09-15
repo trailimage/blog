@@ -48,9 +48,5 @@ describe('Google', ()=> {
             expect(gpxText).to.exist;
          })
       });
-
-      // it.skip('converts a GPX file to GeoJSON', ()=> {
-      //
-      // });
    });
 });
