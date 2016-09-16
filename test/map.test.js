@@ -4,24 +4,15 @@ const map = require('../lib/map');
 const mocha = require('mocha');
 const { expect } = require('chai');
 const DOM = require('xmldom').DOMParser;
-const factory = require('../lib/factory');
 const google = require('./mocks/google.mock');
 
 describe('Map', ()=> {
-   let post = null;
    const gpx = map.gpx;
 	const xml = new DOM().parseFromString('<trkpt lat="43.238334" lon="-116.366600">'
 		+ '<ele>926.90</ele>'
 		+ '<time>2013-11-02T18:54:59Z</time>'
 		+ '<fix>3d</fix>'
 		+ '</trkpt>');
-
-   before(() => {
-      factory.inject.flickr = require('./mocks/flickr.mock');
-      return factory.buildLibrary().then(library => {
-         post = library.postWithKey('owyhee-snow-and-sand/lowlands');
-      });
-   });
 
 	it('returns first node of given type', ()=> {
 		const node = gpx.firstNode(xml, 'trkpt');
@@ -88,8 +79,21 @@ describe('Map', ()=> {
    });
 
    it('converts GPX files to GeoJSON', ()=> {
+      const post = { key: 'whatever' };
       return google.drive.loadGPX(post).then(map.featuresFromGPX).then(geo => {
          expect(geo).to.exist;
+         expect(geo).has.property('type', map.type.COLLECTION);
+         expect(geo).has.property('features');
+         expect(geo.features).is.instanceOf(Array);
+         expect(geo.features).is.lengthOf(4);
+
+         const first = geo.features[0];
+         expect(first).to.contain.all.keys(['geometry','properties']);
+         expect(first.geometry).has.property('type', map.type.LINE);
+         expect(first.geometry).has.property('coordinates');
+         expect(first.geometry.coordinates).is.instanceOf(Array);
+         expect(first.geometry.coordinates).is.length.above(200);
+         expect(first.properties).has.property('time', '2014-05-18T19:56:51Z');
       });
    });
 });

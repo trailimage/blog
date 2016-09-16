@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const is = require('../../lib/is.js');
+const C = require('../../lib/constants');
 
 let tokenExpired = false;
 
@@ -15,7 +16,7 @@ module.exports = {
    },
    drive: {
       /**
-       * @param {Post} post
+       * @param {Post|Object} post
        * @param {Stream.Writable} [stream]
        * @returns {Promise}
        */
@@ -24,7 +25,8 @@ module.exports = {
             if (is.value(err)) {
                reject(err)
             } else {
-               resolve(data);
+               if (is.value(stream)) { stream.write(body); }
+               resolve(data.toString(C.encoding.UTF8));
             }
          })
       })

@@ -44,7 +44,7 @@ function expectRedirect(path) {
  */
 function expectJSON() {
    expect(res.httpStatus).equals(C.httpStatus.OK);
-   expect(res.headers).has.property('Content-Type', C.mimeType.JSON);
+   expect(res.headers).has.property(C.header.content.TYPE, C.mimeType.JSON);
    expect(res.rendered).has.property('json');
    expect(res.rendered.json).has.property('success', true);
    expect(res.rendered.json).has.property('message');
@@ -68,6 +68,7 @@ function expectInCache(keys, exists = true) {
 
 describe('Controller', ()=> {
    before(done => {
+      c.inject.google = require('./mocks/google.mock');
       factory.inject.flickr = require('./mocks/flickr.mock');
       factory.buildLibrary().then(() => {
          middleware.enableStatusHelpers(req, res, ()=> {
@@ -381,7 +382,12 @@ describe('Controller', ()=> {
 
       it('loads GeoJSON for post', done => {
          res.onEnd = ()=> {
-            const msg = expectJSON();
+            expect(res.httpStatus).equals(C.httpStatus.OK);
+            expect(res.headers).has.property(C.header.content.TYPE);
+            expect(res.headers[C.header.content.TYPE]).to.include(C.mimeType.JSON);
+            expect(res.headers).has.property(C.header.content.ENCODING, C.encoding.GZIP);
+            expect(res.content).to.exist;
+            expect(res.content).is.length.above(1000);
             done();
          };
          req.params[ph.POST_KEY] = 'stanley-lake-snow-hike';
