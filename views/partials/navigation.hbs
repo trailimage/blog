@@ -4,11 +4,11 @@
 <!--googleoff: index-->
 <div class='previous'>
 {{#if post.previousIsPart}}
-	<a href="/{{post.previous.slug}}">
-	<h4>{{{icon 'chevron-left'}}} Part {{post.previous.part}}</h4>
+	<a href="/{{post.previous.key}}">
+	<h4>{{{icon 'chevron-left'}}} Part {{post.previous.key}}</h4>
 	{{post.previous.subTitle}}</a>
 {{else}}
-	<a href="/{{post.previous.slug}}">
+	<a href="/{{post.previous.key}}">
 	<h4>{{{icon 'chevron-left'}}} Previous</h4>
 	{{post.previous.title}}</a>
 {{/if}}
@@ -19,11 +19,11 @@
 <!--googleoff: index-->
 <div class='next'>
 {{#if post.nextIsPart}}
-	<a href="/{{post.next.slug}}">
+	<a href="/{{post.next.key}}">
 	<h4>Part {{post.next.part}}{{{icon 'chevron-right'}}}</h4>
 	{{post.next.subTitle}}</a>
 {{else}}
-	<a href="/{{post.next.slug}}">
+	<a href="/{{post.next.key}}">
 	<h4>Next {{{icon 'chevron-right'}}}</h4>
 	{{post.next.title}}</a>
 {{/if}}
