@@ -7,10 +7,10 @@
 {{#unless post.feature}}
 	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
 	{{#if post.previousIsPart}}
-	<link rel="prev" href="/{{post.previous.slug}}" />
+	<link rel="prev" href="/{{post.previous.key}}" />
 	{{/if}}
 	{{#if post.nextIsPart}}
-	<link rel="next" href="/{{post.next.slug}}" />
+	<link rel="next" href="/{{post.next.key}}" />
 	{{/if}}
 {{/unless}}
 	{{> head-files}}
@@ -20,7 +20,7 @@
 	{{> json-ld}}
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.tags}} has-tags{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
+<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}

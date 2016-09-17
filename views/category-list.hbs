@@ -2,11 +2,11 @@
 	{{> json-ld}}
 {{/contentFor}}
 
-<div class="post-tag-category content">
-	{{{iconForPostTag title}}}
+<div class="root-category content">
+	{{{iconForCategory title}}}
 	<ul>
-	{{#each tags}}
-		<li><a href="/{{slug}}" rel="tag">{{title}}</a>({{posts.length}} post{{plural posts.length}})</li>
+	{{#each subcategories}}
+		<li><a href="/{{key}}" rel="tag">{{title}}</a>({{posts.length}} post{{plural posts.length}})</li>
 	{{/each}}
 	</ul>
 </div>

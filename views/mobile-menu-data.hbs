@@ -19,9 +19,9 @@
 <nav class="tags">
 {{#each library.categories}}
 	<ul class="{{lowerCase this.title}}">
-	{{#this.tags}}
+	{{#this.subcategories}}
 		<li><a href="/{{this.key}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
-	{{/this.tags}}
+	{{/this.subcategories}}
 	</ul>
 {{/each}}
 </nav>

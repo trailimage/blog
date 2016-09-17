@@ -4,7 +4,7 @@ const mocha = require('mocha');
 const expect = require('chai').expect;
 const config = require('../lib/config');
 const format = require('../lib/format');
-const { lipsum } = require('./');
+const { lipsum } = require('./mocks/');
 let u;   // undefined
 
 describe('Formatting', ()=> {
@@ -127,20 +127,20 @@ describe('Formatting', ()=> {
 		expect(format.icon('star')).equals('<span class="glyphicon glyphicon-star"></span>');
 	});
 
-	it('matches post tags to glyphicons', ()=> {
-		config.style.icon.CATEGORY = { 'Test': 'success', 'default': 'whatever' };
+	it('matches post categories to glyphicons', ()=> {
+		config.style.icon.category = { 'Test': 'success', 'default': 'whatever' };
 
-		expect(format.postTagIcon('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
+		expect(format.postCategoryIcon('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
 		// revert to default if provided
-		expect(format.postTagIcon('Nothing')).equals('<span class="glyphicon glyphicon-whatever"></span>');
+		expect(format.postCategoryIcon('Nothing')).equals('<span class="glyphicon glyphicon-whatever"></span>');
 
 		// blank if no default
-		delete config.style.icon.CATEGORY['default'];
-		expect(format.postTagIcon('Nothing')).is.empty;
+		delete config.style.icon.category['default'];
+		expect(format.postCategoryIcon('Nothing')).is.empty;
 
 		// blank if no icons defined
-		delete config.style.icon.CATEGORY;
-		expect(format.postTagIcon('Nothing')).is.empty;
+		delete config.style.icon.category;
+		expect(format.postCategoryIcon('Nothing')).is.empty;
 	});
 
 	it('fixes malformed links and URL decode text', ()=> {

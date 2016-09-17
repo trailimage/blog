@@ -3,7 +3,7 @@
 	{{> json-ld}}
 {{/contentFor}}
 
-<div class="post-tag content">
+<div class="category content">
 	<section class="posts">
 	{{#posts}}
 		<article class="summary">
@@ -12,8 +12,8 @@
 					<li class="date-taken">{{date dateTaken}}</li>
   {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
 				</ul>
-				<a class="title" href="/{{slug}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
-				<span class="mode-icon {{modeIconForPost tags}}"></span>
+				<a class="title" href="/{{key}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
+				<span class="mode-icon {{modeIconForPost categories}}"></span>
 				<div class="clear"></div>
 			</header>
 
@@ -23,9 +23,9 @@
 		{{/if}}
 			<section class="detail">
 				<p class="summary">{{description}}</p>
-				<ul class="tags">
-				{{#each tags}}
-					{{! posts store their tags as titles keyed to the slug }}
+				<ul class="categories">
+				{{#each categories}}
+					{{! posts store their categories as titles keyed to the slug }}
 					<li><a href="/{{@key}}" rel="tag">{{{icon 'tag'}}}{{this}}</a></li>
 				{{/each}}
 				</ul>
