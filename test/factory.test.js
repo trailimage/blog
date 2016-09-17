@@ -1,5 +1,6 @@
 'use strict';
 
+const is = require('../lib/is');
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const factory = require('../lib/factory');
@@ -8,6 +9,7 @@ const library = require('../lib/library');
 describe('Factory', ()=> {
    before(() => {
       factory.inject.flickr = require('./mocks/flickr.mock');
+      factory.inject.google = require('./mocks/google.mock');
    });
 
    it('makes library', ()=> factory.buildLibrary().then(() => {
@@ -27,5 +29,12 @@ describe('Factory', ()=> {
          expect(library.changedKeys).to.include('where/kuna-cave');
          done();
       });
-   })
+   });
+
+   it('creates GeoJSON for posts', ()=>
+      factory.map.forPost('owyhee-snow-and-sand/lowlands').then(item => {
+         expect(item).to.exist;
+         expect(is.cacheItem(item)).is.true;
+      })
+   )
 });
