@@ -32,8 +32,6 @@ describe('JSON-LD', ()=> {
 
    it('creates link data for categories', ()=> {
       const schema = ld.fromCategory(category);
-
-
    });
 
    it('serializes link data', ()=> {
