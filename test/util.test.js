@@ -19,30 +19,42 @@ describe('Utilities', ()=> {
          expect(util.date.hourOfDay(14)).equals('PM 2');
       });
 
+      it('shows hours:minutes for fractional hour', ()=> {
+         expect(util.date.hoursAndMinutes(5.5)).equals('5:30');
+      });
+
       it('detects if Daylight Savings Time is active', ()=> {
          expect(util.date.inDaylightSavings(new Date(2010, 1, 1))).is.false;
          expect(util.date.inDaylightSavings(new Date(2010, 8, 1))).is.true;
       });
 
       it('converts date strings to Dates', ()=> {
-         const d1 = util.date.parse('2010-12-31 18:48:14');
-         expect(d1.getFullYear()).equals(2010);
-         expect(d1.getHours()).equals(18);
-         expect(d1.getDate()).equals(31);
-         expect(d1.getMonth()).equals(11); // 0-based
+         const d1 = util.date.parse('2010-12-5 8:48:14');
+         const hourOffset1 = util.date.timeZoneOffset(d1);
+
+         expect(d1.getUTCFullYear()).equals(2010);
+         expect(d1.getUTCHours()).equals(8 - hourOffset1);
+         expect(d1.getUTCDate()).equals(5);
+         expect(d1.getUTCMonth()).equals(11); // 0-based
 
          // daylight savings time
-         const d2 = util.date.parse('2010-8-31 18:48:14');
-         expect(d2.getFullYear()).equals(2010);
-         expect(d2.getHours()).equals(18);
-         expect(d2.getDate()).equals(31);
-         expect(d2.getMonth()).equals(7); // 0-based
-
+         const d2 = util.date.parse('1998-8-31 11:48:14');
+         const hourOffset2 = util.date.timeZoneOffset(d2);
+         expect(d2.getUTCFullYear()).equals(1998);
+         expect(d2.getUTCHours()).equals(11 - hourOffset2);
+         expect(d2.getUTCDate()).equals(31);
+         expect(d2.getUTCMonth()).equals(7); // 0-based
       });
 
       it('converts timestamp to Date', ()=> {
-         const d = new Date(2013, 1, 9, 12, 35, 56);
-         expect(util.date.fromTimeStamp('1360438556')).to.eql(d);
+         // Jan 9, 2013 12:35:56
+         const target = new Date(Date.UTC(2013, 1, 9, 12, 35, 56));
+         const offset = util.date.timeZoneOffset(target);
+         const source = util.date.fromTimeStamp('1360438556');
+         // date constructor automatically converts to local timezone so manually adjust
+         target.setHours(target.getHours() - offset);
+
+         expect(source).to.eql(target);
       });
 
       it.skip('formats timestamp according to ISO 8601', ()=> {
