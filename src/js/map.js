@@ -15,9 +15,9 @@ var ti = {
 };
 
 /**
- * mapSlug, mapPhotoID and allowDownload are supplied by map.hbs
+ * postKey, mapPhotoID and allowDownload are supplied by map.hbs
  * @type {Number} mapPhotoID
- * @type {String} mapSlug
+ * @type {String} postKey
  * @type {Boolean} allowDownload
  */
 google.maps.event.addDomListener(window, 'load', function() {
@@ -125,7 +125,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 		ti.map.data.revertStyle();
 	});
 
-	ti.map.data.loadGeoJson('/' + mapSlug + '/geo.json');
+	ti.map.data.loadGeoJson('/' + postKey + '/geo.json');
 });
 
 /**
@@ -137,20 +137,20 @@ function showPhoto(feature, modal) {
 		var image = feature.getProperty('preview');
 		var id = feature.getProperty('id');
 		var geo = feature.getGeometry();
-		var partSlug = feature.getProperty('partSlug');
+		var partKey = feature.getProperty('partKey');
 
 		modal.setOptions({
-			content: '<a href="/' + (partSlug || mapSlug) + '#' + id + '"><img src="' + image + '"/></a>',
+			content: '<a href="/' + (partKey || postKey) + '#' + id + '"><img src="' + image + '"/></a>',
 			position: geo.get()
 		});
 		modal.open(ti.map);
 	}
 }
 
-function loadPostTrack(newSlug) {
+function loadPostTrack(newKey) {
 	ti.map.data.forEach(function(f) { ti.map.data.remove(f); });
 
-	mapSlug = newSlug;
+	postKey = newKey;
 	ti.miles = 0;
 	ti.hours = 0;
 	ti.topSpeed = 0;
@@ -158,9 +158,9 @@ function loadPostTrack(newSlug) {
 	ti.count = 0;
 	ti.bounds = new google.maps.LatLngBounds();
 
-	window.history.pushState(null, null, '/' + mapSlug + '/map');
+	window.history.pushState(null, null, '/' + postKey + '/map');
 
-	ti.map.data.loadGeoJson('/' + mapSlug + '/geo.json');
+	ti.map.data.loadGeoJson('/' + postKey + '/geo.json');
 }
 
 function hoursAndMinutes(hours) {
