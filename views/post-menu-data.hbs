@@ -3,7 +3,7 @@
 var TrailImage = { menu: {}, post: {} };
 
 {{#each library.categories}}
-	ti.menu['{{this.title}}'] = [
+   TrailImage.menu['{{this.title}}'] = [
 	{{#this.subcategories}}
 		{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
 	{{/this.subcategories}}
@@ -11,14 +11,14 @@ var TrailImage = { menu: {}, post: {} };
 {{/each}}
 
 {{#each library.posts}}
-	ti.post['{{this.id}}'] = {
+   TrailImage.post['{{this.id}}'] = {
 		'slug': '{{this.key}}',
 		'title': '{{this.title}}',
 		'icon': '{{modeIconForPost this.categories}}',
 		'description': '{{this.description}}'
 	{{#this.isPartial}},
 		'subTitle': '{{this.subTitle}}',
-	    'part': {{this.part}}
+	   'part': {{this.part}}
 	{{/this.isPartial}}
 	};
 {{/each}}
