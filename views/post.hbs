@@ -64,7 +64,7 @@
 	{{/if}}
 
 	{{#unless post.feature}}
-		{{> post-tags post.tags}}
+		{{> categories post.categories}}
 		<nav id="nav-top">{{> navigation}}</nav>
 		{{#if post.photoCoordinates}}
 		{{! https://developers.google.com/maps/documentation/static-maps/ }}
@@ -124,7 +124,7 @@
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
 {{#unless post.feature}}
-	<div class="footer-tags content">{{> post-tags post.tags}}</div>
+	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}
 	<div class='by-line content'><p rel='author'><span>by</span>{{config.owner.name}}</p></div>
 
