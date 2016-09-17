@@ -1,56 +1,56 @@
 {
-	"name": "@trailimage/blog",
-	"description": "Trail Image blog",
-	"version": "2.1.0",
-	"private": false,
-	"author": {
-		"name": "Jason Abbott"
-	},
-	"license": "MIT",
-	"engines": {
-		"node": ">=5.0.0"
-	},
-	"scripts": {
-		"test": "node_modules/.bin/mocha --reporter spec",
-		"webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
-		"mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
-	},
-	"dependencies": {
-		"body-parser": "^1.10",
-		"compression": "^1.6.0",
-		"connect-wwwhisper": "git+https://github.com/Jason-Abbott/connect-wwwhisper.git#master",
-		"express": "^4.0",
-		"express-hbs": "^0.8.4",
-		"feed": "^0.2.6",
-		"@trailimage/blog-core": "^1.2.3",
-		"@trailimage/enum": "^1.0.0",
-		"@trailimage/flickr-provider": "^1.0.0",
-		"@trailimage/google-provider": "^1.0.2",
-		"@trailimage/json-ld-factory": "^1.0.0",
-		"@trailimage/output-cache": "^1.0.0",
-		"@trailimage/redis-provider": "^1.0.2",
-		"@trailimage/pdf": "^0.5.0",
-		"@trailimage/spam-block": "^1.0.0",
-		"uglify-js": "^2.4.0"
-	},
-	"devDependencies": {
-		"bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
-		"chai": "^3.4.1",
-		"gulp": "^3.8.0",
-		"gulp-concat": "^2.5.2",
-		"gulp-less": "^3.0.0",
-		"gulp-cssnano": "^2.0.0",
-		"gulp-uglify": "^1.1.0",
-		"merge2": "^0.3.1",
-		"mocha": "^2.3.4",
-		"webfont-dl": "^0.1.2"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Trail-Image/blog.git"
-	},
-	"main": "index",
-	"bugs": {
-		"url": "https://github.com/Trail-Image/blog/issues"
-	}
+  "name": "@trailimage/blog",
+  "description": "Trail Image blog",
+  "version": "2.1.0",
+  "private": false,
+  "author": {
+    "name": "Jason Abbott"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.3.0"
+  },
+  "scripts": {
+    "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+    "mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
+  },
+  "dependencies": {
+    "body-parser": "^1.10",
+    "compression": "^1.6.0",
+    "connect-wwwhisper": "^0.1.13",
+    "express": "^4.0",
+    "express-hbs": "^1.0.0",
+    "feed": "^0.3.0",
+    "google-auth-library": "^0.9.8",
+    "googleapis": "^13.0.0",
+    "node-fetch": "^1.6.0",
+    "oauth": "^0.9.0",
+    "pdfkit": "^0.8.0",
+    "redis": "^2.6.2",
+    "uglify-js": "^2.4.0",
+    "winston": "^2.0.0",
+    "winston-redis": "^1.0.0",
+    "xmldom": "^0.1.19"
+  },
+  "devDependencies": {
+    "bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
+    "chai": "^3.4.1",
+    "gulp": "^3.8.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-less": "^3.0.0",
+    "gulp-cssnano": "^2.0.0",
+    "gulp-mocha": "^3.0.0",
+    "gulp-uglify": "^2.0.0",
+    "merge2": "^1.0.0",
+    "mocha": "^2.3.4",
+    "webfont-dl": "^0.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Trail-Image/blog.git"
+  },
+  "MAIN": "index",
+  "bugs": {
+    "url": "https://github.com/Trail-Image/blog/issues"
+  }
 }

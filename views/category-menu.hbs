@@ -1,0 +1,12 @@
+<ul id="tag-navigation">
+	<li class="head">Other Posts</li>
+{{#each library.categories}}
+	<li class="title {{this.title}}">{{{iconForCategory this.title}}}{{this.title}}
+		<ul>
+		{{#this.subcategories}}
+			<li><a href="/{{this.key}}" rel="tag">{{this.title}}</a>({{this.posts.length}})</li>
+		{{/this.subcategories}}
+		</ul>
+	</li>
+{{/each}}
+</ul>

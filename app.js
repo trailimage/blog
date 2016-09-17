@@ -1,55 +1,49 @@
 'use strict';
 
-/**
- * Application entry point
- * @see http://code.google.com/apis/console/?pli=1#project:1033232213688:access
- */
-const Blog = require('./lib');
-const is = Blog.is;
-const config = Blog.config;
+const is = require('./lib/is');
+const config = require('./lib/config');
+const C = require('./lib/constants');
+const log = require('./lib/logger');
 const Express = require('express');
 const npm = require('./package.json');
 
 config.repoUrl = npm.repository.url;
 
-injectDependencies();
 createWebService();
 
 function createWebService() {
+   const factory = require('./lib/factory');
+   const route = require('./lib/routes');
 	const app = Express();
-	/** @type Number */
 	const port = process.env['PORT'] || 3000;
-	const log = Blog.active.log;
 
-	log.infoIcon(Blog.icon.powerButton, 'Starting %s application', (config.isProduction) ? 'production' : 'development');
+	log.infoIcon(C.icon.powerButton, 'Starting %s application', config.isProduction ? 'production' : 'development');
 
 	defineViews(app);
 
-	if (Blog.active.needsAuth) {
+	if (config.needsAuth) {
 		// must authenticate before normal routes are available
-		Blog.Controller.authRoutes(app);
+		route.authentication(app);
 		app.listen(port);
-		log.infoIcon(Blog.icon.lock, 'Listening for authentication on port %d', port);
+		log.infoIcon(C.icon.lock, 'Listening for authentication on port %d', port);
 	} else {
 		applyMiddleware(app);
 
-		Blog.Library.load(library => {
-			// library must be loaded before routes are defined
-			Blog.Controller.defaultRoutes(app, library, config, Blog.httpStatus);
-			app.listen(port);
-			log.infoIcon(Blog.icon.heartOutline, 'Listening on port %d', port);
-		});
+      factory.buildLibrary().then(() => {
+         // library must be loaded before routes are defined
+         route.standard(app);
+         app.listen(port);
+         log.infoIcon(C.icon.heartOutline, 'Listening on port %d', port);
+      });
 	}
 }
 
-/**
- * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
- * @see https://npmjs.org/package/express-hbs
- * @see http://mustache.github.com/mustache.5.html
- */
+// https://github.com/donpark/hbs/blob/master/examples/extend/app.js
+// https://npmjs.org/package/express-hbs
+// http://mustache.github.com/mustache.5.html
 function defineViews(app) {
-	/** @type ExpressHbs */
 	const hbs = require('express-hbs');
+   const template = require('./lib/template');
 	const engine = 'hbs';
 	const root = __dirname;
 
@@ -57,30 +51,21 @@ function defineViews(app) {
 	app.set('views', root + '/views');
 	app.set('view engine', engine);
 	app.engine(engine, hbs.express4({
-		defaultLayout: root + '/views/' + Blog.template.layout.main + '.hbs',
+		defaultLayout: root + '/views/' + template.layout.MAIN + '.hbs',
 		partialsDir: root + '/views/partials'
 	}));
 
-	Blog.template.assignHelpers(hbs);
+   template.assignHelpers(hbs);
 }
 
-/**
- * @param app
- * @see http://expressjs.com/api.html#app.use
- */
+//  http://expressjs.com/api.html#app.use
 function applyMiddleware(app) {
-	/** @see https://github.com/expressjs/compression/blob/master/README.md */
+	// https://github.com/expressjs/compression/blob/master/README.md
 	const compress = require('compression');
 	const bodyParser = require('body-parser');
-	const outputCache = require('@trailimage/output-cache');
-	const spamBlocker = require('@trailimage/spam-block');
-	const statusHelper = require('./lib/status-middleware.js');
+   const middleware = require('./lib/middleware');
 
-	outputCache.enabled = Blog.config.cacheOutput;
-	outputCache.view.config = Blog.config;
-	outputCache.view.description = Blog.config.site.description;
-
-	app.use(spamBlocker.filter);
+	app.use(middleware.blockSpamReferers);
 
 	if (config.usePersona) {
 		// use wwwhisper middleware to authenticate some routes
@@ -94,64 +79,14 @@ function applyMiddleware(app) {
 	// needed to parse admin page posts with extended enabled for form select arrays
 	app.use('/admin', bodyParser.urlencoded({ extended: true }));
 	app.use(compress({}));
-	app.use(statusHelper.methods);
-	app.use(outputCache.methods);
+	app.use(middleware.enableStatusHelpers);
+	app.use(middleware.enableViewCache);
 	app.use(Express.static(__dirname + '/dist'));
 }
 
-/**
- * This should be what Express already supports but it isn't behaving as expected
- * @param {RegExp} regex
- * @param {Function} fn Middleware
- * @returns Function Wrapper
- */
+// this should be what Express already supports but it isn't behaving as expected
 function filter(regex, fn) {
 	return (req, res, next) => {
 		if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
 	}
-}
-
-/**
- * Inject provider dependencies
- */
-function injectDependencies() {
-	const RedisProvider = require('@trailimage/redis-provider');
-
-	const geoPrivacy = process.env['GEO_PRIVACY'];
-
-	Blog.Post.subtitleSeparator = config.style.subtitleSeparator;
-	Blog.Post.defaultAuthor = config.owner.name;
-
-	Blog.Map.Track.maxPossibleSpeed = config.map.maxPossibleSpeed;
-	Blog.Map.Track.maxDeviationFeet = config.map.maxDeviationFeet;
-
-	Blog.Map.Location.privacy.check = config.map.checkPrivacy;
-	Blog.Map.Location.privacy.miles = config.map.privacyMiles;
-	Blog.Map.Location.privacy.center = config.map.privacyCenter;
-
-	Blog.LinkData.config.owner = config.owner;
-	Blog.LinkData.config.site = config.site;
-
-	if (!is.empty(geoPrivacy) && geoPrivacy.includes(',')) {
-		config.map.privacyCenter = geoPrivacy.split(',').map(parseFloat);
-		config.map.checkPrivacy = (config.map.privacyCenter.length == 2 && is.number(config.map.privacyMiles));
-	}
-
-	/** @type RedisProvider.Config */
-	let c = new RedisProvider.Config();
-	c.url = config.env('REDISCLOUD_URL');
-	c.httpProxy = config.proxy;
-
-	if (config.isProduction && is.empty(config.proxy)) {
-		// replace default log provider with Redis
-		Blog.active.log = new RedisProvider.Log(c);
-	}
-
-	if (is.empty(config.proxy)) {
-		Blog.active.cacheHost = new RedisProvider.Cache(c);
-	} else {
-		// Redis won't work from behind proxy
-		Blog.active.log.info('Proxy detected — using default cache provider');
-	}
-
 }

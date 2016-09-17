@@ -15,9 +15,9 @@ const jsPath = './src/js/';
  * @see https://github.com/jonathanepollack/gulp-minify-css
  * @see https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
  */
-gulp.task('less-main', () => LESS('ti'));
-gulp.task('less-map', () => LESS('map', 'mapfont'));
-gulp.task('less-admin', () => LESS('admin'));
+gulp.task('less-main', ()=> LESS('ti'));
+gulp.task('less-map', ()=> LESS('map', 'mapfont'));
+gulp.task('less-admin', ()=> LESS('admin'));
 gulp.task('less', ['less-main','less-map','less-admin']);
 
 /**

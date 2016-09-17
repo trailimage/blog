@@ -1,6 +1,10 @@
 ## 2.1.0
-#### Features
-- Modularize
+- Rewrite with Promises and functional style
+- Upgrade to lastest Google APIs
+
+## 2.0.21
+#### Fixes
+- Missing URL in og:image meta tag
 
 ## 2.0.20
 #### Fixes

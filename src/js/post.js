@@ -59,7 +59,7 @@ $(function() {
 		var $big = $lb.find('img');
 		/** @type {Boolean} Whether big image is already browser cached */
 		var loaded = $img.data('big-loaded');
-		/** @type {PhotoSize} */
+		/** @type {Size} */
 		var size = new Size($img.data('big-width'), $img.data('big-height'));
 
 		/**
