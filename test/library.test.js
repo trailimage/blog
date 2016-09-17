@@ -89,7 +89,7 @@ describe('Library', ()=> {
 
    it('creates list of post keys', ()=> {
       const keys = library.postKeys();
-      expect(keys).is.lengthOf(168);
+      expect(keys).is.lengthOf(167);
       expect(keys).to.include('brother-ride-2015/simmons-creek');
    });
 

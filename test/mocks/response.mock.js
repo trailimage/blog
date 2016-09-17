@@ -94,6 +94,7 @@ module.exports = {
       this.ended = false;
       this.headers = {};
       this.content = null;
+      this.endOnRender = true;
       this.rendered = {
          template: null,
          options: null,

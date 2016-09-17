@@ -68,8 +68,10 @@ function expectInCache(keys, exists = true) {
 
 describe('Controller', ()=> {
    before(done => {
-      c.inject.google = require('./mocks/google.mock');
+      const googleMock = require('./mocks/google.mock');
+      c.inject.google = googleMock;
       factory.inject.flickr = require('./mocks/flickr.mock');
+      factory.inject.google = googleMock;
       factory.buildLibrary().then(() => {
          middleware.enableStatusHelpers(req, res, ()=> {
              middleware.enableViewCache(req, res, done);
@@ -77,12 +79,9 @@ describe('Controller', ()=> {
       });
    });
 
-   beforeEach(() => {
-      res.reset();
-      req.reset();
-   });
-
    describe('Post', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('shows latest', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.POST);
@@ -132,6 +131,8 @@ describe('Controller', ()=> {
    });
 
    describe('Photos', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('loads all photo tags', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.PHOTO_TAG);
@@ -178,6 +179,8 @@ describe('Controller', ()=> {
    });
 
    describe('Category', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('renders home page for default category', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.CATEGORY);
@@ -219,6 +222,8 @@ describe('Controller', ()=> {
    });
 
    describe('Menu', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('builds data for main menu', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.POST_MENU_DATA);
@@ -240,6 +245,8 @@ describe('Controller', ()=> {
    });
 
    describe('Cache', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       const postKeys = ['stanley-lake-snow-hike','brother-ride-2015/huckleberry-lookout'];
       const mapKeys = postKeys;
       let cacheViewConfig;
@@ -283,6 +290,8 @@ describe('Controller', ()=> {
    });
 
    describe('RSS', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('generates valid RSS 2.0 XML', ()=> {
          const Feed = require('feed');
          const nl = '\n';
@@ -328,6 +337,8 @@ describe('Controller', ()=> {
    });
 
    describe('Administration', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('renders page with supporting data', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.ADMINISTRATION);
@@ -351,11 +362,13 @@ describe('Controller', ()=> {
    });
 
    describe('Map', ()=> {
+      beforeEach(() => { res.reset(); req.reset(); });
+
       it('displays map for post', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.MAP);
             expect(options).has.property('title', 'Map');
-            expect(options).has.property('slug', 'kuna-cave-fails-to-impress');
+            expect(options).has.property('key', 'kuna-cave-fails-to-impress');
             expect(options).has.property('photoID', 0);
             expect(options).has.property('post');
             expect(options.post).has.property('originalTitle', 'Kuna Cave Fails to Impress');

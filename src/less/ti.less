@@ -45,7 +45,7 @@ body {
 
 .clear { clear: both; }
 
-/* Header ------------------------------------------------------------------ */
+//region Header
 
 #bug {
 	position: absolute;
@@ -134,7 +134,8 @@ header.page {
 	}
 }
 
-/* Authorize --------------------------------------------------------------- */
+//endregion
+//region Authorize
 
 div.authorize {
 	margin-top: 20px;
@@ -155,7 +156,8 @@ div.authorize {
 	}
 }
 
-/* 503 --------------------------------------------------------------------- */
+//endregion
+//region Error responses
 
 .not-ready {
 	p {
@@ -166,8 +168,6 @@ div.authorize {
 		color: #fff;
 	}
 }
-
-/* 404 --------------------------------------------------------------------- */
 
 .not-found {
 	height: @contentWidth;
@@ -182,8 +182,6 @@ div.authorize {
 		text-shadow: 0 0 8px rgba(0, 0, 0, 1);
 	}
 }
-
-/* 500 --------------------------------------------------------------------- */
 
 .internal-error {
 	height: @contentWidth;
@@ -200,7 +198,8 @@ div.authorize {
 	}
 }
 
-/* footer ------------------------------------------------------------------ */
+//endregion
+//region Footer
 
 footer.page {
 	position: relative;
@@ -251,3 +250,5 @@ footer.page {
 		}
 	}
 }
+
+//endregion

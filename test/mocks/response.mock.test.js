@@ -6,6 +6,8 @@ const expect = require('chai').expect;
 const C = require('../../lib/constants');
 
 describe('Mock Response', ()=> {
+   beforeEach(()=> res.reset());
+
 	it('allows setting and reading the HTTP status', ()=> {
 		res.status(C.httpStatus.NOT_FOUND);
 		expect(res.httpStatus).equals(C.httpStatus.NOT_FOUND);
