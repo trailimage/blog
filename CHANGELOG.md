@@ -1,5 +1,6 @@
 ## 2.1.0
 - Rewrite with Promises and functional style
+- Upgrade to lastest Google APIs
 
 ## 2.0.21
 #### Fixes

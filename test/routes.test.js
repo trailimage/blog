@@ -1,13 +1,18 @@
 'use strict';
 
 const mocha = require('mocha');
+const config = require('../lib/config');
 const { expect } = require('chai');
 const route = require('../lib/routes');
 const app = require('./mocks/express.mock');
 
 describe('Routes', ()=> {
-   before(() => {
-      route.standard(app);
+   before(() => { route.standard(app); });
+
+   it('creates admin routes', ()=> {
+      expect(app.middleware).has.property('/admin');
+      expect(app.routes.get).has.property('/admin/');
+      expect(app.routes.post).to.contain.all.keys(['/admin/map/delete', '/admin/view/delete'])
    });
 
    // it.skip('forwards old blog paths to new location', ()=> {
@@ -19,18 +24,7 @@ describe('Routes', ()=> {
    //    expect(res.redirected.url).equals(`http://${config.blog.domain}/${req.params[ph.YEAR]}/${req.params[ph.MONTH]}/${req.params[ph.POST_KEY]}`)
    // });
    //
-   // it.skip('forwards deprecated slugs to new location', ()=> {
-   //    const oldPostKey = 'great-post';
-   //
-   //    config.blog = {
-   //       domain: 'blog.test.com',
-   //       redirects: { [oldPostKey]: 'still-a-great-post' }
-   //    };
-   //
-   //    req.params[ph.POST_KEY] = oldPostKey;
-   //    c.post.view(req, res);
-   //    expect(res.redirected.status).equals(C.httpStatus.PERMANENT_REDIRECT);
-   //    expect(res.redirected.url).equals('/' + config.blog.redirects[oldPostKey]);
-   // });
-
+   it('forwards deprecated urls to new location', ()=> {
+      expect(app.routes.get).to.contain.all.keys(Object.keys(config.redirects).map(r => '/' + r));
+   });
 });
