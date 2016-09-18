@@ -19,7 +19,7 @@ describe('Routes', ()=> {
    it('creates series routes', ()=> {
       const base = '/:postKey([\\w\\d-]{4,})';
       expect(app.middleware).has.property(base);
-      expect(app.routes.get).has.property(base);
+      expect(app.routes.get).has.property(base + '/');
       expect(app.routes.get).has.property(base + '/gpx');
    });
 
