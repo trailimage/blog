@@ -6,6 +6,17 @@ const { expect } = require('chai');
 const DOM = require('xmldom').DOMParser;
 const google = require('./mocks/google.mock');
 
+/**
+ * @param {Number[]} point
+ * @returns {Number[]}
+ */
+function expectGeoPoint(point) {
+   expect(point).is.instanceOf(Array);
+   expect(point[0]).within(-180, 180);
+   expect(point[1]).within(-90, 90);
+   return point;
+}
+
 describe('Map', ()=> {
    const gpx = map.gpx;
 	const xml = new DOM().parseFromString('<trkpt lat="43.238334" lon="-116.366600">'
@@ -35,45 +46,45 @@ describe('Map', ()=> {
       expect(map.toRadians(-122)).within(-2.13, -2.12);
    });
 
-   it('creates geojson feature collection', ()=> {
+   it('creates GeoJSON feature collection', ()=> {
       const f = map.features();
       expect(f.type).equals(map.type.COLLECTION);
       expect(f).has.property('features');
    });
 
    it('calculates distance between points', ()=> {
-      const p1 = [48.0, -122.0];
-      const p2 = [49.0, -121.0];
+      const p1 = expectGeoPoint([-122.0, 48.0]);
+      const p2 = expectGeoPoint([-121.0, 49.0]);
 
       expect(map.pointDistance(p1, p2)).within(82.0, 83.0);
 
-      const p3 = [33.9425, -118.4081];
-      const p4 = [20.8987, -156.4305];
+      const p3 = expectGeoPoint([-118.4081, 33.9425]);
+      const p4 = expectGeoPoint([-156.4305, 20.8987]);
 
       expect(map.pointDistance(p3, p4)).within(2482, 2483);
    });
 
    it('identifies points at the same location', ()=> {
-      const p1 = [100, 100, 20];
-      const p2 = [100, 100, 30];
-      const p3 = [100, 101, 30];
+      const p1 = expectGeoPoint([100, 50, 20]);
+      const p2 = expectGeoPoint([100, 50, 30]);
+      const p3 = expectGeoPoint([100, 51, 30]);
 
       expect(map.sameLocation(p1, p2)).is.true;
       expect(map.sameLocation(p1, p3)).is.false;
    });
 
    it('calculates speed between two points', ()=> {
-      const p1 = [48, -122, 0, 100];
-      const p2 = [50, -120, 0, 100 + 1000 * 60 * 60]; // an hour later in milliseconds
+      const p1 = expectGeoPoint([-122, 48, 0, 100]);
+      const p2 = expectGeoPoint([-120, 50, 0, 100 + 1000 * 60 * 60]); // an hour later in milliseconds
 
       expect(map.speed(p1, p2)).within(165, 166);
    });
 
    it('calculates distance between points', ()=> {
       const points = [
-         [48, -122],
-         [49, -121],
-         [50, -120]
+         expectGeoPoint([-122, 48]),
+         expectGeoPoint([-121, 49]),
+         expectGeoPoint([-120, 50])
       ];
       expect(map.length(points)).within(165, 166);
    });
@@ -94,6 +105,8 @@ describe('Map', ()=> {
          expect(first.geometry.coordinates).is.instanceOf(Array);
          expect(first.geometry.coordinates).is.length.above(200);
          expect(first.properties).has.property('time', '2014-05-18T19:56:51Z');
+
+         first.geometry.coordinates.forEach(expectGeoPoint);
       });
    });
 });
