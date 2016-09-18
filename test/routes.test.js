@@ -10,9 +10,17 @@ describe('Routes', ()=> {
    before(() => { route.standard(app); });
 
    it('creates admin routes', ()=> {
-      expect(app.middleware).has.property('/admin');
-      expect(app.routes.get).has.property('/admin/');
-      expect(app.routes.post).to.contain.all.keys(['/admin/map/delete', '/admin/view/delete'])
+      const base = '/admin';
+      expect(app.middleware).has.property(base);
+      expect(app.routes.get).has.property(base + '/');
+      expect(app.routes.post).to.contain.all.keys([`${base}/map/delete`, `${base}/view/delete`])
+   });
+
+   it('creates series routes', ()=> {
+      const base = '/:postKey([\\w\\d-]{4,})';
+      expect(app.middleware).has.property(base);
+      expect(app.routes.get).has.property(base);
+      expect(app.routes.get).has.property(base + '/gpx');
    });
 
    // it.skip('forwards old blog paths to new location', ()=> {
