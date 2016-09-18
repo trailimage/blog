@@ -1,6 +1,7 @@
 'use strict';
 
 const mocha = require('mocha');
+const C = require('../lib/constants');
 const config = require('../lib/config');
 const { expect } = require('chai');
 const route = require('../lib/routes');
@@ -21,6 +22,15 @@ describe('Routes', ()=> {
       expect(app.middleware).has.property(base);
       expect(app.routes.get).has.property(base + '/');
       expect(app.routes.get).has.property(base + '/gpx');
+   });
+
+   it('creates photo tag routes', ()=> {
+      const base = '/photo-tag';
+      const ph = ':' + C.route.PHOTO_TAG;
+      expect(app.middleware).has.property(base);
+      expect(app.routes.get).has.property(base + '/');
+      expect(app.routes.get).has.property(base + '/' + ph);
+      expect(app.routes.get).has.property(base + '/search/' + ph);
    });
 
    // it.skip('forwards old blog paths to new location', ()=> {
