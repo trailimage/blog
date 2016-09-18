@@ -218,17 +218,21 @@ declare namespace Flickr {
    }
 
    interface Response {
-      photoset?: Flickr.SetPhotos[]|Flickr.SetInfo[],
-      set?: Flickr.MemberSet[],
-      collections?: Flickr.Tree,
-      photo?: Flickr.PhotoInfo,
-      sizes?: Flickr.SizeList,
+      photoset?: SetPhotos[]|SetInfo[],
+      set?: MemberSet[],
+      collections?: Tree,
+      photo?: PhotoInfo,
+      sizes?: SizeList,
       stat: string,
       code: number,
       message: string,
-      photos: SearchResult,
+      photos: {
+         photo: SearchResult
+      }
       who: {
-         tags: Tag[]
+         tags: {
+            tag: Tag[]
+         }
       }
    }
 

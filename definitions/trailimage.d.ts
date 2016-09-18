@@ -31,7 +31,6 @@ interface BlogResponse extends EventEmitter, Response {
    sendView(key: string, p2: string|Object|Renderer, p3?: Renderer): void,
    sendJson(key: string, render: Renderer): void,
    sendCompressed(mimeType: string, item: ViewCacheItem, cache?: boolean): void,
-   redirected: Object,
    jsonError(message: string),
    jsonMessage(message: string)
 }
@@ -43,10 +42,20 @@ interface MockRequest extends BlogRequest {
 
 interface MockResponse extends BlogRequest {
    reset(): void,
+   headers: { [key: string]: string },
    content: Buffer|string,
-   rendered: Object,
+   redirected: {
+      status: number,
+      url: string,
+   },
+   rendered: {
+      template: string,
+      options: { [key: string]: string|number },
+      json: any
+   }
    ended: boolean,
-   endOnRender: boolean
+   endOnRender: boolean,
+   setHeader(key: string, value: string): MockResponse
 }
 
 //endregion
