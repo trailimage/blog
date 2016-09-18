@@ -58,7 +58,9 @@ function defineViews(app) {
    template.assignHelpers(hbs);
 }
 
-//  http://expressjs.com/api.html#app.use
+/**
+ * @see http://expressjs.com/api.html#app.use
+ */
 function applyMiddleware(app) {
 	// https://github.com/expressjs/compression/blob/master/README.md
 	const compress = require('compression');
