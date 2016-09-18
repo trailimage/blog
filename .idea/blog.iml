@@ -16,5 +16,6 @@
     <orderEntry type="library" name="express-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="google-drive-realtime-api-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="node-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="geojson-DefinitelyTyped" level="application" />
   </component>
 </module>
