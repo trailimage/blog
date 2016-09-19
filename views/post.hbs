@@ -98,7 +98,8 @@
 	{{/if}}
 
 	{{#if longitude}}
-		<a class='map' title='View on map' href="/{{../../key}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+      {{! http://handlebarsjs.com/#paths }}
+		<a class='map' title='View on map' href="/{{../key}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
 	{{/if}}
 
 	{{#if title}}
@@ -129,7 +130,7 @@
 	<div class='by-line content'><p rel='author'><span>by</span>{{config.owner.name}}</p></div>
 
 	<footer class="post content">
-		<div class="fb-comments" data-href="{{config.site.url}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
+		<div class="fb-comments" data-href="{{config.site.url}}/{{key}}/" data-width="648" data-num-posts="20"></div>
 	</footer>
 	{{> footer}}
 </body>
