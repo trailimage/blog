@@ -269,7 +269,7 @@ describe('Controller', ()=> {
             expectInCache(postKeys, false).then(() => done());
          };
          req.body.selected = postKeys;
-         c.cache.deletePost(req, res);
+         c.cache.deleteView(req, res);
       });
 
       it('removes cached GeoJSON', done => {

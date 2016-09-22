@@ -66,7 +66,7 @@ fieldset {
 }
 
 div.column {
-	width: 30%;
+	width: 37%;
 	float: left;
 	margin: 10px;
 
@@ -76,6 +76,7 @@ div.column {
 
 	&#reference {
 		width: 20%;
+		margin-left: 20px;
 	}
 }
 
@@ -88,17 +89,19 @@ div.column {
 		width: 100%;
 
 		tr {
+			&.error	{ td { background-color: #f99; word-break: break-all; }}
+			&.warn { td { background-color: #ffe; }}
+			&:hover	{ td { background-color: #fff; }}
+
 			&.head {
 				text-align: center;
 				background-color: #000;
 				color: #fff;
 				font-weight: bold;
 				font-size: 25px;
-			}
 
-			&.error	{ td { background-color: #f99; word-break: break-all; }}
-			&.warn { td { background-color: #ffe; }}
-			&:hover	{ td { background-color: #fff; }}
+				&:hover { td { background-color: #000; }}
+			}
 
 			td {
 				border-bottom: 1px solid @borderColor;
@@ -109,10 +112,15 @@ div.column {
 				&.icon {
 					background-color: #444;
 					font-weight: normal;
+					font-size: 15px;
+					width: 15px;
+					height: 15px;
+					text-align: center;
 
 					.glyphicon { color: #ccc; }
 					.glyphicon-ban-circle { color: #eee; }
 					.glyphicon-eye-open { color: #5ef; }
+					.glyphicon-flickr { color: #ff3797; }
 					.glyphicon-heart-empty { color: #f44; }
 					.glyphicon-link { color: #f6c; }
 					.glyphicon-lock { color: #0f0; }
