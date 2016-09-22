@@ -18,7 +18,7 @@ $(function() {
 
 		$m.addClass('loading').html(iconHtml('hourglass', '…'));
 
-		$('<div />')
+		$('<div/>')
 			.addClass('mobile-info')
 			.load($fig.data('exif'), function() {
 				var $info = $(this);
