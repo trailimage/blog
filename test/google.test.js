@@ -44,7 +44,7 @@ describe('Google', ()=> {
       }));
 
       it('retrieve GPX file content', function() {
-         this.timeout = 10000;
+         this.timeout(10000);
          return google.drive.loadGPX(post).then(gpxText => {
             expect(gpxText).to.exist;
          })
