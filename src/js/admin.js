@@ -2,6 +2,7 @@
 
 $(function() {
    handlePost($('#json'));
+   handlePost($('#library'));
    handlePost($('#views'));
 	handlePost($('#maps'));
 
@@ -32,7 +33,7 @@ $(function() {
 						}
 					}
 					window.alert((keys.length > 0 && keys[0] != "")
-						? 'Keys Removed:\n' + keys.join('\n')
+						? 'Keys Affected:\n' + keys.join('\n')
 						: 'No new data found');
 				} else {
 					$form.find('.message').html('Failed').show();

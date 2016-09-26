@@ -38,12 +38,21 @@
 	<div id="caching" class="column">
 		<h2>Cache Contents</h2>
 
+      <form id="library" action="/admin/library/reload">
+         <fieldset id="library">
+            <legend>Library</legend>
+            <button type="submit">Reload</button>
+            <input type="hidden" name="remove-matches" value="true"/>
+            <div class="message"></div>
+         </fieldset>
+      </form>
+
 		<form id="json" action="/admin/json/delete">
 			<fieldset id="json">
 				<legend>JSON</legend>
 			{{#if json}}
 				<button type="submit">Delete</button>
-            <select name="json" size="6" multiple>
+            <select name="json" size="4" multiple>
 				{{#json}}
 					<option value="{{this}}">{{this}}</option>
 				{{/json}}
@@ -65,7 +74,7 @@
 				{{/views}}
 				</select>
 				<input type="hidden" name="remove-matches" value="true"/>
-            <label><input type="checkbox" name="include-related" checked="checked"/>Also Delete Related Views</label>
+            <label><input type="checkbox" name="include-related"/>Also Delete Related Views</label>
 			{{else}}
 				No views are cached
 			{{/if}}
