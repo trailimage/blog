@@ -6,7 +6,7 @@
 	<link href='/css/admin.css' rel='stylesheet' type='text/css'/>
 	<link href='/img/favicon.ico' rel='shortcut icon'/>
 	<link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
-	<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js' type='text/javascript'></script>
+	<script src='//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js' type='text/javascript'></script>
 	<script src='/js/admin.js' type='text/javascript'></script>
 </head>
 <body>
@@ -38,17 +38,26 @@
 	<div id="caching" class="column">
 		<h2>Cache Contents</h2>
 
-		<form id="models" action="/admin/model/reload">
-			<fieldset id="models">
-				<legend>Models</legend>
-			{{#if models}}
-				<button type="submit">Reload</button>
-				<select name="models">
-				{{#models}}
+      <form id="library" action="/admin/library/reload">
+         <fieldset id="library">
+            <legend>Library</legend>
+            <button type="submit">Reload</button>
+            <input type="hidden" name="remove-matches" value="true"/>
+            <div class="message"></div>
+         </fieldset>
+      </form>
+
+		<form id="json" action="/admin/json/delete">
+			<fieldset id="json">
+				<legend>JSON</legend>
+			{{#if json}}
+				<button type="submit">Delete</button>
+            <select name="json" size="4" multiple>
+				{{#json}}
 					<option value="{{this}}">{{this}}</option>
-				{{/models}}
+				{{/json}}
 				</select>
-				<input type="hidden" name="remove-matches" value="false"/>
+				<input type="hidden" name="remove-matches" value="true"/>
 			{{/if}}
 				<div class="message"></div>
 			</fieldset>
@@ -65,6 +74,7 @@
 				{{/views}}
 				</select>
 				<input type="hidden" name="remove-matches" value="true"/>
+            <label><input type="checkbox" name="include-related"/>Also Delete Related Views</label>
 			{{else}}
 				No views are cached
 			{{/if}}
@@ -100,7 +110,7 @@
 				<tr class='head'><td colspan='3'>{{@key}}</td></tr>
 			{{#this}}
 				<tr class='{{level}}'>
-					<td class='icon'>{{#if iconName}}{{{icon iconName}}}{{/if}}</td>
+               <td class='icon'>{{#if iconName}}{{{icon iconName}}}{{/if}}</td>
 					<td>{{{message}}}</td><td class='timestamp'>{{timestamp}}</td>
 				</tr>
 			{{/this}}

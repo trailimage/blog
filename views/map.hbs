@@ -3,10 +3,11 @@
 	{{> head-meta}}
 	{{> head-files}}
 	<meta name="robots" content="noindex">
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key={{config.google.apiKey}}"></script>
 	<link href='/css/map.css' rel='stylesheet' type='text/css'/>
 	<script type='text/javascript'>
-		var mapSlug = '{{slug}}';
+      {{! values used within map.js }}
+		var postKey = '{{key}}';
 		var mapPhotoID = {{photoID}};
 		var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};
 	</script>
@@ -15,8 +16,8 @@
 <body>
 	<div id="map-canvas"></div>
 	<div id="map-wait"><img src="/img/map-progress.gif"/></div>
-	<a id="gpx-download" href="/{{slug}}/gpx" rel="nofollow">Download GPX {{{icon 'save'}}}</a>
-	<a id="back" href="/{{slug}}">{{{icon 'chevron-left'}}} View Post</a>
+	<a id="gpx-download" href="/{{key}}/gpx" rel="nofollow">Download GPX {{{icon 'save'}}}</a>
+	<a id="back" href="/{{key}}">{{{icon 'chevron-left'}}} View Post</a>
 
 	{{> post-menu}}
 	<dl id="summary">

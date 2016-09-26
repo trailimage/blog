@@ -1,16 +1,17 @@
 {
   "name": "@trailimage/blog",
   "description": "Trail Image blog",
-  "version": "2.0.21",
+  "version": "2.1.0",
   "private": false,
   "author": {
     "name": "Jason Abbott"
   },
   "license": "MIT",
   "engines": {
-    "node": ">=5.0.0"
+    "node": ">=6.6.0"
   },
   "scripts": {
+    "test": "node_modules/.bin/mocha --recursive --reporter spec",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
     "mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
   },
@@ -19,15 +20,14 @@
     "compression": "^1.6.0",
     "connect-wwwhisper": "^0.1.13",
     "express": "^4.0",
-    "express-hbs": "^0.8.4",
-    "extend": "^3.0.0",
-    "feed": "^0.2.6",
-    "googleapis": "^2.0.0",
+    "express-hbs": "^1.0.0",
+    "feed": "^0.3.0",
+    "google-auth-library": "^0.9.8",
+    "googleapis": "^13.0.0",
+    "node-fetch": "^1.6.0",
     "oauth": "^0.9.0",
-    "pdfkit": "^0.7.2",
-    "redis": "^2.0.0",
-    "request": "^2.64.0",
-	 "@trailimage/is": "git+https://github.com/Trail-Image/is.git#master",
+    "pdfkit": "^0.8.0",
+    "redis": "^2.6.2",
     "uglify-js": "^2.4.0",
     "winston": "^2.0.0",
     "winston-redis": "^1.0.0",
@@ -39,10 +39,10 @@
     "gulp": "^3.8.0",
     "gulp-concat": "^2.5.2",
     "gulp-less": "^3.0.0",
-	 "gulp-cssnano": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
-    "gulp-uglify": "^1.1.0",
-    "merge2": "^0.3.1",
+    "gulp-cssnano": "^2.0.0",
+    "gulp-mocha": "^3.0.0",
+    "gulp-uglify": "^2.0.0",
+    "merge2": "^1.0.0",
     "mocha": "^2.3.4",
     "webfont-dl": "^0.1.2"
   },

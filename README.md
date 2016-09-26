@@ -1,6 +1,7 @@
-[![Build Status](https://travis-ci.org/Trail-Image/blog.svg?branch=master)](https://travis-ci.org/Trail-Image/blog)
-[![Code Climate](https://codeclimate.com/github/Trail-Image/blog/badges/gpa.svg)](https://codeclimate.com/github/Trail-Image/blog)
-[![David](https://david-dm.org/Trail-Image/blog.svg)](https://david-dm.org/Trail-Image/blog)
+[![Build Status](https://travis-ci.org/Jason-Abbott/trail-image.svg?branch=master)](https://travis-ci.org/Jason-Abbott/trail-image)
+[![Code Climate](https://codeclimate.com/github/Jason-Abbott/trail-image/badges/gpa.svg)](https://codeclimate.com/github/Jason-Abbott/trail-image)
+[![David](https://david-dm.org/Jason-Abbott/trail-image.svg)](https://david-dm.org/Jason-Abbott/trail-image)
+
 
 # Overview
 Frictionless photo blogging platform that leverages existing social media and cloud storage to dynamically generate an engaging and responsive story experience.

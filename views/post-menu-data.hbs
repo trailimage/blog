@@ -2,23 +2,23 @@
 
 var TrailImage = { menu: {}, post: {} };
 
-{{#each library.tags}}
-	TrailImage.menu['{{this.title}}'] = [
-	{{#this.tags}}
+{{#each library.categories}}
+   TrailImage.menu['{{this.title}}'] = [
+	{{#this.subcategories}}
 		{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
-	{{/this.tags}}
+	{{/this.subcategories}}
 	];
 {{/each}}
 
 {{#each library.posts}}
-	TrailImage.post['{{this.id}}'] = {
-		'slug': '{{this.slug}}',
+   TrailImage.post['{{this.id}}'] = {
+		'slug': '{{this.key}}',
 		'title': '{{this.title}}',
-		'icon': '{{modeIconForPost this.tags}}',
+		'icon': '{{modeIconForPost this.categories}}',
 		'description': '{{this.description}}'
 	{{#this.isPartial}},
 		'subTitle': '{{this.subTitle}}',
-	    'part': {{this.part}}
+	   'part': {{this.part}}
 	{{/this.isPartial}}
 	};
 {{/each}}

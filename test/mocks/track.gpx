@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1">
+<metadata>
+	<name>track.gpx</name>
+</metadata>
+<trk>
+	<name>2013-11-02, 104150P (Segment 1)</name>
+	<trkseg>
+		<trkpt lat="43.238334" lon="-116.366600">
+			<ele>926.90</ele>
+			<time>2013-11-02T18:54:59Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238334" lon="-116.366600">
+			<ele>926.70</ele>
+			<time>2013-11-02T18:55:03Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238334" lon="-116.366600">
+			<ele>926.58</ele>
+			<time>2013-11-02T18:55:07Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238334" lon="-116.366600">
+			<ele>926.56</ele>
+			<time>2013-11-02T18:55:11Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238334" lon="-116.366599">
+			<ele>926.63</ele>
+			<time>2013-11-02T18:55:15Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238333" lon="-116.366598">
+			<ele>926.79</ele>
+			<time>2013-11-02T18:55:19Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238333" lon="-116.366597">
+			<ele>926.99</ele>
+			<time>2013-11-02T18:55:23Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366597">
+			<ele>927.20</ele>
+			<time>2013-11-02T18:55:27Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366596">
+			<ele>927.41</ele>
+			<time>2013-11-02T18:55:31Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366596">
+			<ele>927.59</ele>
+			<time>2013-11-02T18:55:35Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366595">
+			<ele>927.74</ele>
+			<time>2013-11-02T18:55:39Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366595">
+			<ele>927.85</ele>
+			<time>2013-11-02T18:55:43Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238331" lon="-116.366594">
+			<ele>927.92</ele>
+			<time>2013-11-02T18:55:47Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238331" lon="-116.366594">
+			<ele>927.98</ele>
+			<time>2013-11-02T18:55:51Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238331" lon="-116.366593">
+			<ele>928.02</ele>
+			<time>2013-11-02T18:55:55Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366593">
+			<ele>928.06</ele>
+			<time>2013-11-02T18:55:59Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366592">
+			<ele>928.10</ele>
+			<time>2013-11-02T18:56:03Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366591">
+			<ele>928.14</ele>
+			<time>2013-11-02T18:56:07Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366591">
+			<ele>928.20</ele>
+			<time>2013-11-02T18:56:11Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366590">
+			<ele>928.25</ele>
+			<time>2013-11-02T18:56:15Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238332" lon="-116.366589">
+			<ele>928.30</ele>
+			<time>2013-11-02T18:56:19Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238331" lon="-116.366589">
+			<ele>928.35</ele>
+			<time>2013-11-02T18:56:23Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238331" lon="-116.366588">
+			<ele>928.39</ele>
+			<time>2013-11-02T18:56:27Z</time>
+			<fix>3d</fix>
+		</trkpt>
+	</trkseg>
+</trk>
+<trk>
+	<name>2013-11-02, 104150P (Segment 2)</name>
+	<trkseg>
+		<trkpt lat="43.292924" lon="-116.432850">
+			<ele>706.26</ele>
+			<time>2013-11-02T20:23:51Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.292930" lon="-116.432848">
+			<ele>707.85</ele>
+			<time>2013-11-02T20:23:55Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.292935" lon="-116.432887">
+			<ele>710.32</ele>
+			<time>2013-11-02T20:23:59Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.292919" lon="-116.433113">
+			<ele>710.02</ele>
+			<time>2013-11-02T20:24:03Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238867" lon="-116.379211">
+			<ele>707.33</ele>
+			<time>2013-11-02T21:56:23Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238910" lon="-116.379248">
+			<ele>707.27</ele>
+			<time>2013-11-02T21:56:27Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238953" lon="-116.379278">
+			<ele>707.02</ele>
+			<time>2013-11-02T21:56:31Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.238994" lon="-116.379282">
+			<ele>707.00</ele>
+			<time>2013-11-02T21:56:35Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.239044" lon="-116.379283">
+			<ele>706.92</ele>
+			<time>2013-11-02T21:56:39Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.239085" lon="-116.379282">
+			<ele>706.80</ele>
+			<time>2013-11-02T21:56:43Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.239116" lon="-116.379287">
+			<ele>706.99</ele>
+			<time>2013-11-02T21:56:47Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.239117" lon="-116.379288">
+			<ele>707.01</ele>
+			<time>2013-11-02T21:56:51Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.239118" lon="-116.379290">
+			<ele>706.91</ele>
+			<time>2013-11-02T21:56:55Z</time>
+			<fix>3d</fix>
+		</trkpt>
+		<trkpt lat="43.239119" lon="-116.379289">
+			<ele>706.91</ele>
+			<time>2013-11-02T21:56:59Z</time>
+			<fix>3d</fix>
+		</trkpt>
+	</trkseg>
+</trk>
+</gpx>

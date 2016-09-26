@@ -57,7 +57,7 @@ $(function() {
 		var show = function() { $button.addClass(css); $menu.show(); $up.show(); $down.hide(); };
 		var hide = function() { $button.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
-		event.stopPropagation();
+		if (event) { event.stopPropagation(); }
 
 		if (forceHide === undefined) { forceHide = $button.hasClass(css); }
 		if (forceHide) { hide(); } else { show(); }

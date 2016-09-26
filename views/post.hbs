@@ -7,10 +7,10 @@
 {{#unless post.feature}}
 	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
 	{{#if post.previousIsPart}}
-	<link rel="prev" href="/{{post.previous.slug}}" />
+	<link rel="prev" href="/{{post.previous.key}}" />
 	{{/if}}
 	{{#if post.nextIsPart}}
-	<link rel="next" href="/{{post.next.slug}}" />
+	<link rel="next" href="/{{post.next.key}}" />
 	{{/if}}
 {{/unless}}
 	{{> head-files}}
@@ -20,7 +20,7 @@
 	{{> json-ld}}
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.tags}} has-tags{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
+<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}
@@ -64,7 +64,7 @@
 	{{/if}}
 
 	{{#unless post.feature}}
-		{{> post-tags post.tags}}
+		{{> categories post.categories}}
 		<nav id="nav-top">{{> navigation}}</nav>
 		{{#if post.photoCoordinates}}
 		{{! https://developers.google.com/maps/documentation/static-maps/ }}
@@ -98,7 +98,8 @@
 	{{/if}}
 
 	{{#if longitude}}
-		<a class='map' title='View on map' href="/{{../../slug}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+      {{! http://handlebarsjs.com/#paths }}
+		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
 	{{/if}}
 
 	{{#if title}}
@@ -124,12 +125,12 @@
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
 {{#unless post.feature}}
-	<div class="footer-tags content">{{> post-tags post.tags}}</div>
+	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}
 	<div class='by-line content'><p rel='author'><span>by</span>{{config.owner.name}}</p></div>
 
 	<footer class="post content">
-		<div class="fb-comments" data-href="{{config.site.url}}/{{slug}}/" data-width="648" data-num-posts="20"></div>
+		<div class="fb-comments" data-href="{{config.site.url}}/{{post.key}}/" data-width="648" data-num-posts="20"></div>
 	</footer>
 	{{> footer}}
 </body>

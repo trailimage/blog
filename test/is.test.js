@@ -1,9 +1,8 @@
 'use strict';
 
-const TI = require('./');
+const is = require('../lib/is');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const is = TI.is;
 let u;   // undefined
 
 describe('Identity Evaluations', ()=> {
@@ -12,6 +11,14 @@ describe('Identity Evaluations', ()=> {
 		expect(is.value(null)).is.false;
 		expect(is.value('whatever')).is.true;
 	});
+
+   it('identifies strings of numbers', ()=> {
+      expect(is.numeric("abc2")).is.false;
+      expect(is.numeric("1")).is.true;
+      expect(is.numeric(123)).is.true;
+      expect(is.numeric("29865963426")).is.true;
+   });
+
 	it('identifies numbers', ()=> {
 		expect(is.number(u)).is.false;
 		expect(is.number(1)).is.true;
@@ -53,4 +60,11 @@ describe('Identity Evaluations', ()=> {
 		expect(is.callable(function() { let x = 2; })).is.true;
 		expect(is.callable(is)).is.false;
 	});
+   it('identifies cache items', ()=> {
+      const notItem = { nope: false };
+      const item = { buffer: new Buffer(''), eTag: 'some value' };
+      expect(is.cacheItem()).is.false;
+      expect(is.cacheItem(notItem)).is.false;
+      expect(is.cacheItem(item)).is.true;
+   })
 });

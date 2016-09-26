@@ -51,7 +51,7 @@ $(function() {
 		if (desktopLoaded) { return; }
 
 		// could optimized into a lazy-load
-		if (feature.sideMenu) {	$('#post-tag-menu').load('/tag-menu'); }
+		if (feature.sideMenu) {	$('#category-menu').load('/category-menu'); }
 
 		if (feature.postMenu) {
 			// append timestap to defeat caching between site deployments
