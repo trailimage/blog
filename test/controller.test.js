@@ -103,6 +103,7 @@ describe('Controller', ()=> {
       });
 
       it('shows post with slug', done => {
+         res.endOnRender = false;
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.POST);
             expect(options).has.property('title', 'Kuna Cave Fails to Impress');
@@ -116,6 +117,7 @@ describe('Controller', ()=> {
       });
 
       it('shows post in series', done => {
+         res.endOnRender = false;
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.POST);
             expect(options).has.property('title', 'Brother Ride 2015');
@@ -354,7 +356,7 @@ describe('Controller', ()=> {
       it('invalidates caches while updating library', done => {
          res.onEnd = ()=> {
             const msg = expectJSON();
-            expect(msg).is.instanceOf(Array);
+            expect(msg).to.exist;
             done();
          };
          c.admin.updateLibrary(req, res);
