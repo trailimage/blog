@@ -11,6 +11,14 @@ describe('Identity Evaluations', ()=> {
 		expect(is.value(null)).is.false;
 		expect(is.value('whatever')).is.true;
 	});
+
+   it('identifies strings of numbers', ()=> {
+      expect(is.numeric("abc2")).is.false;
+      expect(is.numeric("1")).is.true;
+      expect(is.numeric(123)).is.true;
+      expect(is.numeric("29865963426")).is.true;
+   });
+
 	it('identifies numbers', ()=> {
 		expect(is.number(u)).is.false;
 		expect(is.number(1)).is.true;

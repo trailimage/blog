@@ -1,8 +1,10 @@
 'use strict';
 
 var trip = {
-   timer: 0, /** @type {google.maps.Map} */
-   map: null, /** @type {google.maps.LatLngBounds} */
+   timer: 0,
+   /** @type {google.maps.Map} */
+   map: null,
+   /** @type {google.maps.LatLngBounds} */
    bounds: null,
    miles: 0,
    hours: 0,
@@ -32,7 +34,7 @@ google.maps.event.addDomListener(window, 'load', function() {
     * @see http://mapicons.nicolasmollet.com/
     */
    trip.map.data.setStyle(function(feature) {
-      if (parseInt(feature.getProperty('id')) == mapPhotoID) { selected = feature; }
+      if (parseInt(feature.getId()) == mapPhotoID) { selected = feature; }
 
       return {
          icon: '/img/orange-marker.png',

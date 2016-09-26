@@ -6,6 +6,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key={{config.google.apiKey}}"></script>
 	<link href='/css/map.css' rel='stylesheet' type='text/css'/>
 	<script type='text/javascript'>
+      {{! values used within map.js }}
 		var postKey = '{{key}}';
 		var mapPhotoID = {{photoID}};
 		var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};
