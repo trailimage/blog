@@ -1,5 +1,5 @@
 {
-  "name": "@trailimage/blog",
+  "name": "trail-image",
   "description": "Trail Image blog",
   "version": "2.1.0",
   "private": false,
@@ -48,10 +48,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Trail-Image/blog.git"
+    "url": "https://github.com/Jason-Abbott/trail-image.git"
   },
   "main": "index",
   "bugs": {
-    "url": "https://github.com/Trail-Image/blog/issues"
+    "url": "https://github.com/Jason-Abbott/trail-image/issues"
   }
 }
