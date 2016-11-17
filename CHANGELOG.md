@@ -1,3 +1,6 @@
+## 2.1.2
+- Update dependencies
+
 ## 2.1.1
 - Handle unmatched photo tag searches
 - Upgrade to lastest Google APIs
