@@ -3,6 +3,7 @@
 - Remove "Photography" from title
 - Update to latest jQuery
 - Fix RSS feed
+- Make lightbox image draggable for mobile
 
 ## 2.1.2
 - Update dependencies
