@@ -424,7 +424,7 @@ figure {
 			padding: 0;
 			cursor: default;
 			.box-shadow(none);
-			width: auto;
+			width: @contentWidth;
 		}
 	}
 
@@ -661,6 +661,7 @@ figure {
 		}
 
 		@media @mobile {
+			margin-top: -8px;
 			span {
 				border: none;
 				.rounded(15px);

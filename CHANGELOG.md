@@ -1,6 +1,7 @@
 ## 2.1.3
 - Adjust layout for iPad
 - Remove "Photography" from title
+- Update to latest jQuery
 
 ## 2.1.2
 - Update dependencies
