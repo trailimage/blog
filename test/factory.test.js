@@ -12,11 +12,11 @@ describe('Factory', ()=> {
       factory.inject.google = require('./mocks/google.mock');
    });
 
-   it('makes library', ()=> factory.buildLibrary().then(() => {
+   it('makes library', ()=> factory.buildLibrary().then(()=> {
       expect(library.loaded).is.true;
    }));
 
-   it('reloads library and identifies changed cache keys', done => {
+   it('reloads library and identifies changed cache keys', ()=> {
       const postKeys = ['owyhee-snow-and-sand/lowlands','kuna-cave-fails-to-impress'];
       library.remove(postKeys);
 
@@ -27,7 +27,6 @@ describe('Factory', ()=> {
          expect(library.changedKeys).to.include('who/solo');
          expect(library.changedKeys).to.include('where/owyhees');
          expect(library.changedKeys).to.include('where/kuna-cave');
-         done();
       });
    });
 
