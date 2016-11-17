@@ -61,6 +61,8 @@ $(function() {
 		var loaded = $img.data('big-loaded');
 		/** @type {Size} */
 		var size = new Size($img.data('big-width'), $img.data('big-height'));
+      /** click position relative to image corner */
+		var fromCorner = { top: 0, left: 0 };
 
 		/**
 		 * Update image position and panning speed to accomodate window size
@@ -73,12 +75,16 @@ $(function() {
 
 			if (size.needsToPan) {
 				cursor = 'move';
-				$lb.on('mousemove', updatePosition);
+				$lb.on('mousemove', updateHoverPosition);
+				$lb.on('touchstart', beginDrag);
+				$lb.on('touchmove', updateDragPosition);
 			} else {
-				$lb.off('mousemove', updatePosition);
+				$lb.off('mousemove', updateHoverPosition);
+            $lb.off('touchstart', beginDrag);
+            $lb.off('touchmove', updateDragPosition);
 			}
 			// set initial position
-			updatePosition(event);
+			updateHoverPosition(event);
 			$big.css('cursor', cursor);
 		};
 
@@ -86,11 +92,36 @@ $(function() {
 		 * Update image position within light box
 		 * @param {MouseEvent} event
 		 */
-		var updatePosition = function(event) {
+		var updateHoverPosition = function(event) {
 			$big.css({
-				top: size.height.CSS(event.clientY), left: size.width.CSS(event.clientX)
+			   top: size.height.CSS(event.clientY),
+            left: size.width.CSS(event.clientX)
 			});
 		};
+
+      /**
+       * @param {TouchEvent} event
+       */
+		var beginDrag = function(event) {
+         var touchAt = event.targetTouches[0];
+         var imageAt = $big.position();
+
+         fromCorner.left = imageAt.left - touchAt.clientX;
+         fromCorner.top = imageAt.top - touchAt.clientY;
+      };
+
+      /**
+       * @param {TouchEvent} event
+       */
+      var updateDragPosition = function(event) {
+         // ignore multi-finger touches
+         var at = event.targetTouches[0];
+
+         $big.css({
+            top: fromCorner.top + at.clientY,
+            left: fromCorner.left + at.clientX
+         });
+      };
 
 		if (loaded === undefined) { loaded = false; }
 
@@ -112,6 +143,7 @@ $(function() {
 
 		$big.height(size.height.image).width(size.width.image);
 
+
 		// position based on initial click
 		updateSize(event);
 
@@ -120,11 +152,16 @@ $(function() {
 		$(window).resize(updateSize);
 	}
 
-	function disablePageScroll() { $('html').css('overflow', 'hidden'); }
+	function disablePageScroll() {
+	   $('html').css('overflow', 'hidden');
+	   // prevent iOS from dragging page underneath image
+	   document.ontouchmove = function(event) { event.preventDefault(); };
+	}
 
 	function enablePageScroll() {
 		$('html').css('overflow', 'auto');
 		$(window).off('resize');
+		document.ontouchmove = null;
 	}
 
 // - PhotoSize classes -------------------------------------------------------------
