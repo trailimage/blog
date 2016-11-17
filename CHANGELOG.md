@@ -1,5 +1,6 @@
 ## 2.1.2
 - Update dependencies
+- Retry track load after deleting post cache
 
 ## 2.1.1
 - Handle unmatched photo tag searches
