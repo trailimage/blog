@@ -2,6 +2,7 @@
 - Adjust layout for iPad
 - Remove "Photography" from title
 - Update to latest jQuery
+- Fix RSS feed
 
 ## 2.1.2
 - Update dependencies
