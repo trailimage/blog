@@ -1,3 +1,7 @@
+## 2.1.3
+- Adjust layout for iPad
+- Remove "Photography" from title
+
 ## 2.1.2
 - Update dependencies
 - Retry track load after deleting post cache
