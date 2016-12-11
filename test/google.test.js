@@ -1,5 +1,3 @@
-'use strict';
-
 const mocha = require('mocha');
 const config = require('../lib/config');
 const { expect } = require('chai');
@@ -47,7 +45,7 @@ describe('Google', ()=> {
          this.timeout(10000);
          return google.drive.loadGPX(post).then(gpxText => {
             expect(gpxText).to.exist;
-         })
+         });
       });
    });
 });

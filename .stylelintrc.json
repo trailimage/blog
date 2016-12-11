@@ -1,0 +1,7 @@
+{
+   "extends": "stylelint-config-standard",
+   "rules": {
+      "color-no-invalid-hex": true,
+      "indentation": 3
+   }
+}

@@ -15,4 +15,3 @@ exclude_paths:
   - dist/**/*
   - temp/**/*
   - views/**/*
-  - .idea/**/*

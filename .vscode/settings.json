@@ -1,0 +1,17 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+   "css.validate": false,
+
+   "editor.fontFamily": "Fira Code",
+   "editor.fontLigatures": true,
+   "editor.tabSize": 3,
+
+   "files.associations": {
+      "procfile": "yaml"
+   },
+   "files.exclude": {
+      ".idea/": true
+   },
+
+   "npm-intellisense.scanDevDependencies": true
+}

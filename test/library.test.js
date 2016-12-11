@@ -1,5 +1,3 @@
-'use strict';
-
 const mocha = require('mocha');
 const { expect } = require('chai');
 const factory = require('../lib/factory');
@@ -15,7 +13,7 @@ describe('Library', ()=> {
    });
 
    it('has root categories', ()=> {
-      expect(library.categories).to.contain.all.keys(['What','When','Where','Who']);
+      expect(library.categories).to.contain.all.keys(['What', 'When', 'Where', 'Who']);
    });
 
    it('returns category for key', ()=> {
@@ -34,7 +32,7 @@ describe('Library', ()=> {
 
    it('returns keys for category', ()=> {
       const all = library.categoryKeys();
-      const two = library.categoryKeys(['When','Bicycle']);
+      const two = library.categoryKeys(['When', 'Bicycle']);
 
       expect(all).is.lengthOf(62);
       expect(all).to.include('what/jeep-wrangler');
@@ -44,7 +42,7 @@ describe('Library', ()=> {
    });
 
    it('includes all photo tags with their full names', ()=> {
-      expect(library.tags).to.contain.all.keys(['algae','andersonranchreservoir','dam','horse','jason']);
+      expect(library.tags).to.contain.all.keys(['algae', 'andersonranchreservoir', 'dam', 'horse', 'jason']);
       expect(library.tags['andersonranchreservoir']).equals('Anderson Ranch Reservoir');
    });
 
@@ -77,14 +75,14 @@ describe('Library', ()=> {
 
    it('finds post having a photo', ()=> library.getPostWithPhoto('8459503474').then(post => {
       expect(post).to.exist;
-      expect(post).has.property('id','72157632729508554');
+      expect(post).has.property('id', '72157632729508554');
    }));
 
    it('finds photos with tags', ()=> library.getPhotosWithTags('horse').then(photos => {
       expect(photos).to.exist;
       expect(photos).is.instanceOf(Array);
       expect(photos).to.have.length.above(10);
-      expect(photos[0]).to.contain.all.keys(['id','size']);
+      expect(photos[0]).to.contain.all.keys(['id', 'size']);
    }));
 
    it('creates list of post keys', ()=> {
