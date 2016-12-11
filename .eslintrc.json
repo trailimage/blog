@@ -45,7 +45,6 @@
       "key-spacing": ["error"],
       "linebreak-style": "off",
       "max-depth": ["warn", 4],
-      "new-cap": ["warn"],
       "new-parens": ["error"],
       "no-fallthrough": "off",
       "no-alert": "error",
