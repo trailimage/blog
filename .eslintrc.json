@@ -48,6 +48,7 @@
       "new-parens": ["error"],
       "no-fallthrough": "off",
       "no-alert": "error",
+      "no-case-declarations": "off",
       "no-console": "warn",
       "no-duplicate-imports": ["error"],
       "no-eval": "error",
@@ -55,7 +56,7 @@
       "no-implied-eval": "error",
       "no-implicit-globals": "error",
       "no-labels": "error",
-      "no-lonely-if": ["error"],
+      "no-lonely-if": ["warn"],
       "no-multiple-empty-lines": ["error"],
       "no-new-require": "error",
       "no-trailing-spaces": ["warn"],
@@ -101,13 +102,6 @@
       "react/self-closing-comp": "error",
       "react/style-prop-object": "error",
       "semi": ["warn", "always"],
-      "strict": "error",
-      "valid-jsdoc": ["warn", {
-         "prefer": { "return": "returns" },
-         "preferType": { "object": "Object" },
-         "requireReturn": false,
-         "requireParamDescription": false,
-         "requireReturnDescription": false
-      }]
+      "strict": "error"
    }
 }
