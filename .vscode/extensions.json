@@ -1,0 +1,17 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"PKief.material-icon-theme",
+		"leizongmin.node-module-intellisense",
+		"shinnn.stylelint",
+		"msjsdiag.debugger-for-chrome",
+		"cspotcode.vscode-mocha-latte",
+		"codezombiech.gitignore",
+		"pranaygp.vscode-css-peek",
+		"joelday.docthis",
+		"ziyasal.vscode-open-in-github",
+		"donjayamanne.githistory",
+		"anseki.vscode-color",
+		"pflannery.vscode-versionlens"
+	]
+}
