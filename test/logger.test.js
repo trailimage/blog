@@ -1,5 +1,3 @@
-'use strict';
-
 const C = require('../lib/constants');
 const config = require('../lib/config');
 const mocha = require('mocha');
@@ -11,7 +9,7 @@ describe('Logger', ()=> {
 
    before(()=> {
       originalTargets = config.log.targets;
-      config.log.targets = [ C.logTo.FILE, C.logTo.CONSOLE ];
+      config.log.targets = [C.logTo.FILE, C.logTo.CONSOLE];
       log.reset();
    });
 
@@ -22,5 +20,5 @@ describe('Logger', ()=> {
    after(()=> {
       config.log.targets = originalTargets;
       log.reset();
-   })
+   });
 });

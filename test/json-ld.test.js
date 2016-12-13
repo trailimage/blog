@@ -1,5 +1,3 @@
-'use strict';
-
 const ld = require('../lib/json-ld');
 const mocha = require('mocha');
 const expect = require('chai').expect;
@@ -21,17 +19,17 @@ describe('JSON-LD', ()=> {
    it('creates link data for posts', ()=> {
       const schema = ld.fromPost(post);
 
-      expect(schema).to.contain.all.keys(['author','name','publisher','headline','articleSection']);
+      expect(schema).to.contain.all.keys(['author', 'name', 'publisher', 'headline', 'articleSection']);
       expect(schema).has.property('@context', 'http://schema.org');
       expect(schema.name).equals('Spring Fish & Chips');
       expect(schema.headline).equals(schema.name);
       expect(schema.author).has.property('name', 'Jason Abbott');
       expect(schema.publisher).has.property('name', 'Trail Image');
-      expect(schema.articleSection).to.contain('Family')
+      expect(schema.articleSection).to.contain('Family');
    });
 
    it('creates link data for categories', ()=> {
-      const schema = ld.fromCategory(category);
+      ld.fromCategory(category);
    });
 
    it('serializes link data', ()=> {
