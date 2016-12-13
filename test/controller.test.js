@@ -1,5 +1,3 @@
-//region Imports
-
 const C = require('../lib/constants');
 const config = require('../lib/config');
 const cache = require('../lib/cache');
@@ -13,8 +11,6 @@ const { expect } = require('chai');
 const c = require('../lib/controller');
 const ph = C.route;
 
-//endregion
-//region Helpers
 /**
  * Expect standard Handlexitebars template response
  * @param {String} name Template name

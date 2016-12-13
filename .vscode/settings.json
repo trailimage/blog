@@ -13,5 +13,18 @@
       ".idea/": true
    },
 
+   "mocha.env": {
+      "FLICKR_API_KEY": "${env.FLICKR_API_KEY}",
+      "FLICKR_SECRET": "${env.FLICKR_SECRET}",
+      "REDISCLOUD_URL": "${env.REDISCLOUD_URL}",
+      "GOOGLE_DRIVE_KEY": "${env.GOOGLE_DRIVE_KEY}",
+      "GOOGLE_CLIENT_ID": "${env.GOOGLE_CLIENT_ID}",
+      "GOOGLE_SECRET": "${env.GOOGLE_SECRET}"
+   },
+   "mocha.files.glob": "test/**/*.test.js",
+   "mocha.options": {
+      "ui": "bdd"
+   },
+
    "npm-intellisense.scanDevDependencies": true
 }
