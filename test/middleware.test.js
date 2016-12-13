@@ -1,5 +1,3 @@
-'use strict';
-
 const C = require('../lib/constants');
 const cache = require('../lib/cache');
 const config = require('../lib/config');
@@ -119,6 +117,6 @@ describe('Middleware', ()=> {
       after(() => {
          cache.view.remove(viewSlug);
          config.cache.views = cacheViews;
-      })
+      });
    });
 });

@@ -13,7 +13,6 @@ declare namespace JsonLD {
       instrument: Thing,
       location: Place|PostalAddress|string,
       object: Thing,
-      participant: Organization|Person,
       result: Thing,
       startTime: Date,
       target: EntryPoint

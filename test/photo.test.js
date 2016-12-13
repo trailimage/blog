@@ -1,5 +1,3 @@
-'use strict';
-
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const factory = require('../lib/factory');
@@ -31,15 +29,15 @@ describe('Photos', ()=> {
    it('have certain sizes', ()=> {
       const p = post.photos.find(p => p.id == '8458410907');
 
-      expect(p.size).to.contain.all.keys(['big','normal','preview']);
+      expect(p.size).to.contain.all.keys(['big', 'normal', 'preview']);
       expect(p.size.big.height).equals(2048);
    });
 
    it('can retrieve EXIF', ()=> library.getEXIF('8459503474').then(exif => {
       expect(exif).to.exist;
       expect(exif).has.property('ISO', 400);
-      expect(exif).has.property('artist','Jason Abbott');
-      expect(exif).has.property('model','Nikon D700');
+      expect(exif).has.property('artist', 'Jason Abbott');
+      expect(exif).has.property('model', 'Nikon D700');
       expect(exif).has.property('fNumber', 5.6);
    }));
 

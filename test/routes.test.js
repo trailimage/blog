@@ -1,5 +1,3 @@
-'use strict';
-
 const mocha = require('mocha');
 const C = require('../lib/constants');
 const config = require('../lib/config');
@@ -14,7 +12,7 @@ describe('Routes', ()=> {
       const base = '/admin';
       expect(app.middleware).has.property(base);
       expect(app.routes.get).has.property(base + '/');
-      expect(app.routes.post).to.contain.all.keys([`${base}/map/delete`, `${base}/view/delete`])
+      expect(app.routes.post).to.contain.all.keys([`${base}/map/delete`, `${base}/view/delete`]);
    });
 
    it('creates series routes', ()=> {

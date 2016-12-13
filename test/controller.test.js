@@ -1,7 +1,3 @@
-'use strict';
-
-//region Imports
-
 const C = require('../lib/constants');
 const config = require('../lib/config');
 const cache = require('../lib/cache');
@@ -15,10 +11,8 @@ const { expect } = require('chai');
 const c = require('../lib/controller');
 const ph = C.route;
 
-//endregion
-//region Helpers
 /**
- * Expect standard Handlebars template response
+ * Expect standard Handlexitebars template response
  * @param {String} name Template name
  * @returns {Object}
  */
@@ -61,7 +55,7 @@ function expectInCache(keys, exists = true) {
    return Promise
       .all(keys.map(k => cache.view.exists(k)))
       // all() returns an array of outputs from each method
-      .then(results => { results.forEach(r => expect(r).equals(exists)); })
+      .then(results => { results.forEach(r => expect(r).equals(exists)); });
 }
 
 //endregion
@@ -74,7 +68,7 @@ describe('Controller', ()=> {
       factory.inject.google = googleMock;
       factory.buildLibrary().then(() => {
          middleware.enableStatusHelpers(req, res, ()=> {
-             middleware.enableViewCache(req, res, done);
+            middleware.enableViewCache(req, res, done);
          });
       });
    });
@@ -140,7 +134,7 @@ describe('Controller', ()=> {
             const options = expectTemplate(template.page.PHOTO_TAG);
             expect(options).has.property('alphabet', C.alphabet);
             expect(options).has.property('tags');
-            expect(options.tags).to.contain.all.keys(['a','b','c']);
+            expect(options.tags).to.contain.all.keys(['a', 'b', 'c']);
             done();
          };
          c.photo.tags(req, res);
@@ -171,7 +165,7 @@ describe('Controller', ()=> {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.EXIF);
             expect(options).has.property('EXIF');
-            expect(options.EXIF).to.contain.all.keys(['ISO','artist','lens','model']);
+            expect(options.EXIF).to.contain.all.keys(['ISO', 'artist', 'lens', 'model']);
             expect(options.EXIF).has.property('sanitized', true);
             done();
          };
@@ -186,7 +180,7 @@ describe('Controller', ()=> {
       it('renders home page for default category', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.CATEGORY);
-            expect(options).to.contain.all.keys(['description','headerCSS','jsonLD','posts','subtitle','title']);
+            expect(options).to.contain.all.keys(['description', 'headerCSS', 'jsonLD', 'posts', 'subtitle', 'title']);
             done();
          };
          c.category.home(req, res);
@@ -195,7 +189,7 @@ describe('Controller', ()=> {
       it('renders a list of subcategories', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.CATEGORY_LIST);
-            expect(options).to.contain.all.keys(['description','headerCSS','jsonLD','subcategories','subtitle','title']);
+            expect(options).to.contain.all.keys(['description', 'headerCSS', 'jsonLD', 'subcategories', 'subtitle', 'title']);
             done();
          };
          req.params[ph.ROOT_CATEGORY] = 'what';
@@ -205,7 +199,7 @@ describe('Controller', ()=> {
       it('displays category at path', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.CATEGORY_LIST);
-            expect(options).to.contain.all.keys(['description','headerCSS','jsonLD','subcategories','subtitle','title']);
+            expect(options).to.contain.all.keys(['description', 'headerCSS', 'jsonLD', 'subcategories', 'subtitle', 'title']);
             done();
          };
          req.params[ph.ROOT_CATEGORY] = 'when';
@@ -216,7 +210,7 @@ describe('Controller', ()=> {
       it('creates category menu', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.CATEGORY_MENU);
-            expect(options).to.contain.all.keys(['description','library']);
+            expect(options).to.contain.all.keys(['description', 'library']);
             done();
          };
          c.category.menu(req, res);
@@ -229,7 +223,7 @@ describe('Controller', ()=> {
       it('builds data for main menu', done => {
          res.onEnd = ()=> {
             const options = expectTemplate(template.page.POST_MENU_DATA);
-            expect(res.headers).has.property('Vary','Accept-Encoding');
+            expect(res.headers).has.property('Vary', 'Accept-Encoding');
             expect(options).has.property('library');
             done();
          };
@@ -249,7 +243,7 @@ describe('Controller', ()=> {
    describe('Cache', ()=> {
       beforeEach(() => { res.reset(); req.reset(); });
 
-      const postKeys = ['stanley-lake-snow-hike','brother-ride-2015/huckleberry-lookout'];
+      const postKeys = ['stanley-lake-snow-hike', 'brother-ride-2015/huckleberry-lookout'];
       const mapKeys = postKeys;
       let cacheViewConfig;
       let cacheMapConfig;
@@ -288,7 +282,7 @@ describe('Controller', ()=> {
          // restore original settings
          config.cache.views = cacheViewConfig;
          config.cache.maps = cacheMapConfig;
-      })
+      });
    });
 
    describe('RSS', ()=> {
@@ -306,7 +300,7 @@ describe('Controller', ()=> {
          const image = 'http://www.domain.com/img/logo.png';
          const author = { name: authorName, link: 'https://www.facebook.com/test.person' };
          const copyright = 'Copyright © ' + updated.getFullYear() + ' ' + authorName + '. All rights reserved';
-         let feed = new Feed({
+         const feed = new Feed({
             title: title,
             description: description,
             link: url,
@@ -315,8 +309,8 @@ describe('Controller', ()=> {
             author: author,
             updated: updated
          });
-         let source = feed.render('rss-2.0');
-         let target = '<?xml version="1.0" encoding="utf-8"?>' + nl
+         const source = feed.render('rss-2.0');
+         const target = '<?xml version="1.0" encoding="utf-8"?>' + nl
             + '<rss version="2.0">' + nl
             + tab + '<channel>' + nl
             + tab + tab + '<title>' + title + '</title>' + nl
@@ -347,7 +341,7 @@ describe('Controller', ()=> {
             expect(res.headers).has.property('Cache-Control', 'no-cache, no-store, must-revalidate');
             expect(res.headers).has.property('Pragma', 'no-cache');
             expect(res.headers).has.property('Expires', 0);
-            expect(options).to.contain.all.keys(['json','library','logs','maps','views']);
+            expect(options).to.contain.all.keys(['json', 'library', 'logs', 'maps', 'views']);
             done();
          };
          c.admin.home(req, res);
@@ -360,7 +354,7 @@ describe('Controller', ()=> {
             done();
          };
          c.admin.updateLibrary(req, res);
-      })
+      });
    });
 
    describe('Map', ()=> {

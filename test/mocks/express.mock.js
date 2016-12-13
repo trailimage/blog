@@ -1,5 +1,3 @@
-'use strict';
-
 const is = require('../../lib/is');
 
 function assert(methodName, pattern, handler) {
@@ -56,6 +54,6 @@ module.exports = {
          get: {},
          post: {}
       };
-      this.middleware = {}
+      this.middleware = {};
    }
 };

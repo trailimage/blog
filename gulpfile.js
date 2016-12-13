@@ -1,5 +1,3 @@
-'use strict';
-
 const gulp = require('gulp');
 const less = require('gulp-less');
 const merge = require('merge2');
@@ -18,7 +16,7 @@ const jsPath = './src/js/';
 gulp.task('less-main', ()=> LESS('ti'));
 gulp.task('less-map', ()=> LESS('map', 'mapfont'));
 gulp.task('less-admin', ()=> LESS('admin'));
-gulp.task('less', ['less-main','less-map','less-admin']);
+gulp.task('less', ['less-main', 'less-map', 'less-admin']);
 
 /**
  * Combine web fonts and transpile LESS
@@ -28,42 +26,42 @@ gulp.task('less', ['less-main','less-map','less-admin']);
  * @returns {jQuery.Promise}
  */
 function LESS(name, fontFile) {
-	if (fontFile === undefined) { fontFile = 'webfont'; }
+   if (fontFile === undefined) { fontFile = 'webfont'; }
 
-	return merge(
-		gulp.src(dist + 'fonts/' + fontFile + '.css'),
-		gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less' ] }))
-	)
-		.pipe(nano({ discardUnused: false }))
-		.pipe(concat(name + '.css'))
-		.pipe(gulp.dest(dist + 'css'));
+   return merge(
+      gulp.src(dist + 'fonts/' + fontFile + '.css'),
+      gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less'] }))
+   )
+      .pipe(nano({ discardUnused: false }))
+      .pipe(concat(name + '.css'))
+      .pipe(gulp.dest(dist + 'css'));
 }
 
-gulp.task('script', ['script-post','script-other','script-admin']);
+gulp.task('script', ['script-post', 'script-other', 'script-admin']);
 
-gulp.task('script-other', ()=> {
-	return gulp.src(jsPath + '!(jquery.lazyload.js|post.js|admin.js)')
-		.pipe(uglify())
-		.pipe(gulp.dest(dist + 'js'));
-});
+gulp.task('script-other', ()=>
+   gulp.src(jsPath + '!(jquery.lazyload.js|post.js|admin.js)')
+      .pipe(uglify())
+      .pipe(gulp.dest(dist + 'js'))
+);
 
-gulp.task('script-post', ()=> {
-	return gulp.src([jsPath + 'jquery.lazyload.js', jsPath + 'post.js'])
-		.pipe(concat('post.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(dist + 'js'));
-});
+gulp.task('script-post', ()=>
+   gulp.src([jsPath + 'jquery.lazyload.js', jsPath + 'post.js'])
+      .pipe(concat('post.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest(dist + 'js'))
+);
 
-gulp.task('script-admin', ()=> {
-	return gulp.src([jsPath + 'admin.js'])
-		.pipe(uglify())
-		.pipe(gulp.dest(dist + 'js'));
-});
+gulp.task('script-admin', ()=>
+   gulp.src([jsPath + 'admin.js'])
+      .pipe(uglify())
+      .pipe(gulp.dest(dist + 'js'))
+);
 
 // act on changes
 gulp.task('watch', ()=> {
-	gulp.watch('./src/less/*.less', ['less']);
-	gulp.watch('./src/js/*.js', ['script']);
+   gulp.watch('./src/less/*.less', ['less']);
+   gulp.watch('./src/js/*.js', ['script']);
 });
 
 gulp.task('default', ['less', 'script']);
