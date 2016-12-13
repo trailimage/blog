@@ -5,12 +5,26 @@
    "command": "npm",
    "isShellCommand": true,
    "showOutput": "always",
+   "suppressTaskName": true,
    "tasks": [
       {
-         "taskName": "watch",
-         "args": [],
+         "taskName": "Install Modules",
+         "args": ["install"]
+      },
+      {
+         "taskName": "Update Modules",
+         "args": ["update"]
+      },
+      {
+         "taskName": "Test",
+         "args": ["run", "test-pretty"],
+         "isTestCommand": true
+      },
+      {
+         "taskName": "Build and Watch",
+         "args": ["run", "watch"],
          "isBuildCommand": true,
-         "isWatching": false
+         "isWatching": true
       }
    ]
 }

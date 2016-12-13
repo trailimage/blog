@@ -11,8 +11,8 @@
     "node": ">=6.6.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
-    "test-ci": "node_modules/.bin/mocha --recursive --reporter spec",
+    "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
+    "test": "node_modules/.bin/mocha --recursive --reporter spec",
     "watch": "node_modules/.bin/gulp watch",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
     "mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
