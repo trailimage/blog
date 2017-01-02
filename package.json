@@ -8,22 +8,24 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=6.6.0"
+    "node": ">=7.0.0"
   },
   "scripts": {
+    "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
+    "watch": "node_modules/.bin/gulp watch",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
     "mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
   },
   "dependencies": {
-    "body-parser": "^1.10",
+    "body-parser": "^1.15.0",
     "compression": "^1.6.0",
     "connect-wwwhisper": "^0.1.16",
-    "express": "^4.0",
+    "express": "^4.14.0",
     "express-hbs": "^1.0.0",
     "feed": "^0.3.0",
     "google-auth-library": "^0.9.9",
-    "googleapis": "^14.2.0",
+    "googleapis": "^15.0.0",
     "node-fetch": "^1.6.3",
     "oauth": "^0.9.0",
     "pdfkit": "^0.8.0",
@@ -34,16 +36,23 @@
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
-    "chai": "^3.4.1",
-    "gulp": "^3.8.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.12.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-react": "^6.8.0",
+    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
     "gulp-less": "^3.3.0",
-    "gulp-cssnano": "^2.0.0",
-    "gulp-mocha": "^3.0.0",
+    "gulp-mocha": "^3.0.1",
     "gulp-uglify": "^2.0.0",
-    "merge2": "^1.0.0",
-    "mocha": "^3.1.2",
+    "merge2": "^1.0.2",
+    "mocha": "^3.2.0",
+    "mocha-pretty-spec-reporter": "0.1.0-beta.2",
+    "stylelint": "^7.6.0",
+    "stylelint-config-standard": "^15.0.0",
     "webfont-dl": "^0.1.2"
   },
   "repository": {

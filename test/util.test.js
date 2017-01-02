@@ -1,5 +1,3 @@
-'use strict';
-
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const config = require('../lib/config');
@@ -11,7 +9,7 @@ describe('Utilities', ()=> {
    describe('Date and Time', ()=> {
       it('display date as MMM d, YYYY', ()=> {
          // month value is zero-based
-         expect(util.date.toString(new Date(1973,2,15))).equals('March 15, 1973');
+         expect(util.date.toString(new Date(1973, 2, 15))).equals('March 15, 1973');
       });
 
       it('shows AM or PM for hour of day', ()=> {
@@ -69,7 +67,7 @@ describe('Utilities', ()=> {
       });
 
       it('creates HTML for a photo tag list', ()=> {
-         expect(util.html.photoTagList(['Second','First','Third and Last'])).equals(
+         expect(util.html.photoTagList(['Second', 'First', 'Third and Last'])).equals(
             '<a href="/photo-tag/first" rel="tag">First</a> <a href="/photo-tag/second" rel="tag">Second</a> <a href="/photo-tag/thirdandlast" rel="tag">Third and Last</a> ');
       });
 
@@ -198,7 +196,7 @@ describe('Utilities', ()=> {
       });
 
       it('matches post categories to glyphicons', ()=> {
-         config.style.icon.category = { 'Test': 'success', 'default': 'whatever' };
+         config.style.icon.category = { Test: 'success', default: 'whatever' };
 
          expect(util.icon.category('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
          // revert to default if provided
@@ -214,189 +212,189 @@ describe('Utilities', ()=> {
       });
    });
 
-	it('truncates IPv6 to v4', ()=> {
-		expect(util.IPv6('::1')).equals('127.0.0.1');
-		expect(util.IPv6('192.12.15.3')).equals('192.12.15.3');
-		expect(util.IPv6('::abf2:192.12.15.3')).equals('192.12.15.3');
-	});
+   it('truncates IPv6 to v4', ()=> {
+      expect(util.IPv6('::1')).equals('127.0.0.1');
+      expect(util.IPv6('192.12.15.3')).equals('192.12.15.3');
+      expect(util.IPv6('::abf2:192.12.15.3')).equals('192.12.15.3');
+   });
 
-	it('extracts top domain from URL', ()=> {
-		expect(util.topDomain('http://www.microsoft.com')).equals('microsoft.com');
-		expect(util.topDomain('https://github.com/bjoshuanoah/express-spam-referral-blocker')).equals('github.com');
-		expect(util.topDomain('342342342.copyrightclaims.org')).equals('copyrightclaims.org');
-	});
+   it('extracts top domain from URL', ()=> {
+      expect(util.topDomain('http://www.microsoft.com')).equals('microsoft.com');
+      expect(util.topDomain('https://github.com/bjoshuanoah/express-spam-referral-blocker')).equals('github.com');
+      expect(util.topDomain('342342342.copyrightclaims.org')).equals('copyrightclaims.org');
+   });
 
-	it('formats log messages', ()=> {
-		let field = 'message';
-		let log = { message: null };
+   it('formats log messages', ()=> {
+      const field = 'message';
+      const log = { message: null };
 
-		expect(util.logMessage(log, field)).equals('[no message]');
+      expect(util.logMessage(log, field)).equals('[no message]');
 
-		log.message = '/autumn-ride-to-boise/gpx not found for 10.180.57.199';
+      log.message = '/autumn-ride-to-boise/gpx not found for 10.180.57.199';
 
-		let output = '<a href="/autumn-ride-to-boise/gpx" target="_blank">/autumn-ride-to-boise/gpx</a>'
-			+ ' not found for <a href="' + config.log.ipLookupUrl + '10.180.57.199" target="_blank">10.180.57.199</a>';
+      let output = '<a href="/autumn-ride-to-boise/gpx" target="_blank">/autumn-ride-to-boise/gpx</a>'
+         + ' not found for <a href="' + config.log.ipLookupUrl + '10.180.57.199" target="_blank">10.180.57.199</a>';
 
-		expect(util.logMessage(log, field)).equals(output);
+      expect(util.logMessage(log, field)).equals(output);
 
-		log.message  = '/8330346003 not found for 10.230.214.144';
-		output = '/<a href="' + config.log.photoUrl + '8330346003" target="_blank">8330346003</a>'
-			+ ' not found for <a href="' + config.log.ipLookupUrl + '10.230.214.144" target="_blank">10.230.214.144</a>';
+      log.message  = '/8330346003 not found for 10.230.214.144';
+      output = '/<a href="' + config.log.photoUrl + '8330346003" target="_blank">8330346003</a>'
+            + ' not found for <a href="' + config.log.ipLookupUrl + '10.230.214.144" target="_blank">10.230.214.144</a>';
 
-		expect(util.logMessage(log, field)).equals(output);
-	});
+      expect(util.logMessage(log, field)).equals(output);
+   });
 
 
-	it('adds .remove() method to strings', ()=> {
-		expect('string').to.have.property('remove');
-		expect(('some text').remove('text')).equals('some ');
-	});
+   it('adds .remove() method to strings', ()=> {
+      expect('string').to.have.property('remove');
+      expect(('some text').remove('text')).equals('some ');
+   });
 
-	it('substitutes placeholders for values', ()=> {
-		expect(util.format('nothing')).equals('nothing');
-		expect(util.format('{0} {1}', 'one', 'two')).equals('one two');
-		expect(util.format('{1} {0}', 'one', 'two')).equals('two one');
-	});
+   it('substitutes placeholders for values', ()=> {
+      expect(util.format('nothing')).equals('nothing');
+      expect(util.format('{0} {1}', 'one', 'two')).equals('one two');
+      expect(util.format('{1} {0}', 'one', 'two')).equals('two one');
+   });
 
-	it('capitalizes first word', ()=> {
-		expect(util.capitalize('one two')).equals('One two');
-	});
+   it('capitalizes first word', ()=> {
+      expect(util.capitalize('one two')).equals('One two');
+   });
 
-	it('converts phrase to URL slug', ()=> {
-		expect(util.slug('Wiggle and Roll')).equals('wiggle-and-roll');
-		expect(util.slug('Wiggle and    Sing')).equals('wiggle-and-sing');
-		expect(util.slug('Too---dashing')).equals('too-dashing');
-		expect(util.slug('powerful/oz')).equals('powerful-oz');
-	});
+   it('converts phrase to URL slug', ()=> {
+      expect(util.slug('Wiggle and Roll')).equals('wiggle-and-roll');
+      expect(util.slug('Wiggle and    Sing')).equals('wiggle-and-sing');
+      expect(util.slug('Too---dashing')).equals('too-dashing');
+      expect(util.slug('powerful/oz')).equals('powerful-oz');
+   });
 
-	describe('Photo Captions', ()=> {
-		const nl = '\r\n';
-		// double-space
-		const ds = nl + nl;
+   describe('Photo Captions', ()=> {
+      const nl = '\r\n';
+      // double-space
+      const ds = nl + nl;
 
-		it('identifies quote at end of text', ()=> {
-			let source = lipsum + ds + '“' + lipsum + '”';
-			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
+      it('identifies quote at end of text', ()=> {
+         const source = lipsum + ds + '“' + lipsum + '”';
+         const target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
 
-			expect(util.html.caption(source)).equals(target);
-		});
+         expect(util.html.caption(source)).equals(target);
+      });
 
-		it('identifies paragraphs within a quote', ()=> {
-			let source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
-			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
+      it('identifies paragraphs within a quote', ()=> {
+         const source = lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
+         const target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p><p>' + lipsum + '</p><p>' + lipsum + '</p></blockquote>';
 
-			expect(util.html.caption(source)).equals(target);
-		});
+         expect(util.html.caption(source)).equals(target);
+      });
 
-		it('identifies quote within text', ()=> {
-			// text before and after quote
-			let source = lipsum + ds + '“' + lipsum + '”' + ds + lipsum;
-			let target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote><p class="first">' + lipsum + '</p>';
+      it('identifies quote within text', ()=> {
+         // text before and after quote
+         const source = lipsum + ds + '“' + lipsum + '”' + ds + lipsum;
+         const target = '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote><p class="first">' + lipsum + '</p>';
 
-			expect(util.html.caption(source)).equals(target);
-		});
+         expect(util.html.caption(source)).equals(target);
+      });
 
-		it('identifies inline poems', ()=> {
-			// no text after
-			let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
-				+ 'And gazed down on the grandeur below' + nl
-				+ 'And thought of the vast army of people' + nl
-				+ '· · Who never get out as we go?' + ds
-				+ 'Have you ever trailed into the desert' + nl
-				+ 'Where the hills fade from gold into blue,' + nl
-				+ 'And then thought of some poor other fellow' + nl
-				+ 'Who would like to stand alongside of you?';
-			let target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
-				+ 'Have you ever stood on the top of a mountain<br/>'
-				+ 'And gazed down on the grandeur below<br/>'
-				+ 'And thought of the vast army of people<br/>'
-				+ '<span class="tab"></span>Who never get out as we go?</p><p>'
-				+ 'Have you ever trailed into the desert<br/>'
-				+ 'Where the hills fade from gold into blue,<br/>'
-				+ 'And then thought of some poor other fellow<br/>'
-				+ 'Who would like to stand alongside of you?</p></blockquote>';
+      it('identifies inline poems', ()=> {
+         // no text after
+         let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+            + 'And gazed down on the grandeur below' + nl
+            + 'And thought of the vast army of people' + nl
+            + '· · Who never get out as we go?' + ds
+            + 'Have you ever trailed into the desert' + nl
+            + 'Where the hills fade from gold into blue,' + nl
+            + 'And then thought of some poor other fellow' + nl
+            + 'Who would like to stand alongside of you?';
+         let target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
+            + 'Have you ever stood on the top of a mountain<br/>'
+            + 'And gazed down on the grandeur below<br/>'
+            + 'And thought of the vast army of people<br/>'
+            + '<span class="tab"></span>Who never get out as we go?</p><p>'
+            + 'Have you ever trailed into the desert<br/>'
+            + 'Where the hills fade from gold into blue,<br/>'
+            + 'And then thought of some poor other fellow<br/>'
+            + 'Who would like to stand alongside of you?</p></blockquote>';
 
-			expect(util.html.caption(source)).equals(target);
+         expect(util.html.caption(source)).equals(target);
 
-			// text after poem
-			source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
-				+ 'And gazed down on the grandeur below' + nl
-				+ 'And thought of the vast army of people.' + ds
-				+ lipsum;
-			target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
-				+ 'Have you ever stood on the top of a mountain<br/>'
-				+ 'And gazed down on the grandeur below<br/>'
-				+ 'And thought of the vast army of people.</p></blockquote>'
-				+ '<p class="first">' + lipsum + '</p>';
+         // text after poem
+         source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
+            + 'And gazed down on the grandeur below' + nl
+            + 'And thought of the vast army of people.' + ds
+            + lipsum;
+         target = '<p>' + lipsum + '</p><blockquote class="poem"><p>'
+            + 'Have you ever stood on the top of a mountain<br/>'
+            + 'And gazed down on the grandeur below<br/>'
+            + 'And thought of the vast army of people.</p></blockquote>'
+            + '<p class="first">' + lipsum + '</p>';
 
-			expect(util.html.caption(source)).equals(target);
-		});
+         expect(util.html.caption(source)).equals(target);
+      });
 
-		it('identifies haiku', ()=> {
-			let source = 'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
-			let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<span class="glyphicon glyphicon-leaf"></span></p>';
+      it('identifies haiku', ()=> {
+         let source = 'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
+         let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<span class="glyphicon glyphicon-leaf"></span></p>';
 
-			expect(util.html.story(source)).equals(target);
+         expect(util.html.story(source)).equals(target);
 
-			source = 'cows stand chewing' + nl + 'wet meadow grass' + nl + 'while mud swallows wheels' + ds
-				+ 'Here we have Joel "Runs with Cows" Abbott. He did a little loop out among them—kind of became one of them.'
-			target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<span class="glyphicon glyphicon-leaf"></span></p>'
-				+ '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
+         source = 'cows stand chewing' + nl + 'wet meadow grass' + nl + 'while mud swallows wheels' + ds
+            + 'Here we have Joel "Runs with Cows" Abbott. He did a little loop out among them—kind of became one of them.';
+         target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<span class="glyphicon glyphicon-leaf"></span></p>'
+            + '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
 
-			expect(util.html.story(source)).equals(target);
-		});
+         expect(util.html.story(source)).equals(target);
+      });
 
-		it('identifies captions that are entirely a poem', ()=> {
-			let source = '-' + nl
-				+ 'Begotten Not Born' + nl
-				+ 'Indwelling Transcendence' + nl
-				+ '· · · · Infinite Regress' + nl
-				+ 'Uncertain Progress' + nl
-				+ '-';
-			let target = '<p class="poem">'
-				+ 'Begotten Not Born<br/>'
-				+ 'Indwelling Transcendence<br/>'
-				+ '<span class="tab"></span><span class="tab"></span>Infinite Regress<br/>'
-				+ 'Uncertain Progress</p>';
+      it('identifies captions that are entirely a poem', ()=> {
+         const source = '-' + nl
+            + 'Begotten Not Born' + nl
+            + 'Indwelling Transcendence' + nl
+            + '· · · · Infinite Regress' + nl
+            + 'Uncertain Progress' + nl
+            + '-';
+         const target = '<p class="poem">'
+            + 'Begotten Not Born<br/>'
+            + 'Indwelling Transcendence<br/>'
+            + '<span class="tab"></span><span class="tab"></span>Infinite Regress<br/>'
+            + 'Uncertain Progress</p>';
 
-			expect(util.html.story(source)).equals(target);
-		});
+         expect(util.html.story(source)).equals(target);
+      });
 
-		it('styles superscripts', ()=> {
-			let source = lipsum + '²';
-			let target = '<p>' + lipsum + '<sup>²</sup></p>';
-			expect(util.html.caption(source)).equals(target);
-		});
+      it('styles superscripts', ()=> {
+         const source = lipsum + '²';
+         const target = '<p>' + lipsum + '<sup>²</sup></p>';
+         expect(util.html.caption(source)).equals(target);
+      });
 
-		it('identifies footnotes', ()=> {
-			let source = lipsum + nl
-				+ '___' + nl
-				+ '* Note about photo credit' + nl
-				+ '¹ Some other note' + nl
-				+ '² Last note';
-			let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
-				+ '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
-				+ '<li><span>Some other note</span></li>'
-				+ '<li><span>Last note</span></li></ol>';
+      it('identifies footnotes', ()=> {
+         let source = lipsum + nl
+            + '___' + nl
+            + '* Note about photo credit' + nl
+            + '¹ Some other note' + nl
+            + '² Last note';
+         let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
+            + '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
+            + '<li><span>Some other note</span></li>'
+            + '<li><span>Last note</span></li></ol>';
 
-			expect(util.html.caption(source)).equals(target);
+         expect(util.html.caption(source)).equals(target);
 
-			source = lipsum + nl
-				+ '___' + nl
-				+ '¹ Some other note' + nl
-				+ '² Last note';
-			target = '<p>' + lipsum + '</p><ol class="footnotes">'
-				+ '<li><span>Some other note</span></li>'
-				+ '<li><span>Last note</span></li></ol>';
+         source = lipsum + nl
+            + '___' + nl
+            + '¹ Some other note' + nl
+            + '² Last note';
+         target = '<p>' + lipsum + '</p><ol class="footnotes">'
+            + '<li><span>Some other note</span></li>'
+            + '<li><span>Last note</span></li></ol>';
 
-			expect(util.html.caption(source)).equals(target);
+         expect(util.html.caption(source)).equals(target);
 
-			// should ignore trailing newline
-			source += nl;
+         // should ignore trailing newline
+         source += nl;
 
-			expect(util.html.caption(source)).equals(target);
-		});
+         expect(util.html.caption(source)).equals(target);
+      });
 
-		it.skip('styles quips');
-	});
+      it.skip('styles quips');
+   });
 });

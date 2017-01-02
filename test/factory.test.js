@@ -1,5 +1,3 @@
-'use strict';
-
 const is = require('../lib/is');
 const mocha = require('mocha');
 const expect = require('chai').expect;
@@ -17,7 +15,7 @@ describe('Factory', ()=> {
    }));
 
    it('reloads library and identifies changed cache keys', ()=> {
-      const postKeys = ['owyhee-snow-and-sand/lowlands','kuna-cave-fails-to-impress'];
+      const postKeys = ['owyhee-snow-and-sand/lowlands', 'kuna-cave-fails-to-impress'];
       library.remove(postKeys);
 
       return library.load(false).then(() => {
@@ -35,5 +33,5 @@ describe('Factory', ()=> {
          expect(item).to.exist;
          expect(is.cacheItem(item)).is.true;
       })
-   )
+   );
 });

@@ -1,5 +1,3 @@
-'use strict';
-
 const map = require('../lib/map');
 const mocha = require('mocha');
 const { expect } = require('chai');
@@ -19,27 +17,27 @@ function expectGeoPoint(point) {
 
 describe('Map', ()=> {
    const gpx = map.gpx;
-	const xml = new DOM().parseFromString('<trkpt lat="43.238334" lon="-116.366600">'
-		+ '<ele>926.90</ele>'
-		+ '<time>2013-11-02T18:54:59Z</time>'
-		+ '<fix>3d</fix>'
-		+ '</trkpt>');
+   const xml = new DOM().parseFromString('<trkpt lat="43.238334" lon="-116.366600">'
+      + '<ele>926.90</ele>'
+      + '<time>2013-11-02T18:54:59Z</time>'
+      + '<fix>3d</fix>'
+      + '</trkpt>');
 
-	it('returns first node of given type', ()=> {
-		const node = gpx.firstNode(xml, 'trkpt');
-		expect(node).is.not.empty;
-	});
-
-	it('converts XML attributes to numbers', ()=> {
+   it('returns first node of given type', ()=> {
       const node = gpx.firstNode(xml, 'trkpt');
-		expect(gpx.numberAttribute(node, 'lat')).equals(43.238334);
-		expect(gpx.numberAttribute(node, 'lon')).equals(-116.3666);
-	});
+      expect(node).is.not.empty;
+   });
 
-	it('returns node content', ()=> {
+   it('converts XML attributes to numbers', ()=> {
+      const node = gpx.firstNode(xml, 'trkpt');
+      expect(gpx.numberAttribute(node, 'lat')).equals(43.238334);
+      expect(gpx.numberAttribute(node, 'lon')).equals(-116.3666);
+   });
+
+   it('returns node content', ()=> {
       const node = gpx.firstNode(xml, 'ele');
-		expect(gpx.value(node)).equals('926.90');
-	});
+      expect(gpx.value(node)).equals('926.90');
+   });
 
    it('converts between degrees and radians', ()=> {
       expect(map.toRadians(48)).within(0.83, 0.84);
@@ -99,7 +97,7 @@ describe('Map', ()=> {
          expect(geo.features).is.lengthOf(4);
 
          const first = geo.features[0];
-         expect(first).to.contain.all.keys(['geometry','properties']);
+         expect(first).to.contain.all.keys(['geometry', 'properties']);
          expect(first.geometry).has.property('type', map.type.LINE);
          expect(first.geometry).has.property('coordinates');
          expect(first.geometry.coordinates).is.instanceOf(Array);

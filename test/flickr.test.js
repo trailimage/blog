@@ -1,5 +1,3 @@
-'use strict';
-
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const flickr = require('../lib/flickr');
@@ -11,9 +9,9 @@ describe('Flickr', ()=> {
    // disable caching so calls hit API
    before(() => { config.cache.json = false; });
 
-	it('retrieves all collections', ()=> flickr.getCollections().then(json => {
+   it('retrieves all collections', ()=> flickr.getCollections().then(json => {
       expect(json).to.be.instanceOf(Array);
-	}));
+   }));
 
    it('catches non-existent set request', ()=> flickr.getSetInfo('45').catch(error => {
       expect(error).equals('Flickr photosets.getInfo failed for photoset_id 45');
