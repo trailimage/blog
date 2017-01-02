@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=6.6.0"
+    "node": ">=7.0.0"
   },
   "scripts": {
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",

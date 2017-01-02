@@ -102,6 +102,19 @@
       "react/self-closing-comp": "error",
       "react/style-prop-object": "error",
       "semi": ["warn", "always"],
-      "strict": "error"
+      "strict": "error",
+      "valid-jsdoc": ["warn", {
+         "prefer": { "return": "returns" },
+         "preferType": {
+            "Boolean": "boolean",
+            "Number": "number",
+            "Object": "object",
+            "String": "string",
+            "any": "*"
+         },
+         "requireReturn": false,
+         "requireParamDescription": false,
+         "requireReturnDescription": false
+      }]
    }
 }
