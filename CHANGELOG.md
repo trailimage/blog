@@ -1,3 +1,7 @@
+## 2.2.0
+- Use in-memory caching rather than Redis for views
+- Update dependencies
+
 ## 2.1.3
 - Adjust layout for iPad
 - Remove "Photography" from title

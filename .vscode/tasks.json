@@ -3,6 +3,7 @@
    // for the documentation about the tasks.json format
    "version": "0.1.0",
    "command": "npm",
+   "_runner": "terminal",
    "isShellCommand": true,
    "showOutput": "always",
    "suppressTaskName": true,
@@ -24,7 +25,7 @@
          "taskName": "Build and Watch",
          "args": ["run", "watch"],
          "isBuildCommand": true,
-         "isWatching": true
+         "isBackground": true
       }
    ]
 }
