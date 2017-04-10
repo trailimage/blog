@@ -87,5 +87,5 @@ function applyMiddleware(app) {
 function filter(regex, fn) {
    return (req, res, next) => {
       if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
-   }
+   };
 }
