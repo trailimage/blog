@@ -1,3 +1,6 @@
+## 2.1.4
+- Update Google tokens and fix authorization views
+
 ## 2.1.3
 - Adjust layout for iPad
 - Remove "Photography" from title
