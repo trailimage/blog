@@ -1,30 +1,29 @@
 {
    // See https://go.microsoft.com/fwlink/?LinkId=733558
    // for the documentation about the tasks.json format
-   "version": "0.1.0",
-   "command": "npm",
+   "version": "2.0.0",   
    "isShellCommand": true,
    "showOutput": "always",
    "suppressTaskName": true,
    "tasks": [
       {
          "taskName": "Install Modules",
-         "args": ["install"]
+         "command": "npm install"
       },
       {
          "taskName": "Update Modules",
-         "args": ["update"]
+         "command": "npm update"
       },
       {
          "taskName": "Test",
-         "args": ["run", "test-pretty"],
+         "command": "npm run test-pretty",
          "isTestCommand": true
       },
       {
          "taskName": "Build and Watch",
-         "args": ["run", "watch"],
+         "command": "npm run watch",
          "isBuildCommand": true,
-         "isWatching": true
+         "isBackground": true
       }
    ]
 }
