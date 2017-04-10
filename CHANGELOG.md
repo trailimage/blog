@@ -1,3 +1,6 @@
+## 2.2.1
+- Update Google tokens and fix authorization views
+
 ## 2.2.0
 - Use in-memory caching rather than Redis for views
 - Update dependencies

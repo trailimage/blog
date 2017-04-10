@@ -19,7 +19,7 @@ function createWebService() {
    defineViews(app);
 
    if (config.needsAuth) {
-		// must authenticate before normal routes are available
+      // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
       log.infoIcon(C.icon.lock, 'Listening for authentication on port %d', port);
@@ -44,7 +44,7 @@ function defineViews(app) {
    const engine = 'hbs';
    const root = __dirname;
 
-	// http://expressjs.com/4x/api.html#app-settings
+   // http://expressjs.com/4x/api.html#app-settings
    app.set('views', root + '/views');
    app.set('view engine', engine);
    app.engine(engine, hbs.express4({
@@ -59,7 +59,7 @@ function defineViews(app) {
  * @see http://expressjs.com/api.html#app.use
  */
 function applyMiddleware(app) {
-	// https://github.com/expressjs/compression/blob/master/README.md
+   // https://github.com/expressjs/compression/blob/master/README.md
    const compress = require('compression');
    const bodyParser = require('body-parser');
    const middleware = require('./lib/middleware');
@@ -67,15 +67,15 @@ function applyMiddleware(app) {
    app.use(middleware.blockSpamReferers);
 
    if (config.usePersona) {
-		// use wwwhisper middleware to authenticate some routes
-		// https://devcenter.heroku.com/articles/wwwhisper
+      // use wwwhisper middleware to authenticate some routes
+      // https://devcenter.heroku.com/articles/wwwhisper
       const wwwhisper = require('connect-wwwhisper');
 
-         //app.use(/\/admin|\/wwwhisper/gi, wwwhisper(false));
+      //app.use(/\/admin|\/wwwhisper/gi, wwwhisper(false));
       app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
-         //app.use(['/admin','/wwwhisper'], wwwhisper(false));
+      //app.use(['/admin','/wwwhisper'], wwwhisper(false));
    }
-	// needed to parse admin page posts with extended enabled for form select arrays
+   // needed to parse admin page posts with extended enabled for form select arrays
    app.use('/admin', bodyParser.urlencoded({ extended: true }));
    app.use(compress({}));
    app.use(middleware.enableStatusHelpers);
