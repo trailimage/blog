@@ -1,3 +1,6 @@
+## 2.2.2
+- Fix missing JSON-LD @type for blog entries
+
 ## 2.2.1
 - Update Google tokens and fix authorization views
 
