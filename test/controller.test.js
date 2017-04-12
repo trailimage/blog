@@ -13,8 +13,8 @@ const ph = C.route;
 
 /**
  * Expect standard Handlexitebars template response
- * @param {String} name Template name
- * @returns {Object}
+ * @param {string} name Template name
+ * @returns {object}
  */
 function expectTemplate(name) {
    expect(res.httpStatus).equals(C.httpStatus.OK);
@@ -24,7 +24,7 @@ function expectTemplate(name) {
 }
 
 /**
- * @param {String} path Redirection target
+ * @param {string} path Redirection target
  */
 function expectRedirect(path) {
    expect(res.redirected).to.exist;
@@ -34,7 +34,7 @@ function expectRedirect(path) {
 
 /**
  * Expectations for JSON responses
- * @returns {String|Object} response content
+ * @returns {string|object} response content
  */
 function expectJSON() {
    expect(res.httpStatus).equals(C.httpStatus.OK);
@@ -47,8 +47,8 @@ function expectJSON() {
 
 /**
  * Run exists() method for each key and confirm it does or does not exist
- * @param {String[]} keys
- * @param {Boolean} [exists]
+ * @param {string[]} keys
+ * @param {boolean} [exists]
  * @returns {Promise}
  */
 function expectInCache(keys, exists = true) {
@@ -57,8 +57,6 @@ function expectInCache(keys, exists = true) {
       // all() returns an array of outputs from each method
       .then(results => { results.forEach(r => expect(r).equals(exists)); });
 }
-
-//endregion
 
 describe('Controller', ()=> {
    before(done => {
@@ -314,17 +312,17 @@ describe('Controller', ()=> {
             + '<rss version="2.0">' + nl
             + tab + '<channel>' + nl
             + tab + tab + '<title>' + title + '</title>' + nl
-            + tab + tab + '<description>' + description + '</description>' + nl
             + tab + tab + '<link>' + url + '</link>' + nl
+            + tab + tab + '<description>' + description + '</description>' + nl
             + tab + tab + '<lastBuildDate>' + updated.toUTCString() + '</lastBuildDate>' + nl
             + tab + tab + '<docs>http://blogs.law.harvard.edu/tech/rss</docs>' + nl
+            + tab + tab + '<generator>Feed for Node.js</generator>' + nl
             + tab + tab + '<image>' + nl
             + tab + tab + tab + '<title>' + title + '</title>' + nl
             + tab + tab + tab + '<url>' + image + '</url>' + nl
             + tab + tab + tab + '<link>' + url + '</link>' + nl
             + tab + tab + '</image>' + nl
             + tab + tab + '<copyright>' + copyright + '</copyright>' + nl
-            + tab + tab + '<generator>Feed for Node.js</generator>' + nl
             + tab + '</channel>' + nl
             + '</rss>';
 

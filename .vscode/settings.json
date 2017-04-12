@@ -9,9 +9,6 @@
    "files.associations": {
       "procfile": "yaml"
    },
-   "files.exclude": {
-      ".idea/": true
-   },
 
    "mocha.env": {
       "FLICKR_API_KEY": "${env.FLICKR_API_KEY}",
@@ -24,7 +21,5 @@
    "mocha.files.glob": "test/**/*.test.js",
    "mocha.options": {
       "ui": "bdd"
-   },
-
-   "npm-intellisense.scanDevDependencies": true
+   }
 }
