@@ -1,3 +1,7 @@
+## 2.2.3
+- Update dependencies
+- Use memory instead of Redis to cache views
+
 ## 2.2.2
 - Fix missing JSON-LD @type for blog entries
 

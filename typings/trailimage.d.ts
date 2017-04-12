@@ -10,8 +10,6 @@ interface FlickrOptions {
    args: Object
 }
 
-//region IO
-
 interface ViewCacheItem {
    buffer: Buffer,
    eTag: string
@@ -57,9 +55,6 @@ interface MockResponse extends BlogRequest {
    endOnRender: boolean,
    setHeader(key: string, value: string): MockResponse
 }
-
-//endregion
-//region Models
 
 interface Category {
    title: string,
@@ -156,5 +151,3 @@ interface Size {
    height: number,
    isEmpty: boolean
 }
-
-//endregion
