@@ -1,9 +1,6 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-	{{> head-meta}}
-	<script type="text/javascript">
-		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
-	</script>
+	{{> head-meta}}	
 {{#unless post.feature}}
 	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
 	{{#if post.previousIsPart}}
@@ -16,6 +13,9 @@
 	{{> head-files}}
 	{{> head-facebook}}
 	{{> ga}}
+   <script type="text/javascript">
+		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
+	</script>
 	<script src='/js/post.js' type='text/javascript' defer></script>
 	{{> json-ld}}
 </head>
@@ -70,7 +70,7 @@
 		{{! https://developers.google.com/maps/documentation/static-maps/ }}
 		{{! 640 is maximum width of free API: https://developers.google.com/maps/documentation/static-maps/intro#Imagesizes }}
 		<div class='map'>
-			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}"/></a>
+			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}" width="640" height="200"/></a>
 		</div>
 		{{/if}}
 	{{/unless}}
