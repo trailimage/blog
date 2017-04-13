@@ -1,3 +1,6 @@
+## 2.2.4
+- Fix bad GPX caching in Redis
+
 ## 2.2.3
 - Update dependencies
 - Use memory instead of Redis to cache views
