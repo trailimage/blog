@@ -7,6 +7,13 @@
    "suppressTaskName": true,
    "tasks": [
       {
+         "taskName": "Run server",
+         "command": "node app.js",
+         "options": {
+            "cwd": "${workspaceRoot}"
+         }
+      },
+      {
          "taskName": "Install Modules",
          "command": "npm install"
       },
