@@ -1,0 +1,30 @@
+{
+   "env": {
+      "browser": true,
+      "commonjs": false,
+      "es6": false,
+      "mocha": false
+   },
+   "extends": "eslint:recommended",
+   "parser": "babel-eslint",
+   "parserOptions": {
+      "ecmaVersion": 5,
+      "ecmaFeatures": {
+         "experimentalObjectRestSpread": false,
+         "jsx": false
+      },
+      "sourceType": "script"
+   },
+   "globals": {
+      // jQuery
+      "$": true,
+      // defined inline on map.hbs
+      "allowDownload": true,    
+      // Google maps
+      "google": true,
+      // defined inline on map.hbs
+      "mapPhotoID": true,
+      // defined inline on map.hbs
+      "postKey": true
+   }
+}

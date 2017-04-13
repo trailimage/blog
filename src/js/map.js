@@ -16,9 +16,9 @@ var trip = {
 
 /**
  * postKey, mapPhotoID and allowDownload are supplied by map.hbs
- * @type {Number} mapPhotoID
- * @type {String} postKey
- * @type {Boolean} allowDownload
+ * @type {number} mapPhotoID
+ * @type {string} postKey
+ * @type {boolean} allowDownload
  */
 google.maps.event.addDomListener(window, 'load', function() {
    var canvas = document.getElementById('map-canvas');
@@ -74,7 +74,7 @@ google.maps.event.addDomListener(window, 'load', function() {
 
       /**
        * Set a timer to complete the map when all features have been added
-       * @type {Number}
+       * @type {number}
        */
       trip.timer = window.setTimeout(function() {
          trip.map.fitBounds(trip.bounds);

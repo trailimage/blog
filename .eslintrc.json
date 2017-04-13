@@ -1,6 +1,6 @@
 {
    "env": {
-      "browser": true,
+      "browser": false,
       "commonjs": true,
       "es6": true,
       "mocha": true
@@ -22,9 +22,10 @@
       }
    },
    "globals": {
-      "__dirname": true,
-      "process": true,
-      "Buffer": true
+      "__dirname": true,  
+      // defined inline on map.hbs
+      "Buffer": true,
+      "process": true
    },
    "rules": {
       "array-bracket-spacing": ["warn","never", {
