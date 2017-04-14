@@ -4,31 +4,14 @@
 	{{> head-files}}
 	<meta name="robots" content="noindex">
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet' />
+   <link href='/css/mapbox.css' rel='stylesheet' type='text/css'/>
    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>   
 	<script type='text/javascript'>
-      {{! values used within mapbox.js }}
-		var postKey = '{{key}}';
-		var mapPhotoID = {{photoID}};
-		var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};
+		mapboxgl.accessToken = '{{config.mapbox.accessToken}}';
 	</script>
 	<script src='/js/mapbox.js' type='text/javascript' defer></script>
 </head>
 <body>
-	<div id="map-canvas"></div>
-	<div id="map-wait"><img src="/img/map-progress.gif"/></div>
-	<a id="gpx-download" href="/{{key}}/gpx" rel="nofollow">Download GPX {{{icon 'save'}}}</a>
-	<a id="back" href="/{{key}}">{{{icon 'chevron-left'}}} View Post</a>
-
-	{{> post-menu}}
-	<dl id="summary">
-		<dt>Track Miles</dt>
-		<dd id="distance">0</dd>
-		<dt>Track Hours</dt>
-		<dd id="duration">0</dd>
-		<dt id="top-speed-label">Top Speed</dt>
-		<dd id="top-speed">0</dd>
-		<dt id="avg-speed-label">Avg Speed</dt>
-		<dd id="avg-speed">0</dd>
-	</dl>
+   <div id='map-canvas'></div>
 </body>
 </html>

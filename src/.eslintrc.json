@@ -22,6 +22,8 @@
       "allowDownload": true,    
       // Google maps
       "google": true,
+      // defined by mapbox
+      "mapboxgl": true,
       // defined inline on map.hbs
       "mapPhotoID": true,
       // defined inline on map.hbs

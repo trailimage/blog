@@ -15,8 +15,9 @@ const jsPath = './src/js/';
  */
 gulp.task('less-main', ()=> LESS('ti'));
 gulp.task('less-map', ()=> LESS('map', 'mapfont'));
+gulp.task('less-mapbox', ()=> LESS('mapbox'));
 gulp.task('less-admin', ()=> LESS('admin'));
-gulp.task('less', ['less-main', 'less-map', 'less-admin']);
+gulp.task('less', ['less-main', 'less-map', 'less-mapbox', 'less-admin']);
 
 /**
  * Combine web fonts and transpile LESS
