@@ -25,7 +25,9 @@
       "__dirname": true,  
       // defined inline on map.hbs
       "Buffer": true,
-      "process": true
+      "console": true,
+      "process": true,
+      "setTimeout": true
    },
    "rules": {
       "array-bracket-spacing": ["warn","never", {

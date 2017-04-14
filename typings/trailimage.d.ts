@@ -81,7 +81,7 @@ interface EXIF {
    sanitized: boolean
 }
 
-interface Library {
+export interface Library {
    categories: { [key: string]: Category },
    posts: Post[],
    tags: { [key: string]: string },
@@ -90,7 +90,7 @@ interface Library {
    empty(): Library
 }
 
-interface Photo {
+export interface Photo {
    id: string,
    index: number,
    sourceUrl: string,
@@ -108,7 +108,7 @@ interface Photo {
    getExif(): Promise
 }
 
-interface Post {
+export interface Post {
    id: string,
    key: string,
    seriesKey: string,
