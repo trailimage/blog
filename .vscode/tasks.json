@@ -1,34 +1,35 @@
 {
    // See https://go.microsoft.com/fwlink/?LinkId=733558
    // for the documentation about the tasks.json format
-   "version": "2.0.0", 
-   "isShellCommand": true,
+   "version": "2.0.0",
    "showOutput": "always",
    "suppressTaskName": true,
    "tasks": [
       {
          "taskName": "Run server",
          "command": "node app.js",
-         "options": {
-            "cwd": "${workspaceRoot}"
-         }
+         "isShellCommand": true
       },
       {
          "taskName": "Install Modules",
-         "command": "npm install"
+         "command": "npm install",
+         "isShellCommand": true
       },
       {
          "taskName": "Update Modules",
-         "command": "npm update"
+         "command": "npm update",
+         "isShellCommand": true
       },
       {
          "taskName": "Test",
          "command": "npm run test-pretty",
+         "isShellCommand": true,
          "isTestCommand": true
       },
       {
          "taskName": "Build and Watch",
          "command": "npm run watch",
+         "isShellCommand": true,
          "isBuildCommand": true,
          "isBackground": true
       }

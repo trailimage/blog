@@ -31,23 +31,35 @@ function LESS(name, fontFile) {
 
    return merge(
       gulp.src(dist + 'fonts/' + fontFile + '.css'),
-      gulp.src('./src/less/' + name + '.less').pipe(less({ paths: [bsPath + 'less'] }))
+      gulp.src('./src/less/' + name + '.less')
+         .on('error', handleError)
+         .pipe(less({ paths: [bsPath + 'less'] }))
    )
+      .on('error', handleError)
       .pipe(nano({ discardUnused: false }))
       .pipe(concat(name + '.css'))
       .pipe(gulp.dest(dist + 'css'));
 }
 
+/**
+ * Handle error
+ * @param {object} error
+ * @see http://stackoverflow.com/questions/23971388/prevent-errors-from-breaking-crashing-gulp-watch
+ */
+function handleError(error) { console.error(error); this.emit('end'); }
+
 gulp.task('script', ['script-post', 'script-other', 'script-admin']);
 
 gulp.task('script-other', ()=>
    gulp.src(jsPath + '!(jquery.lazyload.js|post.js|admin.js)')
+      .on('error', handleError)
       .pipe(uglify())
       .pipe(gulp.dest(dist + 'js'))
 );
 
 gulp.task('script-post', ()=>
    gulp.src([jsPath + 'jquery.lazyload.js', jsPath + 'post.js'])
+      .on('error', handleError)
       .pipe(concat('post.js'))
       .pipe(uglify())
       .pipe(gulp.dest(dist + 'js'))
@@ -55,6 +67,7 @@ gulp.task('script-post', ()=>
 
 gulp.task('script-admin', ()=>
    gulp.src([jsPath + 'admin.js'])
+      .on('error', handleError)
       .pipe(uglify())
       .pipe(gulp.dest(dist + 'js'))
 );
