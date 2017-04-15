@@ -6,7 +6,9 @@ $(function() {
       street: 'streets-v9',
       satellite: 'satellite-streets-v9'
    };
+   var $preview = $('#photo-preview');
    var $button = $('#toggle-satellite');
+   // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
    var nav = new mapboxgl.NavigationControl();
    var map = new mapboxgl.Map({
       container: 'map-canvas',
@@ -14,6 +16,8 @@ $(function() {
       center: [-116.0987, 44.7],
       zoom: 6.5
    });
+   var canvas = map.getCanvasContainer();
+   var clusterOpacity = 0.6;
 
    /**
     * Cache GeoJSON so it can be reassigned if map style changes
@@ -66,7 +70,7 @@ $(function() {
                   [100, 20]
                ]
             },
-            'circle-opacity': 0.6,
+            'circle-opacity': clusterOpacity,
             'circle-stroke-width': 3,
             'circle-stroke-color': '#ccc'
          }
@@ -90,55 +94,31 @@ $(function() {
 
       // https://www.mapbox.com/mapbox-gl-js/example/custom-marker-icons/
       map.addLayer({
-         id: 'unclustered-point',
+         id: 'photo',
          type: 'circle',
          source: 'photos',
          filter: ['!has', 'point_count'],
          paint: {
             'circle-color': '#11b4da',
-            'circle-radius': 4,
+            'circle-radius': 10,
             'circle-stroke-width': 1,
             'circle-stroke-color': '#fff'
          }
       });
 
-      // https://bl.ocks.org/tristen/863dfc36e3e7b38059f0bc20ef54e9fa
-      map.addSource('cluster-hover', {
-         type: 'geojson',
-         data: {
-            type: 'FeatureCollection',
-            features: []
-         }
-      });
+      map.on('mouseenter', 'photo', function() { canvas.style.cursor = 'pointer'; });
+      map.on('mouseleave', 'photo', function() { canvas.style.cursor = ''; });
 
-      map.addLayer({
-         id: 'cluster-hover',
-         source: 'cluster-hover',
-         type: 'circle',
-         paint: {
-            'circle-color': '#F86767',
-            'circle-stroke-width': 4,
-            'circle-stroke-color': '#fff',
-            'circle-radius': 20
-         }
-      });
+      map.on('mousedown', 'photo', function(e) {
+         console.log('click', e);
+         var img = e.features[0].properties;
 
-      map.on('mousemove', function(e) {
-         var features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
-         map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-
-         var geojson = {
-            type: 'FeatureCollection',
-            features: []
-         };
-
-         if (!features.length) {
-            map.getSource('cluster-hover').setData(geojson);
-            return;
-         }
-
-         geojson.features.push(features[0]);
-         map.getSource('cluster-hover').setData(geojson);
+         $preview
+            .empty()
+            .append($('<img>').attr('src', img.preview))
+            .append($('<div>').html(e.lngLat.lat + ', ' + e.lngLat.lng))
+            .css({ top: e.point.y, left: e.point.x })
+            .show();
       });
    }
 });
