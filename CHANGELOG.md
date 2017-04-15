@@ -1,3 +1,6 @@
+## 2.3.0
+- Add map view of all posts
+
 ## 2.2.4
 - Fix bad GPX caching in Redis
 

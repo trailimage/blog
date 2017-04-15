@@ -1,7 +1,7 @@
 {
   "name": "trail-image",
   "description": "Trail Image blog",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "private": false,
   "author": {
     "name": "Jason Abbott"
@@ -36,6 +36,13 @@
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
+    "@types/facebook-js-sdk": "^2.8.1",
+    "@types/gapi.analytics": "0.0.0",
+    "@types/geojson": "^1.0.1",
+    "@types/googlemaps": "^3.26.8",
+    "@types/jquery": "^2.0.41",
+    "@types/mapbox-gl": "^0.30.0",
+    "@types/twitter": "0.0.28",
     "babel-eslint": "^7.1.1",
     "bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
     "chai": "^3.5.0",
