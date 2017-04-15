@@ -101,5 +101,44 @@ $(function() {
             'circle-stroke-color': '#fff'
          }
       });
+
+      // https://bl.ocks.org/tristen/863dfc36e3e7b38059f0bc20ef54e9fa
+      map.addSource('cluster-hover', {
+         type: 'geojson',
+         data: {
+            type: 'FeatureCollection',
+            features: []
+         }
+      });
+
+      map.addLayer({
+         id: 'cluster-hover',
+         source: 'cluster-hover',
+         type: 'circle',
+         paint: {
+            'circle-color': '#F86767',
+            'circle-stroke-width': 4,
+            'circle-stroke-color': '#fff',
+            'circle-radius': 20
+         }
+      });
+
+      map.on('mousemove', function(e) {
+         var features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
+         map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+         var geojson = {
+            type: 'FeatureCollection',
+            features: []
+         };
+
+         if (!features.length) {
+            map.getSource('cluster-hover').setData(geojson);
+            return;
+         }
+
+         geojson.features.push(features[0]);
+         map.getSource('cluster-hover').setData(geojson);
+      });
    }
 });

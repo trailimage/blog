@@ -4,9 +4,14 @@ const merge = require('merge2');
 const nano = require('gulp-cssnano');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const sourcemaps = require('gulp-sourcemaps');
 const dist = './dist/';
 const bsPath = './node_modules/bootstrap/';
 const jsPath = './src/js/';
+// https://github.com/gulp-sourcemaps/gulp-sourcemaps
+const sourceMapConfig = {
+   sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
+}
 
 /**
  * @see https://github.com/plus3network/gulp-less
@@ -32,8 +37,7 @@ function LESS(name, fontFile) {
    return merge(
       gulp.src(dist + 'fonts/' + fontFile + '.css'),
       gulp.src('./src/less/' + name + '.less')
-         .on('error', handleError)
-         .pipe(less({ paths: [bsPath + 'less'] }))
+         .pipe(less({ paths: [bsPath + 'less'] })).on('error', handleError)
    )
       .on('error', handleError)
       .pipe(nano({ discardUnused: false }))
@@ -52,23 +56,27 @@ gulp.task('script', ['script-post', 'script-other', 'script-admin']);
 
 gulp.task('script-other', ()=>
    gulp.src(jsPath + '!(jquery.lazyload.js|post.js|admin.js)')
-      .on('error', handleError)
-      .pipe(uglify())
+      .pipe(sourcemaps.init())
+      .pipe(uglify()).on('error', handleError)
+      // https://github.com/gulp-sourcemaps/gulp-sourcemaps
+      .pipe(sourcemaps.write('maps', sourceMapConfig))
       .pipe(gulp.dest(dist + 'js'))
 );
 
 gulp.task('script-post', ()=>
    gulp.src([jsPath + 'jquery.lazyload.js', jsPath + 'post.js'])
-      .on('error', handleError)
       .pipe(concat('post.js'))
-      .pipe(uglify())
+      .pipe(sourcemaps.init())
+      .pipe(uglify()).on('error', handleError)
+      .pipe(sourcemaps.write('maps', sourceMapConfig))
       .pipe(gulp.dest(dist + 'js'))
 );
 
 gulp.task('script-admin', ()=>
    gulp.src([jsPath + 'admin.js'])
-      .on('error', handleError)
-      .pipe(uglify())
+      .pipe(sourcemaps.init())
+      .pipe(uglify()).on('error', handleError)
+      .pipe(sourcemaps.write('maps', sourceMapConfig))
       .pipe(gulp.dest(dist + 'js'))
 );
 

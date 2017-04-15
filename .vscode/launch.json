@@ -1,25 +1,38 @@
 {
-   // Use IntelliSense to find out which attributes exist for node debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://go.microsoft.com/fwlink/?linkid=830387
    "version": "0.2.0",
    "configurations": [
       {
-         "name": "Debug Trail Image",
-         "type": "node2",
+         "name": "Node Debug",
+         "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/app.js",
          "cwd": "${workspaceRoot}"
       },
       {
-         "name": "Attach to Process",
-         "type": "node2",
+         "name": "Attach to Node",
+         "type": "node",
          "request": "attach",
          "port": 9229
       },
+      // https://github.com/Microsoft/vscode/issues/13405
+      // https://github.com/gulp-sourcemaps/gulp-sourcemaps
+      {
+         "name": "Chrome Debug",
+         "type": "chrome",
+         "request": "launch",
+         "url": "http://localhost:3000/map/",
+         "userDataDir": "${workspaceRoot}/.vscode/chrome",
+         "webRoot": "${workspaceRoot}/dist",
+         "showAsyncStacks": true,
+         "skipFiles": ["jquery.js"],
+         "sourceMaps": true
+         // "sourceMapPathOverrides": {
+         //    "/source/*": "${workspaceRoot}/*"
+         // }
+      },
       {
          "name": "Debug Mocha Tests",
-         "type": "node2",
+         "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
          "cwd": "${workspaceRoot}",
