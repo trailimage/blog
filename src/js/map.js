@@ -128,7 +128,7 @@ google.maps.event.addDomListener(window, 'load', function() {
  */
 function showPhoto(feature, modal) {
    if (modal && feature) {
-      var image = feature.getProperty('preview');
+      var image = feature.getProperty('url');
       var id = feature.getId();
       var geo = feature.getGeometry();
       var partKey = feature.getProperty('partKey');
