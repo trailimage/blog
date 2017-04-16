@@ -1,30 +1,40 @@
 'use strict';
 
 $(function() {
+   /**
+    * Whether imagery is on either by user click or zoom
+    */
    var imageryOn = false;
+   /**
+    * Whether user clicked button to enable imagery
+    */
+   var userImageryOn = false;
+   var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
       street: 'streets-v9',
       imagery: 'satellite-streets-v9'
    };
    var $count = $('#photo-count');
    var $preview = $('#photo-preview');
-   var $button = $('#toggle-satellite');
+   var $showImagery = $('#toggle-satellite');
+   var $zoomOut = $('#zoom-out');
    var $check = {
-      on:  $('nav .glyphicon-check'),
+      on: $('nav .glyphicon-check'),
       off: $('nav .glyphicon-unchecked')
-   }
+   };
    // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
    var nav = new mapboxgl.NavigationControl();
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
       style: 'mapbox://styles/mapbox/streets-v9',
-      center: [-116.0987, 44.7],
-      zoom: 6.5,
+      center: initial.center,
+      zoom: initial.zoom,
       dragRotate: false
    });
    var canvas = map.getCanvasContainer();
    var markerOpacity = 0.6;
+   var zoomOutEnabled = false;
 
    /**
     * Cache GeoJSON so it can be reassigned if map style changes
@@ -34,17 +44,9 @@ $(function() {
 
    map.addControl(nav, 'top-right')
       .on('load', function() {
-         // https://bl.ocks.org/tristen/0c0ed34e210a04e89984
-         $button.click(function() {
-            imageryOn = !imageryOn;
-            if (imageryOn) {
-               $check.on.show(); $check.off.hide();
-            } else {
-               $check.on.hide(); $check.off.show();
-            }
-
-            map.once('data', function(e) { if (e.dataType == 'style') { addMapLayers(); } })
-               .setStyle('mapbox://styles/mapbox/' + (imageryOn ? style.imagery : style.street));
+         $showImagery.click(function() {
+            userImageryOn = !userImageryOn;
+            showImagery(userImageryOn);
          });
 
          $.getJSON('/geo.json', function(data) {
@@ -53,6 +55,40 @@ $(function() {
             addMapLayers();
          });
       });
+
+   /**
+    * Enable or disable satellite imagery. Abort if the setting is unchanged
+    * or if trying to disable user set imagery.
+    * @param {boolean} enabled
+    */
+   function showImagery(enabled) {
+      if (enabled == imageryOn || (!enabled && userImageryOn)) { return; }
+
+      imageryOn = enabled;
+
+      if (imageryOn) {
+         $check.on.show(); $check.off.hide();
+      } else {
+         $check.on.hide(); $check.off.show();
+      }
+      map.once('data', function(e) { if (e.dataType == 'style') { addMapLayers(); } });
+      map.setStyle('mapbox://styles/mapbox/' + (imageryOn ? style.imagery : style.street));
+   }
+
+   /**
+    * Enable or disable the zoom-out button.
+    */
+   function enableZoomOut() {
+      if (map.getZoom() > initial.zoom && !zoomOutEnabled) {
+         zoomOutEnabled = true;
+         $zoomOut
+            .click(function() { map.easeTo(initial); })
+            .removeClass('disabled');
+      } else if (map.getZoom() <= initial.zoom && zoomOutEnabled) {
+         zoomOutEnabled = false;
+         $zoomOut.off('click').addClass('disabled');
+      }
+   }
 
    /**
     * Curry function to update cursor
@@ -149,8 +185,11 @@ $(function() {
          .on('mouseenter', 'photo', cursor('pointer'))
          .on('mouseleave', 'photo', cursor())
          .on('move', function()  { $preview.hide(); })
-         .on('click', function() { $preview.hide(); });
-         //.on('zoomend', function() { showImagery(map.getZoom() > 12); });
+         .on('click', function() { $preview.hide(); })
+         .on('zoomend', function() {
+            enableZoomOut();
+            showImagery(map.getZoom() > 12);
+         });
 
       // map.setFilter()
 

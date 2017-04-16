@@ -31,19 +31,27 @@ nav {
       }
    }
 
-   #photo-count {
+   #photo-count, #zoom-out, #toggle-satellite {
       float: right;
+   }
+
+   #zoom-out, #toggle-satellite {
+      cursor: pointer;
+      padding-right: 20px;
+      &:hover { color: #ff0; }
+      &.disabled {
+         .opacity();
+         cursor: default;
+         &:hover { color: #fff; }
+      }
+   }
+
+   #photo-count {
       padding-right: 10px;
    }
 
    #toggle-satellite {
-      float: right;
-      padding-right: 20px;
-      cursor: pointer;
-
       .glyphicon-check { display: none; }
-
-      &:hover { color: #ff0; }
    }
 }
 
