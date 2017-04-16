@@ -18,7 +18,7 @@ const sourceMapConfig = {
  * @see https://github.com/jonathanepollack/gulp-minify-css
  * @see https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
  */
-gulp.task('less-main', ()=> LESS('ti'));
+gulp.task('less-main', ()=> LESS('ti', 'webfont'));
 gulp.task('less-map', ()=> LESS('map', 'mapfont'));
 gulp.task('less-mapbox', ()=> LESS('mapbox'));
 gulp.task('less-admin', ()=> LESS('admin'));
@@ -32,15 +32,15 @@ gulp.task('less', ['less-main', 'less-map', 'less-mapbox', 'less-admin']);
  * @returns {jQuery.Promise}
  */
 function LESS(name, fontFile) {
-   if (fontFile === undefined) { fontFile = 'webfont'; }
+   const base = gulp.src('./src/less/' + name + '.less')
+      .pipe(less({ paths: [bsPath + 'less'] }))
+      .on('error', handleError);
+   const source = (fontFile !== undefined)
+      ? merge(gulp.src(dist + 'fonts/' + fontFile + '.css'), base)
+      : base;
 
-   return merge(
-      gulp.src(dist + 'fonts/' + fontFile + '.css'),
-      gulp.src('./src/less/' + name + '.less')
-         .pipe(less({ paths: [bsPath + 'less'] })).on('error', handleError)
-   )
-      .on('error', handleError)
-      .pipe(nano({ discardUnused: false }))
+   return source
+      .pipe(nano({ discardUnused: false })).on('error', handleError)
       .pipe(concat(name + '.css'))
       .pipe(gulp.dest(dist + 'css'));
 }

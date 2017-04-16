@@ -6,8 +6,13 @@ $(function() {
       street: 'streets-v9',
       imagery: 'satellite-streets-v9'
    };
+   var $count = $('#photo-count');
    var $preview = $('#photo-preview');
    var $button = $('#toggle-satellite');
+   var $check = {
+      on:  $('nav .glyphicon-check'),
+      off: $('nav .glyphicon-unchecked')
+   }
    // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
    var nav = new mapboxgl.NavigationControl();
    // https://www.mapbox.com/mapbox-gl-js/api/
@@ -32,23 +37,22 @@ $(function() {
          // https://bl.ocks.org/tristen/0c0ed34e210a04e89984
          $button.click(function() {
             imageryOn = !imageryOn;
+            if (imageryOn) {
+               $check.on.show(); $check.off.hide();
+            } else {
+               $check.on.hide(); $check.off.show();
+            }
+
             map.once('data', function(e) { if (e.dataType == 'style') { addMapLayers(); } })
                .setStyle('mapbox://styles/mapbox/' + (imageryOn ? style.imagery : style.street));
          });
 
          $.getJSON('/geo.json', function(data) {
             geoJSON = data;
+            $count.html(geoJSON.features.length + ' photos').show();
             addMapLayers();
          });
       });
-
-
-   function showImagery(enabled) {
-      if (imageryOn == enabled) { return; }
-
-      map.once('data', function(e) { if (e.dataType == 'style') { addMapLayers(); } })
-         .setStyle('mapbox://styles/mapbox/' + (enabled ? style.imagery : style.street));
-   }
 
    /**
     * Curry function to update cursor
@@ -69,19 +73,6 @@ $(function() {
       var path = url.split('/');
       var parts = path[path.length - 1].split('_');
       window.location = '/' + parts[0];
-   }
-
-   /**
-    * @param {mapboxgl.PointLike} point
-    * @returns {mapboxgl.PointLike[]} bounding box
-    * @see https://www.mapbox.com/mapbox-gl-js/api/#map#queryrenderedfeatures
-    */
-   function boxAroundPoint(point) {
-      var offset = 100;
-      return [
-         [point.x - offset, point.y - offset],
-         [point.x + offset, point.y + offset]
-      ];
    }
 
    function boxAroundLatLon(latLon) {
@@ -163,6 +154,7 @@ $(function() {
 
       // map.setFilter()
 
+      // https://github.com/mapbox/mapbox-gl-js/issues/2384
       map.on('mousedown', 'cluster', function(e) {
          var cluster = e.features[0].properties;
          //console.log('cluster', e);

@@ -1,30 +1,58 @@
 @import "elements";
 @import "settings";
 
+@navHeight: 20px;
+
 html { overflow: hidden; }
 body { margin: 0; padding: 0; background: none; }
-#map-canvas { width: 100%; height: 100%; }
-
-#toggle-satellite, #photo-position, #photo-preview {
+nav {
    position: absolute;
-   z-index: 50;
+   width: 100%;
+   top: 0;
+   line-height: @navHeight;
+   color: #fff;
+   height: @navHeight;
+   background-color: #444;
+   font-family: @sanSerifFont;
+
+   h1 {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      left: 10px;
+      font-weight: bold;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+
+      a {
+         color: @lightTrimColor !important;
+         text-decoration: none;
+         &:hover { color: #fff !important; }
+      }
+   }
+
+   #photo-count {
+      float: right;
+      padding-right: 10px;
+   }
+
+   #toggle-satellite {
+      float: right;
+      padding-right: 20px;
+      cursor: pointer;
+
+      .glyphicon-check { display: none; }
+
+      &:hover { color: #ff0; }
+   }
 }
 
-#toggle-satellite {
-   width: 100px;
-   right: 60px;
-   top: 10px;
-   text-align: center;
-   padding: 10px;
-   font-size: 16px;
-   background-color: #fff;
-   cursor: pointer;
-   font-family: @sanSerifFont;
-   .drop-shadow(0, 0, 5px, 0.3);
-   .rounded(4px);
-}
+#map-canvas { width: 100%; top: @navHeight; bottom: 0; position: absolute; }
 
 #photo-preview {
+   display: none;
+   position: absolute;
+   z-index: 50;
    background-color: #000;
    color: #fff;
    font-family: @sanSerifFont;
