@@ -11,8 +11,8 @@ $(function() {
    var userImageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
-      street: 'streets-v9',
-      imagery: 'satellite-streets-v9'
+      basic: 'jabbott7/cj1k069f0000p2slh5775akgj',
+      imagery: 'mapbox/satellite-streets-v9'
    };
    var $count = $('#photo-count');
    var $preview = $('#photo-preview');
@@ -27,7 +27,7 @@ $(function() {
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/mapbox/streets-v9',
+      style: 'mapbox://styles/' + style.basic,
       center: initial.center,
       zoom: initial.zoom,
       dragRotate: false
@@ -72,7 +72,7 @@ $(function() {
          $check.on.hide(); $check.off.show();
       }
       map.once('data', function(e) { if (e.dataType == 'style') { addMapLayers(); } });
-      map.setStyle('mapbox://styles/mapbox/' + (imageryOn ? style.imagery : style.street));
+      map.setStyle('mapbox://styles/' + (imageryOn ? style.imagery : style.basic));
    }
 
    /**
@@ -111,10 +111,10 @@ $(function() {
       window.location = '/' + parts[0];
    }
 
-   function boxAroundLatLon(latLon) {
-      var offset = 100;
+   // function boxAroundLatLon(latLon) {
+   //    var offset = 100;
 
-   }
+   // }
 
    function addMapLayers() {
       map.addSource('photos', {
@@ -188,28 +188,28 @@ $(function() {
          .on('click', function() { $preview.hide(); })
          .on('zoomend', function() {
             enableZoomOut();
-            showImagery(map.getZoom() > 12);
+            //showImagery(map.getZoom() > 12);
          });
 
       // map.setFilter()
 
       // https://github.com/mapbox/mapbox-gl-js/issues/2384
       map.on('mousedown', 'cluster', function(e) {
-         var cluster = e.features[0].properties;
+         //var cluster = e.features[0].properties;
          //console.log('cluster', e);
 
-         if (cluster.point_count > 5) {
-            map.easeTo({
-               center: e.lngLat,
-               zoom: map.getZoom() + 2
-            });
-         } else {
-            var bounds = new mapboxgl.LngLatBounds(
-               e.lngLat,
-               e.lngLat
-            );
+         //if (cluster.point_count > 5) {
+         map.easeTo({
+            center: e.lngLat,
+            zoom: map.getZoom() + 2
+         });
+         // } else {
+         //    var bounds = new mapboxgl.LngLatBounds(
+         //       e.lngLat,
+         //       e.lngLat
+         //    );
 
-            console.log(map.getSource('photos'));
+         //    console.log(map.getSource('photos'));
 
             //console.log(bounds);
 
@@ -229,7 +229,7 @@ $(function() {
             // });
             //console.log('Found', features);
 
-         }
+        // }
       });
 
       map.on('mousedown', 'photo', function(e) {
