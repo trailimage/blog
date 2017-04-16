@@ -307,7 +307,7 @@ describe('Controller', ()=> {
             author: author,
             updated: updated
          });
-         const source = feed.render('rss-2.0');
+         const source = feed.rss2();
          const target = '<?xml version="1.0" encoding="utf-8"?>' + nl
             + '<rss version="2.0">' + nl
             + tab + '<channel>' + nl
