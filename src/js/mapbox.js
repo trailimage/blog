@@ -49,14 +49,21 @@ $(function() {
          });
       });
 
+
    /**
     * Get all photos near a location
     * @param {mapboxgl.LngLatLike} lngLat
     * @returns {GeoJSON.FeatureCollection}
     */
    function photosNearLocation(lngLat) {
+      var sw = [lngLat.lng - 1, lngLat.lat -1];
+      var ne = [lngLat.lng + 1, lngLat.lat +1];
 
-      return null;
+      return geoJSON.features.filter(function(f) {
+         var coord = f.geometry.coordinates;
+         return coord[0] >= sw[0] && coord[1] >= sw[1]
+             && coord[0] <= ne[0] && coord[1] <= ne[1];
+      });
    }
 
    /**
@@ -112,6 +119,41 @@ $(function() {
    function cursor(name) {
       if (name === undefined) { name = ''; }
       return function() { canvas.style.cursor = name; };
+   }
+
+   /**
+    * @param {mapboxgl.Event} e
+    * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
+    */
+   function clickCluster(e) {
+      var cluster = e.features[0].properties;
+      var atZoom = map.getZoom();
+      //console.log('cluster', e);
+
+      if (cluster.point_count > 5 && atZoom < MAX_ZOOM) {
+         map.easeTo({
+            center: e.lngLat,
+            zoom: MAX_ZOOM - atZoom < 2 ? MAX_ZOOM : atZoom + 2
+         });
+      } else {
+         var photos = photosNearLocation(e.lngLat);
+         console.log(photos);
+      }
+   }
+
+   /**
+    * @param {mapboxgl.Event} e
+    */
+   function clickPhoto(e) {
+      var img = e.features[0].properties;
+
+      $preview
+         .empty()
+         .append($('<img>').attr('src', img.url))
+         .append($('<div>').html(showLngLat(e.lngLat)))
+         .css({ top: e.point.y, left: e.point.x })
+         .click(function() { showPhotoInPost(img.url); })
+         .show();
    }
 
    /**
@@ -195,59 +237,8 @@ $(function() {
          .on('mouseleave', 'photo', cursor())
          .on('move', function()  { $preview.hide(); })
          .on('click', function() { $preview.hide(); })
-         .on('zoomend', enableZoomOut);
-
-      // map.setFilter()
-
-      // https://github.com/mapbox/mapbox-gl-js/issues/2384
-      map.on('mousedown', 'cluster', function(e) {
-         //var cluster = e.features[0].properties;
-         //console.log('cluster', e);
-
-         //if (cluster.point_count > 5) {
-         map.easeTo({
-            center: e.lngLat,
-            zoom: map.getZoom() + 2
-         });
-         // } else {
-         //    var bounds = new mapboxgl.LngLatBounds(
-         //       e.lngLat,
-         //       e.lngLat
-         //    );
-
-         //    console.log(map.getSource('photos'));
-
-            //console.log(bounds);
-
-            // map.unitsLayer.eachLayer(function(marker) {
-            //    if(bounds.contains(marker.getLatLng())) {
-            //       map.select(marker);
-            //    }
-            // });
-
-
-            // var features = map.querySourceFeatures('photo', {
-            //    filter: [
-            //       'all',
-            //       ['<=', '', e.lngLat.lon],
-            //       ['<=', '', e.lngLat.lng]
-            //    ]
-            // });
-            //console.log('Found', features);
-
-        // }
-      });
-
-      map.on('mousedown', 'photo', function(e) {
-         var img = e.features[0].properties;
-
-         $preview
-            .empty()
-            .append($('<img>').attr('src', img.url))
-            .append($('<div>').html(showLngLat(e.lngLat)))
-            .css({ top: e.point.y, left: e.point.x })
-            .click(function() { showPhotoInPost(img.url); })
-            .show();
-      });
+         .on('zoomend', enableZoomOut)
+         .on('mousedown', 'cluster', clickCluster)
+         .on('mousedown', 'photo', clickPhoto);
    }
 });
