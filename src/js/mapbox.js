@@ -1,14 +1,9 @@
 'use strict';
 
 $(function() {
-   /**
-    * Whether imagery is on either by user click or zoom
-    */
+   var MAX_ZOOM = 18;
+   var COORD_DECIMALS = 5;
    var imageryOn = false;
-   /**
-    * Whether user clicked button to enable imagery
-    */
-   var userImageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
       basic: 'jabbott7/cj1k069f0000p2slh5775akgj',
@@ -30,6 +25,7 @@ $(function() {
       style: 'mapbox://styles/' + style.basic,
       center: initial.center,
       zoom: initial.zoom,
+      maxZoom: MAX_ZOOM,
       dragRotate: false
    });
    var canvas = map.getCanvasContainer();
@@ -44,10 +40,7 @@ $(function() {
 
    map.addControl(nav, 'top-right')
       .on('load', function() {
-         $showImagery.click(function() {
-            userImageryOn = !userImageryOn;
-            showImagery(userImageryOn);
-         });
+         $showImagery.click(function() { showImagery(!imageryOn); });
 
          $.getJSON('/geo.json', function(data) {
             geoJSON = data;
@@ -57,12 +50,33 @@ $(function() {
       });
 
    /**
+    * Get all photos near a location
+    * @param {mapboxgl.LngLatLike} lngLat
+    * @returns {GeoJSON.FeatureCollection}
+    */
+   function photosNearLocation(lngLat) {
+
+      return null;
+   }
+
+   /**
+    * Format coordinates
+    * @param {mapboxgl.LngLatLike} lngLat
+    * @returns {string}
+    */
+   function showLngLat(lngLat) {
+      var factor = Math.pow(10, COORD_DECIMALS);
+      var round = function(n) { return Math.round(n * factor) / factor; };
+      return round(lngLat.lat) + ', ' + round(lngLat.lng);
+   }
+
+   /**
     * Enable or disable satellite imagery. Abort if the setting is unchanged
     * or if trying to disable user set imagery.
     * @param {boolean} enabled
     */
    function showImagery(enabled) {
-      if (enabled == imageryOn || (!enabled && userImageryOn)) { return; }
+      if (enabled == imageryOn) { return; }
 
       imageryOn = enabled;
 
@@ -111,17 +125,12 @@ $(function() {
       window.location = '/' + parts[0];
    }
 
-   // function boxAroundLatLon(latLon) {
-   //    var offset = 100;
-
-   // }
-
    function addMapLayers() {
       map.addSource('photos', {
          type: 'geojson',
          data: geoJSON,
          cluster: true,
-         clusterMaxZoom: 15,
+         clusterMaxZoom: 22,
          clusterRadius: 20
       });
 
@@ -186,10 +195,7 @@ $(function() {
          .on('mouseleave', 'photo', cursor())
          .on('move', function()  { $preview.hide(); })
          .on('click', function() { $preview.hide(); })
-         .on('zoomend', function() {
-            enableZoomOut();
-            //showImagery(map.getZoom() > 12);
-         });
+         .on('zoomend', enableZoomOut);
 
       // map.setFilter()
 
@@ -238,7 +244,7 @@ $(function() {
          $preview
             .empty()
             .append($('<img>').attr('src', img.url))
-            .append($('<div>').html(e.lngLat.lat + ', ' + e.lngLat.lng))
+            .append($('<div>').html(showLngLat(e.lngLat)))
             .css({ top: e.point.y, left: e.point.x })
             .click(function() { showPhotoInPost(img.url); })
             .show();
