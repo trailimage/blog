@@ -38,6 +38,52 @@ $(function() {
     */
    var geoJSON = null;
 
+    /**
+    * Methods for generating content.
+    */
+   var html = {
+      /**
+       * @param {string} name
+       * @param {function} [handler] Optional click handler
+       * @returns {jQuery}
+       */
+      icon: function(name, handler) {
+         var $icon = $('<span>').addClass('glyphicon glyphicon-' + name);
+         if (handler !== undefined) { $icon.click(handler); }
+         return $icon;
+      },
+
+      /**
+       * Format coordinates
+       * @param {number[]} pos
+       * @returns {string}
+       */
+      coordinate: function(pos) {
+         var factor = Math.pow(10, COORD_DECIMALS);
+         var round = function(n) { return Math.round(n * factor) / factor; };
+         return round(pos[1]) + ', ' + round(pos[0]);
+      },
+
+
+      /**
+       * Make photo HTML
+       * @param {GeoJSON.Feature} f
+       * @returns {jQuery}
+       */
+      photo: function(f) {
+         var img = f.properties;
+         var tip = 'Click or tap to enlarge';
+         return $('<figure>')
+            .append($('<img>')
+               .attr('src', img.url)
+               .attr('title', tip)
+               .attr('alt', tip)
+               .click(function() { showPhotoInPost(img.url); })
+            )
+            .append($('<figcaption>').html(this.coordinate(f.geometry.coordinates)));
+      }
+   };
+
    map.addControl(nav, 'top-right')
       .on('load', function() {
          $showImagery.click(function() { showImagery(!imageryOn); });
@@ -74,7 +120,7 @@ $(function() {
       });
    }
 
-   function handleZoomEnd() { 
+   function handleZoomEnd() {
       updateUrl();
       enableZoomOut();
    }
@@ -89,19 +135,7 @@ $(function() {
    }
 
    /**
-    * Format coordinates
-    * @param {mapboxgl.LngLatLike} lngLat
-    * @returns {string}
-    */
-   function showLngLat(lngLat) {
-      var factor = Math.pow(10, COORD_DECIMALS);
-      var round = function(n) { return Math.round(n * factor) / factor; };
-      return round(lngLat.lat) + ', ' + round(lngLat.lng);
-   }
-
-   /**
-    * Enable or disable satellite imagery. Abort if the setting is unchanged
-    * or if trying to disable user set imagery.
+    * Enable or disable satellite imagery. Abort if the setting is unchanged.
     * @param {boolean} enabled
     */
    function showImagery(enabled) {
@@ -134,7 +168,7 @@ $(function() {
    }
 
    /**
-    * Curry function to update cursor
+    * Curry function to update canvas cursor.
     * @param {string} name
     * @returns {function}
     */
@@ -144,6 +178,7 @@ $(function() {
    }
 
    /**
+    * Respond to mouse click on cluster marker.
     * @param {mapboxgl.Event} e
     * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
     */
@@ -164,35 +199,53 @@ $(function() {
          if (photos.length == 0) {
             zoomIn();
          } else {
-            var $list = $('<div>').addClass('photo-list');
+            var selected = 1;
+            var $photos = $('<div>').addClass('photo-list');
+            var $markers = $('<div>').addClass('markers');
+            var select = function(count) {               
+               selected += count;
+               if (selected > photos.length) {
+                  selected = 1;
+               } else if (selected < 1) {
+                  selected = photos.length;
+               }
+               $('figure', $photos).hide();
+               $('span', $markers).removeClass('selected');
+               $('figure:nth-child(' + selected + ')', $photos).show();
+               $('span:nth-child(' + selected + ')', $markers).addClass('selected');
+            };
+            var prev = function() { select(-1); };
+            var next = function() { select(1); };
 
             for (var i = 0; i < photos.length; i++) {
-               var img = photos[i].properties;
-               $list.append($('<img>').attr('src', img.url));
+               $photos.append(html.photo(photos[i]));
+               $markers.append(html.icon('map-marker'));
             }
+            $('span:first-child', $markers).addClass('selected');
+
             $preview
                .empty()
-               .append($list)
-               .append($('<div>').html(showLngLat(e.lngLat)))
                .css({ top: e.point.y + 15, left: e.point.x })
-               .click(function() { showPhotoInPost(img.url); })
+               .append($('<nav>')
+                  .append(html.icon('arrow-left', prev))
+                  .append($markers)
+                  .append(html.icon('arrow-right', next))
+               )
+               .append($photos)
                .show();
          }
       }
    }
 
    /**
+    * Respond to mouse click on photo marker.
     * @param {mapboxgl.Event} e
     */
    function clickPhoto(e) {
-      var img = e.features[0].properties;
-
       $preview
          .empty()
-         .append($('<img>').attr('src', img.url))
-         .append($('<div>').html(showLngLat(e.lngLat)))
-         .css({ top: e.point.y, left: e.point.x })
-         .click(function() { showPhotoInPost(img.url); })
+         .css({ top: e.point.y + 15, left: e.point.x })
+         .append(html.photo(e.features[0]))
          .show();
    }
 
@@ -207,6 +260,9 @@ $(function() {
       window.location = '/' + parts[0];
    }
 
+   /**
+    * Assign source and define layers for clustering.
+    */
    function addMapLayers() {
       map.addSource('photos', {
          type: 'geojson',

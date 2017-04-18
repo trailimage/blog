@@ -1,5 +1,6 @@
 @import "elements";
 @import "settings";
+@import "@{bs-path}glyphicons.less";
 
 @navHeight: 20px;
 
@@ -12,6 +13,7 @@ nav {
    line-height: @navHeight;
    color: #fff;
    height: @navHeight;
+   font-size: 14px;
    background-color: #444;
    font-family: @sanSerifFont;
 
@@ -20,6 +22,7 @@ nav {
       margin: 0;
       padding: 0;
       left: 10px;
+      font-size: 14px;
       font-weight: bold;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -65,19 +68,53 @@ nav {
    background-color: #000;
    color: #fff;
    font-family: @sanSerifFont;
-   cursor: pointer;
    border: 1px solid #000;
+   min-height: 100px;
+   min-width: 100px;
    .drop-shadow(0, 0, 20px, 1);
 
-   div {
-      padding: 10px 0;
-      text-align: center;
+   nav {
+      background-color: #000;
+      font-size: 16px;
+      .glyphicon-arrow-left, .glyphicon-arrow-right {
+         margin: 1px 4px;
+         cursor: pointer;
+         color: #999;
+         &:hover { color: #fff; }
+      }
+      .glyphicon-arrow-right { float: right; }
 
-      &.photo-list {
-         img {
-            display: none;
-            &:first-child { display: block; }
+      div.markers {
+         font-size: 12px;
+         left: 20px;
+         right: 20px;
+         top: 0;
+         position: absolute;
+         text-align: center;
+         .glyphicon {
+            padding: 2px 2px 0;
+            color: #777;
+            &.selected { color: #f77; }
          }
+      }
+   }
+
+   figure {
+      display: block;
+      cursor: pointer;
+      text-align: center;
+      margin: 0;
+      figcaption {
+         font-weight: normal;
+         font-size: 12px;
+         padding: 10px 0;
+      }
+   }
+
+   div.photo-list {
+      figure {
+         display: none;
+         &:first-child { display: block; }
       }
    }
 }
