@@ -51,6 +51,7 @@ nav {
    }
 
    #toggle-satellite {
+      display: none;
       .glyphicon-check { display: none; }
    }
 }
@@ -71,5 +72,12 @@ nav {
    div {
       padding: 10px 0;
       text-align: center;
+
+      &.photo-list {
+         img {
+            display: none;
+            &:first-child { display: block; }
+         }
+      }
    }
 }
