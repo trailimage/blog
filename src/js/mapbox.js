@@ -8,7 +8,8 @@ $(function() {
    var style = {
       basic: 'jabbott7/cj1k069f0000p2slh5775akgj',
       hybrid: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
-      imagery: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0'
+      imagery: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
+      outdoors: 'mapbox/outdoors-v10'
    };
    var $count = $('#photo-count');
    var $preview = $('#photo-preview');
@@ -24,7 +25,7 @@ $(function() {
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/' + style.hybrid,
+      style: 'mapbox://styles/' + style.outdoors,
       center: qs.center || initial.center,
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
