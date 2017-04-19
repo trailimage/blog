@@ -7,6 +7,7 @@ $(function() {
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
       basic: 'jabbott7/cj1k069f0000p2slh5775akgj',
+      hybrid: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
       imagery: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0'
    };
    var $count = $('#photo-count');
@@ -26,7 +27,8 @@ $(function() {
       center: initial.center,
       zoom: initial.zoom,
       maxZoom: MAX_ZOOM,
-      dragRotate: false
+      dragRotate: false,
+      keyboard: false
    });
    var canvas = map.getCanvasContainer();
    var markerOpacity = 0.6;
@@ -64,7 +66,6 @@ $(function() {
          return round(pos[1]) + ', ' + round(pos[0]);
       },
 
-
       /**
        * Make photo HTML
        * @param {GeoJSON.Feature} f
@@ -84,6 +85,95 @@ $(function() {
       }
    };
 
+   /**
+    * Event handlers.
+    */
+   var handle = {
+      zoomEnd: function() {
+         updateUrl();
+         enableZoomOut();
+      },
+
+      mapInteraction: function() {
+         $preview.hide();
+         enableKeyNav(false);
+      },
+
+      /**
+       * Respond to mouse click on photo marker.
+       * @param {mapboxgl.Event} e
+       */
+      photoClick: function(e) {
+         $preview
+            .empty()
+            .css({ top: e.point.y + 15, left: e.point.x })
+            .append(html.photo(e.features[0]))
+            .show();
+      },
+
+      /**
+       * Respond to mouse click on cluster marker.
+       * @param {mapboxgl.Event} e
+       * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
+       */
+      clusterClick: function(e) {
+         var cluster = e.features[0].properties;
+         var atZoom = map.getZoom();
+         var zoomIn = function() {
+            map.easeTo({
+               center: e.lngLat,
+               zoom: MAX_ZOOM - atZoom < 2 ? MAX_ZOOM : atZoom + 2
+            });
+         };
+
+         if (cluster.point_count > 5 && atZoom < MAX_ZOOM - 2) {
+            zoomIn();
+         } else {
+            var photos = photosNearLocation(e.lngLat);
+            if (photos.length == 0) {
+               zoomIn();
+            } else {
+               var selected = 1;
+               var $photos = $('<div>').addClass('photo-list');
+               var $markers = $('<div>').addClass('markers');
+               var select = function(count) {               
+                  selected += count;
+                  if (selected > photos.length) {
+                     selected = 1;
+                  } else if (selected < 1) {
+                     selected = photos.length;
+                  }
+                  $('figure', $photos).hide();
+                  $('span', $markers).removeClass('selected');
+                  $('figure:nth-child(' + selected + ')', $photos).show();
+                  $('span:nth-child(' + selected + ')', $markers).addClass('selected');
+               };
+               var prev = function() { select(-1); };
+               var next = function() { select(1); };
+
+               enableKeyNav(true, next, prev);
+
+               for (var i = 0; i < photos.length; i++) {
+                  $photos.append(html.photo(photos[i]));
+                  $markers.append(html.icon('map-marker'));
+               }
+               $('span:first-child', $markers).addClass('selected');
+
+               $preview
+                  .empty()
+                  .css({ top: e.point.y + 15, left: e.point.x })
+                  .append($('<nav>')
+                     .append(html.icon('arrow-left', prev))
+                     .append($markers)
+                     .append(html.icon('arrow-right', next))
+                  )
+                  .append($photos)
+                  .show();
+            }
+         }
+      }
+   };
+
    map.addControl(nav, 'top-right')
       .on('load', function() {
          $showImagery.click(function() { showImagery(!imageryOn); });
@@ -92,8 +182,32 @@ $(function() {
             geoJSON = data;
             $count.html(geoJSON.features.length + ' photos').show();
             addMapLayers();
+            // https://www.mapbox.com/help/blank-tiles/
+            map.resize();
          });
       });
+
+   /**
+    * Enable or disable keyboard photo navigation.
+    * @param {boolean} enable
+    * @param {function} [next]
+    * @param {function} [prev]
+    */
+   function enableKeyNav(enable, next, prev) {
+      if (enable) {
+         //$(document).keypress(function(e) {
+         document.addEventListener('keydown', function(e) {
+            var event = window.event ? window.event : e;
+            switch (event.keyCode) {
+               case 27: handle.mapInteraction(e); break;
+               case 37: prev(); break;
+               case 39: next(); break;
+            }
+         });
+      } else {
+         document.removeEventListener('keydown');
+      }
+   }
 
    /**
     * Get all photos near a location
@@ -118,11 +232,6 @@ $(function() {
          return coord[0] >= sw[0] && coord[1] >= sw[1]
              && coord[0] <= ne[0] && coord[1] <= ne[1];
       });
-   }
-
-   function handleZoomEnd() {
-      updateUrl();
-      enableZoomOut();
    }
 
    /**
@@ -175,78 +284,6 @@ $(function() {
    function cursor(name) {
       if (name === undefined) { name = ''; }
       return function() { canvas.style.cursor = name; };
-   }
-
-   /**
-    * Respond to mouse click on cluster marker.
-    * @param {mapboxgl.Event} e
-    * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
-    */
-   function clickCluster(e) {
-      var cluster = e.features[0].properties;
-      var atZoom = map.getZoom();
-      var zoomIn = function() {
-         map.easeTo({
-            center: e.lngLat,
-            zoom: MAX_ZOOM - atZoom < 2 ? MAX_ZOOM : atZoom + 2
-         });
-      };
-
-      if (cluster.point_count > 5 && atZoom < MAX_ZOOM) {
-         zoomIn();
-      } else {
-         var photos = photosNearLocation(e.lngLat);
-         if (photos.length == 0) {
-            zoomIn();
-         } else {
-            var selected = 1;
-            var $photos = $('<div>').addClass('photo-list');
-            var $markers = $('<div>').addClass('markers');
-            var select = function(count) {               
-               selected += count;
-               if (selected > photos.length) {
-                  selected = 1;
-               } else if (selected < 1) {
-                  selected = photos.length;
-               }
-               $('figure', $photos).hide();
-               $('span', $markers).removeClass('selected');
-               $('figure:nth-child(' + selected + ')', $photos).show();
-               $('span:nth-child(' + selected + ')', $markers).addClass('selected');
-            };
-            var prev = function() { select(-1); };
-            var next = function() { select(1); };
-
-            for (var i = 0; i < photos.length; i++) {
-               $photos.append(html.photo(photos[i]));
-               $markers.append(html.icon('map-marker'));
-            }
-            $('span:first-child', $markers).addClass('selected');
-
-            $preview
-               .empty()
-               .css({ top: e.point.y + 15, left: e.point.x })
-               .append($('<nav>')
-                  .append(html.icon('arrow-left', prev))
-                  .append($markers)
-                  .append(html.icon('arrow-right', next))
-               )
-               .append($photos)
-               .show();
-         }
-      }
-   }
-
-   /**
-    * Respond to mouse click on photo marker.
-    * @param {mapboxgl.Event} e
-    */
-   function clickPhoto(e) {
-      $preview
-         .empty()
-         .css({ top: e.point.y + 15, left: e.point.x })
-         .append(html.photo(e.features[0]))
-         .show();
    }
 
    /**
@@ -331,11 +368,11 @@ $(function() {
          .on('mouseleave', 'cluster', cursor())
          .on('mouseenter', 'photo', cursor('pointer'))
          .on('mouseleave', 'photo', cursor())
-         .on('move', function()  { $preview.hide(); })
-         .on('click', function() { $preview.hide(); })
-         .on('zoomend', handleZoomEnd)
+         .on('move', handle.mapInteraction)
+         .on('click', handle.mapInteraction)
+         .on('zoomend', handle.zoomEnd)
          .on('moveend', updateUrl)
-         .on('mousedown', 'cluster', clickCluster)
-         .on('mousedown', 'photo', clickPhoto);
+         .on('mousedown', 'cluster', handle.clusterClick)
+         .on('mousedown', 'photo', handle.photoClick);
    }
 });
