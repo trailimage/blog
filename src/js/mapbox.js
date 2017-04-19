@@ -18,14 +18,15 @@ $(function() {
       on: $('nav .glyphicon-check'),
       off: $('nav .glyphicon-unchecked')
    };
+   var qs = parseUrl();
    // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
    var nav = new mapboxgl.NavigationControl();
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
       style: 'mapbox://styles/' + style.imagery,
-      center: initial.center,
-      zoom: initial.zoom,
+      center: qs.center || initial.center,
+      zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
       dragRotate: false,
       keyboard: false
@@ -93,6 +94,8 @@ $(function() {
          updateUrl();
          enableZoomOut();
       },
+
+      keyNav: null,
 
       mapInteraction: function() {
          $preview.hide();
@@ -188,6 +191,23 @@ $(function() {
       });
 
    /**
+    * Load map location from URL.
+    * @returns {object}
+    */
+   function parseUrl() {
+      var parts = window.location.search.split(/[&\?]/g);
+      var qs = {};
+      for (var i = 0; i < parts.length; i++) {
+         var pair = parts[i].split('=');
+         if (pair.length == 2) { qs[pair[0]] = parseFloat(pair[1]); }
+      }
+      if (qs.hasOwnProperty('lat') && qs.hasOwnProperty('lon')) {
+         qs.center = [qs.lon, qs.lat];
+      }
+      return qs;
+   }
+
+   /**
     * Enable or disable keyboard photo navigation.
     * @param {boolean} enable
     * @param {function} [next]
@@ -195,17 +215,17 @@ $(function() {
     */
    function enableKeyNav(enable, next, prev) {
       if (enable) {
-         //$(document).keypress(function(e) {
-         document.addEventListener('keydown', function(e) {
+         handle.keyNav = function(e) {
             var event = window.event ? window.event : e;
             switch (event.keyCode) {
                case 27: handle.mapInteraction(e); break;
                case 37: prev(); break;
                case 39: next(); break;
             }
-         });
+         };
+         document.addEventListener('keydown', handle.keyNav);
       } else {
-         document.removeEventListener('keydown');
+         document.removeEventListener('keydown', handle.keyNav);
       }
    }
 
