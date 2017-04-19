@@ -24,7 +24,7 @@ $(function() {
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/' + style.imagery,
+      style: 'mapbox://styles/' + style.hybrid,
       center: qs.center || initial.center,
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
@@ -325,8 +325,8 @@ $(function() {
          type: 'geojson',
          data: geoJSON,
          cluster: true,
-         clusterMaxZoom: 22,
-         clusterRadius: 20
+         clusterMaxZoom: 18,
+         clusterRadius: 30
       });
 
       // https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-circle
