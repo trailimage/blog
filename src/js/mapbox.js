@@ -13,10 +13,7 @@ $(function() {
    var imageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
-      simple: 'jabbott7/cj1qniq9r00322sqxt3pastcf',
-      basic: 'jabbott7/cj1k069f0000p2slh5775akgj',
-      hybrid: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
-      imagery: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
+      basic: 'jabbott7/cj1qniq9r00322sqxt3pastcf',
       outdoors: 'mapbox/outdoors-v10'
    };
    var $count = $('#photo-count');
@@ -33,7 +30,7 @@ $(function() {
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/' + style.simple,
+      style: 'mapbox://styles/' + style.basic, 
       center: qs.center || initial.center,
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
@@ -381,14 +378,14 @@ $(function() {
          source: 'photos',
          filter: ['has', 'point_count'],
          paint: {
-            'circle-color': '#524948',
+            'circle-color': '#422',
             'circle-radius': {
                property: 'point_count',
                type: 'interval',
                stops: [
-                  [0, 13],
-                  [50, 16],
-                  [100, 19]
+                  [0, 10],
+                  [10, 12],
+                  [100, 15]
                ]
             },
             'circle-opacity': markerOpacity,
