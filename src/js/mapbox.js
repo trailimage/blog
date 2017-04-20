@@ -147,7 +147,7 @@ $(function() {
          if (cluster.point_count > 5 && atZoom < MAX_ZOOM - 2) {
             zoomIn();
          } else {
-            var photos = photosNearLocation(e.lngLat);
+            var photos = photosNearLocation(e.lngLat, cluster.point_count);
             if (photos.length == 0) {
                zoomIn();
             } else {
@@ -245,32 +245,54 @@ $(function() {
    }
 
    /**
-    * Get all photos near a location. 
+    * Get number of photos nearest to a location.
+    *
+    * 0.025 works at 6.3               0.1575
+    * 0.015 works at 7.67              0.11505
+    * 0.001 works at 8.5 - 10.56       0.009
+    * 0.0002 works at 12.54            0.002508
+    * 0.0001 works at 13.3 (not 12.3)  0.00133
+    *
     * @param {mapboxgl.LngLatLike} lngLat
-    * @returns {GeoJSON.FeatureCollection}
+    * @param {number} count Number of photos to return
+    * @returns {GeoJSON.Feature[]}
     */
-   function photosNearLocation(lngLat) {
-      // 0.025 works at 6.3               0.1575
-      // 0.015 works at 7.67              0.11505
-      // 0.001 works at 8.5 - 10.56       0.009
-      // 0.0002 works at 12.54            0.002508
-      // 0.0001 works at 13.3 (not 12.3)  0.00133
-      //CLUSTER_MARKER_SIZE
-      //var d = =(($A2 * 4) / POW(2,$A2 * 1.4) * 10)
+   function photosNearLocation(lngLat, count) {
       var z = map.getZoom();
       var f = (z * 1.5) / Math.pow(2, z * 1.3) * 10;
       var sw = [lngLat.lng - f, lngLat.lat -f];
       var ne = [lngLat.lng + f, lngLat.lat +f];
 
-      var maybe = geoJSON.features.filter(function(f) { 
-         var coord = f.geometry.coordinates;
-         return coord[0] >= sw[0] && coord[1] >= sw[1]
-             && coord[0] <= ne[0] && coord[1] <= ne[1];
+      var photos = geoJSON.features
+         .filter(function(f) { 
+            var coord = f.geometry.coordinates;
+            return coord[0] >= sw[0] && coord[1] >= sw[1]
+                && coord[0] <= ne[0] && coord[1] <= ne[1];
+         })
+         .map(function(f) {
+            f.properties.distance = distance(lngLat, f.geometry.coordinates);
+            return f;
+         });
+
+      photos.sort(function(p1, p2) {
+         return p1.properties.distance - p2.properties.distance;
       });
 
+      return photos.slice(0, count);
+   }
 
-
-      return maybe;
+   /**
+    * Straight-line distance between two points.
+    * @param {mapbox.LngLat} lngLat
+    * @param {number[]} point
+    * @returns {number}
+    */
+   function distance(lngLat, point) {
+      var x1 = lngLat.lng;
+      var y1 = lngLat.lat;
+      var x2 = point[0];
+      var y2 = point[1];
+      return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
    }
 
    /**
