@@ -2,7 +2,14 @@
 
 $(function() {
    var MAX_ZOOM = 18;
+   /**
+    * Number of decimals to round coordinates to.
+    */
    var COORD_DECIMALS = 5;
+   /**
+    * Maximum number of photos to display in carousel.
+    */
+   var MAX_IN_CAROUSEL = 10;
    var imageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
@@ -144,7 +151,7 @@ $(function() {
             });
          };
 
-         if (cluster.point_count > 5 && atZoom < MAX_ZOOM - 2) {
+         if (cluster.point_count > MAX_IN_CAROUSEL && atZoom < MAX_ZOOM - 2) {
             zoomIn();
          } else {
             var photos = photosNearLocation(e.lngLat, cluster.point_count);
@@ -191,6 +198,8 @@ $(function() {
          }
       }
    };
+
+   if (qs.center) { enableZoomOut(); }
 
    map.addControl(nav, 'top-right')
       .on('load', function() {
