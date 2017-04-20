@@ -96,8 +96,15 @@ $(function() {
          enableZoomOut();
       },
 
+      /**
+       * Handle keyboard events while photo preview is visible.
+       * @type {function}
+       */
       keyNav: null,
 
+      /**
+       * Respond to user map interaction by hiding photo preview.
+       */
       mapInteraction: function() {
          $preview.hide();
          enableKeyNav(false);
@@ -116,7 +123,14 @@ $(function() {
       },
 
       /**
-       * Respond to mouse click on cluster marker.
+       * Respond to mouse click on cluster marker by showing the nearest
+       * photos equal to the cluster count.
+       *
+       * These may not be the same photos represented by the cluster since
+       * the event coordinate is not the cluster center but the click position
+       * and I've not been able to find a function that exactly relates zoom
+       * level to the radius represented by the cluster.
+       *
        * @param {mapboxgl.Event} e
        * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
@@ -231,7 +245,7 @@ $(function() {
    }
 
    /**
-    * Get all photos near a location
+    * Get all photos near a location. 
     * @param {mapboxgl.LngLatLike} lngLat
     * @returns {GeoJSON.FeatureCollection}
     */
@@ -248,11 +262,15 @@ $(function() {
       var sw = [lngLat.lng - f, lngLat.lat -f];
       var ne = [lngLat.lng + f, lngLat.lat +f];
 
-      return geoJSON.features.filter(function(f) { 
+      var maybe = geoJSON.features.filter(function(f) { 
          var coord = f.geometry.coordinates;
          return coord[0] >= sw[0] && coord[1] >= sw[1]
              && coord[0] <= ne[0] && coord[1] <= ne[1];
       });
+
+
+
+      return maybe;
    }
 
    /**
