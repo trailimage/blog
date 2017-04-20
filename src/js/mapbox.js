@@ -184,9 +184,19 @@ $(function() {
                }
                $('span:first-child', $markers).addClass('selected');
 
+               var position = { top: e.point.y + 15, left: e.point.x };
+
+               // if (3 == 2) {
+               //    delete position['top'];
+               //    position.bottom = e.point.y - 15;
+               // } else {
+               //    delete position['left'];
+               //    position.right = e.point.x;
+               // }
+
                $preview
                   .empty()
-                  .css({ top: e.point.y + 15, left: e.point.x })
+                  .css(position)
                   .append($('<nav>')
                      .append(html.icon('arrow-left', prev))
                      .append($markers)
