@@ -32,7 +32,7 @@ $(function() {
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/' + style.outdoors,
+      style: 'mapbox://styles/' + style.basic,
       center: qs.center || initial.center,
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
