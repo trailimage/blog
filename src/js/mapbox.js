@@ -9,7 +9,7 @@ $(function() {
    /**
     * Maximum number of photos to display in carousel.
     */
-   var MAX_IN_CAROUSEL = 10;
+   var MAX_IN_CAROUSEL = 20;
    var imageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
