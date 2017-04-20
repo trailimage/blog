@@ -184,19 +184,9 @@ $(function() {
                }
                $('span:first-child', $markers).addClass('selected');
 
-               var position = { top: e.point.y + 15, left: e.point.x };
-
-               // if (3 == 2) {
-               //    delete position['top'];
-               //    position.bottom = e.point.y - 15;
-               // } else {
-               //    delete position['left'];
-               //    position.right = e.point.x;
-               // }
-
                $preview
                   .empty()
-                  .css(position)
+                  .css({ top: e.point.y + 15, left: e.point.x })
                   .append($('<nav>')
                      .append(html.icon('arrow-left', prev))
                      .append($markers)
@@ -265,22 +255,15 @@ $(function() {
 
    /**
     * Get number of photos nearest to a location.
-    *
-    * 0.025 works at 6.3               0.1575
-    * 0.015 works at 7.67              0.11505
-    * 0.001 works at 8.5 - 10.56       0.009
-    * 0.0002 works at 12.54            0.002508
-    * 0.0001 works at 13.3 (not 12.3)  0.00133
-    *
     * @param {mapboxgl.LngLatLike} lngLat
     * @param {number} count Number of photos to return
     * @returns {GeoJSON.Feature[]}
     */
    function photosNearLocation(lngLat, count) {
       var z = map.getZoom();
-      var f = (z * 1.5) / Math.pow(2, z * 1.3) * 10;
-      var sw = [lngLat.lng - f, lngLat.lat -f];
-      var ne = [lngLat.lng + f, lngLat.lat +f];
+      var f = (z * 3) / Math.pow(2, z);
+      var sw = [lngLat.lng - f, lngLat.lat - f];
+      var ne = [lngLat.lng + f, lngLat.lat + f];
 
       var photos = geoJSON.features
          .filter(function(f) { 
