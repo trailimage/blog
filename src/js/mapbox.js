@@ -13,6 +13,7 @@ $(function() {
    var imageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
+      simple: 'jabbott7/cj1qniq9r00322sqxt3pastcf',
       basic: 'jabbott7/cj1k069f0000p2slh5775akgj',
       hybrid: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
       imagery: 'jabbott7/cj1mcsd7t000h2rpitaiafuq0',
@@ -32,7 +33,7 @@ $(function() {
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/' + style.basic,
+      style: 'mapbox://styles/' + style.simple,
       center: qs.center || initial.center,
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
