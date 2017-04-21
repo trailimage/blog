@@ -22,12 +22,18 @@
       "allowDownload": true,
       // Google maps
       "google": true,
+      // ?
+      "loadPostTrack": true,
       // defined by mapbox
       "mapboxgl": true,
       // defined inline on map.hbs
       "mapPhotoID": true,
+      // defined inline on mapbox.hbs
+      "mapStyle": true,
       // defined inline on map.hbs
-      "postKey": true
+      "postKey": true,
+      // defined in post-manu.js
+      "TrailImage": true
    },
    // rules are supposed to be inherited from parent directory configurations
    // but that doesn't seem to be happening when run inside VSCode

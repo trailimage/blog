@@ -26,8 +26,6 @@
       // defined inline on map.hbs
       "Buffer": true,
       "console": true,
-      // defined inline on mapbox.hbs
-      "mapStyle": true,
       "process": true,
       "setTimeout": true
    },

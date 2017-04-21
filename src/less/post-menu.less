@@ -28,16 +28,18 @@ header {
 
    &:hover { color: @hoverColor; }
 
-   .glyphicon {
+   .material-icons {
       position: absolute;
       right: 5px;
-      top: 5px;
+      top: 0;
+      margin: 0;
+      vertical-align: text-bottom;
 
       @media @mobile { top: 8px; }
 
-      &.glyphicon-chevron-up {
+      &.expand_less {
          display: none;
-         top: 2px;
+         top: -1px;
          @media @mobile { top: 5px; }
       }
    }
