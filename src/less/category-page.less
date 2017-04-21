@@ -2,210 +2,212 @@
 @import "settings";
 
 header.page.category-header #top-bar {
-	// custom height
-	height: 65px;
+   // custom height
+   height: 65px;
 
-	h1, h4 {
-		clear: left;
-		float: none;
-		line-height: 1em;
-		text-rendering: optimizeLegibility;
-	}
+   h1, h4 {
+      clear: left;
+      float: none;
+      line-height: 1em;
+      text-rendering: optimizeLegibility;
+   }
 
-	h1 {
-		margin: 0 0 0 5px;
-		padding: 2px 0 0 0;
-		font-size: 45px;
-		letter-spacing: 0;
-	}
+   h1 {
+      margin: 0 0 0 5px;
+      padding: 2px 0 0;
+      font-size: 45px;
+      letter-spacing: 0;
+   }
 
-	// subtitle
-	h4 {
-		margin: 3px 0 0 8px;
-		color: rgba(255, 255, 255, 0.1);
-		text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-		font-size: 14px;
-		font-family: @headerFont;
-		letter-spacing: 8px;
-		text-transform: uppercase;
-	}
+   // subtitle
+   h4 {
+      margin: 3px 0 0 8px;
+      color: rgba(255, 255, 255, 0.1);
+      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+      font-size: 14px;
+      font-family: @headerFont;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+   }
 
-	@media @mobile {
-		height: @mobileHeaderHeight;
+   @media @mobile {
+      height: @mobileHeaderHeight;
 
-		h1 {
-			padding-top: 6px;
-			font-size: 30px;
-			letter-spacing: 0;
-		}
-		h4 {
-			color: @mobileTextColor;
-		}
-	}
+      h1 {
+         padding-top: 6px;
+         font-size: 30px;
+         letter-spacing: 0;
+      }
+      h4 {
+         color: @mobileTextColor;
+      }
+   }
 }
 
-//region Content
-
 div.root-category {
-	.glyphicon {
-		font-size: 150px;
-		float: right;
-		color: @lightColor;
-		padding: 30px;
-	}
-	ul {
-		font-size: 20px;
-		padding: 10px 0 20px 20px;
-		li {
-			line-height: 1.5em;
-			color: @lightTrimColor;
+   .glyphicon {
+      font-size: 150px;
+      float: right;
+      color: @lightColor;
+      padding: 30px;
+   }
+   ul {
+      font-size: 20px;
+      padding: 10px 0 20px 20px;
+      li {
+         line-height: 1.5em;
+         color: @lightTrimColor;
 
-			a {
-				font-size: 25px;
-				padding-right: 5px;
-				text-decoration: none;
-				font-weight: bold;
-			}
-		}
-	}
+         a {
+            font-size: 25px;
+            padding-right: 5px;
+            text-decoration: none;
+            font-weight: bold;
+         }
+      }
+   }
 }
 
 div.category {
-	margin-top: -20px;
+   margin-top: -20px;
 
-	section.posts	{
-		padding: 0;
-		margin: 0;
-		font-family: @sanSerifFont;
+   section.posts {
+      padding: 0;
+      margin: 0;
+      font-family: @sanSerifFont;
 
-		article.summary {
-			font-weight: normal;
-			clear: left;
-			text-shadow: none;
-			padding: 0;
-			margin: 0;
+      article.summary {
+         font-weight: normal;
+         clear: left;
+         text-shadow: none;
+         padding: 0;
+         margin: 0;
 
-			header.post {
-				background-color: #fff;
-				margin-top: 20px;
-				padding: 5px 7px 2px 6px;
-				.drop-shadow(0, -2px, 6px, 0.1);
+         header.post {
+            background-color: #fff;
+            margin-top: 20px;
+            padding: 5px 7px 2px 6px;
+            .drop-shadow(0, -2px, 6px, 0.1);
 
-				.mode-icon {
-					float: right;
-					margin: 3px 15px 0 0;
-				}
+            .mode-icon {
+               float: right;
+               margin: 3px 15px 0 0;
+            }
 
-				ul.info {
-					float: right;
-					list-style: none;
-					li { text-align: right; }
-					li.date-taken { font-weight: bold; }
-					li.photo-count { font-size: 12px; }
-				}
+            ul.info {
+               float: right;
+               list-style: none;
+               li { text-align: right; }
+               li.date-taken { font-weight: bold; }
+               li.photo-count { font-size: 12px; }
+            }
 
-				a.title {
-					clear: both;
-					display: inline-block;
-					padding-top: 7px;
-					color: @boldColor;
-					font-size: 14pt;
-					font-weight: bold;
-					text-decoration: none;
-					text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-					text-rendering: optimizeLegibility;
+            a.title {
+               clear: both;
+               display: inline-block;
+               padding-top: 7px;
+               color: @boldColor;
+               font-size: 14pt;
+               font-weight: bold;
+               text-decoration: none;
+               text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+               text-rendering: optimizeLegibility;
 
-					&:hover { color: @hoverColor; }
-				}
+               &:hover { color: @hoverColor; }
+            }
 
-				@media @mobile {
-					background-color: #333;
-					a.title, ul.info { color: #fff; }
-					a:active { color: @mobileHoverColor; }
-					.mode-icon { display: none; }
-				}
-			}
+            @media @mobile {
+               background-color: #333;
+               a.title, ul.info { color: #fff; }
+               a:active { color: @mobileHoverColor; }
+               .mode-icon { display: none; }
+            }
+         }
 
-			a.thumb {
-				margin: 0 20px 0 0;
-				float: left;
-			}
+         a.thumb {
+            margin: 0 20px 0 0;
+            float: left;
+         }
 
-			a.map {
-				margin-left: -20px;
-			}
+         a.map {
+            margin-left: -20px;
+         }
 
-			p.summary {
-				margin: 15px 20px 0 20px;
-				font-family: @serifFont;
-				font-size: 16px;
-				line-height: 1.2em;
-				text-align: justify;
+         p.summary {
+            margin: 15px 20px 0;
+            font-family: @serifFont;
+            font-size: 16px;
+            line-height: 1.2em;
+            text-align: justify;
 
-				@media @mobile {
-					text-align: left;
-					color: @mobileTextColor;
-					font-size: 20px;
-				}
-			}
+            @media @mobile {
+               text-align: left;
+               color: @mobileTextColor;
+               font-size: 20px;
+            }
+         }
 
-			ul.categories {
-				float: right;
-				list-style: none;
-				margin: 0;
-				padding: 10px 6px 10px 0;
+         ul.categories {
+            float: right;
+            list-style: none;
+            margin: 0;
+            padding: 10px 6px 10px 0;
 
-				@media @mobile {
-					padding: 10px 6px 20px 7px;
-				}
+            @media @mobile {
+               padding: 10px 6px 20px 7px;
+            }
 
-				li {
-					position: relative;
-					font-size: 16px;
-					font-weight: normal;
-					color: #888;
-					display: block;
-					float: left;
-					clear: none;
-					padding: 1px 4px 0 4px;
-					margin-left: 3px;
-					line-height: 1em;
+            li {
+               position: relative;
+               font-size: 16px;
+               font-weight: normal;
+               color: #888;
+               display: block;
+               float: left;
+               clear: none;
+               padding: 1px 4px 0;
+               margin-left: 3px;
+               line-height: 1em;
 
-					a {
-						text-decoration: none;
-						.glyphicon { .opacity(0.2); padding-right: 2px; }
-						&:hover .glyphicon { .opacity(1); }
-					}
+               a {
+                  cursor: pointer;
+                  text-decoration: none;
+                  .material-icons {
+                     .opacity(0.2);
+                     font-size: 18px;
+                     vertical-align: text-bottom;
+                     margin: 0 2px 1px 0;
+                  }
+                  &:hover .material-icons { .opacity(1); }
+               }
 
-					@media @mobile {
-						font-size: 18px;
-						padding: 15px 1px 0 7px;
-						margin: 0 0 10px 0;
+               @media @mobile {
+                  font-size: 18px;
+                  padding: 15px 1px 0 7px;
+                  margin: 0 0 10px;
 
-						a {
-							color: #999;
-							padding: 4px 12px 3px 30px;
-							background-color: rgba(100, 100, 100, 0.4);
-							border: none;
+                  a {
+                     color: #999;
+                     padding: 4px 12px 3px 30px;
+                     background-color: rgba(100, 100, 100, 0.4);
+                     border: none;
 
-							.glyphicon {
-								position: absolute;
-								left: 15px;
-								top: 15px;
-								margin-right: 3px;
-							}
-							.rounded(12px);
+                     .material-icons {
+                        position: absolute;
+                        left: 15px;
+                        top: 15px;
+                        margin-right: 3px;
+                     }
+                     .rounded(12px);
 
-							&:active {
-								color: @mobileActiveColor;
-								.glyphicon { color: @mobileActiveColor; .opacity(1); }
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                     &:active {
+                        color: @mobileActiveColor;
+                        .material-icons { color: @mobileActiveColor; .opacity(1); }
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
 }
-
-//endregion
