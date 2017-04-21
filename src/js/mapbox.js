@@ -103,7 +103,10 @@ $(function() {
        * @param {jQuery} [navigation]
        */
       photoPreview: function(e, cssClass, content, navigation) {
-         $preview.empty().removeClass().css(getPreviewPosition(e));
+         $preview
+            .empty()
+            .removeClass()
+            .css(getPreviewPosition(e));
 
          if (navigation !== undefined) { $preview.append(navigation); }
 
