@@ -102,7 +102,7 @@ nav {
 #photo-preview {
    display: none;
    color: #fff;
-   background-color: #000;   
+   background-color: #000;
    min-height: 200px;
    min-width: 200px;
 
@@ -134,15 +134,30 @@ nav {
 
    figure {
       display: block;
-      cursor: pointer;
       text-align: center;
       margin: 0;
-      img { min-height: 200px; }
+      img {
+         min-height: 200px;
+         cursor: pointer;
+      }
       figcaption {
+         position: relative;
          font-weight: normal;
          font-size: 12px;
          padding: 10px 0;
       }
+   }
+
+   .glyphicon-remove {
+      position: absolute;
+      z-index: 100;
+      font-size: 18px;
+      top: 8px;
+      left: 8px;
+      .opacity();
+      color: #fff;
+      cursor: pointer;
+      &:hover { .opacity(1); }
    }
 
    div.photo-list {
@@ -150,5 +165,10 @@ nav {
          display: none;
          &:first-child { display: block; }
       }
+   }
+
+   &.list .glyphicon-remove {
+      top: 25px;
+      left: 4px;
    }
 }

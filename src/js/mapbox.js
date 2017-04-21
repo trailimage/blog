@@ -10,6 +10,7 @@ $(function() {
     * Maximum number of photos to display in carousel.
     */
    var MAX_IN_CAROUSEL = 20;
+
    var imageryOn = false;
    var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    var style = {
@@ -40,6 +41,8 @@ $(function() {
    var canvas = map.getCanvasContainer();
    var markerOpacity = 0.6;
    var zoomOutEnabled = false;
+   var mapSize = { width: 0, height: 0 };
+   var previewSize = { width: 322, height: 350 };
 
    /**
     * Cache GeoJSON so it can be reassigned if map style changes
@@ -88,12 +91,32 @@ $(function() {
                .attr('alt', tip)
                .click(function() { showPhotoInPost(img.url); })
             )
-            .append($('<figcaption>').html(this.coordinate(f.geometry.coordinates)));
+            .append($('<figcaption>')
+               .html(this.coordinate(f.geometry.coordinates))
+            );
+      },
+
+      /**
+       * @param {mapboxgl.Event} e
+       * @param {string} cssClass
+       * @param {jQuery} content
+       * @param {jQuery} [navigation]
+       */
+      photoPreview: function(e, cssClass, content, navigation) {
+         $preview.empty().removeClass().css(getPreviewPosition(e));
+
+         if (navigation !== undefined) { $preview.append(navigation); }
+
+         $preview
+            .addClass(cssClass)
+            .append(content)
+            .append(html.icon('remove', handle.closePreview))
+            .show({ complete: handle.previewShown });
       }
    };
 
    /**
-    * Event handlers.
+    * Event handlers
     */
    var handle = {
       zoomEnd: function() {
@@ -109,22 +132,46 @@ $(function() {
 
       /**
        * Respond to user map interaction by hiding photo preview.
+       * @param {mapboxgl.Event} e
        */
-      mapInteraction: function() {
-         $preview.hide();
-         enableKeyNav(false);
+      mapInteraction: function(e) {
+         if (e.reason != 'fit') { handle.closePreview(); }
       },
 
       /**
-       * Respond to mouse click on photo marker.
+       * Update map size variables when window is resized.
+       * @param {Event} e
+       */
+      windowResize: function() {
+         var $c = $('canvas');
+         mapSize.width = $c.width();
+         mapSize.height = $c.height();
+      },
+
+      /**
+       * Respond to mouse click on photo marker. When preview is shown, start
+       * listening for map interaction events to hide the preview.
        * @param {mapboxgl.Event} e
        */
       photoClick: function(e) {
-         $preview
-            .empty()
-            .css({ top: e.point.y + 15, left: e.point.x })
-            .append(html.photo(e.features[0]))
-            .show();
+         html.photoPreview(e, 'single', html.photo(e.features[0]));
+      },
+
+      /**
+       * Attach events to the map to hide preview as soon as there's user
+       * interaction.
+       */
+      previewShown: function() {
+         map.on('move', handle.mapInteraction);
+      },
+
+      /**
+       * Click to close photo preview
+       */
+      closePreview: function() {
+         $preview.hide();
+         enableKeyNav(false);
+         map.off('move', handle.mapInteraction);
       },
 
       /**
@@ -182,16 +229,10 @@ $(function() {
                }
                $('span:first-child', $markers).addClass('selected');
 
-               $preview
-                  .empty()
-                  .css({ top: e.point.y + 15, left: e.point.x })
-                  .append($('<nav>')
-                     .append(html.icon('arrow-left', prev))
-                     .append($markers)
-                     .append(html.icon('arrow-right', next))
-                  )
-                  .append($photos)
-                  .show();
+               html.photoPreview(e, 'list', $photos, $('<nav>')
+                  .append(html.icon('arrow-left', prev))
+                  .append($markers)
+                  .append(html.icon('arrow-right', next)));
             }
          }
       }
@@ -199,18 +240,44 @@ $(function() {
 
    if (qs.center) { enableZoomOut(); }
 
+   window.addEventListener('resize', handle.windowResize);
+
    map.addControl(nav, 'top-right')
       .on('load', function() {
          $showImagery.click(function() { showImagery(!imageryOn); });
-
+   
          $.getJSON('/geo.json', function(data) {
             geoJSON = data;
             $count.html(geoJSON.features.length + ' photos').show();
             addMapLayers();
-            // https://www.mapbox.com/help/blank-tiles/
-            map.resize();
+            // set initial map dimensions
+            handle.windowResize();
          });
       });
+
+   /**
+    * Preview images may be 320 pixels on a side
+    * @param {mapboxgl.Event} e
+    * @returns {object} CSS property
+    */
+   function getPreviewPosition(e) {
+      var x = e.point.x;
+      var y = e.point.y;
+      var offset = {
+         x: (x + previewSize.width) - mapSize.width,
+         y: (y + previewSize.height) - mapSize.height
+      };
+      offset.x = offset.x < 0 ? 0 : offset.x + 10;
+      offset.y = offset.y < 0 ? 0 : offset.y + 10;
+
+      x -= offset.x;
+      y -= offset.y;
+
+      if (offset.x + offset.y > 0) {
+         map.panBy([offset.x, offset.y], { duration: 100 }, { reason: 'fit' });
+      }
+      return { top: y + 15, left: x };
+   }
 
    /**
     * Load map location from URL.
@@ -429,11 +496,9 @@ $(function() {
          .on('mouseleave', 'cluster', cursor())
          .on('mouseenter', 'photo', cursor('pointer'))
          .on('mouseleave', 'photo', cursor())
-         .on('move', handle.mapInteraction)
-         .on('click', handle.mapInteraction)
          .on('zoomend', handle.zoomEnd)
          .on('moveend', updateUrl)
-         .on('mousedown', 'cluster', handle.clusterClick)
-         .on('mousedown', 'photo', handle.photoClick);
+         .on('click', 'cluster', handle.clusterClick)
+         .on('click', 'photo', handle.photoClick);
    }
 });
