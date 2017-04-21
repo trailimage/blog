@@ -24,7 +24,6 @@
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}
-	{{> bug}}
 	<header class="page post-header content">
 		<!--googleoff: index-->
 		<nav id="mobile-menu"></nav>
@@ -127,7 +126,7 @@
 {{#unless post.feature}}
 	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}
-	<div class='by-line content'><p rel='author'><span>by</span>{{config.owner.name}}</p></div>
+	<div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
 
 	<footer class="post content">
 		<div class="fb-comments" data-href="{{config.site.url}}/{{post.key}}/" data-width="648" data-num-posts="20"></div>

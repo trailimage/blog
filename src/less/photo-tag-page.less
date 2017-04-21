@@ -120,9 +120,6 @@
       @media @mobile {
          border-right: 1px solid #333;
          width: @contentWidth - (@viewWidth + @mobileTabWidth + 7);
-         // header font is much narrower
-         font-family: @headerFont;
-         font-weight: 300;
 
          div {
             a {
@@ -147,8 +144,9 @@
       h4 {
          margin: 10px 0;
          padding: 0;
-         font-family: @headerFont;
-         font-weight: 700;
+         font-family: @sanSerifFont;
+         font-weight: bold;
+         letter-spacing: -1px;
          font-size: 22px;
          color: @boldColor; /* 423938 or 5e685c */
          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);

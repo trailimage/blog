@@ -14,7 +14,6 @@
 html {
    overflow-y: scroll;
    overflow: -moz-scrollbars-vertical;
-   /*-webkit-font-smoothing: subpixel-antialiased;*/
 }
 
 body {
@@ -44,25 +43,6 @@ body {
 
 .clear { clear: both; }
 
-#bug {
-   position: absolute;
-   top: 15px;
-   left: 5px;
-   text-decoration: none;
-
-   @media @mobile { display: none; }
-
-   h1 {
-      margin: 0 0 0 10px;
-      padding: 0;
-      color: rgba(255, 255, 255, 0.1);
-      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-      font-family: @sanSerifFont;
-      font-weight: normal;
-      font-size: 36px;
-   }
-}
-
 header.page {
    position: relative;
 
@@ -74,11 +54,11 @@ header.page {
 
       h1 {
          padding: 10px 0 0 10px;
-         font-family: @headerFont;
-         letter-spacing: -1px;
-         font-weight: 700;
+         font-family: @sanSerifFont;
+         letter-spacing: -1.5px;
          font-size: 34px;
          line-height: 1em;
+         font-weight: bold;
          color: @boldColor; /* 423938 or 5e685c */
          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
          vertical-align: top;
