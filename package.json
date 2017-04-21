@@ -1,7 +1,7 @@
 {
   "name": "trail-image",
   "description": "Trail Image blog",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "private": false,
   "author": {
     "name": "Jason Abbott"
@@ -13,8 +13,7 @@
   "scripts": {
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
-    "watch": "node_modules/.bin/gulp watch",
-    "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css"
+    "watch": "node_modules/.bin/gulp watch"
   },
   "dependencies": {
     "body-parser": "^1.17.0",
@@ -54,12 +53,11 @@
     "gulp-mocha": "^4.3.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^2.1.0",
-    "merge2": "^1.0.2",
+    "merge2": "^1.0.3",
     "mocha": "^3.2.0",
     "mocha-pretty-spec-reporter": "0.1.0-beta.2",
     "stylelint": "^7.10.0",
-    "stylelint-config-standard": "^16.0.0",
-    "webfont-dl": "^0.1.2"
+    "stylelint-config-standard": "^16.0.0"
   },
   "repository": {
     "type": "git",

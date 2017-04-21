@@ -17,7 +17,10 @@
       padding-bottom: 4px;
       text-rendering: optimizeLegibility;
 
-      &:hover, &:active { text-decoration: underline; color: desaturate(lighten(@hoverColor, 40%), 20%); }
+      &:hover, &:active {
+         text-decoration: underline;
+         color: desaturate(lighten(@hoverColor, 40%), 20%);
+      }
    }
 }
 
@@ -27,22 +30,32 @@
 
    li {
       &.Where { display: none; }
-      &.head { font-size: 17px; font-weight: bold; color: desaturate(lighten(@hoverColor, 40%), 20%); }
-      &.title { font-size: 15px; font-weight: bold; margin: 5px; }
+      &.head {
+         font-size: 17px;
+         font-weight: bold;
+         color: desaturate(lighten(@hoverColor, 40%), 20%);
+      }
+      &.title {
+         font-size: 17px;
+         font-weight: bold;
+         margin: 5px;
+      }
 
       .material-icons {
          font-size: 18px;
          margin: 0 5px 1px 0;
          vertical-align: text-bottom;
-         color: @trimColor;
+         .opacity(0.8);
       }
 
       ul {
          margin: 2px 0 0 10px;
 
          li {
+            font-size: smaller;
             font-weight: normal;
             color: @lightTrimColor;
+            line-height: 1.2em;
             a { display: inline; font-weight: normal; padding-right: 5px; }
          }
       }

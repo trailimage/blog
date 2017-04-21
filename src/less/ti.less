@@ -52,39 +52,14 @@ body {
 
    @media @mobile { display: none; }
 
-   h1, h2, h3 {
+   h1 {
       margin: 0 0 0 10px;
       padding: 0;
       color: rgba(255, 255, 255, 0.1);
       text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-      font-family: 'Oswald', Impact, Arial, sans-serif;
-      text-rendering: optimizeLegibility;
+      font-family: @sanSerifFont;
       font-weight: normal;
-      line-height: 1em;
-   }
-   h1 { font-size: 40px; }
-   h2 {
-      font-size: 13px;
-      letter-spacing: 2.3px;
-      text-transform: uppercase;
-      padding-left: 5px;
-      color: rgba(255, 255, 255, 0.2);
-   }
-   h3 {
-      position: absolute;
-      top: 39px;
-      left: 6px;
-      margin: 0;
-      white-space: nowrap;
-      font-size: 46px;
-      font-family: 'Qwigley', Tahoma, Arial, sans-serif;
-   }
-
-   &:hover {
-      h1, h2, h3 { text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7); .transition(); }
-      h1 { color: rgba(255, 255, 255, 0.2); }
-      h3 { color: rgba(255, 100, 100, 0.6); }
-      h2 { color: rgba(255, 255, 255, 0.4); }
+      font-size: 36px;
    }
 }
 
@@ -213,7 +188,7 @@ footer.page {
       color: rgba(255, 255, 255, 0.6);
       font-weight: normal;
       font-family: @sanSerifFont;
-      font-size: 13px;
+      font-size: 14px;
       text-indent: 0;
       padding: 0;
       margin: 2px;

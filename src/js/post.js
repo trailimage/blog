@@ -46,6 +46,7 @@ $(function() {
    /**
     * @param {string} name
     * @param {string} text
+    * @returns {string}
     */
    function iconHtml(name, text) {
       return '<i class="material-icons ' + name + '">' + name + '</i><p>' + text + '</p>';

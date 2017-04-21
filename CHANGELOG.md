@@ -1,5 +1,7 @@
-## 2.3.0
+## 3.0.0
+- Change map provider to Mapbox
 - Add map view of all posts
+- Remove web fonts (performance)
 
 ## 2.2.4
 - Fix bad GPX caching in Redis

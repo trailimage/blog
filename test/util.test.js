@@ -191,16 +191,16 @@ describe('Utilities', ()=> {
    });
 
    describe('Icons', ()=> {
-      it('creates glyphicons', ()=> {
-         expect(util.icon.tag('star')).equals('<span class="glyphicon glyphicon-star"></span>');
+      it('creates material icon tags', ()=> {
+         expect(util.icon.tag('star')).equals('<i class="material-icons star">star</i>');
       });
 
-      it('matches post categories to glyphicons', ()=> {
+      it('matches post categories to material icons', ()=> {
          config.style.icon.category = { Test: 'success', default: 'whatever' };
 
-         expect(util.icon.category('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
+         expect(util.icon.category('Test')).equals('<i class="material-icons success">success</i>');
          // revert to default if provided
-         expect(util.icon.category('Nothing')).equals('<span class="glyphicon glyphicon-whatever"></span>');
+         expect(util.icon.category('Nothing')).equals('<i class="material-icons whatever">whatever</i>');
 
          // blank if no default
          delete config.style.icon.category['default'];
@@ -332,13 +332,13 @@ describe('Utilities', ()=> {
 
       it('identifies haiku', ()=> {
          let source = 'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
-         let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<span class="glyphicon glyphicon-leaf"></span></p>';
+         let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<i class="material-icons spa">spa</i></p>';
 
          expect(util.html.story(source)).equals(target);
 
          source = 'cows stand chewing' + nl + 'wet meadow grass' + nl + 'while mud swallows wheels' + ds
             + 'Here we have Joel "Runs with Cows" Abbott. He did a little loop out among them—kind of became one of them.';
-         target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<span class="glyphicon glyphicon-leaf"></span></p>'
+         target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<i class="material-icons spa">spa</i></p>'
             + '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
 
          expect(util.html.story(source)).equals(target);
@@ -373,7 +373,7 @@ describe('Utilities', ()=> {
             + '¹ Some other note' + nl
             + '² Last note';
          let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
-            + '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
+            + '<li class="credit"><i class="material-icons star">star</i><span>Note about photo credit</span></li>'
             + '<li><span>Some other note</span></li>'
             + '<li><span>Last note</span></li></ol>';
 

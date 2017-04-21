@@ -100,11 +100,10 @@ header.page.post-header {
       font-weight: normal;
       line-height: 1.1em;
       font-family: @serifFont;
-      font-size: 15px;
+      font-size: 16px;
       text-align: justify;
       margin: 13px 35px 0;
       padding: 1.2em 2em 1em;
-      color: @boldColor;
       text-rendering: optimizeLegibility;
 
       p { margin: 0; padding: 0; }
@@ -150,11 +149,9 @@ body.has-date {
    }
 }
 
-body.has-categories {}
-body.has-map {}
-body.has-nav {}
-
-//region Navigation
+//body.has-categories {}
+//body.has-map {}
+//body.has-nav {}
 
 #nav-top {
    @media @mobile {
@@ -199,7 +196,6 @@ div.next, div.previous {
    position: absolute;
    font-family: @sanSerifFont;
    font-size: 16px;
-   text-rendering: optimizeLegibility;
    z-index: 250;
 
    h4 {
@@ -568,12 +564,12 @@ figure {
       display: block;
       background-color: #fff;
       color: #000;
-      padding: 2px 26px 2px 5px;
+      padding: 0 26px 3px 5px;
       font-family: @sanSerifFont;
       font-size: 20px;
       line-height: 17px;
       text-decoration: none;
-      letter-spacing: -2px;
+      letter-spacing: -1px;
       position: absolute;
       border: 1px solid @boldColor;
       .rounded(5px);
@@ -599,11 +595,11 @@ figure {
       &:hover, &:active {
          a.map {
             .opacity(0.7);
-            .glyphicon { color: rgba(255, 0, 0, 0.5); }
+            .material-icons { color: rgba(255, 0, 0, 0.5); }
 
             &:hover, &:active {
                .opacity(1);
-               .glyphicon { color: rgba(255, 0, 0, 1); }
+               .material-icons { color: rgba(255, 0, 0, 1); }
             }
          }
          div.info-button, nav.tags { display: block; }
@@ -836,7 +832,11 @@ div.caption {
             list-style: none;
             text-indent: -10px;
             padding-bottom: 10px;
-            span.glyphicon { color: @footnoteColor; padding-right: 7px; vertical-align: text-top; }
+            .material-icons {
+               color: @footnoteColor;
+               padding-right: 7px;
+               vertical-align: text-top;
+            }
          }
       }
 
@@ -849,7 +849,10 @@ div.caption {
             span { color: darken(@mobileTextColor, 30%); }
             &.credit {
                text-indent: -18px;
-               .material-icons { padding-right: 14px; }
+               .material-icons {
+                  margin: 0;
+                  padding-right: 14px;
+               }
             }
          }
 

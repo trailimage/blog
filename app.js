@@ -14,7 +14,7 @@ function createWebService() {
    const app = Express();
    const port = process.env['PORT'] || 3000;
 
-   log.infoIcon(C.icon.powerButton, 'Starting %s application', config.isProduction ? 'production' : 'development');
+   log.infoIcon('power-settings_new', 'Starting %s application', config.isProduction ? 'production' : 'development');
 
    defineViews(app);
 
@@ -22,7 +22,7 @@ function createWebService() {
       // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
-      log.infoIcon(C.icon.lock, 'Listening for authentication on port %d', port);
+      log.infoIcon('lock', 'Listening for authentication on port %d', port);
    } else {
       applyMiddleware(app);
 
@@ -30,7 +30,7 @@ function createWebService() {
          // library must be loaded before routes are defined
          route.standard(app);
          app.listen(port);
-         log.infoIcon(C.icon.heartOutline, 'Listening on port %d', port);
+         log.infoIcon('hearing', 'Listening on port %d', port);
       });
    }
 }

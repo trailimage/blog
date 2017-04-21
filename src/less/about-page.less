@@ -2,112 +2,48 @@
 @import "settings";
 
 .about {
-	@imageWidth: 401px;
+   padding: 0;
+   position: relative;
 
-	padding: 0;
-	position: relative;
+   .main-image {
+      float: right;
+      margin: 0;
+      padding: 0 0 10px 10px;
 
-	p {
-		padding: 0 1em;
-		font-family: @serifFont;
-		font-size: 17px;
-		line-height: 1.2em;
-		margin: 0 0 1em 0;
-		&.first { padding-top: 1em; }
+      img {
+         border: 1px solid @trimColor;
+         border-top: none;
+         border-right: none;
+      }
 
-		@media @mobile {
-			font-size: 24px;
-			a { color: @mobileLinkColor; }
-		}
-	}
+      &:hover { img { border-color: @hoverColor; } }
 
-	.by-line {
-		text-align: center;
-		font-size: 48px;
-		@media @mobile { margin-bottom: 20px; }
-	}
+      @media @mobile {
+         img { border: none; }
+         pointer-events: none;
+      }
+   }
 
-	#right-column {
-		float: right;
-		width: @imageWidth;
-		margin-left: 1em;
+   p {
+      padding: 0 1em;
+      font-family: @serifFont;
+      font-size: 20px;
+      line-height: 1.2em;
+      margin: 0 0 1em;
+      &.first { padding-top: 1em; }
 
-		.main-image {
-			position: relative;
-			margin: 0;
-			padding: 0;
+      @media @mobile {
+         font-size: 24px;
+         a { color: @mobileLinkColor; }
+      }
+   }
 
-			img {
-				border: 1px solid #000;
-				border-right: none;
-			}
-
-			&:hover	{ img { border-color: @hoverColor; } }
-
-			@media @mobile {
-				img { border: none; }
-				pointer-events: none;
-			}
-		}
-
-		.feature {
-			float: left;
-			width: (@imageWidth / 2) - 1;
-			font-family: @sanSerifFont;
-			font-size: 13px;
-			line-height: 1em;
-			margin: 0;
-			padding: 0 0 0.5em 0;
-			clear: right;
-			border-left: 1px solid @lightTrimColor;
-
-			h1 {
-				line-height: 1em;
-				text-align: center;
-				font-size: 13pt;
-				margin: 0 0 0.5em 0;
-				padding: 4px 0;
-				color: @boldColor;
-				text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-				background-color: @lightColor;
-				border-bottom: 1px solid @lightTrimColor;
-			}
-
-			a {
-				display: block;
-				margin: 5px 10px 0 10px;
-				text-decoration: none;
-			}
-
-			&.technical {
-				clear: left;
-				width: @imageWidth - 1;
-				a { display: inline; margin: 0; }
-				p { margin: 0 1em; padding: 0.5em 0; font-family: @sanSerifFont; font-size: 15px; }
-				h1 { margin-bottom: 0; border-top: 1px solid @lightTrimColor; }
-			}
-
-			@media @mobile {
-				border-color: #222;
-
-				h1 {
-					color: #888;
-					background-color: #222;
-					border: none;
-					text-shadow: none;
-					padding: 10px 0;
-				}
-
-				&.technical {
-					h1 { border: none; }
-					p { line-height: 1.8em; }
-				}
-
-				a {
-					color: @mobileLinkColor;
-					margin: 15px;
-				}
-			}
-		}
-	}
+   .by-line {
+      text-align: right;
+      font-size: 25px;
+      padding: 0 20px 10px 0;
+      font-family: @serifFont;
+      font-style: italic;
+      @media @mobile { margin-bottom: 20px; }
+   }
 }

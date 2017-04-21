@@ -1,11 +1,9 @@
-'use strict';
-
 const fs = require('fs');
 const flickr = require('../../lib/flickr');
 
 /**
- * @param {String} method Name of Flickr API method to call
- * @param {Function} transform Method to transform the result for testing
+ * @param {string} method Name of Flickr API method to call
+ * @param {function} transform Method to transform the result for testing
  * @returns {Promise}
  */
 const call = (method, transform) => new Promise((resolve, reject) => {

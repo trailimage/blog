@@ -32,6 +32,10 @@
       "mapStyle": true,
       // defined inline on map.hbs
       "postKey": true,
+      // defined in photo-tag.hbs
+      "selectedTag": true,
+      // defined in photo-tag.hbs
+      "siteName": true,
       // defined in post-manu.js
       "TrailImage": true
    },
