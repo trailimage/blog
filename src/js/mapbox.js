@@ -11,27 +11,17 @@ $(function() {
     */
    var MAX_IN_CAROUSEL = 20;
 
-   var imageryOn = false;
-   var initial = { zoom: 6.5, center: [-116.0987, 44.7] };
-   var style = {
-      basic: 'jabbott7/cj1qniq9r00322sqxt3pastcf',
-      outdoors: 'mapbox/outdoors-v10'
-   };
+   var initial = { zoom: 6.5, center: [-116.0987, 44.7] };  
    var $count = $('#photo-count');
    var $preview = $('#photo-preview');
-   var $showImagery = $('#toggle-satellite');
    var $zoomOut = $('#zoom-out');
-   var $check = {
-      on: $('nav .glyphicon-check'),
-      off: $('nav .glyphicon-unchecked')
-   };
    var qs = parseUrl();
    // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
    var nav = new mapboxgl.NavigationControl();
    // https://www.mapbox.com/mapbox-gl-js/api/
    var map = new mapboxgl.Map({
       container: 'map-canvas',
-      style: 'mapbox://styles/' + style.basic, 
+      style: 'mapbox://styles/' + mapStyle,
       center: qs.center || initial.center,
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
@@ -51,16 +41,20 @@ $(function() {
    var geoJSON = null;
 
     /**
-    * Methods for generating content.
+    * Methods for generating content
     */
    var html = {
       /**
-       * @param {string} name
+       * @param {string} name Google name with underscores for spaces
        * @param {function} [handler] Optional click handler
        * @returns {jQuery}
+       * @see https://material.io/icons/
        */
       icon: function(name, handler) {
-         var $icon = $('<span>').addClass('glyphicon glyphicon-' + name);
+         var $icon = $('<i>')
+            .addClass('material-icons ' + name)
+            .text(name);
+
          if (handler !== undefined) { $icon.click(handler); }
          return $icon;
       },
@@ -113,7 +107,7 @@ $(function() {
          $preview
             .addClass(cssClass)
             .append(content)
-            .append(html.icon('remove', handle.closePreview))
+            .append(html.icon('close', handle.closePreview))
             .show({ complete: handle.previewShown });
       }
    };
@@ -217,9 +211,9 @@ $(function() {
                      selected = photos.length;
                   }
                   $('figure', $photos).hide();
-                  $('span', $markers).removeClass('selected');
+                  $('i', $markers).removeClass('selected');
                   $('figure:nth-child(' + selected + ')', $photos).show();
-                  $('span:nth-child(' + selected + ')', $markers).addClass('selected');
+                  $('i:nth-child(' + selected + ')', $markers).addClass('selected');
                };
                var prev = function() { select(-1); };
                var next = function() { select(1); };
@@ -228,14 +222,14 @@ $(function() {
 
                for (var i = 0; i < photos.length; i++) {
                   $photos.append(html.photo(photos[i]));
-                  $markers.append(html.icon('map-marker'));
+                  $markers.append(html.icon('place'));
                }
-               $('span:first-child', $markers).addClass('selected');
+               $('i:first-child', $markers).addClass('selected');
 
                html.photoPreview(e, 'list', $photos, $('<nav>')
-                  .append(html.icon('arrow-left', prev))
+                  .append(html.icon('arrow_back', prev))
                   .append($markers)
-                  .append(html.icon('arrow-right', next)));
+                  .append(html.icon('arrow_forward', next)));
             }
          }
       }
@@ -246,9 +240,7 @@ $(function() {
    window.addEventListener('resize', handle.windowResize);
 
    map.addControl(nav, 'top-right')
-      .on('load', function() {
-         $showImagery.click(function() { showImagery(!imageryOn); });
-   
+      .on('load', function() {  
          $.getJSON('/geo.json', function(data) {
             geoJSON = data;
             $count.html(geoJSON.features.length + ' photos').show();
@@ -372,24 +364,6 @@ $(function() {
       var lngLat = map.getCenter();
       var url = '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
       window.history.replaceState(null, null, url);
-   }
-
-   /**
-    * Enable or disable satellite imagery. Abort if the setting is unchanged.
-    * @param {boolean} enabled
-    */
-   function showImagery(enabled) {
-      if (enabled == imageryOn) { return; }
-
-      imageryOn = enabled;
-
-      if (imageryOn) {
-         $check.on.show(); $check.off.hide();
-      } else {
-         $check.on.hide(); $check.off.show();
-      }
-      map.once('data', function(e) { if (e.dataType == 'style') { addMapLayers(); } });
-      map.setStyle('mapbox://styles/' + (imageryOn ? style.imagery : style.basic));
    }
 
    /**

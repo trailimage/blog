@@ -14,8 +14,7 @@
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
     "watch": "node_modules/.bin/gulp watch",
-    "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
-    "mapfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Orbitron:700'\" --css-rel=./fonts -o dist/fonts/mapfont.css"
+    "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Qwigley|Oswald:300,400,700|Droid+Sans:400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css"
   },
   "dependencies": {
     "body-parser": "^1.17.0",
@@ -44,7 +43,6 @@
     "@types/mapbox-gl": "^0.30.0",
     "@types/twitter": "0.0.28",
     "babel-eslint": "^7.1.1",
-    "bootstrap": "git+https://github.com/twbs/bootstrap.git#master",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "eslint-loader": "^1.7.0",
