@@ -87,11 +87,11 @@
 		<img src="{{size.preview.url}}" alt="{{title}}" data-original="{{size.normal.url}}"
 			 style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
 		     data-big="{{size.big.url}}" data-big-width="{{size.big.width}}" data-big-height="{{size.big.height}}"/>
-		<div class="info-button">{{{icon 'camera'}}}<p>Camera Settings</p></div>
+		<div class="info-button">{{{icon 'photo_camera'}}}<p>Camera Settings</p></div>
 
 	{{#if tags}}
 		<nav class="tags">
-			{{{icon 'tags'}}}
+			{{{icon 'local_offer'}}}
 			<h4>More photos like this</h4>
 			{{{makeTagList tags}}}
 		</nav>
@@ -99,7 +99,7 @@
 
 	{{#if longitude}}
       {{! http://handlebarsjs.com/#paths }}
-		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow">map{{{icon 'map'}}}</a>
 	{{/if}}
 
 	{{#if title}}
@@ -108,7 +108,7 @@
 	{{#if sourceUrl}}
 		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
 	{{/if}}
-		<div class="mobile-button">{{{icon 'camera'}}}<p>Info</p></div>
+		<div class="mobile-button">{{{icon 'photo_camera'}}}<p>Info</p></div>
 	</figure>
 
 	<div class="caption content">{{{formatCaption description}}}</div>

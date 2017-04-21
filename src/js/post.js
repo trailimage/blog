@@ -37,14 +37,18 @@ $(function() {
       var $button = $(this);
       $button
          .addClass('loading')
-         .html(iconHtml('download', 'Loading …'))
+         .html(iconHtml('cloud_download', 'Loading …'))
          .load($button.parent().data('exif'), function() {
             $button.removeClass('loading').addClass('loaded');
          });
    });
 
+   /**
+    * @param {string} name
+    * @param {string} text
+    */
    function iconHtml(name, text) {
-      return '<span class="glyphicon glyphicon-' + name + '"></span><p>' + text + '</p>'
+      return '<i class="material-icons ' + name + '">' + name + '</i><p>' + text + '</p>';
    }
 
    /**
