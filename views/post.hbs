@@ -1,6 +1,6 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-	{{> head-meta}}	
+	{{> head-meta}}
 {{#unless post.feature}}
 	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
 	{{#if post.previousIsPart}}
@@ -20,7 +20,7 @@
 	{{> json-ld}}
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
+<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoMarkers}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}
@@ -65,10 +65,10 @@
 	{{#unless post.feature}}
 		{{> categories post.categories}}
 		<nav id="nav-top">{{> navigation}}</nav>
-		{{#if post.photoCoordinates}}
+		{{#if post.photoMarkers}}
 		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
-         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/static/{{post.photoMarkers}}/auto/650x200?access_token={{config.mapbox.accessToken}}" width="650" height="200"/></a>
+         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/static/{{post.photoMarkers}}/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false" width="650" height="200"/></a>
 		</div>
 		{{/if}}
 	{{/unless}}
