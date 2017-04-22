@@ -34,6 +34,7 @@
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.41",
     "@types/facebook-js-sdk": "^2.8.1",
     "@types/gapi.analytics": "0.0.0",
     "@types/geojson": "^1.0.1",
