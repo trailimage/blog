@@ -18,8 +18,8 @@
 			</header>
 
 			<a class="thumb" title="View story" href="/{{key}}"><img src="{{coverPhoto.size.preview.url}}" width="{{coverPhoto.size.preview.width}}" height="{{coverPhoto.size.preview.height}}" style="width: {{coverPhoto.size.preview.width}}px; height: {{coverPhoto.size.preview.height}}px;"/></a>
-		{{#if photoCoordinates}}
-			<a class="map" title="View map" href="/{{key}}/map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size={{subtract 650 coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}&key={{../../config.google.apiKey}}&markers={{photoCoordinates}}"/></a>
+		{{#if photoMarkers}}
+			<a class="map" title="View map" href="/{{key}}/map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/{{../config.mapbox.style.static}}/static/{{photoMarkers}}/auto/{{subtract 650 coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}?access_token={{../config.mapbox.accessToken}}&attribution=false&logo=false" width="{{subtract 650 coverPhoto.size.preview.width}}" height="{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}"/></a>
 		{{/if}}
 			<section class="detail">
 				<p class="summary">{{description}}</p>

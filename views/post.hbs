@@ -68,7 +68,7 @@
 		{{#if post.photoMarkers}}
 		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
-         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/static/{{post.photoMarkers}}/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false" width="650" height="200"/></a>
+         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/{{post.photoMarkers}}/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false" width="650" height="200"/></a>
 		</div>
 		{{/if}}
 	{{/unless}}
