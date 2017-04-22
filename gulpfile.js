@@ -11,7 +11,15 @@ const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
 }
 
+/**
+ * @param {string[]} names
+ * @returns {string[]}
+ */
 const lessPath = names => names.map(n => './src/less/' + n + '.less');
+/**
+ * @param {string[]} names
+ * @returns {string[]}
+ */
 const jsPath =   names => names.map(n => './src/js/' + n);
 
 /**
@@ -25,7 +33,15 @@ function handleError(error) { console.error(error); this.emit('end'); }
 // https://github.com/jonathanepollack/gulp-minify-css
 // https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
 gulp.task('css', ()=>
-   gulp.src(lessPath(['ti', 'map', 'mapbox', 'admin']))
+   merge(
+      gulp.src(lessPath(['map', 'mapbox', 'admin'])).pipe(less()).on('error', handleError),
+      merge(
+         // combine fonts with main styles
+         gulp.src(lessPath(['ti'])).pipe(less()).on('error', handleError),
+         gulp.src(dist + 'fonts/webfont.css')
+      )
+         .pipe(concat('ti.css'))
+   )
       .pipe(less()).on('error', handleError)
       .pipe(nano({ discardUnused: false })).on('error', handleError)
       .pipe(gulp.dest(dist + 'css'))
@@ -35,6 +51,7 @@ gulp.task('css', ()=>
 gulp.task('js', ()=>
    merge(
       gulp.src(jsPath(['!(jquery.lazyload.js|post.js)'])),
+      // combine lazy load library with post script
       gulp.src(jsPath(['jquery.lazyload.js', 'post.js'])).pipe(concat('post.js'))
    )
       .pipe(sourcemaps.init())
