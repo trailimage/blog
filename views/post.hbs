@@ -66,10 +66,9 @@
 		{{> categories post.categories}}
 		<nav id="nav-top">{{> navigation}}</nav>
 		{{#if post.photoCoordinates}}
-		{{! https://developers.google.com/maps/documentation/static-maps/ }}
-		{{! 640 is maximum width of free API: https://developers.google.com/maps/documentation/static-maps/intro#Imagesizes }}
+		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
-			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}" width="640" height="200"/></a>
+         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v10/static/{{post.photoMarkers}}/auto/650x200?access_token={{config.mapbox.accessToken}}" width="650" height="200"/></a>
 		</div>
 		{{/if}}
 	{{/unless}}
