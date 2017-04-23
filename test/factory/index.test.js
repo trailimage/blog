@@ -1,13 +1,13 @@
-const is = require('../lib/is');
+const is = require('../../lib/is');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const factory = require('../lib/factory');
-const library = require('../lib/library');
+const factory = require('../../lib/factory/');
+const library = require('../../lib/library');
 
 describe('Factory', ()=> {
    before(() => {
-      factory.inject.flickr = require('./mocks/flickr.mock');
-      factory.inject.google = require('./mocks/google.mock');
+      factory.inject.flickr = require('../mocks/flickr.mock');
+      factory.inject.google = require('../mocks/google.mock');
    });
 
    it('makes library', ()=> factory.buildLibrary().then(()=> {

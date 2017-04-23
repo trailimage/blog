@@ -1,11 +1,11 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const factory = require('../lib/factory');
-const library = require('../lib/library');
+const factory = require('../../lib/factory/');
+const library = require('../../lib/library');
 /** @type {Post} */
 let post = null;
 
-factory.inject.flickr = require('./mocks/flickr.mock');
+factory.inject.flickr = require('../mocks/flickr.mock');
 
 describe('Photos', ()=> {
    before(() => factory.buildLibrary().then(()=> {

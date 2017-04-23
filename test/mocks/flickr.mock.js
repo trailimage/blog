@@ -1,5 +1,5 @@
 const fs = require('fs');
-const flickr = require('../../lib/flickr');
+const flickr = require('../../lib/providers/flickr');
 
 /**
  * @param {string} method Name of Flickr API method to call

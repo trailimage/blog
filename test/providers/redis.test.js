@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 //const expect = require('chai').expect;
-const redis = require('../lib/redis');
+const redis = require('../../lib/providers/redis');
 const key = 'test-key';
 
 describe('Redis', ()=> {
