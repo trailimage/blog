@@ -20,7 +20,7 @@
 	{{> json-ld}}
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoMarkers}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
+<body class="post{{#if post.happenedOn}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoMarkers}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}
@@ -45,9 +45,9 @@
 			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
 		</div>
 
-	{{#if post.dateTaken}}
+	{{#if post.happenedOn}}
 	{{! outside top-bar to avoid its fixed positioning }}
-		<div id="post-date">{{date post.dateTaken}}</div>
+		<div id="post-date">{{date post.happenedOn}}</div>
 	{{/if}}
 
 		<div class="fb-like" data-href="{{config.site.url}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
