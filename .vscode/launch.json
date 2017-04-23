@@ -38,7 +38,8 @@
          "cwd": "${workspaceRoot}",
          "runtimeExecutable": null,
          "stopOnEntry": false,
-         "args": ["test/**/*.js", "--no-timeouts"]
+         //"args": ["test/**/*.js", "--no-timeouts"]
+         "args": ["test/factory/*", "--no-timeouts"]
       },
       {
          "name": "Debug Gulp",
