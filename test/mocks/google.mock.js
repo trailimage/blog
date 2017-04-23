@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const is = require('../../lib/is.js');
 const C = require('../../lib/constants');
@@ -16,14 +14,14 @@ module.exports = {
    },
    drive: {
       /**
-       * @param {Post|Object} post
+       * @param {Post|object} post
        * @param {Stream.Writable} [stream]
        * @returns {Promise}
        */
       loadGPX: (post, stream) => new Promise((resolve, reject) => {
          fs.readFile(__dirname + '/track-big.gpx', (err, data) => {
             if (is.value(err)) {
-               reject(err)
+               reject(err);
             } else {
                if (is.value(stream)) { stream.write(body); }
                resolve(data.toString(C.encoding.UTF8));
