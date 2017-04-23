@@ -1,8 +1,6 @@
 interface redis {
    /**
     * Removes the specified keys. A key is ignored if it does not exist.
-    * @param {String|String[]} key
-    * @param {function(number)} [callback] Number of keys removed
     * @see http://redis.io/commands/del
     */
    del(key: string|string[], callback: (result: number) => any): void;
@@ -11,24 +9,18 @@ interface redis {
     * Removes the specified fields from the hash stored at key. Specified fields that
     * do not exist within this hash are ignored. If key does not exist, it is treated
     * as an empty hash and this command returns 0.
-    * @param {String|String[]} key Key or array of key plus hash keys
-    * @param {String|String[]|function(number)} hashKey or callback
-    * @param {function(number)} [callback] Number of keys removed
     * @see http://redis.io/commands/hdel
     * @see https://github.com/mranney/node_redis/issues/369
     */
    hdel(key: string|string[], hashKey: string|string[], callback: (result: number) => any): void;
 
    /**
-    * @param {String} key
-    * @param {function(number)} callback Existence indicated by 1 or 0
     * @see http://redis.io/commands/exists
     */
    exists(key: string, callback: (result: number) => any): void;
 
    /**
     * Returns if field is an existing field in the hash stored at key
-    * @param {function(number)} callback Existence indicated by 1 or 0
     * @see http://redis.io/commands/hexists
     */
    hexists(key: string, hashKey: string, callback: (result: number) => any): void;
@@ -59,8 +51,6 @@ interface redis {
 
    /**
     * Returns all fields and values of the hash stored at key
-    * @param {String} key
-    * @param {function(Object)} callback Name-value pairs
     * @see http://redis.io/commands/hgetall
     * @see https://github.com/mranney/node_redis#clienthgetallhash
     */
@@ -84,8 +74,6 @@ interface redis {
     * Sets the specified fields to their respective values in the hash stored at key.
     * This command overwrites any existing fields in the hash. If key does not exist,
     * a new key holding a hash is created.
-    * @param {String} key
-    * @param {Object} hash Name-value pairs
     * @see http://redis.io/commands/hset
     * @see https://github.com/mranney/node_redis#clienthmsethash-obj-callback
     */

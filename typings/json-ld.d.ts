@@ -1,4 +1,6 @@
 import {Post} from "./trailimage";
+import * as Chai from "chai";
+
 declare namespace JsonLD {
    import Property = Chai.Property;
    /**
@@ -180,7 +182,7 @@ declare namespace JsonLD {
    interface DateTime extends Thing {}
 
    /**
-    * @se3 http://schema.org/DayOfWeek
+    * @see http://schema.org/DayOfWeek
     */
    interface DayOfWeek extends Thing {}
 
@@ -369,7 +371,7 @@ declare namespace JsonLD {
     * @see http://schema.org/ItemList
     */
    interface ItemList<T extends Thing> extends Thing {
-      itemListElement: ListItem[]|string[]|Thing[],
+      itemListElement: ListItem<T>[]|string[]|Thing[],
       itemListOrder: ItemListOrderType|string
       numberofItems: number
    }
@@ -389,9 +391,9 @@ declare namespace JsonLD {
     */
    interface ListItem<T extends Thing> extends Thing {
       item: T,
-      nextItem: ListItem,
+      nextItem: ListItem<T>,
       position: number|string,
-      previousItem: ListItem
+      previousItem: ListItem<T>
    }
 
    /**
@@ -485,7 +487,7 @@ declare namespace JsonLD {
    interface MusicGroup extends Organization {
       album: MusicAlbum,
       genre: string|URL,
-      track: ItemList|MusicRecording
+      track: ItemList<MusicRecording>|MusicRecording
    }
 
    /**
@@ -493,7 +495,7 @@ declare namespace JsonLD {
     */
    interface MusicPlaylist extends CreativeWork {
       numTracks: number,
-      track: ItemList|MusicRecording
+      track: ItemList<MusicRecording>|MusicRecording
    }
 
    /**
@@ -725,7 +727,7 @@ declare namespace JsonLD {
       faxNumber: string,
       geo: GeoCoordinates|GeoShape,
       globalLocationNumber: string,
-      hasMap: Map|URL,
+      hasMap: Map<string, URL>|URL,
       isicV4: string,
       logo: ImageObject|URL,
       openingHoursSpecification: OpeningHoursSpecification,

@@ -15,7 +15,7 @@ interface ViewCacheItem {
    eTag: string
 }
 
-interface BlogRequest extends Request {
+export interface BlogRequest extends Request {
    clientIP(): string,
 }
 
@@ -23,7 +23,7 @@ interface Renderer {
 
 }
 
-interface BlogResponse extends EventEmitter, Response {
+export interface BlogResponse extends Response {
    notFound(): void,
    internalError(): void,
    sendView(key: string, p2: string|Object|Renderer, p3?: Renderer): void,
@@ -34,8 +34,7 @@ interface BlogResponse extends EventEmitter, Response {
 }
 
 interface MockRequest extends BlogRequest {
-   reset(): void,
-   connection: Object
+   reset(): void
 }
 
 interface MockResponse extends BlogRequest {
@@ -105,7 +104,7 @@ export interface Photo {
    preview: Size,
    normal: Size,
    big: Size,
-   getExif(): Promise
+   getExif(): Promise<EXIF>
 }
 
 export interface Post {
