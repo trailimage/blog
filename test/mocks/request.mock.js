@@ -1,5 +1,3 @@
-'use strict';
-
 /** @type {MockRequest} */
 module.exports = {
    referer: null,
