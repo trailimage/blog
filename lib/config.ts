@@ -213,7 +213,8 @@ export default {
          callback: 'http://www.' + domain + '/auth/flickr',
          token: {
             access: process.env['FLICKR_ACCESS_TOKEN'] as string,
-            secret: process.env['FLICKR_TOKEN_SECRET'] as string
+            secret: process.env['FLICKR_TOKEN_SECRET'] as string,
+            request: null as string
          }
       }
    },

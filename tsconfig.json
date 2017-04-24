@@ -9,7 +9,6 @@
       "alwaysStrict": true,
       "strictNullChecks": false,
       "allowSyntheticDefaultImports": false,
-      "forceConsistentCasingInFileNames": true,
-      "jsx": "react"
+      "forceConsistentCasingInFileNames": true
    }
 }

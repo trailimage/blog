@@ -9,14 +9,10 @@ import * as compress from 'zlib';
 const prefix = 'api:';
 const viewKey = 'view';
 const mapKey = 'map';
-/**
- * @type {object.<ViewCacheItem>}
- */
-const memory = {};
+const memory:{[key:string]:ViewCacheItem} = {};
 
 /**
  * Whether key with prefix exists
- * @returns {Promise.<boolean>}
  */
 const exists = (key:string, hashKey:string, enabled:boolean) => enabled
    ? redis.exists(key, hashKey)
@@ -27,8 +23,8 @@ const exists = (key:string, hashKey:string, enabled:boolean) => enabled
  * @returns {Promise.<ViewCacheItem>}
  */
 const createItem = (key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>) => new Promise((resolve, reject) => {
-   const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON;
-   compress.gzip(text, (err, buffer) => {
+   const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON as string;
+   compress.gzip(text, (err:Error, buffer:Buffer) => {
       if (is.value(err)) {
          reject(err);
       } else {
@@ -67,9 +63,9 @@ export default {
    /**
     * Retrieve cached value
     */
-   getItem: (key:string, hashKey:string) => redis.getObject(prefix + key, hashKey),
+   getItem: (key:string, hashKey:string) => redis.getObject(prefix + key, hashKey) as ViewCacheItem,
 
-   add: (key:string, hashKeyOrValue:string|object, value:object) => redis.add(prefix + key, hashKeyOrValue, value),
+   add: (key:string, hashKeyOrValue:any, value?:any) => redis.add(prefix + key, hashKeyOrValue, value),
 
    /**
     * All keys with standard prefix
@@ -94,7 +90,7 @@ export default {
       /**
        * Add or replace value at key
        */
-      add: (key:string, text:Buffer|string) => createItem(key, text).then(item => {
+      add: (key:string, value:any) => createItem(key, value).then(item => {
          if (config.cache.views) { memory[key] = item; }
          return Promise.resolve(item);
       }),

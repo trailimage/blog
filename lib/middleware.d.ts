@@ -1,6 +1,5 @@
 import {EventEmitter} from "events";
-import {Response} from "express";
-import {Request} from "express";
+import {Response, Request} from "express";
 
 export interface FlickrOptions {
    value(r: Flickr.Response): Object,

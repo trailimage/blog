@@ -70,7 +70,7 @@ function iconInvoke(icon:string, level:string, args:IArguments) {
    invoke(level, a);
 }
 
-function invoke(l, args) { provider()[l].apply(provider(), args); }
+function invoke(l:string, ...args:any[]) { provider()[l].apply(provider(), args); }
 
 /**
  * Group logs by day
@@ -137,8 +137,8 @@ export default {
    infoIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.INFO, arguments); },
    warn(message:string, ...args:any[]) { invoke(level.WARN, arguments); },
    warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, arguments); },
-   error(message:string, ...args:any[]) { invoke(level.ERROR, arguments); },
-   errorIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
+   error(message:string|Error, ...args:any[]) { invoke(level.ERROR, arguments); },
+   errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
    query,
    // force provider(s) to be re-initialized
    reset() { _provider = null; }

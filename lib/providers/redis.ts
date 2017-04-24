@@ -43,7 +43,7 @@ let connected = false;
 // client is ready to cache commands before it's connected
 let ready = true;
 
-client.on('error', err => {
+client.on('error', (err:any) => {
    let fatal = false;
 
    if (err.code == code.BROKEN) {
@@ -100,15 +100,15 @@ function parseObject(value:string) {
 /**
  * Normalize response
  */
-function makeHandler(key:string, type = dataType.NONE, resolve:function, reject:function) {
+function makeHandler(key:string|string[], type = dataType.NONE, resolve:Function, reject:Function) {
    // calculate expected response
-   const howMany = key => is.array(key) ? key.length : 1;
+   const howMany = (key:string|string[]) => is.array(key) ? key.length : 1;
    // if expectation provided then result is whether it matches actual
    // otherwise return raw response
-   const answer = (actual, expected) => {
+   const answer = (actual:any, expected?:any) => {
       resolve((expected === undefined) ? actual : (actual == expected));
    };
-   return (err, reply) => {
+   return (err:any, reply:any) => {
       if (hasError(key, err)) {
          reject(err);
       } else {
@@ -128,7 +128,7 @@ function makeHandler(key:string, type = dataType.NONE, resolve:function, reject:
 /**
  * Whether Redis returned an error
   */
-function hasError(key:string|string[], err:number|string):boolean {
+function hasError(key:string|string[], err:any):boolean {
    if (is.value(err)) {
       if (is.array(key)) { key = key.join(','); }
       log.error('Operation with key "%s" resulted in', key, err);
@@ -161,7 +161,7 @@ export default {
          client.exists(key, handler);
       } else {
          client.hexists(key, hashKey, handler);
-      }
+      } 
    }),
 
    /**
@@ -195,7 +195,7 @@ export default {
     *
     * See http://redis.io/commands/get
     */
-   getValue: (type:string, key:string, hashKey?:string) => new Promise((resolve, reject) => {
+   getValue: (type:number, key:string, hashKey?:string) => new Promise((resolve, reject) => {
       const handler = makeHandler(key, type, resolve, reject);
       if (hashKey === undefined) {
          client.get(key, handler);
@@ -207,8 +207,8 @@ export default {
    /**
     * Add value to key or hash key
     */
-   add(key:string, hashKeyOrValue:string, value?:any) {
-      let hashKey:string;
+   add(key:string, hashKeyOrValue:string|object, value?:any) {
+      let hashKey:string|object;
       if (value === undefined) {
          value = hashKeyOrValue;
       } else {
@@ -269,7 +269,7 @@ export default {
     * @param {String|Object|function(boolean)} p4 Hash value or callback
     * @param {function(boolean)} [p5] Callback if replacing hash field
     */
-   replace(key:string, p2:string, p3:string|{[key:string]:string}, p4, p5?:boolean) {
+   replace(key:string, p2:string, p3:string|{[key:string]:string}, p4:string|{[key:string]:string}|Function, p5?:Function) {
       if (p5 === undefined) {
          client.multi()
             .del(key)

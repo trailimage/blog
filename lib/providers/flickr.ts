@@ -5,14 +5,17 @@ import util from '../util';
 import cache from '../cache';
 import fetch from 'node-fetch';
 import { OAuth } from 'oauth';
+import { globalAgent} from 'https';
+
+globalAgent.maxSockets = 200;
 
 const type = { USER: 'user_id', SET: 'photoset_id', PHOTO: 'photo_id' };
 const url = {
-   base: '/services/rest/',
-   requestToken: 'http://www.flickr.com/services/oauth/request_token',
-   authorize: 'http://www.flickr.com/services/oauth/authorize',
-   accessToken: 'http://www.flickr.com/services/oauth/access_token',
-   photoSet: 'http://www.flickr.com/photos/trailimage/sets/'
+   BASE: '/services/rest/',
+   REQUEST_TOKEN: 'http://www.flickr.com/services/oauth/request_token',
+   AUTHORIZE: 'http://www.flickr.com/services/oauth/authorize',
+   ACCESS_TOKEN: 'http://www.flickr.com/services/oauth/access_token',
+   PHOTO_SET: 'http://www.flickr.com/photos/trailimage/sets/'
 };
 const method = {
    COLLECTIONS: 'collections.getTree',
@@ -35,13 +38,14 @@ const extra = {
    LOCATION: 'geo',
    PATH_ALIAS: 'path_alias'
 };
-
-
+/**
+ * Number of retries keyed to method.
+ */
 const retries:{[key:string]:number} = {};
 const host = 'api.flickr.com';
 const oauth = new OAuth(
-   url.requestToken,
-   url.accessToken,
+   url.REQUEST_TOKEN,
+   url.ACCESS_TOKEN,
    config.flickr.auth.apiKey,
    config.flickr.auth.secret,
    '1.0A',
@@ -60,8 +64,6 @@ const defaultCallOptions:FlickrOptions = {
    // additional querystring arguments
    args: {}
 };
-
-require('https').globalAgent.maxSockets = 200;
 
 /**
  * Load response from cache or call API
@@ -83,22 +85,18 @@ function call(method:string, idType:string, id:string, options:FlickrOptions = {
 
 /**
  * Invoke API when method result isn't cached
- * @param {string} method
- * @param {string} idType
- * @param {string} id
- * @param {FlickrOptions|object} options
- * @returns {Promise.<Flickr.Response>}
- * @see http://www.flickr.com/services/api/response.json.html
+ *
+ * See http://www.flickr.com/services/api/response.json.html
  */
-function callAPI(method, idType, id, options) {
+function callAPI(method:string, idType:string, id:string, options:FlickrOptions):Promise<Flickr.Response> {
    // create key to track retries and log messages
    const key = method + ':' + id;
-   const methodUrl = 'https://' + host + url.base + parameterize(method, idType, id, options.args);
+   const methodUrl = 'https://' + host + url.BASE + parameterize(method, idType, id, options.args);
 
    return new Promise((resolve, reject) => {
       const token = config.flickr.auth.token;
       // response handler that may retry call
-      const handler = (err, body, attempt) => {
+      const handler = (err:any, body:string, attempt:Function) => {
          let tryAgain = false;
          if (err === null) {
             const json = parse(body, key);
@@ -198,7 +196,7 @@ function clearRetries(key:string) {
 /**
  * Setup standard parameters
  */
-function parameterize(method:string, idType?:string, id?:string, args:{[key:string]:string} = {}):string {
+function parameterize(method:string, idType?:string, id?:string, args:{[key:string]:string|number} = {}):string {
    let qs = '';
    let op = '?';
 
@@ -208,13 +206,11 @@ function parameterize(method:string, idType?:string, id?:string, args:{[key:stri
    args.method = 'flickr.' + method;
 
    if (is.value(idType) && is.value(id)) { args[idType] = id; }
-   for (const k in args) { qs += op + k + '=' + encodeURIComponent(args[k]); op = '&'; }
+   for (const k in args) { qs += op + k + '=' + encodeURIComponent(args[k].toString()); op = '&'; }
    return qs;
 }
 
-// endregion
-
-module.exports = {
+export default {
    /**
     * Return cache keys to support invalidation
     */

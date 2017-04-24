@@ -35,7 +35,7 @@ declare namespace Flickr {
       photo_id: string
    }
 
-   interface Collection {
+   export interface Collection {
       id: string,
       title: string,
       description: string,
@@ -45,16 +45,16 @@ declare namespace Flickr {
       set: SetSummary[],
    }
 
-   interface Content {
+   export interface Content {
       _content: string
    }
 
-   interface EditAbility {
+   export interface EditAbility {
       cancomment: Boolean,
       canaddmeta: Boolean
    }
 
-   interface Exif {
+   export interface Exif {
       tagspace: string,
       tagspaceid: number,
       tag: string,
@@ -69,7 +69,7 @@ declare namespace Flickr {
       farm: number,
    }
 
-   interface Location {
+   export interface Location {
       latitude: number,
       longitude: number,
       accuracy: number,
@@ -115,7 +115,7 @@ declare namespace Flickr {
       lastupdate: string
    }
 
-   interface PhotoInfo extends FarmLocation {
+   export interface PhotoInfo extends FarmLocation {
       dateuploaded: string,
       isfavorite: Boolean,
       license: License,

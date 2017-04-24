@@ -1,26 +1,25 @@
-const is = require('./is');
-const log = require('./logger');
-const config = require('./config');
-const util = require('./util');
-const cache = require('./cache');
-const C = require('./constants');
+import is from './is';
+import log from './logger';
+import config from './config';
+import util from './util';
+import cache from './cache';
+import C from './constants';
+import fetch from 'node-fetch';
 
-const fetch = require('node-fetch');
 const cacheKey = 'spam-referer';
 /**
  * Last time in milliseconds that black list was downloaded
- * @type Number
  */
 let lastUpdate = 0;
-let blackList = [];
+let blackList:string[] = [];
 /**
  * Pending black list lookup callbacks
- * @type {function[]}
  */
-let pending = [];
+let pending:Function[] = [];
 let isDownloading = false;
 
-function blockSpamReferers(req, res, next) {
+
+function blockSpamReferers(req:BlogRequest, res:BlogResponse, next:Function) {
    const referer = req.get('referer');
 
    if (is.value(referer)) {
@@ -37,11 +36,7 @@ function blockSpamReferers(req, res, next) {
    }
 }
 
-/**
- * @param {string} domain
- * @returns {Promise}
- */
-function checkBlackList(domain) {
+function checkBlackList(domain:string):Promise<any> {
    if (blackList.length === 0) {
       return getBlackList().then(list => {
          blackList = list;
@@ -55,7 +50,6 @@ function checkBlackList(domain) {
 
 /**
  * Load list from cache or remote provider
- * @returns {Promise}
  */
 const getBlackList = ()=> cache.getItem(cacheKey).then(list => {
    if (is.array(list)) {
@@ -68,17 +62,13 @@ const getBlackList = ()=> cache.getItem(cacheKey).then(list => {
 
 /**
  * Whether black list needs to be refreshed
- * @returns {boolean}
  */
 const isStale = ()=> lastUpdate === 0 || (
    config.referralSpam.updateFrequency > 0 &&
    (new Date().getTime() - lastUpdate  > config.referralSpam.updateFrequency)
 );
 
-/**
- * @returns {Promise}
- */
-function downloadBlackList() {
+function downloadBlackList():Promise<any> {
    if (isDownloading) {
       log.info('Spam referral black list is already downloading');
       return new Promise(resolve => { pending.push(resolve); });
@@ -96,7 +86,7 @@ function downloadBlackList() {
             }
          })
          .then(body => {
-            let list = [];
+            let list:string[] = [];
 
             if (is.value(body)) {
                // list of non-empty lines
@@ -127,9 +117,8 @@ const template = require('./template');
 /**
  * Express middleware
  * Add expando methods to response and request objects
- * @returns {function}
  */
-function enableStatusHelpers(req, res, next) {
+function enableStatusHelpers(req, res, next:Function) {
    /**
     * Get corrected client IP
     * @returns {string}
@@ -156,15 +145,15 @@ function enableStatusHelpers(req, res, next) {
       res.render(template.page.NOT_FOUND, { title: 'Page Not Found', config: config });
    };
 
-   res.internalError = err => {
+   res.internalError = (err:Error) => {
       if (is.value(err)) { log.error(err); }
       res.status(C.httpStatus.INTERNAL_ERROR);
       res.render(template.page.INTERNAL_ERROR, { title: 'Oops', config: config });
    };
 
    // JSON helpers depend on Express .json() extension and standard response structure
-   res.jsonError = message => { res.json({ success: false, message }); };
-   res.jsonMessage = message => {
+   res.jsonError = (message:string) => { res.json({ success: false, message }); };
+   res.jsonMessage = (message:string) => {
       res.json({
          success: true,
          message: is.value(message) ? message : ''
@@ -178,16 +167,15 @@ function enableStatusHelpers(req, res, next) {
  * Express middleware
  * Add expando methods to response object
  * Cache compressed page renders in a hash key with fields named for the page slug
- * @returns {Function}
  */
-function enableViewCache(req, res, next) {
+function enableViewCache(req, res, next:Function) {
    /**
     * Load output from cache or return renderer that will capture and cache the output
     * @param {string} key Pages are cached with their slug
     * @param {String|function(function)|Object} p2 MIME type, content generation function or options
     * @param {function(function)} [p3] Content generation function if item is not cached
     */
-   res.sendView = (key, p2, p3) => {
+   res.sendView = (key:string, p2:string|Function|object, p3:Function) => {
       const mimeType = is.text(p2) ? p2 : C.mimeType.HTML;
       const optionsOrGenerator = is.value(p3) ? p3 : p2;
       checkCache(res, key, mimeType, optionsOrGenerator);
@@ -195,21 +183,17 @@ function enableViewCache(req, res, next) {
 
    /**
     * Load JSON output from cache or call method to build JSON
-    * @param {string} key
-    * @param {function} generator Method to build JSON if not cached
     */
-   res.sendJson = (key, generator) => {
+   res.sendJson = (key:string, generator:Function) => {
       checkCache(res, key, C.mimeType.JSON, generator);
    };
 
    /**
     * Set headers and write bytes to response
-    * @param {string} mimeType
-    * @param {ViewCacheItem} item
-    * @param {boolean} [cache = true] Whether to send caching headers
-    * @see http://condor.depaul.edu/dmumaugh/readings/handouts/SE435/HTTP/node24.html
+    *
+    * See http://condor.depaul.edu/dmumaugh/readings/handouts/SE435/HTTP/node24.html
     */
-   res.sendCompressed = (mimeType, item, cache = true) => {
+   res.sendCompressed = (mimeType:string, item:ViewCacheItem, cache = true) => {
       res.setHeader(C.header.content.ENCODING, C.encoding.GZIP);
 
       if (cache) {
@@ -231,12 +215,8 @@ function enableViewCache(req, res, next) {
 
 /**
  * Send content if it's cached, otherwise generate with callback
- * @param res
- * @param {string} slug
- * @param {string} mimeType
- * @param {function|object} generator Method that generates content
  */
-function checkCache(res, slug, mimeType, generator) {
+function checkCache(res, slug:string, mimeType:string, generator:Function|object) {
    // prepare fallback method to generate content depending on
    // MIME type and whether given generator is a callable function
    const generate = ()=> prepare(res, slug, mimeType, generator);
@@ -265,12 +245,8 @@ function checkCache(res, slug, mimeType, generator) {
 
 /**
  * Create function to generate, compress and cache content
- * @param {BlogResponse} res
- * @param {string} slug
- * @param {string} mimeType
- * @param {function(function)|Object} generator Method or options (never needed simultaneously) to build content
  */
-function prepare(res, slug, mimeType, generator) {
+function prepare(res, slug:string, mimeType:string, generator:Function) {
    if (mimeType === C.mimeType.JSON) {
       // callback method directly generates output
       cacheAndSend(res, JSON.stringify(generator()), slug, mimeType);
@@ -287,19 +263,15 @@ function prepare(res, slug, mimeType, generator) {
 
 /**
  * Create function to render view then compress and cache it
- * @param res
- * @param {string} slug
- * @param {string} mimeType
- * @returns {function(string, object, function)}
  */
-function makeRenderer(res, slug, mimeType) {
-   return (view, options, postProcess) => {
+function makeRenderer(res, slug:string, mimeType:string):(view:string, options:{[key:string]:any}, postProcess?:Function)=>void {
+   return (view:string, options:{[key:string]:any}, postProcess?:Function) => {
       // use default meta tag description if none provided
       if (is.empty(options.description)) { options.description = config.site.description; }
       // always send config to views
       options.config = config;
 
-      res.render(view, options, (renderError, text) => {
+      res.render(view, options, (renderError:Error, text:string) => {
          if (is.value(renderError)) {
             // error message includes view name
             log.error('Rendering %s %s', slug, renderError.message, renderError);
@@ -314,12 +286,8 @@ function makeRenderer(res, slug, mimeType) {
 
 /**
  * Compress, optionally cache and send content to client
- * @param res
- * @param {string} html Rendered page
- * @param {string} slug
- * @param {string} mimeType
  */
-function cacheAndSend(res, html, slug, mimeType) {
+function cacheAndSend(res, html:string, slug:string, mimeType:string) {
    cache.view.add(slug, html)
       .then(item => { res.sendCompressed(mimeType, item); })
       .catch(err => {
@@ -329,7 +297,7 @@ function cacheAndSend(res, html, slug, mimeType) {
       });
 }
 
-module.exports = {
+export default {
    blockSpamReferers,
    enableStatusHelpers,
    enableViewCache,

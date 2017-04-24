@@ -1,4 +1,4 @@
-import {Post} from "./trailimage";
+import {Post} from './factory/models';
 import * as Chai from "chai";
 
 export namespace JsonLD {
