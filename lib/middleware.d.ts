@@ -1,3 +1,4 @@
+import {Flickr} from './providers/flickr.d';
 import {EventEmitter} from "events";
 import {Response, Request} from "express";
 
@@ -10,46 +11,50 @@ export interface FlickrOptions {
 }
 
 export interface ViewCacheItem {
-   buffer: Buffer,
-   eTag: string
-}
-
-export interface BlogRequest extends Request {
-   clientIP(): string,
+   buffer:Buffer;
+   eTag:string;
 }
 
 interface Renderer {
 
 }
 
-export interface BlogResponse extends Response {
-   notFound(): void,
-   internalError(): void,
-   sendView(key: string, p2: string|Object|Renderer, p3?: Renderer): void,
-   sendJson(key: string, render: Renderer): void,
-   sendCompressed(mimeType: string, item: ViewCacheItem, cache?: boolean): void,
-   jsonError(message: string),
-   jsonMessage(message: string)
-}
-
-export interface MockRequest extends BlogRequest {
-   reset(): void
-}
-
-export interface MockResponse extends BlogRequest {
-   reset(): void,
-   headers: { [key: string]: string },
-   content: Buffer|string,
-   redirected: {
-      status: number,
-      url: string,
-   },
-   rendered: {
-      template: string,
-      options: { [key: string]: string|number },
-      json: any
+declare namespace Blog {
+   export interface Response extends Express.Response {
+      notFound(): void,
+      internalError(): void,
+      sendView(key: string, p2: string|Object|Renderer, p3?: Renderer): void,
+      sendJson(key: string, render: Renderer): void,
+      sendCompressed(mimeType: string, item: ViewCacheItem, cache?: boolean): void,
+      jsonError(message:string):void,
+      jsonMessage(message:string):void
    }
-   ended: boolean,
-   endOnRender: boolean,
-   setHeader(key: string, value: string): MockResponse
+
+   export interface Request extends Express.Request {
+      clientIP(): string,
+   }
+}
+
+declare namespace Mock {
+   export interface Request extends Blog.Request {
+      reset(): void
+   }
+
+   export interface Response extends Blog.Request {
+      reset(): void,
+      headers: { [key: string]: string },
+      content: Buffer|string,
+      redirected: {
+         status: number,
+         url: string,
+      },
+      rendered: {
+         template: string,
+         options: { [key: string]: string|number },
+         json: any
+      }
+      ended: boolean,
+      endOnRender: boolean,
+      setHeader(key: string, value: string): Response
+   }
 }

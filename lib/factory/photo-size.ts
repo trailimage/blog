@@ -1,4 +1,5 @@
 import is from '../is';
+import {Size} from './models';
 
 function make(json:any, sizeField:string|string[]):Size {
    const size = {

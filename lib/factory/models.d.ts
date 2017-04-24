@@ -12,24 +12,26 @@ export interface EXIF {
 }
 
 export interface Library {
-   categories: { [key: string]: Category },
-   posts: Post[],
-   tags: { [key: string]: string },
-   loaded: boolean,
-   postInfoLoaded: boolean,
-   empty(): Library
+   categories: { [key: string]: Category };
+   posts: Post[];
+   tags: { [key: string]: string };
+   loaded: boolean;
+   postInfoLoaded: boolean;
+   postWithKey(key:string):Post;
+   empty(): Library;
 }
 
 export interface Category {
-   title: string,
-   key: string,
-   subcagtegories: Category[],
-   posts: Post[],
-   isChild: boolean,
-   isParent: boolean,
-   add(subcategory: Category): void,
-   getSubcagtegory(key: string): Category,
-   removePost(post: Post): Category,
+   title: string;
+   key: string;
+   subcategories: Category[];
+   posts: Post[];
+   isChild: boolean;
+   isParent: boolean;
+   unload(keys:string|string[]):void;
+   add(subcategory: Category): void;
+   getSubcategory(key: string): Category;
+   removePost(post: Post): Category;
 }
 
 export interface Photo {
@@ -62,7 +64,7 @@ export interface Post {
    photoCount: number,
    coverPhoto: Photo,
    feature: boolean,
-   categories: Category[],
+   categories:{[key:string]:Category},
    hasCategories: boolean,
    infoLoaded: boolean,
    triedTrack: boolean,
@@ -81,7 +83,7 @@ export interface Post {
    empty(): Post,
    name(): string,
    getInfo(): Promise<Post>,
-   getPhotos(): Promise<Post>,
+   getPhotos(): Promise<Photo[]>,
    hasKey(key: string): boolean,
    hasPhotoID(id: string): boolean,
    serializePhotoCoordinates(): Post

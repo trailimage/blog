@@ -1,14 +1,15 @@
-const express = require('express');
-const config = require('./config');
-const C = require('./constants');
-const ctrl = require('./controllers/');
-const library = require('./library');
+import * as express from 'express';
+import config from './config';
+import C from './constants';
+import ctrl from './controllers/';
+import library from './library';
 /** Route placeholders */
 const ph = C.route;
 
 /**
  * Need to capture top-level route parameters
- * @see http://expressjs.com/en/4x/api.html#express.router
+ * 
+ * See http://expressjs.com/en/4x/api.html#express.router
  */
 const keepParams = { mergeParams: true };
 
@@ -36,7 +37,7 @@ function mapSourceRoutes() {
  * @param {string} photoID Pattern
  * @returns {Express.Router}
  */
-function postRoutes(photoID) {
+function postRoutes(photoID:string) {
    const r = express.Router(keepParams);
    r.get('/', ctrl.post.latest);
    //r.get('/pdf', c.pdf);
@@ -49,10 +50,8 @@ function postRoutes(photoID) {
 
 /**
  * Series should load the PDF, GPX and GeoJSON for the main post
- * @param {string} photoID Pattern
- * @returns {Express.Router}
  */
-function seriesRoutes(photoID) {
+function seriesRoutes(photoID:string):Express.Response {
    const r = express.Router(keepParams);
    r.get('/', ctrl.post.inSeries);
    r.get('/map', ctrl.map.series);

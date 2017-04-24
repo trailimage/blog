@@ -1,4 +1,4 @@
-interface redis {
+export interface Redis {
    /**
     * Removes the specified keys. A key is ignored if it does not exist.
     * @see http://redis.io/commands/del

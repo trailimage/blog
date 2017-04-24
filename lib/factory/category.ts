@@ -1,20 +1,15 @@
+import { Category, Post, Flickr } from '../types';
 import is from '../is';
 import post from './post';
 import util from '../util';
 import config from '../config';
 import library from '../library';
 
-/**
- * @this {Category} category
- */
-function getSubcategory(key:string):Category {
+function getSubcategory(this:Category, key:string):Category {
    return this.subcategories.find(c => c.title === key || c.key === key);
 }
 
-/**
- * @this {Category} category
- */
-function has(key:string):boolean { return this.subcategory(key) !== undefined; }
+function has(this:Category, key:string):boolean { return this.subcategory(key) !== undefined; }
 
 /**
  * Add nested category and update its key to include parent
@@ -63,8 +58,8 @@ function make(collection:Flickr.Collection, root = false):Category {
    const category = {
       title: collection.title,
       key: util.slug(collection.title),
-      subcategories: [],
-      posts: [],
+      subcategories: [] as Category[],
+      posts: [] as Post[],
       get isChild() { return this.key.includes('/'); },
       get isParent() { return this.subcategories.length > 0; },
       add,

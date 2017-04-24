@@ -55,7 +55,7 @@ function buildLibrary(emptyIfLoaded:boolean = true):Promise<Library> {
       .then(()=> {
          // find changed post and category keys so their caches can be invalidated
          if (hadPostKeys.length > 0) {
-            let changedKeys = [];
+            let changedKeys:string[] = [];
             library.posts
                .filter(p => hadPostKeys.indexOf(p.key) == -1)
                .forEach(p => {

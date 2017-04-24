@@ -1,49 +1,46 @@
+import { Library, Post, Category, Photo } from './types';
 import is from './is';
 
 /**
  * Singleton collection of photos grouped into "posts" (called a "set" or
  * "album" in most providers) that are in turn assigned categories. Additional
  * library methods are added by the factory.
- * @see addHelperMethods
- * @type {Library}
  */
 export default {
    /**
     * Root categories indexed by their name
-    * @type {object.<Category>}
     */
-   categories: {},
+   categories: {} as {[key:string]:Category},
    /**
     * Flat reference to all posts for simplified lookup
-    * @type {Post[]}
     */
-   posts: [],
+   posts: [] as Post[],
    /**
     * All photo tags in hash[slug] = full name format
-    * @type {object.<string>}
     */
-   tags: {},
+   tags: {} as {[key:string]:string},
    loaded: false,
    postInfoLoaded: false,
    /**
     * Track keys of posts and categories that change on library reload
     * (can be used for cache invalidation)
     */
-   changedKeys:string[]: [],
+   changedKeys: [] as string[],
 
    // empty library object before reloading from source
-   empty() {
+   empty(this:Library) {
       this.loaded = false;
       this.postInfoLoaded = false;
       this.posts = [];
       this.categories = {};
       this.tags = {};
+      return this;
    },
 
    /**
     * Add post to library and link with adjacent posts
     */
-   addPost(p:Post) {
+   addPost(this:Library, p:Post) {
       // exit if post with same ID is already present
       if (this.posts.filter(e => e.id === p.id).length > 0) { return; }
       this.posts.push(p);
@@ -58,17 +55,14 @@ export default {
 
    /**
     * Array of all post keys
-    * @returns {string[]}
     */
-   postKeys() { return this.posts.map(p => p.key); },
+   postKeys(this:Library):string[] { return this.posts.map(p => p.key); },
 
    /**
     * Array of all category keys
-    * @param {string[]} [filterList] List of category names or all if no list given
-    * @returns {string[]}
     */
-   categoryKeys(filterList = []) {
-      const keys = [];
+   categoryKeys(this:Library, filterList:string[] = []):string[] {
+      const keys:string[] = [];
 
       if (filterList.length > 0) {
          // get keys only for named categories
@@ -98,10 +92,8 @@ export default {
 
    /**
     * Find category with given key
-    * @param {string} key
-    * @returns {Category}
     */
-   categoryWithKey(key) {
+   categoryWithKey(this:Library, key:string):Category {
       const rootKey = (key.includes('/')) ? key.split('/')[0] : key;
 
       for (const name in this.categories) {
@@ -113,24 +105,21 @@ export default {
       return null;
    },
 
-   /**
-    * @returns {Promise.<Photo[]>}
-    */
-   getPhotos() {
+   getPhotos(this:Library):Promise<Photo[]> {
       return Promise
          .all(this.posts.map(p => p.getPhotos()))
-         .then(photos => photos.reduce((all, p) => all.concat(p), []));
+         .then(photos => photos.reduce((all, p) => all.concat(p), [] as Photo[]));
    },
 
    /**
     * Find post with given ID
     */
-   postWithID(id:string):Post { return this.posts.find(p => p.id == id); },
+   postWithID(this:Library, id:string):Post { return this.posts.find(p => p.id == id); },
 
    /**
     * Find post with given slug
     */
-   postWithKey(key:string, partKey:string = null):Post {
+   postWithKey(this:Library, key:string, partKey:string = null):Post {
       if (is.value(partKey)) { key += '/' + partKey; }
       return this.posts.find(p => p.hasKey(key));
    },
@@ -138,7 +127,7 @@ export default {
    /**
     * Unload particular posts to force refresh from source
     */
-   unload(keys:string|string[]) {
+   unload(this:Library, keys:string|string[]) {
       if (!is.array(keys)) { keys = [keys]; }
       for (const k of keys) {
          const p = this.postWithKey(k);
@@ -165,7 +154,7 @@ export default {
     * Get unique list of tags used on photos in the post and update photo tags
     * to use full names.
     */
-   photoTagList(photos:Photo[]):string {
+   photoTagList(this:Library, photos:Photo[]):string {
       // all photo tags in the post
       const postTags = [];
 
@@ -196,4 +185,4 @@ export default {
       }
       return (postTags.length > 0) ? postTags.join(', ') : null;
    }
-};
+} as Library;

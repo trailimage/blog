@@ -1,4 +1,4 @@
-declare namespace Flickr {
+export namespace Flickr {
    enum Boolean { 'false', 'true' }
    /**
     * @see http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html

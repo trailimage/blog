@@ -1,3 +1,4 @@
+import { Blog } from '../types';
 import is from '../is';
 import log from '../logger';
 import flickr from '../providers/flickr';
@@ -16,7 +17,7 @@ const menuKeys = [
    template.page.SITEMAP
 ];
 
-function view(res, viewKeys:string[], jsonKeys:string[], mapKeys:string[], logs) {
+function view(res:Blog.Response, viewKeys:string[], jsonKeys:string[], mapKeys:string[], logs) {
    res.set({
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',
@@ -36,7 +37,7 @@ function view(res, viewKeys:string[], jsonKeys:string[], mapKeys:string[], logs)
 /**
  * Load all caches and logs
  */
-function home(req, res) {
+function home(req:Blog.Request, res:Blog.Response) {
    log.warnIcon('security', '%s viewing administration', req.clientIP());
 
    Promise.all([
@@ -53,7 +54,7 @@ function home(req, res) {
 /**
  * Delete library caches then update from photo provider, usually to find new posts
  */
-function updateLibrary(req, res) {
+function updateLibrary(req:Blog.Request, res:Blog.Response) {
    return cache.remove(flickr.cache.keysForLibrary).then(()=> library.load(false)
       .then(()=> {
          if (library.changedKeys.length > 0) {
@@ -73,7 +74,7 @@ function updateLibrary(req, res) {
 /**
  * Delete view and API caches for a post
  */
-function deleteViewCache(req, res) {
+function deleteViewCache(req:Blog.Request, res:Blog.Response) {
    // cache keys to be invalidated
    let viewKeys = [];
    const apiHashKeys = [];
@@ -125,7 +126,7 @@ function deleteViewCache(req, res) {
 /**
  * Delete map cache and update post flag to force reload
  */
-function deleteMapCache(req, res) {
+function deleteMapCache(req:Blog.Request, res:Blog.Response) {
    const keys = req.body.selected;
 
    cache.map.remove(keys)
@@ -151,7 +152,7 @@ function deleteMapCache(req, res) {
 /**
  * Delete API JSON cache
  */
-function deleteJsonCache(req, res) {
+function deleteJsonCache(req:Blog.Request, res:Blog.Response) {
    const keys = req.body.selected;
 
    cache.remove(keys)
