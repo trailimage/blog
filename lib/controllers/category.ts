@@ -1,10 +1,10 @@
-const is = require('../is');
-const ld = require('../json-ld');
-const config = require('../config');
-const util = require('../util');
-const template = require('../template');
-const library = require('../library');
-const C = require('../constants');
+import is from '../is';
+import ld from '../json-ld';
+import config from '../config';
+import util from '../util';
+import template from '../template';
+import library from '../library';
+import C from '../constants';
 /** Route placeholders */
 const ph = C.route;
 
@@ -97,15 +97,8 @@ function menu(req, res) {
 
 /**
  * Render category if it wasn't cached
- * @param {function} render
- * @param {string} template Name of template
- * @param {Category} category
- * @param {object} linkData
- * @param {object} options
- * @param {number} childCount
- * @param {string} subtitle
  */
-function renderCategory(render, template, category, linkData, options, childCount, subtitle) {
+function renderCategory(render:Function, template:string, category:Category, linkData:any, options:{[key:string]:any}, childCount:number, subtitle:string) {
    render(template, Object.assign(options, {
       title: category.title,
       jsonLD: ld.serialize(linkData),
@@ -114,4 +107,4 @@ function renderCategory(render, template, category, linkData, options, childCoun
    }));
 }
 
-module.exports = { home, list, forPath, menu };
+export default { home, list, forPath, menu };

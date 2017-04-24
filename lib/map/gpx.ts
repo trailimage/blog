@@ -11,7 +11,7 @@ import index from './';
  *
  * See http://nationalatlas.gov/articles/mapping/a_latlong.html
  */
-export function location(node:Node|Element):number[] {
+export function location(node:Element):number[] {
    const location = new Array(5);
    const elevation = xml.firstNode(node, 'ele');                     // meters
    const t = xml.firstNode(node, 'time');                            // UTC
@@ -43,7 +43,7 @@ export function location(node:Node|Element):number[] {
 /**
  * Properties of a GPX node
  */
-export function properties(node:Node, extras:string[] = []):{[key:string]:string} {
+export function properties(node:Node, extras:string[] = []):{[key:string]:string|number} {
    const names = extras.concat(['name', 'desc', 'author', 'copyright', 'link', 'time', 'keywords']);
    const properties:{[key:string]:string} = {};
 

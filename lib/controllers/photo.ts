@@ -1,9 +1,10 @@
-const is = require('../is');
-const config = require('../config');
-const util = require('../util');
-const template = require('../template');
-const library = require('../library');
-const C = require('../constants');
+import is from '../is';
+import config from '../config';
+import util from '../util';
+import template from '../template';
+import library from '../library';
+import C from '../constants';
+
 /** Route placeholders */
 const ph = C.route;
 
@@ -47,7 +48,7 @@ function tags(req, res) {
    let selected = normalizeTag(decodeURIComponent(req.params[ph.PHOTO_TAG]));
    const list = library.tags;
    const keys = Object.keys(list);
-   const tags = {};
+   const tags:{[key:string]:string} = {};
 
    if (is.empty(selected)) {
       // select a random tag
@@ -70,13 +71,9 @@ function tags(req, res) {
    });
 }
 
-/**
- * @param {String} slug
- * @returns {String}
- */
-function normalizeTag(slug) {
+function normalizeTag(slug:string):string {
    if (is.value(slug)) { slug = slug.toLowerCase(); }
    return (is.defined(config.photoTagChanges, slug)) ? config.photoTagChanges[slug] : slug;
 }
 
-module.exports = { withTag, tags, exif };
+export default { withTag, tags, exif };

@@ -49,6 +49,7 @@
     "@types/node-fetch": "^1.6.7",
     "@types/redis": "^0.12.36",
     "@types/twitter": "0.0.28",
+    "@types/uglify-js": "^2.6.28",
     "@types/winston": "^2.3.1",
     "@types/xmldom": "^0.1.29",
     "babel-eslint": "^7.1.1",

@@ -1,20 +1,14 @@
-const is = require('../is');
-const ld = require('../json-ld');
-const template = require('../template');
-
-const library = require('../library');
-const C = require('../constants');
+import is from '../is';
+import ld from '../json-ld';
+import template from '../template';
+import library from '../library';
+import C from '../constants';
 /**
  * Route placeholders
  */
 const ph = C.route;
 
-/**
- * @param {BlogResponse} res
- * @param {string} key Post key
- * @param {string} [pageTemplate]
- */
-function view(res, key, pageTemplate = template.page.POST) {
+function view(res, key:string, pageTemplate:string = template.page.POST) {
    res.sendView(key, render => {
       const p = library.postWithKey(key);
       if (!is.value(p)) { res.notFound(); return; }
@@ -81,4 +75,4 @@ function withPhoto(req, res) {
  */
 function latest(req, res) { view(res, library.posts[0].key); }
 
-module.exports = { latest, withID, withKey, withPhoto, inSeries };
+export default { latest, withID, withKey, withPhoto, inSeries };

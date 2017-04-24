@@ -1,6 +1,6 @@
-const config = require('../config');
-const C = require('../constants');
-const index = require('./');
+import config from '../config';
+import C from '../constants';
+import index from './';
 
 const piDeg = Math.PI / 180.0;
 const radiusMiles = 3958.756;
@@ -12,28 +12,19 @@ let elevationConversion = feetPerMeter;
 
 /**
  * Total distance between all points
- * @param {number[][]} points
- * @returns {number}
  */
-const length = points => points.reduce((total, p, i) => total + ((i > 0) ? pointDistance(points[i - 1], p) : 0), 0);
+const length = (points:number[][]) => points.reduce((total, p, i) => total + ((i > 0) ? pointDistance(points[i - 1], p) : 0), 0);
 
 /**
  * Speed between two points
- * @param {number[]} p1
- * @param {number[]} p2
- * @returns {number}
  */
-function speed(p1, p2) {
+function speed(p1:number[], p2:number[]):number {
    const t = Math.abs(p1[index.TIME] - p2[index.TIME]); // milliseconds
    const d = pointDistance(p1, p2);
    return (t > 0 && d > 0) ? d/(t/C.time.HOUR) : 0;
 }
 
-/**
- * @param {number[][]} line
- * @returns {number}
- */
-function duration(line) {
+function duration(line:number[][]):number {
    const firstPoint = line[0];
    const lastPoint = line[line.length - 1];
    return (lastPoint[index.TIME] - firstPoint[index.TIME]) / (1000 * 60 * 60);
@@ -42,20 +33,18 @@ function duration(line) {
 /**
  * Distance between geographic points accounting for earth curvature
  * South latitudes are negative, east longitudes are positive
- * @param {number[]} p1 [longitude, latitude, elevation, time]
- * @param {number[]} p2
- * @returns {number}
- * @see http://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude-what-am-i-doi
- * @see http://www.geodatasource.com/developers/javascript
- * @see http://www.movable-type.co.uk/scripts/latlong.html
- * @see http://boulter.com/gps/distance/
+ *
+ * See http://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude-what-am-i-doi
+ * See http://www.geodatasource.com/developers/javascript
+ * See http://www.movable-type.co.uk/scripts/latlong.html
+ * See http://boulter.com/gps/distance/
  *
  * Given φ is latitude radians, λ is longitude radians, R is earth radius:
  * a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
  * c = 2 ⋅ atan2(√a, √(1−a))
  * d = R ⋅ c
  */
-function pointDistance(p1, p2) {
+function pointDistance(p1:number[], p2:number[]):number {
    if (sameLocation(p1, p2)) { return 0; }
 
    const radLat1 = toRadians(p1[index.LAT]);
@@ -71,18 +60,13 @@ function pointDistance(p1, p2) {
 
 /**
  * Convert degrees to radians
- * @param {number} deg
  */
-const toRadians = deg => deg * piDeg;
+const toRadians = (deg:number) => deg * piDeg;
 
 /**
- * Shortest distance from a point to a segment
- * @param {number[]} p
- * @param {number[]} p1 Line endpoint
- * @param {number[]} p2 Line endpoint
- * @returns {number}
+ * Shortest distance from a point to a segment defined by two points.
  */
-function pointLineDistance(p, p1, p2) {
+function pointLineDistance(p:number[], p1:number[], p2:number[]):number {
    let x = p1[index.LON];
    let y = p1[index.LAT];
    let Δx = p2[index.LON] - x;
@@ -109,20 +93,13 @@ function pointLineDistance(p, p1, p2) {
 
 /**
  * Whether two points are at the same location (disregarding elevation)
- * @param {number[]} p1
- * @param {number[]} p2
- * @returns {boolean}
  */
-const sameLocation = (p1, p2) => p1[index.LAT] == p2[index.LAT] && p1[index.LON] == p2[index.LON];
-
-// endregion
+const sameLocation = (p1:number[], p2:number[]) => p1[index.LAT] == p2[index.LAT] && p1[index.LON] == p2[index.LON];
 
 /**
  * Simplification using Douglas-Peucker algorithm with recursion elimination
- * @param {number[][]} points
- * @returns {number[][]}
  */
-function simplify(points) {
+function simplify(points:number[][]):number[][] {
    if (config.map.maxPointDeviationFeet <= 0) { return points; }
 
    const yard = 3;
@@ -164,7 +141,7 @@ function simplify(points) {
    return points.filter((p, i) => keep[i] == 1);
 }
 
-module.exports = {
+export default {
    speed,
    length,
    duration,
@@ -172,7 +149,7 @@ module.exports = {
    sameLocation,
    pointDistance,
    simplify,
-   set unitType(u) {
+   set unitType(u:number) {
       if (u == units.ENGLISH) {
          earthRadius = radiusMiles;
          elevationConversion = feetPerMeter;

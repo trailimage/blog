@@ -1,12 +1,13 @@
-const is = require('../is');
-const log = require('../logger');
-const fetch = require('node-fetch');
-const config = require('../config');
-const geoJSON = require('../map/geojson');
-const template = require('../template');
-const library = require('../library');
-const factory = require('../factory/');
-const C = require('../constants');
+import is from '../is';
+import log from '../logger';
+import fetch from 'node-fetch';
+import config from '../config';
+import geoJSON from '../map/geojson';
+import template from '../template';
+import library from '../library';
+import factory from '../factory/';
+import C from '../constants';
+
 /** Route placeholders */
 const ph = C.route;
 // can be replaced with injection
@@ -14,11 +15,8 @@ let google = require('../providers/google');
 
 /**
  * Map screen loads then makes AJAX call to fetch data
- * @param {Post} post
- * @param {BlogRequest} req
- * @param {BlogResponse} res
  */
-function view(post, req, res) {
+function view(post:Post, req, res) {
    if (is.value(post)) {
       const key = post.isPartial ? post.seriesKey : post.key;
       const photoID = req.params[ph.PHOTO_ID];
@@ -45,9 +43,7 @@ function series(req, res) {
 }
 
 /**
- * @param {BlogRequest} req
- * @param {BlogResponse} res
- * @see https://www.mapbox.com/mapbox-gl-js/example/cluster/
+ * See https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
 function blog(req, res) {
    res.render(template.page.MAPBOX, {
@@ -59,8 +55,6 @@ function blog(req, res) {
 
 /**
  * Compressed GeoJSON of all post photos
- * @param {BlogRequest} req
- * @param {BlogResponse} res
  */
 function blogJSON(req, res) {
    factory.map.forBlog()
@@ -73,8 +67,6 @@ function blogJSON(req, res) {
 
 /**
  * Compressed GeoJSON of photos and tracks for single post as zipped byte array
- * @param {BlogRequest} req
- * @param {BlogResponse} res
  */
 function postJSON(req, res) {
    factory.map.forPost(req.params[ph.POST_KEY])
@@ -87,8 +79,6 @@ function postJSON(req, res) {
 
 /**
  * Retrieve and parse mines map source
- * @param {BlogRequest} req
- * @param {BlogResponse} res
  */
 function mapSourceMines(req, res) {
    const opt = { headers: { 'User-Agent': 'node.js' }};
@@ -120,10 +110,6 @@ function mapSourceMines(req, res) {
    });
 }
 
-/**
- * @param {BlogRequest} req
- * @param {BlogResponse} res
- */
 function gpx(req, res) {
    const post = config.map.allowDownload ? library.postWithKey(req.params[ph.POST_KEY]) : null;
 
@@ -137,7 +123,7 @@ function gpx(req, res) {
    }
 }
 
-module.exports = {
+export default {
    gpx,
    post,
    series,
@@ -151,6 +137,6 @@ module.exports = {
    },
    // inject different data providers
    inject: {
-      set google(g) { google = g; }
+      set google(g:any) { google = g; }
    }
 };

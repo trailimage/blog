@@ -9,11 +9,8 @@ const idField = '@id';
 
 /**
  * Add standard Linked Data fields
- * @param {string} type
- * @param {object} [fields]
- * @returns {*}
  */
-function ld(type:string, fields = {}) {
+function ld(type:string, fields:any = {}) {
    if (is.defined(fields, 'id')) {
       // rename ID field to standard
       fields[idField] = fields['id'];
@@ -25,10 +22,9 @@ function ld(type:string, fields = {}) {
 }
 
 /**
- * @param {size|object} img
  * @see http://schema.org/ImageObject
  */
-function image(img):JsonLD.ImageObject {
+function image(img:Size):JsonLD.ImageObject {
    const schema = { url: img.url };
    if (is.defined(img, 'width')) { schema.width = img.width; }
    if (is.defined(img, 'height')) { schema.height = img.height; }
@@ -55,10 +51,9 @@ function organization():JsonLD.Organization {
 }
 
 /**
- * @returns {JsonLD.Person}
  * @see http://schema.org/Person
  */
-function owner() {
+function owner():JsonLD.Person {
    return ld('Person', {
       name: config.owner.name,
       url: config.site.url + '/about',
@@ -68,26 +63,18 @@ function owner() {
    });
 }
 
-/**
- * @param {string} url
- * @param {string} title
- * @param {number} position
- * @returns {JsonLD.BreadcrumbList}
- * @see http://schema.org/Breadcrumb
- */
-function breadcrumb(url, title, position) {
+function breadcrumb(url:string, title:string, position:number):JsonLD.BreadcrumbList {
    const schema = { item: { id: url, name: title } };
    if (!isNaN(position)) { schema.position = position; }
    return ld('BreadcrumbList', schema);
 }
 
 /**
- * @returns {JsonLD.SearchAction}
- * @see http://schema.org/docs/actions.html
- * @see http://schema.org/SearchAction
- * @see https://developers.google.com/structured-data/slsb-overview
+ * See http://schema.org/docs/actions.html
+ * See http://schema.org/SearchAction
+ * See https://developers.google.com/structured-data/slsb-overview
  */
-function searchAction() {
+function searchAction():JsonLD.SearchAction {
    const qi = 'query-input';
    const placeHolder = 'search_term_string';
 
@@ -99,10 +86,8 @@ function searchAction() {
 
 /**
  * Convert link data to string with nulls and zeroes removed
- * @param {object} linkData
- * @returns {string}
  */
-function serialize(linkData) {
+function serialize(linkData:any):string {
    removeContext(linkData);
    return JSON.stringify(linkData, (key, value) => (value === null || value === 0) ? undefined : value);
 }
@@ -112,7 +97,7 @@ function serialize(linkData) {
  * @param {object} linkData
  * @param {string} [context] Current schema context
  */
-function removeContext(linkData, context = null) {
+function removeContext(linkData, context?:string = null) {
    if (linkData !== undefined && linkData !== null && typeof(linkData) == is.type.OBJECT) {
       if (linkData.hasOwnProperty(contextField) && linkData[contextField] !== null) {
          if (context !== null && linkData[contextField] == context) {
@@ -127,17 +112,15 @@ function removeContext(linkData, context = null) {
    }
 }
 
-module.exports = {
+export default {
    contextField,
    typeField,
    idField,
    /**
-    * @param {Post} post
-    * @returns {object}
-    * @see https://developers.google.com/structured-data/testing-tool/
-    * @see https://developers.google.com/structured-data/rich-snippets/articles
+    * See https://developers.google.com/structured-data/testing-tool/
+    * See https://developers.google.com/structured-data/rich-snippets/articles
     */
-   fromPost(post) {
+   fromPost(post:Post) {
       const categoryTitle = Object
          .keys(post.categories)
          .map(key => post.categories[key]);
@@ -172,13 +155,9 @@ module.exports = {
    },
 
    /**
-    * @param {Category} category
-    * @param {string} [key] path or slug
-    * @param {boolean} [homePage]
-    * @returns {JsonLD.Blog|JsonLD.WebPage}
-    * @see https://developers.google.com/structured-data/breadcrumbs
+    * See https://developers.google.com/structured-data/breadcrumbs
     */
-   fromCategory(category, key = category.key, homePage = false) {
+   fromCategory(category:Cateogry, key:string = category.key, homePage = false):JsonLD.Blog|JsonLD.WebPage {
       if (homePage) {
          return ld('Blog', {
             url: config.site.url,
@@ -208,12 +187,7 @@ module.exports = {
       }
    },
 
-   /**
-    * @param {object} v
-    * @returns {JsonLD.VideoObject}
-    * @see http://schema.org/VideoObject
-    */
-   fromVideo(v) {
+   fromVideo(v:any):JsonLD.VideoObject {
       return (v == null || v.empty) ? null : ld('VideoObject', {
          contentUrl: 'https://www.youtube.com/watch?v=' + v.id,
          videoFrameSize: v.width + 'x' + v.height,

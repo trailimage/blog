@@ -1,9 +1,9 @@
-const config = require('../config');
-const template = require('../template');
-const library = require('../library');
-const C = require('../constants');
+import config from '../config';
+import template from '../template';
+import library from '../library';
+import C from '../constants';
 // https://npmjs.org/package/uglify-js
-const uglify = require('uglify-js');
+import * as uglify from 'uglify-js';
 
 function data(req, res)  {
    const slug = template.page.POST_MENU_DATA;
@@ -24,7 +24,7 @@ function mobile(req, res) {
    });
 }
 
-module.exports = {
+export default {
    data,
    mobile
 };

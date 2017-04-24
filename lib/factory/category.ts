@@ -1,29 +1,26 @@
-const is = require('../is');
-const post = require('./post');
-const util = require('../util');
-const config = require('../config');
-const library = require('../library');
+import is from '../is';
+import post from './post';
+import util from '../util';
+import config from '../config';
+import library from '../library';
 
 /**
- * @param {string} key
  * @this {Category} category
- * @returns {Category}
  */
-function getSubcategory(key) { return this.subcategories.find(c => c.title === key || c.key === key); }
+function getSubcategory(key:string):Category {
+   return this.subcategories.find(c => c.title === key || c.key === key);
+}
 
 /**
- * @param {string} key
  * @this {Category} category
- * @returns {boolean}
  */
-function has(key) { return this.subcategory(key) !== undefined; }
+function has(key:string):boolean { return this.subcategory(key) !== undefined; }
 
 /**
  * Add nested category and update its key to include parent
- * @param {Category} subcat
  * @this {Category} category
  */
-function add(subcat) {
+function add(subcat:Category) {
    if (is.value(subcat)) {
       const oldKey = subcat.key;
 
@@ -41,10 +38,8 @@ function add(subcat) {
 /**
  * Remove post from category and subcategories (primarily for testing)
  * @this {Category}
- * @param {Post} post
- * @returns {Category}
  */
-function removePost(post) {
+function removePost(post:Post):Category {
    const index = this.posts.indexOf(post);
    if (index >= 0) { this.posts.splice(index, 1); }
    this.subcategories.forEach(s => { s.removePost(post); });
@@ -54,7 +49,6 @@ function removePost(post) {
 /**
  * Ensure photos and information are loaded for all posts
  * @this {Category}
- * @returns {Promise}
  */
 function ensureLoaded() {
    return Promise.all(this.posts.map(p => p.getInfo().then(p => p.getPhotos())));
@@ -62,11 +56,8 @@ function ensureLoaded() {
 
 /**
  * Add Flickr collection to library singleton as category
- * @param {Flickr.Collection} collection
- * @param {boolean} root Whether a root level collection
- * @returns {Category|object}
  */
-function make(collection, root = false) {
+function make(collection:Flickr.Collection, root = false):Category {
    let exclude = config.flickr.excludeSets;
    const feature = config.flickr.featureSets;
    const category = {
@@ -124,4 +115,4 @@ function make(collection, root = false) {
    return category;
 }
 
-module.exports = { make };
+export default { make };

@@ -264,7 +264,7 @@ export default {
       jeremy: 'jeremyabbott',
       jessica: 'jessicaabbott',
       jime: 'jimeldredge'
-   },
+   }  as {[key:string]:string},
    blog: {
       domain: 'trailimage.blogspot.com',
       /** Match old blog URLs to new. Slug is always prefixed by /YYYY/MM/ */

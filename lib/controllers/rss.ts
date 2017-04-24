@@ -1,12 +1,13 @@
-const log = require('../logger');
-const config = require('../config');
-const library = require('../library');
-const C = require('../constants');
+import log from '../logger';
+import config from '../config';
+import library from '../library';
+import C from '../constants';
+
 const MAX_RSS_RETRIES = 10;
 
 let rssRetries = 0;
 
-function feed(req, res) {
+export function feed(req, res) {
    const Feed = require('feed');
 
    if (!library.postInfoLoaded) {
@@ -48,5 +49,3 @@ function feed(req, res) {
    res.set('Content-Type', C.mimeType.XML);
    res.send(feed.rss2());
 }
-
-module.exports = feed;

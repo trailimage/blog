@@ -1,14 +1,14 @@
-const admin = require('./admin');
-const auth = require('./auth');
-const category = require('./category');
-const map = require('./map');
-const menu = require('./menu');
-const photo = require('./photo');
-const post = require('./post');
-const rss = require('./rss');
-const s = require('./static');
+import admin from './admin';
+import auth from './auth';
+import category from './category';
+import map from './map';
+import menu from './menu';
+import photo from './photo';
+import post from './post';
+import rss from './rss';
+import s from './static';
 
-module.exports = {
+export default {
    about: s.about,
    search: s.search,
    siteMap: s.siteMap,

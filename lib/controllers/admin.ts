@@ -8,7 +8,6 @@ import library from '../library';
 
 /**
  * Cache keys for site map and menu views
- * @returns {string[]}
  */
 const menuKeys = [
    template.page.MOBILE_MENU_DATA,
@@ -17,14 +16,7 @@ const menuKeys = [
    template.page.SITEMAP
 ];
 
-/**
- * @param res
- * @param {string[]} viewKeys
- * @param {string[]} jsonKeys
- * @param {string[]} mapKeys
- * @param {object} [logs]
- */
-function view(res, viewKeys, jsonKeys, mapKeys, logs) {
+function view(res, viewKeys:string[], jsonKeys:string[], mapKeys:string[], logs) {
    res.set({
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',
@@ -170,7 +162,7 @@ function deleteJsonCache(req, res) {
       .catch(res.jsonError);
 }
 
-module.exports = {
+export default {
    home,
    updateLibrary,
    cache: {

@@ -1,11 +1,11 @@
-const is = require('../is');
-const log = require('../logger');
-const config = require('../config');
-const template = require('../template');
-const C = require('../constants');
+import is from '../is';
+import log from '../logger';
+import config from '../config';
+import template from '../template';
+import C from '../constants';
 
 /**
- * @see https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
+ * See https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
  */
 function view(req, res) {
    const flickr = require('./flickr');
@@ -24,7 +24,8 @@ function view(req, res) {
 
 /**
  * Default route action
- * @see http://www.flickr.com/services/api/auth.oauth.html
+ * 
+ * See http://www.flickr.com/services/api/auth.oauth.html
  */
 function flickr(req, res) {
    const f = require('./flickr');
@@ -78,4 +79,4 @@ function google(req, res) {
    }
 }
 
-module.exports = { flickr, google, view };
+export default { flickr, google, view };

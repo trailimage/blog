@@ -1,10 +1,9 @@
 import is from '../is';
-const is = require('../is');
-const ld = require('../json-ld');
-const config = require('../config');
-const template = require('../template');
-const library = require('../library');
-const C = require('../constants');
+import ld from '../json-ld';
+import config from '../config';
+import template from '../template';
+import library from '../library';
+import C from '../constants';
 
 function search(req, res) {
    const term = req.query['q'];
@@ -41,4 +40,4 @@ function issues(req, res) {
    res.redirect(C.httpStatus.PERMANENT_REDIRECT, 'http://issues.' + config.domain);
 }
 
-module.exports = { search, about, siteMap, issues };
+export default { search, about, siteMap, issues };
