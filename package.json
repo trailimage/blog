@@ -47,6 +47,7 @@
     "@types/jquery": "^2.0.41",
     "@types/mapbox-gl": "^0.30.0",
     "@types/twitter": "0.0.28",
+    "@types/xmldom": "^0.1.29",
     "babel-eslint": "^7.1.1",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",

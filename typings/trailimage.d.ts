@@ -10,7 +10,7 @@ interface FlickrOptions {
    args: Object
 }
 
-interface ViewCacheItem {
+export interface ViewCacheItem {
    buffer: Buffer,
    eTag: string
 }
