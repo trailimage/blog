@@ -1,9 +1,9 @@
-const config = require('../config');
-const C = require('../constants');
-const is = require('../is');
-const log = require('../logger');
-const googleAPIs = require('googleapis');
-const googleAuth = require('google-auth-library');
+import config from '../config';
+import C from '../constants';
+import is from '../is';
+import log from '../logger';
+import googleAPIs from 'googleapis';
+import googleAuth from 'google-auth-library';
 
 // https://developers.google.com/drive/web/scopes
 const scope = {
@@ -32,8 +32,11 @@ const authorizationURL = ()=> authClient.generateAuthUrl({
 const accessTokenExpired = ()=> is.value(authConfig.token.refresh) &&
    (authConfig.token.accessExpiration === null || authConfig.token.accessExpiration < new Date());
 
-// set expiration a minute earlier than actual so refresh occurs before Google blocks request
-const minuteEarlier = ms => {
+/**
+ * Set expiration a minute earlier than actual so refresh occurs before Google
+ * blocks request.
+ */
+const minuteEarlier = (ms:number) => {
    const d = new Date(ms);
    d.setMinutes(d.getMinutes() - 1);
    return d;
@@ -41,8 +44,8 @@ const minuteEarlier = ms => {
 
 /**
  * Refresh access token and proceed
- * @see https://developers.google.com/drive/v3/web/quickstart/nodejs
- * @returns {Promise}
+ * 
+ * See https://developers.google.com/drive/v3/web/quickstart/nodejs
  */
 const verifyToken = ()=> new Promise((resolve, reject) => {
    authClient.setCredentials({
@@ -73,10 +76,8 @@ const verifyToken = ()=> new Promise((resolve, reject) => {
 
 /**
  * Retrieve access and refresh tokens
- * @param {string} code
- * @returns {Promise.<object>}
  */
-const getAccessToken = code => new Promise((resolve, reject) => {
+const getAccessToken = (code:string) => new Promise((resolve, reject) => {
    authClient.getToken(code, (err, token) => {
       if (is.value(err)) {
          reject(err);
@@ -100,13 +101,10 @@ function drive() {
 }
 
 /**
- * @param {Post} post
- * @param {Stream.Writable} [stream] If provided then file is piped directly to stream
- * @returns {Promise}
- * @see https://developers.google.com/drive/v3/reference/files/list
- * @see https://developers.google.com/drive/v3/web/search-parameters
+ * See https://developers.google.com/drive/v3/reference/files/list
+ * See https://developers.google.com/drive/v3/web/search-parameters
  */
-const loadGPX = (post, stream) => verifyToken().then(() => new Promise((resolve, reject) => {
+const loadGPX = (post:Post, stream:Stream.Writable) => verifyToken().then(() => new Promise((resolve, reject) => {
    const options = {
       auth: authClient,
       q: `name = '${post.title}.gpx' and '${driveConfig.tracksFolder}' in parents`
@@ -141,16 +139,12 @@ const loadGPX = (post, stream) => verifyToken().then(() => new Promise((resolve,
 
 /**
  * Google downloader uses Request module
- * @param {string} fileId
- * @param {Post} post
- * @param {Stream.Writable|EventEmitter} [stream] If provided then file is piped directly to stream
- * @returns {Promise.<string>}
  * @see https://developers.google.com/drive/v3/reference/files/get
  * @see https://developers.google.com/drive/v3/web/manage-downloads
  * Getter uses request library
  * @see https://github.com/request/request
  */
-const downloadFile = (fileId, post, stream) => verifyToken().then(()=> new Promise((resolve, reject) => {
+const downloadFile = (fileId:string, post:Post, stream:Stream.Writable|Event.EventEmitter) => verifyToken().then(()=> new Promise((resolve, reject) => {
    const options = { fileId, auth: authClient, alt: 'media', timeout: 10000 };
    if (is.value(stream)) {
       // pipe to stream
@@ -180,7 +174,7 @@ const downloadFile = (fileId, post, stream) => verifyToken().then(()=> new Promi
    }
 }));
 
-module.exports = {
+export default {
    auth: {
       url: authorizationURL,
       client: authClient,

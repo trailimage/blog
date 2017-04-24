@@ -12,29 +12,45 @@ const type = {
    OBJECT: 'object'
 };
 
-/**
- * Check if value is defined and non-null
- */
-const value = (v:any) => (v !== undefined && v !== null);
+
+ /** Whether variable is defined and not null */
+function value<T>(x:any):x is T { return (x !== undefined && x !== null); }
 
 /**
- * Whether value is a number
+ * Whether named field is defined in the given object
+ * 
+ * See http://jsperf.com/hasownproperty-vs-in-vs-other/16
  */
-const number = (n:any) => value(n) && typeof(n) === type.NUMBER;
+const defined = (object:any, field:string|number) => value(object) && typeof(object[field]) !== type.UNDEFINED;
 
-/**
- * Whether value is numeric even if its type is a string
- */
-const numeric = (n:any) => integer(n) || /^\d+$/.test(n);
-const integer = (n:any) => number(n) && parseInt(n) === n;
+/** Whether value is null, undefined or an empty string */
+const empty = (x:any) => !value(x) || x === '';
+
+/** Whether value exists and is a type of number */
+function number(n:any):n is number {
+   return value(n) && typeof(n) === type.NUMBER;
+}
+
+/** Whether value is numeric even if its type is a string */
+function numeric(n:any):n is string|number {
+   return integer(n) || /^\d+$/.test(n);
+}
+
+/** Whether value is an integer */
+function integer(n:any):n is string|number {
+   return value(n) && parseInt(n as string) === n;
+}
+
+function callable(v:any):v is Function {
+   return value(v) && v instanceof Function
+}
+
 const bigInt = (n:any) => integer(n) && (n < -32768 || n > 32767);
-// http://jsperf.com/hasownproperty-vs-in-vs-other/16
 
-/**
- * Whether object has a named field
- * @returns {boolean}
- */
-const defined = (object:any, field:string) => value(object) && typeof(object[field]) !== type.UNDEFINED;
+/** Whether value exists and is an array */
+function array(x:any):x is any[] {
+   return value(x) && Array.isArray(x);
+}
 
 export default {
    type,
@@ -48,8 +64,10 @@ export default {
    int64: bigInt,
    date: (v:any) => value(v) && v instanceof Date,
    empty: (t:any) => !value(t) || t === '',
-   array: (v:any) => value(v) && v instanceof Array,
-   callable: (v:any) => value(v) && v instanceof Function,
+   callable(v:any):v is Function {
+      return value(v) && v instanceof Function
+   },
+   array(v:any):v is Array<any> { return value(v) && v instanceof Array; },
    text: (v:any) => typeof(v) === type.STRING,
    xml(v:any) { return this.text(v) && /^<\?xml version="[\d\.]+"/.test(v); }
 }

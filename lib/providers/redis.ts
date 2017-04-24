@@ -1,9 +1,10 @@
 // simplified Redis interface
 
-const is = require('../is');
-const log = require('../logger');
-const config = require('../config');
-const Redis = require('redis');
+import is from '../is';
+import log from '../logger';
+import config from '../config';
+import * as Redis from 'redis';
+
 const URL = require('url');
 const url = URL.parse(config.redis.url);
 const client = Redis.createClient(url.port, url.hostname, {
@@ -72,10 +73,8 @@ client.on('end', ()=> {
 
 /**
  * Normalize data value for cache storage
- * @param {object|string|array|ViewCacheItem} value
- * @returns {string}
  */
-function normalize(value) {
+function normalize(value:string|string[]|ViewCacheItem):string {
    if (typeof value == is.type.OBJECT) {
       const cache = require('../cache');
       return is.cacheItem(value) ? cache.redisView.serialize(value) : JSON.stringify(value);
@@ -86,10 +85,8 @@ function normalize(value) {
 
 /**
  * Deserialize objects as needed
- * @param {object|string} value
- * @returns {object}
  */
-function parseObject(value) {
+function parseObject(value:string) {
    if (is.empty(value)) { return null; }
 
    try {
@@ -102,13 +99,8 @@ function parseObject(value) {
 
 /**
  * Normalize response
- * @param {string} key Cache key
- * @param {number} type Data type
- * @param {function} resolve
- * @param {function} reject
- * @returns {function}
  */
-function makeHandler(key, type = dataType.NONE, resolve, reject) {
+function makeHandler(key:string, type = dataType.NONE, resolve:function, reject:function) {
    // calculate expected response
    const howMany = key => is.array(key) ? key.length : 1;
    // if expectation provided then result is whether it matches actual
@@ -135,11 +127,8 @@ function makeHandler(key, type = dataType.NONE, resolve, reject) {
 
 /**
  * Whether Redis returned an error
- * @param {string|string[]} key
- * @param {object|number|string} err
- * @returns {boolean}
- */
-function hasError(key, err) {
+  */
+function hasError(key:string|string[], err:number|string):boolean {
    if (is.value(err)) {
       if (is.array(key)) { key = key.join(','); }
       log.error('Operation with key "%s" resulted in', key, err);
@@ -153,25 +142,20 @@ function hasError(key, err) {
    return false;
 }
 
-module.exports = {
+export default {
    dataType,
 
    /**
     * Get all items of a hash
-    * @param {string} key
-    * @returns {Promise}
     */
-   getAll: key => new Promise((resolve, reject) => {
+   getAll: (key:string) => new Promise((resolve, reject) => {
       client.hgetall(key, makeHandler(key, dataType.RAW, resolve, reject));
    }),
 
    /**
     * Whether key or hash key exists
-    * @param {string} key
-    * @param {string} hashKey
-    * @returns {Promise.<Boolean>}
     */
-   exists: (key, hashKey) => new Promise((resolve, reject) => {
+   exists: (key:string, hashKey:string) => new Promise((resolve, reject) => {
       const handler = makeHandler(key, dataType.BIT, resolve, reject);
       if (hashKey === undefined) {
          client.exists(key, handler);
@@ -182,11 +166,10 @@ module.exports = {
 
    /**
     * All hash keys
-    * @param {string} key
-    * @see http://redis.io/commands/keys
-    * @returns {Promise.<String[]>}
+    *
+    * See http://redis.io/commands/keys
     */
-   keys: key => new Promise((resolve, reject) => {
+   keys: (key:string) => new Promise((resolve, reject) => {
       const handler = makeHandler(key, dataType.RAW, resolve, reject);
       if (/[\?\*\[\]]/.test(key)) {
          // wildcard match against root keys
@@ -199,29 +182,20 @@ module.exports = {
 
    /**
     * Return raw value
-    * @param {string} key
-    * @param {string} [hashKey]
-    * @returns {Promise}
     */
-   get(key, hashKey) { return this.getValue(dataType.RAW, key, hashKey); },
+   get(key:string, hashKey:string) { return this.getValue(dataType.RAW, key, hashKey); },
 
    /**
     * Get key or hash field value as an object
-    * @param {string} key
-    * @param {string} [hashKey]
-    * @returns {Promise.<Object>}
     */
-   getObject(key, hashKey) { return this.getValue(dataType.JSON, key, hashKey); },
+   getObject(key:string, hashKey:string) { return this.getValue(dataType.JSON, key, hashKey); },
 
    /**
     * Get key or hash field value as given type
-    * @param {number} type Reply type
-    * @param {string} key
-    * @param {string} [hashKey]
-    * @returns {Promise}
-    * @see http://redis.io/commands/get
+    *
+    * See http://redis.io/commands/get
     */
-   getValue: (type, key, hashKey) => new Promise((resolve, reject) => {
+   getValue: (type:string, key:string, hashKey?:string) => new Promise((resolve, reject) => {
       const handler = makeHandler(key, type, resolve, reject);
       if (hashKey === undefined) {
          client.get(key, handler);
@@ -232,13 +206,9 @@ module.exports = {
 
    /**
     * Add value to key or hash key
-    * @param {string} key
-    * @param {string|object} hashKeyOrValue Key value or member key
-    * @param {string|object} [value] Member value
-    * @returns {Promise}
     */
-   add(key, hashKeyOrValue, value) {
-      let hashKey;
+   add(key:string, hashKeyOrValue:string, value?:any) {
+      let hashKey:string;
       if (value === undefined) {
          value = hashKeyOrValue;
       } else {
@@ -256,11 +226,8 @@ module.exports = {
 
    /**
     * Add all hash items
-    * @param {string} key
-    * @param {object} hash Name-value pairs
-    * @returns {Promise}
     */
-   addAll: (key, hash) => new Promise((resolve, reject) => {
+   addAll: (key:string, hash:{[key:string]:string}) => new Promise((resolve, reject) => {
       client.hmset(key, hash, makeHandler(key, dataType.OKAY, resolve, reject));
    }),
 
@@ -268,11 +235,8 @@ module.exports = {
     * Remove key or key field (hash) from storage
     * If hashKey is provided and key is an array then the same hashKey field
     * will be removed from every key value
-    * @param {string|string[]} key
-    * @param {string|string[]} [hashKey]
-    * @returns {Promise}
     */
-   remove: (key, hashKey) => new Promise((resolve, reject) => {
+   remove: (key:string|string[], hashKey?:string|string[]) => new Promise((resolve, reject) => {
       if (is.empty(key)) {
          reject('Attempt to delete hash item with empty key');
       } else if (is.value(hashKey)) {
@@ -305,7 +269,7 @@ module.exports = {
     * @param {String|Object|function(boolean)} p4 Hash value or callback
     * @param {function(boolean)} [p5] Callback if replacing hash field
     */
-   replace(key, p2, p3, p4, p5) {
+   replace(key:string, p2:string, p3:string|{[key:string]:string}, p4, p5?:boolean) {
       if (p5 === undefined) {
          client.multi()
             .del(key)

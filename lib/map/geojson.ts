@@ -1,10 +1,11 @@
-const is = require('../is');
-const log = require('../logger');
-const gpx = require('./gpx');
-const kml = require('./kml');
-const index = require('./');
-const config = require('../config');
-const measure = require('./measure');
+import is from '../is';
+import log from '../logger';
+import gpx from './gpx';
+import kml from './kml';
+import index from './';
+import config from '../config';
+import measure from './measure';
+
 const type = {
    FEATURE: 'Feature',
    COLLECTION: 'FeatureCollection',

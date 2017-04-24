@@ -7,7 +7,7 @@ import is from './is';
  * @see addHelperMethods
  * @type {Library}
  */
-module.exports = {
+export default {
    /**
     * Root categories indexed by their name
     * @type {object.<Category>}

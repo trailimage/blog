@@ -1,42 +1,30 @@
-const is = require('../is');
+import is from '../is';
 
 /**
  * Node content
- * @param {Node} node
- * @returns {string}
- * @see https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize
+ *
+ * See https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize
  */
-function value(node) {
+function value(node:Element|Node):string {
    if (is.value(node) && node.normalize) { node.normalize(); }
    return node && node.firstChild && node.firstChild.nodeValue;
 }
 
-/**
- * @param {Node} node
- * @param {string} tag
- * @returns {string}
- */
-function firstValue(node, tag) { return this.value(this.firstNode(node, tag)); }
+function firstValue(node:Element|Node, tag:string):string {
+   return this.value(this.firstNode(node, tag));
+}
 
 /**
  * First child or null
- * @param {Document|Node} node
- * @param {string} tag
- * @returns {Node}
  */
-function firstNode(node, tag) {
+function firstNode(node:Element, tag:string):Element {
    var n = node.getElementsByTagName(tag);
    return (is.value(n) && n.length > 0) ? n[0] : null;
 }
 
-/**
- * @param {Node|Element} dom
- * @param {string} name
- * @returns {Number}
- */
-const numberAttribute = (dom, name) => parseFloat(dom.getAttribute(name));
+const numberAttribute = (dom:Element, name:string) => parseFloat(dom.getAttribute(name));
 
-module.exports = {
+export default {
    value,
    firstValue,
    firstNode,

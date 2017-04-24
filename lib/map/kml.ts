@@ -1,15 +1,13 @@
-const is = require('../is');
-const xml = require('./xml');
-const DOM = require('xmldom').DOMParser;
-const index = require('./');
-const unzipper = require('unzipper');
+import is from '../is';
+import xml from './xml';
+import { DOMParser as DOM } from 'xmldom';
+import index from './';
+import unzipper from 'unzipper';
 
 /**
  * Return location as [latitude, longitude, elevation]
- * @param {Node|Element} node
- * @returns {number[]}
  */
-function location(node) {
+function location(node:Element):number[] {
    const location = new Array(3);
    const point = xml.firstNode(node, 'Point');
 
@@ -27,10 +25,8 @@ function location(node) {
 
 /**
  * Extract properties from description HTML table.
- * @param {object.<string>} properties
- * @returns {object.<string>}
  */
-function parseDescription(properties) {
+function parseDescription(properties:{[key:string]:string}):{[key:string]:string} {
    if (/^<html/.test(properties.description)) {
       let html = null;
       try {
@@ -65,13 +61,10 @@ function parseDescription(properties) {
 
 /**
  * Properties of a KML node
- * @param {Node} node
- * @param {string[]} [extras] Additional property names to retrieve
- * @returns {object}
  */
-function properties(node, extras = []) {
+function properties(node:Element, extras:string[] = []):{[key:string]:string} {
    const names = extras.concat(['name', 'description']); // styleUrl,
-   const properties = {};
+   const properties:{[key:string]:string} = {};
 
    for (const key of names) {
       const value = xml.firstValue(node, key);
@@ -80,5 +73,4 @@ function properties(node, extras = []) {
    return parseDescription(properties);
 }
 
-
-module.exports = { properties, location };
+export default { properties, location };

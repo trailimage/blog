@@ -59,12 +59,10 @@ function provider() {
 
 /**
  * Append icon as metadata at the end of the arguments
- * @param {String} icon
- * @param {String} level
- * @param args
- * @see https://github.com/winstonjs/winston#logging-with-metadata
+ *
+ * See https://github.com/winstonjs/winston#logging-with-metadata
  */
-function iconInvoke(icon, level, args) {
+function iconInvoke(icon:string, level:string, args:IArguments) {
    const a = Array.from(args);
    a.shift();
    // avoid conflict with handlebars format function called icon()
@@ -74,9 +72,6 @@ function iconInvoke(icon, level, args) {
 
 function invoke(l, args) { provider()[l].apply(provider(), args); }
 
-// endregion
-// region Reports
-
 /**
  * Group logs by day
  * @param {Object} results
@@ -84,7 +79,7 @@ function invoke(l, args) { provider()[l].apply(provider(), args); }
  */
 function parseLogs(results) {
    // whether two timestamps are the same day
-   const sameDay = (d1, d2) => (d1 != null && d2 != null && d1.getMonth() == d2.getMonth() && d1.getDate() == d2.getDate());
+   const sameDay = (d1:Date, d2:Date) => (d1 != null && d2 != null && d1.getMonth() == d2.getMonth() && d1.getDate() == d2.getDate());
    const grouped = {};
 
    if (is.defined(results, 'redis')) {
@@ -114,12 +109,7 @@ function parseLogs(results) {
    return grouped;
 }
 
-/**
- * @param {Number} daysAgo
- * @param {Number} [maxRows] Max rows to retrieve
- * @returns {Promise}
- */
-function query(daysAgo, maxRows = 500) {
+function query(daysAgo:number, maxRows = 500) {
    // https://github.com/flatiron/winston/blob/master/lib/winston/transports/transport.js
    const options = {
       from: new Date() - (C.time.DAY * daysAgo),
@@ -142,15 +132,13 @@ function query(daysAgo, maxRows = 500) {
    });
 }
 
-// endregion
-
-module.exports = {
-   info(message, args) { invoke(level.INFO, arguments); },
-   infoIcon(icon, message, args) { iconInvoke(icon, level.INFO, arguments); },
-   warn(message, args) { invoke(level.WARN, arguments); },
-   warnIcon(icon, message, args) { iconInvoke(icon, level.WARN, arguments); },
-   error(message, args) { invoke(level.ERROR, arguments); },
-   errorIcon(icon, message, args) { iconInvoke(icon, level.ERROR, arguments); },
+export default {
+   info(message:string, ...args:any[]) { invoke(level.INFO, arguments); },
+   infoIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.INFO, arguments); },
+   warn(message:string, ...args:any[]) { invoke(level.WARN, arguments); },
+   warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, arguments); },
+   error(message:string, ...args:any[]) { invoke(level.ERROR, arguments); },
+   errorIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
    query,
    // force provider(s) to be re-initialized
    reset() { _provider = null; }

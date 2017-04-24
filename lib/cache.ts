@@ -1,11 +1,10 @@
 import is from './is';
-
-
-const C = require('./constants');
-const config = require('./config');
-const redis = require('./providers/redis');
+import C from './constants';
+import config from './config';
+import redis from './providers/redis';
 // http://nodejs.org/api/zlib.html
-const compress = require('zlib');
+import * as compress from 'zlib';
+
 // Redis uses colon prefix as a kind of namespace
 const prefix = 'api:';
 const viewKey = 'view';
@@ -25,11 +24,9 @@ const exists = (key:string, hashKey:string, enabled:boolean) => enabled
 
 /**
  * Create view cache item with eTag and compressed content
- * @param {string} key Page slug
- * @param {string|GeoJSON.FeatureCollection} htmlOrJSON
  * @returns {Promise.<ViewCacheItem>}
  */
-const createItem = (key:string, htmlOrJSON) => new Promise((resolve, reject) => {
+const createItem = (key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>) => new Promise((resolve, reject) => {
    const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON;
    compress.gzip(text, (err, buffer) => {
       if (is.value(err)) {
@@ -47,61 +44,42 @@ const createItem = (key:string, htmlOrJSON) => new Promise((resolve, reject) => 
  * @param {boolean} enabled Whether caching for this root key is enabled
  * @returns {Promise.<ViewCacheItem>}
  */
-const addItem = (key, hashKey, value, enabled) => createItem(hashKey, value)
-   .then(item => (enabled) ? redis.add(key, hashKey, item) : Promise.resolve(item));
+const addItem = (key:string, hashKey:string, value:string|GeoJSON.FeatureCollection<any>, enabled:boolean) => createItem(hashKey, value)
+      .then(item => (enabled) ? redis.add(key, hashKey, item) : Promise.resolve(item));
 
 /**
  * Convert view cache to string
- * @param {ViewCacheItem} item
- * @returns {object}
  */
-const serializeItem = item => JSON.stringify({
+const serializeItem = (item:ViewCacheItem) => JSON.stringify({
    buffer: item.buffer.toString(C.encoding.HEXADECIMAL),
    eTag: item.eTag
 });
 
-/**
- * @param {ViewCacheItem} item
- * @returns {object}
- */
-const deserialize = item => is.value(item)
+const deserialize = (item:ViewCacheItem) => is.value(item)
    ? { buffer: Buffer.from(item.buffer, C.encoding.HEXADECIMAL), eTag: item.eTag }
    : null;
 
 /**
  * Manage cache interaction
  */
-module.exports = {
+export default {
    prefix,
    /**
     * Retrieve cached value
-    * @param {string} key
-    * @param {string} [hashKey]
-    * @returns {Promise}
     */
-   getItem: (key, hashKey) => redis.getObject(prefix + key, hashKey),
+   getItem: (key:string, hashKey:string) => redis.getObject(prefix + key, hashKey),
 
-   /**
-    * @param {string} key
-    * @param {string|object} hashKeyOrValue
-    * @param {object} [value] Value to cache if hash key is given
-    * @returns {Promise}
-    */
-   add: (key, hashKeyOrValue, value) => redis.add(prefix + key, hashKeyOrValue, value),
+   add: (key:string, hashKeyOrValue:string|object, value:object) => redis.add(prefix + key, hashKeyOrValue, value),
 
    /**
     * All keys with standard prefix
-    * @returns {Promise.<string[]>}
     */
    keys: ()=> redis.keys(prefix + '*'),
 
    /**
     * Remove cached items
-    * @param {string|string[]} key
-    * @param {string|string[]} [hashKey]
-    * @returns {Promise}
     */
-   remove: (key, hashKey) => redis.remove(
+   remove: (key:string|string[], hashKey:string|string[]) => redis.remove(
       is.array(key) ? key.map(k => prefix + k) : prefix + key,
       hashKey
    ),
@@ -110,24 +88,13 @@ module.exports = {
     * Cache rendered views in memory
     */
    view: {
-      /**
-       * @param {string} key Page slug
-       * @returns {Promise.<ViewCacheItem>}
-       */
-      getItem: key => Promise.resolve(memory[key]),
-
-      /**
-       * @returns {Promise.<string[]>}
-       */
+      getItem: (key:string) => Promise.resolve(memory[key]),
       keys: ()=> Promise.resolve(Object.keys(memory)),
 
       /**
        * Add or replace value at key
-       * @param {string} key Page slug
-       * @param {Buffer|string} text HTML or JSON
-       * @returns {Promise.<ViewCacheItem>}
        */
-      add: (key, text) => createItem(key, text).then(item => {
+      add: (key:string, text:Buffer|string) => createItem(key, text).then(item => {
          if (config.cache.views) { memory[key] = item; }
          return Promise.resolve(item);
       }),
@@ -136,18 +103,13 @@ module.exports = {
 
       /**
        * Whether cache view exists
-       * @param {string} key
-       * @returns {Promise.<boolean>}
        */
-      exists: key => Promise.resolve(is.defined(memory, key)),
+      exists: (key:string) => Promise.resolve(is.defined(memory, key)),
 
       /**
        * Add value only if it doesn't already exist (mainly for testing)
-       * @param {string} key Page slug
-       * @param {Buffer|string} buffer Zipped view content
-       * @returns {Promise}
        */
-      addIfMissing(key, buffer) {
+      addIfMissing(key:string, buffer:string|Buffer) {
          return (config.cache.views)
             ? this.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
             : Promise.resolve();
@@ -155,10 +117,8 @@ module.exports = {
 
       /**
        * Remove cached page views
-       * @param {string|string[]} keys
-       * @returns {Promise}
        */
-      remove: keys => {
+      remove: (keys:string|string[]) => {
          if (is.array(keys)) {
             keys.forEach(k => delete memory[k]);
          } else {
@@ -169,51 +129,33 @@ module.exports = {
 
       /**
        * In-memory cache doesn't need to serialize the page buffer
-       * @param {ViewCacheItem} item
-       * @returns {object}
        */
-      serialize: item => item
+      serialize: (item:ViewCacheItem) => item
    },
 
    /**
     * Cache rendered views in Redis
     */
    redisView: {
-      /**
-       * @param {string} key Page slug
-       * @returns {Promise.<ViewCacheItem>}
-       */
-      getItem: key => redis.getObject(viewKey, key).then(deserialize),
-
-      /**
-       * @returns {Promise.<string[]>}
-       */
+      getItem: (key:string) => redis.getObject(viewKey, key).then(deserialize),
       keys: ()=> redis.keys(viewKey),
 
       /**
        * Add or replace value at key
-       * @param {string} key Page slug
-       * @param {string} text HTML or JSON
-       * @returns {Promise.<ViewCacheItem>}
        */
-      add: (key, text) => addItem(viewKey, key, text, config.cache.views),
+      add: (key:string, text:string) => addItem(viewKey, key, text, config.cache.views),
 
       create: createItem,
 
       /**
        * Whether cache view exists
-       * @param {string} key
-       * @returns {Promise.<boolean>}
        */
-      exists: key => exists(viewKey, key, config.cache.views),
+      exists: (key:string) => exists(viewKey, key, config.cache.views),
 
       /**
        * Add value only if it doesn't already exist (mainly for testing)
-       * @param {string} key Page slug
-       * @param {Buffer|string} buffer Zipped view content
-       * @returns {Promise}
        */
-      addIfMissing(key, buffer) {
+      addIfMissing(key:string, buffer:Buffer|string) {
          return (config.cache.views)
             ? this.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
             : Promise.resolve();
@@ -221,10 +163,8 @@ module.exports = {
 
       /**
        * Remove cached page views
-       * @param {string|string[]} keys
-       * @returns {Promise}
        */
-      remove: keys => redis.remove(viewKey, keys),
+      remove: (keys:string|string[]) => redis.remove(viewKey, keys),
 
       serialize: serializeItem
    },
@@ -232,46 +172,28 @@ module.exports = {
     * Cache GeoJSON
     */
    map: {
-      /**
-       * @param {string} key Page slug
-       * @returns {Promise.<ViewCacheItem>}
-       */
-      getItem: key => redis.getObject(mapKey, key).then(deserialize),
-
-      /**
-       * @returns {Promise.<string[]>}
-       */
+      getItem: (key:string) => redis.getObject(mapKey, key).then(deserialize),
       keys: ()=> redis.keys(mapKey),
 
       /**
        * Add or replace value at key
-       * @param {string} key Page slug
-       * @param {GeoJSON.FeatureCollection} geoJSON Zipped view content
-       * @returns {Promise.<ViewCacheItem>}
        */
-      add: (key, geoJSON) => addItem(mapKey, key, geoJSON, config.cache.maps),
+      add: (key:string, geoJSON:GeoJSON.FeatureCollection<any>) => addItem(mapKey, key, geoJSON, config.cache.maps),
 
       /**
        * Whether cache map exists
-       * @param {string} key
-       * @returns {Promise.<boolean>}
        */
-      exists: key => exists(mapKey, key, config.cache.maps),
+      exists: (key:string) => exists(mapKey, key, config.cache.maps),
 
       /**
        * Remove cached GeoJSON
-       * @param {string|string[]} key
-       * @returns {Promise}
        */
-      remove: key => redis.remove(mapKey, key),
+      remove: (key:string|string[]) => redis.remove(mapKey, key),
 
       /**
        * Add value only if it doesn't already exist (mainly for testing)
-       * @param {string} key Page slug
-       * @param {Buffer|string} buffer Zipped view content
-       * @returns {Promise}
        */
-      addIfMissing(key, buffer) {
+      addIfMissing(key:string, buffer:Buffer|string) {
          return (config.cache.maps)
             ? this.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
             : Promise.resolve();

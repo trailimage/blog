@@ -1,6 +1,6 @@
 // Handlebars templates
 
-module.exports = {
+export default {
    layout: {
       MAIN: 'layouts/default-layout',
       NONE: null
@@ -31,24 +31,23 @@ module.exports = {
    },
    /**
     * Assign methods that will be available from within Handlebars templates.
-    * @param {ExpressHbs} hbs
     */
-   assignHelpers: function(hbs) {
+   assignHelpers: function(hbs:ExpressHbs) {
       const util = require('./util');
       const config = require('./config');
-      const helpers = {
+      const helpers:{[key:string}:function} = {
          formatCaption: util.html.story,
          formatTitle: util.html.typography,
-         lowerCase: text => text.toLocaleLowerCase(),
-         add: (a, b) => (a * 1) + b,
+         lowerCase: (text:string) => text.toLocaleLowerCase(),
+         add: (a:number, b:number) => (a * 1) + b,
          date: util.date.toString,
-         subtract: (a, b) => (a * 1) - b,
-         plural: count => (count > 1) ? 's' : '',
+         subtract: (a:number, b:number) => (a * 1) - b,
+         plural: (count:number) => (count > 1) ? 's' : '',
          makeTagList: util.html.photoTagList,
          formatLogTime: util.date.toLogTime,
-         formatISO8601: d => d.toISOString(),
+         formatISO8601: (d:Date) => d.toISOString(),
          formatFraction: util.html.fraction,
-         mapHeight: (width, height) => height > width ? config.style.map.maxInlineHeight : height,
+         mapHeight: (width:number, height:number) => height > width ? config.style.map.maxInlineHeight : height,
          icon: util.icon.tag,
          iconForCategory: util.icon.category,
          modeIconForPost: util.icon.mode,

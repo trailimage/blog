@@ -1,8 +1,11 @@
-const config = require('../config');
-const log = require('../logger');
-const is = require('../is');
-const util = require('../util');
-const cache = require('../cache');
+import config from '../config'
+import log from '../logger';
+import is from '../is';
+import util from '../util';
+import cache from '../cache';
+import fetch from 'node-fetch';
+import { OAuth } from 'oauth';
+
 const type = { USER: 'user_id', SET: 'photoset_id', PHOTO: 'photo_id' };
 const url = {
    base: '/services/rest/',
@@ -33,12 +36,9 @@ const extra = {
    PATH_ALIAS: 'path_alias'
 };
 
-// region Connectivity
 
-const retries = {};
-const fetch = require('node-fetch');
+const retries:{[key:string]:number} = {};
 const host = 'api.flickr.com';
-const OAuth = require('oauth').OAuth;
 const oauth = new OAuth(
    url.requestToken,
    url.accessToken,
@@ -47,7 +47,8 @@ const oauth = new OAuth(
    '1.0A',
    config.flickr.auth.callback,
    'HMAC-SHA1');
-const defaultCallOptions = {
+
+const defaultCallOptions:FlickrOptions = {
    // method to retrieve value from JSON response
    value: r => r,
    // error message to log if call fails
@@ -64,13 +65,8 @@ require('https').globalAgent.maxSockets = 200;
 
 /**
  * Load response from cache or call API
- * @param {string} method Name of Flickr API method to call
- * @param {string} idType Type of Flickr ID whether photo, set, collection, etc.
- * @param {string} id FlickrAPI object ID
- * @param {FlickrOptions|object} [options]
- * @returns {Promise.<Flickr.Response>}
  */
-function call(method, idType, id, options = {}) {
+function call(method:string, idType:string, id:string, options:FlickrOptions = {}):Promise<Flickr.Response> {
    options = Object.assign({}, defaultCallOptions, options);
    // generate fallback API call
    const noCache = ()=> callAPI(method, idType, id, options);
@@ -139,11 +135,8 @@ function callAPI(method, idType, id, options) {
 
 /**
  * Parse Flickr response and handle different kinds of error conditions
- * @param {string} body
- * @param {string} key
- * @returns {Flickr.Response}
  */
-function parse(body, key) {
+function parse(body:string, key:string):Flickr.Response {
    const fail = { retry: true, stat: 'fail' };
    let json = null;
 
@@ -175,11 +168,8 @@ function parse(body, key) {
 
 /**
  * Retry service call if bad response and less than max retries
- * @param {function} fn Call to retry
- * @param {string} key
- * @return {boolean} whether call could be retried
  */
-function retry(fn, key) {
+function retry(fn:Function, key:string):boolean {
    let count = 1;
 
    if (is.defined(retries, key)) { count = ++retries[key]; } else { retries[key] = count; }
@@ -197,9 +187,8 @@ function retry(fn, key) {
 
 /**
  * Clear retry count and log success
- * @param {string} key
  */
-function clearRetries(key) {
+function clearRetries(key:string) {
    if (is.defined(retries, key) && retries[key] > 0) {
       log.info('Call to %s succeeded', key);
       retries[key] = 0;
@@ -208,13 +197,8 @@ function clearRetries(key) {
 
 /**
  * Setup standard parameters
- * @param {string} method Name of flickr API method to call
- * @param {string} [idType] The type of ID whether photo, set or other
- * @param {string} [id] ID of the flickr object
- * @param {object} [args] Additional parameters
- * @returns {string}
  */
-function parameterize(method, idType, id, args = {}) {
+function parameterize(method:string, idType?:string, id?:string, args:{[key:string]:string} = {}):string {
    let qs = '';
    let op = '?';
 
@@ -244,9 +228,6 @@ module.exports = {
       isEmpty() { return is.empty(config.flickr.auth.token.access); }
    },
 
-   /**
-    * @returns {Promise}
-    */
    getRequestToken() {
       const token = config.flickr.auth.token;
       return new Promise((resolve, reject) => {
@@ -264,12 +245,7 @@ module.exports = {
       });
    },
 
-   /**
-    * @param {string} requestToken
-    * @param {string} verifier
-    * @returns {Promise}
-    */
-   getAccessToken(requestToken, verifier) {
+   getAccessToken(requestToken:string, verifier:string):Promise<token> {
       const token = config.flickr.auth.token;
       return new Promise((resolve, reject) => {
          oauth.getOAuthAccessToken(requestToken, token.secret, verifier, (error, accessToken, accessTokenSecret) => {
@@ -296,34 +272,30 @@ module.exports = {
    }),
 
    /**
-    * @param {string} id
     * @returns {Promise.<Flickr.SetInfo>}
     */
-   getSetInfo: id => call(method.set.INFO, type.SET, id, { value: r => r.photoset, allowCache: true }),
+   getSetInfo: (id:string) => call(method.set.INFO, type.SET, id, { value: r => r.photoset, allowCache: true }),
 
    /**
-    * @param {string} id
     * @returns {Promise.<Flickr.Size[]>}
     */
-   getPhotoSizes: id => call(method.photo.SIZES, type.PHOTO, id, { value: r => r.sizes.size }),
+   getPhotoSizes: (id:string) => call(method.photo.SIZES, type.PHOTO, id, { value: r => r.sizes.size }),
 
    /**
-    * @param {string} id
     * @returns {Promise.<Flickr.SetInfo[]>}
     */
-   getPhotoContext: id => call(method.photo.SETS, type.PHOTO, id, { value: r => r.set }),
+   getPhotoContext: (id:string) => call(method.photo.SETS, type.PHOTO, id, { value: r => r.set }),
 
    /**
-    * @param {string} id
     * @returns {Promise.<Flickr.EXIF>}
     */
-   getExif: id => call(method.photo.EXIF, type.PHOTO, id, { value: r => r.photo.exif, allowCache: true }),
+   getExif: (id:string) => call(method.photo.EXIF, type.PHOTO, id, { value: r => r.photo.exif, allowCache: true }),
 
    /**
     * @param {string} id
     * @returns {Promise.<Flickr.PhotoSummary[]>}
     */
-   getSetPhotos: id => call(method.set.PHOTOS, type.SET, id, {
+   getSetPhotos: (id:string) => call(method.set.PHOTOS, type.SET, id, {
       args: {
          extras: [extra.DESCRIPTION, extra.TAGS, extra.DATE_TAKEN, extra.LOCATION, extra.PATH_ALIAS]
             .concat(config.flickr.photoSize.post)
@@ -336,11 +308,12 @@ module.exports = {
    /**
     * The documentation says signing is not required but results differ even with entirely
     * public photos -- perhaps a Flickr bug
-    * @param {string[]|String} tags
+    *
     * @returns {Promise.<Flickr.PhotoSummary[]>}
-    * @see https://www.flickr.com/services/api/flickr.photos.search.html
+    *
+    * See https://www.flickr.com/services/api/flickr.photos.search.html
     */
-   photoSearch: tags => call(method.photo.SEARCH, type.USER, config.flickr.userID, {
+   photoSearch: (tags:string|string[]) => call(method.photo.SEARCH, type.USER, config.flickr.userID, {
       args: {
          extras: config.flickr.photoSize.search.join(),
          tags: is.array(tags) ? tags.join() : tags,

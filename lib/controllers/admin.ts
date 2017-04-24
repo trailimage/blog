@@ -1,10 +1,10 @@
-const is = require('../is');
-const log = require('../logger');
-const flickr = require('../providers/flickr');
-const cache = require('../cache');
-const config = require('../config');
-const template = require('../template');
-const library = require('../library');
+import is from '../is';
+import log from '../logger';
+import flickr from '../providers/flickr';
+import cache from '../cache';
+import config from '../config';
+import template from '../template';
+import library from '../library';
 
 /**
  * Cache keys for site map and menu views

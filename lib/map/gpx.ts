@@ -1,18 +1,17 @@
-const config = require('../config');
-const is = require('../is');
-const xml = require('./xml');
-const measure = require('./measure');
-const index = require('./');
+import config from '../config';
+import is from '../is';
+import xml from './xml';
+import measure from './measure';
+import index from './';
 
 /**
  * Return location as [latitude, longitude, elevation, time, speed]
  * A degree of latitude is approximately 69 miles
  * A degree of longitude is about 69 miles at the equater, 0 at the poles
- * @param {Node|Element} node
- * @returns {number[]}
- * @see http://nationalatlas.gov/articles/mapping/a_latlong.html
+ *
+ * See http://nationalatlas.gov/articles/mapping/a_latlong.html
  */
-function location(node) {
+export function location(node:Node|Element):number[] {
    const location = new Array(5);
    const elevation = xml.firstNode(node, 'ele');                     // meters
    const t = xml.firstNode(node, 'time');                            // UTC
@@ -43,13 +42,10 @@ function location(node) {
 
 /**
  * Properties of a GPX node
- * @param {Node} node
- * @param {string[]} [extras] Additional property names to retrieve
- * @returns {object}
  */
-function properties(node, extras = []) {
+export function properties(node:Node, extras:string[] = []):{[key:string]:string} {
    const names = extras.concat(['name', 'desc', 'author', 'copyright', 'link', 'time', 'keywords']);
-   const properties = {};
+   const properties:{[key:string]:string} = {};
 
    for (const key of names) {
       const value = xml.firstValue(node, key);
@@ -59,11 +55,9 @@ function properties(node, extras = []) {
 }
 
 /**
- * @param {Node|Element} node
- * @param {string} name
- * @returns {number[][]} Array of point arrays
+ * Get array of point arrays.
  */
-const line = (node, name) =>
+export const line = (node:Element, name:string):number[][] =>
    Array.from(node.getElementsByTagName(name))
       .map(p => location(p))
       .filter(p => is.value(p))
@@ -72,4 +66,4 @@ const line = (node, name) =>
          return p;
       });
 
-module.exports = { location, line, properties };
+export default { location, line, properties };
