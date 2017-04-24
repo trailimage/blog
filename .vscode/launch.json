@@ -6,6 +6,7 @@
          "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/app.js",
+         "protocol": "inspector",
          "cwd": "${workspaceRoot}"
       },
       {
@@ -38,8 +39,10 @@
          "cwd": "${workspaceRoot}",
          "runtimeExecutable": null,
          "stopOnEntry": false,
+         "protocol": "inspector",
          //"args": ["test/**/*.js", "--no-timeouts"]
-         "args": ["test/factory/*", "--no-timeouts"]
+         //"args": ["test/factory/*", "--no-timeouts"]
+         "args": ["test/map/geojson*", "--no-timeouts"]
       },
       {
          "name": "Debug Gulp",
@@ -47,6 +50,7 @@
          "request": "launch",
          "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
          "cwd": "${workspaceRoot}",
+         "protocol": "inspector",
          "runtimeExecutable": null,
          "stopOnEntry": true,
          "args": ["css"]

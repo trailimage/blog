@@ -1,7 +1,12 @@
 const geoJSON = require('../../lib/map/geojson');
 const mocha = require('mocha');
+const fs = require('fs');
+const path = require('path');
+const readline = require('readline');
+const stream = require('stream');
 const { expect } = require('chai');
 const google = require('../mocks/google.mock');
+const nl = require('os').EOL;
 
 /**
  * @param {number[]} point
@@ -12,6 +17,22 @@ function expectGeoPoint(point) {
    expect(point[0]).within(-180, 180);
    expect(point[1]).within(-90, 90);
    return point;
+}
+
+/**
+ * Use technique that supports large files
+ * @param {string} name
+ * @returns {Promise.<string>} File content
+ */
+function loadMockFile(name) {
+   return new Promise(resolve => {
+      const input = fs.createReadStream(path.normalize(__dirname + '/../mocks/' + name));
+      const output = new stream();
+      const rl = readline.createInterface(input, output);
+      let file = '';
+      rl.on('line', line => file += line + nl);
+      rl.on('close', ()=> resolve(file));
+   });
 }
 
 describe('GeoJSON', ()=> {
@@ -35,4 +56,9 @@ describe('GeoJSON', ()=> {
          first.geometry.coordinates.forEach(expectGeoPoint);
       });
    });
+
+   it('converts KML files to GeoJSON', ()=> loadMockFile('mines.kml').then(kml => {
+      const geo = geoJSON.featuresFromKML(kml);
+      expect(geo).to.exist;
+   }));
 });
