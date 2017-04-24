@@ -1,3 +1,4 @@
+import { Blog } from './types';
 import * as express from 'express';
 import config from './config';
 import C from './constants';
@@ -76,11 +77,11 @@ function categoryRoutes() {
 
 /**
  * Standard routes
- * @param {Express.Application} app
- * @see http://expressjs.com/en/4x/api.html
- * @see http://expressjs.com/en/guide/routing.html
+ *
+ * See http://expressjs.com/en/4x/api.html
+ * See http://expressjs.com/en/guide/routing.html
  */
-function standard(app) {
+function standard(app:Express.Application) {
    // slug pattern
    const s = '([\\w\\d-]{4,})';
    // Flickr photo ID pattern
@@ -99,7 +100,7 @@ function standard(app) {
    app.use('/admin', adminRoutes());
 
    for (const slug in config.redirects) {
-      app.get('/' + slug, (req, res) => {
+      app.get('/' + slug, (req:Blog.Request, res:Blog.Response) => {
          res.redirect(C.httpStatus.PERMANENT_REDIRECT, '/' + config.redirects[slug]);
       });
    }
@@ -134,9 +135,8 @@ function standard(app) {
 
 /**
  * If a provider isn't authenticated then all paths route to authentication pages
- * @param app Express instance
  */
-function authentication(app) {
+function authentication(app:Express.Application) {
    // provider authentication callbacks
    app.get('/auth/flickr', ctrl.auth.flickr);
    app.get('/auth/google', ctrl.auth.google);

@@ -114,5 +114,5 @@ export interface Size {
    url: string,
    width: number,
    height: number,
-   isEmpty: boolean
+   isEmpty?: boolean
 }

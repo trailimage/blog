@@ -1,4 +1,5 @@
 // Handlebars templates
+import util from './util';
 
 export default {
    layout: {
@@ -32,10 +33,10 @@ export default {
    /**
     * Assign methods that will be available from within Handlebars templates.
     */
-   assignHelpers: function(hbs:ExpressHbs) {
+   assignHelpers: function(hbs:any) {
       const util = require('./util');
       const config = require('./config');
-      const helpers:{[key:string}:function} = {
+      const helpers:{[key:string]:Function} = {
          formatCaption: util.html.story,
          formatTitle: util.html.typography,
          lowerCase: (text:string) => text.toLocaleLowerCase(),

@@ -21,18 +21,19 @@ const exists = (key:string, hashKey:string, enabled:boolean) => enabled
 
 /**
  * Create view cache item with eTag and compressed content
- * @returns {Promise.<ViewCacheItem>}
  */
-const createItem = (key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>) => new Promise((resolve, reject) => {
-   const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON as string;
-   compress.gzip(text, (err:Error, buffer:Buffer) => {
-      if (is.value(err)) {
-         reject(err);
-      } else {
-         resolve({ buffer, eTag: key + '_' + (new Date()).getTime().toString() });
-      }
+function createItem(key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>):Promise<ViewCacheItem> {
+   return new Promise<ViewCacheItem>((resolve, reject) => {
+      const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON as string;
+      compress.gzip(text, (err:Error, buffer:Buffer) => {
+         if (is.value(err)) {
+            reject(err);
+         } else {
+            resolve({ buffer, eTag: key + '_' + (new Date()).getTime().toString() } as ViewCacheItem);
+         }
+      });
    });
-});
+}
 
 /**
  * @param {string} key Root Redis key

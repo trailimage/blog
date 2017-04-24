@@ -13,7 +13,7 @@ export interface FlickrOptions {
 }
 
 export interface ViewCacheItem {
-   buffer:Buffer|string;
+   buffer:Buffer;
    eTag:string;
 }
 

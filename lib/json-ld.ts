@@ -1,3 +1,4 @@
+import { JsonLD, Category, Post, Size } from './types';
 import is from './is';
 import config from './config';
 
@@ -10,7 +11,7 @@ const idField = '@id';
 /**
  * Add standard Linked Data fields
  */
-function ld(type:string, fields:any = {}) {
+function ld<T extends JsonLD.Thing>(type:string, fields:any = {}):T {
    if (is.defined(fields, 'id')) {
       // rename ID field to standard
       fields[idField] = fields['id'];
@@ -21,40 +22,29 @@ function ld(type:string, fields:any = {}) {
    return fields;
 }
 
-/**
- * @see http://schema.org/ImageObject
- */
 function image(img:Size):JsonLD.ImageObject {
-   const schema = { url: img.url };
+   const schema:JsonLD.ImageObject = { url: img.url };
    if (is.defined(img, 'width')) { schema.width = img.width; }
    if (is.defined(img, 'height')) { schema.height = img.height; }
    return ld('ImageObject', schema);
 }
 
-/**
- * @see http://schema.org/WebPage
- */
 function webPage(path:string = ''):JsonLD.WebPage {
-   return ld('WebPage', { id: pathUrl(path) });
+   return ld<JsonLD.WebPage>('WebPage', { id: pathUrl(path) });
 }
 
 const pathUrl = (path:string) => config.site.url + '/' + path;
 
-/**
- * @see http://schema.org/Organization
- */
+
 function organization():JsonLD.Organization {
-   return ld('Organization', {
+   return ld<JsonLD.Organization>('Organization', {
       name: config.site.title,
       logo: image(config.site.companyLogo)
    });
 }
 
-/**
- * @see http://schema.org/Person
- */
 function owner():JsonLD.Person {
-   return ld('Person', {
+   return ld<JsonLD.Person>('Person', {
       name: config.owner.name,
       url: config.site.url + '/about',
       sameAs: config.owner.urls,
@@ -64,9 +54,9 @@ function owner():JsonLD.Person {
 }
 
 function breadcrumb(url:string, title:string, position:number):JsonLD.BreadcrumbList {
-   const schema = { item: { id: url, name: title } };
+   const schema:{[key:string]:any} = { item: { id: url, name: title } };
    if (!isNaN(position)) { schema.position = position; }
-   return ld('BreadcrumbList', schema);
+   return ld<JsonLD.BreadcrumbList>('BreadcrumbList', schema);
 }
 
 /**
@@ -78,7 +68,7 @@ function searchAction():JsonLD.SearchAction {
    const qi = 'query-input';
    const placeHolder = 'search_term_string';
 
-   return ld('SearchAction', {
+   return ld<JsonLD.SearchAction>('SearchAction', {
       target: config.site.url + '/search?q={' + placeHolder + '}',
       [qi]: 'required name=' + placeHolder
    });
@@ -94,10 +84,8 @@ function serialize(linkData:any):string {
 
 /**
  * Remove redundant context specifications
- * @param {object} linkData
- * @param {string} [context] Current schema context
  */
-function removeContext(linkData, context?:string = null) {
+function removeContext(linkData:JsonLD.Thing, context:string = null) {
    if (linkData !== undefined && linkData !== null && typeof(linkData) == is.type.OBJECT) {
       if (linkData.hasOwnProperty(contextField) && linkData[contextField] !== null) {
          if (context !== null && linkData[contextField] == context) {
@@ -157,9 +145,9 @@ export default {
    /**
     * See https://developers.google.com/structured-data/breadcrumbs
     */
-   fromCategory(category:Cateogry, key:string = category.key, homePage = false):JsonLD.Blog|JsonLD.WebPage {
+   fromCategory(category:Category, key:string = category.key, homePage = false):JsonLD.Blog|JsonLD.WebPage {
       if (homePage) {
-         return ld('Blog', {
+         return ld<JsonLD.Blog>('Blog', {
             url: config.site.url,
             name: config.site.title,
             author: owner(),
@@ -188,7 +176,7 @@ export default {
    },
 
    fromVideo(v:any):JsonLD.VideoObject {
-      return (v == null || v.empty) ? null : ld('VideoObject', {
+      return (v == null || v.empty) ? null : ld<JsonLD.VideoObject>('VideoObject', {
          contentUrl: 'https://www.youtube.com/watch?v=' + v.id,
          videoFrameSize: v.width + 'x' + v.height,
          description: null,

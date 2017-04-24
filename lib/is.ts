@@ -21,7 +21,7 @@ function value<T>(x:any):x is T { return (x !== undefined && x !== null); }
  * 
  * See http://jsperf.com/hasownproperty-vs-in-vs-other/16
  */
-const defined = (object:any, field:string|number) => value(object) && typeof(object[field]) !== type.UNDEFINED;
+const defined = (obj:{[key:string]:any}, field:string|number) => value(obj) && typeof(obj[field]) !== type.UNDEFINED;
 
 /** Whether value is null, undefined or an empty string */
 const empty = (x:any) => !value(x) || x === '';

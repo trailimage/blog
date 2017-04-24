@@ -1,8 +1,14 @@
-const config = require('./lib/config');
-const C = require('./lib/constants');
-const log = require('./lib/logger');
-const Express = require('express');
-const npm = require('./package.json');
+import { Blog } from './lib/types';
+import config from './lib/config';
+import C from './lib/constants';
+import log from './lib/logger';
+import * as Express from 'express';
+import * as hbs from 'express-hbs';
+import template from './lib/template';
+import compress from 'compression';
+import bodyParser from 'body-parser';
+import middleware from './lib/middleware';
+import npm from './package.json';
 
 config.repoUrl = npm.repository.url;
 
@@ -38,9 +44,8 @@ function createWebService() {
 // https://github.com/donpark/hbs/blob/master/examples/extend/app.js
 // https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
-function defineViews(app) {
-   const hbs = require('express-hbs');
-   const template = require('./lib/template');
+function defineViews(app:Express.Application) {
+   
    const engine = 'hbs';
    const root = __dirname;
 
@@ -56,14 +61,10 @@ function defineViews(app) {
 }
 
 /**
- * @see http://expressjs.com/api.html#app.use
+ * See http://expressjs.com/api.html#app.use
  */
-function applyMiddleware(app) {
+function applyMiddleware(app:Express.Application) {
    // https://github.com/expressjs/compression/blob/master/README.md
-   const compress = require('compression');
-   const bodyParser = require('body-parser');
-   const middleware = require('./lib/middleware');
-
    app.use(middleware.blockSpamReferers);
 
    if (config.usePersona) {
@@ -84,8 +85,8 @@ function applyMiddleware(app) {
 }
 
 // this should be what Express already supports but it isn't behaving as expected
-function filter(regex, fn) {
-   return (req, res, next) => {
+function filter(regex:RegExp, fn:Function) {
+   return (req:Blog.Request, res:Blog.Response, next:Function) => {
       if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
    };
 }

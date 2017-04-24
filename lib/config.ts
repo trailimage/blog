@@ -255,11 +255,11 @@ export default {
       }
    },
    /** Maintain redirects to support previously used URLs */
-   redirects: {
+   redirects: {      
       'brother-rider-2013-a-night-in-pierce': 'brother-ride-2013',
       'backroads-to-college': 'panhandle-past-and-future',
       'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
-   },
+   }  as {[key:string]:string},
    /** Support for renamed photo tags */
    photoTagChanges: {
       jeremy: 'jeremyabbott',
