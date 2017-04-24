@@ -1,3 +1,4 @@
+import { Post, Photo, Flickr } from '../types';
 import util from '../util';
 import is from '../is';
 import re from '../regex';
@@ -12,9 +13,8 @@ import flickr from '../providers/flickr';
 /**
  * For post titles that looked like part of a series (had a colon separator) but had no other parts
  * This does not handle ungrouping from a legitimate series
- * @this {Post}
  */
-function ungroup() {
+function ungroup(this:Post) {
    this.title = this.originalTitle;
    this.subTitle = null;
    this.key = util.slug(this.originalTitle);
@@ -30,45 +30,37 @@ function ungroup() {
 
 /**
  * Flag post as the start of a series
- * @this {Post}
  */
-function makeSeriesStart() {
+function makeSeriesStart(this:Post) {
    this.isSeriesStart = true;
    this.key = this.seriesKey;
 }
 
 /**
  * Whether item matches key
- * @this {Post}
  */
-function hasKey(key:string):boolean {
+function hasKey(this:Post, key:string):boolean {
    return (this.key == key || (is.value(this.partKey) && key == this.seriesKey + '-' + this.partKey));
 }
 
-/**
- * @this {Post}
- * @returns {Promise}
- */
-function ensureLoaded() { return Promise.all([this.getInfo(), this.getPhotos()]); }
+function ensureLoaded(this:Post) { return Promise.all([this.getInfo(), this.getPhotos()]); }
 
 /**
  * Load photos for post and calculate summaries
- * @this {Post}
  */
-function getPhotos():Promise<Photo[]> {
+function getPhotos(this:Post):Promise<Photo[]> {
    return this.photosLoaded
       ? Promise.resolve(this.photos)
-      : flickr.getSetPhotos(this.id).then(res => updatePhotos(this, res));
+      : flickr.getSetPhotos(this.id).then((res:Flickr.SetPhotos) => updatePhotos(this, res));
 }
 
 /**
  * Add information to existing post object
- * @this {Post}
  */
-function getInfo():Promise<Post> {
+function getInfo(this:Post):Promise<Post> {
    return this.infoLoaded
       ? Promise.resolve(this)
-      : flickr.getSetInfo(this.id).then(res => updateInfo(this, res));
+      : flickr.getSetInfo(this.id).then((info:Flickr.SetInfo) => updateInfo(this, info:Flickr.SetInfo));
 }
 
 function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
@@ -79,7 +71,7 @@ function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
       createdOn: util.date.fromTimeStamp(setInfo.date_create),
       updatedOn: util.date.fromTimeStamp(setInfo.date_update),
       photoCount: setInfo.photos,
-      description: setInfo.description._content.remove(/[\r\n\s]*$/),
+      description: setInfo.description._content.replace(/[\r\n\s]*$/, ''),
       // long description is updated after photos are loaded
       longDescription: p.description,
       // http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
@@ -125,9 +117,8 @@ function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
 
 /**
  * Remove post details to force reload from data provider
- * @this {Post}
  */
-function empty() {
+function empty(this:Post) {
    // from updateInfo()
    this.video = null;
    this.createdOn = null;
@@ -151,22 +142,21 @@ function empty() {
 
 /**
  * Title and optional subtitle
- * @this {Post|object}
  */
-function name():string {
+function name(this:Post|{ post: Post }):string {
    // context is screwed up when called from HBS template
-   /** @type {Post} */
-   const p = is.defined(this, 'post') ? this.post : this;
+   const p:Post = is.defined(this, 'post') ? this.post : this as Post;
    return p.title + ((p.isPartial) ? config.library.subtitleSeparator + ' ' + p.subTitle : '');
 }
 
 /**
  * Coordinate path used by Mapbox static maps
- * @this {Post}
- * @see https://www.mapbox.com/api-documentation/#static
- * @example pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
+ * 
+ * See https://www.mapbox.com/api-documentation/#static
+ * 
+ * Example pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
  */
-function updatePhotoMarkers() {
+function updatePhotoMarkers(this:Post) {
    let start = 1;  // always skip first photo
    let total = this.photos.length;
    let map = '';
@@ -189,7 +179,7 @@ function updatePhotoMarkers() {
  * Create post from Flickr photo set. Chronolocal indicates Whether set photos occurred together at a point in time
  */
 function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
-   const p = {
+   const p:Post = {
       id: flickrSet.id,
       // whether post pictures occurred at a specific point in time (exceptions are themed sets)
       chronological: chronological,
@@ -198,9 +188,9 @@ function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
 
       // photos are lazy loaded
       photosLoaded: false,
-      photos: [],
+      photos: [] as Photo[],
       photoCount: 0,
-      coverPhoto: null,
+      coverPhoto: null as Photo,
 
       // whether posts is featured in main navigation
       feature: false,
@@ -215,8 +205,8 @@ function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
       // whether a GPS track was found
       hasTrack: false,
 
-      next: null,
-      previous: null,
+      next: null as Post,
+      previous: null as Post,
 
       // position of this post in a series
       part: 0,
@@ -232,7 +222,7 @@ function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
       isSeriesStart: false,
 
       // photo marker path for Mapbox static map
-      photoMarkers: null,
+      photoMarkers: null as string,
 
       makeSeriesStart,
       ungroup,

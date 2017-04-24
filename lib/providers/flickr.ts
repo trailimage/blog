@@ -1,4 +1,4 @@
-import { Flickr } from './flickr.d';
+import { Flickr, FlickrOptions } from '../types';
 import config from '../config'
 import log from '../logger';
 import is from '../is';

@@ -1,3 +1,4 @@
+import { Blog, ViewCacheItem } from './types';
 import is from './is';
 import log from './logger';
 import config from './config';
@@ -5,6 +6,7 @@ import util from './util';
 import cache from './cache';
 import C from './constants';
 import fetch from 'node-fetch';
+import template from './template';
 
 const cacheKey = 'spam-referer';
 /**
@@ -19,7 +21,7 @@ let pending:Function[] = [];
 let isDownloading = false;
 
 
-function blockSpamReferers(req:BlogRequest, res:BlogResponse, next:Function) {
+function blockSpamReferers(req:Blog.Request, res:Blog.Response, next:Function) {
    const referer = req.get('referer');
 
    if (is.value(referer)) {
@@ -112,13 +114,11 @@ function downloadBlackList():Promise<any> {
    }
 }
 
-const template = require('./template');
-
 /**
  * Express middleware
  * Add expando methods to response and request objects
  */
-function enableStatusHelpers(req, res, next:Function) {
+function enableStatusHelpers(req:Blog.Request, res:Blog.Response, next:Function) {
    /**
     * Get corrected client IP
     * @returns {string}
@@ -168,7 +168,7 @@ function enableStatusHelpers(req, res, next:Function) {
  * Add expando methods to response object
  * Cache compressed page renders in a hash key with fields named for the page slug
  */
-function enableViewCache(req, res, next:Function) {
+function enableViewCache(req:Blog.Request, res:Blog.Response, next:Function) {
    /**
     * Load output from cache or return renderer that will capture and cache the output
     * @param {string} key Pages are cached with their slug
@@ -176,7 +176,7 @@ function enableViewCache(req, res, next:Function) {
     * @param {function(function)} [p3] Content generation function if item is not cached
     */
    res.sendView = (key:string, p2:string|Function|object, p3:Function) => {
-      const mimeType = is.text(p2) ? p2 : C.mimeType.HTML;
+      const mimeType = is.text(p2) ? p2 as string : C.mimeType.HTML;
       const optionsOrGenerator = is.value(p3) ? p3 : p2;
       checkCache(res, key, mimeType, optionsOrGenerator);
    };
@@ -216,7 +216,7 @@ function enableViewCache(req, res, next:Function) {
 /**
  * Send content if it's cached, otherwise generate with callback
  */
-function checkCache(res, slug:string, mimeType:string, generator:Function|object) {
+function checkCache(res:Blog.Response, slug:string, mimeType:string, generator:Function|object) {
    // prepare fallback method to generate content depending on
    // MIME type and whether given generator is a callable function
    const generate = ()=> prepare(res, slug, mimeType, generator);
@@ -246,7 +246,7 @@ function checkCache(res, slug:string, mimeType:string, generator:Function|object
 /**
  * Create function to generate, compress and cache content
  */
-function prepare(res, slug:string, mimeType:string, generator:Function) {
+function prepare(res:Blog.Response, slug:string, mimeType:string, generator:Function) {
    if (mimeType === C.mimeType.JSON) {
       // callback method directly generates output
       cacheAndSend(res, JSON.stringify(generator()), slug, mimeType);
@@ -264,7 +264,7 @@ function prepare(res, slug:string, mimeType:string, generator:Function) {
 /**
  * Create function to render view then compress and cache it
  */
-function makeRenderer(res, slug:string, mimeType:string):(view:string, options:{[key:string]:any}, postProcess?:Function)=>void {
+function makeRenderer(res:Blog.Response, slug:string, mimeType:string):(view:string, options:{[key:string]:any}, postProcess?:Function)=>void {
    return (view:string, options:{[key:string]:any}, postProcess?:Function) => {
       // use default meta tag description if none provided
       if (is.empty(options.description)) { options.description = config.site.description; }
@@ -287,7 +287,7 @@ function makeRenderer(res, slug:string, mimeType:string):(view:string, options:{
 /**
  * Compress, optionally cache and send content to client
  */
-function cacheAndSend(res, html:string, slug:string, mimeType:string) {
+function cacheAndSend(res:Blog.Response, html:string, slug:string, mimeType:string) {
    cache.view.add(slug, html)
       .then(item => { res.sendCompressed(mimeType, item); })
       .catch(err => {

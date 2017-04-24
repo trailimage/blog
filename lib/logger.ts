@@ -15,7 +15,7 @@ const level = {
    ERROR: 'error'
 };
 
-let _provider = null;
+let _provider:Winston.LoggerInstance = null;
 
 function provider() {
    if (_provider === null) {
@@ -38,7 +38,7 @@ function provider() {
                      length: 10000
                   });
 
-                  tx.on('error', err => {
+                  tx.on('error', (err:Error) => {
                      // replace Redis transport with console
                      try { _provider.remove(C.logTo.REDIS); } catch(err) {}
                      try { _provider.add(new winston.transports.Console()); } catch(err) {}
@@ -74,13 +74,11 @@ function invoke(l:string, ...args:any[]) { provider()[l].apply(provider(), args)
 
 /**
  * Group logs by day
- * @param {Object} results
- * @returns {Object.<String, Array>}
  */
-function parseLogs(results) {
+function parseLogs(results:any):{[key:string]:string[]} {
    // whether two timestamps are the same day
    const sameDay = (d1:Date, d2:Date) => (d1 != null && d2 != null && d1.getMonth() == d2.getMonth() && d1.getDate() == d2.getDate());
-   const grouped = {};
+   const grouped:{[key:string]:string[]} = {};
 
    if (is.defined(results, 'redis')) {
       let day = null;
@@ -112,7 +110,7 @@ function parseLogs(results) {
 function query(daysAgo:number, maxRows = 500) {
    // https://github.com/flatiron/winston/blob/master/lib/winston/transports/transport.js
    const options = {
-      from: new Date() - (C.time.DAY * daysAgo),
+      from: (new Date()) - (C.time.DAY * daysAgo),
       rows: maxRows
    };
 

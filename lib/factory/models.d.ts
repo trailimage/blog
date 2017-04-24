@@ -35,58 +35,79 @@ export interface Category {
 }
 
 export interface Photo {
-   id: string,
-   index: number,
-   sourceUrl: string,
-   title: string,
-   description: string,
-   tags: string[],
-   dateTaken: Date,
-   latitude: number,
-   longitude: number,
-   primary: boolean,
-   size: { [key: string]: Size },
-   preview: Size,
-   normal: Size,
-   big: Size,
-   getExif(): Promise<EXIF>
+   id: string;
+   index: number;
+   sourceUrl: string;
+   title: string;
+   description: string;
+   tags: string[];
+   dateTaken: Date;
+   latitude: number;
+   longitude: number;
+   primary: boolean;
+   size: { [key: string]: Size };
+   preview: Size;
+   normal: Size;
+   big: Size;
+   outlierDate:boolean;
+   //get tagList():string;
+   getExif(): Promise<EXIF>;
 }
 
 export interface Post {
-   id: string,
-   key: string,
-   seriesKey: string,
-   partKey: string,
-   chronological: boolean,
-   originalTitle: string,
-   photosLoaded: boolean,
-   photos: Photo[],
-   photoCount: number,
-   coverPhoto: Photo,
-   feature: boolean,
-   categories:{[key:string]:Category},
-   hasCategories: boolean,
-   infoLoaded: boolean,
-   triedTrack: boolean,
-   hasTrack: boolean,
-   next?: Post,
-   previous?: Post,
-   part: number,
-   isPartial: boolean,
-   nextIsPart: boolean,
-   previousIsPart: boolean,
-   totalParts: number,
-   isSeriesStart: boolean,
-   photoCoordinates: string,
-   makeSeriesStart(): Post,
-   ungroup(): Post,
-   empty(): Post,
-   name(): string,
-   getInfo(): Promise<Post>,
-   getPhotos(): Promise<Photo[]>,
-   hasKey(key: string): boolean,
-   hasPhotoID(id: string): boolean,
-   serializePhotoCoordinates(): Post
+   id: string;
+   key: string;
+   title:string;
+   subTitle:string;
+   description:string;
+   longDescription:string;
+   seriesKey: string;
+   partKey: string;
+   happenedOn:Date;
+   createdOn:Date;
+   updatedOn:Date;
+   chronological: boolean;
+   originalTitle: string;
+   photosLoaded: boolean;
+   bigThumbURL:string;
+   smallThumbURL:string;
+   photos: Photo[];
+   photoCount: number;
+   photoTagList:string[],
+   photoMarkers:string,
+   coverPhoto: Photo;
+   feature: boolean;
+   categories:{[key:string]:Category};
+   hasCategories: boolean;
+   infoLoaded: boolean;
+   triedTrack: boolean;
+   hasTrack: boolean;
+   next?: Post;
+   previous?: Post;
+   part: number;
+   isPartial: boolean;
+   nextIsPart: boolean;
+   previousIsPart: boolean;
+   totalParts: number;
+   isSeriesStart: boolean;
+   video:VideoInfo;
+   makeSeriesStart(): Post;
+   ungroup(): Post;
+   empty(): Post;
+   name(): string;
+   getInfo(): Promise<Post>;
+   getPhotos(): Promise<Photo[]>;
+   hasKey(key: string): boolean;
+   hasPhotoID(id: string): boolean;
+   ensureLoaded():void;
+   updatePhotoMarkers():void;
+}
+
+export interface VideoInfo {
+   id:string;
+   width:number;
+   height:number;
+   empty:boolean
 }
 
 export interface Size {

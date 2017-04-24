@@ -1,3 +1,4 @@
+import { Blog } from '../types';
 import log from '../logger';
 import config from '../config';
 import library from '../library';
@@ -7,7 +8,7 @@ const MAX_RSS_RETRIES = 10;
 
 let rssRetries = 0;
 
-export function feed(req, res) {
+export default function feed(req:Blog.Request, res:Blog.Response) {
    const Feed = require('feed');
 
    if (!library.postInfoLoaded) {

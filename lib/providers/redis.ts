@@ -1,5 +1,5 @@
 // simplified Redis interface
-
+import { ViewCacheItem } from '../types';
 import is from '../is';
 import log from '../logger';
 import config from '../config';
@@ -79,7 +79,7 @@ function normalize(value:string|string[]|ViewCacheItem):string {
       const cache = require('../cache');
       return is.cacheItem(value) ? cache.redisView.serialize(value) : JSON.stringify(value);
    } else {
-      return value;
+      return value as string;
    }
 }
 

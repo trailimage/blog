@@ -1,3 +1,4 @@
+import { ViewCacheItem } from './types';
 import is from './is';
 import C from './constants';
 import config from './config';
@@ -75,7 +76,7 @@ export default {
    /**
     * Remove cached items
     */
-   remove: (key:string|string[], hashKey:string|string[]) => redis.remove(
+   remove: (key:string|string[], hashKey?:string|string[]) => redis.remove(
       is.array(key) ? key.map(k => prefix + k) : prefix + key,
       hashKey
    ),

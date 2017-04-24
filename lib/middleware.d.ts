@@ -1,6 +1,8 @@
 import {Flickr} from './providers/flickr.d';
 import {EventEmitter} from "events";
-import {Response, Request} from "express";
+import {
+   Response as ExpressResponse,
+   Request as ExpressRequest } from "express";
 
 export interface FlickrOptions {
    value(r: Flickr.Response): Object,
@@ -11,7 +13,7 @@ export interface FlickrOptions {
 }
 
 export interface ViewCacheItem {
-   buffer:Buffer;
+   buffer:Buffer|string;
    eTag:string;
 }
 
@@ -20,7 +22,7 @@ interface Renderer {
 }
 
 declare namespace Blog {
-   export interface Response extends Express.Response {
+   export interface Response extends ExpressResponse {
       notFound(): void,
       internalError(): void,
       sendView(key: string, p2: string|Object|Renderer, p3?: Renderer): void,
@@ -30,7 +32,7 @@ declare namespace Blog {
       jsonMessage(message:string):void
    }
 
-   export interface Request extends Express.Request {
+   export interface Request extends ExpressRequest {
       clientIP(): string,
    }
 }

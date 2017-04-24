@@ -17,7 +17,7 @@ const menuKeys = [
    template.page.SITEMAP
 ];
 
-function view(res:Blog.Response, viewKeys:string[], jsonKeys:string[], mapKeys:string[], logs) {
+function view(res:Blog.Response, viewKeys:string[], jsonKeys:string[], mapKeys:string[], logs:any) {
    res.set({
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       Pragma: 'no-cache',

@@ -1,3 +1,4 @@
+import { Flickr, Photo } from '../types';
 import is from '../is';
 import util from '../util';
 import config from '../config';
@@ -9,7 +10,7 @@ import flickr from '../providers/flickr';
 /**
  * Parse Flickr photo summary
  */
-function make(json:Flickr.PhotoSummary, getEXIF:Function, index:number):Photo {
+function make(json:Flickr.PhotoSummary, index:number):Photo {
    return {
       id: json.id,
       index: index + 1,
@@ -34,7 +35,7 @@ function make(json:Flickr.PhotoSummary, getEXIF:Function, index:number):Photo {
          big: photoSize.make(json, config.flickr.sizes.big)
       },
       // comma-delimited list of tags
-      get tagList() { return this.tags.join(','); }
+      get tagList(this:Photo):string { return this.tags.join(','); }
    };
 }
 
