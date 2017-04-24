@@ -1,13 +1,13 @@
-const util = require('../util');
-const is = require('../is');
-const re = require('../regex');
-const log = require('../logger');
-const config = require('../config');
-const photo = require('./photo.js');
-const videoInfo = require('./video-info');
-const library = require('../library');
+import util from '../util';
+import is from '../is';
+import re from '../regex';
+import log from '../logger';
+import config from '../config';
+import photo from './photo.js';
+import videoInfo from './video-info';
+import library from '../library';
 // can be replaced with injection
-let flickr = require('../providers/flickr');
+import flickr from '../providers/flickr';
 
 /**
  * For post titles that looked like part of a series (had a colon separator) but had no other parts
@@ -39,11 +39,9 @@ function makeSeriesStart() {
 
 /**
  * Whether item matches key
- * @param {string} key
  * @this {Post}
- * @returns {boolean}
  */
-function hasKey(key) {
+function hasKey(key:string):boolean {
    return (this.key == key || (is.value(this.partKey) && key == this.seriesKey + '-' + this.partKey));
 }
 
@@ -56,9 +54,8 @@ function ensureLoaded() { return Promise.all([this.getInfo(), this.getPhotos()])
 /**
  * Load photos for post and calculate summaries
  * @this {Post}
- * @returns {Promise.<Photo[]>}
  */
-function getPhotos() {
+function getPhotos():Promise<Photo[]> {
    return this.photosLoaded
       ? Promise.resolve(this.photos)
       : flickr.getSetPhotos(this.id).then(res => updatePhotos(this, res));
@@ -67,20 +64,14 @@ function getPhotos() {
 /**
  * Add information to existing post object
  * @this {Post}
- * @returns {Promise.<Post>}
  */
-function getInfo() {
+function getInfo():Promise<Post> {
    return this.infoLoaded
       ? Promise.resolve(this)
       : flickr.getSetInfo(this.id).then(res => updateInfo(this, res));
 }
 
-/**
- * @param {Post} p
- * @param {Flickr.SetInfo} setInfo
- * @returns {Post}
- */
-function updateInfo(p, setInfo) {
+function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
    const thumb = `http://farm${setInfo.farm}.staticflickr.com/${setInfo.server}/${setInfo.primary}_${setInfo.secret}`;
    return Object.assign(p, {
       // removes video information from setInfo.description
@@ -100,12 +91,7 @@ function updateInfo(p, setInfo) {
    });
 }
 
-/**
- * @param {Post} p
- * @param {Flickr.SetPhotos} setPhotos
- * @returns {Photo[]}
- */
-function updatePhotos(p, setPhotos) {
+function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
    p.photos = setPhotos.photo.map((img, index) => photo.make(img, index));
 
    if (p.photos.length > 0) {
@@ -166,9 +152,8 @@ function empty() {
 /**
  * Title and optional subtitle
  * @this {Post|object}
- * @returns {string}
  */
-function name() {
+function name():string {
    // context is screwed up when called from HBS template
    /** @type {Post} */
    const p = is.defined(this, 'post') ? this.post : this;
@@ -201,12 +186,9 @@ function updatePhotoMarkers() {
 }
 
 /**
- * Create post from Flickr photo set
- * @param {Flickr.SetSummary} flickrSet
- * @param {boolean} [chronological = true] Whether set photos occurred together at a point in time
- * @returns {Post|Object}
+ * Create post from Flickr photo set. Chronolocal indicates Whether set photos occurred together at a point in time
  */
-function make(flickrSet, chronological = true) {
+function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
    const p = {
       id: flickrSet.id,
       // whether post pictures occurred at a specific point in time (exceptions are themed sets)
@@ -278,9 +260,9 @@ function make(flickrSet, chronological = true) {
    return p;
 }
 
-module.exports = {
+export default {
    make,
    inject: {
-      set flickr(f) { flickr = f; }
+      set flickr(f:any) { flickr = f; }
    }
 };

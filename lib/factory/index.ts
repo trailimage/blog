@@ -1,14 +1,14 @@
 // translate Flickr, Google and Redis responses into standard objects
 
-const is = require('../is');
-const log = require('../logger');
-const config = require('../config');
-const library = require('../library');
-const category = require('./category');
-const photoSize = require('./photo-size');
-const map = require('./map');
-const post = require('./post');
-const exif = require('./exif');
+import is from '../is';
+import log from '../logger';
+import config from '../config';
+import library from '../library';
+import category from './category';
+import photoSize from './photo-size';
+import map from './map';
+import post from './post';
+import exif from './exif';
 
 // can be replaced with injection
 let flickr = require('../providers/flickr');
@@ -17,7 +17,7 @@ let flickr = require('../providers/flickr');
  * @param {boolean} [emptyIfLoaded] Whether to reset the library before loading
  * @returns {Promise.<Library>} Resolve with list of changed post keys
  */
-function buildLibrary(emptyIfLoaded = true) {
+function buildLibrary(emptyIfLoaded:boolean = true):Promise<Library> {
    // store existing post keys to compute changes
    const hadPostKeys = library.postKeys();
    if (emptyIfLoaded && library.loaded) { library.empty(); }
@@ -110,10 +110,8 @@ function correlatePosts() {
 
 /**
  * @this {Library}
- * @param {Photo|string} photo
- * @returns {Promise}
  */
-function getPostWithPhoto(photo) {
+function getPostWithPhoto(photo:Photo|string):Promise<Post> {
    const id = (typeof photo == is.type.STRING) ? photo : photo.id;
    return flickr.getPhotoContext(id).then(sets => (is.value(sets))
       ? this.posts.find(p => p.id == sets[0].id)
@@ -121,18 +119,15 @@ function getPostWithPhoto(photo) {
    );
 }
 
-/**
- * @param {number} photoID
- * @returns {Promise}
- */
-function getEXIF(photoID) { return flickr.getExif(photoID).then(exif.make); }
+function getEXIF(photoID:number):Promise<EXIF> {
+   return flickr.getExif(photoID).then(exif.make);
+}
 
 /**
  * All photos with given tags
- * @param {string|string[]} tags
  * @returns {Promise.<Photo[]>}
  */
-const getPhotosWithTags = tags => flickr.photoSearch(tags)
+const getPhotosWithTags = (tags:string|string[]) => flickr.photoSearch(tags)
    .then(photos => photos.map(json => ({
       id: json.id,
       size: { thumb: photoSize.make(json, config.flickr.photoSize.search[0]) }
@@ -140,10 +135,8 @@ const getPhotosWithTags = tags => flickr.photoSearch(tags)
 
 /**
  * Convert tags to hash of phrases keyed to their "clean" abbreviation
- * @param {Flickr.Tag[]} rawTags
- * @returns {object}
  */
-function parsePhotoTags(rawTags) {
+function parsePhotoTags(rawTags:Flickr.Tag[]):{[key:string]:string} {
    const exclusions = is.array(config.flickr.excludeTags) ? config.flickr.excludeTags : [];
    return rawTags.reduce((tags, t) => {
       const text = t.raw[0]._content;
@@ -153,15 +146,15 @@ function parsePhotoTags(rawTags) {
    }, {});
 }
 
-module.exports = {
+export default {
    buildLibrary,
    map,
    // inject different data providers
    inject: {
-      set flickr(f) {
+      set flickr(f:any) {
          flickr = f;
          post.inject.flickr = f;
       },
-      set google(g) { map.inject.google = g; }
+      set google(g:any) { map.inject.google = g; }
    }
 };

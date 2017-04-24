@@ -1,11 +1,7 @@
-const is = require('../is');
-const re = require('../regex');
+import is from '../is';
+import re from '../regex';
 
-/**
- * @param {Flickr.PhotoExif} flickrExif
- * @returns {EXIF|object}
- */
-function make(flickrExif) {
+function make(flickrExif:Flickr.PhotoExif):EXIF {
    const parser = (exif, tag, empty = null) => {
       for (const e of exif) { if (e.tag == tag) { return e.raw._content; } }
       return empty;
@@ -24,13 +20,9 @@ function make(flickrExif) {
    });
 }
 
-/**
- * @param {EXIF|object} exif
- * @returns {EXIF}
- */
-function sanitizeExif(exif) {
+function sanitizeExif(exif:EXIF):EXIF {
    const numericRange = /\d\-\d/;
-   const camera = text => is.empty(text) ? '' : text
+   const camera = (text:string) => is.empty(text) ? '' : text
       .replace('NIKON', 'Nikon')
       .replace('ILCE-7R', 'Sony α7ʀ')
       .replace('ILCE-7RM2', 'Sony α7ʀ II')
@@ -38,7 +30,7 @@ function sanitizeExif(exif) {
       .replace('VS980 4G', 'LG G2')
       .replace('XT1060', 'Motorola Moto X')
       .replace('TG-4', 'Olympus Tough TG-3');
-   const lens = (text, camera) => is.empty(text) ? '' : text
+   const lens = (text:string, camera:string) => is.empty(text) ? '' : text
       .replace(/FE 35mm.*/i, 'Sony FE 35mm ƒ2.8')
       .replace(/FE 55mm.*/i, 'Sony FE 55mm ƒ1.8')
       .replace(/FE 90mm.*/i, 'Sony FE 90mm ƒ2.8 OSS')
@@ -58,10 +50,10 @@ function sanitizeExif(exif) {
       .replace('1 NIKKOR VR 10-30mm f/3.5-5.6', 'Nikkor 1 10–30mm ƒ3.5–5.6 VR')
       .replace('18.0-200.0 mm f/3.5-5.6', 'Nikkor 18–200mm ƒ3.5–5.6G ED VR')
       .replace(/Voigtlander Heliar 15mm.*/i, 'Voigtländer Heliar 15mm ƒ4.5 III');
-   const software = text => is.empty(text) ? '' : text
+   const software = (text:string) => is.empty(text) ? '' : text
       .replace('Photoshop Lightroom', 'Lightroom')
       .replace(/\s*\(Windows\)/, '');
-   const compensation = text => {
+   const compensation = (text:string) => {
       if (text == '0') { text = 'No'; }
       return text;
    };
@@ -82,4 +74,4 @@ function sanitizeExif(exif) {
    return exif;
 }
 
-module.exports = { make };
+export default { make };

@@ -1,19 +1,15 @@
-const is = require('../is');
-const util = require('../util');
-const config = require('../config');
-const exif = require('./exif');
-const photoSize = require('./photo-size');
+import is from '../is';
+import util from '../util';
+import config from '../config';
+import exif from './exif';
+import photoSize from './photo-size';
 // can be replaced with injection
-let flickr = require('../providers/flickr');
+import flickr from '../providers/flickr';
 
 /**
  * Parse Flickr photo summary
- * @param {Flickr.PhotoSummary} json
- * @param {function} getEXIF Method to retrieve EXIF for photo
- * @param {number} index Position of photo in list
- * @returns {Photo|object}
  */
-function make(json, getEXIF, index) {
+function make(json:Flickr.PhotoSummary, getEXIF:Function, index:number):Photo {
    return {
       id: json.id,
       index: index + 1,
@@ -50,11 +46,11 @@ function make(json, getEXIF, index) {
 
 /**
  * Simplistic outlier calculation
- * @param {Photo[]} photos
- * @see https://en.wikipedia.org/wiki/Outlier
- * @see http://www.wikihow.com/Calculate-Outliers
+ *
+ * See https://en.wikipedia.org/wiki/Outlier
+ * See http://www.wikihow.com/Calculate-Outliers
  */
-function identifyOutliers(photos) {
+function identifyOutliers(photos:Photo[]) {
    const median = values => {
       const half = Math.floor(values.length / 2);
       return (values.length % 2 !== 0) ? values[half] : (values[half-1] + values[half]) / 2.0;
@@ -85,10 +81,10 @@ function identifyOutliers(photos) {
    }
 }
 
-module.exports = {
+export default {
    make,
    identifyOutliers,
    inject: {
-      set flickr(f) { flickr = f; }
+      set flickr(f:any) { flickr = f; }
    }
 };

@@ -1,13 +1,8 @@
-const is = require('../is');
+import is from '../is';
 
-/**
- * @param {object} json
- * @param {string|string[]} sizeField Size or list of size field names in order of preference
- * @returns {Size|object}
- */
-function make(json, sizeField) {
+function make(json:any, sizeField:string|string[]):Size {
    const size = {
-      url: null,
+      url: null as string,
       width: 0,
       height: 0,
       // whether size is empty
@@ -26,7 +21,7 @@ function make(json, sizeField) {
    }
 
    if (field !== null) {
-      const suffix = field.remove('url');
+      const suffix = field.replace('url', '');
 
       if (!is.empty(json[field])) {
          size.url = json[field];
@@ -37,4 +32,4 @@ function make(json, sizeField) {
    return size;
 }
 
-module.exports = { make };
+export default { make };

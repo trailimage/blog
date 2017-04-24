@@ -1,11 +1,9 @@
-const re = require('../regex');
+import re from '../regex';
 
 /**
  * Get video ID and dimensions
- * @param {Flickr.SetInfo} setInfo
- * @returns {object}
  */
-function make(setInfo) {
+function make(setInfo:Flickr.SetInfo):any {
    const d = setInfo.description._content;
 
    if (re.video.test(d))	{
@@ -23,4 +21,4 @@ function make(setInfo) {
    }
 }
 
-module.exports = { make };
+export default { make };
