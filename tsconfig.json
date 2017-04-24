@@ -1,7 +1,15 @@
 {
    "compilerOptions": {
+      "target": "es2015",
       "module": "commonjs",
-      "lib": ["es2015","dom"],
-      "typeRoots": ["node_modules/@types", "./typings"]
+      "baseUrl": "./",
+      "newLine": "LF",
+      "noImplicitAny": true,
+      "allowJs": false,
+      "alwaysStrict": true,
+      "strictNullChecks": false,
+      "allowSyntheticDefaultImports": false,
+      "forceConsistentCasingInFileNames": true,
+      "jsx": "react"
    }
 }

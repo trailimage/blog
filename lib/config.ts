@@ -1,4 +1,5 @@
-const C = require('./constants');
+import C from './constants';
+
 const domain = 'trailimage.com';
 const isProduction = process.env['NODE_ENV'] === 'production';
 /** Preferred photo sizes */
@@ -11,10 +12,8 @@ const sizes = {
 
 /**
  * Return environment value or throw an error if it isn't found
- * @param {string} key
- * @returns {string}
  */
-function env(key) {
+function env(key:string):string {
    const value = process.env[key];
    if (value === undefined) { throw new Error(`Environment value ${key} must be set`); }
    return value;
@@ -36,11 +35,22 @@ const owner = {
    ]
 };
 
-module.exports = {
+export const library = {
+   /**
+    * Characters separating title and subtitle in library source. Posts with
+    * different subtitles but the same title are considered parts of a series
+    */
+   subtitleSeparator: ':',
+   /** Photo EXIF is only shown for named artists */
+   artistNames: ['Abbott', 'Wright', 'Bowman', 'Thomas', 'Reed'],
+   /** Root category displayed on home page */
+   defaultCategory: 'When'
+}
+
+export default {
    env,
    domain,
-   /** @type {boolean} */
-   get needsAuth() {
+   get needsAuth():boolean {
       const f = this.flickr.auth.token.access;
       const g = this.google.auth.token.access;
       return f === null || f === '' || g === null || g === '';
@@ -48,7 +58,7 @@ module.exports = {
    proxy: process.env['HTTPS_PROXY'],
    timestamp: new Date().getTime(),
    isProduction: isProduction,
-   // whether to use wwwhisper authentication (https://devcenter.heroku.com/articles/wwwhisper)
+   /** Whether to use wwwhisper authentication (https://devcenter.heroku.com/articles/wwwhisper) */
    usePersona: process.env['WWWHISPER_DISABLE'] !== '1',
    /** Hours difference from GMT during standard (not daylight savings) time */
    timeZone: -7,
@@ -72,8 +82,9 @@ module.exports = {
          height: 60
       }
    },
+   library,
    cache: {
-      setAll(enabled) {
+      setAll(enabled:boolean) {
          this.views = enabled;
          this.maps = enabled;
          this.json = enabled;
@@ -126,17 +137,7 @@ module.exports = {
       /** Characters used between displayed title and subtitle */
       subtitleSeparator: ':'
    },
-   library: {
-      /**
-       * Characters separating title and subtitle in library source. Posts with
-       * different subtitles but the same title are considered parts of a series
-       */
-      subtitleSeparator: ':',
-      /** Photo EXIF is only shown for named artists */
-      artistNames: ['Abbott', 'Wright', 'Bowman', 'Thomas', 'Reed'],
-      /** Root category displayed on home page */
-      defaultCategory: 'When'
-   },
+   
    map: {
       minimumTrackLength: 0.2,
       minimumTrackPoints: 5,

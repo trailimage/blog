@@ -1,4 +1,4 @@
-const is = require('./is');
+import is from './is';
 
 /**
  * Singleton collection of photos grouped into "posts" (called a "set" or
@@ -28,9 +28,8 @@ module.exports = {
    /**
     * Track keys of posts and categories that change on library reload
     * (can be used for cache invalidation)
-    * @type {string[]}
     */
-   changedKeys: [],
+   changedKeys:string[]: [],
 
    // empty library object before reloading from source
    empty() {
@@ -43,9 +42,8 @@ module.exports = {
 
    /**
     * Add post to library and link with adjacent posts
-    * @param {Post} p
     */
-   addPost(p) {
+   addPost(p:Post) {
       // exit if post with same ID is already present
       if (this.posts.filter(e => e.id === p.id).length > 0) { return; }
       this.posts.push(p);
@@ -126,27 +124,21 @@ module.exports = {
 
    /**
     * Find post with given ID
-    * @param {string} id
-    * @returns {Post}
     */
-   postWithID(id) { return this.posts.find(p => p.id == id); },
+   postWithID(id:string):Post { return this.posts.find(p => p.id == id); },
 
    /**
     * Find post with given slug
-    * @param {string} key
-    * @param {string} [partKey]
-    * @returns {Post}
     */
-   postWithKey(key, partKey) {
+   postWithKey(key:string, partKey:string = null):Post {
       if (is.value(partKey)) { key += '/' + partKey; }
       return this.posts.find(p => p.hasKey(key));
    },
 
    /**
     * Unload particular posts to force refresh from source
-    * @param {string|string[]} keys
     */
-   unload(keys) {
+   unload(keys:string|string[]) {
       if (!is.array(keys)) { keys = [keys]; }
       for (const k of keys) {
          const p = this.postWithKey(k);
@@ -157,9 +149,8 @@ module.exports = {
 
    /**
     * Remove posts (primarily for testing)
-    * @param {string|string[]} keys
     */
-   remove(keys) {
+   remove(keys:string|string[]) {
       if (!is.array(keys)) { keys = [keys]; }
       for (const k of keys) {
          const p = this.postWithKey(k);
@@ -171,11 +162,10 @@ module.exports = {
    },
 
    /**
-    * Get unique list of tags used on photos in the post and update photo tags to use full names
-    * @param {Photo[]} photos
-    * @returns {string} Unique list of photo tags
+    * Get unique list of tags used on photos in the post and update photo tags
+    * to use full names.
     */
-   photoTagList(photos) {
+   photoTagList(photos:Photo[]):string {
       // all photo tags in the post
       const postTags = [];
 

@@ -7,13 +7,16 @@ const yard = 3;
 const mile = yard * 1760;
 const equator = mile * 24901;
 
-module.exports = {
+export const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+export default {
    // distances in terms of feet
    distance: { EQUATOR: equator, MILE: mile, YARD: yard },
    // durations in terms of milliseconds
    time: { SECOND: s, MINUTE: m, HOUR: h, DAY: d, WEEK: w },
-   month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-   weekday: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+   month,
+   weekday,
    httpStatus: {
       OK: 200,
       TEMP_REDIRECT: 301,
@@ -122,63 +125,4 @@ module.exports = {
       REQUESTED_WITH: 'X-Requested-With',
       USER_AGENT: 'user-agent'
    }
-   // https://material.io/icons/
-   //icon: {
-      // arrowDown: 'arrow-down',
-      // arrowLeft: 'arrow-left',
-      // arrowRight: 'arrow-right',
-      // arrowUp: 'arrow-up',
-      // asterisk: 'asterisk',
-      // banned: 'ban-circle',
-      // bell: 'bell',
-      // book: 'book',
-      // bullhorn: 'bullhorn',
-      // certificate: 'certificate',
-      // calendar: 'calendar',
-      // camera: 'camera',
-      // chevronLeft: 'chevron-left',
-      // chevronRight: 'chevron-right',
-      // cloud: 'cloud',
-      // cloudDownload: 'cloud-download',
-      // cog: 'cog',
-      // compressed: 'compressed',
-      // download: 'download',
-      // eye: 'eye-open',
-      // fire: 'fire',
-      // flash: 'flash',
-      // flickr: 'flickr',
-      // formula: 'baby-formula',
-      // gift: 'gift',
-      // globe: 'globe',
-      // heartOutline: 'heart-empty',
-      // hourglass: 'hourglass',
-      // leaf: 'leaf',
-      // lightning: 'flash',
-      // link: 'link',
-      // lock: 'lock',
-      // login: 'log-in',
-      // mapMarker: 'map-marker',
-      // marker: 'map-marker',
-      // newWindow: 'new-window',
-      // pencil: 'pencil',
-      // person: 'user',
-      // powerButton: 'off',
-      // refresh: 'refresh',
-      // remove: 'remove',
-      // road: 'road',
-      // save: 'save',
-      // saveFile: 'save-file',
-      // tag: 'tag',
-      // tags: 'tags',
-      // target: 'screenshot',
-      // tent: 'tent',
-      // thumbsUp: 'thumbs-up',
-      // transfer: 'transfer',
-      // trash: 'trash',
-      // upload: 'upload',
-      // user: 'user',
-      // x: 'close',
-      // zoomIn: 'zoom-in',
-      // zoomOut: 'zoom-out'
-   //}
 };

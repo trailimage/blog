@@ -1,5 +1,6 @@
-const is = require('./is');
-const config = require('./config');
+import is from './is';
+import config from './config';
+
 const library = require('./library');
 const defaultContext = 'http://schema.org';
 const contextField = '@context';
@@ -12,7 +13,7 @@ const idField = '@id';
  * @param {object} [fields]
  * @returns {*}
  */
-function ld(type, fields = {}) {
+function ld(type:string, fields = {}) {
    if (is.defined(fields, 'id')) {
       // rename ID field to standard
       fields[idField] = fields['id'];
@@ -25,10 +26,9 @@ function ld(type, fields = {}) {
 
 /**
  * @param {size|object} img
- * @returns {JsonLD.ImageObject}
  * @see http://schema.org/ImageObject
  */
-function image(img) {
+function image(img):JsonLD.ImageObject {
    const schema = { url: img.url };
    if (is.defined(img, 'width')) { schema.width = img.width; }
    if (is.defined(img, 'height')) { schema.height = img.height; }
@@ -36,19 +36,18 @@ function image(img) {
 }
 
 /**
- * @param {string} path
- * @returns {JsonLD.WebPage}
  * @see http://schema.org/WebPage
  */
-function webPage(path = '') { return ld('WebPage', { id: pathUrl(path) }); }
+function webPage(path:string = ''):JsonLD.WebPage {
+   return ld('WebPage', { id: pathUrl(path) });
+}
 
-const pathUrl = path => config.site.url + '/' + path;
+const pathUrl = (path:string) => config.site.url + '/' + path;
 
 /**
- * @returns {JsonLD.Organization}
  * @see http://schema.org/Organization
  */
-function organization() {
+function organization():JsonLD.Organization {
    return ld('Organization', {
       name: config.site.title,
       logo: image(config.site.companyLogo)

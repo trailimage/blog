@@ -1,3 +1,4 @@
+import is from '../is';
 const is = require('../is');
 const ld = require('../json-ld');
 const config = require('../config');

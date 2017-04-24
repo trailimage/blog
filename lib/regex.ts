@@ -1,7 +1,8 @@
-const { library } = require('./config');
+import { library } from './config';
+
 
 // use getters to return new instances of global flagged patterns so lastIndex isn't an issue
-module.exports = {
+export default {
    // e.g. Video (960x720): <a href="http://youtu.be/obCgu3yJ4uw" rel="nofollow">youtu.be/obCgu3yJ4uw</a>
    get video() { return /Video(\s*\((\d+)[x×](\d+)\))?:\s*<a[^>]+>[^\/]+\/([\w\-_]+)<\/a>/gi; },
    ipAddress: /\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b/,

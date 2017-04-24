@@ -1,4 +1,6 @@
-const is = require('./is');
+import is from './is';
+
+
 const C = require('./constants');
 const config = require('./config');
 const redis = require('./providers/redis');
@@ -15,12 +17,9 @@ const memory = {};
 
 /**
  * Whether key with prefix exists
- * @param {string} key
- * @param {string} hashKey
- * @param {boolean} enabled Whether caching is enabled
  * @returns {Promise.<boolean>}
  */
-const exists = (key, hashKey, enabled) => enabled
+const exists = (key:string, hashKey:string, enabled:boolean) => enabled
    ? redis.exists(key, hashKey)
    : Promise.resolve(false);
 
@@ -30,7 +29,7 @@ const exists = (key, hashKey, enabled) => enabled
  * @param {string|GeoJSON.FeatureCollection} htmlOrJSON
  * @returns {Promise.<ViewCacheItem>}
  */
-const createItem = (key, htmlOrJSON) => new Promise((resolve, reject) => {
+const createItem = (key:string, htmlOrJSON) => new Promise((resolve, reject) => {
    const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON;
    compress.gzip(text, (err, buffer) => {
       if (is.value(err)) {

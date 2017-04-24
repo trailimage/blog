@@ -1,34 +1,28 @@
-require('./extensions.js');
-
-const { month, weekday } = require('./constants');
-const re = require('./regex');
-const config = require('./config');
-const is = require('./is');
-const url = require('url');
+import { month, weekday } from './constants';
+import re from './regex';
+import config from './config';
+import is from './is';
+import * as url from 'url';
 //const superscript = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'];
 
 /**
  * Replace placeholders with arbitrary arguments
- * @param {string} text
- * @returns {string}
  */
-function format(text) {
+function format(text:string, ...insertions:any[]):string {
    for (let i = 0; i < arguments.length; i++) {
-      text = text.replace('{' + i + '}', arguments[i + 1]);
+      text = text.replace('{' + i + '}', insertions[i + 1]);
    }
    return text;
 }
 
 /**
  * Format paragraphs and prose
- * @param {string} text
- * @returns {string}
  */
-function story(text) {
+function story(text:string):string {
    if (!is.empty(text)) {
       if (re.poetry.all.test(text)) {
          // text is entirely a poem or haiku
-         text = text.remove(re.poetry.delimiter);
+         text = text.replace(re.poetry.delimiter,'');
 
          if (re.haiku.all.test(text)) {
             // haiku
@@ -50,22 +44,22 @@ function story(text) {
    return text;
 }
 
-function linkPattern(url) { return '<a href="' + url + '$1" target="_blank">$1</a>'; }
+function linkPattern(url:string):string {
+   return '<a href="' + url + '$1" target="_blank">$1</a>';
+}
 
 /**
  * Replace UTF superscript with HTML superscript
- * @param {string} notes
- * @returns {string}
  */
-function formatNotes(notes) {
+function formatNotes(notes:string):string {
    // photo credit becomes note number 0
    const start = (/^\s*\*/g.test(notes)) ? ' start="0"' : '';
 
    notes = '<ol class="footnotes"' + start + '><li><span>'
       + notes
-         .remove(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+\s*/g)
+         .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+\s*/g, '')
          .replace(/[\r\n]+/g, '</span></li><li><span>')
-         .remove(/<\/span><\/li><li><span>\s*$/)         // remove trailing empty item
+         .replace(/<\/span><\/li><li><span>\s*$/, '')         // remove trailing empty item
       + '</span></li></ol>';
 
    return notes.replace(/<li><span>\s*\*\s*/gi,
@@ -74,28 +68,23 @@ function formatNotes(notes) {
 
 /**
  * Format Haiku text
- * @param {string} text
- * @param {RegExp} regex
- * @returns {string}
  */
-function formatHaiku(text, regex) {
+function formatHaiku(text:string, regex:RegExp):string {
    const match = regex.exec(text);
 
    return '<p class="haiku">'
       + match[1] + '<br/>'
       + match[2] + '<br/>'
       + match[3] + iconTag('spa') + '</p>'
-      + caption(text.remove(match[0]));
+      + caption(text.replace(match[0], ''));
 }
 
 /**
  * Format poetry text
- * @param {string} text
- * @returns {string}
  */
-function formatPoem(text) {
+function formatPoem(text:string):string {
    return '<blockquote class="poem"><p>' + text
-      .remove(re.trailingWhiteSpace)
+      .replace(re.trailingWhiteSpace, '')
       .replace(re.lineBreak, '<br/>')
       .replace(/(<br\/>){2,}/gi, '</p><p>')
       .replace(re.poetry.indent, '<span class="tab"></span>')
@@ -105,11 +94,9 @@ function formatPoem(text) {
 
 /**
  * Convert new lines to HTML paragraphs and normalize links
- * @param {string} text
- * @returns {string}
  * @see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */
-function caption(text) {
+function caption(text:string):string {
    if (!is.empty(text))	{
       const ph = '[POEM]';  // poetry placeholder
       let footnotes = '';
@@ -131,7 +118,7 @@ function caption(text) {
 
       text = text
          .replace(re.newLine, '</p><p>')
-         .remove(re.tag.emptyParagraph)
+         .replace(re.tag.emptyParagraph, '')
          .replace(re.quip, (match, tag, body) => '<p class="quip">' + body)
          .replace(re.footnote.number, '$1<sup>$2</sup>')
          // restore blockquotes
@@ -142,7 +129,7 @@ function caption(text) {
       if (poem.length > 0) {
          text = text
             .replace(ph, '</p>' + poem + '<p class="first">')
-            .remove(re.tag.emptyParagraph);
+            .replace(re.tag.emptyParagraph, '');
       }
       return text + footnotes;
    }
@@ -152,10 +139,8 @@ function caption(text) {
 /**
  * Flickr sometimes messes up URLs that have parenthesis within them
  * @example Newsletter, No. 2: <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
- * @param {string} text
- * @returns {string}
  */
-function fixMalformedLink(text) {
+function fixMalformedLink(text:string):string {
    let index = 0;
 
    text = text.replace(re.tag.truncatedLink, (match, missedPart, i) => {
@@ -180,10 +165,8 @@ function fixMalformedLink(text) {
 
 /**
  * If link text is a web address, replace with just domain and page
- * @param {string} text
- * @returns {string}
  */
-const shortenLinkText = text => text.replace(re.tag.linkToUrl, (match, protocol, url) => {
+const shortenLinkText = (text:string) => text.replace(re.tag.linkToUrl, (match, protocol, url) => {
    const parts = url.split('/');
    const domain = parts[0].remove('www.');
    // page precedes trailing slash
@@ -205,10 +188,8 @@ const shortenLinkText = text => text.replace(re.tag.linkToUrl, (match, protocol,
 
 /**
  * Stylize punctuation
- * @param {string} text
- * @returns {string}
  */
-const typography = text => is.empty(text) ? '' : text
+const typography = (text:string) => is.empty(text) ? '' : text
    .replace(re.quote.rightSingle, '$1&rsquo;')
    .replace(re.quote.leftSingle, '&lsquo;$1')
    .replace(re.quote.rightDouble, '$1&rdquo;')
@@ -218,10 +199,8 @@ const typography = text => is.empty(text) ? '' : text
 
 /**
  * Different slug style to match Flickr's photo tags
- * @param {string[]} list
- * @returns {string}
  */
-function photoTagList(list) {
+function photoTagList(list:string[]):string {
    let links = '';
    const link = '<a href="/photo-tag/{0}" rel="tag">{1}</a>';
 
@@ -235,29 +214,20 @@ function photoTagList(list) {
 
 /**
  * Format fractions within text
- * @param {string} text
- * @returns {string}
  */
-const fraction = text => text.replace(/(\d+)\/(\d+)/, '<sup>$1</sup>&frasl;<sub>$2</sub>');
+const fraction = (text:string) => text.replace(/(\d+)\/(\d+)/, '<sup>$1</sup>&frasl;<sub>$2</sub>');
 
 /**
- * @param {number} h
- * @returns {string} 'AM' or 'PM'
+ * Return AM or PM
  */
-const hourOfDay = h => (h > 12) ? 'PM ' + (h - 12) : 'AM ' + h;
+const hourOfDay = (h:number) => (h > 12) ? 'PM ' + (h - 12) : 'AM ' + h;
 
 /**
  * Format date as Month Day, Year (March 15, 1973)
- * @param {Date} d
- * @returns {string}
  */
-const toDateString = d => month[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+const toDateString = (d:Date) => month[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 
-/**
- * @param {string} text
- * @returns {string}
- */
-function toLogTime(text) {
+function toLogTime(text:string):string {
    const d = new Date(text);
    //var logOffset = d.getTimezoneOffset();
    //var localOffset = (new Date()).getTimezoneOffset();
@@ -278,11 +248,9 @@ function toLogTime(text) {
 
 /**
  * Whether daylight savings applies to date
- * @param {Date} [date] Current date if none given
- * @returns {boolean}
  * @see http://javascript.about.com/library/bldst.htm
  */
-function inDaylightSavings(date = new Date()) {
+function inDaylightSavings(date = new Date()):boolean {
    const jan = new Date(date.getFullYear(), 0, 1);
    const jul = new Date(date.getFullYear(), 6, 1);
    const nonDstOffset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
@@ -290,21 +258,15 @@ function inDaylightSavings(date = new Date()) {
    return date.getTimezoneOffset() < nonDstOffset;
 }
 
-/**
- * @param {Date} date
- * @returns {number}
- */
 const timeZoneOffset = (date = new Date()) => config.timeZone + (inDaylightSavings(date) ? 1 : 0);
 
 /**
  * Convert text to date object
  * Date constructor uses local time which we need to defeat since local time
  * will be different on host servers
- * @param {string} text
- * @returns {Date}
  * @example 2012-06-17 17:34:33
  */
-function parseDate(text) {
+function parseDate(text:string):Date {
    const parts = text.split(' ');
    const date = parts[0].split('-').map(d => parseInt(d));
    const time = parts[1].split(':').map(d => parseInt(d));
@@ -318,10 +280,8 @@ function parseDate(text) {
 
 /**
  * Timestamps are created on hosted servers so time zone isn't known
- * @param {Date|number|string} timestamp
- * @returns {Date}
  */
-function dateFromTimeStamp(timestamp) {
+function dateFromTimeStamp(timestamp:Date|number|string):Date {
    if (is.date(timestamp)) {
       return timestamp;
    } else if (is.text(timestamp)) {
@@ -331,20 +291,16 @@ function dateFromTimeStamp(timestamp) {
 }
 
 /**
- * @param {number|Date} timestamp
- * @returns {string}
  * @example 2013-10-02T11:55Z
  * @see http://en.wikipedia.org/wiki/ISO_8601
  * @see https://developers.facebook.com/docs/reference/opengraph/object-type/article/
  */
-const iso8601time = timestamp => dateFromTimeStamp(timestamp).toISOString();
+const iso8601time = (timestamp:number|Date) => dateFromTimeStamp(timestamp).toISOString();
 
 /**
  * Convert decimal hours to hours:minutes
- * @param {number} hours
- * @returns {string}
  */
-function hoursAndMinutes(hours) {
+function hoursAndMinutes(hours:number):string {
    const h = Math.floor(hours);
    const m = hours - h;
 
@@ -353,22 +309,16 @@ function hoursAndMinutes(hours) {
 
 /**
  * Pad integer with leading zeroes
- * @param {number} d
- * @param {number} count
- * @returns {string}
  */
-function leadingZeros(d, count) {
+function leadingZeros(d:number, count:number):string {
    var text = d.toString();
    while (text.length < count) { text = '0' + text; }
    return text;
 }
 
 /**
- * @param {number} n
- * @param {boolean} [capitalize=true]
- * @returns {string}
  */
-function sayNumber(n, capitalize = true) {
+function sayNumber(n:number, capitalize = true):string {
    let word = n.toString();
    switch (n) {
       case 1: word = 'One'; break;
@@ -397,28 +347,23 @@ function sayNumber(n, capitalize = true) {
 
 /**
  * Remove non-numeric characters from string
- * @param {string} text
- * @returns {number}
  */
-function parseNumber(text) {
-   text = (text ? text : '').remove(/[^\d\.]/g);
+function parseNumber(text:string):number {
+   text = (text ? text : '').replace(/[^\d\.]/g, '');
    return is.empty(text) ? NaN : parseFloat(text);
 }
 
 /**
  * Material icon tag
- * @param {string} name Google name with underscore for spaces
- * @returns {string}
- * @see https://material.io/icons/
+ * 
+ * See https://material.io/icons/
  */
-const iconTag = name => `<i class="material-icons ${name}">${name}</i>`;
+const iconTag = (name:string) => `<i class="material-icons ${name}">${name}</i>`;
 
 /**
  * HTML tag for icon matched to post tag
- * @param {string} title
- * @returns {string}
  */
-function postCategoryIcon(title) {
+function postCategoryIcon(title:string):string {
    const map = config.style.icon.category;
 
    if (is.value(map)) {
@@ -428,11 +373,7 @@ function postCategoryIcon(title) {
    return '';
 }
 
-/**
- * @param {object} categories
- * @returns {string}
- */
-function postModeIcon(categories) {
+function postModeIcon(categories:{[key:string]:Category}):string {
    const icons = config.style.icon;
    const map = icons.post;
 
@@ -453,15 +394,13 @@ function postModeIcon(categories) {
 }
 
 // http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
-const decodeBase64= text => (new Buffer(text, 'base64')).toString();
-const encodeBase64 = text => (new Buffer(text)).toString('base64');
+const decodeBase64 = (text:string) => (new Buffer(text, 'base64')).toString();
+const encodeBase64 = (text:string) => (new Buffer(text)).toString('base64');
 
 /**
- * @param {string} text
- * @returns {string}
- * @see http://stackoverflow.com/questions/617647/where-is-my-one-line-implementation-of-rot13-in-javascript-going-wrong
+ * See http://stackoverflow.com/questions/617647/where-is-my-one-line-implementation-of-rot13-in-javascript-going-wrong
  */
-const rot13 = text =>
+const rot13 = (text:string) =>
    is.empty(text) ? null :	text.replace(/[a-zA-Z]/g, chr => {
       const start = chr <= 'Z' ? 65 : 97;
       return String.fromCharCode(start + (chr.charCodeAt(0) - start + 13) % 26);
@@ -469,15 +408,13 @@ const rot13 = text =>
 
 /**
  * Obfuscate text as HTML character entities
- * @param {string} text
- * @returns {string}
  */
-const characterEntities = text => text.replace(
+const characterEntities = (text:string) => text.replace(
    /[\u00A0-\u2666<>\&]/g,
    c => '&' + (htmlEntity[c.charCodeAt(0)] || '#' + c.charCodeAt(0)) + ';'
 );
 
-module.exports = {
+export default {
    format,
    typography,
 
@@ -523,8 +460,10 @@ module.exports = {
       parse: parseNumber
    },
 
-   // https://github.com/igormilla/top-domain
-   topDomain: address => {
+   /**
+    * See https://github.com/igormilla/top-domain
+    */
+   topDomain: (address:string) => {
       const parsed = url.parse(address.toLowerCase());
       const domain = (parsed.host !== null) ? parsed.host : parsed.path;
       const match = domain.match(re.domain);
@@ -534,18 +473,12 @@ module.exports = {
 
    /**
     * Remove IPv6 prefix from transitional addresses
-    * @param {string} ip
-    * @returns {string}
-    * @see https://en.wikipedia.org/wiki/IPv6_address
+    *
+    * See https://en.wikipedia.org/wiki/IPv6_address
     */
-   IPv6: ip => (is.empty(ip) || ip === '::1') ? '127.0.0.1' : ip.remove(/^::[0123456789abcdef]{4}:/g),
+   IPv6: (ip:string) => (is.empty(ip) || ip === '::1') ? '127.0.0.1' : ip.replace(/^::[0123456789abcdef]{4}:/g, ''),
 
-   /**
-    * @param {object} r
-    * @param {string} fieldName
-    * @returns {string}
-    */
-   logMessage: (r, fieldName) => {
+   logMessage: (r:any, fieldName:string) => {
       if (is.defined(r, fieldName) && is.value(r[fieldName])) {
          r[fieldName] = r[fieldName]
             .replace(/(\d{10,11})/, linkPattern(config.log.photoUrl))
@@ -558,32 +491,25 @@ module.exports = {
       return r[fieldName];
    },
 
-   /**
-    * @param {string} text
-    * @returns {string}
-    */
-   capitalize: text => is.empty(text) ? '' : text.substr(0, 1).toUpperCase() + text.substr(1).toLowerCase(),
+   capitalize: (text:string) => is.empty(text) ? '' : text.substr(0, 1).toUpperCase() + text.substr(1).toLowerCase(),
 
    /**
     * Make URL slug
-    * @param {string} text
-    * @returns {string}
     */
-   slug: text => is.empty(text)
+   slug: (text:string) => is.empty(text)
       ? null
       : text
          .toLowerCase()
          .replace(/[\s\/-]+/g, '-')
          .replace('à', 'a')
-         .remove(/[^\-a-z0-9]/g),
+         .replace(/[^\-a-z0-9]/g, ''),
 
    /**
     * Shuffle an array
-    * @param {Array} a
-    * @returns {Array}
-    * @see http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
+    *
+    * See http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
     */
-   shuffle(a) {
+   shuffle(a:Array<any>):Array<any> {
       if (!is.array(a) || a.length === 0) { return null; }
 
       let i = a.length;
@@ -600,9 +526,10 @@ module.exports = {
 
 /**
  * Character codes for HTML entities
- * @see http://www.w3.org/TR/html4/sgml/entities.html
+ * 
+ * See http://www.w3.org/TR/html4/sgml/entities.html
  */
-const htmlEntity = {
+const htmlEntity:{[key:number]:string} = {
    34: 'quot',
    38: 'amp',
    39: 'apos',

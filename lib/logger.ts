@@ -1,8 +1,9 @@
-const is = require('./is');
-const util = require('./util');
-const config = require('./config');
-const C = require('./constants');
-const winston = require('winston');
+import is from './is';
+import util from './util';
+import config from './config';
+import C from './constants';
+import winston from 'winston';
+
 let queryable = false;
 
 // region Invoke provider

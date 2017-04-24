@@ -1,7 +1,7 @@
 import {Post} from "./trailimage";
 import * as Chai from "chai";
 
-declare namespace JsonLD {
+export namespace JsonLD {
    import Property = Chai.Property;
    /**
     * @see http://schema.org/Action
