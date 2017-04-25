@@ -290,7 +290,7 @@ export default {
       value: r => r.sizes.size
    }),
 
-   getPhotoContext: (id:string) => call<Flickr.MemberSet>(method.photo.SETS, type.PHOTO, id, {
+   getPhotoContext: (id:string) => call<Flickr.MemberSet[]>(method.photo.SETS, type.PHOTO, id, {
       value: r => r.set
    }),
 

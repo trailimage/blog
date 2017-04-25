@@ -1,4 +1,4 @@
-import { Library, Post, Category, Photo } from './types';
+import { Library, Post, Category, Photo, EXIF } from './types';
 import is from './is';
 
 /**
@@ -184,5 +184,10 @@ export default {
          }
       }
       return (postTags.length > 0) ? postTags.join(', ') : null;
-   }
+   },
+
+   load():Promise<Library> { return null },
+   getEXIF():Promise<EXIF> { return null },
+   getPostWithPhoto():Promise<Post> { return null },
+   getPhotosWithTags():Promise<Photo[]> { return null }
 } as Library;

@@ -106,7 +106,10 @@ function correlatePosts() {
 }
 
 function getPostWithPhoto(this:Library, photo:Photo|string):Promise<Post> {
-   const id = (typeof photo == is.type.STRING) ? photo : photo.id;
+   const id:string = (typeof photo == is.type.STRING)
+      ? (photo as string)
+      : (photo as Photo).id;
+
    return flickr.getPhotoContext(id).then(sets => (is.value(sets))
       ? this.posts.find(p => p.id == sets[0].id)
       : null
@@ -124,7 +127,7 @@ const getPhotosWithTags = (tags:string|string[]) => flickr.photoSearch(tags)
    .then(photos => photos.map(json => ({
       id: json.id,
       size: { thumb: photoSize.make(json, config.flickr.photoSize.search[0]) }
-   })));
+   }  as Photo)));
 
 /**
  * Convert tags to hash of phrases keyed to their "clean" abbreviation
@@ -136,7 +139,7 @@ function parsePhotoTags(rawTags:Flickr.Tag[]):{[key:string]:string} {
       // ensure not machine or exluded tag
       if (text.indexOf('=') == -1 && exclusions.indexOf(text) == -1) { tags[t.clean] = text; }
       return tags;
-   }, {});
+   }, {} as {[key:string]:string});
 }
 
 export default {

@@ -2,7 +2,7 @@ import { Blog } from '../types';
 import is from '../is';
 import log from '../logger';
 import flickr from '../providers/flickr';
-import cache from '../cache';
+import cache from '../cache/';
 import config from '../config';
 import template from '../template';
 import library from '../library';
@@ -41,12 +41,12 @@ function home(req:Blog.Request, res:Blog.Response) {
    log.warnIcon('security', '%s viewing administration', req.clientIP());
 
    Promise.all([
-      cache.keys(),
+      cache.api.keys(),
       cache.view.keys(),
       cache.map.keys(),
       log.query(7)
    ]).then(([jsonKeys, viewKeys, mapKeys, logs]) => {
-      jsonKeys = (is.array(jsonKeys)) ? jsonKeys.map(j => j.remove(cache.prefix)) : [];
+      jsonKeys = (is.array(jsonKeys)) ? jsonKeys.map(j => j.replace(cache.prefix, '')) : [];
       view(res, viewKeys, jsonKeys, mapKeys, logs);
    });
 }
@@ -76,7 +76,7 @@ function updateLibrary(req:Blog.Request, res:Blog.Response) {
  */
 function deleteViewCache(req:Blog.Request, res:Blog.Response) {
    // cache keys to be invalidated
-   let viewKeys = [];
+   let viewKeys:string[] = [];
    const apiHashKeys = [];
    const removals = [];
    const includeRelated = req.body['includeRelated'] == 'true';

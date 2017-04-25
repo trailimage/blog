@@ -60,7 +60,7 @@ function getPhotos(this:Post):Promise<Photo[]> {
 function getInfo(this:Post):Promise<Post> {
    return this.infoLoaded
       ? Promise.resolve(this)
-      : flickr.getSetInfo(this.id).then((info:Flickr.SetInfo) => updateInfo(this, info:Flickr.SetInfo));
+      : flickr.getSetInfo(this.id).then((info:Flickr.SetInfo) => updateInfo(this, info));
 }
 
 function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
@@ -145,7 +145,7 @@ function empty(this:Post) {
  */
 function name(this:Post|{ post: Post }):string {
    // context is screwed up when called from HBS template
-   const p:Post = is.defined(this, 'post') ? this.post : this as Post;
+   const p:Post = this.post ? this.post : this as Post;
    return p.title + ((p.isPartial) ? config.library.subtitleSeparator + ' ' + p.subTitle : '');
 }
 
@@ -154,7 +154,8 @@ function name(this:Post|{ post: Post }):string {
  * 
  * See https://www.mapbox.com/api-documentation/#static
  * 
- * Example pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
+ *    Example:
+ *    pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
  */
 function updatePhotoMarkers(this:Post) {
    let start = 1;  // always skip first photo
@@ -176,10 +177,17 @@ function updatePhotoMarkers(this:Post) {
 }
 
 /**
- * Create post from Flickr photo set. Chronolocal indicates Whether set photos occurred together at a point in time
+ * Create post from Flickr photo set
+ * 
+ * *chronological*: whether set photos occurred together at a point in time.
  */
-function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
+function make(flickrSet:Flickr.SetSummary, chronological:boolean = true):Post {
    const p:Post = {
+      key: null,
+      title: null,
+      subTitle: null,
+      description: null,
+      longDescription: null,
       id: flickrSet.id,
       // whether post pictures occurred at a specific point in time (exceptions are themed sets)
       chronological: chronological,
@@ -190,7 +198,15 @@ function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
       photosLoaded: false,
       photos: [] as Photo[],
       photoCount: 0,
+      photoTagList: null,
       coverPhoto: null as Photo,
+
+      updatedOn: null,
+      createdOn: null,
+      happenedOn: null,
+
+      bigThumbURL: null,
+      smallThumbURL: null,
 
       // whether posts is featured in main navigation
       feature: false,
@@ -198,6 +214,7 @@ function make(flickrSet:Flickr.SetSummary, chronological?:boolean = true):Post {
       // whether post has categories
       get hasCategories() { return Object.keys(this.categories).length > 0; },
 
+      video: null,
       infoLoaded: false,
 
       // whether an attempt has been made to load GPS track

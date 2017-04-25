@@ -229,7 +229,7 @@ export namespace Flickr {
 
    interface Response {
       photoset?:SetPhotos|SetInfo;
-      set?:MemberSet;
+      set?:MemberSet[];
       collections?:Tree;
       photo?:PhotoInfo;
       sizes?:SizeList;

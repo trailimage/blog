@@ -19,92 +19,100 @@ export interface Library {
    postInfoLoaded:boolean;
    changedKeys:string[];
    getEXIF(photoID:number):Promise<EXIF>;
+   addPost(p:Post):void;
    postKeys():string[];
+   postWithID(id:string):Post;
    postWithKey(key:string):Post;
-   empty(): Library;
+   empty():void;
    getPostWithPhoto(photo:Photo|string):Promise<Post>;
-   getPhotosWithTags(tags:string|string[]):Promise;
+   getPhotosWithTags(tags:string|string[]):Promise<Photo[]>;
+   photoTagList(photos:Photo[]):string;
    load(emptyIfLoaded:boolean):Promise<Library>;
+   unload(keys:string|string[]):void;
 }
 
 export interface Category {
-   title: string;
-   key: string;
-   subcategories: Category[];
-   posts: Post[];
-   isChild: boolean;
-   isParent: boolean;
-   unload(keys:string|string[]):void;
-   add(subcategory: Category): void;
-   getSubcategory(key: string): Category;
-   removePost(post: Post): Category;
+   title:string;
+   key:string;
+   has(key:string):boolean;
+   subcategories:Category[];
+   posts:Post[];
+   readonly isChild:boolean;
+   readonly isParent:boolean;
+   ensureLoaded():void;
+   //unload(keys:string|string[]):void;
+   add(subcategory:Category):void;
+   getSubcategory(key:string):Category;
+   removePost(post:Post):Category;
 }
 
 export interface Photo {
-   id: string;
-   index: number;
-   sourceUrl: string;
-   title: string;
-   description: string;
-   tags: string[];
-   dateTaken: Date;
-   latitude: number;
-   longitude: number;
-   primary: boolean;
-   size: { [key: string]: Size };
-   preview: Size;
-   normal: Size;
-   big: Size;
-   outlierDate:boolean;
+   id:string;
+   index?:number;
+   sourceUrl?:string;
+   title?:string;
+   description?:string;
+   tags?:string[];
+   dateTaken?:Date;
+   latitude?:number;
+   longitude?:number;
+   primary?:boolean;
+   size:{ [key: string]: Size };
+   preview?:Size;
+   normal?:Size;
+   big?:Size;
+   outlierDate?:boolean;
    //get tagList():string;
-   getExif(): Promise<EXIF>;
+   //getExif(): Promise<EXIF>;
 }
 
 export interface Post {
-   id: string;
-   key: string;
+   id:string;
+   key:string;
    title:string;
    subTitle:string;
    description:string;
    longDescription:string;
-   seriesKey: string;
-   partKey: string;
+   seriesKey?:string;
+   partKey?:string;
    happenedOn:Date;
    createdOn:Date;
    updatedOn:Date;
-   chronological: boolean;
-   originalTitle: string;
-   photosLoaded: boolean;
+   chronological:boolean;
+   originalTitle:string;
+   photosLoaded:boolean;
    bigThumbURL:string;
    smallThumbURL:string;
-   photos: Photo[];
-   photoCount: number;
-   photoTagList:string[],
+   photos:Photo[];
+   photoCount:number;
+   photoTagList:string,
    photoMarkers:string,
-   coverPhoto: Photo;
-   feature: boolean;
-   categories:{[key:string]:Category};
-   hasCategories: boolean;
-   infoLoaded: boolean;
-   triedTrack: boolean;
-   hasTrack: boolean;
-   next?: Post;
-   previous?: Post;
-   part: number;
-   isPartial: boolean;
-   nextIsPart: boolean;
-   previousIsPart: boolean;
-   totalParts: number;
-   isSeriesStart: boolean;
+   coverPhoto:Photo;
+   feature:boolean;
+   /** Category titles mapped to category keys */
+   categories:{[key:string]:string};
+   hasCategories:boolean;
+   infoLoaded:boolean;
+   triedTrack:boolean;
+   hasTrack:boolean;
+   next?:Post;
+   previous?:Post;
+   /** Position of this post in a series */
+   part:number;
+   isPartial:boolean;
+   nextIsPart:boolean;
+   previousIsPart:boolean;
+   totalParts:number;
+   isSeriesStart:boolean;
    video:VideoInfo;
-   makeSeriesStart(): Post;
-   ungroup(): Post;
-   empty(): Post;
-   name(): string;
-   getInfo(): Promise<Post>;
-   getPhotos(): Promise<Photo[]>;
-   hasKey(key: string): boolean;
-   hasPhotoID(id: string): boolean;
+   makeSeriesStart():void;
+   ungroup():void;
+   empty():void;
+   name():string;
+   getInfo():Promise<Post>;
+   getPhotos():Promise<Photo[]>;
+   hasKey(key:string):boolean;
+   hasPhotoID(id:string):boolean;
    ensureLoaded():void;
    updatePhotoMarkers():void;
 }

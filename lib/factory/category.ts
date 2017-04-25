@@ -9,13 +9,14 @@ function getSubcategory(this:Category, key:string):Category {
    return this.subcategories.find(c => c.title === key || c.key === key);
 }
 
-function has(this:Category, key:string):boolean { return this.subcategory(key) !== undefined; }
+function has(this:Category, key:string):boolean {
+   return this.getSubcategory(key) !== undefined;
+}
 
 /**
  * Add nested category and update its key to include parent
- * @this {Category} category
  */
-function add(subcat:Category) {
+function add(this:Category, subcat:Category) {
    if (is.value(subcat)) {
       const oldKey = subcat.key;
 
@@ -32,9 +33,8 @@ function add(subcat:Category) {
 
 /**
  * Remove post from category and subcategories (primarily for testing)
- * @this {Category}
  */
-function removePost(post:Post):Category {
+function removePost(this:Category, post:Post):Category {
    const index = this.posts.indexOf(post);
    if (index >= 0) { this.posts.splice(index, 1); }
    this.subcategories.forEach(s => { s.removePost(post); });
@@ -43,9 +43,8 @@ function removePost(post:Post):Category {
 
 /**
  * Ensure photos and information are loaded for all posts
- * @this {Category}
  */
-function ensureLoaded() {
+function ensureLoaded(this:Category) {
    return Promise.all(this.posts.map(p => p.getInfo().then(p => p.getPhotos())));
 }
 
@@ -55,7 +54,7 @@ function ensureLoaded() {
 function make(collection:Flickr.Collection, root = false):Category {
    let exclude = config.flickr.excludeSets;
    const feature = config.flickr.featureSets;
-   const category = {
+   const category:Category = {
       title: collection.title,
       key: util.slug(collection.title),
       subcategories: [] as Category[],
@@ -68,8 +67,7 @@ function make(collection:Flickr.Collection, root = false):Category {
       removePost,
       ensureLoaded
    };
-   /** @type {Post} */
-   let p = null;
+   let p:Post = null;
 
    if (exclude === undefined) { exclude = []; }
    if (root) { library.categories[category.title] = category; }
