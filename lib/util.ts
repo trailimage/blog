@@ -382,12 +382,12 @@ function postModeIcon(categories:string[]|{[key:string]:Category}):string {
    if (is.value(map)) {
       const iconName = Object.keys(map).find(iconName => {
          const re = map[iconName];
-         return categories.find(c => re.test(c)) !== undefined;
+         return (categories as string[]).find(c => re.test(c)) !== undefined;
       });
 
       if (is.value(iconName)) {
          return iconName;
-      } else if (is.defined(icons, 'postDefault')) {
+      } else if (icons.postDefault) {
          return icons.postDefault;
       }
    }

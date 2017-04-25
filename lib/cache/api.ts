@@ -5,8 +5,9 @@ import redis from '../providers/redis';
 const prefix = 'api:';
 
 const provider = {
-   getItem: (key:string, hashKey:string) =>
-      redis.getObject<Flickr.Response>(prefix + key, hashKey),
+   getItem<T>(key:string, hashKey:string) {
+      return redis.getObject<T>(prefix + key, hashKey)
+   },
 
    add: (key:string, hashKeyOrValue:any, value?:any) =>
       redis.add(prefix + key, hashKeyOrValue, value),

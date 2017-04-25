@@ -4,14 +4,6 @@ import {
    Response as ExpressResponse,
    Request as ExpressRequest } from "express";
 
-export interface FlickrOptions {
-   value(r: Flickr.Response): Object,
-   sign: boolean,
-   allowCache: boolean,
-   error: string,
-   args: Object
-}
-
 interface Renderer {
 
 }

@@ -1,6 +1,6 @@
 export interface EXIF {
    artist: string,
-   compensation: number,
+   compensation: string,
    time: number,
    fNumber: number,
    focalLength: number,
@@ -12,13 +12,19 @@ export interface EXIF {
 }
 
 export interface Library {
-   categories: { [key: string]: Category };
-   posts: Post[];
-   tags: { [key: string]: string };
-   loaded: boolean;
-   postInfoLoaded: boolean;
+   categories:{ [key: string]: Category };
+   posts:Post[];
+   tags:{ [key: string]: string };
+   loaded:boolean;
+   postInfoLoaded:boolean;
+   changedKeys:string[];
+   getEXIF(photoID:number):Promise<EXIF>;
+   postKeys():string[];
    postWithKey(key:string):Post;
    empty(): Library;
+   getPostWithPhoto(photo:Photo|string):Promise<Post>;
+   getPhotosWithTags(tags:string|string[]):Promise;
+   load(emptyIfLoaded:boolean):Promise<Library>;
 }
 
 export interface Category {

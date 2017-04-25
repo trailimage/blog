@@ -1,17 +1,14 @@
 // translate Flickr, Google and Redis responses into standard objects
-
+import { Flickr, Library, Post, Photo, EXIF } from '../types';
 import is from '../is';
 import log from '../logger';
 import config from '../config';
 import library from '../library';
 import category from './category';
 import photoSize from './photo-size';
-import map from './map';
+import flickr from '../providers/flickr';
 import post from './post';
 import exif from './exif';
-
-// can be replaced with injection
-let flickr = require('../providers/flickr');
 
 /**
  * @param {boolean} [emptyIfLoaded] Whether to reset the library before loading
@@ -108,10 +105,7 @@ function correlatePosts() {
    }
 }
 
-/**
- * @this {Library}
- */
-function getPostWithPhoto(photo:Photo|string):Promise<Post> {
+function getPostWithPhoto(this:Library, photo:Photo|string):Promise<Post> {
    const id = (typeof photo == is.type.STRING) ? photo : photo.id;
    return flickr.getPhotoContext(id).then(sets => (is.value(sets))
       ? this.posts.find(p => p.id == sets[0].id)
@@ -125,7 +119,6 @@ function getEXIF(photoID:number):Promise<EXIF> {
 
 /**
  * All photos with given tags
- * @returns {Promise.<Photo[]>}
  */
 const getPhotosWithTags = (tags:string|string[]) => flickr.photoSearch(tags)
    .then(photos => photos.map(json => ({

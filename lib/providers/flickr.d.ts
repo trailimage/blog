@@ -1,5 +1,14 @@
 export namespace Flickr {
    enum Boolean { 'false', 'true' }
+
+   export interface Options<T> {
+      value(r: Response): T,
+      sign?: boolean,
+      allowCache?: boolean,
+      error?: string,
+      args?: {[key:string]:string|number|boolean}
+   }
+
    /**
     * @see http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html
     */
@@ -116,36 +125,37 @@ export namespace Flickr {
    }
 
    export interface PhotoInfo extends FarmLocation {
-      dateuploaded: string,
-      isfavorite: Boolean,
-      license: License,
-      safetylevel: SafetyLevel,
-      rotate: Boolean,
-      originalsecret: string,
-      originalformat: string,
-      owner: Owner,
-      title: Content,
-      description: Content,
-      visibility: Visibility,
-      dates: PhotoDates,
-      views: number,
-      permissions: Permission,
-      editability: EditAbility,
-      publiceditability: EditAbility,
-      usage: Usage,
+      dateuploaded: string;
+      isfavorite: Boolean;
+      license: License;
+      safetylevel: SafetyLevel;
+      rotate: Boolean;
+      originalsecret: string;
+      originalformat: string;
+      owner: Owner;
+      title: Content;
+      description: Content;
+      visibility: Visibility;
+      dates: PhotoDates;
+      views: number;
+      permissions: Permission;
+      editability: EditAbility;
+      publiceditability: EditAbility;
+      usage:Usage;
+      exif:PhotoExif;
       tags: {
-         tag: TagSummary
+         tag: TagSummary;
       }
-      location: Location,
-      geoperms: LocationPermission,
-      media: string,
+      location: Location;
+      geoperms: LocationPermission;
+      media: string;
       urls: {
-         url: URL[]
+         url: URL[];
       }
    }
 
    interface PhotoExif {
-      photo: Flickr.PhotoSummary,
+      photo: Flickr.PhotoSummary;
    }
 
    interface PhotoMembership {
@@ -218,20 +228,25 @@ export namespace Flickr {
    }
 
    interface Response {
-      photoset?: SetPhotos[]|SetInfo[],
-      set?: MemberSet[],
-      collections?: Tree,
-      photo?: PhotoInfo,
-      sizes?: SizeList,
-      stat: string,
-      code: number,
-      message: string,
+      photoset?:SetPhotos|SetInfo;
+      set?:MemberSet;
+      collections?:Tree;
+      photo?:PhotoInfo;
+      sizes?:SizeList;
+      /**
+       * Dynamically added property indicating whether the request can be
+       * retried. 
+       */
+      retry?:boolean;
+      stat:string;
+      code:number;
+      message:string;
       photos: {
-         photo: SearchResult
+         photo:SearchResult|PhotoSummary[];
       }
       who: {
          tags: {
-            tag: Tag[]
+            tag:Tag[];
          }
       }
    }

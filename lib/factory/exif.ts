@@ -1,8 +1,9 @@
+import { Flickr, EXIF } from '../types';
 import is from '../is';
 import re from '../regex';
 
 function make(flickrExif:Flickr.PhotoExif):EXIF {
-   const parser = (exif, tag, empty = null) => {
+   const parser = (exif:Flickr.PhotoExif, tag:string, empty:string|number = null) => {
       for (const e of exif) { if (e.tag == tag) { return e.raw._content; } }
       return empty;
    };
@@ -53,9 +54,9 @@ function sanitizeExif(exif:EXIF):EXIF {
    const software = (text:string) => is.empty(text) ? '' : text
       .replace('Photoshop Lightroom', 'Lightroom')
       .replace(/\s*\(Windows\)/, '');
-   const compensation = (text:string) => {
+   const compensation = (text:string|number) => {
       if (text == '0') { text = 'No'; }
-      return text;
+      return text as string;
    };
 
    if (!exif.sanitized) {
@@ -64,7 +65,7 @@ function sanitizeExif(exif:EXIF):EXIF {
          exif.model = camera(exif.model);
          exif.lens = lens(exif.lens, exif.model);
          exif.compensation = compensation(exif.compensation);
-         exif.ISO = parseInt(exif.ISO);
+         exif.ISO = parseInt(exif.ISO.toString());
          // don't show focal length for primes
          if (!numericRange.test(exif.lens)) { exif.focalLength = null; }
       }

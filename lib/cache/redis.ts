@@ -3,7 +3,7 @@ import config from '../config';
 import item from './item';
 import redis from '../providers/redis';
 
-const viewKey = 'view';
+//const viewKey = 'view';
 
 function addItem(
    key:string, hashKey:string,
@@ -16,44 +16,44 @@ function addItem(
 }
 
 /**
- * Whether key with prefix exists
+ * Create a Redis-based cache provider.
  */
-function exists(key:string, hashKey:string, enabled:boolean):Promise<boolean> {
-   return enabled ? redis.exists(key, hashKey) : Promise.resolve(false);
-};
+function provide(typeKey:string, enabled:boolean):Cache.Provider {
+   const exists = (key:string) => enabled
+      ? redis.exists(key, typeKey) : Promise.resolve(false);
 
+   return {
+      getItem: (key:string) => redis.getObject(typeKey, key).then(item.deserialize),
+      keys: ()=> redis.keys(typeKey),
 
-const provider:Cache.Provider = {
-   getItem: (key:string) => redis.getObject(viewKey, key).then(item.deserialize),
-   keys: ()=> redis.keys(viewKey),
+      /**
+       * Add or replace value at key
+       */
+      add: (key:string, text:string) => addItem(typeKey, key, text, enabled),
 
-   /**
-    * Add or replace value at key
-    */
-   add: (key:string, text:string) => addItem(viewKey, key, text, config.cache.views),
+      create: item.create,
 
-   create: item.create,
+      /**
+       * Whether cache view exists
+       */
+      exists,
 
-   /**
-    * Whether cache view exists
-    */
-   exists: (key:string) => exists(viewKey, key, config.cache.views),
+      /**
+       * Add value only if it doesn't already exist (mainly for testing)
+       */
+      addIfMissing(key:string, buffer:Buffer|string) {
+         return enabled
+            ? exists(key).then(yep => yep ? Promise.resolve() : this.add(key, buffer))
+            : Promise.resolve();
+      },
 
-   /**
-    * Add value only if it doesn't already exist (mainly for testing)
-    */
-   addIfMissing(key:string, buffer:Buffer|string) {
-      return (config.cache.views)
-         ? provider.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
-         : Promise.resolve();
-   },
+      /**
+       * Remove cached page views
+       */
+      remove: (keys:string|string[]) => redis.remove(typeKey, keys),
 
-   /**
-    * Remove cached page views
-    */
-   remove: (keys:string|string[]) => redis.remove(viewKey, keys),
-
-   serialize: item.serialize
+      serialize: item.serialize
+   }
 }
 
-export default provider;
+export default { provide };
