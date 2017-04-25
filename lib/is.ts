@@ -1,6 +1,7 @@
 /**
  * Javascript types
- * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+ * 
+ * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
  */
 const type = {
    UNDEFINED: 'undefined',
@@ -12,8 +13,7 @@ const type = {
    OBJECT: 'object'
 };
 
-
- /** Whether variable is defined and not null */
+/** Whether variable is defined and not null */
 function value<T>(x:any):x is T { return (x !== undefined && x !== null); }
 
 /**
@@ -21,7 +21,8 @@ function value<T>(x:any):x is T { return (x !== undefined && x !== null); }
  * 
  * See http://jsperf.com/hasownproperty-vs-in-vs-other/16
  */
-const defined = (obj:{[key:string]:any}, field:string|number) => value(obj) && typeof(obj[field]) !== type.UNDEFINED;
+const defined = (obj:{[key:string]:object}, field:string) =>
+   value(obj) && value(obj[field]);
 
 /** Whether value is null, undefined or an empty string */
 const empty = (x:any) => !value(x) || x === '';
@@ -41,33 +42,41 @@ function integer(n:any):n is string|number {
    return value(n) && parseInt(n as string) === n;
 }
 
+function date(v:any):v is Date {
+   return value(v) && v instanceof Date;
+}
+
+function text(v:any):v is string {
+   return typeof(v) === type.STRING;
+}
+
 function callable(v:any):v is Function {
-   return value(v) && v instanceof Function
+   return value(v) && v instanceof Function;
 }
 
 const bigInt = (n:any) => integer(n) && (n < -32768 || n > 32767);
 
 /** Whether value exists and is an array */
-function array(x:any):x is any[] {
-   return value(x) && Array.isArray(x);
+function array(v:any):v is any[] {
+   return value(v) && Array.isArray(v);
 }
 
 export default {
    type,
    value,
    defined,
-   cacheItem: (o:any) => (value(o) && defined(o, 'buffer') && defined(o, 'eTag')),
+   cacheItem: (o:{[key:string]:object}) => (value(o) && defined(o, 'buffer') && defined(o, 'eTag')),
    number,
    numeric,
    integer,
    bigInt,
    int64: bigInt,
-   date: (v:any) => value(v) && v instanceof Date,
+   date,
+   text,
    empty: (t:any) => !value(t) || t === '',
    callable(v:any):v is Function {
       return value(v) && v instanceof Function
    },
    array(v:any):v is Array<any> { return value(v) && v instanceof Array; },
-   text: (v:any) => typeof(v) === type.STRING,
    xml(v:any) { return this.text(v) && /^<\?xml version="[\d\.]+"/.test(v); }
 }

@@ -115,14 +115,16 @@ export default {
             When: 'date_range',
             Where: 'map',
             default: 'local_offer' // tag icon
-         },
+         }  as {[key:string]:string},
+
          // assign mode of transportation icon based on post tags
          post: {
             motorcycle: /(KTM|BMW|Honda)/gi,
             bicycle: /bicycle/gi,
             hike: /hike/gi,
             jeep: /jeep/gi
-         },
+         }  as {[key:string]:RegExp},
+
          /** Default transportation mode if none given */
          postDefault: 'motorcycle'
       },
@@ -169,7 +171,7 @@ export default {
          nonMotorized: 'https://trails.idaho.gov/pages/kmz/Nonmotorized.kmz',
          otherRoads: 'https://trails.idaho.gov/pages/kmz/Other_Road.kmz',
          wilderness: 'https://trails.idaho.gov/pages/kmz/Wilderness.kmz'
-      }
+      }  as {[key:string]:string}
    },
    bing: {
       key: process.env['BING_KEY']
@@ -260,12 +262,14 @@ export default {
       'backroads-to-college': 'panhandle-past-and-future',
       'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
    }  as {[key:string]:string},
+
    /** Support for renamed photo tags */
    photoTagChanges: {
       jeremy: 'jeremyabbott',
       jessica: 'jessicaabbott',
       jime: 'jimeldredge'
    }  as {[key:string]:string},
+
    blog: {
       domain: 'trailimage.blogspot.com',
       /** Match old blog URLs to new. Slug is always prefixed by /YYYY/MM/ */
@@ -354,7 +358,7 @@ export default {
          'lucky-peak-with-laura': 'lucky-peak-with-laura',
          'cricket-ridge-ride': 'cricket-ridge-ride',
          'caterpillar-ridge-ride': 'spring-caterpillars-on-the-boise-ridge'
-      }
+      }  as {[key:string]:string}
    },
    alwaysKeywords: 'Adventure, Scenery, Photography,',
    keywords: 'BMW R1200GS, KTM XCW, jeep wrangler, motorcycle, motorcycling, riding, adventure, Jason Abbott, Abbott, outdoors, scenery, idaho, mountains'

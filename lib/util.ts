@@ -1,3 +1,4 @@
+import { Category } from './types';
 import { month, weekday } from './constants';
 import re from './regex';
 import config from './config';
@@ -368,12 +369,12 @@ function postCategoryIcon(title:string):string {
 
    if (is.value(map)) {
       for (const name in map) { if (name == title) { return iconTag(map[name]); } }
-      if (is.defined(map, 'default')) { return iconTag(map['default']); }
+      if (map.default) { return iconTag(map.default); }
    }
    return '';
 }
 
-function postModeIcon(categories:{[key:string]:Category}):string {
+function postModeIcon(categories:string[]|{[key:string]:Category}):string {
    const icons = config.style.icon;
    const map = icons.post;
 

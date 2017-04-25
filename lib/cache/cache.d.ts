@@ -5,7 +5,7 @@ export namespace Cache {
    }
 
    export interface Provider {
-      getItem(key:string):Promise<Item>;
+      getItem(key:string, hashKey?:string):Promise<Item>;
       keys():Promise<string[]>;
       add(key:string, value:any):Promise<Item>;
       create(key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>):Promise<Cache.Item>;

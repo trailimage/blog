@@ -1,5 +1,5 @@
 import { Blog } from './types';
-import * as express from 'express';
+import * as Express from 'express';
 import config from './config';
 import C from './constants';
 import ctrl from './controllers/';
@@ -15,7 +15,7 @@ const ph = C.route;
 const keepParams = { mergeParams: true };
 
 function adminRoutes() {
-   const r = express.Router();
+   const r = Express.Router();
    r.get('/', ctrl.admin.home);
    r.post('/view/delete', ctrl.admin.cache.deleteView);
    r.post('/map/delete', ctrl.admin.cache.deleteMap);
@@ -26,20 +26,15 @@ function adminRoutes() {
 
 /**
  * Download and transform map layers from third-party sources
- * @returns {Express.Router}
  */
-function mapSourceRoutes() {
-   const r = express.Router(keepParams);
+function mapSourceRoutes():Express.Router {
+   const r = Express.Router(keepParams);
    r.get('/mines.json', ctrl.map.source.mines);
    return r;
 }
 
-/**
- * @param {string} photoID Pattern
- * @returns {Express.Router}
- */
-function postRoutes(photoID:string) {
-   const r = express.Router(keepParams);
+function postRoutes(photoID:string):Express.Router {
+   const r = Express.Router(keepParams);
    r.get('/', ctrl.post.latest);
    //r.get('/pdf', c.pdf);
    r.get('/map', ctrl.map.post);
@@ -52,24 +47,24 @@ function postRoutes(photoID:string) {
 /**
  * Series should load the PDF, GPX and GeoJSON for the main post
  */
-function seriesRoutes(photoID:string):Express.Response {
-   const r = express.Router(keepParams);
+function seriesRoutes(photoID:string):Express.Router {
+   const r = Express.Router(keepParams);
    r.get('/', ctrl.post.inSeries);
    r.get('/map', ctrl.map.series);
    r.get(`/map/${photoID}`, ctrl.map.series);
    return r;
 }
 
-function photoTagRoutes() {
-   const r = express.Router();
+function photoTagRoutes():Express.Router {
+   const r = Express.Router();
    r.get('/', ctrl.photo.tags);
    r.get(`/:${ph.PHOTO_TAG}`, ctrl.photo.tags);
    r.get(`/search/:${ph.PHOTO_TAG}`, ctrl.photo.withTag);
    return r;
 }
 
-function categoryRoutes() {
-   const r = express.Router(keepParams);
+function categoryRoutes():Express.Router {
+   const r = Express.Router(keepParams);
    r.get('/', ctrl.category.list);
    r.get(`/:${ph.CATEGORY}`, ctrl.category.forPath);
    return r;

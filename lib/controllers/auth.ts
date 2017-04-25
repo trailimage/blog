@@ -1,16 +1,16 @@
+import { Blog } from '../types';
 import is from '../is';
 import log from '../logger';
 import config from '../config';
 import template from '../template';
+import flickr from '../providers/flickr';
+import google from '../providers/google';
 import C from '../constants';
 
 /**
  * See https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
  */
-function view(req, res) {
-   const flickr = require('./flickr');
-   const google = require('./google');
-
+function view(req:Blog.Request, res:Blog.Response) {
    if (config.needsAuth) {
       if (flickr.auth.isEmpty()) {
          res.redirect(flickr.auth.url());
@@ -27,17 +27,15 @@ function view(req, res) {
  * 
  * See http://www.flickr.com/services/api/auth.oauth.html
  */
-function flickr(req, res) {
-   const f = require('./flickr');
-
+function f(req:Blog.Request, res:Blog.Response) {
    if (is.empty(req.param('oauth_token'))) {
       log.warn('%s is updating Flickr tokens', req.clientIP());
-      f.getRequestToken().then(url => res.redirect(url));
+      flickr.getRequestToken().then(url => res.redirect(url));
    } else {
       const token = req.param('oauth_token');
       const verifier = req.param('oauth_verifier');
 
-      f.getAccessToken(token, verifier)
+      flickr.getAccessToken(token, verifier)
          .then(token => {
             res.render(template.page.AUTHORIZE, {
                title: 'Flickr Access',
@@ -55,7 +53,7 @@ function flickr(req, res) {
 /**
  * @see https://github.com/google/google-api-nodejs-client/
  */
-function google(req, res) {
+function g(req:Blog.Request, res:Blog.Response) {
    const google = require('./google');
    const code = req.param('code');
 
@@ -79,4 +77,4 @@ function google(req, res) {
    }
 }
 
-export default { flickr, google, view };
+export default { flickr: f, google: g, view };

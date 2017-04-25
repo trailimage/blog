@@ -2,7 +2,7 @@ import is from './is';
 import util from './util';
 import config from './config';
 import C from './constants';
-import winston from 'winston';
+import Winston from 'winston';
 
 let queryable = false;
 
@@ -20,11 +20,11 @@ let _provider:Winston.LoggerInstance = null;
 function provider() {
    if (_provider === null) {
       // initialize selected transports and create logger
-      _provider = new winston.Logger({
+      _provider = new Winston.Logger({
          transports: config.log.targets.map(t => {
             switch (t) {
                case C.logTo.CONSOLE:
-                  return new winston.transports.Console();
+                  return new Winston.transports.Console();
                case C.logTo.REDIS:
                   // https://github.com/winstonjs/winston-redis
                   const URL = require('url');

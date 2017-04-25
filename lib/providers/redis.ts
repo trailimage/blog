@@ -155,7 +155,7 @@ export default {
    /**
     * Whether key or hash key exists
     */
-   exists: (key:string, hashKey:string) => new Promise((resolve, reject) => {
+   exists: (key:string, hashKey:string) => new Promise<boolean>((resolve, reject) => {
       const handler = makeHandler(key, dataType.BIT, resolve, reject);
       if (hashKey === undefined) {
          client.exists(key, handler);
@@ -188,7 +188,7 @@ export default {
    /**
     * Get key or hash field value as an object
     */
-   getObject(key:string, hashKey:string):Promise<object> {
+   getObject<T>(key:string, hashKey:string):Promise<T> {
       return this.getValue(dataType.JSON, key, hashKey);
    },
 

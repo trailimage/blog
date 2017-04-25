@@ -1,5 +1,6 @@
 import { Cache } from '../types';
 import config from '../config';
+import item from './item';
 import is from '../is';
 
 const memory:{[key:string]:Cache.Item} = {};
@@ -11,12 +12,12 @@ const provider:Cache.Provider = {
    /**
     * Add or replace value at key
     */
-   add: (key:string, value:any) => createItem(key, value).then(item => {
+   add: (key:string, value:any) => item.create(key, value).then(item => {
       if (config.cache.views) { memory[key] = item; }
       return Promise.resolve(item);
    }),
 
-   create: createItem,
+   create: item.create,
 
    /**
     * Whether cache view exists
@@ -28,7 +29,7 @@ const provider:Cache.Provider = {
     */
    addIfMissing(key:string, buffer:string|Buffer) {
       return (config.cache.views)
-         ? this.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
+         ? provider.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
          : Promise.resolve();
    },
 

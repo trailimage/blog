@@ -1,13 +1,15 @@
-import { Cache } from '../types';
+import { Cache, Flickr } from '../types';
 import is from '../is';
 import redis from '../providers/redis';
 
 const prefix = 'api:';
 
-const provider:Cache.Provider = {
-   getItem: (key:string, hashKey:string) => redis.getObject(prefix + key, hashKey),
+const provider = {
+   getItem: (key:string, hashKey:string) =>
+      redis.getObject<Flickr.Response>(prefix + key, hashKey),
 
-   add: (key:string, hashKeyOrValue:any, value?:any) => redis.add(prefix + key, hashKeyOrValue, value),
+   add: (key:string, hashKeyOrValue:any, value?:any) =>
+      redis.add(prefix + key, hashKeyOrValue, value),
 
    /**
     * All keys with standard prefix

@@ -1,3 +1,4 @@
+import { Post } from '../types';
 import config from '../config';
 import C from '../constants';
 import is from '../is';
@@ -139,10 +140,13 @@ const loadGPX = (post:Post, stream:Stream.Writable) => verifyToken().then(() => 
 
 /**
  * Google downloader uses Request module
- * @see https://developers.google.com/drive/v3/reference/files/get
- * @see https://developers.google.com/drive/v3/web/manage-downloads
+ * 
+ * See https://developers.google.com/drive/v3/reference/files/get
+ * See https://developers.google.com/drive/v3/web/manage-downloads
+ * 
  * Getter uses request library
- * @see https://github.com/request/request
+ * 
+ * See https://github.com/request/request
  */
 const downloadFile = (fileId:string, post:Post, stream:Stream.Writable|Event.EventEmitter) => verifyToken().then(()=> new Promise((resolve, reject) => {
    const options = { fileId, auth: authClient, alt: 'media', timeout: 10000 };

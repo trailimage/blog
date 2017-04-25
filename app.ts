@@ -5,8 +5,8 @@ import log from './lib/logger';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';
 import template from './lib/template';
-import compress from 'compression';
-import bodyParser from 'body-parser';
+import * as compress from 'compression';
+import * as bodyParser from 'body-parser';
 import middleware from './lib/middleware';
 import npm from './package.json';
 
@@ -45,7 +45,6 @@ function createWebService() {
 // https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
 function defineViews(app:Express.Application) {
-   
    const engine = 'hbs';
    const root = __dirname;
 

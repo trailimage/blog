@@ -24,8 +24,8 @@ function ld<T extends JsonLD.Thing>(type:string, fields:any = {}):T {
 
 function image(img:Size):JsonLD.ImageObject {
    const schema:JsonLD.ImageObject = { url: img.url };
-   if (is.defined(img, 'width')) { schema.width = img.width; }
-   if (is.defined(img, 'height')) { schema.height = img.height; }
+   if (img.width) { schema.width = img.width; }
+   if (img.height) { schema.height = img.height; }
    return ld('ImageObject', schema);
 }
 

@@ -5,8 +5,12 @@ import redis from '../providers/redis';
 
 const viewKey = 'view';
 
-function addItem(key:string, hashKey:string, value:string|GeoJSON.FeatureCollection<any>, enabled:boolean) {
-   item
+function addItem(
+   key:string, hashKey:string,
+   value:string|GeoJSON.FeatureCollection<any>,
+   enabled:boolean):Promise<Cache.Item> {
+   
+   return item
       .create(hashKey, value)
       .then(item => (enabled) ? redis.add(key, hashKey, item) : Promise.resolve(item));
 }
@@ -14,9 +18,9 @@ function addItem(key:string, hashKey:string, value:string|GeoJSON.FeatureCollect
 /**
  * Whether key with prefix exists
  */
-const exists = (key:string, hashKey:string, enabled:boolean) => enabled
-   ? redis.exists(key, hashKey)
-   : Promise.resolve(false);
+function exists(key:string, hashKey:string, enabled:boolean):Promise<boolean> {
+   return enabled ? redis.exists(key, hashKey) : Promise.resolve(false);
+};
 
 
 const provider:Cache.Provider = {
@@ -40,7 +44,7 @@ const provider:Cache.Provider = {
     */
    addIfMissing(key:string, buffer:Buffer|string) {
       return (config.cache.views)
-         ? this.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
+         ? provider.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
          : Promise.resolve();
    },
 

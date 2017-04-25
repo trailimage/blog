@@ -3,7 +3,7 @@ import config from '../config'
 import log from '../logger';
 import is from '../is';
 import util from '../util';
-import cache from '../cache';
+import cache from '../cache/api';
 import fetch from 'node-fetch';
 import { OAuth } from 'oauth';
 import { globalAgent} from 'https';
@@ -69,7 +69,7 @@ const defaultCallOptions:FlickrOptions = {
 /**
  * Load response from cache or call API
  */
-function call(method:string, idType:string, id:string, options:FlickrOptions = {}):Promise<Flickr.Response> {
+function call(method:string, idType:string, id:string, options:FlickrOptions):Promise<Flickr.Response> {
    options = Object.assign({}, defaultCallOptions, options);
    // generate fallback API call
    const noCache = ()=> callAPI(method, idType, id, options);
@@ -77,7 +77,7 @@ function call(method:string, idType:string, id:string, options:FlickrOptions = {
    return (config.cache.json && options.allowCache)
       ? cache.getItem(method, id)
          .then(item => is.value(item) ? item : noCache())
-         .catch(err => {
+         .catch((err:Error) => {
             log.error('Error getting Flickr %s:%s from cache: %j', method, id, err);
             return noCache();
          })
@@ -94,7 +94,7 @@ function callAPI(method:string, idType:string, id:string, options:FlickrOptions)
    const key = method + ':' + id;
    const methodUrl = 'https://' + host + url.BASE + parameterize(method, idType, id, options.args);
 
-   return new Promise((resolve, reject) => {
+   return new Promise<Flickr.Response>((resolve, reject) => {
       const token = config.flickr.auth.token;
       // response handler that may retry call
       const handler = (err:any, body:string, attempt:Function) => {
@@ -171,7 +171,7 @@ function parse(body:string, key:string):Flickr.Response {
 function retry(fn:Function, key:string):boolean {
    let count = 1;
 
-   if (is.defined(retries, key)) { count = ++retries[key]; } else { retries[key] = count; }
+   if (retries[key]) { count = ++retries[key]; } else { retries[key] = count; }
 
    if (count > config.flickr.maxRetries) {
       retries[key] = 0;
@@ -188,7 +188,7 @@ function retry(fn:Function, key:string):boolean {
  * Clear retry count and log success
  */
 function clearRetries(key:string) {
-   if (is.defined(retries, key) && retries[key] > 0) {
+   if (retries[key] && retries[key] > 0) {
       log.info('Call to %s succeeded', key);
       retries[key] = 0;
    }
@@ -225,9 +225,9 @@ export default {
       isEmpty() { return is.empty(config.flickr.auth.token.access); }
    },
 
-   getRequestToken() {
+   getRequestToken():Promise<string> {
       const token = config.flickr.auth.token;
-      return new Promise((resolve, reject) => {
+      return new Promise<string>((resolve, reject) => {
          oauth.getOAuthRequestToken((error, t, secret) => {
             if (is.value(error)) {
                reject(error);

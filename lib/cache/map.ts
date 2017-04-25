@@ -1,10 +1,12 @@
 import { Cache } from '../types';
+import config from '../config';
+import item from './item';
 import redis from '../providers/redis';
 
 const mapKey = 'map';
 
 const provider:Cache.Provider = {
-   getItem: (key:string) => redis.getObject(mapKey, key).then(deserialize),
+   getItem: (key:string) => redis.getObject(mapKey, key).then(item.deserialize),
    keys: ()=> redis.keys(mapKey),
 
    /**
@@ -27,11 +29,11 @@ const provider:Cache.Provider = {
     */
    addIfMissing(key:string, buffer:Buffer|string) {
       return (config.cache.maps)
-         ? this.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
+         ? provider.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
          : Promise.resolve();
    },
 
-   serialize: serializeItem
+   serialize: item.serialize
 };
 
 export default provider;
