@@ -169,7 +169,7 @@ export default {
     *
     * See http://redis.io/commands/keys
     */
-   keys: (key:string) => new Promise((resolve, reject) => {
+   keys: (key:string) => new Promise<string[]>((resolve, reject) => {
       const handler = makeHandler(key, dataType.RAW, resolve, reject);
       if (/[\?\*\[\]]/.test(key)) {
          // wildcard match against root keys

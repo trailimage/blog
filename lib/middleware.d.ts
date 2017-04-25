@@ -1,4 +1,4 @@
-import {Flickr} from './providers/flickr.d';
+import {Flickr, Cache} from './types';
 import {EventEmitter} from "events";
 import {
    Response as ExpressResponse,
@@ -12,11 +12,6 @@ export interface FlickrOptions {
    args: Object
 }
 
-export interface ViewCacheItem {
-   buffer:Buffer;
-   eTag:string;
-}
-
 interface Renderer {
 
 }
@@ -27,7 +22,7 @@ declare namespace Blog {
       internalError(): void,
       sendView(key: string, p2: string|Object|Renderer, p3?: Renderer): void,
       sendJson(key: string, render: Renderer): void,
-      sendCompressed(mimeType: string, item: ViewCacheItem, cache?: boolean): void,
+      sendCompressed(mimeType: string, item: Cache.Item, cache?: boolean): void,
       jsonError(message:string):void,
       jsonMessage(message:string):void
    }

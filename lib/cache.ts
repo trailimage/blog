@@ -1,4 +1,4 @@
-import { ViewCacheItem } from './types';
+import { Cache } from './types';
 import is from './is';
 import C from './constants';
 import config from './config';
@@ -10,7 +10,7 @@ import * as compress from 'zlib';
 const prefix = 'api:';
 const viewKey = 'view';
 const mapKey = 'map';
-const memory:{[key:string]:ViewCacheItem} = {};
+const memory:{[key:string]:Cache.Item} = {};
 
 /**
  * Whether key with prefix exists
@@ -22,14 +22,14 @@ const exists = (key:string, hashKey:string, enabled:boolean) => enabled
 /**
  * Create view cache item with eTag and compressed content
  */
-function createItem(key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>):Promise<ViewCacheItem> {
-   return new Promise<ViewCacheItem>((resolve, reject) => {
+function createItem(key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<any>):Promise<Cache.Item> {
+   return new Promise<Cache.Item>((resolve, reject) => {
       const text = (typeof(htmlOrJSON) == is.type.OBJECT) ? JSON.stringify(htmlOrJSON) : htmlOrJSON as string;
       compress.gzip(text, (err:Error, buffer:Buffer) => {
          if (is.value(err)) {
             reject(err);
          } else {
-            resolve({ buffer, eTag: key + '_' + (new Date()).getTime().toString() } as ViewCacheItem);
+            resolve({ buffer, eTag: key + '_' + (new Date()).getTime().toString() } as Cache.Item);
          }
       });
    });
@@ -48,12 +48,12 @@ const addItem = (key:string, hashKey:string, value:string|GeoJSON.FeatureCollect
 /**
  * Convert view cache to string
  */
-const serializeItem = (item:ViewCacheItem) => JSON.stringify({
+const serializeItem = (item:Cache.Item) => JSON.stringify({
    buffer: item.buffer.toString(C.encoding.HEXADECIMAL),
    eTag: item.eTag
 });
 
-const deserialize = (item:ViewCacheItem) => is.value(item)
+const deserialize = (item:Cache.Item) => is.value(item)
    ? { buffer: Buffer.from(item.buffer, C.encoding.HEXADECIMAL), eTag: item.eTag }
    : null;
 
@@ -65,7 +65,7 @@ export default {
    /**
     * Retrieve cached value
     */
-   getItem: (key:string, hashKey:string) => redis.getObject(prefix + key, hashKey) as ViewCacheItem,
+   getItem: (key:string, hashKey:string) => redis.getObject(prefix + key, hashKey) as Cache.Item,
 
    add: (key:string, hashKeyOrValue:any, value?:any) => redis.add(prefix + key, hashKeyOrValue, value),
 
@@ -128,8 +128,8 @@ export default {
       /**
        * In-memory cache doesn't need to serialize the page buffer
        */
-      serialize: (item:ViewCacheItem) => item
-   },
+      serialize: (item:Cache.Item) => item
+   }  as Cache.Provider,
 
    /**
     * Cache rendered views in Redis
@@ -165,7 +165,8 @@ export default {
       remove: (keys:string|string[]) => redis.remove(viewKey, keys),
 
       serialize: serializeItem
-   },
+   }  as Cache.Provider,
+
    /**
     * Cache GeoJSON
     */
@@ -198,5 +199,5 @@ export default {
       },
 
       serialize: serializeItem
-   }
+   }  as Cache.Provider
 };
