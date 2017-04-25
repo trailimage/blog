@@ -21,7 +21,7 @@ export function create(key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<a
 }
 
 /**
- * Convert view cache to string
+ * Convert cache item to string for storage
  */
 export const serialize = (item:Cache.Item) => JSON.stringify({
    buffer: item.buffer.toString(C.encoding.HEXADECIMAL),

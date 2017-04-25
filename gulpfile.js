@@ -20,7 +20,7 @@ const lessPath = names => names.map(n => './src/less/' + n + '.less');
  * @param {string[]} names
  * @returns {string[]}
  */
-const jsPath =   names => names.map(n => './src/js/' + n);
+const jsPath =   names => names.map(n => './src/client/' + n);
 
 /**
  * Handle error so file watcher can continue
@@ -63,5 +63,5 @@ gulp.task('js', ()=>
 // act on changes
 gulp.task('watch', ()=> {
    gulp.watch('./src/less/*.less', ['css']);
-   gulp.watch('./src/js/*.js', ['js']);
+   gulp.watch('./src/client/*.js', ['js']);
 });

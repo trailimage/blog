@@ -26,7 +26,7 @@ function image(img:Size):JsonLD.ImageObject {
    const schema:JsonLD.ImageObject = { url: img.url };
    if (img.width) { schema.width = img.width; }
    if (img.height) { schema.height = img.height; }
-   return ld('ImageObject', schema);
+   return ld<JsonLD.ImageObject>('ImageObject', schema);
 }
 
 function webPage(path:string = ''):JsonLD.WebPage {
@@ -139,7 +139,7 @@ export default {
          schema.image.thumbnail = image(post.coverPhoto.size.thumb);
       }
 
-      return ld('BlogPosting', schema);
+      return ld<JsonLD.BlogPosting>('BlogPosting', schema);
    },
 
    /**

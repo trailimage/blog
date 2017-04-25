@@ -11,6 +11,7 @@
    },
 
    "tslint.enable": true,
+   "eslint.enable": false,
 
    "mocha.env": {
       "FLICKR_API_KEY": "${env.FLICKR_API_KEY}",

@@ -11,6 +11,11 @@ export interface EXIF {
    sanitized: boolean
 }
 
+/**
+ * Singleton collection of photos grouped into "posts" (called a "set" or
+ * "album" in most providers) that are in turn assigned categories. Additional
+ * library methods are added by the factory.
+ */
 export interface Library {
    categories:{ [key: string]: Category };
    posts:Post[];

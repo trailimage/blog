@@ -11,8 +11,7 @@ import post from './post';
 import exif from './exif';
 
 /**
- * @param {boolean} [emptyIfLoaded] Whether to reset the library before loading
- * @returns {Promise.<Library>} Resolve with list of changed post keys
+ * `emptyIfLoaded` Whether to reset the library before loading
  */
 function buildLibrary(emptyIfLoaded:boolean = true):Promise<Library> {
    // store existing post keys to compute changes
