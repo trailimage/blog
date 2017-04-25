@@ -1,0 +1,19 @@
+{
+   "extends": "./tsconfig.json",
+   "compileOnSave": true,
+   "compilerOptions": {
+      "module": "commonjs",
+      "outDir": "../lib",
+      "removeComments": true,
+      "sourceMap": true,
+      "types": [],
+      "lib": ["es6"]
+   },
+   "exclude": [
+      "node_modules",
+      "**/*.d.ts"
+   ],
+   "include": [
+      "app.ts"
+   ]
+}

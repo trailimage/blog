@@ -10,6 +10,8 @@
       "procfile": "yaml"
    },
 
+   "tslint.enable": true,
+
    "mocha.env": {
       "FLICKR_API_KEY": "${env.FLICKR_API_KEY}",
       "FLICKR_SECRET": "${env.FLICKR_SECRET}",
