@@ -1,5 +1,5 @@
 // simplified Redis interface
-import { ViewCacheItem } from '../types';
+import { Cache } from '../types';
 import is from '../is';
 import log from '../logger';
 import config from '../config';
@@ -74,7 +74,7 @@ client.on('end', ()=> {
 /**
  * Normalize data value for cache storage
  */
-function normalize(value:string|string[]|ViewCacheItem):string {
+function normalize(value:string|string[]|Cache.Item):string {
    if (typeof value == is.type.OBJECT) {
       const cache = require('../cache');
       return is.cacheItem(value) ? cache.redisView.serialize(value) : JSON.stringify(value);
@@ -188,7 +188,9 @@ export default {
    /**
     * Get key or hash field value as an object
     */
-   getObject(key:string, hashKey:string) { return this.getValue(dataType.JSON, key, hashKey); },
+   getObject(key:string, hashKey:string):Promise<object> {
+      return this.getValue(dataType.JSON, key, hashKey);
+   },
 
    /**
     * Get key or hash field value as given type
