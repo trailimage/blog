@@ -1,8 +1,10 @@
 import is from './is';
 import util from './util';
 import config from './config';
-import C from './constants';
-import Winston from 'winston';
+import { logTo, time, month, weekday } from './constants';
+import * as URL from 'url';
+import * as Winston from 'winston';
+import * as Redis from 'winston-redis';
 
 let queryable = false;
 
@@ -15,22 +17,20 @@ const level = {
    ERROR: 'error'
 };
 
-let _provider:Winston.LoggerInstance = null;
+let selectedProvider:Winston.LoggerInstance = null;
 
 function provider() {
-   if (_provider === null) {
+   if (selectedProvider === null) {
       // initialize selected transports and create logger
-      _provider = new Winston.Logger({
+      selectedProvider = new Winston.Logger({
          transports: config.log.targets.map(t => {
             switch (t) {
-               case C.logTo.CONSOLE:
+               case logTo.CONSOLE:
                   return new Winston.transports.Console();
-               case C.logTo.REDIS:
+               case logTo.REDIS:
                   // https://github.com/winstonjs/winston-redis
-                  const URL = require('url');
                   const url = URL.parse(config.redis.url);
-                  const RedisTx = require('winston-redis').Redis;
-                  const tx = new RedisTx({
+                  const tx = new Redis({
                      host: url.hostname,
                      port: url.port,
                      // winston-redis only wants password for auth
@@ -40,21 +40,21 @@ function provider() {
 
                   tx.on('error', (err:Error) => {
                      // replace Redis transport with console
-                     try { _provider.remove(C.logTo.REDIS); } catch(err) {}
-                     try { _provider.add(new winston.transports.Console()); } catch(err) {}
-                     _provider[level.ERROR]('Reverting logs to console', err.stack);
+                     try { selectedProvider.remove(logTo.REDIS); } catch (err) {}
+                     try { selectedProvider.add(new Winston.transports.Console()); } catch (err) {}
+                     selectedProvider[level.ERROR]('Reverting logs to console', err.stack);
                   });
 
                   queryable = true;
 
                   return tx;
-               case C.logTo.FILE:
+               case logTo.FILE:
 
             }
          })
       });
    }
-   return _provider;
+   return selectedProvider;
 }
 
 /**
@@ -98,7 +98,7 @@ function parseLogs(results:any):{[key:string]:string[]} {
 
          if (!sameDay(day, d)) {
             day = d;
-            dayKey = util.format('{0}, {1} {2}', C.weekday[d.getDay()], C.month[d.getMonth()], d.getDate());
+            dayKey = util.format('{0}, {1} {2}', weekday[d.getDay()], month[d.getMonth()], d.getDate());
             grouped[dayKey] = [];
          }
          grouped[dayKey].push(r);
@@ -109,9 +109,10 @@ function parseLogs(results:any):{[key:string]:string[]} {
 
 function query(daysAgo:number, maxRows = 500) {
    // https://github.com/flatiron/winston/blob/master/lib/winston/transports/transport.js
-   const options = {
-      from: (new Date()) - (C.time.DAY * daysAgo),
-      rows: maxRows
+   const options:Winston.QueryOptions = {
+      from: new Date((new Date()).getTime() - (time.DAY * daysAgo)),
+      rows: maxRows,
+      fields: null
    };
 
    return new Promise((resolve, reject) => {
@@ -139,5 +140,5 @@ export default {
    errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
    query,
    // force provider(s) to be re-initialized
-   reset() { _provider = null; }
+   reset() { selectedProvider = null; }
 };

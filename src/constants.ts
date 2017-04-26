@@ -120,7 +120,9 @@ export const logTo = {
    FILE: 'file'
 };
 
-// durations in terms of milliseconds
+/**
+ * Durations of time in milliseconds
+ */
 export const time = { SECOND: s, MINUTE: m, HOUR: h, DAY: d, WEEK: w };
 
 export default {

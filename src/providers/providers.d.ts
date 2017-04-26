@@ -27,5 +27,4 @@ export namespace Provider {
          loadGPX(post:Post, stream:Stream.Writable):Promise<string>;
       }
    }
-
 }
