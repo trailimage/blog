@@ -23,7 +23,7 @@ function story(text:string):string {
    if (!is.empty(text)) {
       if (re.poetry.all.test(text)) {
          // text is entirely a poem or haiku
-         text = text.replace(re.poetry.delimiter,'');
+         text = text.replace(re.poetry.delimiter, '');
 
          if (re.haiku.all.test(text)) {
             // haiku
@@ -312,7 +312,7 @@ function hoursAndMinutes(hours:number):string {
  * Pad integer with leading zeroes
  */
 function leadingZeros(d:number, count:number):string {
-   var text = d.toString();
+   let text = d.toString();
    while (text.length < count) { text = '0' + text; }
    return text;
 }
@@ -356,7 +356,7 @@ function parseNumber(text:string):number {
 
 /**
  * Material icon tag
- * 
+ *
  * See https://material.io/icons/
  */
 const iconTag = (name:string) => `<i class="material-icons ${name}">${name}</i>`;
@@ -527,7 +527,7 @@ export default {
 
 /**
  * Character codes for HTML entities
- * 
+ *
  * See http://www.w3.org/TR/html4/sgml/entities.html
  */
 const htmlEntity:{[key:number]:string} = {

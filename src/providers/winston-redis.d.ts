@@ -11,5 +11,6 @@ declare module "winston-redis" {
 
    export interface Redis extends Winston.TransportInstance {
       new(options?:Options):Redis;
+      //new(options?: ConsoleTransportOptions): ConsoleTransportInstance;
    }
 }

@@ -4,11 +4,9 @@ import config from './config';
 import { logTo, time, month, weekday } from './constants';
 import * as URL from 'url';
 import * as Winston from 'winston';
-import * as Redis from 'winston-redis';
+import * as RedixTx from 'winston-redis';
 
 let queryable = false;
-
-// region Invoke provider
 
 const level = {
    DEBUG: 'debug',
@@ -17,12 +15,12 @@ const level = {
    ERROR: 'error'
 };
 
-let selectedProvider:Winston.LoggerInstance = null;
+let logger:Winston.LoggerInstance = null;
 
 function provider() {
-   if (selectedProvider === null) {
+   if (logger === null) {
       // initialize selected transports and create logger
-      selectedProvider = new Winston.Logger({
+      logger = new Winston.Logger({
          transports: config.log.targets.map(t => {
             switch (t) {
                case logTo.CONSOLE:
@@ -30,7 +28,7 @@ function provider() {
                case logTo.REDIS:
                   // https://github.com/winstonjs/winston-redis
                   const url = URL.parse(config.redis.url);
-                  const tx = new Redis({
+                  const tx = new RedisTx({
                      host: url.hostname,
                      port: url.port,
                      // winston-redis only wants password for auth
@@ -40,9 +38,18 @@ function provider() {
 
                   tx.on('error', (err:Error) => {
                      // replace Redis transport with console
-                     try { selectedProvider.remove(logTo.REDIS); } catch (err) {}
-                     try { selectedProvider.add(new Winston.transports.Console()); } catch (err) {}
-                     selectedProvider[level.ERROR]('Reverting logs to console', err.stack);
+                     try {
+                        const r = logger.transports[logTo.REDIS];
+                        logger.remove(r);
+                     } catch (err) {
+                        console.error('Unable to remove Redis logger');
+                     }
+                     try {
+                        logger.add(new Winston.transports.Console());
+                     } catch (err) {
+                        console.error(err);
+                     }
+                     //logger[level.ERROR]('Reverting logs to console', err.stack);
                   });
 
                   queryable = true;
@@ -54,7 +61,7 @@ function provider() {
          })
       });
    }
-   return selectedProvider;
+   return logger;
 }
 
 /**
@@ -140,5 +147,5 @@ export default {
    errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
    query,
    // force provider(s) to be re-initialized
-   reset() { selectedProvider = null; }
+   reset() { logger = null; }
 };
