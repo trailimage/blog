@@ -96,39 +96,45 @@ export const route = {
    YEAR: 'year'
 };
 
+export const flickrSize = {
+   THUMB: 'url_t',
+   SQUARE_75: 'url_sq',
+   SQUARE_150: 'url_q',
+   SMALL_240: 'url_s',
+   SMALL_320: 'url_n',
+   MEDIUM_500: 'url_m',
+   MEDIUM_640: 'url_z',
+   MEDIUM_800: 'url_c',
+   LARGE_1024: 'url_l',
+   LARGE_1600: 'url_h',
+   LARGE_2048: 'url_k',
+   ORIGINAL: 'url_o'
+};
+
+/**
+ * Provider names used internally by Winston
+ */
+export const logTo = {
+   REDIS: 'redis',
+   CONSOLE: 'console',
+   FILE: 'file'
+};
+
+// durations in terms of milliseconds
+export const time = { SECOND: s, MINUTE: m, HOUR: h, DAY: d, WEEK: w };
+
 export default {
    // distances in terms of feet
    distance: { EQUATOR: equator, MILE: mile, YARD: yard },
-   // durations in terms of milliseconds
-   time: { SECOND: s, MINUTE: m, HOUR: h, DAY: d, WEEK: w },
+   time,
    month,
    weekday,
    httpStatus,
    alphabet,
-   /**
-    * Provider names used internally by Winston
-    */
-   logTo: {
-      REDIS: 'redis',
-      CONSOLE: 'console',
-      FILE: 'file'
-   },
+   logTo,
    route,
    encoding,
-   flickrSize: {
-      THUMB: 'url_t',
-      SQUARE_75: 'url_sq',
-      SQUARE_150: 'url_q',
-      SMALL_240: 'url_s',
-      SMALL_320: 'url_n',
-      MEDIUM_500: 'url_m',
-      MEDIUM_640: 'url_z',
-      MEDIUM_800: 'url_c',
-      LARGE_1024: 'url_l',
-      LARGE_1600: 'url_h',
-      LARGE_2048: 'url_k',
-      ORIGINAL: 'url_o'
-   },
+   flickrSize,
    mimeType,
    header
 };

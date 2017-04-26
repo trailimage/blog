@@ -1,4 +1,4 @@
-import { Blog, Post } from '../types';
+import { Blog, Post, Provider } from '../types';
 import is from '../is';
 import log from '../logger';
 import fetch from 'node-fetch';
@@ -7,8 +7,10 @@ import geoJSON from '../map/geojson';
 import template from '../template';
 import library from '../library';
 import factory from '../factory/';
-import google from '../providers/google';
+import realGoogle from '../providers/google';
 import { route as ph, mimeType, httpStatus, header, encoding } from '../constants';
+// can be replaced with injection
+let google = realGoogle;
 
 /**
  * Map screen loads then makes AJAX call to fetch data
@@ -134,6 +136,6 @@ export default {
    },
    // inject different data providers
    inject: {
-      set google(g:any) { google = g; }
+      set google(g:Provider.Google) { google = g; }
    }
 };

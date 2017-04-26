@@ -81,8 +81,6 @@ export interface Post {
    subTitle:string;
    description:string;
    longDescription:string;
-   seriesKey?:string;
-   partKey?:string;
    happenedOn:Date;
    createdOn:Date;
    updatedOn:Date;
@@ -101,7 +99,9 @@ export interface Post {
    categories:{[key:string]:string};
    hasCategories:boolean;
    infoLoaded:boolean;
+   /** Whether attempt was made to load GPX track */
    triedTrack:boolean;
+   /** Whether GPX track was found for the post */
    hasTrack:boolean;
    next?:Post;
    previous?:Post;
@@ -112,6 +112,8 @@ export interface Post {
    previousIsPart:boolean;
    totalParts:number;
    isSeriesStart:boolean;
+   seriesKey?:string;
+   partKey?:string;
    video:VideoInfo;
    makeSeriesStart():void;
    ungroup():void;

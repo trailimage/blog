@@ -1,4 +1,4 @@
-import { Flickr } from '../types';
+import { Flickr, Provider } from '../types';
 import config from '../config';
 import log from '../logger';
 import is from '../is';
@@ -335,4 +335,4 @@ export default {
       sign: true,
       allowCache: true
    })
-};
+} as Provider.Flickr;

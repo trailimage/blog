@@ -50,6 +50,7 @@
     "@types/mapbox-gl": "^0.30.0",
     "@types/node-fetch": "^1.6.7",
     "@types/redis": "^0.12.36",
+    "@types/request": "0.0.42",
     "@types/twitter": "0.0.28",
     "@types/uglify-js": "^2.6.28",
     "@types/winston": "^2.3.1",

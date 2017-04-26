@@ -1,4 +1,4 @@
-import { Post, Photo, Flickr } from '../types';
+import { Post, Photo, Flickr, Provider } from '../types';
 import util from '../util';
 import is from '../is';
 import re from '../regex';
@@ -7,8 +7,9 @@ import config from '../config';
 import photo from './photo.js';
 import videoInfo from './video-info';
 import library from '../library';
+import realFlickr from '../providers/flickr';
 // can be replaced with injection
-import flickr from '../providers/flickr';
+let flickr = realFlickr;
 
 /**
  * For post titles that looked like part of a series (had a colon separator) but had no other parts
@@ -270,6 +271,6 @@ function make(flickrSet:Flickr.SetSummary, chronological:boolean = true):Post {
 export default {
    make,
    inject: {
-      set flickr(f:any) { flickr = f; }
+      set flickr(f:Provider.Flickr) { flickr = f; }
    }
 };

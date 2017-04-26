@@ -1,14 +1,23 @@
 // translate Flickr, Google and Redis responses into standard objects
-import { Flickr, Library, Post, Photo, EXIF } from '../types';
 import is from '../is';
 import log from '../logger';
 import config from '../config';
 import library from '../library';
 import category from './category';
 import photoSize from './photo-size';
-import flickr from '../providers/flickr';
+import realFlickr from '../providers/flickr';
+//import inject from '../providers/inject';
 import post from './post';
 import exif from './exif';
+import {
+   Flickr,
+   Provider,
+   Library,
+   Post,
+   Photo,
+   EXIF } from '../types';
+
+let flickr = realFlickr;
 
 /**
  * `emptyIfLoaded` Whether to reset the library before loading
@@ -143,13 +152,14 @@ function parsePhotoTags(rawTags:Flickr.Tag[]):{[key:string]:string} {
 
 export default {
    buildLibrary,
-   map,
    // inject different data providers
    inject: {
-      set flickr(f:any) {
+      set flickr(f:Provider.Flickr) {
          flickr = f;
          post.inject.flickr = f;
       },
-      set google(g:any) { map.inject.google = g; }
+      set google(g:Provider.Google) {
+         //map.inject.google = g;
+      }
    }
 };

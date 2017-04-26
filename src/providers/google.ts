@@ -1,14 +1,17 @@
-import { Post } from '../types';
+import { Post, Provider, Token } from '../types';
 import * as Stream from 'stream';
-import { EventEmitter } from 'events';
 import config from '../config';
-import C from '../constants';
+import { header, mimeType } from '../constants';
 import is from '../is';
 import log from '../logger';
-import googleAPIs from 'googleapis';
+import * as googleAPIs from 'googleapis';
 import googleAuth from 'google-auth-library';
 
-// https://developers.google.com/drive/web/scopes
+/**
+ * Google access scopes
+ *
+ * https://developers.google.com/drive/web/scopes
+ */
 const scope = {
    drive: {
       READ_WRITE: 'https://www.googleapis.com/auth/drive',
@@ -29,8 +32,8 @@ const authorizationURL = ()=> authClient.generateAuthUrl({
 });
 
 /**
- * Whether access token needs to be refreshed
- * @returns {boolean} True if a refresh token is available and expiration is empty or old
+ * Whether access token needs to be refreshed. True if a refresh token is
+ * available and expiration is empty or old.
  */
 const accessTokenExpired = ()=> is.value(authConfig.token.refresh) &&
    (authConfig.token.accessExpiration === null || authConfig.token.accessExpiration < new Date());
@@ -50,7 +53,7 @@ const minuteEarlier = (ms:number) => {
  *
  * See https://developers.google.com/drive/v3/web/quickstart/nodejs
  */
-const verifyToken = ()=> new Promise((resolve, reject) => {
+const verifyToken = ()=> new Promise<null>((resolve, reject) => {
    authClient.setCredentials({
       access_token: authConfig.token.access,
       refresh_token: authConfig.token.refresh
@@ -80,7 +83,7 @@ const verifyToken = ()=> new Promise((resolve, reject) => {
 /**
  * Retrieve access and refresh tokens
  */
-const getAccessToken = (code:string) => new Promise((resolve, reject) => {
+const getAccessToken = (code:string) => new Promise<Token>((resolve, reject) => {
    authClient.getToken(code, (err:Error, token) => {
       if (is.value(err)) {
          reject(err);
@@ -90,95 +93,89 @@ const getAccessToken = (code:string) => new Promise((resolve, reject) => {
             access: token.access_token,
             refresh: token.refresh_token,
             accessExpiration: minuteEarlier(token.expiry_date)
-         });
+         } as Token);
       }
    });
 });
 
 const driveConfig = config.google.drive;
-let _drive = null;
+let _drive:googleAPIs.Drive = null;
 
 function drive() {
    if (_drive === null) { _drive = googleAPIs.drive('v3'); }
    return _drive;
 }
 
-/**
- * See https://developers.google.com/drive/v3/reference/files/list
- * See https://developers.google.com/drive/v3/web/search-parameters
- */
-const loadGPX = (post:Post, stream:Stream.Writable) => verifyToken().then(() => new Promise((resolve, reject) => {
-   const options = {
-      auth: authClient,
-      q: `name = '${post.title}.gpx' and '${driveConfig.tracksFolder}' in parents`
-   };
+const loadGPX = (post:Post, stream:Stream.Writable) =>
+   verifyToken().then(()=> new Promise<string>((resolve, reject) => {
+      const options = {
+         auth: authClient,
+         q: `name = '${post.title}.gpx' and '${driveConfig.tracksFolder}' in parents`
+      };
 
-   drive().files.list(options, (err:Error, list) => {
-      // set flag so we don't try repeatedly
-      post.triedTrack = true;
+      drive().files.list(options, (err, list) => {
+         // set flag so it isn't tried repeatedly
+         post.triedTrack = true;
 
-      if (err !== null) {
-         log.error('Error finding GPX for “%s”: %s', post.title, err.message);
-         reject(err);
-      } else if (!is.array(list.files) || list.files.length == 0) {
-         // no matches
-         post.hasTrack = false;
-         log.warn(`No GPX file found for “${post.title}”`);
-         reject();
-      } else {
-         const file = list.files[0];
-         let purpose = 'Retrieving';
-         let icon = 'save';
+         if (err !== null) {
+            log.error('Error finding GPX for “%s”: %s', post.title, err.message);
+            reject(err);
+         } else if (!is.array(list.files) || list.files.length == 0) {
+            // no matches
+            post.hasTrack = false;
+            log.warn(`No GPX file found for “${post.title}”`);
+            reject();
+         } else {
+            const file = list.files[0];
+            let purpose = 'Retrieving';
+            let icon = 'save';
 
-         if (is.value(stream)) {
-            purpose = 'Downloading';
-            icon = 'file_download';
+            if (is.value(stream)) {
+               purpose = 'Downloading';
+               icon = 'file_download';
+            }
+            log.infoIcon(icon, '%s GPX for “%s” (%s)', purpose, post.title, file.id);
+            resolve(downloadFile(file.id, post, stream));
          }
-         log.infoIcon(icon, '%s GPX for “%s” (%s)', purpose, post.title, file.id);
-         resolve(downloadFile(file.id, post, stream));
-      }
-   });
-}));
+      });
+   })
+);
 
 /**
  * Google downloader uses Request module
- *
- * See https://developers.google.com/drive/v3/reference/files/get
- * See https://developers.google.com/drive/v3/web/manage-downloads
- *
- * Getter uses request library
- *
- * See https://github.com/request/request
  */
-const downloadFile = (fileId:string, post:Post, stream:Stream.Writable|EventEmitter) => verifyToken().then(()=> new Promise((resolve, reject) => {
-   const options = { fileId, auth: authClient, alt: 'media', timeout: 10000 };
-   if (is.value(stream)) {
-      // pipe to stream
-      stream.on('finish', resolve);
-      drive().files
-         .get(options)
-         .on('error', reject)
-         .on('end', ()=> { post.hasTrack = true; })
-         .on('response', res => {
-            // response headers are piped directly to the stream so changes must happen here
-            res.headers[C.header.content.DISPOSITION.toLowerCase()] = `attachment; filename=${post.key}.gpx`;
-            res.headers[C.header.content.TYPE.toLowerCase()] = C.mimeType.GPX;
-         })
-         .pipe(stream);
-   } else {
-      // capture file contents
-      drive().files
-         .get(options, (err:Error, body, response) => {
-            if (is.value(err)) {
-               reject(err);
-            } else {
-               post.hasTrack = true;
-               resolve(body);
-            }
-         })
-         .on('error', reject);
-   }
-}));
+const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
+   verifyToken().then(()=> new Promise<string>((resolve, reject) => {
+      const options = { fileId, auth: authClient, alt: 'media', timeout: 10000 };
+      if (is.value(stream)) {
+         // pipe to stream
+         stream.on('finish', resolve);
+         drive().files
+            .get(options)
+            .on('error', reject)
+            .on('end', ()=> { post.hasTrack = true; })
+            .on('response', res => {
+               // response headers are piped directly to the stream so changes
+               // must happen here
+               res.headers[header.content.DISPOSITION.toLowerCase()] = `attachment; filename=${post.key}.gpx`;
+               res.headers[header.content.TYPE.toLowerCase()] = mimeType.GPX;
+            })
+            .pipe(stream);
+      } else {
+         // capture file contents
+         drive().files
+            .get(options, (err:Error, body, response) => {
+               if (is.value(err)) {
+                  reject(err);
+               } else {
+                  post.hasTrack = true;
+                  resolve(body);
+               }
+            })
+            .on('error', reject);
+      }
+   })
+);
 
 export default {
    auth: {
@@ -192,4 +189,4 @@ export default {
    drive: {
       loadGPX
    }
-};
+} as Provider.Google;

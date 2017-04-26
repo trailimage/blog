@@ -1,13 +1,14 @@
-import C from './constants';
+import { Token } from './types';
+import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';
 const isProduction = process.env['NODE_ENV'] === 'production';
 /** Preferred photo sizes */
 const sizes = {
-   thumb: C.flickrSize.SQUARE_150,
-   preview: C.flickrSize.SMALL_320,
-   normal: [C.flickrSize.LARGE_1024, C.flickrSize.MEDIUM_800, C.flickrSize.MEDIUM_640],
-   big: [C.flickrSize.LARGE_2048, C.flickrSize.LARGE_1600, C.flickrSize.LARGE_1024]
+   thumb: s.SQUARE_150,
+   preview: s.SMALL_320,
+   normal: [s.LARGE_1024, s.MEDIUM_800, s.MEDIUM_640],
+   big: [s.LARGE_2048, s.LARGE_1600, s.LARGE_1024]
 };
 
 /**
@@ -100,7 +101,7 @@ export default {
    log: {
       ipLookupUrl: 'http://www.ip-tracker.org/locator/ip-lookup.php?ip=',
       photoUrl: 'http://flickr.com/photo.gne?id=',
-      targets: isProduction ? [C.logTo.REDIS, C.logTo.CONSOLE] : [C.logTo.CONSOLE],
+      targets: isProduction ? [logTo.REDIS, logTo.CONSOLE] : [logTo.CONSOLE],
       save: isProduction
    },
    style: {
@@ -176,8 +177,8 @@ export default {
    bing: {
       key: process.env['BING_KEY']
    },
-   cacheDuration: C.time.DAY * 2,
-   retryDelay: C.time.SECOND * 30,
+   cacheDuration: time.DAY * 2,
+   retryDelay: time.SECOND * 30,
    referralSpam: {
       updateFrequency: 0,
       listUrl: 'https://raw.githubusercontent.com/piwik/referrer-spam-blacklist/master/spammers.txt'
@@ -202,8 +203,8 @@ export default {
       /** Photo sizes that must be retrieved for certain contexts */
       photoSize: {
          post: sizes.normal.concat(sizes.big, sizes.preview),
-         map: [C.flickrSize.SMALL_320],
-         search: [C.flickrSize.SQUARE_150]
+         map: [s.SMALL_320],
+         search: [s.SQUARE_150]
       },
       excludeSets: ['72157631638576162'],
       excludeTags: ['Idaho', 'United States of America', 'Abbott', 'LensTagger', 'Boise'],
@@ -217,7 +218,7 @@ export default {
             access: process.env['FLICKR_ACCESS_TOKEN'] as string,
             secret: process.env['FLICKR_TOKEN_SECRET'] as string,
             request: null as string
-         }
+         } as Token
       }
    },
    mapbox: {
@@ -230,30 +231,30 @@ export default {
       }
    },
    redis: {
-      url: env('REDISCLOUD_URL')
+      url: env('REDISCLOUD_URL') as string
    },
    // http://code.google.com/apis/console/#project:1033232213688
    // http://developers.google.com/maps/documentation/staticmaps/
    google: {
-      apiKey: process.env['GOOGLE_KEY'],
+      apiKey: process.env['GOOGLE_KEY'] as string,
       projectID: '316480757902',
       analyticsID: '22180727',        // shown as 'UA-22180727-1
-      searchEngineID: process.env['GOOGLE_SEARCH_ID'],
+      searchEngineID: process.env['GOOGLE_SEARCH_ID'] as string,
       blogID: '118459106898417641',
       drive: {
-         apiKey: env('GOOGLE_DRIVE_KEY'),
+         apiKey: env('GOOGLE_DRIVE_KEY') as string,
          tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM'
       },
       auth: {
-         clientID: env('GOOGLE_CLIENT_ID'),
-         secret: env('GOOGLE_SECRET'),
+         clientID: env('GOOGLE_CLIENT_ID') as string,
+         secret: env('GOOGLE_SECRET') as string,
          callback: 'http://www.' + domain + '/auth/google',
          token: {
             type: null,
-            access: process.env['GOOGLE_ACCESS_TOKEN'],
-            accessExpiration: null,
-            refresh: process.env['GOOGLE_REFRESH_TOKEN']
-         }
+            access: process.env['GOOGLE_ACCESS_TOKEN'] as string,
+            accessExpiration: null as Date,
+            refresh: process.env['GOOGLE_REFRESH_TOKEN'] as string
+         } as Token
       }
    },
    /** Maintain redirects to support previously used URLs */
