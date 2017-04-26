@@ -77,14 +77,17 @@ function iconInvoke(icon:string, level:string, args:IArguments) {
    invoke(level, a);
 }
 
-function invoke(l:string, ...args:any[]) { provider()[l].apply(provider(), args); }
+function invoke(level:string, ...args:any[]) {
+   provider()[l].apply(provider(), args);
+}
 
 /**
  * Group logs by day
  */
 function parseLogs(results:any):{[key:string]:string[]} {
    // whether two timestamps are the same day
-   const sameDay = (d1:Date, d2:Date) => (d1 != null && d2 != null && d1.getMonth() == d2.getMonth() && d1.getDate() == d2.getDate());
+   const sameDay = (d1:Date, d2:Date) =>
+      (d1 != null && d2 != null && d1.getMonth() == d2.getMonth() && d1.getDate() == d2.getDate());
    const grouped:{[key:string]:string[]} = {};
 
    if (is.defined(results, 'redis')) {
@@ -140,12 +143,15 @@ function query(daysAgo:number, maxRows = 500) {
 
 export default {
    info(message:string, ...args:any[]) { invoke(level.INFO, arguments); },
+   /** Log information message with a Material icon attribute */
    infoIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.INFO, arguments); },
    warn(message:string, ...args:any[]) { invoke(level.WARN, arguments); },
+   /** Log warning with a Material icon attribute */
    warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, arguments); },
    error(message:string|Error, ...args:any[]) { invoke(level.ERROR, arguments); },
+   /** Log error with a Material icon attribute */
    errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
    query,
-   // force provider(s) to be re-initialized
+   /** Force provider(s) to be re-initialized */
    reset() { logger = null; }
 };

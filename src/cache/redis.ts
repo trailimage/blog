@@ -5,6 +5,9 @@ import redis from '../providers/redis';
 
 //const viewKey = 'view';
 
+/**
+ * Add cache item to Redis
+ */
 function addItem(
    key:string, hashKey:string,
    value:string|GeoJSON.FeatureCollection<any>,

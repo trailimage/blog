@@ -3,23 +3,30 @@ import { Cache } from '../types';
 import is from '../is';
 import log from '../logger';
 import config from '../config';
-import cache from '../cache/';
+import cacheItem from '../cache/item';
 import * as Redis from 'redis';
 import * as URL from 'url';
 
 const url = URL.parse(config.redis.url);
-const client = Redis.createClient(url.port, url.hostname, {
+const client = Redis.createClient(parseInt(url.port), url.hostname, {
    no_ready_check: true,
    password: url.auth.split(':')[1]
 });
-// expected hash response used for validation and parsing
+
+/** Expected hash response used for validation and parsing */
 const dataType = {
-   NONE: 0,            // don't check the reply
-   OKAY: 1,            // check for 'OK'
-   COUNT: 2,           // reply should match key count
-   BIT: 3,             // 1 or 0
-   RAW: 4,             // return raw data without validation or parsing
-   JSON: 5             // parse as JSON
+   /** Don't check the reply */
+   NONE: 0,
+   /** Check for 'OK' */
+   OKAY: 1,
+   /** Reply should match key count */
+   COUNT: 2,
+   /** 1 or 0 */
+   BIT: 3,
+   /** Return raw data without validation or parsing */
+   RAW: 4,
+   /** Parse as JSON */
+   JSON: 5
 };
 
 const code = {
@@ -31,7 +38,7 @@ const event = {
    CONNECTED: 'connected',
    FATAL: 'fatal'
 };
-// http://redis.io/commands
+/** http://redis.io/commands */
 const command = {
    AUTH: 'AUTH',
    DEL: 'DEL',
@@ -41,7 +48,8 @@ const command = {
    HASH_DEL: 'HDEL'
 };
 let connected = false;
-// client is ready to cache commands before it's connected
+
+/** Client is ready to cache commands before it's connected */
 let ready = true;
 
 client.on('error', (err:any) => {
@@ -77,7 +85,7 @@ client.on('end', ()=> {
  */
 function normalize(value:string|string[]|Cache.Item):string {
    if (typeof value == is.type.OBJECT) {
-      return is.cacheItem(value) ? cache.redis.serialize(value) : JSON.stringify(value);
+      return is.cacheItem(value) ? cacheItem.serialize(value) : JSON.stringify(value);
    } else {
       return value as string;
    }
@@ -90,7 +98,7 @@ function parseObject(value:string) {
    if (is.empty(value)) { return null; }
 
    try {
-      return JSON.parse(value)
+      return JSON.parse(value);
    } catch (err) {
       log.error('Unable to JSON parse "%s"', value);
       return null;
@@ -127,12 +135,12 @@ function makeHandler(key:string|string[], type = dataType.NONE, resolve:Function
 
 /**
  * Whether Redis returned an error
-*/
-function hasError(key:string|string[], err:any):boolean {
+ */
+function hasError(key:string|string[], err:Error):boolean {
    if (is.value(err)) {
       if (is.array(key)) { key = key.join(','); }
       log.error('Operation with key "%s" resulted in', key, err);
-      if (is.defined(err, 'message') && err.message.indexOf(`memory > 'maxmemory'`) > 0) {
+      if (err['message'] && err.message.indexOf(`memory > 'maxmemory'`) > 0) {
          // error indicates Redis will not respond to any queries
          log.error('Disabling all caching');
          config.cache.setAll(false);
@@ -161,7 +169,7 @@ export default {
          client.exists(key, handler);
       } else {
          client.hexists(key, hashKey, handler);
-      } 
+      }
    }),
 
    /**
@@ -234,9 +242,9 @@ export default {
    }),
 
    /**
-    * Remove key or key field (hash) from storage
-    * If hashKey is provided and key is an array then the same hashKey field
-    * will be removed from every key value
+    * Remove key or key field (hash) from storage. If hashKey is provided and
+    * key is an array then the same hashKey field will be removed from every
+    * key value.
     */
    remove: (key:string|string[], hashKey?:string|string[]) => new Promise((resolve, reject) => {
       if (is.empty(key)) {
@@ -264,37 +272,38 @@ export default {
    }),
 
    /**
-    * Delete one key and add another
-    * @param {string} key Hash key or old string key
-    * @param {string} p2 Old hash field or new string key
-    * @param {string|object} p3 New hash field or value
-    * @param {String|Object|function(boolean)} p4 Hash value or callback
-    * @param {function(boolean)} [p5] Callback if replacing hash field
+    * Delete one key and add another.
+    *
+    * - `key` Hash key or old string key
+    * - `p2` Old hash field or new string key
+    * - `p3` New hash field or value
+    * - `p4` Hash value or callback
+    * - `p5` Callback if replacing hash field
     */
-   replace(key:string, p2:string, p3:string|{[key:string]:string}, p4:string|{[key:string]:string}|Function, p5?:Function) {
-      if (p5 === undefined) {
-         client.multi()
-            .del(key)
-            .set(p2, normalize(p3))
-            .exec((err, replies) => {
-               log.info('MULTI got %d replies', replies.length);
-               replies.forEach((reply, index) => {
-                  log.info('Reply %d: %s', index, reply);
-               });
-            });
-      } else {
-         // hash
-         client.multi()
-            .hdel(key, p2)
-            .hset(key, p3, normalize(p4))
-            .exec((err, replies) => {
-               log.info('MULTI got %d replies', replies.length);
-               replies.forEach((reply, index) => {
-                  log.info('Reply %d: %s', index, reply);
-               });
-            });
-      }
-   },
+   // replace(key:string, p2:string, p3:string|{[key:string]:string}, p4:string|{[key:string]:string}|Function, p5?:Function) {
+   //    if (p5 === undefined) {
+   //       client.multi()
+   //          .del(key)
+   //          .set(p2, normalize(p3))
+   //          .exec((err, replies) => {
+   //             log.info('MULTI got %d replies', replies.length);
+   //             replies.forEach((reply, index) => {
+   //                log.info('Reply %d: %s', index, reply);
+   //             });
+   //          });
+   //    } else {
+   //       // hash
+   //       client.multi()
+   //          .hdel(key, p2)
+   //          .hset(key, p3, normalize(p4))
+   //          .exec((err, replies) => {
+   //             log.info('MULTI got %d replies', replies.length);
+   //             replies.forEach((reply, index) => {
+   //                log.info('Reply %d: %s', index, reply);
+   //             });
+   //          });
+   //    }
+   // },
 
    disconnect() {
       if (connected) {

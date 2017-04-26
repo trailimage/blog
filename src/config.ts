@@ -27,7 +27,7 @@ const owner = {
       width: 300,
       height: 300
    },
-   email: process.env['EMAIL_CONTACT'],
+   email: process.env['EMAIL_CONTACT'] as string,
    urls: [
       'https://www.facebook.com/jason.e.abbott',
       'http://www.flickr.com/photos/boise',
@@ -85,6 +85,7 @@ export default {
    },
    library,
    cache: {
+      /** Enable or disable all caching */
       setAll(enabled:boolean) {
          this.views = enabled;
          this.maps = enabled;
@@ -134,7 +135,7 @@ export default {
          maxInlineHeight: 200
       },
       css: {
-         // see category-page.less
+         /** See category-page.less */
          categoryHeader: 'category-header'
       },
       /** Characters used between displayed title and subtitle */
@@ -149,8 +150,10 @@ export default {
       /** Manually adjusted tracks may have infinite speeds between points so throw out anything over a threshold */
       maxPossibleSpeed: 150,
       /** Erase tracks around given latitude and longitude */
-      privacyCenter: null,  // reverse order from Google map listing
+      privacyCenter: null as number[],
+      /** Radius around `privacyCenter` to exclude from GeoJSON */
       privacyMiles: 1,
+      /** Whether to enforce `privacy` settings */
       checkPrivacy: false,
       /** Whether track GPX files can be downloaded */
       allowDownload: true,
@@ -175,7 +178,7 @@ export default {
       }  as {[key:string]:string}
    },
    bing: {
-      key: process.env['BING_KEY']
+      key: process.env['BING_KEY'] as string
    },
    cacheDuration: time.DAY * 2,
    retryDelay: time.SECOND * 30,
@@ -183,8 +186,10 @@ export default {
       updateFrequency: 0,
       listUrl: 'https://raw.githubusercontent.com/piwik/referrer-spam-blacklist/master/spammers.txt'
    },
-   // https://developers.facebook.com/docs/reference/plugins/like/
-   // https://developers.facebook.com/apps/110860435668134/summary
+   /**
+    * https://developers.facebook.com/docs/reference/plugins/like/
+    * https://developers.facebook.com/apps/110860435668134/summary
+    */
    facebook: {
       appID: '110860435668134',
       pageID: '241863632579825',
@@ -226,7 +231,7 @@ export default {
       style: {
          /** Style used for interactive maps */
          dynamic: 'jabbott7/cj1qniq9r00322sqxt3pastcf',
-         /** Style used for stati maps */
+         /** Style used for static maps */
          static: 'jabbott7/cj1prg25g002o2ro2xtzos6cy'
       }
    },
@@ -264,7 +269,7 @@ export default {
       'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
    }  as {[key:string]:string},
 
-   /** Support for renamed photo tags */
+   /** Support for renamed photo tags. The key is the old name. */
    photoTagChanges: {
       jeremy: 'jeremyabbott',
       jessica: 'jessicaabbott',
@@ -273,7 +278,7 @@ export default {
 
    blog: {
       domain: 'trailimage.blogspot.com',
-      /** Match old blog URLs to new. Slug is always prefixed by /YYYY/MM/ */
+      /** Match old blog URLs to new. Slug is always prefixed by /YYYY/MM/. */
       redirects: {
          'juntura-by-desert-dry-creek-gorge': 'juntura-by-desert',
          'juntura-by-desert-owyhee-dam': 'juntura-by-desert',
