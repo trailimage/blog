@@ -71,8 +71,8 @@ function categoryRoutes():Express.Router {
 /**
  * Standard routes
  *
- * See http://expressjs.com/en/4x/api.html
- * See http://expressjs.com/en/guide/routing.html
+ * http://expressjs.com/en/4x/api.html
+ * http://expressjs.com/en/guide/routing.html
  */
 function standard(app:Express.Application) {
    // slug pattern

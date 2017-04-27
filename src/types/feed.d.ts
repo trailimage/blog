@@ -1,7 +1,19 @@
 /**
  * https://github.com/jpmonette/feed
+ * 
+ * TypeScript merges modules and classes that have the same name.
  */
-declare module "feed" {
+declare class Feed {
+   constructor(options:Feed.Options);
+   addItem(item:Feed.Item):void;
+   addCategory(category:string):void;
+   addContributor(contributor:Feed.Contributor):void;
+   rss2():void;
+   atom1():void;
+   ISODateString(d:Date):string;
+}
+
+declare module Feed {
    interface Person {
       name:string;
       email?:string;
@@ -12,9 +24,11 @@ declare module "feed" {
    interface Contributor extends Person {}
 
    interface Item {
-      id:string;
+      id?:string;
       link:string;
       title:string;
+      /** URL */
+      image:string;
       description?:string;
       content?:string;
       date:Date;
@@ -25,7 +39,7 @@ declare module "feed" {
    }
 
    interface Options {
-      id:string;
+      id?:string;
       title:string;
       description?:string;
       updated?:Date;
@@ -38,14 +52,8 @@ declare module "feed" {
       hub?:string;
       copyright?:string;
    }
+}
 
-   export interface Feed {
-      new(options:Options):Feed;
-      addItem(item:Item):void;
-      addCategory(category:string):void;
-      addContributor(contributor:Contributor):void;
-      rss2():void;
-      atom1():void;
-      ISODateString(d:Date):string;
-   }
+declare module "feed" {
+   export = Feed;
 }

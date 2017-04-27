@@ -9,7 +9,7 @@ const MAX_RSS_RETRIES = 10;
 
 let rssRetries = 0;
 
-export default function feed(req:Blog.Request, res:Blog.Response) {
+export default function postFeed(req:Blog.Request, res:Blog.Response) {
    if (!library.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
          log.error('Unable to load library after %d tries', MAX_RSS_RETRIES);
@@ -19,7 +19,7 @@ export default function feed(req:Blog.Request, res:Blog.Response) {
       } else {
          rssRetries++;
          log.error('Library not ready when creating RSS feed — attempt %d', rssRetries);
-         setTimeout(() => { feed(req, res); }, 3000);
+         setTimeout(() => { postFeed(req, res); }, 3000);
       }
       return;
    }
