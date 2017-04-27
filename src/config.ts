@@ -108,8 +108,9 @@ export default {
    style: {
       icon: {
          /**
-          * Match post tag names to Material icons
-          * @see https://material.io/icons/
+          * Match post categories to Material icons
+          *
+          * https://material.io/icons/
           */
          category: {
             Who: 'person',
@@ -119,7 +120,9 @@ export default {
             default: 'local_offer' // tag icon
          }  as {[key:string]:string},
 
-         // assign mode of transportation icon based on post tags
+         /**
+          * Assign mode of transportation icon based on `What` category
+          */
          post: {
             motorcycle: /(KTM|BMW|Honda)/gi,
             bicycle: /bicycle/gi,
@@ -182,6 +185,12 @@ export default {
    },
    cacheDuration: time.DAY * 2,
    retryDelay: time.SECOND * 30,
+
+   /**
+    * Block referral spam
+    *
+    * https://en.wikipedia.org/wiki/Referer_spam
+    */
    referralSpam: {
       updateFrequency: 0,
       listUrl: 'https://raw.githubusercontent.com/piwik/referrer-spam-blacklist/master/spammers.txt'
@@ -269,7 +278,7 @@ export default {
       'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
    }  as {[key:string]:string},
 
-   /** Support for renamed photo tags. The key is the old name. */
+   /** Support for renamed photo tags. The hash key is the old name. */
    photoTagChanges: {
       jeremy: 'jeremyabbott',
       jessica: 'jessicaabbott',

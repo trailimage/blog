@@ -20,11 +20,16 @@ let blackList:string[] = [];
 let pending:Function[] = [];
 let isDownloading = false;
 
+/**
+ * Return 404 for known spam referers
+ *
+ * https://en.wikipedia.org/wiki/Referer_spam
+ */
 function blockSpamReferers(req:Blog.Request, res:Blog.Response, next:Function) {
    const referer = req.get('referer');
 
    if (is.value(referer)) {
-      checkBlackList(util.topDomain(referer)).then(spam => {
+      checkSpammerList(util.topDomain(referer)).then(spam => {
          if (spam) {
             log.warnIcon('fingerprint', 'Spam blocked %s referer', referer);
             res.status(httpStatus.NOT_FOUND).end();
@@ -37,41 +42,44 @@ function blockSpamReferers(req:Blog.Request, res:Blog.Response, next:Function) {
    }
 }
 
-function checkBlackList(domain:string):Promise<any> {
+/**
+ * Whether requestor domain matches a spam referer
+ */
+function checkSpammerList(domain:string):Promise<boolean> {
    if (blackList.length === 0) {
-      return getBlackList().then(list => {
+      return getSpammerList().then(list => {
          blackList = list;
          return blackList.indexOf(domain) !== -1;
       });
    } else {
-      if (isStale()) { downloadBlackList(); }
+      if (isStale()) { downloadSpammerList(); }
       return Promise.resolve(blackList.indexOf(domain) !== -1);
    }
 }
 
 /**
- * Load list from cache or remote provider
+ * Load spammer list from cache or remote provider
  */
-function getBlackList():Promise<string[]> {
+function getSpammerList():Promise<string[]> {
    return cache.getItem(cacheKey).then(list => {
       if (is.array(list)) {
-         if (isStale()) { downloadBlackList(); }
+         if (isStale()) { downloadSpammerList(); }
          return list;
       } else {
-         return downloadBlackList();
+         return downloadSpammerList();
       }
    });
 }
 
 /**
- * Whether black list needs to be refreshed
+ * Whether spam list needs to be refreshed
  */
 const isStale = ()=> lastUpdate === 0 || (
    config.referralSpam.updateFrequency > 0 &&
    (new Date().getTime() - lastUpdate  > config.referralSpam.updateFrequency)
 );
 
-function downloadBlackList():Promise<string[]> {
+function downloadSpammerList():Promise<string[]> {
    if (isDownloading) {
       log.info('Spam referral black list is already downloading');
       return new Promise(resolve => { pending.push(resolve); });
@@ -234,7 +242,7 @@ function renderForType(res:Blog.Response, slug:string, options:Blog.RenderOption
    } else {
       // invoke renderer directly, assuming view name identical to slug
       const render = renderTemplate(res, slug, options.mimeType);
-      render(slug, options.templateOptions);
+      render(slug, options.templateValues);
    }
 }
 

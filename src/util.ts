@@ -95,7 +95,8 @@ function formatPoem(text:string):string {
 
 /**
  * Convert new lines to HTML paragraphs and normalize links
- * @see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
+ *
+ * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */
 function caption(text:string):string {
    if (!is.empty(text))	{
@@ -138,8 +139,9 @@ function caption(text:string):string {
 }
 
 /**
- * Flickr sometimes messes up URLs that have parenthesis within them
- * @example Newsletter, No. 2: <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
+ * Flickr sometimes messes up URLs that have parenthesis within them. Example:
+ *
+ *    Newsletter, No. 2: <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
  */
 function fixMalformedLink(text:string):string {
    let index = 0;
@@ -462,7 +464,9 @@ export default {
    },
 
    /**
-    * See https://github.com/igormilla/top-domain
+    * Infer top level domain from URL
+    *
+    * https://github.com/igormilla/top-domain
     */
    topDomain: (address:string) => {
       const parsed = url.parse(address.toLowerCase());
@@ -475,7 +479,7 @@ export default {
    /**
     * Remove IPv6 prefix from transitional addresses
     *
-    * See https://en.wikipedia.org/wiki/IPv6_address
+    * https://en.wikipedia.org/wiki/IPv6_address
     */
    IPv6: (ip:string) => (is.empty(ip) || ip === '::1') ? '127.0.0.1' : ip.replace(/^::[0123456789abcdef]{4}:/g, ''),
 
@@ -508,9 +512,9 @@ export default {
    /**
     * Shuffle an array
     *
-    * See http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
+    * http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
     */
-   shuffle(a:Array<any>):Array<any> {
+   shuffle<T>(a:T[]):T[] {
       if (!is.array(a) || a.length === 0) { return null; }
 
       let i = a.length;
@@ -528,7 +532,7 @@ export default {
 /**
  * Character codes for HTML entities
  *
- * See http://www.w3.org/TR/html4/sgml/entities.html
+ * http://www.w3.org/TR/html4/sgml/entities.html
  */
 const htmlEntity:{[key:number]:string} = {
    34: 'quot',

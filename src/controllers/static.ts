@@ -21,7 +21,7 @@ function search(req:Blog.Request, res:Blog.Response) {
 
 function about(req:Blog.Request, res:Blog.Response) {
    res.sendView(page.ABOUT, {
-      templateOptions: {
+      templateValues: {
          title: 'About ' + config.site.title,
          jsonLD: ld.serialize(ld.owner)
       }

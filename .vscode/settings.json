@@ -10,6 +10,12 @@
       "procfile": "yaml"
    },
 
+   "search.exclude": {
+      "**/node_modules": true,
+      "**/lib": true,
+      "**/dist": true
+   },
+
    "tslint.enable": true,
    "eslint.enable": false,
 

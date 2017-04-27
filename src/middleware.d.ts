@@ -23,12 +23,12 @@ declare namespace Blog {
       callback?:RenderCallback;
       /** Custom method to generate non-template content like JSON */
       generate?:Generator;
-      /** Options send to template renderer */
-      templateOptions?:Object;
+      /** Values that may be rendered with a template */
+      templateValues?:{[key:string]:any};
    }
    
    export interface Response extends ExpressResponse {
-      /** Render not found page */
+      /** Log warning and render not found page */
       notFound():void;
 
       /**

@@ -4,7 +4,7 @@ import config from './config';
 import { logTo, time, month, weekday } from './constants';
 import * as URL from 'url';
 import * as Winston from 'winston';
-import * as RedixTx from 'winston-redis';
+import * as RedisTx from 'winston-redis';
 
 let queryable = false;
 
