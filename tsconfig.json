@@ -9,6 +9,7 @@
       "alwaysStrict": true,
       "strictNullChecks": false,
       "allowSyntheticDefaultImports": false,
-      "forceConsistentCasingInFileNames": true
+      "forceConsistentCasingInFileNames": true,
+      "typeRoots": ["node_modules/@types"]
    }
 }

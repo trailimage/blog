@@ -11,9 +11,6 @@ import * as compress from 'compression';
 import * as bodyParser from 'body-parser';
 import middleware from './middleware';
 import * as wwwhisper from 'connect-wwwhisper';
-import npm from './package.json';
-
-config.repoUrl = npm.repository.url;
 
 createWebService();
 

@@ -63,7 +63,7 @@ export default {
    usePersona: process.env['WWWHISPER_DISABLE'] !== '1',
    /** Hours difference from GMT during standard (not daylight savings) time */
    timeZone: -7,
-   repoUrl: null,
+   repoUrl: 'https://github.com/Jason-Abbott/trail-image.git',
    owner,
    site: {
       domain,

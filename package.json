@@ -14,7 +14,7 @@
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
     "watch": "node_modules/.bin/gulp watch",
-    "oldfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:300,400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+    "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css"
   },
   "dependencies": {
@@ -70,8 +70,10 @@
     "merge2": "^1.0.3",
     "mocha": "^3.2.0",
     "mocha-pretty-spec-reporter": "0.1.0-beta.2",
+    "nodemon": "^1.11.0",
     "stylelint": "^7.10.0",
     "stylelint-config-standard": "^16.0.0",
+    "ts-node": "^3.0.2",
     "tslint": "^5.1.0",
     "typescript": "^2.2.2"
   },

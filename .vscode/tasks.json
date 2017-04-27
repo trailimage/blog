@@ -27,11 +27,18 @@
          "isTestCommand": true
       },
       {
-         "taskName": "Build and Watch",
+         "taskName": "Build and Watch Client",
          "command": "npm run watch",
          "isShellCommand": true,
          "isBuildCommand": true,
          "isBackground": true
+      },
+      {
+         "taskName": "Build Server",
+         "command": "./node_modules/.bin/tsc -p .",
+         "isShellCommand": true,
+         "showOutput": "silent",
+         "problemMatcher": "$tsc"
       }
    ]
 }
