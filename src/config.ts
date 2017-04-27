@@ -1,4 +1,4 @@
-import { Token } from './types';
+import { Token } from './types/';
 import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';

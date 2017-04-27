@@ -1,4 +1,4 @@
-import { Blog, Post, Provider } from '../types';
+import { Blog, Post, Provider } from '../types/';
 import is from '../is';
 import log from '../logger';
 import fetch from 'node-fetch';
@@ -8,6 +8,7 @@ import template from '../template';
 import library from '../library';
 import factory from '../factory/';
 import realGoogle from '../providers/google';
+import * as compress from 'zlib';
 import { route as ph, mimeType, httpStatus, header, encoding } from '../constants';
 // can be replaced with injection
 let google = realGoogle;
@@ -78,6 +79,8 @@ function postJSON(req:Blog.Request, res:Blog.Response) {
 
 /**
  * Retrieve and parse mines map source
+ *
+ * http://nodejs.org/api/zlib.html
  */
 function mapSourceMines(req:Blog.Request, res:Blog.Response) {
    const opt = { headers: { 'User-Agent': 'node.js' }};
@@ -87,7 +90,7 @@ function mapSourceMines(req:Blog.Request, res:Blog.Response) {
             .then(geoJSON.featuresFromKML)
             .then(JSON.stringify)
             .then(geoText => {
-               compress.gzip(geoText, (err, buffer) => {
+               compress.gzip(Buffer.from(geoText), (err:Error, buffer:Buffer) => {
                   if (is.value(err)) {
                      res.internalError(err);
                   } else {

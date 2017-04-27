@@ -1,4 +1,4 @@
-import { Provider, Photo, Flickr } from '../types';
+import { Provider, Photo, Flickr } from '../types/';
 import is from '../is';
 import util from '../util';
 import config from '../config';

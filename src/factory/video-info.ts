@@ -1,4 +1,4 @@
-import { Flickr, VideoInfo } from '../types';
+import { Flickr, VideoInfo } from '../types/';
 import re from '../regex';
 
 /**

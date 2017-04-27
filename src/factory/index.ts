@@ -2,11 +2,11 @@
 import is from '../is';
 import log from '../logger';
 import config from '../config';
+import map from './map';
 import library from '../library';
 import category from './category';
 import photoSize from './photo-size';
 import realFlickr from '../providers/flickr';
-//import inject from '../providers/inject';
 import post from './post';
 import exif from './exif';
 import {
@@ -15,7 +15,7 @@ import {
    Library,
    Post,
    Photo,
-   EXIF } from '../types';
+   EXIF } from '../types/';
 
 let flickr = realFlickr;
 
@@ -152,6 +152,7 @@ function parsePhotoTags(rawTags:Flickr.Tag[]):{[key:string]:string} {
 
 export default {
    buildLibrary,
+   map,
    // inject different data providers
    inject: {
       set flickr(f:Provider.Flickr) {
@@ -159,7 +160,7 @@ export default {
          post.inject.flickr = f;
       },
       set google(g:Provider.Google) {
-         //map.inject.google = g;
+         map.inject.google = g;
       }
    }
 };

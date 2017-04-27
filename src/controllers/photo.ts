@@ -1,4 +1,4 @@
-import { Blog } from '../types';
+import { Blog } from '../types/';
 import is from '../is';
 import config from '../config';
 import util from '../util';

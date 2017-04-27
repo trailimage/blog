@@ -1,4 +1,4 @@
-import { Blog } from './types';
+import { Blog } from './types/';
 import config from './config';
 import C from './constants';
 import log from './logger';

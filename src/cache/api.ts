@@ -1,4 +1,4 @@
-import { Cache, Flickr } from '../types';
+import { Cache, Flickr } from '../types/';
 import is from '../is';
 import redis from '../providers/redis';
 

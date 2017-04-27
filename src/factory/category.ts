@@ -1,4 +1,4 @@
-import { Category, Post, Flickr } from '../types';
+import { Category, Post, Flickr } from '../types/';
 import is from '../is';
 import post from './post';
 import util from '../util';

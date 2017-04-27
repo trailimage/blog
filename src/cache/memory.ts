@@ -1,4 +1,4 @@
-import { Cache } from '../types';
+import { Cache } from '../types/';
 import config from '../config';
 import item from './item';
 import is from '../is';

@@ -71,7 +71,7 @@ export interface Photo {
    normal?:Size;
    big?:Size;
    outlierDate?:boolean;
-   tagList:string;
+   tagList?:string;
    //getExif(): Promise<EXIF>;
 }
 

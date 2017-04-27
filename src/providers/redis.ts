@@ -94,7 +94,7 @@ function normalize(value:string|string[]|Cache.Item):string {
 /**
  * Deserialize objects as needed
  */
-function parseObject(value:string) {
+function parseObject<T>(value:string):T {
    if (is.empty(value)) { return null; }
 
    try {
@@ -106,9 +106,14 @@ function parseObject(value:string) {
 }
 
 /**
- * Normalize response
+ * Curry method to handle Redis response and convert to expected type.
  */
-function makeHandler(key:string|string[], type = dataType.NONE, resolve:Function, reject:Function) {
+function makeHandler(
+   key:string|string[],
+   type = dataType.NONE,
+   resolve:Function,
+   reject:Function):(err:Error, reply:any)=>void {
+
    // calculate expected response
    const howMany = (key:string|string[]) => is.array(key) ? key.length : 1;
    // if expectation provided then result is whether it matches actual
@@ -116,7 +121,7 @@ function makeHandler(key:string|string[], type = dataType.NONE, resolve:Function
    const answer = (actual:any, expected?:any) => {
       resolve((expected === undefined) ? actual : (actual == expected));
    };
-   return (err:any, reply:any) => {
+   return (err:Error, reply:any) => {
       if (hasError(key, err)) {
          reject(err);
       } else {
@@ -131,6 +136,22 @@ function makeHandler(key:string|string[], type = dataType.NONE, resolve:Function
          }
       }
    };
+}
+
+/**
+ * Get key or hash field value as given type
+ *
+ * http://redis.io/commands/get
+ */
+function getValue<T>(type:number, key:string, hashKey?:string) {
+   return new Promise<T>((resolve, reject) => {
+      const handler = makeHandler(key, type, resolve, reject);
+      if (hashKey === undefined) {
+         client.get(key, handler);
+      } else {
+         client.hget(key, hashKey, handler);
+      }
+   });
 }
 
 /**
@@ -191,28 +212,18 @@ export default {
    /**
     * Return raw value
     */
-   get(key:string, hashKey:string) { return this.getValue(dataType.RAW, key, hashKey); },
+   get(key:string, hashKey?:string) {
+       return getValue<string>(dataType.RAW, key, hashKey);
+   },
 
    /**
     * Get key or hash field value as an object
     */
-   getObject<T>(key:string, hashKey:string):Promise<T> {
-      return this.getValue(dataType.JSON, key, hashKey);
+   getObject<T>(key:string, hashKey?:string):Promise<T> {
+      return getValue<T>(dataType.JSON, key, hashKey);
    },
 
-   /**
-    * Get key or hash field value as given type
-    *
-    * See http://redis.io/commands/get
-    */
-   getValue: (type:number, key:string, hashKey?:string) => new Promise((resolve, reject) => {
-      const handler = makeHandler(key, type, resolve, reject);
-      if (hashKey === undefined) {
-         client.get(key, handler);
-      } else {
-         client.hget(key, hashKey, handler);
-      }
-   }),
+   getValue,
 
    /**
     * Add value to key or hash key

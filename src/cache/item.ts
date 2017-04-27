@@ -1,4 +1,4 @@
-import { Cache } from '../types';
+import { Cache } from '../types/';
 import is from '../is';
 import C from '../constants';
 // http://nodejs.org/api/zlib.html

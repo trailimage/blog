@@ -1,4 +1,4 @@
-import { Blog, Category } from '../types';
+import { Blog, Category } from '../types/';
 import is from '../is';
 import ld from '../json-ld';
 import config from '../config';

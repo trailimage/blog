@@ -1,4 +1,4 @@
-import { Blog } from './types';
+import { Blog } from './types/';
 import * as Express from 'express';
 import config from './config';
 import { route as ph, httpStatus } from './constants';

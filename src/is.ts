@@ -1,4 +1,4 @@
-import { Cache } from './types';
+import { Cache } from './types/';
 
 /**
  * Javascript types

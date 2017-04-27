@@ -1,4 +1,4 @@
-import { Photo } from '../types';
+import { Photo } from '../types/';
 import is from '../is';
 import log from '../logger';
 import gpx from './gpx';

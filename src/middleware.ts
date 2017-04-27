@@ -1,4 +1,4 @@
-import { Blog, Cache } from './types';
+import { Blog, Cache } from './types/';
 import is from './is';
 import log from './logger';
 import config from './config';
@@ -19,7 +19,6 @@ let blackList:string[] = [];
  */
 let pending:Function[] = [];
 let isDownloading = false;
-
 
 function blockSpamReferers(req:Blog.Request, res:Blog.Response, next:Function) {
    const referer = req.get('referer');
@@ -53,14 +52,16 @@ function checkBlackList(domain:string):Promise<any> {
 /**
  * Load list from cache or remote provider
  */
-const getBlackList = ()=> cache.getItem(cacheKey).then(list => {
-   if (is.array(list)) {
-      if (isStale()) { downloadBlackList(); }
-      return list;
-   } else {
-      return downloadBlackList();
-   }
-});
+function getBlackList():Promise<string[]> {
+   return cache.getItem(cacheKey).then(list => {
+      if (is.array(list)) {
+         if (isStale()) { downloadBlackList(); }
+         return list;
+      } else {
+         return downloadBlackList();
+      }
+   });
+}
 
 /**
  * Whether black list needs to be refreshed
@@ -70,7 +71,7 @@ const isStale = ()=> lastUpdate === 0 || (
    (new Date().getTime() - lastUpdate  > config.referralSpam.updateFrequency)
 );
 
-function downloadBlackList():Promise<any> {
+function downloadBlackList():Promise<string[]> {
    if (isDownloading) {
       log.info('Spam referral black list is already downloading');
       return new Promise(resolve => { pending.push(resolve); });

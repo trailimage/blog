@@ -1,4 +1,4 @@
-import { JsonLD, Category, Post, Size } from './types';
+import { JsonLD, Category, Post, Size } from './types/';
 import is from './is';
 import config from './config';
 import library from './library';

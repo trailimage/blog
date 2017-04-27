@@ -1,4 +1,4 @@
-import { Post, Photo, Flickr, Provider } from '../types';
+import { Post, Photo, Flickr, Provider } from '../types/';
 import util from '../util';
 import is from '../is';
 import re from '../regex';

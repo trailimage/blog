@@ -1,4 +1,4 @@
-import { Category } from './types';
+import { Category } from './types/';
 import { month, weekday } from './constants';
 import re from './regex';
 import config from './config';

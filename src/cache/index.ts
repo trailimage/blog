@@ -1,5 +1,6 @@
 import map from './map';
 import api from './api';
+import { getItem, add } from './redis';
 import memory from './memory';
 
 export default {
@@ -8,5 +9,8 @@ export default {
    /** GeoJSON converted from GPX stored on Google Drive */
    map,
    /** Rendered HBS template pages */
-   view: memory
+   view: memory,
+
+   getItem,
+   add
 };

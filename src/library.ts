@@ -1,4 +1,4 @@
-import { Library, Post, Category, Photo, EXIF } from './types';
+import { Library, Post, Category, Photo, EXIF } from './types/';
 import is from './is';
 
 /**

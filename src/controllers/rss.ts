@@ -1,4 +1,4 @@
-import { Blog } from '../types';
+import { Blog } from '../types/';
 import log from '../logger';
 import config from '../config';
 import library from '../library';
@@ -13,7 +13,7 @@ export default function feed(req:Blog.Request, res:Blog.Response) {
    if (!library.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
          log.error('Unable to load library after %d tries', MAX_RSS_RETRIES);
-         res.render(httpStatus.NOT_FOUND, {title: 'Unable to load feed'});
+         res.notFound();
          // reset tries so page can be refreshed
          rssRetries = 0;
       } else {

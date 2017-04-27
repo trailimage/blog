@@ -1,4 +1,4 @@
-import { Cache } from '../types';
+import { Cache } from '../types/';
 import config from '../config';
 import item from './item';
 import redis from '../providers/redis';
@@ -18,13 +18,21 @@ function addItem(
       .then(item => (enabled) ? redis.add(key, hashKey, item) : Promise.resolve(item));
 }
 
+export function getItem<T>(key:string):Promise<T> {
+   return redis.getObject<T>(key);
+}
+
+export function add(key:string, value:any):Promise<boolean> {
+   return redis.add(key, item);
+}
+
 /**
  * Create a Redis-based cache provider.
  *
  * - `typeKey`: Hash key in which all cache items will be stored
  * - `enabled`: whether caching is enabled
  */
-function provide(hashKey:string, enabled:boolean):Cache.Provider {
+export function provide(hashKey:string, enabled:boolean):Cache.Provider {
    const exists = (key:string) => enabled
       ? redis.exists(key, hashKey) : Promise.resolve(false);
 

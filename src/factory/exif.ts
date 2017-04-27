@@ -1,4 +1,4 @@
-import { Flickr, EXIF } from '../types';
+import { Flickr, EXIF } from '../types/';
 import is from '../is';
 import re from '../regex';
 

@@ -1,4 +1,4 @@
-import { Blog } from '../types';
+import { Blog } from '../types/';
 import config from '../config';
 import { layout, page } from '../template';
 import library from '../library';

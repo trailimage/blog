@@ -1,17 +1,19 @@
-import { Cache, Post } from '../types';
+import { Cache, Post, Provider } from '../types/';
 import is from '../is';
 import config from '../config';
 import library from '../library';
 import geoJSON from '../map/geojson';
 import cache from '../cache';
-import google from '../providers/google';
+import realGoogle from '../providers/google';
 
 const BLOG_JSON_KEY = 'blog-map';
+
+let google = realGoogle;
 
 /**
  * Load all map information (track and photo features) for a post
  *
- * See http://geojsonlint.com/
+ * http://geojsonlint.com/
  */
 const forPost = (postKey:string) => config.cache.maps
    ? cache.map.getItem(postKey).then(item => is.cacheItem(item) ? item : loadForPost(postKey))
@@ -19,7 +21,6 @@ const forPost = (postKey:string) => config.cache.maps
 
 /**
  * Load map photos for all posts.
- * @returns {Promise.<ViewCacheItem>}
  */
 const forBlog = () => config.cache.maps
    ? cache.map.getItem(BLOG_JSON_KEY).then(item => is.cacheItem(item) ? item : loadMap())
@@ -27,7 +28,6 @@ const forBlog = () => config.cache.maps
 
 /**
  * Get photo GeoJSON (not tracks) for all posts.
- * @returns {Promise.<ViewCacheItem>}
  */
 const loadMap = () => Promise.resolve(geoJSON.features())
    .then(geo => mapPhotoFeatures(geo))
@@ -100,11 +100,11 @@ function addPhotoFeatures(geo:GeoJSON.FeatureCollection<any>, resolve:Function) 
    });
 }
 
-module.exports = {
+export default {
    forPost,
    forBlog,
    // inject different data providers
    inject: {
-      set google(g:any) { google = g; }
+      set google(g:Provider.Google) { google = g; }
    }
 };
