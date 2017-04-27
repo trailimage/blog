@@ -35,7 +35,6 @@ function webPage(path:string = ''):JsonLD.WebPage {
 
 const pathUrl = (path:string) => config.site.url + '/' + path;
 
-
 function organization():JsonLD.Organization {
    return ld<JsonLD.Organization>('Organization', {
       name: config.site.title,
@@ -175,6 +174,9 @@ export default {
       }
    },
 
+   /**
+    * Linked Data for YouTube video
+    */
    fromVideo(v:any):JsonLD.VideoObject {
       return (v == null || v.empty) ? null : ld<JsonLD.VideoObject>('VideoObject', {
          contentUrl: 'https://www.youtube.com/watch?v=' + v.id,
@@ -184,5 +186,6 @@ export default {
          thumbnailUrl: null
       });
    },
+   owner,
    serialize
 };

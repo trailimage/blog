@@ -53,7 +53,11 @@ export namespace Provider {
    export interface Google {
       auth: GoogleAuth;
       drive: {
-         loadGPX(post:Post, stream:Stream.Writable):Promise<string>;
+         /**
+          * Load GPX file matching Post. File content will be piped to `stream`
+          * if provided.
+          */
+         loadGPX(post:Post, stream?:Stream.Writable):Promise<string>;
       }
    }
 }

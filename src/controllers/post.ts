@@ -6,23 +6,26 @@ import library from '../library';
 import { route as ph, httpStatus } from '../constants';
 
 function view(res:Blog.Response, key:string, pageTemplate:string = template.page.POST) {
-   res.sendView(key, render => {
-      const p = library.postWithKey(key);
-      if (!is.value(p)) { res.notFound(); return; }
-      p.ensureLoaded()
-         .then(() => {
-            render(pageTemplate, {
-               post: p,
-               title: p.title,
-               // https://developers.google.com/structured-data/testing-tool/
-               jsonLD: ld.serialize(ld.fromPost(p)),
-               description: p.longDescription,
-               slug: key,
-               layout: template.layout.NONE
-            });
-         })
-         .catch(res.internalError);
-   });
+   res.sendView(key, {
+      callback: render => {
+         const p = library.postWithKey(key);
+         if (!is.value(p)) { res.notFound(); return; }
+         p.ensureLoaded()
+            .then(() => {
+               render(pageTemplate, {
+                  post: p,
+                  title: p.title,
+                  // https://developers.google.com/structured-data/testing-tool/
+                  jsonLD: ld.serialize(ld.fromPost(p)),
+                  description: p.longDescription,
+                  slug: key,
+                  layout: template.layout.NONE
+               });
+            })
+            .catch(res.internalError);
+         }
+      }
+   );
 }
 
 /**

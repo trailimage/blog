@@ -8,7 +8,7 @@ import library from '../library';
 import { route as ph } from '../constants';
 
 function view(res:Blog.Response, path:string, homePage = false) {
-   res.sendView(path, render => {
+   res.sendView(path, { callback: render => {
       // use renderer to build view that wasn't cached
       const category = library.categoryWithKey(path);
 
@@ -24,7 +24,7 @@ function view(res:Blog.Response, path:string, homePage = false) {
       } else {
          res.notFound();
       }
-   });
+   }});
 }
 
 
@@ -62,7 +62,7 @@ function list(req:Blog.Request, res:Blog.Response) {
    const key = req.params[ph.ROOT_CATEGORY] as string;
 
    if (is.value(key)) {
-      res.sendView(key, render => {
+      res.sendView(key, { callback: render => {
          // use renderer to build view that wasn't cached
          const category = library.categoryWithKey(key);
 
@@ -76,7 +76,7 @@ function list(req:Blog.Request, res:Blog.Response) {
          } else {
             res.notFound();
          }
-      });
+      }});
    } else {
       res.notFound();
    }
@@ -84,7 +84,9 @@ function list(req:Blog.Request, res:Blog.Response) {
 
 function menu(req:Blog.Request, res:Blog.Response) {
    const t = template.page.CATEGORY_MENU;
-   res.sendView(t, render => { render(t, { library, layout: template.layout.NONE }); });
+   res.sendView(t, { callback: render => {
+       render(t, { library, layout: template.layout.NONE });
+   }});
 }
 
 /**

@@ -144,7 +144,7 @@ function empty(this:Post) {
 /**
  * Title and optional subtitle
  */
-function name(this:Post|{ post:Post }):string {
+function name(this:Post|any):string {
    // context is screwed up when called from HBS template
    const p:Post = this.post ? this.post : this as Post;
    return p.title + ((p.isPartial) ? config.library.subtitleSeparator + ' ' + p.subTitle : '');

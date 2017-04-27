@@ -27,6 +27,7 @@ export interface Library {
    getPhotos():Promise<Photo[]>;
    getEXIF(photoID:number):Promise<EXIF>;
    addPost(p:Post):void;
+   categoryKeys(filterList?:string[]):string[];
    categoryWithKey(key:string):Category;
    postKeys():string[];
    postWithID(id:string):Post;
@@ -47,7 +48,7 @@ export interface Category {
    posts:Post[];
    readonly isChild:boolean;
    readonly isParent:boolean;
-   ensureLoaded():void;
+   ensureLoaded():Promise<null>;
    //unload(keys:string|string[]):void;
    add(subcategory:Category):void;
    getSubcategory(key:string):Category;
@@ -70,7 +71,7 @@ export interface Photo {
    normal?:Size;
    big?:Size;
    outlierDate?:boolean;
-   //get tagList():string;
+   tagList:string;
    //getExif(): Promise<EXIF>;
 }
 
@@ -122,7 +123,7 @@ export interface Post {
    getInfo():Promise<Post>;
    getPhotos():Promise<Photo[]>;
    hasKey(key:string):boolean;
-   hasPhotoID(id:string):boolean;
+   //hasPhotoID(id:string):boolean;
    ensureLoaded():Promise<null>;
    updatePhotoMarkers():void;
 }

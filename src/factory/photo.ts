@@ -1,11 +1,12 @@
-import { Flickr, Photo } from '../types';
+import { Provider, Photo, Flickr } from '../types';
 import is from '../is';
 import util from '../util';
 import config from '../config';
 import exif from './exif';
 import photoSize from './photo-size';
-// can be replaced with injection
-import flickr from '../providers/flickr';
+import realFlickr from '../providers/flickr';
+
+let flickr:Provider.Flickr = realFlickr;
 
 /**
  * Parse Flickr photo summary
@@ -48,15 +49,15 @@ function make(json:Flickr.PhotoSummary, index:number):Photo {
 /**
  * Simplistic outlier calculation
  *
- * See https://en.wikipedia.org/wiki/Outlier
- * See http://www.wikihow.com/Calculate-Outliers
+ * https://en.wikipedia.org/wiki/Outlier
+ * http://www.wikihow.com/Calculate-Outliers
  */
 function identifyOutliers(photos:Photo[]) {
-   const median = values => {
+   const median = (values:number[]) => {
       const half = Math.floor(values.length / 2);
       return (values.length % 2 !== 0) ? values[half] : (values[half-1] + values[half]) / 2.0;
    };
-   const boundary = (values, distance) => {
+   const boundary = (values:number[], distance?:number) => {
       if (!is.array(values) || values.length === 0) { return null; }
       if (distance === undefined) { distance = 3; }
 
@@ -68,8 +69,8 @@ function identifyOutliers(photos:Photo[]) {
       const range = q3 - q1;
 
       return {
-         min: q1 - (range * distance),
-         max: q3 + (range * distance)
+         min: q1 - (range * distance) as number,
+         max: q3 + (range * distance) as number
       };
    };
    const fence = boundary(photos.map(p => p.dateTaken.getTime()));
@@ -86,6 +87,6 @@ export default {
    make,
    identifyOutliers,
    inject: {
-      set flickr(f:any) { flickr = f; }
+      set flickr(f:Provider.Flickr) { flickr = f; }
    }
 };
