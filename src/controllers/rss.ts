@@ -2,7 +2,7 @@ import { Blog } from '../types/';
 import log from '../logger';
 import config from '../config';
 import library from '../library';
-import Feed from 'feed';
+import * as Feed from 'feed';
 import { httpStatus, mimeType } from '../constants';
 
 const MAX_RSS_RETRIES = 10;
@@ -24,7 +24,10 @@ export default function feed(req:Blog.Request, res:Blog.Response) {
       return;
    }
 
-   const author = { name: config.owner.name, link: 'https://www.facebook.com/jason.e.abbott' };
+   const author:Feed.Author = {
+      name: config.owner.name,
+      link: 'https://www.facebook.com/jason.e.abbott'
+   };
    const copyright = 'Copyright © ' + new Date().getFullYear() + ' ' + config.owner.name + '. All rights reserved.';
    const feed = new Feed({
       title: config.site.title,
