@@ -1,4 +1,4 @@
-import { Flickr, Provider } from '../types';
+import { Flickr, Provider, Token } from '../types';
 import config from '../config';
 import log from '../logger';
 import is from '../is';
@@ -238,42 +238,41 @@ export default {
 
    auth: {
       isEmpty() { return is.empty(config.flickr.auth.token.access); },
-      url() { return config.flickr.auth.callback; }
-   },
-
-   getRequestToken():Promise<string> {
-      const token = config.flickr.auth.token;
-      return new Promise<string>((resolve, reject) => {
-         oauth.getOAuthRequestToken((error, t, secret) => {
-            if (is.value(error)) {
-               reject(error);
-            } else {
-               // token and secret are both needed for the next call but token is
-               // echoed back from the authorize service
-               token.request = t;
-               token.secret = secret;
-               resolve(util.format('{0}?oauth_token={1}', url.AUTHORIZE, t));
-            }
+      url() { return config.flickr.auth.callback; },
+      getRequestToken():Promise<string> {
+         const token = config.flickr.auth.token;
+         return new Promise<string>((resolve, reject) => {
+            oauth.getOAuthRequestToken((error, t, secret) => {
+               if (is.value(error)) {
+                  reject(error);
+               } else {
+                  // token and secret are both needed for the next call but token is
+                  // echoed back from the authorize service
+                  token.request = t;
+                  token.secret = secret;
+                  resolve(util.format('{0}?oauth_token={1}', url.AUTHORIZE, t));
+               }
+            });
          });
-      });
-   },
+      },
 
-   getAccessToken(requestToken:string, verifier:string):Promise<any> {
-      const token = config.flickr.auth.token;
-      return new Promise((resolve, reject) => {
-         oauth.getOAuthAccessToken(requestToken, token.secret, verifier, (error, accessToken, accessTokenSecret) => {
-            token.secret = null;
-            if (is.value(error)) {
-               reject(error);
-            } else {
-               resolve({
-                  value: accessToken,
-                  secret: accessTokenSecret,
-                  expiration: null
-               });
-            }
+      getAccessToken(requestToken:string, verifier:string):Promise<Token> {
+         const token = config.flickr.auth.token;
+         return new Promise((resolve, reject) => {
+            oauth.getOAuthAccessToken(requestToken, token.secret, verifier, (error, accessToken, accessTokenSecret) => {
+               token.secret = null;
+               if (is.value(error)) {
+                  reject(error);
+               } else {
+                  resolve({
+                     access: accessToken,
+                     secret: accessTokenSecret,
+                     accessExpiration: null
+                  }  as Token);
+               }
+            });
          });
-      });
+      }
    },
 
    getCollections: ()=> call<Flickr.Collection[]>(method.COLLECTIONS, type.USER, config.flickr.userID, {

@@ -72,7 +72,7 @@ function list(req:Blog.Request, res:Blog.Response) {
             const options = { subcategories: category.subcategories };
             const subtitle = 'Subcategories';
 
-            renderCategory(render, template.page.CATEGORY_LIST, category, linkData, options, count, subtitle);
+            renderCategory(render as Blog.Renderer, template.page.CATEGORY_LIST, category, linkData, options, count, subtitle);
          } else {
             res.notFound();
          }

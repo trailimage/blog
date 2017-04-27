@@ -44,7 +44,7 @@ function removePost(this:Category, post:Post):Category {
 /**
  * Ensure photos and information are loaded for all posts
  */
-function ensureLoaded(this:Category) {
+function ensureLoaded(this:Category):Promise<any> {
    return Promise.all(this.posts.map(p => p.getInfo().then(p => p.getPhotos())));
 }
 

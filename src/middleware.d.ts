@@ -7,19 +7,35 @@ import {
 declare namespace Blog {
    /** Method to transform rendered text before it's cached and sent */
    export type PostProcess = (text:string) => string;
-   /** Custom method to render a view */
+
+   /**
+    * - `viewName` template name to render
+    * - `options` values provided to the template
+    * - `postProcess` transform rendered HTML before sending to client
+    */
    export type Renderer = (viewName:string, options?:{[key:string]:any}, postProcess?:PostProcess)=>void;
+   export type Generator = ()=> string;
+   export type RenderCallback = (r:Renderer)=>void;
+
+   export interface RenderOptions {
+      mimeType?:string;
+      /** Callback to process template renderer output */
+      callback?:RenderCallback;
+      /** Custom method to generate non-template content like JSON */
+      generate?:Generator;
+      /** Options send to template renderer */
+      templateOptions?:Object;
+   }
    
    export interface Response extends ExpressResponse {
       /** Render not found page */
       notFound():void;
 
       /**
-       * Load output from cache or return renderer that will capture and cache the output
+       * Load output from cache or return template renderer that will capture
+       * and cache the output
        */
-      sendView(key:string, renderer:Renderer):void;
-      sendView(key:string, mimeType:string, renderer:Renderer):void;
-      sendView(key:string, options:Object, renderer:Renderer):void;
+      sendView(key:string, options:RenderOptions):void;
 
       /**
        * Load JSON output from cache or call method to build JSON
@@ -29,7 +45,7 @@ declare namespace Blog {
       /**
        * Set headers and write bytes for GZipped response
        *
-       * See http://condor.depaul.edu/dmumaugh/readings/handouts/SE435/HTTP/node24.html
+       * http://condor.depaul.edu/dmumaugh/readings/handouts/SE435/HTTP/node24.html
        */
       sendCompressed(mimeType:string, item:Cache.Item, cache?:boolean):void;
 
@@ -47,7 +63,7 @@ declare namespace Blog {
       /**
        * Client IP corrected for forwarding headers
        *
-       * See http://stackoverflow.com/questions/14382725/how-to-get-the-correct-ip-address-of-a-client-into-a-node-socket-io-app-hosted-o
+       * http://stackoverflow.com/questions/14382725/how-to-get-the-correct-ip-address-of-a-client-into-a-node-socket-io-app-hosted-o
        */
       clientIP(): string,
    }

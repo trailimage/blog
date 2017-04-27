@@ -133,13 +133,13 @@ function enableStatusHelpers(req:Blog.Request, res:Blog.Response, next:Function)
    res.notFound = ()=> {
       log.warnIcon('report_problem', `${req.originalUrl} not found for ${req.clientIP()}`);
       res.status(httpStatus.NOT_FOUND);
-      res.render(template.page.NOT_FOUND, { title: 'Page Not Found', config: config });
+      res.render(template.page.NOT_FOUND, { title: 'Page Not Found', config });
    };
 
    res.internalError = (err?:Error) => {
       if (is.value(err)) { log.error(err); }
       res.status(httpStatus.INTERNAL_ERROR);
-      res.render(template.page.INTERNAL_ERROR, { title: 'Oops', config: config });
+      res.render(template.page.INTERNAL_ERROR, { title: 'Oops', config });
    };
 
    // JSON helpers depend on Express .json() extension and standard response structure
@@ -158,14 +158,16 @@ function enableStatusHelpers(req:Blog.Request, res:Blog.Response, next:Function)
  * Express middleware: add response methods to cache and compress output
  */
 function enableViewCache(req:Blog.Request, res:Blog.Response, next:Function) {
-   res.sendView = (key:string, p2:string|Function|object, p3?:Function) => {
-      const type = is.text(p2) ? p2 as string : mimeType.HTML;
-      const optionsOrGenerator:object|Function = is.value(p3) ? p3 : p2 as object|Function;
-      checkCache(res, key, type, optionsOrGenerator);
+   res.sendView = (key:string, options:Blog.RenderOptions) => {
+      if (!options.mimeType) { options.mimeType = mimeType.HTML; }
+      sendFromCacheOrRender(res, key, options);
    };
 
-   res.sendJson = (key:string, generator:Function) => {
-      checkCache(res, key, mimeType.JSON, generator);
+   res.sendJson = (key:string, generate:Function) => {
+      sendFromCacheOrRender(res, key, {
+         mimeType: mimeType.JSON,
+         generate
+      }  as Blog.RenderOptions);
    };
 
    res.sendCompressed = (mimeType:string, item:Cache.Item, cache = true) => {
@@ -189,19 +191,19 @@ function enableViewCache(req:Blog.Request, res:Blog.Response, next:Function) {
 }
 
 /**
- * Send content if it's cached, otherwise generate with callback
+ * Send content if it's cached otherwise generate with callback
  */
-function checkCache(res:Blog.Response, slug:string, mimeType:string, generator:Function|object) {
+function sendFromCacheOrRender(res:Blog.Response, slug:string, options:Blog.RenderOptions) {
    // prepare fallback method to generate content depending on
    // MIME type and whether given generator is a callable function
-   const generate = ()=> prepare(res, slug, mimeType, generator);
+   const generate = ()=> renderForType(res, slug, options);
 
    if (config.cache.views) {
       cache.view.getItem(slug)
          .then(item => {
             if (is.cacheItem(item)) {
                // send cached item directly
-               res.sendCompressed(mimeType, item);
+               res.sendCompressed(options.mimeType, item);
             } else {
                // generate content to send
                log.info('"%s" not cached', slug);
@@ -219,28 +221,27 @@ function checkCache(res:Blog.Response, slug:string, mimeType:string, generator:F
 }
 
 /**
- * Create function to generate, compress and cache content
+ * Render or generate content dependong on type then compress and cache output
  */
-function prepare(res:Blog.Response, slug:string, type:string, generator:Function|object) {
-   if (type === mimeType.JSON) {
-      // callback method directly generates output
-      cacheAndSend(res, JSON.stringify(generator()), slug, type);
-   } else if (is.callable(generator)) {
+function renderForType(res:Blog.Response, slug:string, options:Blog.RenderOptions) {
+   if (options.mimeType === mimeType.JSON) {
+      // JSON content always supplies a generate method
+      cacheAndSend(res, JSON.stringify(options.generate()), slug, options.mimeType);
+   } else if (is.callable(options.callback)) {
       // pass view renderer back to generator function to execute
-      generator(makeRenderer(res, slug, type));
+      options.callback(renderTemplate(res, slug, options.mimeType));
    } else {
       // invoke renderer directly, assuming view name identical to slug
-      const options = generator;
-      const render = makeRenderer(res, slug, type);
-      render(slug, options);
+      const render = renderTemplate(res, slug, options.mimeType);
+      render(slug, options.templateOptions);
    }
 }
 
 /**
- * Create function to render view identified by the slug then compress and
- * cache it
+ * Curry standard function to render the view identified by the slug then
+ * compress and cache it
  */
-function makeRenderer(res:Blog.Response, slug:string, type:string) {
+function renderTemplate(res:Blog.Response, slug:string, type:string):Blog.Renderer {
    return (view:string, options:{[key:string]:any}, postProcess?:Function) => {
       // use default meta tag description if none provided
       if (is.empty(options.description)) { options.description = config.site.description; }

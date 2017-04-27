@@ -30,26 +30,26 @@ function view(req:Blog.Request, res:Blog.Response) {
 function f(req:Blog.Request, res:Blog.Response) {
    if (is.empty(req.param('oauth_token'))) {
       log.warn('%s is updating Flickr tokens', req.clientIP());
-      flickr.getRequestToken().then(url => res.redirect(url));
+      flickr.auth.getRequestToken().then(url => res.redirect(url));
    } else {
       const token = req.param('oauth_token');
       const verifier = req.param('oauth_verifier');
 
-      flickr.getAccessToken(token, verifier)
+      flickr.auth.getAccessToken(token, verifier)
          .then(token => {
             res.render(template.page.AUTHORIZE, {
                title: 'Flickr Access',
-               token: token.value,
+               token: token.access,
                secret: token.secret,
                layout: template.layout.NONE
             });
          })
-         .catch(err => {});
+         .catch((err:Error) => { log.error(err); });
    }
 }
 
 /**
- * @see https://github.com/google/google-api-nodejs-client/
+ * See https://github.com/google/google-api-nodejs-client/
  */
 function g(req:Blog.Request, res:Blog.Response) {
    const code = req.param('code');

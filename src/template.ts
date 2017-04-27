@@ -2,35 +2,36 @@
 import util from './util';
 import config from './config';
 
+export const layout = {
+   MAIN: 'layouts/default-layout',
+   NONE: null as string
+};
+
+export const page = {
+   NOT_FOUND: 'error/404',
+   INTERNAL_ERROR: 'error/500',
+   ERROR: '503',
+   ABOUT: 'about',
+   ADMINISTRATION: 'admin',
+   AUTHORIZE: 'authorize',
+   EXIF: 'exif',
+   CATEGORY_MENU: 'category-menu',
+   POST_MENU_DATA: 'post-menu-data',
+   MOBILE_MENU_DATA: 'mobile-menu-data',
+   POST: 'post',
+   CATEGORY: 'category',
+   CATEGORY_LIST: 'category-list',
+   PHOTO_TAG: 'photo-tag',
+   PHOTO_SEARCH: 'photo-search',
+   MAP: 'map',
+   MAPBOX: 'mapbox',
+   SEARCH: 'search',
+   SITEMAP: 'sitemap-xml'
+};
+
 export default {
-   layout: {
-      MAIN: 'layouts/default-layout',
-      NONE: null
-   },
-   /**
-    * Page template contstants.
-    */
-   page: {
-      NOT_FOUND: 'error/404',
-      INTERNAL_ERROR: 'error/500',
-      ERROR: '503',
-      ABOUT: 'about',
-      ADMINISTRATION: 'admin',
-      AUTHORIZE: 'authorize',
-      EXIF: 'exif',
-      CATEGORY_MENU: 'category-menu',
-      POST_MENU_DATA: 'post-menu-data',
-      MOBILE_MENU_DATA: 'mobile-menu-data',
-      POST: 'post',
-      CATEGORY: 'category',
-      CATEGORY_LIST: 'category-list',
-      PHOTO_TAG: 'photo-tag',
-      PHOTO_SEARCH: 'photo-search',
-      MAP: 'map',
-      MAPBOX: 'mapbox',
-      SEARCH: 'search',
-      SITEMAP: 'sitemap-xml'
-   },
+   layout,
+   page,
    /**
     * Assign methods that will be available from within Handlebars templates.
     */

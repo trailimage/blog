@@ -2,7 +2,7 @@ import { Flickr as f, Post } from '../types';
 import * as Stream from 'stream';
 
 export interface Token {
-   type:string;
+   type?:string;
    access:string;
    secret?:string;
    request?:string;
@@ -11,7 +11,35 @@ export interface Token {
 }
 
 export namespace Provider {
+   interface Auth {
+      getAccessToken(code:string):Promise<Token>;
+      getAccessToken(requestToken:string, verifier:string):Promise<Token>;
+      /**
+       * Whether tokens are empty
+       */
+      isEmpty():boolean;
+      /**
+       * OAuth callback URL
+       */
+      url():string;
+   }
+
+   interface FlickrAuth extends Auth {
+      getRequestToken():Promise<string>;
+   }
+
+   interface GoogleAuth extends Auth {
+      verify():Promise<null>;
+      expired():boolean;
+   }
+
    export interface Flickr {
+      cache: {
+         keysForPost:string[];
+         keysForPhoto:string[],
+         keysForLibrary:string[]
+      },
+      auth: FlickrAuth;
       getCollections():Promise<f.Collection[]>;
       getSetInfo(id:string):Promise<f.SetInfo>;
       getPhotoSizes(id:string):Promise<f.Size[]>;
@@ -23,6 +51,7 @@ export namespace Provider {
    }
 
    export interface Google {
+      auth: GoogleAuth;
       drive: {
          loadGPX(post:Post, stream:Stream.Writable):Promise<string>;
       }
