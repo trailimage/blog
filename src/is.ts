@@ -59,7 +59,7 @@ function callable(v:any):v is Function {
 const bigInt = (n:any) => integer(n) && (n < -32768 || n > 32767);
 
 function cacheItem(o:any):o is Cache.Item {
-   return (value(o) && o['buffer'] && o['eTag'])
+   return (value<Object>(o) && o['buffer'] && o['eTag']);
 }
 
 /** Whether value exists and is an array */
