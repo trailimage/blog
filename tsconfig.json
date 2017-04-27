@@ -2,7 +2,7 @@
    "compilerOptions": {
       "target": "es2015",
       "module": "commonjs",
-      "baseUrl": "./",
+      "baseUrl": "./src",
       "newLine": "LF",
       "noImplicitAny": true,
       "allowJs": false,

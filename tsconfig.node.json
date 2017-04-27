@@ -3,9 +3,9 @@
    "compileOnSave": true,
    "compilerOptions": {
       "module": "commonjs",
-      "outDir": "../lib",
+      "outDir": "./lib",
       "removeComments": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "types": [],
       "lib": ["es6"]
    },
@@ -14,6 +14,6 @@
       "**/*.d.ts"
    ],
    "include": [
-      "app.ts"
+      "./src/app.ts"
    ]
 }

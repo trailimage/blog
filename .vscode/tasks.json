@@ -35,7 +35,7 @@
       },
       {
          "taskName": "Build Server",
-         "command": "./node_modules/.bin/tsc -p .",
+         "command": "./node_modules/.bin/tsc -p {$workspaceRoot}tsconfig.node.json",
          "isShellCommand": true,
          "showOutput": "silent",
          "problemMatcher": "$tsc"
