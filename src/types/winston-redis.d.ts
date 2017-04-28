@@ -3,22 +3,18 @@
  * 
  * TypeScript merges modules and classes that have the same name.
  */
+declare class WinstonRedis {
+   constructor(options:any);
+}
 
+declare module WinstonRedis {} 
 
 declare module "winston-redis" {
    import * as Winston from 'winston';
-   //import { EventEmitter } from 'events';
-
-   // interface Options extends Winston.TransportOptions {
-   //    host:string;
-   //    port:string;
-   //    /** Password only */
-   //    auth:string
-   //    length:number;
-   // }
-
-   // class WinstonRedis extends EventEmitter implements Winston.TransportInstance  {
-   //    new(options?:Winston.HttpTransportOptions):Winston.TransportInstance;
+   
+   // class WinstonRedis extends NodeJS.EventEmitter implements Winston.TransportInstance {
+   //    constructor(options?:Winston.TransportOptions);
+   //    //new(options?:Winston.TransportOptions):Winston.TransportInstance;
 
    //    silent: boolean;
    //    raw: boolean;
@@ -35,19 +31,9 @@ declare module "winston-redis" {
    //    logException(msg: string, meta: Object, callback: () => void): void;
    // }
 
-   interface WinstonRedis extends Winston.TransportInstance {
+   // interface WinstonRedis extends Winston.TransportInstance {
       
-   }
-
-   module WinstonRedis {
-      interface Options {
-         host:string;
-         port:string;
-         /** Password only */
-         auth:string
-         length:number;
-      }
-   } 
+   // }
 
    export = WinstonRedis;
 }

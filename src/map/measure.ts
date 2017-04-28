@@ -34,15 +34,15 @@ function duration(line:number[][]):number {
  * Distance between geographic points accounting for earth curvature
  * South latitudes are negative, east longitudes are positive
  *
- * See http://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude-what-am-i-doi
- * See http://www.geodatasource.com/developers/javascript
- * See http://www.movable-type.co.uk/scripts/latlong.html
- * See http://boulter.com/gps/distance/
+ * http://stackoverflow.com/questions/3694380/calculating-distance-between-two-points-using-latitude-longitude-what-am-i-doi
+ * http://www.geodatasource.com/developers/javascript
+ * http://www.movable-type.co.uk/scripts/latlong.html
+ * http://boulter.com/gps/distance/
  *
- * Given φ is latitude radians, λ is longitude radians, R is earth radius:
- * a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
- * c = 2 ⋅ atan2(√a, √(1−a))
- * d = R ⋅ c
+ *    Given φ is latitude radians, λ is longitude radians, R is earth radius:
+ *    a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
+ *    c = 2 ⋅ atan2(√a, √(1−a))
+ *    d = R ⋅ c
  */
 function pointDistance(p1:number[], p2:number[]):number {
    if (sameLocation(p1, p2)) { return 0; }

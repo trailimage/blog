@@ -6,7 +6,16 @@ import * as URL from 'url';
 import * as Winston from 'winston';
 import * as RedisTx from 'winston-redis';
 
+/**
+ * Whether log provider can be queried
+ */
 let queryable = false;
+
+declare global {
+   namespace Winston {
+      export interface LoggerInstance { [key:string]:string; }
+   }
+}
 
 const level = {
    DEBUG: 'debug',
@@ -28,7 +37,7 @@ function provider() {
                case logTo.REDIS:
                   // https://github.com/winstonjs/winston-redis
                   const url = URL.parse(config.redis.url);
-                  const tx = new RedisTx({
+                  const tx:WinstonRedis = new RedisTx({
                      host: url.hostname,
                      port: url.port,
                      // winston-redis only wants password for auth

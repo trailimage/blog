@@ -12,8 +12,9 @@ import realFlickr from '../providers/flickr';
 let flickr = realFlickr;
 
 /**
- * For post titles that looked like part of a series (had a colon separator) but had no other parts
- * This does not handle ungrouping from a legitimate series
+ * For post titles that looked like part of a series (had a colon separator)
+ * but had no other parts. This does not handle ungrouping from a legitimate
+ * series.
  */
 function ungroup(this:Post) {
    this.title = this.originalTitle;
@@ -180,7 +181,7 @@ function updatePhotoMarkers(this:Post) {
 /**
  * Create post from Flickr photo set
  *
- * *chronological*: whether set photos occurred together at a point in time.
+ * `chronological` whether set photos occurred together at a point in time.
  */
 function make(flickrSet:Flickr.SetSummary, chronological:boolean = true):Post {
    const p:Post = {
@@ -190,8 +191,7 @@ function make(flickrSet:Flickr.SetSummary, chronological:boolean = true):Post {
       description: null,
       longDescription: null,
       id: flickrSet.id,
-      // whether post pictures occurred at a specific point in time (exceptions are themed sets)
-      chronological: chronological,
+      chronological,
       // to restore subtitle to title if ungrouped
       originalTitle: flickrSet.title,
 
@@ -209,7 +209,6 @@ function make(flickrSet:Flickr.SetSummary, chronological:boolean = true):Post {
       bigThumbURL: null,
       smallThumbURL: null,
 
-      // whether posts is featured in main navigation
       feature: false,
       categories: {},
       // whether post has categories

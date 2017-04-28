@@ -43,7 +43,7 @@ function series(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * See https://www.mapbox.com/mapbox-gl-js/example/cluster/
+ * https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
 function blog(req:Blog.Request, res:Blog.Response) {
    res.render(template.page.MAPBOX, {

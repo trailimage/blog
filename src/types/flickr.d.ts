@@ -10,7 +10,7 @@ export namespace Flickr {
    }
 
    /**
-    * @see http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html
+    * http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html
     */
    enum License {
       AllRightsReserved = 0,
@@ -24,7 +24,7 @@ export namespace Flickr {
       UnitedStatesGovernmentWork = 8
    }
    /**
-    * @see http://www.flickr.com/services/api/flickr.photos.setSafetyLevel.html
+    * http://www.flickr.com/services/api/flickr.photos.setSafetyLevel.html
     */
    enum SafetyLevel {
       Safe = 1,
@@ -142,7 +142,7 @@ export namespace Flickr {
       editability: EditAbility;
       publiceditability: EditAbility;
       usage:Usage;
-      exif:PhotoExif;
+      exif:Exif[];
       tags: {
          tag: TagSummary;
       }
@@ -154,12 +154,13 @@ export namespace Flickr {
       }
    }
 
-   interface PhotoExif {
-      photo: Flickr.PhotoSummary;
-   }
+   // https://www.flickr.com/services/api/flickr.photos.getExif.html
+   // interface PhotoExif {
+   //    photo: Flickr.PhotoSummary;
+   // }
 
    interface PhotoMembership {
-      set: MemberSet[]
+      set: MemberSet[];
    }
 
    interface SetPhotos {
@@ -177,49 +178,51 @@ export namespace Flickr {
    }
 
    interface PhotoSummary extends Place {
-      id: string,
-      secret: string,
-      server: string,
-      farm: number,
-      title: string,
-      isprimary: string,
-      tags: string,
-      description?: Content,
-      datetaken?: string,
-      datetakengranularity?: string,
-      latitude?: string,
-      longitude?: string,
-      context?: number,
-      geo_is_family?: Boolean|boolean,
-      geo_is_friend?: Boolean|boolean,
-      geo_is_contact?: Boolean|boolean,
-      geo_is_public?: Boolean|boolean,
-      lastupdate?: string,
-      pathalias?: string,
+      id:string;
+      secret:string;
+      server: string;
+      farm: number;
+      title: string;
+      isprimary: string;
+      tags: string;
+      description?: Content;
+      datetaken?: string;
+      datetakengranularity?: string;
+      latitude?: string;
+      longitude?: string;
+      context?: number;
+      geo_is_family?: Boolean|boolean;
+      geo_is_friend?: Boolean|boolean;
+      geo_is_contact?: Boolean|boolean;
+      geo_is_public?: Boolean|boolean;
+      lastupdate?: string;
+      pathalias?: string;
 
-      url_s?: string,
-      height_s?: string,
-      width_s?: string,
+      exif:Exif[];
 
-      url_h?: string,
-      height_h?: string,
-      width_h?: string,
+      url_s?: string;
+      height_s?: string;
+      width_s?: string;
 
-      url_k?: string,
-      height_k?: string,
-      width_k?: string,
+      url_h?: string;
+      height_h?: string;
+      width_h?: string;
 
-      url_l?: string,
-      height_l?: string,
-      width_l?: string,
+      url_k?: string;
+      height_k?: string;
+      width_k?: string;
 
-      url_m?: string,
-      height_m?: string,
-      width_m?: string,
+      url_l?: string;
+      height_l?: string;
+      width_l?: string;
 
-      url_o?: string,
-      height_o?: string,
-      width_o?: string
+      url_m?: string;
+      height_m?: string;
+      width_m?: string;
+
+      url_o?: string;
+      height_o?: string;
+      width_o?: string;
    }
 
    interface Place {

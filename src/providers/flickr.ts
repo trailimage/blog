@@ -280,7 +280,6 @@ export default {
       allowCache: true
    }),
 
-
    getSetInfo: (id:string) => call<Flickr.SetInfo>(method.set.INFO, type.SET, id, {
       value: r => r.photoset as Flickr.SetInfo,
       allowCache: true
@@ -294,7 +293,7 @@ export default {
       value: r => r.set
    }),
 
-   getExif: (id:number) => call<Flickr.PhotoExif>(method.photo.EXIF, type.PHOTO, id.toString(), {
+   getExif: (id:number) => call<Flickr.Exif[]>(method.photo.EXIF, type.PHOTO, id.toString(), {
       value: r => r.photo.exif,
       allowCache: true
    }),
@@ -313,7 +312,7 @@ export default {
     * The documentation says signing is not required but results differ even with entirely
     * public photos -- perhaps a Flickr bug
     *
-    * See https://www.flickr.com/services/api/flickr.photos.search.html
+    * https://www.flickr.com/services/api/flickr.photos.search.html
     */
    photoSearch: (tags:string|string[]) => call<Flickr.PhotoSummary[]>(method.photo.SEARCH, type.USER, config.flickr.userID, {
       args: {

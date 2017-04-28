@@ -3,7 +3,7 @@ import is from '../is';
 /**
  * Node content
  *
- * See https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize
+ * https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize
  */
 function value(node:Element|Node):string {
    if (is.value(node) && node.normalize) { node.normalize(); }
@@ -24,9 +24,4 @@ function firstNode(node:Element, tag:string):Element {
 
 const numberAttribute = (dom:Element, name:string) => parseFloat(dom.getAttribute(name));
 
-export default {
-   value,
-   firstValue,
-   firstNode,
-   numberAttribute
-};
+export default { value, firstValue, firstNode, numberAttribute };

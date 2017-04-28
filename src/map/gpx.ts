@@ -6,10 +6,10 @@ import index from './';
 
 /**
  * Return location as [latitude, longitude, elevation, time, speed]
- * A degree of latitude is approximately 69 miles
- * A degree of longitude is about 69 miles at the equater, 0 at the poles
+ * A degree of latitude is approximately 69 miles.
+ * A degree of longitude is about 69 miles at the equater, 0 at the poles.
  *
- * See http://nationalatlas.gov/articles/mapping/a_latlong.html
+ * http://nationalatlas.gov/articles/mapping/a_latlong.html
  */
 export function location(node:Element):number[] {
    const location = new Array(5);

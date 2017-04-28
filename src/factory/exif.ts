@@ -2,18 +2,22 @@ import { Flickr, EXIF } from '../types/';
 import is from '../is';
 import re from '../regex';
 
-function make(flickrExif:Flickr.PhotoExif):EXIF {
-   const parser = (exif:Flickr.PhotoExif, tag:string, empty:string|number = null) => {
+function make(flickrExif:Flickr.Exif[]):EXIF {
+   const parser = (exif:Flickr.Exif[], tag:string, empty:string = null) => {
+      for (const key in exif) {
+         const e = exif[key];
+         if (e.tag == tag) { return e.raw._content; }
+      }
       for (const e of exif) { if (e.tag == tag) { return e.raw._content; } }
       return empty;
    };
    return sanitizeExif({
       artist: parser(flickrExif, 'Artist'),
-      compensation: parser(flickrExif, 'ExposureCompensation', 0),
-      time: parser(flickrExif, 'ExposureTime', 0),
-      fNumber: parser(flickrExif, 'FNumber', 0),
+      compensation: parser(flickrExif, 'ExposureCompensation'),
+      time: parseFloat(parser(flickrExif, 'ExposureTime', '0')),
+      fNumber: parseFloat(parser(flickrExif, 'FNumber', '0')),
       focalLength: 0,   // calculated in sanitizeExif()
-      ISO: parser(flickrExif, 'ISO', 0),
+      ISO: parseFloat(parser(flickrExif, 'ISO', '0')),
       lens: parser(flickrExif, 'Lens'),
       model: parser(flickrExif, 'Model'),
       software: parser(flickrExif, 'Software'),

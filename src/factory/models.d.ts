@@ -70,6 +70,7 @@ export interface Photo {
    preview?:Size;
    normal?:Size;
    big?:Size;
+   /** Whether photo is an outlier compared to the others */
    outlierDate?:boolean;
    tagList?:string;
    //getExif(): Promise<EXIF>;
@@ -85,6 +86,10 @@ export interface Post {
    happenedOn:Date;
    createdOn:Date;
    updatedOn:Date;
+   /**
+    * Whether post pictures occurred at a specific point in time (exceptions
+    * are themed sets) 
+    */
    chronological:boolean;
    originalTitle:string;
    photosLoaded:boolean;
@@ -95,6 +100,7 @@ export interface Post {
    photoTagList:string,
    photoMarkers:string,
    coverPhoto:Photo;
+   /** Whether posts is featured in main navigation */
    feature:boolean;
    /** Category titles mapped to category keys */
    categories:{[key:string]:string};
@@ -108,10 +114,15 @@ export interface Post {
    previous?:Post;
    /** Position of this post in a series */
    part:number;
+   /** Whether post is part of a series */
    isPartial:boolean;
+   /** Whether next post is part of the same series */
    nextIsPart:boolean;
+   /** Whether previous post is part of the same series */
    previousIsPart:boolean;
+   /** Total number of posts in the series */
    totalParts:number;
+   /** Whether this post is the first in a series */
    isSeriesStart:boolean;
    seriesKey?:string;
    partKey?:string;

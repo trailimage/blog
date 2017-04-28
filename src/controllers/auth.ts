@@ -8,7 +8,7 @@ import google from '../providers/google';
 import { httpStatus } from '../constants';
 
 /**
- * See https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
+ * https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
  */
 function view(req:Blog.Request, res:Blog.Response) {
    if (config.needsAuth) {
@@ -25,7 +25,7 @@ function view(req:Blog.Request, res:Blog.Response) {
 /**
  * Default route action
  *
- * See http://www.flickr.com/services/api/auth.oauth.html
+ * http://www.flickr.com/services/api/auth.oauth.html
  */
 function f(req:Blog.Request, res:Blog.Response) {
    if (is.empty(req.param('oauth_token'))) {
@@ -49,7 +49,7 @@ function f(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * See https://github.com/google/google-api-nodejs-client/
+ * https://github.com/google/google-api-nodejs-client/
  */
 function g(req:Blog.Request, res:Blog.Response) {
    const code = req.param('code');
