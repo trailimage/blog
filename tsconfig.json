@@ -5,13 +5,15 @@
       "module": "commonjs",
       "baseUrl": "./src",
       "newLine": "LF",
+      //"pretty": true,
       "noImplicitAny": true,
       "noUnusedLocals": true,
+      "noImplicitThis": true,
       "allowJs": false,
       "alwaysStrict": true,
       "strictNullChecks": false,
       "allowSyntheticDefaultImports": false,
       "forceConsistentCasingInFileNames": false,
-      "typeRoots": ["node_modules/@types", "src/types"]
+      "typeRoots": ["./node_modules/@types", "./src/types"]
    }
 }

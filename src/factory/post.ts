@@ -92,7 +92,7 @@ function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
       p.coverPhoto = p.photos.find(img => img.primary);
 
       if (!is.value(p.coverPhoto)) {
-         log.error('No cover photo defined for %s', this.title);
+         log.error('No cover photo defined for %s', p.title);
          p.coverPhoto = p.photos[0];
       }
 

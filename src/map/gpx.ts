@@ -43,7 +43,7 @@ export function location(node:Element):number[] {
 /**
  * Properties of a GPX node
  */
-export function properties(node:Node, extras:string[] = []):{[key:string]:string|number} {
+export function properties(node:Element, extras:string[] = []):{[key:string]:string|number} {
    const names = extras.concat(['name', 'desc', 'author', 'copyright', 'link', 'time', 'keywords']);
    const properties:{[key:string]:string} = {};
 

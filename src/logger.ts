@@ -140,7 +140,7 @@ function query(daysAgo:number, maxRows = 500) {
             if (err === null) {
                resolve(parseLogs(results));
             } else {
-               this.error(err.toString());
+               error(err.toString());
                reject(err);
             }
          });
@@ -150,6 +150,8 @@ function query(daysAgo:number, maxRows = 500) {
    });
 }
 
+function error(message:string|Error, ...args:any[]) { invoke(level.ERROR, arguments); }
+
 export default {
    info(message:string, ...args:any[]) { invoke(level.INFO, arguments); },
    /** Log information message with a Material icon attribute */
@@ -157,7 +159,7 @@ export default {
    warn(message:string, ...args:any[]) { invoke(level.WARN, arguments); },
    /** Log warning with a Material icon attribute */
    warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, arguments); },
-   error(message:string|Error, ...args:any[]) { invoke(level.ERROR, arguments); },
+   error,
    /** Log error with a Material icon attribute */
    errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
    query,

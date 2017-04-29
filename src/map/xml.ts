@@ -10,8 +10,8 @@ function value(node:Element|Node):string {
    return node && node.firstChild && node.firstChild.nodeValue;
 }
 
-function firstValue(node:Element|Node, tag:string):string {
-   return this.value(this.firstNode(node, tag));
+function firstValue(node:Element, tag:string):string {
+   return value(firstNode(node, tag));
 }
 
 /**
