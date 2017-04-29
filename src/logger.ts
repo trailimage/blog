@@ -83,8 +83,15 @@ function iconInvoke(icon:string, level:string, args:IArguments) {
 /**
  * Apply arguments to log writer function keyed to severity level
  */
-function invoke(level:string, ...args:any[]) {
-   provider()[level].apply(provider(), args);
+function invoke(l:string, ...args:any[]) {
+   //provider()[level].apply(provider(), args);
+   const p = provider();
+   switch (l) {
+      case level.DEBUG: p.debug.apply(p, args); break;
+      case level.INFO: p.info.apply(p, args); break;
+      case level.WARN: p.warn.apply(p, args); break;
+      case level.ERROR: p.error.apply(p, args); break;
+   }
 }
 
 /**
