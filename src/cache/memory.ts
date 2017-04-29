@@ -27,9 +27,9 @@ const provider:Cache.Provider = {
    /**
     * Add value only if it doesn't already exist (mainly for testing)
     */
-   addIfMissing(key:string, buffer:string|Buffer) {
+   addIfMissing(key:string, buffer:string|Buffer):Promise<any> {
       return (config.cache.views)
-         ? provider.exists(key).then(exists => exists ? Promise.resolve() : this.add(key, buffer))
+         ? provider.exists(key).then(exists => exists ? Promise.resolve(null) : this.add(key, buffer))
          : Promise.resolve();
    },
 

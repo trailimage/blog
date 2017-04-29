@@ -147,7 +147,7 @@ export default {
          this.maps = enabled;
          this.json = enabled;
       },
-      /** Whether to cache views */
+      /** Whether to cache rendered template views */
       views: isProduction,
       /** Whether to cache GeoJSON */
       maps: true,

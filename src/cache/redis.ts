@@ -56,7 +56,7 @@ export function provide(hashKey:string, enabled:boolean):Cache.Provider {
        */
       addIfMissing(key:string, buffer:Buffer|string) {
          return enabled
-            ? exists(key).then(yep => yep ? Promise.resolve() : this.add(key, buffer))
+            ? exists(key).then(yep => yep ? Promise.resolve(null) : this.add(key, buffer))
             : Promise.resolve();
       },
 
