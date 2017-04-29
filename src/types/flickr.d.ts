@@ -9,6 +9,11 @@ export namespace Flickr {
       args?: {[key:string]:string|number|boolean}
    }
 
+   export interface FeatureSet {
+      id:string;
+      title:string;
+   }
+
    /**
     * http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html
     */
@@ -238,7 +243,7 @@ export namespace Flickr {
       sizes?:SizeList;
       /**
        * Dynamically added property indicating whether the request can be
-       * retried. 
+       * retried.
        */
       retry?:boolean;
       stat:string;

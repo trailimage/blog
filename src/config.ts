@@ -1,4 +1,4 @@
-import { Token } from './types/';
+import { Token, Flickr } from './types/';
 import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';
@@ -36,6 +36,61 @@ const owner = {
    ]
 };
 
+const flickr = {
+   userID: '60950751@N04',
+   appID: '72157631007435048',
+   featureSets: [
+      { id: '72157632729508554', title: 'Ruminations' }
+   ] as Flickr.FeatureSet[],
+   sizes,
+   /** Photo sizes that must be retrieved for certain contexts */
+   photoSize: {
+      post: sizes.normal.concat(sizes.big, sizes.preview),
+      map: [s.SMALL_320],
+      search: [s.SQUARE_150]
+   },
+   excludeSets: ['72157631638576162'],
+   excludeTags: ['Idaho', 'United States of America', 'Abbott', 'LensTagger', 'Boise'],
+   maxRetries: 10,
+   retryDelay: 300,
+   auth: {
+      apiKey: env('FLICKR_API_KEY'),
+      secret: env('FLICKR_SECRET'),
+      callback: 'http://www.' + domain + '/auth/flickr',
+      token: {
+         access: process.env['FLICKR_ACCESS_TOKEN'] as string,
+         secret: process.env['FLICKR_TOKEN_SECRET'] as string,
+         request: null as string
+      } as Token
+   }
+};
+
+/**
+ * http://code.google.com/apis/console/#project:1033232213688
+ */
+const google = {
+   apiKey: process.env['GOOGLE_KEY'] as string,
+   projectID: '316480757902',
+   analyticsID: '22180727',        // shown as 'UA-22180727-1
+   searchEngineID: process.env['GOOGLE_SEARCH_ID'] as string,
+   blogID: '118459106898417641',
+   drive: {
+      apiKey: env('GOOGLE_DRIVE_KEY') as string,
+      tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM'
+   },
+   auth: {
+      clientID: env('GOOGLE_CLIENT_ID') as string,
+      secret: env('GOOGLE_SECRET') as string,
+      callback: 'http://www.' + domain + '/auth/google',
+      token: {
+         type: null,
+         access: process.env['GOOGLE_ACCESS_TOKEN'] as string,
+         accessExpiration: null as Date,
+         refresh: process.env['GOOGLE_REFRESH_TOKEN'] as string
+      } as Token
+   }
+};
+
 export const library = {
    /**
     * Characters separating title and subtitle in library source. Posts with
@@ -51,12 +106,13 @@ export const library = {
 export default {
    env,
    domain,
+   /** Whether any provider needs authorization tokens */
    get needsAuth():boolean {
-      const f = this.flickr.auth.token.access;
-      const g = this.google.auth.token.access;
+      const f = flickr.auth.token.access;
+      const g = google.auth.token.access;
       return f === null || f === '' || g === null || g === '';
    },
-   proxy: process.env['HTTPS_PROXY'],
+   proxy: process.env['HTTPS_PROXY'] as string,
    timestamp: new Date().getTime(),
    isProduction: isProduction,
    /** Whether to use wwwhisper authentication (https://devcenter.heroku.com/articles/wwwhisper) */
@@ -207,34 +263,7 @@ export default {
       enabled: true,
       authorURL: 'https://www.facebook.com/jason.e.abbott'
    },
-   flickr: {
-      userID: '60950751@N04',
-      appID: '72157631007435048',
-      featureSets: [
-         { id: '72157632729508554', title: 'Ruminations' }
-      ],
-      sizes,
-      /** Photo sizes that must be retrieved for certain contexts */
-      photoSize: {
-         post: sizes.normal.concat(sizes.big, sizes.preview),
-         map: [s.SMALL_320],
-         search: [s.SQUARE_150]
-      },
-      excludeSets: ['72157631638576162'],
-      excludeTags: ['Idaho', 'United States of America', 'Abbott', 'LensTagger', 'Boise'],
-      maxRetries: 10,
-      retryDelay: 300,
-      auth: {
-         apiKey: env('FLICKR_API_KEY'),
-         secret: env('FLICKR_SECRET'),
-         callback: 'http://www.' + domain + '/auth/flickr',
-         token: {
-            access: process.env['FLICKR_ACCESS_TOKEN'] as string,
-            secret: process.env['FLICKR_TOKEN_SECRET'] as string,
-            request: null as string
-         } as Token
-      }
-   },
+   flickr,
    mapbox: {
       accessToken: env('MAPBOX_ACCESS_TOKEN'),
       style: {
@@ -247,30 +276,7 @@ export default {
    redis: {
       url: env('REDISCLOUD_URL') as string
    },
-   // http://code.google.com/apis/console/#project:1033232213688
-   // http://developers.google.com/maps/documentation/staticmaps/
-   google: {
-      apiKey: process.env['GOOGLE_KEY'] as string,
-      projectID: '316480757902',
-      analyticsID: '22180727',        // shown as 'UA-22180727-1
-      searchEngineID: process.env['GOOGLE_SEARCH_ID'] as string,
-      blogID: '118459106898417641',
-      drive: {
-         apiKey: env('GOOGLE_DRIVE_KEY') as string,
-         tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM'
-      },
-      auth: {
-         clientID: env('GOOGLE_CLIENT_ID') as string,
-         secret: env('GOOGLE_SECRET') as string,
-         callback: 'http://www.' + domain + '/auth/google',
-         token: {
-            type: null,
-            access: process.env['GOOGLE_ACCESS_TOKEN'] as string,
-            accessExpiration: null as Date,
-            refresh: process.env['GOOGLE_REFRESH_TOKEN'] as string
-         } as Token
-      }
-   },
+   google,
    /** Maintain redirects to support previously used URLs */
    redirects: {
       'brother-rider-2013-a-night-in-pierce': 'brother-ride-2013',

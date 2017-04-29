@@ -3,7 +3,7 @@ import log from '../logger';
 import config from '../config';
 import library from '../library';
 import * as Feed from 'feed';
-import { httpStatus, mimeType } from '../constants';
+import { mimeType } from '../constants';
 
 const MAX_RSS_RETRIES = 10;
 

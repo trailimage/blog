@@ -6,11 +6,12 @@
       "baseUrl": "./src",
       "newLine": "LF",
       "noImplicitAny": true,
+      "noUnusedLocals": true,
       "allowJs": false,
       "alwaysStrict": true,
       "strictNullChecks": false,
       "allowSyntheticDefaultImports": false,
-      "forceConsistentCasingInFileNames": true,
-      "typeRoots": ["node_modules/@types"]
+      "forceConsistentCasingInFileNames": false,
+      "typeRoots": ["node_modules/@types", "src/types"]
    }
 }

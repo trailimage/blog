@@ -34,10 +34,10 @@ const code = {
    TIMEOUT: 'ETIMEDOUT',
    ERROR: 'ERR'
 };
-const event = {
-   CONNECTED: 'connected',
-   FATAL: 'fatal'
-};
+// const event = {
+//    CONNECTED: 'connected',
+//    FATAL: 'fatal'
+// };
 /** http://redis.io/commands */
 const command = {
    AUTH: 'AUTH',

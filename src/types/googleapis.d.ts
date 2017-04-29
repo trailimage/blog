@@ -25,7 +25,7 @@ declare module 'googleapis' {
        * constant.
        */
       name:string;
-      mimeType:string;
+      mimeType:string; 
       description:string;
       starred:boolean;
 
@@ -51,7 +51,7 @@ declare module 'googleapis' {
        * The full file extension extracted from the `name` field. May contain
        * multiple concatenated extensions, such as "tar.gz". This is only
        * available for files with binary content in Drive.
-       * 
+       *
        * This is automatically updated when the `name` field changes, however it
        * is not cleared if the new name does not contain a valid extension.
        */
@@ -77,7 +77,7 @@ declare module 'googleapis' {
       list(options:QueryOptions, callback:(err:Error, list:FileList)=>void):void;
       /**
        * https://developers.google.com/drive/v3/reference/files/get
-       * 
+       *
        * Getter uses https://github.com/request/request
        */
       get(options:QueryOptions, callback?:(err:Error, body:string, response:any)=>void):Request;
@@ -88,38 +88,4 @@ declare module 'googleapis' {
    }
 
    export function drive(apiVersion:string):Drive;
-}
-
-declare module 'google-auth-library' {
-   interface UrlOptions {
-      access_type:string;
-      approval_prompt:string;
-      scope:string;
-   }
-
-   /** Method to transform rendered text before it's cached and sent */
-   export type Callback = (err:Error, tokens:Tokens) => void;
-   
-   export interface Tokens {
-      access_token:string;
-      refresh_token:string;
-      token_type?:string;
-      expiry_date?:number;
-   }
-
-   interface OAuth2 {
-      credentials:Tokens;
-      generateAuthUrl(options:UrlOptions):string;
-      setCredentials(tokens:Tokens):void;
-      refreshAccessToken(callback:Callback):void;
-      getToken(code:string, callback:Callback):void;
-   }
-
-   interface OAuthConstructor {
-      new(clientID:string, secret:string, callbackURL:string):OAuth2;
-   }
-
-   export default class {
-      OAuth2:OAuthConstructor
-   }
 }

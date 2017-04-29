@@ -7,11 +7,10 @@
       "removeComments": true,
       "sourceMap": false,
       "types": [],
-      "lib": ["es6"]
+      "lib": ["es6","dom"]
    },
    "exclude": [
-      "node_modules",
-      "**/*.d.ts"
+      "node_modules"
    ],
    "include": [
       "./src/app.ts"

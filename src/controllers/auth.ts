@@ -8,6 +8,8 @@ import google from '../providers/google';
 import { httpStatus } from '../constants';
 
 /**
+ * Redirect to authorization URL for unauthorized providers
+ *
  * https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
  */
 function view(req:Blog.Request, res:Blog.Response) {
@@ -23,11 +25,12 @@ function view(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * Default route action
+ * Retrieve tokens for Flickr and display on page to be manually copied into
+ * configuration
  *
  * http://www.flickr.com/services/api/auth.oauth.html
  */
-function f(req:Blog.Request, res:Blog.Response) {
+function flickrAuth(req:Blog.Request, res:Blog.Response) {
    if (is.empty(req.param('oauth_token'))) {
       log.warn('%s is updating Flickr tokens', req.clientIP());
       flickr.auth.getRequestToken().then(url => res.redirect(url));
@@ -49,9 +52,12 @@ function f(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
+ * Retrieve tokens for Google and display on page to be manually copied into
+ * configuration
+ *
  * https://github.com/google/google-api-nodejs-client/
  */
-function g(req:Blog.Request, res:Blog.Response) {
+function googleAuth(req:Blog.Request, res:Blog.Response) {
    const code = req.param('code');
 
    if (is.empty(code)) {
@@ -74,4 +80,4 @@ function g(req:Blog.Request, res:Blog.Response) {
    }
 }
 
-export default { flickr: f, google: g, view };
+export default { flickr: flickrAuth, google: googleAuth, view };

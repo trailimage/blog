@@ -1,3 +1,5 @@
+/// <reference types="geojson" />
+
 import { Photo } from '../types/';
 import is from '../is';
 import log from '../logger';

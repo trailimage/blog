@@ -10,6 +10,7 @@
   "engines": {
     "node": ">=7.8.0"
   },
+  "main": "lib/app.js",
   "scripts": {
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
@@ -75,13 +76,12 @@
     "stylelint-config-standard": "^16.0.0",
     "ts-node": "^3.0.2",
     "tslint": "^5.1.0",
-    "typescript": "^2.2.2"
+    "typescript": "^2.3.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Jason-Abbott/trail-image.git"
   },
-  "main": "index",
   "bugs": {
     "url": "https://github.com/Jason-Abbott/trail-image/issues"
   }

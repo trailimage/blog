@@ -1,6 +1,5 @@
 import { Blog } from './types/';
 import config from './config';
-import C from './constants';
 import log from './logger';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';

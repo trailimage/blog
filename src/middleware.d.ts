@@ -17,6 +17,9 @@ declare namespace Blog {
    export type Generator = ()=> string;
    export type RenderCallback = (r:Renderer)=>void;
 
+   /**
+    * Options to render or generate content if not found in cache
+    */
    export interface RenderOptions {
       mimeType?:string;
       /** Callback to process template renderer output */
@@ -26,7 +29,7 @@ declare namespace Blog {
       /** Values that may be rendered with a template */
       templateValues?:{[key:string]:any};
    }
-   
+
    export interface Response extends ExpressResponse {
       /** Log warning and render not found page */
       notFound():void;

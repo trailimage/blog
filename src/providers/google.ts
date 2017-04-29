@@ -40,7 +40,7 @@ const accessTokenExpired = ()=> is.value(authConfig.token.refresh) &&
 
 /**
  * Set expiration a minute earlier than actual so refresh occurs before Google
- * blocks request.
+ * blocks the request.
  */
 const minuteEarlier = (ms:number) => {
    const d = new Date(ms);
@@ -51,7 +51,7 @@ const minuteEarlier = (ms:number) => {
 /**
  * Refresh access token and proceed
  *
- * See https://developers.google.com/drive/v3/web/quickstart/nodejs
+ * https://developers.google.com/drive/v3/web/quickstart/nodejs
  */
 const verifyToken = ()=> new Promise<null>((resolve, reject) => {
    authClient.setCredentials({

@@ -59,9 +59,9 @@ function breadcrumb(url:string, title:string, position:number):JsonLD.Breadcrumb
 }
 
 /**
- * See http://schema.org/docs/actions.html
- * See http://schema.org/SearchAction
- * See https://developers.google.com/structured-data/slsb-overview
+ * http://schema.org/docs/actions.html
+ * http://schema.org/SearchAction
+ * https://developers.google.com/structured-data/slsb-overview
  */
 function searchAction():JsonLD.SearchAction {
    const qi = 'query-input';
@@ -104,8 +104,8 @@ export default {
    typeField,
    idField,
    /**
-    * See https://developers.google.com/structured-data/testing-tool/
-    * See https://developers.google.com/structured-data/rich-snippets/articles
+    * https://developers.google.com/structured-data/testing-tool/
+    * https://developers.google.com/structured-data/rich-snippets/articles
     */
    fromPost(post:Post) {
       const categoryTitle = Object
@@ -142,7 +142,7 @@ export default {
    },
 
    /**
-    * See https://developers.google.com/structured-data/breadcrumbs
+    * https://developers.google.com/structured-data/breadcrumbs
     */
    fromCategory(category:Category, key:string = category.key, homePage = false):JsonLD.Blog|JsonLD.WebPage {
       if (homePage) {

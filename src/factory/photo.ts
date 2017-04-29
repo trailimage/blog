@@ -2,7 +2,6 @@ import { Provider, Photo, Flickr } from '../types/';
 import is from '../is';
 import util from '../util';
 import config from '../config';
-import exif from './exif';
 import photoSize from './photo-size';
 import realFlickr from '../providers/flickr';
 

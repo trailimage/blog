@@ -1,9 +1,9 @@
 import { Cache } from './types/';
 
 /**
- * Javascript types
+ * Javascript type names
  *
- * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
  */
 const type = {
    UNDEFINED: 'undefined',
@@ -21,7 +21,7 @@ function value<T>(x:any):x is T { return (x !== undefined && x !== null); }
 /**
  * Whether named field is defined in the given object
  *
- * See http://jsperf.com/hasownproperty-vs-in-vs-other/16
+ * http://jsperf.com/hasownproperty-vs-in-vs-other/16
  */
 const defined = (obj:{[key:string]:object}, field:string) =>
    value(obj) && value(obj[field]);
@@ -79,8 +79,8 @@ export default {
    int64: bigInt,
    date,
    text,
-   empty: (t:any) => !value(t) || t === '',
+   empty,
    callable,
-   array(v:any):v is Array<any> { return value(v) && v instanceof Array; },
+   array,
    xml(v:any) { return this.text(v) && /^<\?xml version="[\d\.]+"/.test(v); }
 };

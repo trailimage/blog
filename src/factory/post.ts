@@ -183,7 +183,7 @@ function updatePhotoMarkers(this:Post) {
  *
  * `chronological` whether set photos occurred together at a point in time.
  */
-function make(flickrSet:Flickr.SetSummary, chronological:boolean = true):Post {
+function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boolean = true):Post {
    const p:Post = {
       key: null,
       title: null,

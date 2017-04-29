@@ -44,7 +44,7 @@ export namespace Provider {
       getSetInfo(id:string):Promise<f.SetInfo>;
       getPhotoSizes(id:string):Promise<f.Size[]>;
       getPhotoContext(id:string):Promise<f.MemberSet[]>;
-      getExif(id:number):Promise<f.PhotoExif>;
+      getExif(id:number):Promise<f.Exif[]>;
       getSetPhotos(id:string):Promise<f.SetPhotos>;
       photoSearch(tags:string|string[]):Promise<f.PhotoSummary[]>;
       getAllPhotoTags():Promise<f.Tag[]>;

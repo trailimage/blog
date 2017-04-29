@@ -2,7 +2,7 @@ import is from '../is';
 import xml from './xml';
 import { DOMParser as DOM } from 'xmldom';
 import index from './';
-import * as unzipper from 'unzipper';
+//import * as unzipper from 'unzipper';
 
 /**
  * Return location as [latitude, longitude, elevation]
