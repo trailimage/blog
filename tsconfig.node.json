@@ -6,7 +6,7 @@
       "outDir": "./lib",
       "removeComments": true,
       "sourceMap": false,
-      "types": [],
+      //"types": [],
       "lib": ["es6","dom"]
    },
    "exclude": [
