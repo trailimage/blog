@@ -1,5 +1,8 @@
-export { Flickr } from './flickr.d';
-export { Redis } from './redis.d';
+// Writing definition files:
+// https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
+
+export { Flickr } from '../providers/flickr.d';
+//export { Redis } from './redis.d';
 export { Cache } from '../cache/cache';
 export { Provider, Token } from '../providers/providers';
 export { Blog, Mock } from '../middleware.d';

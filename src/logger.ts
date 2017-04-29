@@ -11,12 +11,6 @@ import * as RedisTx from 'winston-redis';
  */
 let queryable = false;
 
-declare global {
-   namespace Winston {
-      export interface LoggerInstance { [key:string]:string; }
-   }
-}
-
 const level = {
    DEBUG: 'debug',
    INFO: 'info',
@@ -37,13 +31,13 @@ function provider() {
                case logTo.REDIS:
                   // https://github.com/winstonjs/winston-redis
                   const url = URL.parse(config.redis.url);
-                  const tx:WinstonRedis = new RedisTx({
+                  const tx = new RedisTx({
                      host: url.hostname,
                      port: url.port,
                      // winston-redis only wants password for auth
                      auth: url.auth.split(':')[1],
                      length: 10000
-                  });
+                  }) as Winston.TransportInstance;
 
                   tx.on('error', (err:Error) => {
                      // replace Redis transport with console
@@ -76,7 +70,7 @@ function provider() {
 /**
  * Append icon as metadata at the end of the arguments
  *
- * See https://github.com/winstonjs/winston#logging-with-metadata
+ * https://github.com/winstonjs/winston#logging-with-metadata
  */
 function iconInvoke(icon:string, level:string, args:IArguments) {
    const a = Array.from(args);
@@ -86,8 +80,11 @@ function iconInvoke(icon:string, level:string, args:IArguments) {
    invoke(level, a);
 }
 
+/**
+ * Apply arguments to log writer function keyed to severity level
+ */
 function invoke(level:string, ...args:any[]) {
-   provider()[l].apply(provider(), args);
+   provider()[level].apply(provider(), args);
 }
 
 /**
