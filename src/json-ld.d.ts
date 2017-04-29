@@ -3,7 +3,7 @@ import * as Chai from "chai";
 export namespace JsonLD {
    import Property = Chai.Property;
    /**
-    * See http://schema.org/Action
+    * http://schema.org/Action
     */
    interface Action extends Thing {
       actionStatus: ActionStatusType
@@ -20,12 +20,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ActionStatusType
+    * http://schema.org/ActionStatusType
     */
    interface ActionStatusType extends Thing {}
 
    /**
-    * See http://schema.org/AdministrativeArea
+    * http://schema.org/AdministrativeArea
     */
    interface AdministrativeArea extends Place {}
 
@@ -36,7 +36,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Article
+    * http://schema.org/Article
     */
    interface Article extends CreativeWork {
       articleBody: string,
@@ -48,7 +48,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Audience
+    * http://schema.org/Audience
     */
    interface Audience extends Thing {
       audienceType: string,
@@ -56,19 +56,19 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Blog
+    * http://schema.org/Blog
     */
    interface Blog extends Thing {
       blogPost: BlogPosting[]
    }
 
    /**
-    * See http://schema.org/BlogPosting
+    * http://schema.org/BlogPosting
     */
    interface BlogPosting extends SocialMediaPosting {}
 
    /**
-    * See http://schema.org/Brand
+    * http://schema.org/Brand
     */
    interface Brand extends Thing {
       aggregateRating: AggregateRating,
@@ -77,27 +77,27 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Breadcrumb
+    * http://schema.org/Breadcrumb
     */
    interface Breadcrumb extends Thing {}
 
    /**
-    * See http://schema.org/BreadcrumbList
+    * http://schema.org/BreadcrumbList
     */
    interface BreadcrumbList extends ItemList<Breadcrumb> {}
 
    /**
-    * See http://schema.org/BusinessEntityType
+    * http://schema.org/BusinessEntityType
     */
    interface BusinessEntityType extends Thing {}
 
    /**
-    * See http://schema.org/BusinessFunction
+    * http://schema.org/BusinessFunction
     */
    interface BusinessFunction extends Thing {}
 
    /**
-    * See http://schema.org/Comment
+    * http://schema.org/Comment
     */
    interface Comment extends CreativeWork {
       downvoteCount: number,
@@ -105,12 +105,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Country
+    * http://schema.org/Country
     */
    interface Country extends Place {}
 
    /**
-    * See http://schema.org/CreativeWork
+    * http://schema.org/CreativeWork
     */
    interface CreativeWork extends Thing {
       author?: Person|Organization,
@@ -160,12 +160,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ContactPointOption
+    * http://schema.org/ContactPointOption
     */
    interface ContactPointOption extends Thing {}
 
    /**
-    * See http://schema.org/GeoCoordinates
+    * http://schema.org/GeoCoordinates
     */
    interface Coordinates extends Thing {
       elevation: string|number,
@@ -175,18 +175,18 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/DateTime
-    * See https://en.wikipedia.org/wiki/ISO_8601
+    * http://schema.org/DateTime
+    * https://en.wikipedia.org/wiki/ISO_8601
     */
    interface DateTime extends Thing {}
 
    /**
-    * See http://schema.org/DayOfWeek
+    * http://schema.org/DayOfWeek
     */
    interface DayOfWeek extends Thing {}
 
    /**
-    * See http://schema.org/DeliveryMethod
+    * http://schema.org/DeliveryMethod
     */
    interface DeliveryMethod extends Thing {
       method: {
@@ -202,7 +202,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Demand
+    * http://schema.org/Demand
     */
    interface Demand extends Thing {
       acceptedPaymentMethod: LoanOrCredit|PaymentMethod,
@@ -245,17 +245,17 @@ export namespace JsonLD {
    interface DiscussionForumPosting extends SocialMediaPosting {}
 
    /**
-    * See http://schema.org/Distance
+    * http://schema.org/Distance
     */
    interface Distance extends Thing {}
 
    /**
-    * See http://schema.org/Duration
+    * http://schema.org/Duration
     */
    interface Duration extends Thing {}
 
    /**
-    * See http://schema.org/EducationalOrganization
+    * http://schema.org/EducationalOrganization
     */
    interface EducationalOrganization extends Organization {
       alumni: Person[]
@@ -271,12 +271,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Enumeration
+    * http://schema.org/Enumeration
     */
    interface Enumeration extends Thing {}
 
    /**
-    * See http://schema.org/Event
+    * http://schema.org/Event
     */
    interface Event extends Thing {
       actor: Person,
@@ -310,12 +310,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/EventStatusType
+    * http://schema.org/EventStatusType
     */
    interface EventStatusType extends Thing {}
 
    /**
-    * See http://schema.org/FinancialProduct
+    * http://schema.org/FinancialProduct
     */
    interface FinancialProduct extends Service {
       annualPercentageRate: number|QuantitativeValue,
@@ -329,7 +329,7 @@ export namespace JsonLD {
    interface GenderType extends Thing {}
 
    /**
-    * See http://schema.org/GeoCoordinates
+    * http://schema.org/GeoCoordinates
     */
    interface GeoCoordinates extends Thing {
       address: PostalAddress|string,
@@ -352,7 +352,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ImageObject
+    * http://schema.org/ImageObject
     */
    interface ImageObject extends MediaObject {
       caption?: string,
@@ -362,12 +362,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ItemAvailability
+    * http://schema.org/ItemAvailability
     */
    interface ItemAvailability extends Thing {}
 
    /**
-    * See http://schema.org/ItemList
+    * http://schema.org/ItemList
     */
    interface ItemList<T extends Thing> extends Thing {
       itemListElement: ListItem<T>[]|string[]|Thing[],
@@ -376,17 +376,17 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ItemListOrderType
+    * http://schema.org/ItemListOrderType
     */
    interface ItemListOrderType extends Thing {}
 
    /**
-    * See http://schema.org/Language
+    * http://schema.org/Language
     */
    interface Language extends Thing {}
 
    /**
-    * See http://schema.org/ListItem
+    * http://schema.org/ListItem
     */
    interface ListItem<T extends Thing> extends Thing {
       item: T,
@@ -396,7 +396,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/LoanOrCredit
+    * http://schema.org/LoanOrCredit
     */
    interface LoanOrCredit extends FinancialProduct {
       amount: MonetaryAmount|number,
@@ -405,7 +405,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/LocationFeatureSpecification
+    * http://schema.org/LocationFeatureSpecification
     */
    interface LocationFeatureSpecification extends PropertyValue {
       hoursAvailable: OpeningHoursSpecification,
@@ -425,7 +425,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/MonetaryAmount
+    * http://schema.org/MonetaryAmount
     */
    interface MonetaryAmount extends Thing {
       currency: string,
@@ -437,7 +437,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/MusicAlbum
+    * http://schema.org/MusicAlbum
     */
    interface MusicAlbum extends CreativeWork {
       albumProductionType: MusicAlbumProductionType,
@@ -457,7 +457,7 @@ export namespace JsonLD {
    interface MusicAlbumReleaseType extends Thing {}
 
    /**
-    * See http://schema.org/MusicComposition
+    * http://schema.org/MusicComposition
     */
    interface MusicComposition extends CreativeWork {
       composer: Person|Organization,
@@ -473,7 +473,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/MusicGroup
+    * http://schema.org/MusicGroup
     */
    interface MusicGroup extends Organization {
       album: MusicAlbum,
@@ -482,7 +482,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/MusicPlaylist
+    * http://schema.org/MusicPlaylist
     */
    interface MusicPlaylist extends CreativeWork {
       numTracks: number,
@@ -490,7 +490,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/MusicRecording
+    * http://schema.org/MusicRecording
     */
    interface MusicRecording extends CreativeWork {
       byArtist: MusicGroup,
@@ -502,7 +502,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/MusicRelease
+    * http://schema.org/MusicRelease
     */
    interface MusicRelease extends MusicPlaylist {
       catalogNumber: string,
@@ -570,17 +570,17 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/OfferCatalog
+    * http://schema.org/OfferCatalog
     */
    interface OfferCatalog extends ItemList<Offer> {}
 
    /**
-    * See http://schema.org/OfferItemCondition
+    * http://schema.org/OfferItemCondition
     */
    interface OfferItemCondition extends Thing {}
 
    /**
-    * See http://schema.org/OpeningHoursSpecification
+    * http://schema.org/OpeningHoursSpecification
     */
    interface OpeningHoursSpecification extends Thing {
       closes: Date,
@@ -591,7 +591,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Organization
+    * http://schema.org/Organization
     */
    interface Organization extends Thing {
       address: PostalAddress|string,
@@ -637,7 +637,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/OwnershipInfo
+    * http://schema.org/OwnershipInfo
     */
    interface OwnershipInfo extends Thing {
       acquiredFrom: Organization|Person,
@@ -647,12 +647,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/PaymentMethod
+    * http://schema.org/PaymentMethod
     */
    interface PaymentMethod extends Thing {}
 
    /**
-    * See http://schema.org/Person
+    * http://schema.org/Person
     */
    interface Person extends Thing {
       additionalName: string,
@@ -708,7 +708,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Photograph
+    * http://schema.org/Photograph
     */
    interface Photograph extends CreativeWork {}
 
@@ -745,7 +745,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/PriceSpecification
+    * http://schema.org/PriceSpecification
     */
    interface PriceSpecification extends Thing {
       eligibleQuantity: QuantitativeValue,
@@ -760,7 +760,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ProgramMembership
+    * http://schema.org/ProgramMembership
     */
    interface ProgramMembership extends Thing {
       hostingOrganization: Organization,
@@ -803,7 +803,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ProductModel
+    * http://schema.org/ProductModel
     */
    interface ProductModel extends Product {
       isVariantOf: ProductModel,
@@ -843,7 +843,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Rating
+    * http://schema.org/Rating
     */
    interface Rating extends Thing {
       author: Organization|Person,
@@ -853,7 +853,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Review
+    * http://schema.org/Review
     */
    interface Review extends CreativeWork {
       itemReviewed: Thing,
@@ -862,14 +862,14 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/SearchAction
+    * http://schema.org/SearchAction
     */
    interface SearchAction extends Action {
       query: string
    }
 
    /**
-    * See http://schema.org/Service
+    * http://schema.org/Service
     */
    interface Service extends Thing {
       aggregateRating: AggregateRating,
@@ -893,7 +893,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/ServiceChannel
+    * http://schema.org/ServiceChannel
     */
    interface ServiceChannel extends Thing {
       availableLanguage: Language,
@@ -907,14 +907,14 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/SocialMediaPosting
+    * http://schema.org/SocialMediaPosting
     */
    interface SocialMediaPosting extends Article {
       sharedContent: CreativeWork
    }
 
    /**
-    * See http://schema.org/SoftwareApplication
+    * http://schema.org/SoftwareApplication
     */
    interface SoftwareApplication extends Thing {
       applicationCategory: string,
@@ -925,12 +925,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/Specialty
+    * http://schema.org/Specialty
     */
    interface Specialty extends Thing {}
 
    /**
-    * See http://schema.org/StructuredValue
+    * http://schema.org/StructuredValue
     */
    interface StructuredValue extends Thing {}
 
@@ -951,7 +951,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/TypeAndQuantityNode
+    * http://schema.org/TypeAndQuantityNode
     */
    interface TypeAndQuantityNode extends Thing {
       amountOfThisGood: number,
@@ -964,7 +964,7 @@ export namespace JsonLD {
    interface URL extends Thing {}
 
    /**
-    * See http://schema.org/VideoObject
+    * http://schema.org/VideoObject
     */
    interface VideoObject extends MediaObject {
       actor: Person,
@@ -978,7 +978,7 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/WarrantyPromise
+    * http://schema.org/WarrantyPromise
     */
    interface WarrantyPromise extends Thing {
       durationOfWarranty: QuantitativeValue,
@@ -986,12 +986,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/WarrantyScope
+    * http://schema.org/WarrantyScope
     */
    interface WarrantyScope extends Thing {}
 
    /**
-    * See http://schema.org/WebPage
+    * http://schema.org/WebPage
     */
    interface WebPage extends CreativeWork {
       breadcrumb?: BreadcrumbList|Breadcrumb[],
@@ -1005,12 +1005,12 @@ export namespace JsonLD {
    }
 
    /**
-    * See http://schema.org/WebPageElement
+    * http://schema.org/WebPageElement
     */
    interface WebPageElement extends CreativeWork {}
 
    /**
-    * See http://schema.org/WebSite
+    * http://schema.org/WebSite
     */
    interface WebSite extends CreativeWork {}
 }

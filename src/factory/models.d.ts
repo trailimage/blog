@@ -88,7 +88,7 @@ export interface Post {
    updatedOn:Date;
    /**
     * Whether post pictures occurred at a specific point in time (exceptions
-    * are themed sets) 
+    * are themed sets)
     */
    chronological:boolean;
    originalTitle:string;

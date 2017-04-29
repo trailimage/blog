@@ -1,6 +1,6 @@
 /**
  * https://github.com/jpmonette/feed
- * 
+ *
  * TypeScript merges modules and classes that have the same name.
  */
 declare class Feed {
