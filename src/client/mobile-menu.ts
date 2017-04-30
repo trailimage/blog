@@ -1,74 +1,82 @@
-'use strict';
+/// <reference types="jquery" />
 
 $(function() {
-	var $button = $('#mobile-menu-button');
-	var $menu = $('#mobile-menu');
-	var $tags = $menu.find('.tags');
-	var $down = $menu.find('.glyphicon-chevron-down');
-	var tagHeight = $tags.height();
-	var prepared = false;
-	var visible = false;
-	var selection = loadMenuSelection('when');
+   const $button = $('#mobile-menu-button');
+   const $menu = $('#mobile-menu');
+   const $tags = $menu.find('.tags');
+   /**
+    * Down button
+    *
+    *    TODO: needs to be material icon
+    */
+   const $down = $menu.find('.glyphicon-chevron-down');
+   const tagHeight = $tags.height();
+   const selection = loadMenuSelection('when');
 
-	$button.click(function() {
-		if (visible) {
-			$menu.hide(0, function() { visible = false; });
-		} else {
-			$menu.show(0, prepare);
-		}
-	});
+   let prepared = false;
+   let visible = false;
 
-	/**
-	 * Wire menu events
-	 */
-	function prepare() {
-		visible = true;
-		if (prepared) { return; }
+   $button.click(() => {
+      if (visible) {
+         $menu.hide(0, ()=> { visible = false; });
+      } else {
+         $menu.show(0, prepare);
+      }
+   });
 
-		var css = 'selected';
-		var $tagList = $menu.find('.tag-list li');
-		var $down = $menu.find('.glyphicon-chevron-down');
+   /**
+    * Wire menu events
+    */
+   function prepare() {
+      visible = true;
+      if (prepared) { return; }
 
-		$menu.find('.close').click(function() { $menu.hide(0, function() { visible = false; }); });
+      const css = 'selected';
+      const $tagList = $menu.find('.tag-list li');
+      //const $down = $menu.find('.glyphicon-chevron-down');
 
-		// make initial selection
-		$tags.find('ul.' + selection).show(0, toggleArrow);
-		$tagList.filter('li.' + selection).addClass(css);
+      $menu.find('.close').click(()=> { $menu.hide(0, ()=> { visible = false; }); });
 
-		$tagList.click(function() {
-			var $tag = $(this);
-			var tagClass = $tag.attr('class');
+      // make initial selection
+      $tags.find('ul.' + selection).show(0, toggleArrow);
+      $tagList.filter('li.' + selection).addClass(css);
 
-			$down.hide();
-			$tags.find('ul').hide();
-			$tags.find('ul.' + tagClass).show(0, toggleArrow);
-			$tagList.removeClass(css);
-			$tag.addClass(css);
-			saveMenuSelection(tagClass);
-		});
+      $tagList.click(function(this:HTMLElement) {
+         const $tag = $(this);
+         const tagClass = $tag.attr('class');
 
-		prepared = true;
-	}
+         $down.hide();
+         $tags.find('ul').hide();
+         $tags.find('ul.' + tagClass).show(0, toggleArrow);
+         $tagList.removeClass(css);
+         $tag.addClass(css);
 
-	/**
-	 * Show down arrow if list of tags exceeds display area
-	 */
-	function toggleArrow() {
-		if ($(this).height() > tagHeight) {	$down.show(); }
-	}
+         saveMenuSelection(tagClass);
+      });
 
-	/**
-	 * @param {String} ifNone Tag to load if no cookie is found
-	 * @returns {String}
-	 */
-	function loadMenuSelection(ifNone) {
-		var re = new RegExp('\\bmobile=([^;\\b]+)', 'gi');
-		var match = re.exec(document.cookie);
-		return (match === null) ? ifNone : match[1];
-	}
+      prepared = true;
+   }
 
-	/**
-	 * @param {String} selected
-	 */
-	function saveMenuSelection(selected) { document.cookie = 'mobile=' + selected; }
+   /**
+    * Show down arrow if list of tags exceeds display area
+    */
+   function toggleArrow(this:HTMLElement) {
+      if ($(this).height() > tagHeight) {	$down.show(); }
+   }
+
+   /**
+    * Load menu selection from browser storage
+    */
+   function loadMenuSelection(ifNone:string):string {
+      const re = new RegExp('\\bmobile=([^;\\b]+)', 'gi');
+      const match = re.exec(document.cookie);
+      return (match === null) ? ifNone : match[1];
+   }
+
+   /**
+    * Save menu selection to browser storage
+    */
+   function saveMenuSelection(selected:string) {
+      document.cookie = 'mobile=' + selected;
+   }
 });

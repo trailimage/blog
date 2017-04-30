@@ -1,24 +1,28 @@
-{{! http://www.cs.tut.fi/~jkorpela/chars/spaces.html }}
+{{!
+   Generate Javscript data structure for menu
 
-var TrailImage = { menu: {}, post: {} };
+   http://www.cs.tut.fi/~jkorpela/chars/spaces.html
+
+   Rendered to
+   http://www.trailimage.com/js/post-menu-data.js
+}}
+var postMenuData = { category: {}, post: {} };
 
 {{#each library.categories}}
-   TrailImage.menu['{{this.title}}'] = [
+postMenuData.category['{{this.title}}'] = [
 	{{#this.subcategories}}
-		{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
-	{{/this.subcategories}}
-	];
+	{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
+   {{/this.subcategories}}];
 {{/each}}
-
 {{#each library.posts}}
-   TrailImage.post['{{this.id}}'] = {
-		'slug': '{{this.key}}',
-		'title': '{{this.title}}',
-		'icon': '{{modeIconForPost this.categories}}',
-		'description': '{{this.description}}'
+postMenuData.post['{{this.id}}'] = {
+   'slug': '{{this.key}}',
+   'title': '{{this.title}}',
+   'icon': '{{modeIconForPost this.categories}}',
+   'description': '{{this.description}}'
 	{{#this.isPartial}},
-		'subTitle': '{{this.subTitle}}',
-	   'part': {{this.part}}
+   'subTitle': '{{this.subTitle}}',
+   'part': {{this.part}}
 	{{/this.isPartial}}
-	};
+};
 {{/each}}

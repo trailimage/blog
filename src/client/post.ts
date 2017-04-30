@@ -1,8 +1,9 @@
-'use strict';
+/// <reference types="jquery" />
 
 /**
- * Set up lazy loading and light box for post images
- * Depends on post images having data-original, data-big, data-big-width and data-big-height attributes
+ * Set up lazy loading and light box for post images. Depends on post images
+ * having data-original, data-big, data-big-width and data-big-height
+ * attributes.
  *
  * http://www.appelsiini.net/projects/lazyload
  */
@@ -12,7 +13,7 @@ $(function() {
 
    $lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
    $photos.find('img').on('click', lightBox).lazyload();
-   $photos.find('.mobile-button').on('touchstart', function(this:Element) {
+   $photos.find('.mobile-button').on('touchstart', function(this:HTMLElement) {
       const $m = $(this);
       const $fig = $m.parent();
       const content = $m.html();
@@ -21,7 +22,7 @@ $(function() {
 
       $('<div/>')
          .addClass('mobile-info')
-         .load($fig.data('exif'), function(this:Element) {
+         .load($fig.data('exif'), function(this:HTMLElement) {
             const $info = $(this);
             $m.hide().removeClass('loading').html(content);
             $info
@@ -55,14 +56,14 @@ $(function() {
     * Simple light box for clicked image
     * Post image has HTML data attributes defining the big image URL and dimensions
     */
-   function lightBox(this:Element, event:MouseEvent) {
+   function lightBox(this:HTMLElement, event:JQueryMouseEventObject) {
       /** Post image */
       const $img = $(this);
       /** Big image */
       const $big = $lb.find('img');
       /** Whether big image is already browser cached */
       let loaded = $img.data('big-loaded') as boolean;
-      /** @type {Size} */
+
       const size = new Size($img.data('big-width'), $img.data('big-height'));
       /** click position relative to image corner */
       const fromCorner = { top: 0, left: 0 };
@@ -70,7 +71,7 @@ $(function() {
       /**
        * Update image position and panning speed to accomodate window size
        */
-      const updateSize = function(event:MouseEvent) {
+      const updateSize = function(event:JQueryEventObject) {
          let cursor = 'zoom-out';
 
          size.update();
@@ -93,14 +94,14 @@ $(function() {
       /**
        * Update image position within light box
        */
-      const updateHoverPosition = function(event:MouseEvent) {
+      const updateHoverPosition = function(event:JQueryEventObject) {
          $big.css({
             top: size.height.CSS(event.clientY),
             left: size.width.CSS(event.clientX)
          });
       };
 
-      const beginDrag = function(event:TouchEvent) {
+      const beginDrag = function(event:JQueryEventObject) {
          const touchAt = event.targetTouches[0];
          const imageAt = $big.position();
 
@@ -108,7 +109,7 @@ $(function() {
          fromCorner.top = imageAt.top - touchAt.clientY;
       };
 
-      const updateDragPosition = function(event:TouchEvent) {
+      const updateDragPosition = function(event:JQueryEventObject) {
          // ignore multi-finger touches
          const at = event.targetTouches[0];
 
@@ -158,8 +159,6 @@ $(function() {
       $(window).off('resize');
       document.ontouchmove = null;
    }
-
-// - PhotoSize classes -------------------------------------------------------------
 
    /**
     *  ╔════════╤════════════════╗

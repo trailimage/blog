@@ -1,4 +1,4 @@
-import { Blog, Cache } from './types/';
+import { Blog, Cache, JsonResponse } from './types/';
 import is from './is';
 import log from './logger';
 import config from './config';
@@ -152,12 +152,15 @@ function enableStatusHelpers(req:Blog.Request, res:Blog.Response, next:Function)
    };
 
    // JSON helpers depend on Express .json() extension and standard response structure
-   res.jsonError = (message:string) => { res.json({ success: false, message }); };
+   res.jsonError = (message:string) => {
+      res.json({ success: false, message } as JsonResponse);
+   };
+
    res.jsonMessage = (message:string) => {
       res.json({
          success: true,
          message: is.value(message) ? message : ''
-      });
+      }  as JsonResponse);
    };
 
    next();

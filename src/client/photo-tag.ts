@@ -1,14 +1,21 @@
 /// <reference types="jquery" />
 
-'use strict';
+import { JQueryResponse } from '../types/';
+
+/**
+ * Defined in /views/photo-tag.hbs
+ */
+declare const selectedTag:string;
+declare const siteName:string;
+
 
 $(function() {
    const css = 'selected';
    const $view = $('#photo-tag');
    const id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
-   const $list = $view.find('#' + id);
-   const $link = $list.find('#link-' + selectedTag);
-   const $li = $view.find('li[data-for=' + id + ']');
+   let $list = $view.find('#' + id);
+   let $link = $list.find('#link-' + selectedTag);
+   let $li = $view.find('li[data-for=' + id + ']');
 
    $list.show();
    $link.addClass(css);
@@ -16,7 +23,7 @@ $(function() {
 
    loadPhotoTag($link);
 
-   $view.find('li').click(function() {
+   $view.find('li').click(function(this:HTMLElement) {
       $li.removeClass(css);
       $li = $(this);
       $li.addClass(css);
@@ -26,7 +33,7 @@ $(function() {
       $list.show();
    });
 
-   $view.find('#tag-index a').click(function(e) {
+   $view.find('#tag-index a').click(function(this:HTMLElement, e) {
       e.stopPropagation();
       e.preventDefault();
       $link.removeClass(css);
@@ -42,10 +49,13 @@ $(function() {
       );
    });
 
+   /**
+    * Load photo tag HTML
+    */
    function loadPhotoTag($link:JQuery) {
       if ($link.length > 0) {
          $('#wait').show();
-         $('#thumbs').load($link.attr('href'), (response, status) => {
+         $('#thumbs').load($link.attr('href'), function(this:HTMLElement, response:JQueryResponse, status:string) {
             if (status === 'error') {
                $(this).empty();
                $link.removeClass(css);

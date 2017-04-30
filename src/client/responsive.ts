@@ -1,23 +1,37 @@
-'use strict';
+/// <reference types="jquery" />
+
+import { PageFeature } from '../types/';
+
+/**
+ * Defined in /views/post.hbs
+ */
+declare const pageFeatures:PageFeature;
 
 /**
  * Only load scripts and data for the current view port and features
  */
 $(function() {
-   var mobileLoaded = false;
-   var desktopLoaded = false;
-   var $view = $(window);
-   var timer = 0;
-   var breakAt = 1024;
+   /** Whether mobile resources have been loaded */
+   let mobileLoaded = false;
+   /** Whether desktop resources have been loaded */
+   let desktopLoaded = false;
+   const $view = $(window);
+   let timer = 0;
+   /** Page width below which mobile rather than desktop resources will be loaded */
+   const breakAt = 1024;
    // default features
-   var feature = { sideMenu: true, postMenu: true, twitter: true, facebook: false, timestamp: 0 };
+   const feature:PageFeature = { sideMenu: true, postMenu: true, twitter: true, facebook: false, timestamp: 0 };
+
    // incorporate features set by page
-   $.extend(feature, window.feature);
+   $.extend(feature, pageFeatures);
    $view.on('resize', resizeHandler);
 
    // always check on first load
    checkResources();
 
+   /**
+    * Load different resources if view size crosses break boundary
+    */
    function resizeHandler() {
       if (mobileLoaded && desktopLoaded) {
          // no need to check after everything is loaded
@@ -28,6 +42,9 @@ $(function() {
       }
    }
 
+   /**
+    * Load resources based on current view width
+    */
    function checkResources() {
       if ($view.width() > breakAt) {
          loadDesktop();
@@ -36,17 +53,23 @@ $(function() {
       }
    }
 
+   /**
+    * Lazy-load mobile resources
+    */
    function loadMobile() {
       if (mobileLoaded) { return; }
 
       // could be optimized into a lazy-load
-      $('#mobile-menu').load('/mobile-menu', function() {
+      $('#mobile-menu').load('/mobile-menu', ()=> {
          $.getScript('/js/mobile-menu.js');
       });
 
       mobileLoaded = true;
    }
 
+   /**
+    * Lazy-load desktop resources
+    */
    function loadDesktop() {
       if (desktopLoaded) { return; }
 
@@ -72,13 +95,10 @@ $(function() {
 
    /**
     * jQuery getScript() might work but this is the pattern both Facebook and Twitter employ
-    * @param {String} id
-    * @param {String} url
-    * @param {Boolean} [async]
     */
-   function loadSource(id, url, async) {
-      var js;
-      var firstScript = document.getElementsByTagName('script')[0];
+   function loadSource(id:string, url:string, async:boolean = false) {
+      let js;
+      const firstScript = document.getElementsByTagName('script')[0];
 
       if (!document.getElementById(id)) {
          if (async === undefined) { async = false; }

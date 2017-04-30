@@ -14,7 +14,7 @@
 	{{> head-facebook}}
 	{{> ga}}
    <script type="text/javascript">
-		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
+		var pageFeatures = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
 	</script>
 	<script src='/js/post.js' type='text/javascript' defer></script>
 	{{> json-ld}}

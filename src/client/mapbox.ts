@@ -1,7 +1,20 @@
 /// <reference types="jquery" />
 /// <reference types="geojson" />
+/// <reference types="mapbox-gl" />
 
-'use strict';
+/**
+ * Mapbox style identifier defined in /views/mapbox.hbs
+ */
+declare const mapStyle:string;
+
+declare interface UrlPosition {
+   [key:string]:number|number[];
+   /** Longitude, latitude */
+   center?:number[];
+   lon?:number;
+   lat?:number;
+   zoom?:number;
+}
 
 $(function() {
    const MAX_ZOOM = 18;
@@ -13,15 +26,20 @@ $(function() {
     * Maximum number of photos to display in carousel.
     */
    const MAX_IN_CAROUSEL = 20;
+   /**
+    * Initial map position if not specified in URL
+    */
+   const initial:UrlPosition = { zoom: 6.5, center: [-116.0987, 44.7] };
 
-   const initial = { zoom: 6.5, center: [-116.0987, 44.7] };
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
    const $zoomOut = $('#zoom-out');
    const qs = parseUrl();
-   // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
+
+   /** https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol */
    const nav = new mapboxgl.NavigationControl();
-   // https://www.mapbox.com/mapbox-gl-js/api/
+
+   /** https://www.mapbox.com/mapbox-gl-js/api/ */
    const map = new mapboxgl.Map({
       container: 'map-canvas',
       style: 'mapbox://styles/' + mapStyle,
@@ -33,27 +51,30 @@ $(function() {
    });
    const canvas = map.getCanvasContainer();
    const markerOpacity = 0.6;
-   const zoomOutEnabled = false;
    const mapSize = { width: 0, height: 0 };
    const previewSize = { width: 322, height: 350 };
+
+   /**
+    * Whether zoom-out button is enabled
+    */
+   let zoomOutEnabled = false;
 
    /**
     * Cache GeoJSON so it can be reassigned if map style changes
     */
    let geoJSON:GeoJSON.FeatureCollection<any> = null;
 
-    /**
-    * Methods for generating content
+   /**
+    * Methods for generating map content
     */
-   var html = {
+   const html = {
       /**
-       * @param {string} name Google name with underscores for spaces
-       * @param {function} [handler] Optional click handler
-       * @returns {jQuery}
-       * @see https://material.io/icons/
+       * Generate Google material icon HTML
+       *
+       * See https://material.io/icons/
        */
-      icon: function(name, handler) {
-         var $icon = $('<i>')
+      icon: function(name:string, handler?:Function):JQuery {
+         const $icon = $('<i>')
             .addClass('material-icons ' + name)
             .text(name);
 
@@ -63,23 +84,19 @@ $(function() {
 
       /**
        * Format coordinates
-       * @param {number[]} pos
-       * @returns {string}
        */
-      coordinate: function(pos) {
-         var factor = Math.pow(10, COORD_DECIMALS);
-         var round = function(n) { return Math.round(n * factor) / factor; };
+      coordinate: function(pos:number[]):string {
+         const factor = Math.pow(10, COORD_DECIMALS);
+         const round = function(n:number):number { return Math.round(n * factor) / factor; };
          return round(pos[1]) + ', ' + round(pos[0]);
       },
 
       /**
        * Make photo HTML
-       * @param {GeoJSON.Feature} f
-       * @returns {jQuery}
        */
-      photo: function(f) {
-         var img = f.properties;
-         var tip = 'Click or tap to enlarge';
+      photo: function(f:GeoJSON.Feature<GeoJSON.Point>):JQuery {
+         const img = f.properties;
+         const tip = 'Click or tap to enlarge';
          return $('<figure>')
             .append($('<img>')
                .attr('src', img.url)
@@ -93,12 +110,9 @@ $(function() {
       },
 
       /**
-       * @param {mapboxgl.Event} e
-       * @param {string} cssClass
-       * @param {jQuery} content
-       * @param {jQuery} [navigation]
+       * Show photo preview
        */
-      photoPreview: function(e, cssClass, content, navigation) {
+      photoPreview: function(e:mapboxgl.EventData, cssClass:string, content:JQuery, navigation?:JQuery) {
          $preview
             .empty()
             .removeClass()
@@ -117,7 +131,7 @@ $(function() {
    /**
     * Event handlers
     */
-   var handle = {
+   const handle = {
       zoomEnd: function() {
          updateUrl();
          enableZoomOut();
@@ -125,24 +139,21 @@ $(function() {
 
       /**
        * Handle keyboard events while photo preview is visible.
-       * @type {function}
        */
-      keyNav: null,
+      keyNav: null as Function,
 
       /**
        * Respond to user map interaction by hiding photo preview.
-       * @param {mapboxgl.Event} e
        */
-      mapInteraction: function(e) {
+      mapInteraction: function(e:mapboxgl.EventData|KeyboardEvent) {
          if (e.reason != 'fit') { handle.closePreview(); }
       },
 
       /**
        * Update map size variables when window is resized.
-       * @param {Event} e
        */
       windowResize: function() {
-         var $c = $('canvas');
+         const $c = $('canvas');
          mapSize.width = $c.width();
          mapSize.height = $c.height();
       },
@@ -150,9 +161,8 @@ $(function() {
       /**
        * Respond to mouse click on photo marker. When preview is shown, start
        * listening for map interaction events to hide the preview.
-       * @param {mapboxgl.Event} e
        */
-      photoClick: function(e) {
+      photoClick: function(e:mapboxgl.EventData) {
          html.photoPreview(e, 'single', html.photo(e.features[0]));
       },
 
@@ -182,13 +192,12 @@ $(function() {
        * and I've not been able to find a function that exactly relates zoom
        * level to the radius represented by the cluster.
        *
-       * @param {mapboxgl.Event} e
-       * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
+       * See https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
-      clusterClick: function(e) {
-         var cluster = e.features[0].properties;
-         var atZoom = map.getZoom();
-         var zoomIn = function() {
+      clusterClick: function(e:mapboxgl.EventData) {
+         const cluster = e.features[0].properties;
+         const atZoom = map.getZoom();
+         const zoomIn = function() {
             map.easeTo({
                center: e.lngLat,
                zoom: MAX_ZOOM - atZoom < 2 ? MAX_ZOOM : atZoom + 2
@@ -198,14 +207,14 @@ $(function() {
          if (cluster.point_count > MAX_IN_CAROUSEL && atZoom < MAX_ZOOM - 2) {
             zoomIn();
          } else {
-            var photos = photosNearLocation(e.lngLat, cluster.point_count);
+            const photos = photosNearLocation(e.lngLat, cluster.point_count);
             if (photos.length == 0) {
                zoomIn();
             } else {
-               var selected = 1;
-               var $photos = $('<div>').addClass('photo-list');
-               var $markers = $('<div>').addClass('markers');
-               var select = function(count) {
+               let selected = 1;
+               const $photos = $('<div>').addClass('photo-list');
+               const $markers = $('<div>').addClass('markers');
+               const select = (count:number) => {
                   selected += count;
                   if (selected > photos.length) {
                      selected = 1;
@@ -217,12 +226,12 @@ $(function() {
                   $('figure:nth-child(' + selected + ')', $photos).show();
                   $('i:nth-child(' + selected + ')', $markers).addClass('selected');
                };
-               var prev = function() { select(-1); };
-               var next = function() { select(1); };
+               const prev = ()=> { select(-1); };
+               const next = ()=> { select(1); };
 
                enableKeyNav(true, next, prev);
 
-               for (var i = 0; i < photos.length; i++) {
+               for (let i = 0; i < photos.length; i++) {
                   $photos.append(html.photo(photos[i]));
                   $markers.append(html.icon('place'));
                }
@@ -254,12 +263,11 @@ $(function() {
 
    /**
     * Preview images may be 320 pixels on a side
-    * @returns {object} CSS property
     */
-   function getPreviewPosition(e:mapboxgl.EventData) {
-      const x = e.point.x;
-      const y = e.point.y;
-      var offset = {
+   function getPreviewPosition(e:mapboxgl.EventData):object {
+      let x = e.point.x;
+      let y = e.point.y;
+      const offset = {
          x: (x + previewSize.width) - mapSize.width,
          y: (y + previewSize.height) - mapSize.height
       };
@@ -278,9 +286,9 @@ $(function() {
    /**
     * Load map location from URL.
     */
-   function parseUrl() {
+   function parseUrl():UrlPosition {
       const parts = window.location.search.split(/[&\?]/g);
-      const qs = {};
+      const qs:UrlPosition = {};
       for (let i = 0; i < parts.length; i++) {
          const pair = parts[i].split('=');
          if (pair.length == 2) { qs[pair[0]] = parseFloat(pair[1]); }
@@ -293,15 +301,11 @@ $(function() {
 
    /**
     * Enable or disable keyboard photo navigation.
-    * @param {boolean} enable
-    * @param {function} [next]
-    * @param {function} [prev]
     */
-   function enableKeyNav(enable, next, prev) {
+   function enableKeyNav(enable:boolean, next:Function, prev:Function) {
       if (enable) {
-         handle.keyNav = function(e) {
-            var event = window.event ? window.event : e;
-            switch (event.keyCode) {
+         handle.keyNav = (e:KeyboardEvent) => {
+            switch (e.keyCode) {
                case 27: handle.mapInteraction(e); break;
                case 37: prev(); break;
                case 39: next(); break;
@@ -315,45 +319,36 @@ $(function() {
 
    /**
     * Get number of photos nearest to a location.
-    * @param {mapboxgl.LngLatLike} lngLat
-    * @param {number} count Number of photos to return
-    * @returns {GeoJSON.Feature[]}
     */
-   function photosNearLocation(lngLat, count) {
-      var z = map.getZoom();
-      var f = (z * 3) / Math.pow(2, z);
-      var sw = [lngLat.lng - f, lngLat.lat - f];
-      var ne = [lngLat.lng + f, lngLat.lat + f];
-
-      var photos = geoJSON.features
-         .filter(function(f) {
-            var coord = f.geometry.coordinates;
+   function photosNearLocation(lngLat:mapboxgl.LngLat, count:number):GeoJSON.Feature<any> {
+      const z = map.getZoom();
+      const f = (z * 3) / Math.pow(2, z);
+      const sw = [lngLat.lng - f, lngLat.lat - f];
+      const ne = [lngLat.lng + f, lngLat.lat + f];
+      const photos = geoJSON.features
+         .filter(f => {
+            const coord = f.geometry.coordinates;
             return coord[0] >= sw[0] && coord[1] >= sw[1]
                 && coord[0] <= ne[0] && coord[1] <= ne[1];
          })
-         .map(function(f) {
+         .map(f => {
             f.properties.distance = distance(lngLat, f.geometry.coordinates);
             return f;
          });
 
-      photos.sort(function(p1, p2) {
-         return p1.properties.distance - p2.properties.distance;
-      });
+      photos.sort((p1, p2) =>p1.properties.distance - p2.properties.distance);
 
       return photos.slice(0, count);
    }
 
    /**
     * Straight-line distance between two points.
-    * @param {mapbox.LngLat} lngLat
-    * @param {number[]} point
-    * @returns {number}
     */
-   function distance(lngLat, point) {
-      var x1 = lngLat.lng;
-      var y1 = lngLat.lat;
-      var x2 = point[0];
-      var y2 = point[1];
+   function distance(lngLat:mapboxgl.LngLat, point:number[]):number {
+      const x1 = lngLat.lng;
+      const y1 = lngLat.lat;
+      const x2 = point[0];
+      const y2 = point[1];
       return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
    }
 
@@ -361,8 +356,8 @@ $(function() {
     * Update URL with current zoom level and map center.
     */
    function updateUrl() {
-      var lngLat = map.getCenter();
-      var url = '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
+      const lngLat = map.getCenter();
+      const url = '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
       window.history.replaceState(null, null, url);
    }
 
@@ -383,22 +378,20 @@ $(function() {
 
    /**
     * Curry function to update canvas cursor.
-    * @param {string} name
-    * @returns {function}
     */
-   function cursor(name) {
+   function cursor(name:string):Function {
       if (name === undefined) { name = ''; }
       return function() { canvas.style.cursor = name; };
    }
 
    /**
     * Retrieve photo ID from preview URL and redirect to post with that photo
-    * @param {string} url
-    * @example https://farm3.staticflickr.com/2853/33767184811_9eff6deb48_n.jpg
+    *
+    * Example https://farm3.staticflickr.com/2853/33767184811_9eff6deb48_n.jpg
     */
-   function showPhotoInPost(url) {
-      var path = url.split('/');
-      var parts = path[path.length - 1].split('_');
+   function showPhotoInPost(url:string) {
+      const path = url.split('/');
+      const parts = path[path.length - 1].split('_');
       window.location = '/' + parts[0];
    }
 

@@ -9,7 +9,7 @@
       "indent": [true, "spaces"],
       "jsdoc-format": true,
       "label-position": true,
-      "linebreak-style": [true, "LF"],
+      //"linebreak-style": [true, "LF"],
       "new-parens": true,
       "no-angle-bracket-type-assertion": true,
       "no-arg": true,
