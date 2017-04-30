@@ -10,6 +10,15 @@
       "procfile": "yaml"
    },
 
+   "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "lib/**/.js.map": true
+   },
+
    "search.exclude": {
       "**/node_modules": true,
       "**/lib": true,

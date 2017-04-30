@@ -22,7 +22,7 @@ export function getItem<T>(key:string):Promise<T> {
 }
 
 export function add(key:string, value:any):Promise<boolean> {
-   return redis.add(key, item);
+   return redis.add(key, value);
 }
 
 /**

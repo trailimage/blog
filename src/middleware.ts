@@ -61,7 +61,7 @@ function checkSpammerList(domain:string):Promise<boolean> {
  * Load spammer list from cache or remote provider
  */
 function getSpammerList():Promise<string[]> {
-   return cache.getItem(cacheKey).then(list => {
+   return cache.getItem<string[]>(cacheKey).then(list => {
       if (is.array(list)) {
          if (isStale()) { downloadSpammerList(); }
          return list;

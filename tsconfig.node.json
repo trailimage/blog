@@ -4,7 +4,7 @@
       "module": "commonjs",
       "outDir": "./lib",
       "removeComments": true,
-      "sourceMap": false,
+      "sourceMap": true,
       //"moduleResolution": "node",
       //"isolatedModules": true,
       //"types": [],
