@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const factory = require('../../lib/factory');
+const factory = require('../../lib/factory').default;
 /** @type {Post} */
 let post1 = null;
 /** @type {Post} */

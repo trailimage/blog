@@ -1,7 +1,7 @@
 const mocha = require('mocha');
 const { expect } = require('chai');
-const factory = require('../lib/factory');
-const library = require('../lib/library');
+const factory = require('../lib/factory').default;
+const library = require('../lib/library').default;
 
 factory.inject.flickr = require('./mocks/flickr.mock');
 

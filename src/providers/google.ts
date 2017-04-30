@@ -5,7 +5,7 @@ import { header, mimeType } from '../constants';
 import is from '../is';
 import log from '../logger';
 import * as googleAPIs from 'googleapis';
-import googleAuth from 'google-auth-library';
+import * as googleAuth from 'google-auth-library';
 
 /**
  * Google access scopes

@@ -1,8 +1,8 @@
-const is = require('../../lib/is');
+const is = require('../../lib/is').default;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const factory = require('../../lib/factory/');
-const library = require('../../lib/library');
+const factory = require('../../lib/factory/').default;
+const library = require('../../lib/library').default;
 
 describe('Factory', ()=> {
    before(() => {

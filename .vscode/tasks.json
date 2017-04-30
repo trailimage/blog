@@ -30,11 +30,11 @@
          "taskName": "Build and Watch Client",
          "command": "npm run watch",
          "isShellCommand": true,
-         "isBuildCommand": true,
          "isBackground": true
       },
       {
          "taskName": "Build Server",
+         "isBuildCommand": true,
          "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
          "options": {
             "cwd": "{$workspaceRoot}"

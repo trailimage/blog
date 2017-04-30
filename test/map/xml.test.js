@@ -1,4 +1,4 @@
-const xml = require('../../lib/map/xml');
+const xml = require('../../lib/map/xml').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
 const DOM = require('xmldom').DOMParser;

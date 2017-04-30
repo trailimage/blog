@@ -1,7 +1,7 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const config = require('../lib/config');
-const util = require('../lib/util');
+const config = require('../lib/config').default;
+const util = require('../lib/util').default;
 const { lipsum } = require('./mocks/');
 let u;   // undefined
 

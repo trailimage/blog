@@ -1,8 +1,8 @@
 const mocha = require('mocha');
-const C = require('../lib/constants');
-const config = require('../lib/config');
+const C = require('../lib/constants').default;
+const config = require('../lib/config').default;
 const { expect } = require('chai');
-const route = require('../lib/routes');
+const route = require('../lib/routes').default;
 const app = require('./mocks/express.mock');
 
 describe('Routes', ()=> {

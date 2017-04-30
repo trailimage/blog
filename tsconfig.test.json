@@ -2,16 +2,15 @@
    "extends": "./tsconfig.json",
    "compilerOptions": {
       "module": "commonjs",
-      "outDir": "./lib",
+      "outDir": "./test",
       "removeComments": true,
       "sourceMap": false,
-      //"moduleResolution": "node",
       //"isolatedModules": true,
       //"types": [],
       "lib": ["es6","dom"],
-      "watch": false
+      "watch": true
    },
    "include": [
-      "./src/app.ts"
+      "./test/app.ts"
    ]
 }

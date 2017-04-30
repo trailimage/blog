@@ -1,12 +1,12 @@
-const C = require('../../lib/constants');
-const cache = require('../../lib/cache');
+const C = require('../../lib/constants').default;
+const cache = require('../../lib/cache').default;
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
-const middleware = require('../../lib/middleware');
-const factory = require('../../lib/factory');
+const middleware = require('../../lib/middleware').default;
+const factory = require('../../lib/factory').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const c = require('../../lib/controllers/');
+const c = require('../../lib/controllers/').default;
 
 /**
  * Expect standard Handlexitebars template response

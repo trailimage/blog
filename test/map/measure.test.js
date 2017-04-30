@@ -1,4 +1,4 @@
-const measure = require('../../lib/map/measure');
+const measure = require('../../lib/map/measure').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
 

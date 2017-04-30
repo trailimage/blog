@@ -1,11 +1,11 @@
-const C = require('../lib/constants');
-const cache = require('../lib/cache');
-const config = require('../lib/config');
+const C = require('../lib/constants').default;
+const cache = require('../lib/cache').default;
+const config = require('../lib/config').default;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const res = require('./mocks/response.mock');
 const req = require('./mocks/request.mock');
-const middleware = require('../lib/middleware');
+const middleware = require('../lib/middleware').default;
 
 describe('Middleware', ()=> {
    beforeEach(() => {

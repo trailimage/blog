@@ -1,8 +1,8 @@
 const mocha = require('mocha');
-const config = require('../../lib/config');
+const config = require('../../lib/config').default;
 const { expect } = require('chai');
-const google = require('../../lib/providers/google');
-const factory = require('../../lib/factory/');
+const google = require('../../lib/providers/google').default;
+const factory = require('../../lib/factory/').default;
 const authConfig = config.google.auth;
 
 describe('Google', ()=> {

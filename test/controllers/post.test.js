@@ -1,12 +1,12 @@
-const C = require('../../lib/constants');
-const config = require('../../lib/config');
+const C = require('../../lib/constants').default;
+const config = require('../../lib/config').default;
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
-const template = require('../../lib/template');
+const template = require('../../lib/template').default;
 const { prepare, expectTemplate, expectRedirect } = require('./index.test');
 const mocha = require('mocha');
 const { expect } = require('chai');
-const post = require('../../lib/controllers/post');
+const post = require('../../lib/controllers/post').default;
 const ph = C.route;
 
 describe('Post', ()=> {

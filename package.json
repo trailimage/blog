@@ -14,6 +14,7 @@
   "scripts": {
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
+    "tstest": "node_modules/.bin/mocha -r ts-node/register",
     "watch": "node_modules/.bin/gulp watch",
     "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css"
@@ -49,6 +50,7 @@
     "@types/googlemaps": "^3.26.8",
     "@types/jquery": "^2.0.41",
     "@types/mapbox-gl": "^0.30.0",
+    "@types/mocha": "^2.2.41",
     "@types/node-fetch": "^1.6.7",
     "@types/redis": "^0.12.36",
     "@types/request": "0.0.42",
