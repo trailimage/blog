@@ -1,7 +1,7 @@
 const res = require('./response.mock');
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const C = require('../../lib/constants');
+const C = require('../../lib/constants').default;
 
 describe('Mock Response', ()=> {
    beforeEach(()=> res.reset());

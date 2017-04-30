@@ -1,6 +1,6 @@
 const util = require('util');
-const C = require('../../lib/constants');
-const is = require('../../lib/is');
+const C = require('../../lib/constants').default;
+const is = require('../../lib/is').default;
 
 /** @type {MockResponse} */
 module.exports = {
