@@ -2,6 +2,8 @@
 /// <reference types="geojson" />
 /// <reference types="mapbox-gl" />
 
+import { MapPhoto } from '../types/';
+
 /**
  * Mapbox style identifier defined in /views/mapbox.hbs
  */
@@ -9,7 +11,7 @@ declare const mapStyle:string;
 
 declare interface UrlPosition {
    [key:string]:number|number[];
-   /** Longitude, latitude */
+   /** longitude, latitude */
    center?:number[];
    lon?:number;
    lat?:number;
@@ -95,7 +97,7 @@ $(function() {
        * Make photo HTML
        */
       photo: function(f:GeoJSON.Feature<GeoJSON.Point>):JQuery {
-         const img = f.properties;
+         const img:MapPhoto = f.properties;
          const tip = 'Click or tap to enlarge';
          return $('<figure>')
             .append($('<img>')
@@ -112,7 +114,7 @@ $(function() {
       /**
        * Show photo preview
        */
-      photoPreview: function(e:mapboxgl.EventData, cssClass:string, content:JQuery, navigation?:JQuery) {
+      photoPreview: function(e:mapboxgl.MapMouseEvent, cssClass:string, content:JQuery, navigation?:JQuery) {
          $preview
             .empty()
             .removeClass()
@@ -140,7 +142,7 @@ $(function() {
       /**
        * Handle keyboard events while photo preview is visible.
        */
-      keyNav: null as Function,
+      keyNav: null as EventListener,
 
       /**
        * Respond to user map interaction by hiding photo preview.
@@ -162,7 +164,7 @@ $(function() {
        * Respond to mouse click on photo marker. When preview is shown, start
        * listening for map interaction events to hide the preview.
        */
-      photoClick: function(e:mapboxgl.EventData) {
+      photoClick: function(e:mapboxgl.MapMouseEvent) {
          html.photoPreview(e, 'single', html.photo(e.features[0]));
       },
 
@@ -194,8 +196,8 @@ $(function() {
        *
        * See https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
-      clusterClick: function(e:mapboxgl.EventData) {
-         const cluster = e.features[0].properties;
+      clusterClick: function(e:mapboxgl.MapMouseEvent) {
+         const cluster:mapboxgl.PointCluster = e.features[0].properties;
          const atZoom = map.getZoom();
          const zoomIn = function() {
             map.easeTo({
@@ -264,7 +266,7 @@ $(function() {
    /**
     * Preview images may be 320 pixels on a side
     */
-   function getPreviewPosition(e:mapboxgl.EventData):object {
+   function getPreviewPosition(e:mapboxgl.MapMouseEvent):object {
       let x = e.point.x;
       let y = e.point.y;
       const offset = {
@@ -302,7 +304,7 @@ $(function() {
    /**
     * Enable or disable keyboard photo navigation.
     */
-   function enableKeyNav(enable:boolean, next:Function, prev:Function) {
+   function enableKeyNav(enable:boolean, next?:Function, prev?:Function) {
       if (enable) {
          handle.keyNav = (e:KeyboardEvent) => {
             switch (e.keyCode) {
@@ -320,7 +322,7 @@ $(function() {
    /**
     * Get number of photos nearest to a location.
     */
-   function photosNearLocation(lngLat:mapboxgl.LngLat, count:number):GeoJSON.Feature<any> {
+   function photosNearLocation(lngLat:mapboxgl.LngLat, count:number):GeoJSON.Feature<any>[] {
       const z = map.getZoom();
       const f = (z * 3) / Math.pow(2, z);
       const sw = [lngLat.lng - f, lngLat.lat - f];
@@ -336,7 +338,7 @@ $(function() {
             return f;
          });
 
-      photos.sort((p1, p2) =>p1.properties.distance - p2.properties.distance);
+      photos.sort((p1, p2) => p1.properties.distance - p2.properties.distance);
 
       return photos.slice(0, count);
    }
@@ -379,7 +381,7 @@ $(function() {
    /**
     * Curry function to update canvas cursor.
     */
-   function cursor(name:string):Function {
+   function cursor(name?:string):Function {
       if (name === undefined) { name = ''; }
       return function() { canvas.style.cursor = name; };
    }
@@ -392,7 +394,7 @@ $(function() {
    function showPhotoInPost(url:string) {
       const path = url.split('/');
       const parts = path[path.length - 1].split('_');
-      window.location = '/' + parts[0];
+      window.location.href = '/' + parts[0];
    }
 
    /**
@@ -462,6 +464,7 @@ $(function() {
          }
       });
 
+      // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/mapbox-gl/index.d.ts
       map.on('mouseenter', 'cluster', cursor('pointer'))
          .on('mouseleave', 'cluster', cursor())
          .on('mouseenter', 'photo', cursor('pointer'))

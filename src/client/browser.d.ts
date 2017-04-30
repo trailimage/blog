@@ -43,6 +43,15 @@ export interface JsonResponse {
 }
 
 /**
+ * GeoJSON properties for post photos
+ */
+export interface MapPhoto {
+   url?:string;
+   title?:string;
+   partKey?:string;
+}
+
+/**
  * Standard JQuery AJAX response
  */
 export type JQueryResponse = (responseText:string, textStatus:string, XMLHttpRequest:XMLHttpRequest) => any;

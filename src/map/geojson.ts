@@ -1,6 +1,6 @@
 /// <reference types="geojson" />
 
-import { Photo } from '../types/';
+import { Photo, MapPhoto } from '../types/';
 import is from '../is';
 import log from '../logger';
 import gpx from './gpx';
@@ -118,7 +118,7 @@ function featuresFromGPX(gpxString:string):GeoJSON.FeatureCollection<any> {
  * See http://geojson.org/geojson-spec.html
  */
 const pointFromPhoto = (photo:Photo, partKey?:string) => {
-   const properties:{[key:string]:string} = { url: photo.size.preview.url };
+   const properties:MapPhoto = { url: photo.size.preview.url };
    if (partKey !== undefined) {
       // implies GeoJSON for single post
       properties.title = photo.title;
