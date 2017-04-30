@@ -33,8 +33,9 @@ describe('Google', ()=> {
       });
    });
 
-   describe('Drive', ()=> {
+   describe('Drive', function() {
       let post = null;
+      this.timeout(10000);
 
       before(() => factory.buildLibrary().then(library => {
          post = library.postWithKey('owyhee-snow-and-sand/lowlands');

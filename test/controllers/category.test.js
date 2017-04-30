@@ -4,7 +4,7 @@ const { prepare, expectTemplate } = require('./index.test');
 const template = require('../../lib/template').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const category = require('../../lib/controllers/category');
+const category = require('../../lib/controllers/category').default;
 const { route: ph } = require('../../lib/constants').default;
 
 describe('Category Controller', ()=> {
