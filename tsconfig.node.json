@@ -9,7 +9,7 @@
       //"isolatedModules": true,
       //"types": [],
       "lib": ["es6","dom"],
-      "watch": false
+      "watch": true
    },
    "include": [
       "./src/app.ts"

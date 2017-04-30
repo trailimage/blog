@@ -42,7 +42,8 @@
          "protocol": "inspector",
          //"args": ["test/**/*.js", "--no-timeouts"]
          //"args": ["test/factory/*", "--no-timeouts"]
-         "args": ["test/map/geojson*", "--no-timeouts"]
+         //"args": ["test/map/geojson*", "--no-timeouts"]
+         "args": ["test/is*", "--no-timeouts"]
       },
       {
          "name": "Debug Gulp",

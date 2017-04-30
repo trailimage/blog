@@ -36,10 +36,7 @@
          "taskName": "Build Server",
          "isBuildCommand": true,
          "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
-         "options": {
-            "cwd": "{$workspaceRoot}"
-         },
-         "isShellCommand": false,
+         "isShellCommand": true,
          "problemMatcher": "$tsc"
       }
    ]

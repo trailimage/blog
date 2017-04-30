@@ -9,9 +9,9 @@ import * as url from 'url';
 /**
  * Replace placeholders with arbitrary arguments
  */
-function format(text:string, ...insertions:any[]):string {
-   for (let i = 0; i < arguments.length; i++) {
-      text = text.replace('{' + i + '}', insertions[i + 1]);
+function format(text:string, ...insertions:(string|number)[]):string {
+   for (let i = 0; i < insertions.length; i++) {
+      text = text.replace('{' + i + '}', insertions[i] as string);
    }
    return text;
 }
@@ -109,12 +109,16 @@ function caption(text:string):string {
       text = typography(text);
 
       text = text
-      // format footnotes separately
-         .replace(re.footnote.text, (match, prefix, body) => { footnotes = formatNotes(body); return ''; })
+         // format footnotes separately
+         .replace(re.footnote.text, (match:string, prefix:string, body:string) => {
+            footnotes = formatNotes(body); return '';
+         })
          // set poetry aside and replace with placeholder
-         .replace(re.poetry.any, (match, space, body) => { poem = formatPoem(body); return ph; })
+         .replace(re.poetry.any, (match:string, space:string, body:string) => {
+            poem = formatPoem(body); return ph;
+         })
          // remove block quotes and wrap in fake tags that won't match subsequent operations
-         .replace(re.quote.block, (match, newLines, body) => '[Q]' + body.remove(re.quote.curly) + '[/Q]');
+         .replace(re.quote.block, (match:string, newLines:string, body:string) => '[Q]' + body.replace(re.quote.curly, '') + '[/Q]');
 
       text = '<p>' + text + '</p>';
 
@@ -157,7 +161,7 @@ function fixMalformedLink(text:string):string {
       const newLink = oldLink.replace(re.tag.link, (match, url, name) => {
          // add protocol if missing
          if (!protocol.test(name)) { name = 'http://' + name; }
-         return format('<a href="{0}">{1}</a>', name, decodeURI(name.remove(protocol)));
+         return format('<a href="{0}">{1}</a>', name, decodeURI(name.replace(protocol, '')));
       });
       text = text.replace(oldLink, newLink);
    } else {
@@ -169,9 +173,9 @@ function fixMalformedLink(text:string):string {
 /**
  * If link text is a web address, replace with just domain and page
  */
-const shortenLinkText = (text:string) => text.replace(re.tag.linkToUrl, (match, protocol, url) => {
+const shortenLinkText = (text:string) => text.replace(re.tag.linkToUrl, (match, protocol, url:string) => {
    const parts = url.split('/');
-   const domain = parts[0].remove('www.');
+   const domain = parts[0].replace('www.', '');
    // page precedes trailing slash
    let lastPart = /\/$/.test(url) ? parts.length - 2 : parts.length - 1;
    // if last part is only a query string then move to previous
@@ -179,9 +183,9 @@ const shortenLinkText = (text:string) => text.replace(re.tag.linkToUrl, (match, 
 
    let middle = '/';
    const page = parts[lastPart]
-      .remove(re.queryString)
-      .remove(re.tag.anchor)
-      .remove(re.fileExt);
+      .replace(re.queryString, '')
+      .replace(re.tag.anchor, '')
+      .replace(re.fileExt, '');
 
    if (lastPart > 1) { middle = '/&hellip;/'; }
    if (protocol === undefined) { protocol = 'http://'; }
