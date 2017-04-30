@@ -154,7 +154,7 @@ function name(this:Post|any):string {
 /**
  * Coordinate path used by Mapbox static maps
  *
- * See https://www.mapbox.com/api-documentation/#static
+ * https://www.mapbox.com/api-documentation/#static
  *
  *    Example:
  *    pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
@@ -162,20 +162,22 @@ function name(this:Post|any):string {
 function updatePhotoMarkers(this:Post) {
    let start = 1;  // always skip first photo
    let total = this.photos.length;
-   let map = '';
+   let markers:string = '';
 
    if (total > config.map.maxMarkers) {
-      start = 5;  // skip the first few which are often just prep shots
-      total = config.map.maxMarkers + 5;
-      if (total > this.photos.length) { total = this.photos.length; }
+       start = 5;  // skip the first few which are often just prep shots
+       total = config.map.maxMarkers + 5;
+       if (total > this.photos.length) { total = this.photos.length; }
    }
 
    for (let i = start; i < total; i++) {
-      const img = this.photos[i];
-      if (img.latitude > 0) { map += '|' + img.latitude + ',' + img.longitude; }
+       const img = this.photos[i];
+       //if (img.latitude > 0) { markers += `,pin-s+800(${img.longitude.toFixed(5)},${img.latitude.toFixed(5)})`; }
+       if (img.latitude > 0) {
+          markers += `,url-${encodeURIComponent('http://www.trailimage.com/p.png')}(${img.longitude.toFixed(5)},${img.latitude.toFixed(5)})`;
+       }
    }
-
-   this.photoMarkers = (is.empty(map)) ? null : encodeURIComponent('size:tiny' + map);
+   this.photoMarkers = (is.empty(markers)) ? null : markers.replace(/^,/, '');
 }
 
 /**

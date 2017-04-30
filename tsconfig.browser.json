@@ -3,7 +3,15 @@
    "compilerOptions": {
       "module": "es6",
       "outDir": "../dist",
+      "allowJs": true,
       "sourceMap": true,
       "lib": ["es6","dom"]
-   }
+   },
+   "include": [
+      "./src/client/*.ts"
+   ],
+   "exclude": [
+      "./src/types",
+      "node_modules"
+   ]
 }

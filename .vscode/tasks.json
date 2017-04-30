@@ -6,18 +6,18 @@
    "suppressTaskName": true,
    "tasks": [
       {
-         "taskName": "Run server",
+         "taskName": "Run Server",
          "command": "node ./lib/app.js",
          "isShellCommand": true,
          "isBackground": true
       },
       {
-         "taskName": "Install Modules",
+         "taskName": "Module Install",
          "command": "npm install",
          "isShellCommand": true
       },
       {
-         "taskName": "Update Modules",
+         "taskName": "Module Update",
          "command": "npm update",
          "isShellCommand": true
       },
@@ -34,7 +34,7 @@
          "isBackground": true
       },
       {
-         "taskName": "Build Server",
+         "taskName": "Build and Watch Server",
          "isBuildCommand": true,
          "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
          "isShellCommand": true,

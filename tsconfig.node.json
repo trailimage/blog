@@ -11,6 +11,11 @@
       "lib": ["es6","dom"],
       "watch": true
    },
+   "exclude": [
+      "./src/types",
+      "./src/client",
+      "node_modules"
+   ],
    "include": [
       "./src/app.ts"
    ]

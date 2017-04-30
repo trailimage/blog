@@ -15,9 +15,5 @@
       "allowSyntheticDefaultImports": false,
       "forceConsistentCasingInFileNames": false,
       "typeRoots": ["./node_modules/@types", "./src/types"]
-   },
-   "exclude": [
-      "./src/types",
-      "node_modules"
-   ]
+   }
 }
