@@ -90,17 +90,17 @@ describe('Middleware', ()=> {
             });
          };
          res.endOnRender = false;
-         res.sendView(viewSlug, render => {
+         res.sendView(viewSlug, { callback: render => {
             // mock response echoes back parameters instead of rendering view
             render('test-template', { option1: 'value1', option2: 'value2' });
-         });
+         }});
       });
 
       it('sends already rendered pages from cache', done => {
          res.onEnd = done;
-         res.sendView(viewSlug, ()=> {
+         res.sendView(viewSlug, { callback: ()=> {
             throw new Error('Attempt to render page that should be cached');
-         });
+         }});
       });
 
       it('adds caching headers to compressed content', ()=>
