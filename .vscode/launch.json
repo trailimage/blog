@@ -6,7 +6,7 @@
          "name": "Node Debug",
          "type": "node",
          "request": "launch",
-         "program": "${workspaceRoot}/app.js",
+         "program": "${workspaceRoot}/lib/app.js",
          "protocol": "inspector",
          "sourceMaps": true,
          "outFiles": ["${workspaceRoot}/lib"],

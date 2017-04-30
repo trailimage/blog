@@ -7,8 +7,9 @@
    "tasks": [
       {
          "taskName": "Run server",
-         "command": "node app.js",
-         "isShellCommand": true
+         "command": "node ./lib/app.js",
+         "isShellCommand": true,
+         "isBackground": true
       },
       {
          "taskName": "Install Modules",
