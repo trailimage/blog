@@ -1,12 +1,14 @@
+/// <reference types="jquery" />
+
 'use strict';
 
 $(function() {
-   var css = 'selected';
-   var $view = $('#photo-tag');
-   var id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
-   var $list = $view.find('#' + id);
-   var $link = $list.find('#link-' + selectedTag);
-   var $li = $view.find('li[data-for=' + id + ']');
+   const css = 'selected';
+   const $view = $('#photo-tag');
+   const id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
+   const $list = $view.find('#' + id);
+   const $link = $list.find('#link-' + selectedTag);
+   const $li = $view.find('li[data-for=' + id + ']');
 
    $list.show();
    $link.addClass(css);
@@ -40,13 +42,10 @@ $(function() {
       );
    });
 
-   /**
-    * @param {jQuery} $link
-    */
-   function loadPhotoTag($link) {
+   function loadPhotoTag($link:JQuery) {
       if ($link.length > 0) {
          $('#wait').show();
-         $('#thumbs').load($link.attr('href'), function(response, status) {
+         $('#thumbs').load($link.attr('href'), (response, status) => {
             if (status === 'error') {
                $(this).empty();
                $link.removeClass(css);

@@ -1,6 +1,6 @@
 'use strict';
 
-var trip = {
+const trip = {
    timer: 0,
    /** @type {google.maps.Map} */
    map: null,

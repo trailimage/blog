@@ -1,25 +1,28 @@
+/// <reference types="jquery" />
+/// <reference types="geojson" />
+
 'use strict';
 
 $(function() {
-   var MAX_ZOOM = 18;
+   const MAX_ZOOM = 18;
    /**
     * Number of decimals to round coordinates to.
     */
-   var COORD_DECIMALS = 5;
+   const COORD_DECIMALS = 5;
    /**
     * Maximum number of photos to display in carousel.
     */
-   var MAX_IN_CAROUSEL = 20;
+   const MAX_IN_CAROUSEL = 20;
 
-   var initial = { zoom: 6.5, center: [-116.0987, 44.7] };  
-   var $count = $('#photo-count');
-   var $preview = $('#photo-preview');
-   var $zoomOut = $('#zoom-out');
-   var qs = parseUrl();
+   const initial = { zoom: 6.5, center: [-116.0987, 44.7] };
+   const $count = $('#photo-count');
+   const $preview = $('#photo-preview');
+   const $zoomOut = $('#zoom-out');
+   const qs = parseUrl();
    // https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
-   var nav = new mapboxgl.NavigationControl();
+   const nav = new mapboxgl.NavigationControl();
    // https://www.mapbox.com/mapbox-gl-js/api/
-   var map = new mapboxgl.Map({
+   const map = new mapboxgl.Map({
       container: 'map-canvas',
       style: 'mapbox://styles/' + mapStyle,
       center: qs.center || initial.center,
@@ -28,17 +31,16 @@ $(function() {
       dragRotate: false,
       keyboard: false
    });
-   var canvas = map.getCanvasContainer();
-   var markerOpacity = 0.6;
-   var zoomOutEnabled = false;
-   var mapSize = { width: 0, height: 0 };
-   var previewSize = { width: 322, height: 350 };
+   const canvas = map.getCanvasContainer();
+   const markerOpacity = 0.6;
+   const zoomOutEnabled = false;
+   const mapSize = { width: 0, height: 0 };
+   const previewSize = { width: 322, height: 350 };
 
    /**
     * Cache GeoJSON so it can be reassigned if map style changes
-    * @type {GeoJSON.FeatureCollection}
     */
-   var geoJSON = null;
+   let geoJSON:GeoJSON.FeatureCollection<any> = null;
 
     /**
     * Methods for generating content
@@ -203,7 +205,7 @@ $(function() {
                var selected = 1;
                var $photos = $('<div>').addClass('photo-list');
                var $markers = $('<div>').addClass('markers');
-               var select = function(count) {               
+               var select = function(count) {
                   selected += count;
                   if (selected > photos.length) {
                      selected = 1;
@@ -240,7 +242,7 @@ $(function() {
    window.addEventListener('resize', handle.windowResize);
 
    map.addControl(nav, 'top-right')
-      .on('load', function() {  
+      .on('load', function() {
          $.getJSON('/geo.json', function(data) {
             geoJSON = data;
             $count.html(geoJSON.features.length + ' photos').show();
@@ -252,12 +254,11 @@ $(function() {
 
    /**
     * Preview images may be 320 pixels on a side
-    * @param {mapboxgl.Event} e
     * @returns {object} CSS property
     */
-   function getPreviewPosition(e) {
-      var x = e.point.x;
-      var y = e.point.y;
+   function getPreviewPosition(e:mapboxgl.EventData) {
+      const x = e.point.x;
+      const y = e.point.y;
       var offset = {
          x: (x + previewSize.width) - mapSize.width,
          y: (y + previewSize.height) - mapSize.height
@@ -276,13 +277,12 @@ $(function() {
 
    /**
     * Load map location from URL.
-    * @returns {object}
     */
    function parseUrl() {
-      var parts = window.location.search.split(/[&\?]/g);
-      var qs = {};
-      for (var i = 0; i < parts.length; i++) {
-         var pair = parts[i].split('=');
+      const parts = window.location.search.split(/[&\?]/g);
+      const qs = {};
+      for (let i = 0; i < parts.length; i++) {
+         const pair = parts[i].split('=');
          if (pair.length == 2) { qs[pair[0]] = parseFloat(pair[1]); }
       }
       if (qs.hasOwnProperty('lat') && qs.hasOwnProperty('lon')) {
@@ -326,7 +326,7 @@ $(function() {
       var ne = [lngLat.lng + f, lngLat.lat + f];
 
       var photos = geoJSON.features
-         .filter(function(f) { 
+         .filter(function(f) {
             var coord = f.geometry.coordinates;
             return coord[0] >= sw[0] && coord[1] >= sw[1]
                 && coord[0] <= ne[0] && coord[1] <= ne[1];

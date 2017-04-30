@@ -4,58 +4,57 @@
  * Menu data are loaded in menu-script.hbs referenced as /js/menu-data.js only available on post pages
  */
 $(function() {
-   var css = 'selected';
-   var $button = $('#post-menu-button');
-   var $menu = $('#post-menu');
-   var $rootList = $('#menu-roots');
-   var $tagList = $('#menu-tags');
-   var $postList = $('#menu-posts');
-   var $description = $('#post-description');
-   var selection = loadMenuSelection(['When', null]);
+   const css = 'selected';
+   const $button = $('#post-menu-button');
+   const $menu = $('#post-menu');
+   const $rootList = $('#menu-roots');
+   const $tagList = $('#menu-tags');
+   const $postList = $('#menu-posts');
+   const $description = $('#post-description');
+
+   let selection = loadMenuSelection(['When', null]);
 
    $button
       .one('click', function() {
          // populate menu on first click
-         for (var root in TrailImage.menu) {
-            var $li = $('<li>').text(root);
+         for (const root in TrailImage.menu) {
+            const $li = $('<li>').text(root);
             $rootList.append($li);
             if (root == selection[0]) { $li.addClass(css); loadTags(selection); }
          }
       })
       .click(toggleMenu);
 
-   $rootList.on('click', 'li', function(event) {
+   $rootList.on('click', 'li', function(this:Element, event:Event) {
       event.stopPropagation();
-      var $li = $(this);
+      const $li = $(this);
       selection = [$li.text(), null];
       menuSelect($rootList, $li, loadTags, selection);
    });
 
-   $tagList.on('click', 'li', function(event) {
+   $tagList.on('click', 'li', function(this:Element, event:Event) {
       event.stopPropagation();
-      var $li = $(this);
+      const $li = $(this);
       selection[1] = $li.text();
       menuSelect($tagList, $li, loadPosts, selection);
    });
 
    $postList
       .on('click', 'li.post', showSelection)
-      .on('mouseover', 'li.post', function() { $description.html($(this).data('description')); })
+      .on('mouseover', 'li.post', function(this:Element) { $description.html($(this).data('description')); })
       .on('mouseout', function() { $description.empty(); });
 
    // always hide menu when clicking anywhere else on the screen
    $('html').click(function(event) { toggleMenu(event, true); });
 
    /**
-    * @param {object} [event]
-    * @param {boolean} [forceHide] Optionally force hide otherwise detect from CSS
+    * Toggle menu visibility
     */
-   function toggleMenu(event, forceHide) {
-      // toggle menu visibility
-      var $up = $button.find('.material-icons.expand_less');
-      var $down = $button.find('.material-icons.expand_more');
-      var show = function() { $button.addClass(css); $menu.show(); $up.show(); $down.hide(); };
-      var hide = function() { $button.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
+   function toggleMenu(event?:Event, forceHide?:boolean) {
+      const $up = $button.find('.material-icons.expand_less');
+      const $down = $button.find('.material-icons.expand_more');
+      const show = function() { $button.addClass(css); $menu.show(); $up.show(); $down.hide(); };
+      const hide = function() { $button.removeClass(css); $menu.hide(); $up.hide(); $down.show(); };
 
       if (event) { event.stopPropagation(); }
 
@@ -63,8 +62,8 @@ $(function() {
       if (forceHide) { hide(); } else { show(); }
    }
 
-   function showSelection() {
-      var slug = $(this).data('slug');
+   function showSelection(this:Element) {
+      const slug = $(this).data('slug');
 
       if (typeof loadPostTrack !== 'undefined') {
          loadPostTrack(slug);
@@ -74,58 +73,46 @@ $(function() {
       toggleMenu();
    }
 
-   /**
-    * @param {jQuery} $list
-    * @param {jQuery} $clicked
-    * @param {function(string[])} loader
-    * @param {string[]} selected
-    */
-   function menuSelect($list, $clicked, loader, selected) {
+   function menuSelect($list:JQuery, $clicked:JQuery, loader:(selected:string[])=>void, selected:string[]) {
       $list.find('li').removeClass(css);
       loader(selected);
       $clicked.addClass(css);
       saveMenuSelection(selected);
    }
 
-   /**
-    * @param {string[]} selected
-    */
-   function loadTags(selected) {
+   function loadTags(selected:string[]) {
       /** @type {TrailImage.Tag[]} */
-      var tags = TrailImage.menu[selected[0]];
+      const tags = TrailImage.menu[selected[0]];
 
       $tagList.empty();
 
       if (selected[1] == null) { selected[1] = tags[0].title; }
 
-      for (var i = 0; i < tags.length; i++) {
-         var $li = $('<li>').text(tags[i].title);
+      for (let i = 0; i < tags.length; i++) {
+         const $li = $('<li>').text(tags[i].title);
          $tagList.append($li);
          if (tags[i].title == selected[1]) { $li.addClass(css); loadPosts(selected); }
       }
    }
 
-   /**
-    * @param {string[]} selected
-    */
-   function loadPosts(selected) {
+   function loadPosts(selected:string[]) {
       /** @type {TrailImage.Tag[]} */
-      var tags = TrailImage.menu[selected[0]];
+      const tags = TrailImage.menu[selected[0]];
 
       // reset list of posts in third column
       $postList.empty();
 
-      for (var i = 0; i < tags.length; i++) {
+      for (let i = 0; i < tags.length; i++) {
          if (tags[i].title == selected[1]) {
-            var ids = tags[i].posts;
+            const ids = tags[i].posts;
 
-            for (var j = 0; j < ids.length; j++) {
-               var post = TrailImage.post[ids[j]];
-               var title = post.title;
+            for (let j = 0; j < ids.length; j++) {
+               let post = TrailImage.post[ids[j]];
+               let title = post.title;
 
                if (post.part && j < (ids.length - 1) && title == TrailImage.post[ids[j + 1]].title) {
                   // found part in series followed by at least one more part in the same series
-                  var $ol = $('<ol>');
+                  const $ol = $('<ol>');
 
                   while (j < ids.length && TrailImage.post[ids[j]].title == title) {
                      post = TrailImage.post[ids[j]];
@@ -163,21 +150,16 @@ $(function() {
       }
    }
 
-   /**
-    * @param {string[]} ifNone Root and post tags to load if no cookie is found
-    * @returns {string[]}
-    */
-   function loadMenuSelection(ifNone) {
-      var re = new RegExp('\\bmenu=([^;\\b]+)', 'gi');
-      var match = re.exec(document.cookie);
+   function loadMenuSelection(ifNone:string[]):string[] {
+      const re = new RegExp('\\bmenu=([^;\\b]+)', 'gi');
+      const match = re.exec(document.cookie);
       return (match === null) ? ifNone : match[1].split(',');
    }
 
    /**
     * Menu root and tag selection
-    * @param {string|string[]} selected
     */
-   function saveMenuSelection(selected) {
+   function saveMenuSelection(selected:string|string[]) {
       if (typeof selected === 'string') { selected = [selected, null]; }
       document.cookie = 'menu=' + selected.join();
    }

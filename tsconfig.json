@@ -4,7 +4,7 @@
       "target": "es2015",
       "module": "commonjs",
       "baseUrl": "./src",
-      "newLine": "LF",
+      //"newLine": "LF",
       //"pretty": true,
       "noImplicitAny": true,
       "noUnusedLocals": true,

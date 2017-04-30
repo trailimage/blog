@@ -3,25 +3,26 @@
 /**
  * Set up lazy loading and light box for post images
  * Depends on post images having data-original, data-big, data-big-width and data-big-height attributes
- * @see http://www.appelsiini.net/projects/lazyload
+ *
+ * http://www.appelsiini.net/projects/lazyload
  */
 $(function() {
-   var $photos = $('figure');
-   var $lb = $('#light-box');
+   const $photos = $('figure');
+   const $lb = $('#light-box');
 
    $lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
    $photos.find('img').on('click', lightBox).lazyload();
-   $photos.find('.mobile-button').on('touchstart', function() {
-      var $m = $(this);
-      var $fig = $m.parent();
-      var content = $m.html();
+   $photos.find('.mobile-button').on('touchstart', function(this:Element) {
+      const $m = $(this);
+      const $fig = $m.parent();
+      const content = $m.html();
 
       $m.addClass('loading').html(iconHtml('hourglass', '…'));
 
       $('<div/>')
          .addClass('mobile-info')
-         .load($fig.data('exif'), function() {
-            var $info = $(this);
+         .load($fig.data('exif'), function(this:Element) {
+            const $info = $(this);
             $m.hide().removeClass('loading').html(content);
             $info
                .appendTo($fig)
@@ -33,8 +34,8 @@ $(function() {
                });
          });
    });
-   $photos.find('.info-button').one('mouseover', function() {
-      var $button = $(this);
+   $photos.find('.info-button').one('mouseover', function(this:Element) {
+      const $button = $(this);
       $button
          .addClass('loading')
          .html(iconHtml('cloud_download', 'Loading …'))
@@ -44,37 +45,33 @@ $(function() {
    });
 
    /**
-    * @param {string} name
-    * @param {string} text
-    * @returns {string}
+    * Material icon HTML
     */
-   function iconHtml(name, text) {
+   function iconHtml(name:string, text:string):string {
       return '<i class="material-icons ' + name + '">' + name + '</i><p>' + text + '</p>';
    }
 
    /**
     * Simple light box for clicked image
     * Post image has HTML data attributes defining the big image URL and dimensions
-    * @param {MouseEvent} event
     */
-   function lightBox(event) {
-      /** @type {jQuery} Post image */
-      var $img = $(this);
-      /** @type {jQuery} Big image */
-      var $big = $lb.find('img');
-      /** @type {Boolean} Whether big image is already browser cached */
-      var loaded = $img.data('big-loaded');
+   function lightBox(this:Element, event:MouseEvent) {
+      /** Post image */
+      const $img = $(this);
+      /** Big image */
+      const $big = $lb.find('img');
+      /** Whether big image is already browser cached */
+      let loaded = $img.data('big-loaded') as boolean;
       /** @type {Size} */
-      var size = new Size($img.data('big-width'), $img.data('big-height'));
+      const size = new Size($img.data('big-width'), $img.data('big-height'));
       /** click position relative to image corner */
-      var fromCorner = { top: 0, left: 0 };
+      const fromCorner = { top: 0, left: 0 };
 
       /**
        * Update image position and panning speed to accomodate window size
-       * @param {MouseEvent} event
        */
-      var updateSize = function(event) {
-         var cursor = 'zoom-out';
+      const updateSize = function(event:MouseEvent) {
+         let cursor = 'zoom-out';
 
          size.update();
 
@@ -95,32 +92,25 @@ $(function() {
 
       /**
        * Update image position within light box
-       * @param {MouseEvent} event
        */
-      var updateHoverPosition = function(event) {
+      const updateHoverPosition = function(event:MouseEvent) {
          $big.css({
             top: size.height.CSS(event.clientY),
             left: size.width.CSS(event.clientX)
          });
       };
 
-      /**
-       * @param {TouchEvent} event
-       */
-      var beginDrag = function(event) {
-         var touchAt = event.targetTouches[0];
-         var imageAt = $big.position();
+      const beginDrag = function(event:TouchEvent) {
+         const touchAt = event.targetTouches[0];
+         const imageAt = $big.position();
 
          fromCorner.left = imageAt.left - touchAt.clientX;
          fromCorner.top = imageAt.top - touchAt.clientY;
       };
 
-      /**
-       * @param {TouchEvent} event
-       */
-      var updateDragPosition = function(event) {
+      const updateDragPosition = function(event:TouchEvent) {
          // ignore multi-finger touches
-         var at = event.targetTouches[0];
+         const at = event.targetTouches[0];
 
          $big.css({
             top: fromCorner.top + at.clientY,
@@ -138,7 +128,7 @@ $(function() {
          $big.attr('src', $img.data('original'));
          // load photo in detached element
          $('<img />')
-            .bind('load', function() {
+            .bind('load', function(this:HTMLImageElement) {
                // assign big image to light box once it's loaded
                $big.attr('src', this.src);
                $img.data('big-loaded', true);
@@ -172,26 +162,6 @@ $(function() {
 // - PhotoSize classes -------------------------------------------------------------
 
    /**
-    *
-    * @param {String} imageWidth
-    * @param {String} imageHeight
-    * @constructor
-    */
-   function Size(imageWidth, imageHeight) {
-      /** @type {Length} */
-      this.width = new Length(imageWidth);
-      /** @type {Length} */
-      this.height = new Length(imageHeight);
-      /**
-       * Whether image needs to pan
-       * @type {Boolean}
-       */
-      this.needsToPan = false;
-   }
-
-   /**
-    * @param {String} forImage
-    *
     *  ╔════════╤════════════════╗
     *  ║        │ extra          ║
     *  ║   ╔════╧═══╤════════╗   ║
@@ -203,75 +173,72 @@ $(function() {
     *  ╚═════════════════════════╝
     *  Pan ratio maps mouse position from window center to the number of pixels
     *  to offset against the image overlap
-    *
-    * @constructor
     */
-   function Length(forImage) {
+   class Length {
+      constructor(forImage:string) {
+         this.image = parseInt(forImage);
+         this.window = 0;
+         this.extra = 0;
+         this.panRatio = 0;
+      }
+      /** Image edge length */
+      image:number;
+      /** Window edge length */
+      window:number;
+      /** How much longer is window edge (usually a negative number) */
+      extra:number;
+      /** Ratio of mouse to image movement pixels for panning */
+      panRatio:number;
+
       /**
-       * Image edge length
-       * @type {Number}
+       * Update window dimension and calculate how much larger it is than image
        */
-      this.image = parseInt(forImage);
+      update(forWindow:number) {
+         this.window = forWindow;
+         this.extra = (this.window - this.image) / 2;
+      }
+
       /**
-       * Window edge length
-       * @type {Number}
+       * Calculate ratio for this dimension. Leading number is factor by which
+       * to accelerate panning so edge of image is visible before cursor
+       * reaches edge of window.
        */
-      this.window = 0;
+      ratio():number {
+         return 2 * ((this.window - this.image) / this.window);
+      }
+
       /**
-       * How much longer is window edge (usually a negative number)
-       * @type {Number}
+       * Get CSS image offset based on mouse position
        */
-      this.extra = 0;
-      /**
-       * Ratio of mouse to image movement pixels for panning
-       * @type {Number}
-       */
-      this.panRatio = 0;
+      CSS(m:number):string {
+         const subtract = (this.extra > 0) ? 0 : ((this.window / 2) - m) * this.panRatio;
+         return (this.extra - subtract).toFixed(0) + 'px';
+      }
    }
 
-   /**
-    * Update window dimension and calculate how much larger it is than image
-    * @param {Number} forWindow
-    */
-   Length.prototype.update = function(forWindow) {
-      this.window = forWindow;
-      this.extra = (this.window - this.image) / 2;
-   };
-
-   /**
-    * Calculate ratio for this dimension
-    * Leading number is factor by which to accelerate panning so edge of image is visible before
-    * cursor reaches edge of window
-    * @return {Number}
-    */
-   Length.prototype.ratio = function() {
-      return 2 * ((this.window - this.image) / this.window);
-   };
-
-   /**
-    * Get CSS image offset based on mouse position
-    * @param {Number} m
-    * @returns {String}
-    */
-   Length.prototype.CSS = function(m) {
-      var subtract = (this.extra > 0) ? 0 : ((this.window / 2) - m) * this.panRatio;
-      return (this.extra - subtract).toFixed(0) + 'px';
-   };
-
-   /**
-    *
-    */
-   Size.prototype.update = function() {
-      this.height.update(window.innerHeight);
-      this.width.update(window.innerWidth);
-      this.needsToPan = this.width.extra < 0 || this.height.extra < 0;
-
-      if (this.needsToPan) {
-         // pan image using length with biggest ratio
-         // or if one dimension needs no panning then use the other dimension
-         this.height.panRatio = this.width.panRatio = (this.width.extra < this.height.extra && this.width.extra < 0)
-            ? this.width.ratio()
-            : this.height.ratio();
+   class Size {
+      constructor(imageWidth:string, imageHeight:string) {
+         this.width = new Length(imageWidth);
+         this.height = new Length(imageHeight);
       }
-   };
+
+      width:Length;
+      height:Length;
+      /** Whether image needs to pan */
+      needsToPan:boolean;
+
+      update() {
+         this.height.update(window.innerHeight);
+         this.width.update(window.innerWidth);
+         this.needsToPan = this.width.extra < 0 || this.height.extra < 0;
+
+         if (this.needsToPan) {
+            // pan image using length with biggest ratio
+            // or if one dimension needs no panning then use the other dimension
+            this.height.panRatio = this.width.panRatio = (this.width.extra < this.height.extra && this.width.extra < 0)
+               ? this.width.ratio()
+               : this.height.ratio();
+         }
+      }
+   }
 });

@@ -1,3 +1,5 @@
+/// <reference types="jquery" />
+
 'use strict';
 
 $(function() {
@@ -6,14 +8,14 @@ $(function() {
    handlePost($('#views'));
    handlePost($('#maps'));
 
-   function handlePost($form) {
+   function handlePost($form:JQuery) {
       $form.submit(function() {
-         var disable = 'select, button';
-         var $select = $form.find('select');
-         var $includeRelated = $form.find('input[name=include-related]');
+         const disable = 'select, button';
+         const $select = $form.find('select');
+         const $includeRelated = $form.find('input[name=include-related]');
          // whether to remove keys from select list
-         var remove = $form.find('input[name=remove-matches]').val() == 'true';
-         var fields = {
+         const remove = $form.find('input[name=remove-matches]').val() == 'true';
+         const fields = {
             selected: $select.val(),
             includeRelated: $includeRelated.length > 0 && $includeRelated.is(':checked')
          };
@@ -26,13 +28,13 @@ $(function() {
             $form.css('cursor', 'auto');
 
             if (response.success) {
-               var keys = response.message.split(',');
+               const keys = response.message.split(',');
                if (remove) {
-                  for (var i = 0; i < keys.length; i++) {
+                  for (let i = 0; i < keys.length; i++) {
                      $select.find('option[value="' + keys[i] + '"]').remove();
                   }
                }
-               window.alert((keys.length > 0 && keys[0] != "")
+               window.alert((keys.length > 0 && keys[0] != '')
                   ? 'Keys Affected:\n' + keys.join('\n')
                   : 'No new data found');
             } else {
