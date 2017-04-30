@@ -17,6 +17,8 @@ declare interface UrlPosition {
    lat?:number;
    zoom?:number;
 }
+declare interface FakeEvent { reason:string }
+declare interface CssPosition { top:number; left:number; }
 
 $(function() {
    const MAX_ZOOM = 18;
@@ -147,7 +149,7 @@ $(function() {
       /**
        * Respond to user map interaction by hiding photo preview.
        */
-      mapInteraction: function(e:mapboxgl.EventData|KeyboardEvent) {
+      mapInteraction: function(e:mapboxgl.EventData|FakeEvent) {
          if (e.reason != 'fit') { handle.closePreview(); }
       },
 
@@ -266,7 +268,7 @@ $(function() {
    /**
     * Preview images may be 320 pixels on a side
     */
-   function getPreviewPosition(e:mapboxgl.MapMouseEvent):object {
+   function getPreviewPosition(e:mapboxgl.MapMouseEvent):CssPosition {
       let x = e.point.x;
       let y = e.point.y;
       const offset = {
@@ -280,7 +282,14 @@ $(function() {
       y -= offset.y;
 
       if (offset.x + offset.y > 0) {
-         map.panBy([offset.x, offset.y], { duration: 100 }, { reason: 'fit' });
+         map.panBy([offset.x, offset.y], { duration: 100 }, {
+            type: null,
+            point: null,
+            target: null,
+            reason: 'fit',
+            lngLat: null,
+            originalEvent: null
+         });
       }
       return { top: y + 15, left: x };
    }
@@ -370,7 +379,7 @@ $(function() {
       if (map.getZoom() > initial.zoom && !zoomOutEnabled) {
          zoomOutEnabled = true;
          $zoomOut
-            .click(function() { map.easeTo(initial); })
+            .click(() => { map.easeTo(initial); })
             .removeClass('disabled');
       } else if (map.getZoom() <= initial.zoom && zoomOutEnabled) {
          zoomOutEnabled = false;
@@ -381,13 +390,12 @@ $(function() {
    /**
     * Curry function to update canvas cursor.
     */
-   function cursor(name?:string):Function {
-      if (name === undefined) { name = ''; }
-      return function() { canvas.style.cursor = name; };
+   function cursor(name:string = ''):Function {
+      return ()=> { canvas.style.cursor = name; };
    }
 
    /**
-    * Retrieve photo ID from preview URL and redirect to post with that photo
+    * Retrieve photo ID from preview URL and redirect to post with that photo.
     *
     * Example https://farm3.staticflickr.com/2853/33767184811_9eff6deb48_n.jpg
     */
