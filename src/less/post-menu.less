@@ -90,7 +90,7 @@ header {
       cursor: pointer;
       white-space: nowrap;
 
-      &:after {
+      &::after {
          left: 100%;
          top: 50%;
          border: solid transparent;
@@ -108,7 +108,7 @@ header {
       &:hover {
          background-color: yellow;
          @media @mobile { .rounded(15px); }
-         &:after {
+         &::after {
             border-left-color: yellow;
          }
       }
@@ -117,7 +117,7 @@ header {
          color: #fff;
          background-color: @boldColor;
          @media @mobile { .rounded(15px); }
-         &:after {
+         &::after {
             border-left-color: @boldColor;
          }
       }

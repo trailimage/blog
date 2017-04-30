@@ -1,6 +1,6 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const re = require('../lib/regex');
+const re = require('../lib/regex').default;
 const text = `some
 text on more
 than

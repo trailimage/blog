@@ -1,4 +1,4 @@
-const is = require('../../lib/is');
+const is = require('../../lib/is').default;
 
 function assert(methodName, pattern, handler) {
    if (!is.value(pattern)) { throw new ReferenceError(`app.${methodName}() pattern cannot be null`); }

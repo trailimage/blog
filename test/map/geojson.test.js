@@ -1,4 +1,4 @@
-const geoJSON = require('../../lib/map/geojson');
+const geoJSON = require('../../lib/map/geojson').default;
 const mocha = require('mocha');
 const fs = require('fs');
 const path = require('path');

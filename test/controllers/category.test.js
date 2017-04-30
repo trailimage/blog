@@ -1,11 +1,11 @@
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
 const { prepare, expectTemplate } = require('./index.test');
-const template = require('../../lib/template');
+const template = require('../../lib/template').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const category = require('../../lib/controllers/category');
-const { route: ph } = require('../../lib/constants');
+const category = require('../../lib/controllers/category').default;
+const { route: ph } = require('../../lib/constants').default;
 
 describe('Category Controller', ()=> {
    before(done => prepare(done));

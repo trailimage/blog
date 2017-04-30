@@ -1,0 +1,17 @@
+{
+   "extends": "./tsconfig.json",
+   "compilerOptions": {
+      "module": "commonjs",
+      "outDir": "./lib",
+      "removeComments": true,
+      "sourceMap": true,
+      //"moduleResolution": "node",
+      //"isolatedModules": true,
+      //"types": [],
+      "lib": ["es6","dom"],
+      "watch": true
+   },
+   "include": [
+      "./src/app.ts"
+   ]
+}

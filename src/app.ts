@@ -1,16 +1,22 @@
-const config = require('./lib/config');
-const C = require('./lib/constants');
-const log = require('./lib/logger');
-const Express = require('express');
-const npm = require('./package.json');
+import { Blog } from './types/';
+import config from './config';
+import log from './logger';
+import * as Express from 'express';
+import * as hbs from 'express-hbs';
+import * as path from 'path';
+import template from './template';
+import factory from './factory/';
+import route from './routes';
+import * as compress from 'compression';
+import * as bodyParser from 'body-parser';
+import middleware from './middleware';
+import * as wwwhisper from 'connect-wwwhisper';
 
-config.repoUrl = npm.repository.url;
+const root = path.normalize(__dirname + '/../');
 
 createWebService();
 
 function createWebService() {
-   const factory = require('./lib/factory');
-   const route = require('./lib/routes');
    const app = Express();
    const port = process.env['PORT'] || 3000;
 
@@ -38,38 +44,31 @@ function createWebService() {
 // https://github.com/donpark/hbs/blob/master/examples/extend/app.js
 // https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
-function defineViews(app) {
-   const hbs = require('express-hbs');
-   const template = require('./lib/template');
+function defineViews(app:Express.Application) {
    const engine = 'hbs';
-   const root = __dirname;
+   const views = path.normalize(root + 'views/');
 
    // http://expressjs.com/4x/api.html#app-settings
-   app.set('views', root + '/views');
+   app.set('views', views);
    app.set('view engine', engine);
    app.engine(engine, hbs.express4({
-      defaultLayout: root + '/views/' + template.layout.MAIN + '.hbs',
-      partialsDir: root + '/views/partials'
+      defaultLayout: views + template.layout.MAIN + '.hbs',
+      partialsDir: views + 'partials'
    }));
 
    template.assignHelpers(hbs);
 }
 
 /**
- * @see http://expressjs.com/api.html#app.use
+ * See http://expressjs.com/api.html#app.use
  */
-function applyMiddleware(app) {
+function applyMiddleware(app:Express.Application) {
    // https://github.com/expressjs/compression/blob/master/README.md
-   const compress = require('compression');
-   const bodyParser = require('body-parser');
-   const middleware = require('./lib/middleware');
-
    app.use(middleware.blockSpamReferers);
 
    if (config.usePersona) {
       // use wwwhisper middleware to authenticate some routes
       // https://devcenter.heroku.com/articles/wwwhisper
-      const wwwhisper = require('connect-wwwhisper');
 
       //app.use(/\/admin|\/wwwhisper/gi, wwwhisper(false));
       app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
@@ -80,12 +79,12 @@ function applyMiddleware(app) {
    app.use(compress({}));
    app.use(middleware.enableStatusHelpers);
    app.use(middleware.enableViewCache);
-   app.use(Express.static(__dirname + '/dist'));
+   app.use(Express.static(root + 'dist'));
 }
 
 // this should be what Express already supports but it isn't behaving as expected
-function filter(regex, fn) {
-   return (req, res, next) => {
+function filter(regex:RegExp, fn:Function) {
+   return (req:Blog.Request, res:Blog.Response, next:Function) => {
       if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
    };
 }

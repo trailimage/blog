@@ -1,8 +1,8 @@
 const C = require('../lib/constants');
-const config = require('../lib/config');
+const config = require('../lib/config').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const log = require('../lib/logger');
+const log = require('../lib/logger').default;
 
 describe('Logger', ()=> {
    let originalTargets;

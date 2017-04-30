@@ -2,10 +2,10 @@ const C = require('../../lib/constants');
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
 const { prepare, expectTemplate, expectRedirect } = require('./index.test');
-const template = require('../../lib/template');
+const template = require('../../lib/template').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const photo = require('../../lib/controllers/photo');
+const photo = require('../../lib/controllers/photo').default;
 const ph = C.route;
 
 describe('Photos', ()=> {

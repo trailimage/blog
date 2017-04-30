@@ -1,12 +1,15 @@
 {
    "version": "0.2.0",
    "configurations": [
+      // http://www.mithunvp.com/typescript-tutorials-setting-visual-studio-code/
       {
          "name": "Node Debug",
          "type": "node",
          "request": "launch",
-         "program": "${workspaceRoot}/app.js",
+         "program": "${workspaceRoot}/lib/app.js",
          "protocol": "inspector",
+         "sourceMaps": true,
+         "outFiles": ["${workspaceRoot}/lib"],
          "cwd": "${workspaceRoot}"
       },
       {
@@ -40,9 +43,12 @@
          "runtimeExecutable": null,
          "stopOnEntry": false,
          "protocol": "inspector",
+         "sourceMaps": true,
+         "outFiles": ["${workspaceRoot}/lib"],
          //"args": ["test/**/*.js", "--no-timeouts"]
          //"args": ["test/factory/*", "--no-timeouts"]
-         "args": ["test/map/geojson*", "--no-timeouts"]
+         //"args": ["test/map/geojson*", "--no-timeouts"]
+         "args": ["test/providers/goo*", "--no-timeouts"]
       },
       {
          "name": "Debug Gulp",

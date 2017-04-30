@@ -1,6 +1,6 @@
 const fs = require('fs');
-const is = require('../../lib/is.js');
-const C = require('../../lib/constants');
+const is = require('../../lib/is.js').default;
+const C = require('../../lib/constants').default;
 
 let tokenExpired = false;
 

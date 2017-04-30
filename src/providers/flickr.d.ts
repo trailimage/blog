@@ -1,7 +1,21 @@
-declare namespace Flickr {
+export namespace Flickr {
    enum Boolean { 'false', 'true' }
+
+   export interface Options<T> {
+      value(r: Response): T,
+      sign?: boolean,
+      allowCache?: boolean,
+      error?: string,
+      args?: {[key:string]:string|number|boolean}
+   }
+
+   export interface FeatureSet {
+      id:string;
+      title:string;
+   }
+
    /**
-    * @see http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html
+    * http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html
     */
    enum License {
       AllRightsReserved = 0,
@@ -15,7 +29,7 @@ declare namespace Flickr {
       UnitedStatesGovernmentWork = 8
    }
    /**
-    * @see http://www.flickr.com/services/api/flickr.photos.setSafetyLevel.html
+    * http://www.flickr.com/services/api/flickr.photos.setSafetyLevel.html
     */
    enum SafetyLevel {
       Safe = 1,
@@ -35,7 +49,7 @@ declare namespace Flickr {
       photo_id: string
    }
 
-   interface Collection {
+   export interface Collection {
       id: string,
       title: string,
       description: string,
@@ -45,16 +59,16 @@ declare namespace Flickr {
       set: SetSummary[],
    }
 
-   interface Content {
+   export interface Content {
       _content: string
    }
 
-   interface EditAbility {
+   export interface EditAbility {
       cancomment: Boolean,
       canaddmeta: Boolean
    }
 
-   interface Exif {
+   export interface Exif {
       tagspace: string,
       tagspaceid: number,
       tag: string,
@@ -69,7 +83,7 @@ declare namespace Flickr {
       farm: number,
    }
 
-   interface Location {
+   export interface Location {
       latitude: number,
       longitude: number,
       accuracy: number,
@@ -115,41 +129,43 @@ declare namespace Flickr {
       lastupdate: string
    }
 
-   interface PhotoInfo extends FarmLocation {
-      dateuploaded: string,
-      isfavorite: Boolean,
-      license: License,
-      safetylevel: SafetyLevel,
-      rotate: Boolean,
-      originalsecret: string,
-      originalformat: string,
-      owner: Owner,
-      title: Content,
-      description: Content,
-      visibility: Visibility,
-      dates: PhotoDates,
-      views: number,
-      permissions: Permission,
-      editability: EditAbility,
-      publiceditability: EditAbility,
-      usage: Usage,
+   export interface PhotoInfo extends FarmLocation {
+      dateuploaded: string;
+      isfavorite: Boolean;
+      license: License;
+      safetylevel: SafetyLevel;
+      rotate: Boolean;
+      originalsecret: string;
+      originalformat: string;
+      owner: Owner;
+      title: Content;
+      description: Content;
+      visibility: Visibility;
+      dates: PhotoDates;
+      views: number;
+      permissions: Permission;
+      editability: EditAbility;
+      publiceditability: EditAbility;
+      usage:Usage;
+      exif:Exif[];
       tags: {
-         tag: TagSummary
+         tag: TagSummary;
       }
-      location: Location,
-      geoperms: LocationPermission,
-      media: string,
+      location: Location;
+      geoperms: LocationPermission;
+      media: string;
       urls: {
-         url: URL[]
+         url: URL[];
       }
    }
 
-   interface PhotoExif {
-      photo: Flickr.PhotoSummary,
-   }
+   // https://www.flickr.com/services/api/flickr.photos.getExif.html
+   // interface PhotoExif {
+   //    photo: Flickr.PhotoSummary;
+   // }
 
    interface PhotoMembership {
-      set: MemberSet[]
+      set: MemberSet[];
    }
 
    interface SetPhotos {
@@ -167,49 +183,51 @@ declare namespace Flickr {
    }
 
    interface PhotoSummary extends Place {
-      id: string,
-      secret: string,
-      server: string,
-      farm: number,
-      title: string,
-      isprimary: Boolean|boolean,
-      tags: string,
-      description?: Content,
-      datetaken?: string,
-      datetakengranularity?: string,
-      latitude?: number,
-      longitude?: number,
-      context?: number,
-      geo_is_family?: Boolean|boolean,
-      geo_is_friend?: Boolean|boolean,
-      geo_is_contact?: Boolean|boolean,
-      geo_is_public?: Boolean|boolean,
-      lastupdate?: string,
-      pathalias?: string,
+      id:string;
+      secret:string;
+      server: string;
+      farm: number;
+      title: string;
+      isprimary: string;
+      tags: string;
+      description?: Content;
+      datetaken?: string;
+      datetakengranularity?: string;
+      latitude?: string;
+      longitude?: string;
+      context?: number;
+      geo_is_family?: Boolean|boolean;
+      geo_is_friend?: Boolean|boolean;
+      geo_is_contact?: Boolean|boolean;
+      geo_is_public?: Boolean|boolean;
+      lastupdate?: string;
+      pathalias?: string;
 
-      url_s?: string,
-      height_s?: string,
-      width_s?: string,
+      exif:Exif[];
 
-      url_h?: string,
-      height_h?: string,
-      width_h?: string,
+      url_s?: string;
+      height_s?: string;
+      width_s?: string;
 
-      url_k?: string,
-      height_k?: string,
-      width_k?: string,
+      url_h?: string;
+      height_h?: string;
+      width_h?: string;
 
-      url_l?: string,
-      height_l?: string,
-      width_l?: string,
+      url_k?: string;
+      height_k?: string;
+      width_k?: string;
 
-      url_m?: string,
-      height_m?: string,
-      width_m?: string,
+      url_l?: string;
+      height_l?: string;
+      width_l?: string;
 
-      url_o?: string,
-      height_o?: string,
-      width_o?: string
+      url_m?: string;
+      height_m?: string;
+      width_m?: string;
+
+      url_o?: string;
+      height_o?: string;
+      width_o?: string;
    }
 
    interface Place {
@@ -218,20 +236,25 @@ declare namespace Flickr {
    }
 
    interface Response {
-      photoset?: SetPhotos[]|SetInfo[],
-      set?: MemberSet[],
-      collections?: Tree,
-      photo?: PhotoInfo,
-      sizes?: SizeList,
-      stat: string,
-      code: number,
-      message: string,
+      photoset?:SetPhotos|SetInfo;
+      set?:MemberSet[];
+      collections?:Tree;
+      photo?:PhotoInfo;
+      sizes?:SizeList;
+      /**
+       * Dynamically added property indicating whether the request can be
+       * retried.
+       */
+      retry?:boolean;
+      stat:string;
+      code:number;
+      message:string;
       photos: {
-         photo: SearchResult
+         photo:SearchResult|PhotoSummary[];
       }
       who: {
          tags: {
-            tag: Tag[]
+            tag:Tag[];
          }
       }
    }

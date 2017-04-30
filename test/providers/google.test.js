@@ -1,8 +1,8 @@
 const mocha = require('mocha');
-const config = require('../../lib/config');
+const config = require('../../lib/config').default;
 const { expect } = require('chai');
-const google = require('../../lib/providers/google');
-const factory = require('../../lib/factory/');
+const google = require('../../lib/providers/google').default;
+const factory = require('../../lib/factory/').default;
 const authConfig = config.google.auth;
 
 describe('Google', ()=> {
@@ -33,8 +33,9 @@ describe('Google', ()=> {
       });
    });
 
-   describe('Drive', ()=> {
+   describe('Drive', function() {
       let post = null;
+      this.timeout(10000);
 
       before(() => factory.buildLibrary().then(library => {
          post = library.postWithKey('owyhee-snow-and-sand/lowlands');

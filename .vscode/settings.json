@@ -10,6 +10,24 @@
       "procfile": "yaml"
    },
 
+   "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "lib/**/.js.map": true
+   },
+
+   "search.exclude": {
+      "**/node_modules": true,
+      "**/lib": true,
+      "**/dist": true
+   },
+
+   "tslint.enable": true,
+   "eslint.enable": false,
+
    "mocha.env": {
       "FLICKR_API_KEY": "${env.FLICKR_API_KEY}",
       "FLICKR_SECRET": "${env.FLICKR_SECRET}",

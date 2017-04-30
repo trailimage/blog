@@ -10,11 +10,13 @@
   "engines": {
     "node": ">=7.8.0"
   },
+  "main": "lib/app.js",
   "scripts": {
     "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
     "test": "node_modules/.bin/mocha --recursive --reporter spec",
+    "tstest": "node_modules/.bin/mocha -r ts-node/register",
     "watch": "node_modules/.bin/gulp watch",
-    "oldfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:300,400,700|Lora:400,700,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+    "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css"
   },
   "dependencies": {
@@ -37,7 +39,9 @@
     "xmldom": "^0.1.19"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.16.3",
     "@types/chai": "^3.5.1",
+    "@types/compression": "0.0.33",
     "@types/core-js": "^0.9.41",
     "@types/express": "^4.0.35",
     "@types/facebook-js-sdk": "^2.8.1",
@@ -46,7 +50,13 @@
     "@types/googlemaps": "^3.26.8",
     "@types/jquery": "^2.0.41",
     "@types/mapbox-gl": "^0.30.0",
+    "@types/mocha": "^2.2.41",
+    "@types/node-fetch": "^1.6.7",
+    "@types/redis": "^0.12.36",
+    "@types/request": "0.0.42",
     "@types/twitter": "0.0.28",
+    "@types/uglify-js": "^2.6.28",
+    "@types/winston": "^2.3.1",
     "@types/xmldom": "^0.1.29",
     "babel-eslint": "^7.1.1",
     "chai": "^3.5.0",
@@ -63,14 +73,17 @@
     "merge2": "^1.0.3",
     "mocha": "^3.2.0",
     "mocha-pretty-spec-reporter": "0.1.0-beta.2",
+    "nodemon": "^1.11.0",
     "stylelint": "^7.10.0",
-    "stylelint-config-standard": "^16.0.0"
+    "stylelint-config-standard": "^16.0.0",
+    "ts-node": "^3.0.2",
+    "tslint": "^5.1.0",
+    "typescript": "^2.3.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Jason-Abbott/trail-image.git"
   },
-  "main": "index",
   "bugs": {
     "url": "https://github.com/Jason-Abbott/trail-image/issues"
   }

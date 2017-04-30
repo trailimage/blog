@@ -1,12 +1,12 @@
-const config = require('../../lib/config');
-const cache = require('../../lib/cache');
+const config = require('../../lib/config').default;
+const cache = require('../../lib/cache').default;
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
 const { prepare, expectTemplate, expectJSON, expectInCache } = require('./index.test');
-const template = require('../../lib/template');
+const template = require('../../lib/template').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const admin = require('../../lib/controllers/admin');
+const admin = require('../../lib/controllers/admin').default;
 const postKeys = ['stanley-lake-snow-hike', 'brother-ride-2015/huckleberry-lookout'];
 const mapKeys = postKeys;
 let cacheViewConfig;

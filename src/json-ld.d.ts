@@ -1,10 +1,9 @@
-import {Post} from "./trailimage";
 import * as Chai from "chai";
 
-declare namespace JsonLD {
+export namespace JsonLD {
    import Property = Chai.Property;
    /**
-    * @see http://schema.org/Action
+    * http://schema.org/Action
     */
    interface Action extends Thing {
       actionStatus: ActionStatusType
@@ -21,12 +20,12 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ActionStatusType
+    * http://schema.org/ActionStatusType
     */
    interface ActionStatusType extends Thing {}
 
    /**
-    * @see http://schema.org/AdministrativeArea
+    * http://schema.org/AdministrativeArea
     */
    interface AdministrativeArea extends Place {}
 
@@ -37,7 +36,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Article
+    * http://schema.org/Article
     */
    interface Article extends CreativeWork {
       articleBody: string,
@@ -49,7 +48,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Audience
+    * http://schema.org/Audience
     */
    interface Audience extends Thing {
       audienceType: string,
@@ -57,19 +56,19 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Blog
+    * http://schema.org/Blog
     */
    interface Blog extends Thing {
       blogPost: BlogPosting[]
    }
 
    /**
-    * @see http://schema.org/BlogPosting
+    * http://schema.org/BlogPosting
     */
    interface BlogPosting extends SocialMediaPosting {}
 
    /**
-    * @see http://schema.org/Brand
+    * http://schema.org/Brand
     */
    interface Brand extends Thing {
       aggregateRating: AggregateRating,
@@ -78,27 +77,27 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Breadcrumb
+    * http://schema.org/Breadcrumb
     */
    interface Breadcrumb extends Thing {}
 
    /**
-    * @see http://schema.org/BreadcrumbList
+    * http://schema.org/BreadcrumbList
     */
    interface BreadcrumbList extends ItemList<Breadcrumb> {}
 
    /**
-    * @see http://schema.org/BusinessEntityType
+    * http://schema.org/BusinessEntityType
     */
    interface BusinessEntityType extends Thing {}
 
    /**
-    * @see http://schema.org/BusinessFunction
+    * http://schema.org/BusinessFunction
     */
    interface BusinessFunction extends Thing {}
 
    /**
-    * @see http://schema.org/Comment
+    * http://schema.org/Comment
     */
    interface Comment extends CreativeWork {
       downvoteCount: number,
@@ -106,46 +105,46 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Country
+    * http://schema.org/Country
     */
    interface Country extends Place {}
 
    /**
-    * @see http://schema.org/CreativeWork
+    * http://schema.org/CreativeWork
     */
    interface CreativeWork extends Thing {
-      author: Person|Organization,
-      creator: Person|Organization,
-      provider: Person|Organization,
-      producer: Person|Organization,
-      sourceOrganization: Organization,
-      editor: Person,
-      associatedArticle: NewsArticle,
+      author?: Person|Organization,
+      creator?: Person|Organization,
+      provider?: Person|Organization,
+      producer?: Person|Organization,
+      sourceOrganization?: Organization,
+      editor?: Person,
+      associatedArticle?: NewsArticle,
       requiresSubscription?: boolean,
-      contentSize: string,
-      contentUrl: URL|string,
-      encodingFormat: string,
-      bitrate: string,
-      duration: Duration,
-      height: Distance|QuantitativeValue,
-      width: Distance|QuantitativeValue,
-      productionCompany: Organization,
-      regionsAllowed: Place,
-      copyrightHolder: Person|Organization,
-      copyrightYear: number,
-      audience: Audience,
-      encoding: MediaObject,
-      hasPart: CreativeWork,
-      isPartOf: CreativeWork,
-      headling: string,
-      keywords: string,
-      locationCreated: Place,
-      review: Review,
-      datePublished: DateTime,
-      text: string,
-      version: number,
-      mainEntity: Thing,
-      thumbnailUrl: string
+      contentSize?: string,
+      contentUrl?: URL|string,
+      encodingFormat?: string,
+      bitrate?: string,
+      duration?: Duration,
+      height?: Distance|QuantitativeValue|number,
+      width?: Distance|QuantitativeValue|number,
+      productionCompany?: Organization,
+      regionsAllowed?: Place,
+      copyrightHolder?: Person|Organization,
+      copyrightYear?: number,
+      audience?: Audience,
+      encoding?: MediaObject,
+      hasPart?: CreativeWork,
+      isPartOf?: CreativeWork,
+      headling?: string,
+      keywords?: string,
+      locationCreated?: Place,
+      review?: Review,
+      datePublished?: DateTime,
+      text?: string,
+      version?: number,
+      mainEntity?: Thing,
+      thumbnailUrl?: string
    }
 
    interface ContactPoint extends Thing {
@@ -161,12 +160,12 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ContactPointOption
+    * http://schema.org/ContactPointOption
     */
    interface ContactPointOption extends Thing {}
 
    /**
-    * @see http://schema.org/GeoCoordinates
+    * http://schema.org/GeoCoordinates
     */
    interface Coordinates extends Thing {
       elevation: string|number,
@@ -176,18 +175,18 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/DateTime
-    * @see https://en.wikipedia.org/wiki/ISO_8601
+    * http://schema.org/DateTime
+    * https://en.wikipedia.org/wiki/ISO_8601
     */
    interface DateTime extends Thing {}
 
    /**
-    * @see http://schema.org/DayOfWeek
+    * http://schema.org/DayOfWeek
     */
    interface DayOfWeek extends Thing {}
 
    /**
-    * @see http://schema.org/DeliveryMethod
+    * http://schema.org/DeliveryMethod
     */
    interface DeliveryMethod extends Thing {
       method: {
@@ -203,7 +202,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Demand
+    * http://schema.org/Demand
     */
    interface Demand extends Thing {
       acceptedPaymentMethod: LoanOrCredit|PaymentMethod,
@@ -246,17 +245,17 @@ declare namespace JsonLD {
    interface DiscussionForumPosting extends SocialMediaPosting {}
 
    /**
-    * @see http://schema.org/Distance
+    * http://schema.org/Distance
     */
    interface Distance extends Thing {}
 
    /**
-    * @see http://schema.org/Duration
+    * http://schema.org/Duration
     */
    interface Duration extends Thing {}
 
    /**
-    * @see http://schema.org/EducationalOrganization
+    * http://schema.org/EducationalOrganization
     */
    interface EducationalOrganization extends Organization {
       alumni: Person[]
@@ -272,12 +271,12 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Enumeration
+    * http://schema.org/Enumeration
     */
    interface Enumeration extends Thing {}
 
    /**
-    * @see http://schema.org/Event
+    * http://schema.org/Event
     */
    interface Event extends Thing {
       actor: Person,
@@ -311,12 +310,12 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/EventStatusType
+    * http://schema.org/EventStatusType
     */
    interface EventStatusType extends Thing {}
 
    /**
-    * @see http://schema.org/FinancialProduct
+    * http://schema.org/FinancialProduct
     */
    interface FinancialProduct extends Service {
       annualPercentageRate: number|QuantitativeValue,
@@ -330,7 +329,7 @@ declare namespace JsonLD {
    interface GenderType extends Thing {}
 
    /**
-    * @see http://schema.org/GeoCoordinates
+    * http://schema.org/GeoCoordinates
     */
    interface GeoCoordinates extends Thing {
       address: PostalAddress|string,
@@ -353,22 +352,22 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ImageObject
+    * http://schema.org/ImageObject
     */
    interface ImageObject extends MediaObject {
-      caption: string,
-      exifData: PropertyValue|string,
-      representativeOfPage: boolean,
-      thumbnail: ImageObject
+      caption?: string,
+      exifData?: PropertyValue|string,
+      representativeOfPage?: boolean,
+      thumbnail?: ImageObject
    }
 
    /**
-    * @see http://schema.org/ItemAvailability
+    * http://schema.org/ItemAvailability
     */
    interface ItemAvailability extends Thing {}
 
    /**
-    * @see http://schema.org/ItemList
+    * http://schema.org/ItemList
     */
    interface ItemList<T extends Thing> extends Thing {
       itemListElement: ListItem<T>[]|string[]|Thing[],
@@ -377,17 +376,17 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ItemListOrderType
+    * http://schema.org/ItemListOrderType
     */
    interface ItemListOrderType extends Thing {}
 
    /**
-    * @see http://schema.org/Language
+    * http://schema.org/Language
     */
    interface Language extends Thing {}
 
    /**
-    * @see http://schema.org/ListItem
+    * http://schema.org/ListItem
     */
    interface ListItem<T extends Thing> extends Thing {
       item: T,
@@ -397,7 +396,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/LoanOrCredit
+    * http://schema.org/LoanOrCredit
     */
    interface LoanOrCredit extends FinancialProduct {
       amount: MonetaryAmount|number,
@@ -406,7 +405,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/LocationFeatureSpecification
+    * http://schema.org/LocationFeatureSpecification
     */
    interface LocationFeatureSpecification extends PropertyValue {
       hoursAvailable: OpeningHoursSpecification,
@@ -415,26 +414,18 @@ declare namespace JsonLD {
    }
 
    interface MediaObject extends CreativeWork {
-      associatedArticle: NewsArticle,
-      bitrate: string,
-      contentSize: string,
-      contentUrl: URL|string,
-      duration: Duration,
-      embedUrl: URL,
-      encodesCreativeWork: CreativeWork,
-      encodingFormat: string,
-      expires: Date,
-      height: Distance|QuantitativeValue,
-      playerType: string,
-      productionCompany: Organization,
-      regionsAllowed: Place,
-      requiresSubscription: boolean,
-      uploadDate: Date,
-      width: Distance|QuantitativeValue
+      embedUrl?: URL|string;
+      encodesCreativeWork?: CreativeWork;
+      expires?: Date;
+      playerType?: string;
+      productionCompany?: Organization;
+      regionsAllowed?: Place;
+      requiresSubscription?: boolean;
+      uploadDate?: Date;
    }
 
    /**
-    * @see http://schema.org/MonetaryAmount
+    * http://schema.org/MonetaryAmount
     */
    interface MonetaryAmount extends Thing {
       currency: string,
@@ -446,7 +437,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/MusicAlbum
+    * http://schema.org/MusicAlbum
     */
    interface MusicAlbum extends CreativeWork {
       albumProductionType: MusicAlbumProductionType,
@@ -466,7 +457,7 @@ declare namespace JsonLD {
    interface MusicAlbumReleaseType extends Thing {}
 
    /**
-    * @see http://schema.org/MusicComposition
+    * http://schema.org/MusicComposition
     */
    interface MusicComposition extends CreativeWork {
       composer: Person|Organization,
@@ -482,7 +473,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/MusicGroup
+    * http://schema.org/MusicGroup
     */
    interface MusicGroup extends Organization {
       album: MusicAlbum,
@@ -491,7 +482,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/MusicPlaylist
+    * http://schema.org/MusicPlaylist
     */
    interface MusicPlaylist extends CreativeWork {
       numTracks: number,
@@ -499,7 +490,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/MusicRecording
+    * http://schema.org/MusicRecording
     */
    interface MusicRecording extends CreativeWork {
       byArtist: MusicGroup,
@@ -511,7 +502,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/MusicRelease
+    * http://schema.org/MusicRelease
     */
    interface MusicRelease extends MusicPlaylist {
       catalogNumber: string,
@@ -579,17 +570,17 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/OfferCatalog
+    * http://schema.org/OfferCatalog
     */
    interface OfferCatalog extends ItemList<Offer> {}
 
    /**
-    * @see http://schema.org/OfferItemCondition
+    * http://schema.org/OfferItemCondition
     */
    interface OfferItemCondition extends Thing {}
 
    /**
-    * @see http://schema.org/OpeningHoursSpecification
+    * http://schema.org/OpeningHoursSpecification
     */
    interface OpeningHoursSpecification extends Thing {
       closes: Date,
@@ -599,6 +590,9 @@ declare namespace JsonLD {
       validThrough: Date
    }
 
+   /**
+    * http://schema.org/Organization
+    */
    interface Organization extends Thing {
       address: PostalAddress|string,
       aggregateRating: AggregateRating,
@@ -643,7 +637,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/OwnershipInfo
+    * http://schema.org/OwnershipInfo
     */
    interface OwnershipInfo extends Thing {
       acquiredFrom: Organization|Person,
@@ -653,10 +647,13 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/PaymentMethod
+    * http://schema.org/PaymentMethod
     */
    interface PaymentMethod extends Thing {}
 
+   /**
+    * http://schema.org/Person
+    */
    interface Person extends Thing {
       additionalName: string,
       addres: PostalAddress|string,
@@ -711,7 +708,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Photograph
+    * http://schema.org/Photograph
     */
    interface Photograph extends CreativeWork {}
 
@@ -748,7 +745,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/PriceSpecification
+    * http://schema.org/PriceSpecification
     */
    interface PriceSpecification extends Thing {
       eligibleQuantity: QuantitativeValue,
@@ -763,7 +760,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ProgramMembership
+    * http://schema.org/ProgramMembership
     */
    interface ProgramMembership extends Thing {
       hostingOrganization: Organization,
@@ -806,7 +803,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ProductModel
+    * http://schema.org/ProductModel
     */
    interface ProductModel extends Product {
       isVariantOf: ProductModel,
@@ -846,7 +843,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Rating
+    * http://schema.org/Rating
     */
    interface Rating extends Thing {
       author: Organization|Person,
@@ -856,7 +853,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Review
+    * http://schema.org/Review
     */
    interface Review extends CreativeWork {
       itemReviewed: Thing,
@@ -865,14 +862,14 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/SearchAction
+    * http://schema.org/SearchAction
     */
    interface SearchAction extends Action {
       query: string
    }
 
    /**
-    * @see http://schema.org/Service
+    * http://schema.org/Service
     */
    interface Service extends Thing {
       aggregateRating: AggregateRating,
@@ -896,7 +893,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/ServiceChannel
+    * http://schema.org/ServiceChannel
     */
    interface ServiceChannel extends Thing {
       availableLanguage: Language,
@@ -910,14 +907,14 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/SocialMediaPosting
+    * http://schema.org/SocialMediaPosting
     */
    interface SocialMediaPosting extends Article {
       sharedContent: CreativeWork
    }
 
    /**
-    * @see http://schema.org/SoftwareApplication
+    * http://schema.org/SoftwareApplication
     */
    interface SoftwareApplication extends Thing {
       applicationCategory: string,
@@ -928,32 +925,33 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/Specialty
+    * http://schema.org/Specialty
     */
    interface Specialty extends Thing {}
 
    /**
-    * @see http://schema.org/StructuredValue
+    * http://schema.org/StructuredValue
     */
    interface StructuredValue extends Thing {}
 
    interface Thing {
-      '@id': string,
-      '@context': string,
-      '@type': string,
-      name?: string,
-      description?: string,
-      image?: ImageObject|string,
-      alternateName?: string,
-      additionalType?: URL,
-      potentialAction?: Action,
-      sameAs: URL,
-      mainEntityOfPage: CreativeWork|URL,
-      url?: URL
+      [key:string]: any;
+      '@id'?: string;
+      '@context'?: string;
+      '@type'?: string;
+      name?: string;
+      description?: string;
+      image?: ImageObject|string;
+      alternateName?: string;
+      additionalType?: URL;
+      potentialAction?: Action;
+      sameAs?: URL;
+      mainEntityOfPage?: CreativeWork|URL;
+      url?: URL|string;
    }
 
    /**
-    * @see http://schema.org/TypeAndQuantityNode
+    * http://schema.org/TypeAndQuantityNode
     */
    interface TypeAndQuantityNode extends Thing {
       amountOfThisGood: number,
@@ -966,7 +964,7 @@ declare namespace JsonLD {
    interface URL extends Thing {}
 
    /**
-    * @see http://schema.org/VideoObject
+    * http://schema.org/VideoObject
     */
    interface VideoObject extends MediaObject {
       actor: Person,
@@ -980,7 +978,7 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/WarrantyPromise
+    * http://schema.org/WarrantyPromise
     */
    interface WarrantyPromise extends Thing {
       durationOfWarranty: QuantitativeValue,
@@ -988,31 +986,31 @@ declare namespace JsonLD {
    }
 
    /**
-    * @see http://schema.org/WarrantyScope
+    * http://schema.org/WarrantyScope
     */
    interface WarrantyScope extends Thing {}
 
    /**
-    * @see http://schema.org/WebPage
+    * http://schema.org/WebPage
     */
    interface WebPage extends CreativeWork {
-      breadcrumb: BreadcrumbList|string,
-      lastReviewed: Date,
-      mainContentOfPage: WebPageElement,
-      primaryImageOfPage: ImageObject,
-      relatedLink: URL[],
-      reviewedBy: Person|Organization,
-      significantLink: URL,
-      specialty: Specialty
+      breadcrumb?: BreadcrumbList|Breadcrumb[],
+      lastReviewed?: Date,
+      mainContentOfPage?: WebPageElement,
+      primaryImageOfPage?: ImageObject,
+      relatedLink?: URL[],
+      reviewedBy?: Person|Organization,
+      significantLink?: URL,
+      specialty?: Specialty
    }
 
    /**
-    * @see http://schema.org/WebPageElement
+    * http://schema.org/WebPageElement
     */
    interface WebPageElement extends CreativeWork {}
 
    /**
-    * @see http://schema.org/WebSite
+    * http://schema.org/WebSite
     */
    interface WebSite extends CreativeWork {}
 }

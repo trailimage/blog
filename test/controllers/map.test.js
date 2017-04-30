@@ -1,11 +1,11 @@
-const C = require('../../lib/constants');
+const C = require('../../lib/constants').default;
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
 const { prepare, expectTemplate } = require('./index.test');
-const template = require('../../lib/template');
+const template = require('../../lib/template').default;
 const mocha = require('mocha');
 const { expect } = require('chai');
-const map = require('../../lib/controllers/map');
+const map = require('../../lib/controllers/map').default;
 const ph = C.route;
 
 describe('Map', ()=> {

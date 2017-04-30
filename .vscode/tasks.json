@@ -7,8 +7,9 @@
    "tasks": [
       {
          "taskName": "Run server",
-         "command": "node app.js",
-         "isShellCommand": true
+         "command": "node ./lib/app.js",
+         "isShellCommand": true,
+         "isBackground": true
       },
       {
          "taskName": "Install Modules",
@@ -27,11 +28,17 @@
          "isTestCommand": true
       },
       {
-         "taskName": "Build and Watch",
+         "taskName": "Build and Watch Client",
          "command": "npm run watch",
          "isShellCommand": true,
-         "isBuildCommand": true,
          "isBackground": true
+      },
+      {
+         "taskName": "Build Server",
+         "isBuildCommand": true,
+         "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
+         "isShellCommand": true,
+         "problemMatcher": "$tsc"
       }
    ]
 }
