@@ -8,7 +8,7 @@ import { MapPhoto } from '../types/';
  * Mapbox style identifier defined in /views/mapbox.hbs
  */
 declare const mapStyle:string;
-
+declare interface PointCluster { point_count?:number; }
 declare interface UrlPosition {
    [key:string]:number|number[];
    /** longitude, latitude */
@@ -17,7 +17,7 @@ declare interface UrlPosition {
    lat?:number;
    zoom?:number;
 }
-declare interface FakeEvent { reason:string }
+declare interface FakeEvent { reason:string; }
 declare interface CssPosition { top:number; left:number; }
 
 $(function() {
@@ -64,9 +64,9 @@ $(function() {
    let zoomOutEnabled = false;
 
    /**
-    * Cache GeoJSON so it can be reassigned if map style changes
+    * Cache GeoJSON photos so it can be reassigned if map style changes
     */
-   let geoJSON:GeoJSON.FeatureCollection<any> = null;
+   let geoJSON:GeoJSON.FeatureCollection<GeoJSON.Point> = null;
 
    /**
     * Methods for generating map content
@@ -149,8 +149,8 @@ $(function() {
       /**
        * Respond to user map interaction by hiding photo preview.
        */
-      mapInteraction: function(e:mapboxgl.EventData|FakeEvent) {
-         if (e.reason != 'fit') { handle.closePreview(); }
+      mapInteraction: function(e?:mapboxgl.EventData|FakeEvent) {
+         if (e !== undefined && e.reason != 'fit') { handle.closePreview(); }
       },
 
       /**
@@ -196,10 +196,10 @@ $(function() {
        * and I've not been able to find a function that exactly relates zoom
        * level to the radius represented by the cluster.
        *
-       * See https://github.com/mapbox/mapbox-gl-js/issues/2384
+       * https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
       clusterClick: function(e:mapboxgl.MapMouseEvent) {
-         const cluster:mapboxgl.PointCluster = e.features[0].properties;
+         const cluster:PointCluster = e.features[0].properties;
          const atZoom = map.getZoom();
          const zoomIn = function() {
             map.easeTo({
@@ -317,7 +317,7 @@ $(function() {
       if (enable) {
          handle.keyNav = (e:KeyboardEvent) => {
             switch (e.keyCode) {
-               case 27: handle.mapInteraction(e); break;
+               case 27: handle.mapInteraction(); break;
                case 37: prev(); break;
                case 39: next(); break;
             }
@@ -331,7 +331,7 @@ $(function() {
    /**
     * Get number of photos nearest to a location.
     */
-   function photosNearLocation(lngLat:mapboxgl.LngLat, count:number):GeoJSON.Feature<any>[] {
+   function photosNearLocation(lngLat:mapboxgl.LngLat, count:number):GeoJSON.Feature<GeoJSON.Point>[] {
       const z = map.getZoom();
       const f = (z * 3) / Math.pow(2, z);
       const sw = [lngLat.lng - f, lngLat.lat - f];
@@ -343,11 +343,11 @@ $(function() {
                 && coord[0] <= ne[0] && coord[1] <= ne[1];
          })
          .map(f => {
-            f.properties.distance = distance(lngLat, f.geometry.coordinates);
+            (f.properties as MapPhoto).distance = distance(lngLat, f.geometry.coordinates);
             return f;
          });
 
-      photos.sort((p1, p2) => p1.properties.distance - p2.properties.distance);
+      photos.sort((p1, p2) => (p1.properties as MapPhoto).distance - (p2.properties as MapPhoto).distance);
 
       return photos.slice(0, count);
    }

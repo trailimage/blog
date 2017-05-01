@@ -101,7 +101,7 @@ $(function() {
          });
       };
 
-      const beginDrag = function(event:JQueryEventObject) {
+      const beginDrag = function(event:JQueryEventObject|TouchEvent) {
          const touchAt = event.targetTouches[0];
          const imageAt = $big.position();
 
@@ -141,7 +141,7 @@ $(function() {
 
 
       // position based on initial click
-      updateSize(event);
+      updateSize(event as JQueryEventObject);
 
       $lb.show(0, disablePageScroll);
       // update panning calculations if window resizes

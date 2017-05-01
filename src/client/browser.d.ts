@@ -1,3 +1,5 @@
+/// <reference types="jquery" />
+
 /**
  * Structure of data generated in views/post-menu-data.hbs visible at
  *
@@ -49,6 +51,8 @@ export interface MapPhoto {
    url?:string;
    title?:string;
    partKey?:string;
+   /** Distance from clicked cluster */
+   distance?:number;
 }
 
 /**
