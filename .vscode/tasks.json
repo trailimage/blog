@@ -7,7 +7,7 @@
    "tasks": [
       {
          "taskName": "Run Server",
-         "command": "node ./lib/app.js",
+         "command": "./node_modules/.bin/nodemon ./lib/app.js",
          "isShellCommand": true,
          "isBackground": true
       },
