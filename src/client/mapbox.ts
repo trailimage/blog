@@ -17,7 +17,7 @@ declare interface UrlPosition {
    lat?:number;
    zoom?:number;
 }
-declare interface FakeEvent { reason:string }
+declare interface FakeEvent { reason:string; }
 declare interface CssPosition { top:number; left:number; }
 
 $(function() {
