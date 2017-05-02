@@ -72,19 +72,17 @@ function provider() {
  *
  * https://github.com/winstonjs/winston#logging-with-metadata
  */
-function iconInvoke(icon:string, level:string, args:IArguments) {
-   const a = Array.from(args);
-   a.shift();
+function iconInvoke(icon:string, level:string, message:string|Error, args:any[]) {
    // avoid conflict with handlebars format function called icon()
-   a.push({ iconName: icon });
-   invoke(level, a);
+   args.push({ iconName: icon });
+   invoke(level, message, args);
 }
 
 /**
  * Apply arguments to log writer function keyed to severity level
  */
-function invoke(l:string, ...args:any[]) {
-   //provider()[level].apply(provider(), args);
+function invoke(l:string, message:string|Error, args:any[]) {
+   args.unshift(message);
    const p = provider();
    switch (l) {
       case level.DEBUG: p.debug.apply(p, args); break;
@@ -154,19 +152,25 @@ function query(daysAgo:number, maxRows = 500) {
    });
 }
 
-function error(message:string|Error, ...args:any[]) { invoke(level.ERROR, arguments); }
+function error(message:string|Error, ...args:any[]) { invoke(level.ERROR, message, args); }
 
 export default {
-   info(message:string, ...args:any[]) { invoke(level.INFO, arguments); },
+   info(message:string, ...args:any[]) { invoke(level.INFO, message, args); },
    /** Log information message with a Material icon attribute */
-   infoIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.INFO, arguments); },
-   warn(message:string, ...args:any[]) { invoke(level.WARN, arguments); },
+   infoIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.INFO, message, args); },
+   warn(message:string, ...args:any[]) { invoke(level.WARN, message, args); },
    /** Log warning with a Material icon attribute */
-   warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, arguments); },
+   warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, message, args); },
    error,
    /** Log error with a Material icon attribute */
-   errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, arguments); },
+   errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, message, args); },
    query,
    /** Force provider(s) to be re-initialized */
-   reset() { logger = null; }
+   reset() { logger = null; },
+
+   inject: {
+      set transport(t:Winston.TransportInstance) {
+          logger = new Winston.Logger({ transports: [t] });
+      }
+   }
 };

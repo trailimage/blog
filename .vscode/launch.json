@@ -3,7 +3,7 @@
    "configurations": [
       // http://www.mithunvp.com/typescript-tutorials-setting-visual-studio-code/
       {
-         "name": "Node Debug",
+         "name": "Node Server",
          "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/lib/app.js",
@@ -35,7 +35,7 @@
          // }
       },
       {
-         "name": "Debug Mocha Tests",
+         "name": "Mocha Test",
          "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
@@ -48,10 +48,10 @@
          //"args": ["test/**/*.js", "--no-timeouts"]
          //"args": ["test/factory/*", "--no-timeouts"]
          //"args": ["test/map/geojson*", "--no-timeouts"]
-         "args": ["test/providers/goo*", "--no-timeouts"]
+         "args": ["test/logger*", "--no-timeouts"]
       },
       {
-         "name": "Debug Gulp",
+         "name": "Gulp",
          "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
