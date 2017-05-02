@@ -1,8 +1,6 @@
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts"/>
 
-//import { JQueryResponse } from '../types/';
-
 /**
  * Defined in /views/photo-tag.hbs
  */

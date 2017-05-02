@@ -1,11 +1,10 @@
 /// <reference types="jquery" />
-
-//import { PageFeature } from '../types/';
+/// <reference path="../types/jquery/index.d.ts" />
 
 /**
  * Which features to enable on a page — determines which libraries to lazy-load
  */
-declare interface PageFeature {
+interface PageFeature {
    sideMenu:boolean;
    postMenu:boolean;
    twitter:boolean;

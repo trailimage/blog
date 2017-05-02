@@ -1,10 +1,7 @@
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts"/>
 
-declare interface JsonResponse {
-   success:boolean;
-   message:string;
-}
+declare interface JsonResponse { success:boolean; message:string; }
 
 /**
  * Manage cache items

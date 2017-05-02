@@ -50,29 +50,15 @@ gulp.task('css', ()=>
       .pipe(gulp.dest(dist + 'css'))
 );
 
-// gulp.task('ts', ()=>
-//    tsProject.src()
-//       .pipe(tsProject())
-//       .pipe(sourcemaps.init())
-//       .pipe(uglify()).on('error', handleError)
-//       .pipe(sourcemaps.write('maps', sourceMapConfig))
-//       .pipe(gulp.dest(dist + 'js'))
-// );
-
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
 gulp.task('js', ()=>
-   // const most = gulp.src(['./src/client/*.ts', '!./src/client/post.ts']).pipe(tsProject());
-   // const post = merge(
-   //    gulp.src('./src/client/post.ts').pipe(tsProject()),
-   //    gulp.src('./src/client/jquery.lazyload.js'
-   //    ).pipe.concat('post.js')
-
    merge(
       gulp.src(['./src/client/*.ts', '!./src/client/post.ts']).pipe(tsProject1()),
       merge(
          gulp.src('./src/client/post.ts').pipe(tsProject2()),
          gulp.src('./src/client/jquery.lazyload.js')
-      ).pipe(concat('post.js'))
+      )
+         .pipe(concat('post.js'))
    )
       .pipe(sourcemaps.init())
       .pipe(uglify()).on('error', handleError)

@@ -12,9 +12,7 @@ declare interface MapPhoto {
    distance?:number;
 }
 
-/**
- * Mapbox style identifier defined in /views/mapbox.hbs
- */
+/** Mapbox style identifier defined in /views/mapbox.hbs */
 declare const mapStyle:string;
 declare interface PointCluster { point_count?:number; }
 declare interface UrlPosition {
