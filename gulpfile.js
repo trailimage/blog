@@ -6,24 +6,28 @@ const uglify = require('gulp-uglify');
 const ts = require('gulp-typescript');
 const sourcemaps = require('gulp-sourcemaps');
 const merge = require('merge2');
+const jsPath = './src/client/'
 const dist = './dist/';
-// https://github.com/gulp-sourcemaps/gulp-sourcemaps
+/**
+ * https://github.com/gulp-sourcemaps/gulp-sourcemaps
+ */
 const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
 }
-const tsProject1 = ts.createProject('tsconfig.browser.json');
-const tsProject2 = ts.createProject('tsconfig.browser.json');
+
+/**
+ * Cannot use the same project twice in one pipeline
+ */
+const tsConfig = [
+   ts.createProject('tsconfig.browser.json'),
+   ts.createProject('tsconfig.browser.json')
+]
 
 /**
  * @param {string[]} names
  * @returns {string[]}
  */
 const lessPath = names => names.map(n => './src/less/' + n + '.less');
-/**
- * @param {string[]} names
- * @returns {string[]}
- */
-const jsPath = names => names.map(n => './src/client/' + n);
 
 /**
  * Handle error so file watcher can continue
@@ -53,10 +57,11 @@ gulp.task('css', ()=>
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
 gulp.task('js', ()=>
    merge(
-      gulp.src(['./src/client/*.ts', '!./src/client/post.ts']).pipe(tsProject1()),
+      gulp.src([`${jsPath}*.ts`, `!${jsPath}post.ts`]).pipe(tsConfig[0]()),
+      // merge post and lazy-load plugin into single file
       merge(
-         gulp.src('./src/client/post.ts').pipe(tsProject2()),
-         gulp.src('./src/client/jquery.lazyload.js')
+         gulp.src(jsPath + 'post.ts').pipe(tsConfig[1]()),
+         gulp.src(jsPath + 'jquery.lazyload.js')
       )
          .pipe(concat('post.js'))
    )
@@ -69,5 +74,5 @@ gulp.task('js', ()=>
 // act on changes
 gulp.task('watch', ()=> {
    gulp.watch('./src/less/*.less', ['css']);
-   gulp.watch('./src/client/*.js', ['js']);
+   gulp.watch('./src/client/*.?s', ['js']);
 });
