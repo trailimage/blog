@@ -1,3 +1,5 @@
+/// <reference types="geojson" />
+
 import * as Mapbox from 'mapbox-gl'
 
 /**
