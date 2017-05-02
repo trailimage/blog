@@ -1,8 +1,16 @@
 /// <reference types="jquery" />
 /// <reference types="geojson" />
 /// <reference types="mapbox-gl" />
+/// <reference path="../types/mapbox-gl/index.d.ts" />
+/// <reference path="../types/jquery/index.d.ts"/>
 
-import { MapPhoto } from '../types/';
+declare interface MapPhoto {
+   url?:string;
+   title?:string;
+   partKey?:string;
+   /** Distance from clicked cluster */
+   distance?:number;
+}
 
 /**
  * Mapbox style identifier defined in /views/mapbox.hbs

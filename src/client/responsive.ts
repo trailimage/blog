@@ -1,6 +1,17 @@
 /// <reference types="jquery" />
 
-import { PageFeature } from '../types/';
+//import { PageFeature } from '../types/';
+
+/**
+ * Which features to enable on a page — determines which libraries to lazy-load
+ */
+declare interface PageFeature {
+   sideMenu:boolean;
+   postMenu:boolean;
+   twitter:boolean;
+   facebook:boolean;
+   timestamp:number;
+}
 
 /**
  * Defined in /views/post.hbs

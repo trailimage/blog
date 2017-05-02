@@ -1,12 +1,14 @@
 /// <reference types="jquery" />
+/// <reference path="../types/jquery/index.d.ts"/>
 
-import { JQueryResponse } from '../types/';
+//import { JQueryResponse } from '../types/';
 
 /**
  * Defined in /views/photo-tag.hbs
  */
 declare const selectedTag:string;
 declare const siteName:string;
+declare type JQueryResponse = (responseText:string, textStatus:string, XMLHttpRequest:XMLHttpRequest) => any;
 
 
 $(function() {

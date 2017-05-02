@@ -3,6 +3,7 @@ const less = require('gulp-less');
 const nano = require('gulp-cssnano');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const ts = require('gulp-typescript');
 const sourcemaps = require('gulp-sourcemaps');
 const merge = require('merge2');
 const dist = './dist/';
@@ -10,6 +11,7 @@ const dist = './dist/';
 const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
 }
+const tsProject = ts.createProject('tsconfig.browser.json');
 
 /**
  * @param {string[]} names
@@ -47,9 +49,19 @@ gulp.task('css', ()=>
       .pipe(gulp.dest(dist + 'css'))
 );
 
+gulp.task('ts', ()=>
+   tsProject.src()
+      .pipe(tsProject())
+      .pipe(sourcemaps.init())
+      .pipe(uglify()).on('error', handleError)
+      .pipe(sourcemaps.write('maps', sourceMapConfig))
+      .pipe(gulp.dest(dist + 'js'))
+);
+
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
 gulp.task('js', ()=>
    merge(
+      gulp.src(tsProject.src()).pipe(tsProject()),
       gulp.src(jsPath(['!(jquery.lazyload.js|post.js)'])),
       // combine lazy load library with post script
       gulp.src(jsPath(['jquery.lazyload.js', 'post.js'])).pipe(concat('post.js'))

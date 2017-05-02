@@ -2,15 +2,14 @@
    // https://www.typescriptlang.org/docs/handbook/compiler-options.html
    "compilerOptions": {
       "target": "es2015",
+      "moduleResolution": "node",
       "module": "commonjs",
       "baseUrl": "./src",
       "newLine": "LF",
       //"pretty": true,
-      "noImplicitAny": true,
-      "noUnusedLocals": true,
-      "noImplicitThis": true,
       "allowJs": false,
       "alwaysStrict": true,
+      "removeComments": true,
       "strictNullChecks": false,
       "allowSyntheticDefaultImports": false,
       "forceConsistentCasingInFileNames": false,

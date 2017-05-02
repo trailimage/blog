@@ -1,10 +1,11 @@
 {
    "extends": "./tsconfig.json",
    "compilerOptions": {
-      "module": "commonjs",
       "outDir": "./lib",
-      "removeComments": true,
       "sourceMap": true,
+      "noImplicitAny": true,
+      "noUnusedLocals": true,
+      "noImplicitThis": true,
       //"moduleResolution": "node",
       //"isolatedModules": true,
       //"types": [],

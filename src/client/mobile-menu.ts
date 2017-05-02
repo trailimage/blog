@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference path="../types/jquery/index.d.ts"/>
 
 $(function() {
    const $button = $('#mobile-menu-button');

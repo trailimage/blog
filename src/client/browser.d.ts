@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference path="../types/jquery/index.d.ts"/>
 
 /**
  * Structure of data generated in views/post-menu-data.hbs visible at

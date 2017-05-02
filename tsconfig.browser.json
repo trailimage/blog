@@ -1,17 +1,18 @@
 {
    "extends": "./tsconfig.json",
    "compilerOptions": {
-      "module": "es6",
-      "outDir": "../dist",
-      "allowJs": true,
-      "sourceMap": true,
+      "target": "es5",
+      "module": "none",
+      "outDir": "./dist/js",
+      "baseUrl": "./src/client",
+      "alwaysStrict": true,
       "lib": ["es6","dom"]
    },
    "include": [
       "./src/client/*.ts"
    ],
    "exclude": [
-      "./src/types",
+      "./src/types/",
       "node_modules"
    ]
 }

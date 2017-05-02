@@ -59,7 +59,7 @@
          "protocol": "inspector",
          "runtimeExecutable": null,
          "stopOnEntry": true,
-         "args": ["css"]
+         "args": ["ts"]
       }
    ]
 }

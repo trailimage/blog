@@ -1,6 +1,10 @@
 /// <reference types="jquery" />
+/// <reference path="../types/jquery/index.d.ts"/>
 
-import { JsonResponse } from '../types/';
+declare interface JsonResponse {
+   success:boolean;
+   message:string;
+}
 
 /**
  * Manage cache items
