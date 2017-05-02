@@ -1,4 +1,5 @@
 /// <reference types="jquery" />
+/// <reference path="../types/jquery/index.d.ts" />
 
 /**
  * Set up lazy loading and light box for post images. Depends on post images

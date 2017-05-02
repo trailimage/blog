@@ -11,7 +11,8 @@ const dist = './dist/';
 const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
 }
-const tsProject = ts.createProject('tsconfig.browser.json');
+const tsProject1 = ts.createProject('tsconfig.browser.json');
+const tsProject2 = ts.createProject('tsconfig.browser.json');
 
 /**
  * @param {string[]} names
@@ -22,7 +23,7 @@ const lessPath = names => names.map(n => './src/less/' + n + '.less');
  * @param {string[]} names
  * @returns {string[]}
  */
-const jsPath =   names => names.map(n => './src/client/' + n);
+const jsPath = names => names.map(n => './src/client/' + n);
 
 /**
  * Handle error so file watcher can continue
@@ -49,22 +50,29 @@ gulp.task('css', ()=>
       .pipe(gulp.dest(dist + 'css'))
 );
 
-gulp.task('ts', ()=>
-   tsProject.src()
-      .pipe(tsProject())
-      .pipe(sourcemaps.init())
-      .pipe(uglify()).on('error', handleError)
-      .pipe(sourcemaps.write('maps', sourceMapConfig))
-      .pipe(gulp.dest(dist + 'js'))
-);
+// gulp.task('ts', ()=>
+//    tsProject.src()
+//       .pipe(tsProject())
+//       .pipe(sourcemaps.init())
+//       .pipe(uglify()).on('error', handleError)
+//       .pipe(sourcemaps.write('maps', sourceMapConfig))
+//       .pipe(gulp.dest(dist + 'js'))
+// );
 
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
 gulp.task('js', ()=>
+   // const most = gulp.src(['./src/client/*.ts', '!./src/client/post.ts']).pipe(tsProject());
+   // const post = merge(
+   //    gulp.src('./src/client/post.ts').pipe(tsProject()),
+   //    gulp.src('./src/client/jquery.lazyload.js'
+   //    ).pipe.concat('post.js')
+
    merge(
-      gulp.src(tsProject.src()).pipe(tsProject()),
-      gulp.src(jsPath(['!(jquery.lazyload.js|post.js)'])),
-      // combine lazy load library with post script
-      gulp.src(jsPath(['jquery.lazyload.js', 'post.js'])).pipe(concat('post.js'))
+      gulp.src(['./src/client/*.ts', '!./src/client/post.ts']).pipe(tsProject1()),
+      merge(
+         gulp.src('./src/client/post.ts').pipe(tsProject2()),
+         gulp.src('./src/client/jquery.lazyload.js')
+      ).pipe(concat('post.js'))
    )
       .pipe(sourcemaps.init())
       .pipe(uglify()).on('error', handleError)
