@@ -53,6 +53,7 @@ export default {
          iconForCategory: util.icon.category,
          modeIconForPost: util.icon.mode,
          rot13: util.encode.rot13,
+         json: JSON.stringify,
          encode: encodeURIComponent
       };
       for (const name in helpers) { hbs.registerHelper(name, helpers[name]); }

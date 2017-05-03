@@ -20,7 +20,7 @@
 	{{> json-ld}}
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.happenedOn}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoMarkers}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
+<body class="post{{#if post.happenedOn}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoLocations}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}
@@ -65,10 +65,14 @@
 	{{#unless post.feature}}
 		{{> categories post.categories}}
 		<nav id="nav-top">{{> navigation}}</nav>
-		{{#if post.photoMarkers}}
+		{{#if post.photoLocations}}
 		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
-         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/{{post.photoMarkers}}/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false" width="650" height="200"/></a>
+         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow">
+            <img src="./img/blank.png" width="650" height="200" class="static-map"
+               data-locations="{{json post.photoLocations}}"
+               data-href="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/-pins-/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false"/>
+         </a>
 		</div>
 		{{/if}}
 	{{/unless}}

@@ -97,8 +97,8 @@ export interface Post {
    smallThumbURL:string;
    photos:Photo[];
    photoCount:number;
-   photoTagList:string,
-   photoMarkers:string,
+   photoTagList:string;
+   photoLocations:number[][];
    coverPhoto:Photo;
    /** Whether posts is featured in main navigation */
    feature:boolean;
@@ -136,7 +136,7 @@ export interface Post {
    hasKey(key:string):boolean;
    //hasPhotoID(id:string):boolean;
    ensureLoaded():Promise<null>;
-   updatePhotoMarkers():void;
+   updatePhotoLocations():void;
 }
 
 export interface VideoInfo {

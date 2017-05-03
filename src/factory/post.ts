@@ -110,7 +110,7 @@ function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
          p.longDescription += (is.value(p.video) && !p.video.empty) ? ' and one video)' : ')';
       }
 
-      p.updatePhotoMarkers();
+      p.updatePhotoLocations();
    }
    p.photosLoaded = true;
 
@@ -137,7 +137,7 @@ function empty(this:Post) {
    this.photos = null;
    this.happenedOn = null;
    this.photoTagList = null;
-   this.photoMarkers = null;
+   this.photoLocations = null;
    this.longDescription = null;
    this.photosLoaded = false;
 }
@@ -159,10 +159,10 @@ function name(this:Post|any):string {
  *    Example:
  *    pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
  */
-function updatePhotoMarkers(this:Post) {
+function updatePhotoLocations(this:Post) {
    let start = 1;  // always skip first photo
    let total = this.photos.length;
-   let markers:string = '';
+   const locations:number[][] = [];
 
    if (total > config.map.maxMarkers) {
        start = 5;  // skip the first few which are often just prep shots
@@ -172,12 +172,11 @@ function updatePhotoMarkers(this:Post) {
 
    for (let i = start; i < total; i++) {
        const img = this.photos[i];
-       //if (img.latitude > 0) { markers += `,pin-s+800(${img.longitude.toFixed(5)},${img.latitude.toFixed(5)})`; }
        if (img.latitude > 0) {
-          markers += `,url-${encodeURIComponent('http://www.trailimage.com/p.png')}(${img.longitude.toFixed(5)},${img.latitude.toFixed(5)})`;
+          locations.push([parseFloat(img.longitude.toFixed(5)), parseFloat(img.latitude.toFixed(5))]);
        }
    }
-   this.photoMarkers = (is.empty(markers)) ? null : markers.replace(/^,/, '');
+   this.photoLocations = locations.length > 0 ? locations : null;
 }
 
 /**
@@ -241,7 +240,7 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
       isSeriesStart: false,
 
       // photo marker path for Mapbox static map
-      photoMarkers: null as string,
+      photoLocations: null,
 
       makeSeriesStart,
       ungroup,
@@ -251,7 +250,7 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
       getInfo,
       getPhotos,
       hasKey,
-      updatePhotoMarkers
+      updatePhotoLocations
    };
 
    const parts = p.originalTitle.split(re.subtitle);

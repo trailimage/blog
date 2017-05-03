@@ -8,7 +8,6 @@ declare const selectedTag:string;
 declare const siteName:string;
 declare type JQueryResponse = (responseText:string, textStatus:string, XMLHttpRequest:XMLHttpRequest) => any;
 
-
 $(function() {
    const css = 'selected';
    const $view = $('#photo-tag');

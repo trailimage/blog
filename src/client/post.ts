@@ -63,7 +63,7 @@ $(function() {
       /** Big image */
       const $big = $lb.find('img');
       /** Whether big image is already browser cached */
-      let loaded = $img.data('big-loaded') as boolean;
+      let loaded:boolean = $img.data('big-loaded');
 
       const size = new Size($img.data('big-width'), $img.data('big-height'));
       /** click position relative to image corner */
