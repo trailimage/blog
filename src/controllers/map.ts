@@ -84,7 +84,7 @@ function postJSON(req:Blog.Request, res:Blog.Response) {
  */
 function mapSourceMines(req:Blog.Request, res:Blog.Response) {
    const opt = { headers: { 'User-Agent': 'node.js' }};
-   fetch(config.map.source.mines, opt).then(kml => {
+   fetch(config.map.source.mines.url, opt).then(kml => {
       if (kml.status == httpStatus.OK) {
          kml.text()
             .then(geoJSON.featuresFromKML)
