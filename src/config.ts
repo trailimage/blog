@@ -1,4 +1,5 @@
 import { Token, Flickr } from './types/';
+import mapsource from './mapsource';
 import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';
@@ -103,6 +104,27 @@ export const library = {
    defaultCategory: 'When'
 };
 
+export const map = {
+   minimumTrackLength: 0.2,
+   minimumTrackPoints: 5,
+   /** Distance a track point must deviate from others to avoid Douglas-Peucker simplification */
+   maxPointDeviationFeet: 0.5,
+   /** Manually adjusted tracks may have infinite speeds between points so throw out anything over a threshold */
+   maxPossibleSpeed: 150,
+   /** Erase tracks around given latitude and longitude */
+   privacyCenter: null as number[],
+   /** Radius around `privacyCenter` to exclude from GeoJSON */
+   privacyMiles: 1,
+   /** Whether to enforce `privacy` settings */
+   checkPrivacy: false,
+   /** Whether track GPX files can be downloaded */
+   allowDownload: true,
+   /** Maximum number of photo markers to show on Mapbox static map. */
+   maxMarkers: 70,
+   /** Idaho map sources */
+   source: mapsource
+};
+
 export default {
    env,
    domain,
@@ -200,42 +222,7 @@ export default {
       /** Characters used between displayed title and subtitle */
       subtitleSeparator: ':'
    },
-
-   map: {
-      minimumTrackLength: 0.2,
-      minimumTrackPoints: 5,
-      /** Distance a track point must deviate from others to avoid Douglas-Peucker simplification */
-      maxPointDeviationFeet: 0.5,
-      /** Manually adjusted tracks may have infinite speeds between points so throw out anything over a threshold */
-      maxPossibleSpeed: 150,
-      /** Erase tracks around given latitude and longitude */
-      privacyCenter: null as number[],
-      /** Radius around `privacyCenter` to exclude from GeoJSON */
-      privacyMiles: 1,
-      /** Whether to enforce `privacy` settings */
-      checkPrivacy: false,
-      /** Whether track GPX files can be downloaded */
-      allowDownload: true,
-      /** Maximum number of photo markers to show on Mapbox static map. */
-      maxMarkers: 70,
-      /** Idaho map sources */
-      source: {
-         mines: 'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz',
-         atv: 'https://trails.idaho.gov/pages/kmz/ATV.kmz',
-         atvSeasonal: 'https://trails.idaho.gov/pages/kmz/ATV_Seasonal.kmz',
-         automobile: 'https://trails.idaho.gov/pages/kmz/Automobile.kmz',
-         automobileSeasonal: 'https://trails.idaho.gov/pages/kmz/Automobile_Seasonal.kmz',
-         highway: 'https://trails.idaho.gov/pages/kmz/Highway_Legal.kmz',
-         highwaySeasonal: 'https://trails.idaho.gov/pages/kmz/Highway_Legal_Seasonal.kmz',
-         jeep: 'https://trails.idaho.gov/pages/kmz/Jeep.kmz',
-         jeepSeasonal: 'https://trails.idaho.gov/pages/kmz/Jeep_Seasonal.kmz',
-         motorcycle: 'https://trails.idaho.gov/pages/kmz/Motorcycle.kmz',
-         motorcycleSeasonal: 'https://trails.idaho.gov/pages/kmz/Motorcycle_Seasonal.kmz',
-         nonMotorized: 'https://trails.idaho.gov/pages/kmz/Nonmotorized.kmz',
-         otherRoads: 'https://trails.idaho.gov/pages/kmz/Other_Road.kmz',
-         wilderness: 'https://trails.idaho.gov/pages/kmz/Wilderness.kmz'
-      }  as {[key:string]:string}
-   },
+   map,
    bing: {
       key: process.env['BING_KEY'] as string
    },

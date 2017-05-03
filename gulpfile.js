@@ -34,6 +34,10 @@ const none = names => ['**'].concat(names.map(n => '!**/' + n + '*'));
  */
 function handleError(error) { console.error(error); this.emit('end'); }
 
+function bundle() {
+   
+}
+
 // https://github.com/plus3network/gulp-less
 // https://github.com/jonathanepollack/gulp-minify-css
 // https://github.com/jakubpawlowicz/clean-css/blob/master/README.md

@@ -20,3 +20,9 @@ export {
    Size,
    VideoInfo,
    EXIF } from '../factory/models';
+
+export interface MapSource {
+   name:string;
+   provider:string;
+   url:string;
+}
