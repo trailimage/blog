@@ -1,5 +1,6 @@
 const geoJSON = require('../../lib/map/geojson').default;
 const mocha = require('mocha');
+const kml = require('../../lib/map/kml').default;
 const { expect } = require('chai');
 const mock = require('../mocks/');
 const nl = require('os').EOL;
@@ -37,9 +38,17 @@ describe('GeoJSON', ()=> {
       });
    });
 
-   it.skip('converts KML files to GeoJSON', ()=> mock.loadFile('mines.kml').then(kmlString => {
-      const kml = geoJSON.featuresFromKML(kmlString);
-      expect(kml).to.exist;
-   }));
-      //.timeout(20000);
+   it.skip('converts KML files to GeoJSON', ()=> mock.loadFile('mines.kmz')
+      .then(kml.fromKMZ)
+      .then(geoJSON.featuresFromKML)
+      .then(geo => {
+         expect(geo).to.exist;
+         expect(geo).has.property('type', geoJSON.type.COLLECTION);
+         expect(geo).has.property('features');
+         expect(geo.features).is.instanceOf(Array);
+         expect(geo.features).is.lengthOf(8843);
+         expect(geo.features[0]).has.property('properties');
+         expect(geo.features[0].properties).has.property('DMSLAT', 443312);
+      })
+   ); //.timeout(10000);
 });

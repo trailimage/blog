@@ -1,9 +1,11 @@
+import { MapProperties } from '../types/';
 import is from '../is';
 import xml from './xml';
 //import * as stream from 'stream';
 import { DOMParser as DOM } from 'xmldom';
 import index from './';
 import log from '../logger';
+import util from '../util';
 import * as unzip from 'yauzl';
 
 /**
@@ -29,11 +31,16 @@ function location(node:Element):number[] {
  * Extract properties from description HTML table. This seems to be standard
  * output format from ESRI systems.
  */
-function parseDescription(properties:{[key:string]:string}):{[key:string]:string} {
-   if (/^<html/.test(properties.description)) {
-      let html = null;
+function parseDescription(properties:MapProperties):MapProperties {
+   if (/<html/.test(properties.description)) {
+      // remove CDATA wrapper
+      const source = properties.description
+         .replace(/^<\!\[CDATA\[/, '')
+         .replace(/\]\]>$/, '');
+      let html:Document = null;
+
       try {
-         html = new DOM().parseFromString(properties.description);
+         html = new DOM().parseFromString(source);
       } catch (ex) {
          return properties;
       }
@@ -42,6 +49,7 @@ function parseDescription(properties:{[key:string]:string}):{[key:string]:string
       let most = 0;
       let index = -1;
 
+      // find index of the largest table
       for (let i = 0; i < tables.length; i++) {
          const t = tables[i];
          if (t.childNodes.length > most) {
@@ -53,8 +61,8 @@ function parseDescription(properties:{[key:string]:string}):{[key:string]:string
       if (index > 0) {
          const rows = tables[index].getElementsByTagName('tr');
          for (let i = 0; i < rows.length; i++) {
-            const r = rows[i];
-            properties[xml.value(r.firstChild)] = xml.value(r.lastChild);
+            const cols = rows[i].getElementsByTagName('td');
+            properties[xml.value(cols[0])] = util.number.maybe(xml.value(cols[1]));
          }
          delete properties['description'];
       }
@@ -74,15 +82,22 @@ function fromKMZ(data:Buffer):Promise<Document> {
                zipFile.openReadStream(entry, (err, stream) => {
                   let text = '';
                   stream.on('end', ()=> {
-                     resolve(new DOM().parseFromString(text));
-                     //zipFile.close();
+                     const dom = new DOM({
+                        // per docs but not working
+                        errorHandler: { warning: (msg:string) => { /** do nothing */ } }
+                     });
+                     try {
+                        resolve(dom.parseFromString(text));
+                     } catch (ex) {
+                        reject(ex);
+                     }
                   });
                   stream.on('error', (err:Error) => {
                      // log error but continue iterating through entries
                      log.error(err);
                      zipFile.readEntry();
                   });
-                  stream.on('data', buffer => {
+                  stream.on('data', (buffer:Buffer|string) => {
                      text += Buffer.isBuffer(buffer) ? buffer.toString() : buffer;
                   });
                });
@@ -106,15 +121,15 @@ function fromKMZ(data:Buffer):Promise<Document> {
 /**
  * Properties of a KML node
  */
-function properties(node:Element, extras:string[] = []):{[key:string]:string} {
+function properties(node:Element, extras:string[] = []):MapProperties {
    const names = extras.concat(['name', 'description']); // styleUrl,
-   const properties:{[key:string]:string} = {};
+   const properties:MapProperties = {};
 
    for (const key of names) {
       const value = xml.firstValue(node, key);
-      if (!is.empty(value)) { properties[key] = value; }
+      if (!is.empty(value)) { properties[key] = util.number.maybe(value); }
    }
    return parseDescription(properties);
 }
 
-export default { properties, location, fromKMZ };
+export default { properties, location, fromKMZ, parseDescription };

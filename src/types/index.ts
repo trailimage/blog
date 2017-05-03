@@ -26,3 +26,8 @@ export interface MapSource {
    provider:string;
    url:string;
 }
+
+export interface MapProperties {
+   [key:string]:string|number;
+   description?:string;
+}

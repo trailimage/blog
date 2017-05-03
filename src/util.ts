@@ -9,7 +9,7 @@ import * as url from 'url';
 /**
  * Replace placeholders with arbitrary arguments
  */
-function format(text:string, ...insertions:(string|number)[]):string {
+export function format(text:string, ...insertions:(string|number)[]):string {
    for (let i = 0; i < insertions.length; i++) {
       text = text.replace('{' + i + '}', insertions[i] as string);
    }
@@ -45,14 +45,14 @@ function story(text:string):string {
    return text;
 }
 
-function linkPattern(url:string):string {
+export function linkPattern(url:string):string {
    return '<a href="' + url + '$1" target="_blank">$1</a>';
 }
 
 /**
  * Replace UTF superscript with HTML superscript
  */
-function formatNotes(notes:string):string {
+export function formatNotes(notes:string):string {
    // photo credit becomes note number 0
    const start = (/^\s*\*/g.test(notes)) ? ' start="0"' : '';
 
@@ -70,7 +70,7 @@ function formatNotes(notes:string):string {
 /**
  * Format Haiku text
  */
-function formatHaiku(text:string, regex:RegExp):string {
+export function formatHaiku(text:string, regex:RegExp):string {
    const match = regex.exec(text);
 
    return '<p class="haiku">'
@@ -83,7 +83,7 @@ function formatHaiku(text:string, regex:RegExp):string {
 /**
  * Format poetry text
  */
-function formatPoem(text:string):string {
+export function formatPoem(text:string):string {
    return '<blockquote class="poem"><p>' + text
       .replace(re.trailingWhiteSpace, '')
       .replace(re.lineBreak, '<br/>')
@@ -98,7 +98,7 @@ function formatPoem(text:string):string {
  *
  * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */
-function caption(text:string):string {
+export function caption(text:string):string {
    if (!is.empty(text))	{
       const ph = '[POEM]';  // poetry placeholder
       let footnotes = '';
@@ -360,6 +360,10 @@ function parseNumber(text:string):number {
    return is.empty(text) ? NaN : parseFloat(text);
 }
 
+function maybeNumber(val:string):number|string {
+   return (re.numeric.test(val)) ? parseFloat(val) : val;
+}
+
 /**
  * Material icon tag
  *
@@ -464,7 +468,8 @@ export default {
    number: {
       say: sayNumber,
       pad: leadingZeros,
-      parse: parseNumber
+      parse: parseNumber,
+      maybe: maybeNumber
    },
 
    /**

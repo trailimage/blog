@@ -169,6 +169,13 @@ describe('Utilities', ()=> {
          expect(util.number.parse('wow 28.9')).equals(28.9);
          expect(util.number.parse('nothing')).to.be.NaN;
       });
+
+      it('converts eligible strings to numbers', ()=> {
+         expect(util.number.maybe('3.5')).equals(3.5);
+         expect(util.number.maybe('3.5')).not.equals('3.5');
+         expect(util.number.maybe('563')).equals(563);
+         expect(util.number.maybe('asdfds')).equals('asdfds');
+      });
    });
 
    describe('Encoding', ()=> {

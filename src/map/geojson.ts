@@ -146,25 +146,29 @@ function parseNodes<T extends GeoJSON.GeometryObject>(
 }
 
 /**
- * Convert KML string to GeoJSON
+ * Convert KML to GeoJSON
  */
-const featuresFromKML = (kmlString:string) => {
+const featuresFromKML = (kml:string|Document) => {
    const geo = features();
-   let kml = null;
+   let doc:Document = null;
 
-   kmlString = kmlString.replace(/[\r\n]/g, '').replace(/>\s+</g, '><');
+   if (is.text(kml)) {
+      kml = kml.replace(/[\r\n]/g, '').replace(/>\s+</g, '><');
 
-   try {
-      kml = new DOM().parseFromString(kmlString);
-   } catch (ex) {
-      log.error(ex.toString());
-      return null;
+      try {
+         doc = new DOM().parseFromString(kml);
+      } catch (ex) {
+         log.error(ex.toString());
+         return null;
+      }
+   } else {
+      doc = kml;
    }
    //const tracks = parseNodes(kml, 'trk', trackFromGPX);
    //const routes = parseNodes(kml, 'rte', routeFromGPX);
    const tracks:GeoJSON.Feature<GeoJSON.LineString>[] = [];
    const routes:GeoJSON.Feature<GeoJSON.LineString>[] = [];
-   const points = parseNodes(kml, 'Placemark', pointFromKML);
+   const points = parseNodes(doc, 'Placemark', pointFromKML);
 
    geo.features = geo.features.concat(tracks, routes, points);
 
