@@ -1,11 +1,7 @@
 const geoJSON = require('../../lib/map/geojson').default;
 const mocha = require('mocha');
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const stream = require('stream');
 const { expect } = require('chai');
-const google = require('../mocks/google.mock');
+const mock = require('../mocks/');
 const nl = require('os').EOL;
 
 /**
@@ -19,26 +15,10 @@ function expectGeoPoint(point) {
    return point;
 }
 
-/**
- * Use technique that supports large files
- * @param {string} name
- * @returns {Promise.<string>} File content
- */
-function loadMockFile(name) {
-   return new Promise(resolve => {
-      const input = fs.createReadStream(path.normalize(__dirname + '/../mocks/' + name));
-      const output = new stream();
-      const rl = readline.createInterface(input, output);
-      let file = '';
-      rl.on('line', line => file += line + nl);
-      rl.on('close', ()=> resolve(file));
-   });
-}
-
 describe('GeoJSON', ()=> {
    it('converts GPX files to GeoJSON', ()=> {
       const post = { key: 'whatever' };
-      return google.drive.loadGPX(post).then(geoJSON.featuresFromGPX).then(geo => {
+      return mock.google.drive.loadGPX(post).then(geoJSON.featuresFromGPX).then(geo => {
          expect(geo).to.exist;
          expect(geo).has.property('type', geoJSON.type.COLLECTION);
          expect(geo).has.property('features');
@@ -57,7 +37,7 @@ describe('GeoJSON', ()=> {
       });
    });
 
-   it.skip('converts KML files to GeoJSON', ()=> loadMockFile('mines.kml').then(kmlString => {
+   it.skip('converts KML files to GeoJSON', ()=> mock.loadFile('mines.kml').then(kmlString => {
       const kml = geoJSON.featuresFromKML(kmlString);
       expect(kml).to.exist;
    }));

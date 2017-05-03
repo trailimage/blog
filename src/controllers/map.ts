@@ -1,6 +1,7 @@
 import { Blog, Post, Provider } from '../types/';
 import is from '../is';
 import log from '../logger';
+import kml from '../map/kml';
 import fetch from 'node-fetch';
 import config from '../config';
 import geoJSON from '../map/geojson';
@@ -84,9 +85,10 @@ function postJSON(req:Blog.Request, res:Blog.Response) {
  */
 function mapSourceMines(req:Blog.Request, res:Blog.Response) {
    const opt = { headers: { 'User-Agent': 'node.js' }};
-   fetch(config.map.source.mines.url, opt).then(kml => {
-      if (kml.status == httpStatus.OK) {
-         kml.text()
+   fetch(config.map.source.mines.url, opt).then(kmz => {
+      if (kmz.status == httpStatus.OK) {
+
+         kmz.text()
             .then(geoJSON.featuresFromKML)
             .then(JSON.stringify)
             .then(geoText => {
@@ -107,7 +109,7 @@ function mapSourceMines(req:Blog.Request, res:Blog.Response) {
                res.internalError(err);
             });
       } else {
-         res.end(kml.status);
+         res.end(kmz.status);
       }
    });
 }

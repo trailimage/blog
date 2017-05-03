@@ -33,10 +33,10 @@
     "pdfkit": "^0.8.0",
     "redis": "^2.7.0",
     "uglify-js": "^2.8.0",
-    "unzipper": "^0.8.8",
     "winston": "^2.3.0",
     "winston-redis": "^1.0.0",
-    "xmldom": "^0.1.19"
+    "xmldom": "^0.1.19",
+    "yauzl": "^2.8.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.3",

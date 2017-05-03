@@ -1,8 +1,9 @@
 import is from '../is';
 import xml from './xml';
+import * as stream from 'stream';
 import { DOMParser as DOM } from 'xmldom';
 import index from './';
-//import * as unzipper from 'unzipper';
+import * as unzip from 'yauzl';
 
 /**
  * Return location as [latitude, longitude, elevation]
@@ -60,6 +61,15 @@ function parseDescription(properties:{[key:string]:string}):{[key:string]:string
 }
 
 /**
+ * Return KML content from KMZ file
+ */
+function fromKMZ(stream:stream.Readable):string {
+   stream.pipe(unzip.Parse());
+
+   return '';
+}
+
+/**
  * Properties of a KML node
  */
 function properties(node:Element, extras:string[] = []):{[key:string]:string} {
@@ -73,4 +83,4 @@ function properties(node:Element, extras:string[] = []):{[key:string]:string} {
    return parseDescription(properties);
 }
 
-export default { properties, location };
+export default { properties, location, fromKMZ };
