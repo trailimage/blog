@@ -46,6 +46,10 @@ function parseDescription(properties:MapProperties):MapProperties {
       }
 
       const tables = html.getElementsByTagName('table');
+      const clean = (text:string) => is.value(text)
+         ? text.replace(/[\r\n]/g, '').replace('&lt;Null&gt;', '').replace('<Null>', '')
+         : null;
+
       let most = 0;
       let index = -1;
 
@@ -62,7 +66,10 @@ function parseDescription(properties:MapProperties):MapProperties {
          const rows = tables[index].getElementsByTagName('tr');
          for (let i = 0; i < rows.length; i++) {
             const cols = rows[i].getElementsByTagName('td');
-            properties[xml.value(cols[0])] = util.number.maybe(xml.value(cols[1]));
+            const key = clean(xml.value(cols[0]));
+            const value = util.number.maybe(clean(xml.value(cols[1])));
+
+            if (key && value) { properties[key] = value; }
          }
          delete properties['description'];
       }

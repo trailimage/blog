@@ -4,6 +4,7 @@ import log from '../logger';
 //import kml from '../map/kml';
 import fetch from 'node-fetch';
 import config from '../config';
+import kml from '../map/kml';
 import geoJSON from '../map/geojson';
 import template from '../template';
 import library from '../library';
@@ -80,15 +81,13 @@ function postJSON(req:Blog.Request, res:Blog.Response) {
 
 /**
  * Retrieve and parse mines map source
- *
- * http://nodejs.org/api/zlib.html
  */
 function mapSourceMines(req:Blog.Request, res:Blog.Response) {
    const opt = { headers: { 'User-Agent': 'node.js' }};
    fetch(config.map.source.mines.url, opt).then(kmz => {
       if (kmz.status == httpStatus.OK) {
-
-         kmz.text()
+         kmz.buffer()
+            .then(kml.fromKMZ)
             .then(geoJSON.featuresFromKML)
             .then(JSON.stringify)
             .then(geoText => {

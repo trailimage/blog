@@ -19,7 +19,7 @@ export default {
    /** root domain name */
    domain: /[a-z0-9][a-z0-9\-]*[a-z0-9]\.[a-z\.]{2,6}$/i,
 
-   numeric: /^\d+(\.\d+)?$/,
+   numeric: /^\-?\d+(\.\d+)?$/,
 
    /**
     * Facebook album ID to be inserted into Enum.url.facebookAlbum. Examples:

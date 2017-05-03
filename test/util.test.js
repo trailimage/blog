@@ -173,6 +173,7 @@ describe('Utilities', ()=> {
       it('converts eligible strings to numbers', ()=> {
          expect(util.number.maybe('3.5')).equals(3.5);
          expect(util.number.maybe('3.5')).not.equals('3.5');
+         expect(util.number.maybe('-3.25')).equals(-3.25);
          expect(util.number.maybe('563')).equals(563);
          expect(util.number.maybe('asdfds')).equals('asdfds');
       });

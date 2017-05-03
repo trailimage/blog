@@ -18,6 +18,7 @@ describe('Patterns', ()=> {
 
    it('identifies numbers', ()=> {
       expect(re.numeric.test("1.3")).is.true;
+      expect(re.numeric.test(-26.36)).is.true;
       expect(re.numeric.test(".1.3")).is.false;
       expect(re.numeric.test("1.3654654654")).is.true;
       expect(re.numeric.test("1555553")).is.true;
