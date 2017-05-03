@@ -1,8 +1,9 @@
 import is from '../is';
 import xml from './xml';
-import * as stream from 'stream';
+//import * as stream from 'stream';
 import { DOMParser as DOM } from 'xmldom';
 import index from './';
+import log from '../logger';
 import * as unzip from 'yauzl';
 
 /**
@@ -25,7 +26,8 @@ function location(node:Element):number[] {
 }
 
 /**
- * Extract properties from description HTML table.
+ * Extract properties from description HTML table. This seems to be standard
+ * output format from ESRI systems.
  */
 function parseDescription(properties:{[key:string]:string}):{[key:string]:string} {
    if (/^<html/.test(properties.description)) {
@@ -61,12 +63,44 @@ function parseDescription(properties:{[key:string]:string}):{[key:string]:string
 }
 
 /**
- * Return KML content from KMZ file
+ * Return KML from KMZ file. Returns the first .kml file found in the archive.
  */
-function fromKMZ(stream:stream.Readable):string {
-   stream.pipe(unzip.Parse());
-
-   return '';
+function fromKMZ(data:Buffer):Promise<Document> {
+   return new Promise((resolve, reject) => {
+      unzip.fromBuffer(data, (err, zipFile) => {
+         zipFile.readEntry();
+         zipFile.on('entry', (entry:unzip.Entry) => {
+            if (/\.kml$/.test(entry.fileName)) {
+               zipFile.openReadStream(entry, (err, stream) => {
+                  let text = '';
+                  stream.on('end', ()=> {
+                     resolve(new DOM().parseFromString(text));
+                     //zipFile.close();
+                  });
+                  stream.on('error', (err:Error) => {
+                     // log error but continue iterating through entries
+                     log.error(err);
+                     zipFile.readEntry();
+                  });
+                  stream.on('data', buffer => {
+                     text += Buffer.isBuffer(buffer) ? buffer.toString() : buffer;
+                  });
+               });
+            } else {
+               // try the next file
+               zipFile.readEntry();
+            }
+         });
+         zipFile.on('end', ()=> {
+            reject('No readable KML found in archive');
+         });
+         zipFile.on('error', (err:Error) => {
+            if (!err.message.includes('central directory file header')) {
+               reject(err);
+            }
+         });
+      });
+   });
 }
 
 /**

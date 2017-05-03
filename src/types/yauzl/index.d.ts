@@ -1,13 +1,13 @@
-
-
-
-declare module YetAnotherUnzipLibrary {
-   interface Field {
+/**
+ * https://github.com/thejoshwolfe/yauzl
+ */
+declare module "yauzl" {
+   export interface Field {
       id:number;
       data:Buffer;
    }
 
-   interface Entry {
+   export interface Entry {
       versionMadeBy:number;
       versionNeededToExtract:number;
       generalPurposeBitFlag:number;
@@ -32,7 +32,7 @@ declare module YetAnotherUnzipLibrary {
       isCompressed():boolean;
    }
 
-   interface ZipFile extends NodeJS.EventEmitter {
+   export interface ZipFile extends NodeJS.EventEmitter {
       /**
        * Causes this `ZipFile` to emit an `entry` or `end` event (or an `error`
        * event). This method must only be called when this `ZipFile` was
@@ -51,11 +51,12 @@ declare module YetAnotherUnzipLibrary {
        * undefined behavior. Calling this method after calling `close()` will
        * cause undefined behavior.
        */
-      readEntry();
+      readEntry():void;
 
-      openReadStream(entry:Entry, options, callback?:Function);
+      openReadStream(entry:Entry, options:ReadOptions, callback?:EntryCallback):void;
+      openReadStream(entry:Entry, callback?:EntryCallback):void;
 
-      close();
+      close():void;
 
       isOpen:boolean;
    }
@@ -66,9 +67,18 @@ declare module YetAnotherUnzipLibrary {
     * indicates that this is not a zip file. Otherwise, `zipfile` is an
     * instance of `ZipFile`.
     */
-   type Callback = (err:Error, file:ZipFile) => void;
+   export type FileCallback = (err:Error, file:ZipFile) => void;
 
-   interface Options {
+   export type EntryCallback = (err:Error, stream:NodeJS.ReadableStream) => void;
+
+   export interface ReadOptions {
+      decompress?:boolean;
+      decrypt?:string;
+      start?:number;
+      end?:number;
+   }
+
+   export interface OpenOptions {
       autoClose?:boolean;
       /**
        * Whether entries should be read only when `readEntry()` is called. If
@@ -107,17 +117,6 @@ declare module YetAnotherUnzipLibrary {
        */
       validateEntrySizes?:boolean;
    }
-}
-
-declare interface YetAnotherUnzipLibrary {
-   open(path:string, options?:YetAnotherUnzipLibrary.Options, callback?:YetAnotherUnzipLibrary.Callback);
-
-   /**
-    * Reads from the fd, which is presumed to be an open .zip file. Note that
-    * random access is required by the zip file specification, so the fd cannot
-    * be an open socket or any other fd that does not support random access.
-    */
-   fromFd(file, options?:YetAnotherUnzipLibrary.Options, callback?:YetAnotherUnzipLibrary.Callback);
 
    /**
     * Like `fromFd()`, but reads from a RAM buffer instead of an open file.
@@ -125,7 +124,19 @@ declare interface YetAnotherUnzipLibrary {
     * it will never emit the close event, and calling `close()` is not
     * necessary.
     */
-   fromBuffer(buffer:Buffer, options?:YetAnotherUnzipLibrary.Options, callback?:YetAnotherUnzipLibrary.Callback);
+   function fromBuffer(buffer:Buffer, options?:OpenOptions, callback?:FileCallback):void;
+   function fromBuffer(buffer:Buffer, callback?:FileCallback):void;
+
+   function open(path:string, options?:OpenOptions, callback?:FileCallback):void;
+   function open(path:string, callback?:FileCallback):void;
+
+   /**
+    * Reads from the fd, which is presumed to be an open .zip file. Note that
+    * random access is required by the zip file specification, so the fd cannot
+    * be an open socket or any other fd that does not support random access.
+    */
+   function fromFd(file:any, options?:OpenOptions, callback?:FileCallback):void;
+   function fromFd(file:any, callback?:FileCallback):void;
    
    /**
     * Returns `null` or a `String` error message depending on the validity of
@@ -133,12 +144,5 @@ declare interface YetAnotherUnzipLibrary {
     * contains `".."` path segments or `"\\"`, this function returns an error
     * message.
     */
-   validateFileName(fileName:string):string
-}
-
-/**
- * https://github.com/thejoshwolfe/yauzl
- */
-declare module 'yauzl' {
-   export = YetAnotherUnzipLibrary;
+   function validateFileName(fileName:string):string
 }

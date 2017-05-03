@@ -1,7 +1,7 @@
 import { Blog, Post, Provider } from '../types/';
 import is from '../is';
 import log from '../logger';
-import kml from '../map/kml';
+//import kml from '../map/kml';
 import fetch from 'node-fetch';
 import config from '../config';
 import geoJSON from '../map/geojson';
