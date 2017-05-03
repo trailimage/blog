@@ -33,7 +33,7 @@ function mapSourceRoutes():Express.Router {
 
 function postRoutes(photoID:string):Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', ctrl.post.latest);
+   r.get('/', ctrl.post.withKey);
    //r.get('/pdf', c.pdf);
    r.get('/map', ctrl.map.post);
    r.get('/gpx', ctrl.map.gpx);
