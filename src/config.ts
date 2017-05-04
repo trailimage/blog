@@ -3,7 +3,7 @@ import mapsource from './mapsource';
 import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';
-const isProduction = process.env['NODE_ENV'] === 'production';
+const isProduction = true; //process.env['NODE_ENV'] === 'production';
 /** Preferred photo sizes */
 const sizes = {
    thumb: s.SQUARE_150,

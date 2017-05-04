@@ -4,7 +4,7 @@ import config from './config';
 import { logTo, time, month, weekday } from './constants';
 import * as URL from 'url';
 import * as Winston from 'winston';
-import * as RedisTx from 'winston-redis';
+import { Redis as RedisTx } from 'winston-redis';
 
 /**
  * Whether log provider can be queried
@@ -17,6 +17,9 @@ const level = {
    WARN: 'warn',
    ERROR: 'error'
 };
+
+// const RedisTx = require('winston-redis').Redis;
+// const tx = new RedisTx({
 
 let logger:Winston.LoggerInstance = null;
 

@@ -1,4 +1,7 @@
-declare namespace WinstonRedis {
+/**
+ * https://github.com/winstonjs/winston-redis
+ */
+declare module "winston-redis" {
    interface Options {
        host:string;
        port:string;
@@ -6,14 +9,8 @@ declare namespace WinstonRedis {
        auth:string;
        length:number;
    }
-}
-declare class WinstonRedis {
-   constructor(options:WinstonRedis.Options);
-}
 
-/**
- * https://github.com/winstonjs/winston-redis
- */
-declare module "winston-redis" {
-   export = WinstonRedis;
+   export class Redis {
+      constructor(options:Options);
+   }
 }
