@@ -167,7 +167,7 @@ function enableStatusHelpers(req:Blog.Request, res:Blog.Response, next:Function)
 }
 
 /**
- * Express middleware: add response methods to cache and compress output
+ * Express middleware: add response methods to cache and compress output.
  */
 function enableViewCache(req:Blog.Request, res:Blog.Response, next:Function) {
    res.sendView = (key:string, options:Blog.RenderOptions) => {
@@ -203,7 +203,7 @@ function enableViewCache(req:Blog.Request, res:Blog.Response, next:Function) {
 }
 
 /**
- * Send content if it's cached otherwise generate with callback
+ * Send content if it's cached otherwise generate with callback.
  */
 function sendFromCacheOrRender(res:Blog.Response, slug:string, options:Blog.RenderOptions) {
    // prepare fallback method to generate content depending on
@@ -233,7 +233,8 @@ function sendFromCacheOrRender(res:Blog.Response, slug:string, options:Blog.Rend
 }
 
 /**
- * Render or generate content dependong on type then compress and cache output
+ * Render or generate content depending on its type then compress and cache
+ * output.
  */
 function renderForType(res:Blog.Response, slug:string, options:Blog.RenderOptions) {
    if (options.mimeType === mimeType.JSON) {
@@ -243,7 +244,7 @@ function renderForType(res:Blog.Response, slug:string, options:Blog.RenderOption
       // pass view renderer back to generator function to execute
       options.callback(renderTemplate(res, slug, options.mimeType));
    } else {
-      // invoke renderer directly, assuming view name identical to slug
+      // invoke renderer directly assuming view name identical to slug
       const render = renderTemplate(res, slug, options.mimeType);
       render(slug, options.templateValues);
    }
@@ -251,7 +252,7 @@ function renderForType(res:Blog.Response, slug:string, options:Blog.RenderOption
 
 /**
  * Curry standard function to render the view identified by the slug then
- * compress and cache it
+ * compress and cache it.
  */
 function renderTemplate(res:Blog.Response, slug:string, type:string):Blog.Renderer {
    return (view:string, options:{[key:string]:any}, postProcess?:Function) => {
@@ -274,7 +275,7 @@ function renderTemplate(res:Blog.Response, slug:string, type:string):Blog.Render
 }
 
 /**
- * Compress, cache and send content to client
+ * Compress, cache and send content to client.
  */
 function cacheAndSend(res:Blog.Response, html:string, slug:string, type:string) {
    cache.view.add(slug, html)

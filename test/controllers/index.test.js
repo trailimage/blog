@@ -2,6 +2,7 @@ const C = require('../../lib/constants').default;
 const cache = require('../../lib/cache').default;
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
+const config = require('../../lib/config').default;
 const middleware = require('../../lib/middleware').default;
 const factory = require('../../lib/factory').default;
 const mocha = require('mocha');
@@ -59,6 +60,7 @@ function expectInCache(keys, exists = true) {
  * @param {function} done
  */
 function prepare(done) {
+   config.testing = true;
    factory.inject.flickr = require('../mocks/flickr.mock');
    factory.inject.google = require('../mocks/google.mock');
    factory.buildLibrary().then(() => {

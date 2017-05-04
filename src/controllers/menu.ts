@@ -3,13 +3,17 @@ import config from '../config';
 import { layout, page } from '../template';
 import library from '../library';
 import { mimeType } from '../constants';
-// https://npmjs.org/package/uglify-js
 import * as uglify from 'uglify-js';
 
+/**
+ * Minify menu JSON for production. Set `config.testing = true` if testing
+ * with the production flag enabled to avoid uglifying the mock response.
+ *
+ * https://npmjs.org/package/uglify-js
+ */
 function data(req:Blog.Request, res:Blog.Response)  {
    const slug = page.POST_MENU_DATA;
-   // minify menu JSON for live site
-   const postProcess = config.isProduction
+   const postProcess = (config.isProduction && !config.testing)
       ? (text:string) => uglify.minify(text, { fromString: true }).code
       : null;
 

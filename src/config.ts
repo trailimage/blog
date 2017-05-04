@@ -3,7 +3,7 @@ import mapsource from './mapsource';
 import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';
-const isProduction = true; //process.env['NODE_ENV'] === 'production';
+const isProduction = process.env['NODE_ENV'] === 'production';
 /** Preferred photo sizes */
 const sizes = {
    thumb: s.SQUARE_150,
@@ -136,6 +136,13 @@ export default {
    },
    proxy: process.env['HTTPS_PROXY'] as string,
    timestamp: new Date().getTime(),
+   /**
+    * Whether site is running tests. This is only needed in a few particular
+    * cases, such as setting the `isProduction` flag while using response
+    * mocks, so set directly as needed rather than with an environment
+    * variable.
+    */
+   testing: false,
    isProduction: isProduction,
    /** Whether to use wwwhisper authentication (https://devcenter.heroku.com/articles/wwwhisper) */
    usePersona: process.env['WWWHISPER_DISABLE'] !== '1',

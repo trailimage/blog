@@ -3,7 +3,12 @@ import re from '../regex';
 import * as url from 'url';
 
 /**
- * Replace placeholders with arbitrary arguments
+ * Replace numerical, bracketed placeholders with arbitrary arguments. The same
+ * value can be substituted in more than one position. Example:
+ *
+ *    format('I like {0}, {1} and {0}', 'chocolate', 'peanut butter');
+ *
+ * Note the logger uses `printf` syntax instead.
  */
 export function format(text:string, ...insertions:(string|number)[]):string {
    for (let i = 0; i < insertions.length; i++) {
@@ -16,7 +21,7 @@ export const capitalize = (text:string) =>
    is.empty(text) ? '' : text.substr(0, 1).toUpperCase() + text.substr(1).toLowerCase();
 
 /**
- * Capitalize words
+ * Capitalize individual words.
  */
 export const properCase = (text:string) => is.empty(text) ? '' : text
    .replace('', '');
@@ -33,7 +38,7 @@ export const slug = (text:string) => is.empty(text)
       .replace(/[^\-a-z0-9]/g, '');
 
 /**
- * Remove IPv6 prefix from transitional addresses
+ * Remove IPv6 prefix from transitional addresses.
  *
  * https://en.wikipedia.org/wiki/IPv6_address
  */
@@ -54,7 +59,7 @@ export const rot13 = (text:string) =>
    });
 
 /**
- * Infer top level domain from URL
+ * Infer top level domain from URL.
  *
  * https://github.com/igormilla/top-domain
  */

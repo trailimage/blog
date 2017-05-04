@@ -1,12 +1,17 @@
-// Handlebars templates
 import util from './util/';
 import config from './config';
 
+/**
+ * Handlebars layouts.
+ */
 export const layout = {
    MAIN: 'layouts/default-layout',
    NONE: null as string
 };
 
+/**
+ * Handlebars page templates.
+ */
 export const page = {
    NOT_FOUND: 'error/404',
    INTERNAL_ERROR: 'error/500',
