@@ -38,17 +38,25 @@ describe('GeoJSON', ()=> {
       });
    });
 
-   it.skip('converts KML files to GeoJSON', ()=> mock.loadFile('mines.kmz')
-      .then(kml.fromKMZ)
-      .then(geoJSON.featuresFromKML)
-      .then(geo => {
-         expect(geo).to.exist;
-         expect(geo).has.property('type', geoJSON.type.COLLECTION);
-         expect(geo).has.property('features');
-         expect(geo.features).is.instanceOf(Array);
-         expect(geo.features).is.lengthOf(8843);
-         expect(geo.features[0]).has.property('properties');
-         expect(geo.features[0].properties).has.property('DMSLAT', 443312);
-      })
-   ); //.timeout(10000);
+   it.skip('converts KML files to GeoJSON', ()=> Promise.all([
+      mock.loadFile('mines.kmz')
+         .then(kml.fromKMZ)
+         .then(geoJSON.featuresFromKML)
+         .then(geo => {
+            expect(geo).to.exist;
+            expect(geo).has.property('type', geoJSON.type.COLLECTION);
+            expect(geo).has.property('features');
+            expect(geo.features).is.instanceOf(Array);
+            expect(geo.features).is.lengthOf(8843);
+            expect(geo.features[0]).has.property('properties');
+            expect(geo.features[0].properties).has.property('DMSLAT', 443312);
+         }),
+
+      mock.loadFile('atv.kmz')
+         .then(kml.fromKMZ)
+         .then(geoJSON.featuresFromKML)
+         .then(geo => {
+            expect(geo).to.exist;
+         })
+   ])); //.timeout(15000);
 });

@@ -4,28 +4,58 @@ import xml from './xml';
 //import * as stream from 'stream';
 import { DOMParser as DOM } from 'xmldom';
 import index from './';
-import log from '../logger';
 import util from '../util';
-import * as unzip from 'yauzl';
+import * as JSZip from 'jszip';
+
+/**
+ * Coordinate values. Example:
+ *
+ *    -113.2924677415256,44.70498119901985,0 -113.2924051073907,44.70509329841001,0 -113.2922923580428,44.70527906358436,0
+ */
+function coordinates(node:Element, name:string):number[][] {
+   const geothing = xml.firstNode(node, name);
+
+   if (geothing != null) {
+      const coordinates = xml.firstValue(geothing, 'coordinates');
+
+      if (coordinates != null) {
+         const locations:number[][] = [];
+         const points = coordinates.trim().split(' ');
+
+         points.forEach(p => {
+            const location:number[] = new Array(3);
+            const parts = p.split(',').map(parseFloat);
+
+            if (parts.length >= 2) {
+               location[index.LON] = parts[0];
+               location[index.LAT] = parts[1];
+
+               if (parts.length >= 3) {
+                  location[index.ELEVATION] = parts[2];
+               }
+               locations.push(location);
+            }
+         });
+
+         return locations.length > 0 ? locations : null;
+      }
+   }
+
+   return null;
+}
 
 /**
  * Return location as [latitude, longitude, elevation]
  */
 function location(node:Element):number[] {
-   const location = new Array(3);
-   const point = xml.firstNode(node, 'Point');
-
-   if (point != null) {
-      const coordinates = xml.firstValue(point, 'coordinates');
-      if (coordinates != null) {
-         const parts = coordinates.split(',').map(parseFloat);
-         location[index.LON] = parts[0];
-         location[index.LAT] = parts[1];
-         location[index.ELEVATION] = parts[2];
-      }
-   }
-   return location;
+   const locations = coordinates(node, 'Point');
+   return locations == null ? null : locations[0];
 }
+
+/**
+ * Get array of point arrays.
+ */
+export const line = (node:Element):number[][] => coordinates(node, 'LineString');
 
 /**
  * Extract properties from description HTML table. This seems to be standard
@@ -69,7 +99,9 @@ function parseDescription(properties:MapProperties):MapProperties {
             const key = clean(xml.value(cols[0]));
             const value = util.number.maybe(clean(xml.value(cols[1])));
 
-            if (key && value) { properties[key] = value; }
+            if (key && value) {
+               properties[key.replace(' ', '_')] = value;
+            }
          }
          delete properties['description'];
       }
@@ -82,45 +114,21 @@ function parseDescription(properties:MapProperties):MapProperties {
  */
 function fromKMZ(data:Buffer):Promise<Document> {
    return new Promise((resolve, reject) => {
-      unzip.fromBuffer(data, (err, zipFile) => {
-         zipFile.readEntry();
-         zipFile.on('entry', (entry:unzip.Entry) => {
-            if (/\.kml$/.test(entry.fileName)) {
-               zipFile.openReadStream(entry, (err, stream) => {
-                  let text = '';
-                  stream.on('end', ()=> {
-                     const dom = new DOM({
-                        // per docs but not working
-                        errorHandler: { warning: (msg:string) => { /** do nothing */ } }
-                     });
-                     try {
-                        resolve(dom.parseFromString(text));
-                     } catch (ex) {
-                        reject(ex);
-                     }
-                  });
-                  stream.on('error', (err:Error) => {
-                     // log error but continue iterating through entries
-                     log.error(err);
-                     zipFile.readEntry();
-                  });
-                  stream.on('data', (buffer:Buffer|string) => {
-                     text += Buffer.isBuffer(buffer) ? buffer.toString() : buffer;
-                  });
+      const zip = new JSZip();
+      zip.loadAsync(data).then(archive => {
+         for (const name in archive.files) {
+            if (name.endsWith('.kml')) {
+               archive.files[name].async('string').then(text => {
+                  try {
+                     resolve(new DOM().parseFromString(text));
+                  } catch (ex) {
+                     reject(ex);
+                  }
                });
-            } else {
-               // try the next file
-               zipFile.readEntry();
+               return;
             }
-         });
-         zipFile.on('end', ()=> {
-            reject('No readable KML found in archive');
-         });
-         zipFile.on('error', (err:Error) => {
-            if (!err.message.includes('central directory file header')) {
-               reject(err);
-            }
-         });
+         }
+         reject('No readable KML found in archive');
       });
    });
 }
@@ -139,4 +147,4 @@ function properties(node:Element, extras:string[] = []):MapProperties {
    return parseDescription(properties);
 }
 
-export default { properties, location, fromKMZ, parseDescription };
+export default { properties, location, line, fromKMZ, parseDescription };

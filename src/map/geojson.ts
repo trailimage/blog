@@ -81,11 +81,22 @@ const pointFromGPX = (node:Element) => ({
    geometry: geometry(type.POINT, gpx.location(node))
 }  as GeoJSON.Feature<GeoJSON.Point>);
 
-const pointFromKML = (node:Element) => ({
-   type: type.FEATURE,
-   properties: kml.properties(node, ['sym']),
-   geometry: geometry(type.POINT, kml.location(node))
-}  as GeoJSON.Feature<GeoJSON.Point>);
+function pointFromKML(node:Element) {
+   const location = kml.location(node);
+   return (location == null) ? null : {
+      type: type.FEATURE,
+      properties: kml.properties(node, ['sym']),
+      geometry: geometry(type.POINT, location)
+   }  as GeoJSON.Feature<GeoJSON.Point>;
+}
+
+function routeFromKML(node:Element) {
+   const line = kml.line(node);
+   return (line == null) ? null : {
+      properties: kml.properties(node),
+      geometry: geometry(type.LINE, line)
+   }  as GeoJSON.Feature<GeoJSON.LineString>;
+}
 
 /**
  * Create GeoJSON from GPX string
@@ -146,7 +157,9 @@ function parseNodes<T extends GeoJSON.GeometryObject>(
 }
 
 /**
- * Convert KML to GeoJSON
+ * Convert KML to GeoJSON. KML places lines and points in the same `Placemark`
+ * node, only differentiated by whether they have `Point` or `LineString`
+ * members.
  */
 const featuresFromKML = (kml:string|Document) => {
    const geo = features();
@@ -164,10 +177,10 @@ const featuresFromKML = (kml:string|Document) => {
    } else {
       doc = kml;
    }
-   //const tracks = parseNodes(kml, 'trk', trackFromGPX);
-   //const routes = parseNodes(kml, 'rte', routeFromGPX);
+
    const tracks:GeoJSON.Feature<GeoJSON.LineString>[] = [];
-   const routes:GeoJSON.Feature<GeoJSON.LineString>[] = [];
+   //const routes:GeoJSON.Feature<GeoJSON.LineString>[] = [];
+   const routes = parseNodes(doc, 'Placemark', routeFromKML);
    const points = parseNodes(doc, 'Placemark', pointFromKML);
 
    geo.features = geo.features.concat(tracks, routes, points);
