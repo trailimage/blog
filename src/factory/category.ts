@@ -1,7 +1,7 @@
 import { Category, Post, Flickr } from '../types/';
 import is from '../is';
 import post from './post';
-import util from '../util';
+import { slug } from '../util/text';
 import config from '../config';
 import library from '../library';
 
@@ -56,7 +56,7 @@ function make(collection:Flickr.Collection, root = false):Category {
    const feature = config.flickr.featureSets;
    const category:Category = {
       title: collection.title,
-      key: util.slug(collection.title),
+      key: slug(collection.title),
       subcategories: [] as Category[],
       posts: [] as Post[],
       get isChild() { return this.key.includes('/'); },

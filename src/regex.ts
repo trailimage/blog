@@ -16,9 +16,10 @@ export default {
    ipAddress: /\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b/,
    url: /(http:\/\/[^\s\r\n]+)/g,
 
-   /** root domain name */
+   /** Root domain name */
    domain: /[a-z0-9][a-z0-9\-]*[a-z0-9]\.[a-z\.]{2,6}$/i,
 
+   /** Digits and separators parselable as a number */
    numeric: /^\-?\d+(\.\d+)?$/,
 
    /**

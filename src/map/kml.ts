@@ -4,11 +4,12 @@ import xml from './xml';
 //import * as stream from 'stream';
 import { DOMParser as DOM } from 'xmldom';
 import index from './';
-import util from '../util';
+import util from '../util/';
 import * as JSZip from 'jszip';
 
 /**
- * Coordinate values. Example:
+ * Coordinate values. In KML these are space-separated, comma-delimited points.
+ * Example:
  *
  *    -113.2924677415256,44.70498119901985,0 -113.2924051073907,44.70509329841001,0 -113.2922923580428,44.70527906358436,0
  */
@@ -45,7 +46,8 @@ function coordinates(node:Element, name:string):number[][] {
 }
 
 /**
- * Return location as [latitude, longitude, elevation]
+ * Return location as `[latitude, longitude, elevation]` or null if the element
+ * contains no coordinates.
  */
 function location(node:Element):number[] {
    const locations = coordinates(node, 'Point');
@@ -53,9 +55,12 @@ function location(node:Element):number[] {
 }
 
 /**
- * Get array of point arrays.
+ * Get array of point arrays or null if the element contains no coordinates.
  */
-export const line = (node:Element):number[][] => coordinates(node, 'LineString');
+function line(node:Element):number[][] {
+   const l = coordinates(node, 'LineString');
+   return l == null || l.length == 0 ? null : l;
+}
 
 /**
  * Extract properties from description HTML table. This seems to be standard
@@ -110,7 +115,8 @@ function parseDescription(properties:MapProperties):MapProperties {
 }
 
 /**
- * Return KML from KMZ file. Returns the first .kml file found in the archive.
+ * Return KML from KMZ file. Returns the first .kml file found in the archive
+ * which should be doc.kml.
  */
 function fromKMZ(data:Buffer):Promise<Document> {
    return new Promise((resolve, reject) => {
@@ -137,7 +143,7 @@ function fromKMZ(data:Buffer):Promise<Document> {
  * Properties of a KML node
  */
 function properties(node:Element, extras:string[] = []):MapProperties {
-   const names = extras.concat(['name', 'description']); // styleUrl,
+   const names = extras.concat(['name', 'description']);
    const properties:MapProperties = {};
 
    for (const key of names) {

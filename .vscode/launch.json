@@ -48,7 +48,7 @@
          //"args": ["test/**/*.js", "--no-timeouts"]
          //"args": ["test/factory/*", "--no-timeouts"]
          //"args": ["test/map/geojson*", "--no-timeouts"]
-         "args": ["test/map/geo*", "--no-timeouts"]
+         "args": ["test/controllers/menu*", "--no-timeouts"]
       },
       {
          "name": "Gulp",

@@ -2,7 +2,7 @@ import { Blog, Category } from '../types/';
 import is from '../is';
 import ld from '../json-ld';
 import config from '../config';
-import util from '../util';
+import util from '../util/';
 import template from '../template';
 import library from '../library';
 import { route as ph } from '../constants';

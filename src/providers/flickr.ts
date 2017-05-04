@@ -2,7 +2,7 @@ import { Flickr, Provider, Token } from '../types';
 import config from '../config';
 import log from '../logger';
 import is from '../is';
-import util from '../util';
+import util from '../util/';
 import cache from '../cache/api';
 import fetch from 'node-fetch';
 import { OAuth } from 'oauth';

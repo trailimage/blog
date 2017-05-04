@@ -2,7 +2,7 @@ import { Blog, Cache, JsonResponse } from './types/';
 import is from './is';
 import log from './logger';
 import config from './config';
-import util from './util';
+import util from './util/';
 import cache from './cache';
 import { header, httpStatus, mimeType, encoding } from './constants';
 import fetch from 'node-fetch';

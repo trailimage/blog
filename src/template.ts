@@ -1,5 +1,5 @@
 // Handlebars templates
-import util from './util';
+import util from './util/';
 import config from './config';
 
 export const layout = {

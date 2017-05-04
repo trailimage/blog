@@ -1,5 +1,5 @@
 import is from './is';
-import util from './util';
+import util from './util/';
 import config from './config';
 import { logTo, time, month, weekday } from './constants';
 import * as URL from 'url';

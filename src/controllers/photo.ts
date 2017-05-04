@@ -1,7 +1,7 @@
 import { Blog } from '../types/';
 import is from '../is';
 import config from '../config';
-import util from '../util';
+import util from '../util/';
 import template from '../template';
 import library from '../library';
 import { route as ph, alphabet } from '../constants';

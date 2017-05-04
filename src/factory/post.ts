@@ -1,5 +1,6 @@
 import { Post, Photo, Flickr, Provider } from '../types/';
-import util from '../util';
+import { slug } from '../util/text';
+import { fromTimeStamp } from '../util/time';
 import is from '../is';
 import re from '../regex';
 import log from '../logger';
@@ -19,7 +20,7 @@ let flickr = realFlickr;
 function ungroup(this:Post) {
    this.title = this.originalTitle;
    this.subTitle = null;
-   this.key = util.slug(this.originalTitle);
+   this.key = slug(this.originalTitle);
    this.part = 0;
    this.totalParts = 0;
    this.isSeriesStart = false;
@@ -70,8 +71,8 @@ function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
    return Object.assign(p, {
       // removes video information from setInfo.description
       video: videoInfo.make(setInfo),
-      createdOn: util.date.fromTimeStamp(setInfo.date_create),
-      updatedOn: util.date.fromTimeStamp(setInfo.date_update),
+      createdOn: fromTimeStamp(setInfo.date_create),
+      updatedOn: fromTimeStamp(setInfo.date_update),
       photoCount: setInfo.photos,
       description: setInfo.description._content.replace(/[\r\n\s]*$/, ''),
       // long description is updated after photos are loaded
@@ -259,11 +260,11 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
 
    if (parts.length > 1) {
       p.subTitle = parts[1];
-      p.seriesKey = util.slug(p.title);
-      p.partKey = util.slug(p.subTitle);
+      p.seriesKey = slug(p.title);
+      p.partKey = slug(p.subTitle);
       p.key = p.seriesKey + '/' + p.partKey;
    } else {
-      p.key = util.slug(p.originalTitle);
+      p.key = slug(p.originalTitle);
    }
    return p;
 }

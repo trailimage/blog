@@ -1,7 +1,7 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
 const config = require('../lib/config').default;
-const util = require('../lib/util').default;
+const util = require('../lib/util/').default;
 const { lipsum } = require('./mocks/');
 let u;   // undefined
 
@@ -72,10 +72,10 @@ describe('Utilities', ()=> {
       });
 
       it('substitutes nicer typography', ()=> {
-         expect(util.typography(u)).is.empty;
-         expect(util.typography('')).is.empty;
-         expect(util.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
-         expect(util.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
+         expect(util.html.typography(u)).is.empty;
+         expect(util.html.typography('')).is.empty;
+         expect(util.html.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
+         expect(util.html.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
       });
 
       it('fixes malformed links and URL decode text', ()=> {

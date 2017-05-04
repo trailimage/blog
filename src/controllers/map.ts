@@ -91,7 +91,7 @@ function source(req:Blog.Request, res:Blog.Response) {
    if (!is.value<MapSource>(s)) { return res.notFound(); }
 
    // for now hardcoded to KMZ
-   const parser = fetchKMZ;
+   const parser = fetchKMZ(s.provider);
 
    fetch(s.url, { headers: { 'User-Agent': 'node.js' }}).then(reply => {
       if (reply.status == httpStatus.OK) {
@@ -120,10 +120,16 @@ function source(req:Blog.Request, res:Blog.Response) {
    });
 }
 
-function fetchKMZ(res:Response):Promise<GeoJSON.FeatureCollection<any>> {
-   return res.buffer().then(kml.fromKMZ).then(geoJSON.featuresFromKML);
-}
+/**
+ * Curried method to capture `sourceName` used in the GeoJSON conversion to
+ * load any custom transformations.
+ */
+const fetchKMZ = (sourceName:string) => (res:Response) =>
+   res.buffer().then(kml.fromKMZ).then(geoJSON.featuresFromKML(sourceName));
 
+/**
+ * Initiate GPX download for a post.
+ */
 function gpx(req:Blog.Request, res:Blog.Response) {
    const post = config.map.allowDownload ? library.postWithKey(req.params[ph.POST_KEY]) : null;
 
