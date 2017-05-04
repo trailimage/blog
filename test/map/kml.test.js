@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const mock = require('../mocks/');
 
 describe('KML', ()=> {
-   it.skip('extracts KML from KMZ', ()=> mock.loadFile('mines.kmz')
+   it('extracts KML from KMZ', ()=> mock.loadFile('atv.kmz')
       .then(kml.fromKMZ)
       .then(doc => { expect(doc).to.exist; })
    ); //.timeout(10000);

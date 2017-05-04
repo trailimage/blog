@@ -4,14 +4,14 @@ export default {
    mines: {
       name: '',
       provider: 'Idaho Geological Survey',
-      url: 'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz',
+      url: 'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz'
    },
    atv: {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/ATV.kmz'
    },
-   atvSeasonal: {
+   'atv-seasonal': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/ATV_Seasonal.kmz'
@@ -21,7 +21,7 @@ export default {
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Automobile.kmz'
    },
-   automobileSeasonal: {
+   'automobile-seasonal': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Automobile_Seasonal.kmz'
@@ -31,7 +31,7 @@ export default {
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Highway_Legal.kmz'
    },
-   highwaySeasonal: {
+   'highway-seasonal': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Highway_Legal_Seasonal.kmz'
@@ -41,7 +41,7 @@ export default {
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Jeep.kmz'
    },
-   jeepSeasonal: {
+   'jeep-seasonal': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Jeep_Seasonal.kmz'
@@ -51,17 +51,17 @@ export default {
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Motorcycle.kmz'
    },
-   motorcycleSeasonal: {
+   'motorcycle-seasonal': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Motorcycle_Seasonal.kmz'
    },
-   nonMotorized: {
+   'non-motorized': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Nonmotorized.kmz'
    },
-   otherRoads: {
+   'other-roads': {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Other_Road.kmz'

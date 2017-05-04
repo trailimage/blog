@@ -1,8 +1,7 @@
-import { Blog, Post, Provider } from '../types/';
+import { Blog, Post, Provider, MapSource } from '../types/';
 import is from '../is';
 import log from '../logger';
-//import kml from '../map/kml';
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 import config from '../config';
 import kml from '../map/kml';
 import geoJSON from '../map/geojson';
@@ -80,15 +79,23 @@ function postJSON(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * Retrieve and parse mines map source
+ * Retrieve and parse a map source
  */
-function mapSourceMines(req:Blog.Request, res:Blog.Response) {
-   const opt = { headers: { 'User-Agent': 'node.js' }};
-   fetch(config.map.source.mines.url, opt).then(kmz => {
-      if (kmz.status == httpStatus.OK) {
-         kmz.buffer()
-            .then(kml.fromKMZ)
-            .then(geoJSON.featuresFromKML)
+function source(req:Blog.Request, res:Blog.Response) {
+   const key:string = req.params[ph.MAP_SOURCE];
+
+   if (!is.text(key)) { return res.notFound(); }
+
+   const s = config.map.source[key.replace('.json', '')];
+
+   if (!is.value<MapSource>(s)) { return res.notFound(); }
+
+   // for now hardcoded to KMZ
+   const parser = fetchKMZ;
+
+   fetch(s.url, { headers: { 'User-Agent': 'node.js' }}).then(reply => {
+      if (reply.status == httpStatus.OK) {
+         parser(reply)
             .then(JSON.stringify)
             .then(geoText => {
                compress.gzip(Buffer.from(geoText), (err:Error, buffer:Buffer) => {
@@ -98,7 +105,7 @@ function mapSourceMines(req:Blog.Request, res:Blog.Response) {
                      res.setHeader(header.content.ENCODING, encoding.GZIP);
                      res.setHeader(header.CACHE_CONTROL, 'max-age=86400, public');    // seconds
                      res.setHeader(header.content.TYPE, mimeType.JSON + ';charset=utf-8');
-                     res.setHeader(header.content.DISPOSITION, `attachment; filename=mines.json`);
+                     res.setHeader(header.content.DISPOSITION, `attachment; filename=${key}`);
                      res.write(buffer);
                      res.end();
                   }
@@ -108,9 +115,13 @@ function mapSourceMines(req:Blog.Request, res:Blog.Response) {
                res.internalError(err);
             });
       } else {
-         res.end(kmz.status);
+         res.end(reply.status);
       }
    });
+}
+
+function fetchKMZ(res:Response):Promise<GeoJSON.FeatureCollection<any>> {
+   return res.buffer().then(kml.fromKMZ).then(geoJSON.featuresFromKML);
 }
 
 function gpx(req:Blog.Request, res:Blog.Response) {
@@ -135,9 +146,7 @@ export default {
       blog: blogJSON,
       post: postJSON
    },
-   source: {
-      mines: mapSourceMines
-   },
+   source,
    // inject different data providers
    inject: {
       set google(g:Provider.Google) { google = g; }

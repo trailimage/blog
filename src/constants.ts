@@ -50,6 +50,9 @@ export const header = {
    REQUESTED_WITH: 'X-Requested-With',
    USER_AGENT: 'user-agent'
 };
+
+export enum MapDataType { KMZ, KML, GeoJSON }
+
 export const httpStatus = {
    OK: 200,
    TEMP_REDIRECT: 301,
@@ -93,6 +96,7 @@ export const route = {
    POST_KEY: 'postKey',
    ROOT_CATEGORY: 'rootCategory',
    SERIES_KEY: 'seriesKey',
+   MAP_SOURCE: 'mapSource',
    YEAR: 'year'
 };
 

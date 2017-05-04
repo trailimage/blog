@@ -1,6 +1,8 @@
 // Writing definition files:
 // https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 
+import { MapDataType } from '../constants';
+
 export { Flickr } from '../providers/flickr.d';
 export { Cache } from '../cache/cache';
 export { Provider, Token } from '../providers/providers';
@@ -24,6 +26,7 @@ export {
 export interface MapSource {
    name:string;
    provider:string;
+   type?:MapDataType;
    url:string;
 }
 

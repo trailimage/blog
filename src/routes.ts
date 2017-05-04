@@ -22,15 +22,6 @@ function adminRoutes() {
    return r;
 }
 
-/**
- * Download and transform map layers from third-party sources
- */
-function mapSourceRoutes():Express.Router {
-   const r = Express.Router(keepParams);
-   r.get('/mines.json', ctrl.map.source.mines);
-   return r;
-}
-
 function postRoutes(photoID:string):Express.Router {
    const r = Express.Router(keepParams);
    r.get('/', ctrl.post.withKey);
@@ -69,7 +60,7 @@ function categoryRoutes():Express.Router {
 }
 
 /**
- * Standard routes
+ * Standard routes. Regular expressions must match the full string.
  *
  * http://expressjs.com/en/4x/api.html
  * http://expressjs.com/en/guide/routing.html
@@ -101,6 +92,7 @@ function standard(app:Express.Application) {
    // the latest posts
    app.get('/', ctrl.category.home);
    app.get('/map', ctrl.map.blog);
+   app.get(`/map/source/:${ph.MAP_SOURCE}([a-z\-]+\.json$)`, ctrl.map.source);
    app.get('/geo.json', ctrl.map.json.blog);
    app.get('/rss', ctrl.rss);
    app.get('/about', ctrl.about);
@@ -118,7 +110,6 @@ function standard(app:Express.Application) {
    // old blog links with format /YYYY/MM/slug
    //app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.date);
    app.use('/photo-tag', photoTagRoutes());
-   app.use('/map/source', mapSourceRoutes());
    app.get(`/${photoID}`, ctrl.post.withPhoto);
    app.get(`/${postID}`, ctrl.post.withID);
    app.get(`/${postID}/${photoID}`, ctrl.post.withID);
