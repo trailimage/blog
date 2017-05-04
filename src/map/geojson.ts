@@ -93,6 +93,7 @@ function pointFromKML(node:Element) {
 function routeFromKML(node:Element) {
    const line = kml.line(node);
    return (line == null) ? null : {
+      type: type.FEATURE,
       properties: kml.properties(node),
       geometry: geometry(type.LINE, line)
    }  as GeoJSON.Feature<GeoJSON.LineString>;
