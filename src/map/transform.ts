@@ -1,4 +1,5 @@
 import { MapProperties } from '../types/';
+import { titleCase } from '../util/text';
 import is from '../is';
 
 /**
@@ -11,7 +12,6 @@ const vehicle:{[key:string]:string} = {
    MOTORCYCLE: 'Motorcycle',
    UTV: 'UTV'
 };
-
 
 /**
  * Update seasonal restriction field.
@@ -38,14 +38,15 @@ export default {
    ['Idaho Parks & Recreation'](from:MapProperties):MapProperties {
       const out:MapProperties = {};
       const miles:number = from['MILES'] as number;
+      const who = 'Jurisdiction';
       let name:string = from['NAME'] as string;
       let label:string = from['name'] as string;
 
       if (miles && miles > 0) { out['Miles'] = miles; }
+      if (label) { label = label.toString().trim(); }
 
       if (!is.empty(name) && !is.empty(label)) {
-         label = label.toString();
-         name = name.toString();
+         name = titleCase(name.toString().trim());
          // label is usually just a number so prefer name when supplied
          const num = label.replace(/\D/g, '');
          // some names alread include the road or trail number and
@@ -56,7 +57,8 @@ export default {
       if (label) { out['Label'] = label; }
 
       Object.keys(vehicle).forEach(key => { seasonal(key, from, out); });
-      relabel(from, out, { JURISDICTION: 'Jurisdiction' });
+      relabel(from, out, { JURISDICTION: who });
+      if (out[who]) { out[who] = titleCase(out[who] as string); }
 
       return out;
    },

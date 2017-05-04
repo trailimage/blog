@@ -2,6 +2,9 @@ import is from '../is';
 import re from '../regex';
 import * as url from 'url';
 
+const alwaysLower = ['a', 'at', 'how', 'have', 'in', 'not', 'of', 'on', 'the', 'to', 'when', 'who'];
+const alwaysUpper = ['blm', 'fs', 'i'];
+
 /**
  * Replace numerical, bracketed placeholders with arbitrary arguments. The same
  * value can be substituted in more than one position. Example:
@@ -23,11 +26,25 @@ export const capitalize = (text:string) =>
 /**
  * Capitalize individual words.
  */
-export const properCase = (text:string) => is.empty(text) ? '' : text
-   .replace('', '');
+export const titleCase = (text:string) => is.empty(text) ? '' : text
+   // only lowercase actual words, not addresses with numbers
+   .replace(/(^|\s)([a-zA-z]+('[a-zA-Z]{1,2})?)(\b|$)/g, (match, before, word, apostrophe, after, index) => {
+      return before + word.toLocaleLowerCase();
+   })
+   .replace(/\b[a-z]+('[a-z]{1,2})?/g, (match, apostrophe, index) => {
+      let word = match;
+      if (alwaysUpper.indexOf(word) >= 0) {
+         word = word.toLocaleUpperCase();
+      } else if (index == 0 || alwaysLower.indexOf(word) == -1) {
+         word = word.substr(0, 1).toUpperCase() + word.substr(1);
+      }
+      return word;
+   })
+   // lone trailing letter is probably a label
+   .replace(/\b[a-z]$/, match => match.toLocaleUpperCase());
 
 /**
- * Make URL slug
+ * Make URL slug.
  */
 export const slug = (text:string) => is.empty(text)
    ? null

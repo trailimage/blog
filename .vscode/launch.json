@@ -13,6 +13,22 @@
          "cwd": "${workspaceRoot}"
       },
       {
+         "name": "Mocha Test",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+         "cwd": "${workspaceRoot}",
+         "runtimeExecutable": null,
+         "stopOnEntry": false,
+         "protocol": "inspector",
+         "sourceMaps": true,
+         "outFiles": ["${workspaceRoot}/lib"],
+         //"args": ["test/**/*.js", "--no-timeouts"]
+         //"args": ["test/factory/*", "--no-timeouts"]
+         //"args": ["test/map/geojson*", "--no-timeouts"]
+         "args": ["test/util*", "--no-timeouts"]
+      },
+      {
          "name": "Attach to Node",
          "type": "node",
          "request": "attach",
@@ -33,22 +49,6 @@
          // "sourceMapPathOverrides": {
          //    "/source/*": "${workspaceRoot}/*"
          // }
-      },
-      {
-         "name": "Mocha Test",
-         "type": "node",
-         "request": "launch",
-         "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-         "cwd": "${workspaceRoot}",
-         "runtimeExecutable": null,
-         "stopOnEntry": false,
-         "protocol": "inspector",
-         "sourceMaps": true,
-         "outFiles": ["${workspaceRoot}/lib"],
-         //"args": ["test/**/*.js", "--no-timeouts"]
-         //"args": ["test/factory/*", "--no-timeouts"]
-         //"args": ["test/map/geojson*", "--no-timeouts"]
-         "args": ["test/controllers/menu*", "--no-timeouts"]
       },
       {
          "name": "Gulp",

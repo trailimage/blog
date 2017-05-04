@@ -268,11 +268,24 @@ describe('Utilities', ()=> {
       expect(util.capitalize('one two')).equals('One two');
    });
 
+   it('converts to title case', ()=> {
+      expect(util.titleCase('one two')).equals('One Two');
+      expect(util.titleCase('onetwo 22')).equals('Onetwo 22');
+      expect(util.titleCase('BLM - BUREAU OF LAND MANAGEMENT')).equals('BLM - Bureau of Land Management');
+      expect(util.titleCase('some road 12-34R')).equals('Some Road 12-34R');
+      expect(util.titleCase('the sentence')).equals('The Sentence');
+      expect(util.titleCase('went to the south')).equals('Went to the South');
+      expect(util.titleCase('i haven\'t showered')).equals('I Haven\'t Showered');
+      expect(util.titleCase('IDAHO DEPARTMENT OF PARKS & RECREATION')).equals('Idaho Department of Parks & Recreation');
+      expect(util.titleCase('fan saddle south a')).equals('Fan Saddle South A');
+   });
+
    it('converts phrase to URL slug', ()=> {
       expect(util.slug('Wiggle and Roll')).equals('wiggle-and-roll');
       expect(util.slug('Wiggle and    Sing')).equals('wiggle-and-sing');
       expect(util.slug('Too---dashing')).equals('too-dashing');
       expect(util.slug('powerful/oz')).equals('powerful-oz');
+      expect(util.slug('three o\' clock')).equals('three-o-clock');
    });
 
    describe('Photo Captions', ()=> {

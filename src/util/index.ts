@@ -4,6 +4,7 @@ import {
    rot13,
    IPv6,
    slug,
+   titleCase,
    capitalize,
    topDomain,
    encodeBase64,
@@ -44,6 +45,7 @@ export default {
    IPv6,
    slug,
    capitalize,
+   titleCase,
 
    date: {
       fromTimeStamp,
