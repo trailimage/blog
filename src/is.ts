@@ -15,7 +15,10 @@ const type = {
    OBJECT: 'object'
 };
 
-/** Whether variable is defined and not null */
+/**
+ * Whether variable is defined and not null. This will return `true` for `0`
+ * whereas a bare `if (var)` will not.
+ */
 function value<T>(x:any):x is T { return (x !== undefined && x !== null); }
 
 /**

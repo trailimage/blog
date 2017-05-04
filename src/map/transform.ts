@@ -43,7 +43,7 @@ export default {
       let label:string = from['name'] as string;
 
       if (miles && miles > 0) { out['Miles'] = miles; }
-      if (label) { label = label.toString().trim(); }
+      if (is.value(label)) { label = label.toString().trim(); }
 
       if (!is.empty(name) && !is.empty(label)) {
          name = titleCase(name.toString().trim());
@@ -69,7 +69,7 @@ export default {
       relabel(from, out, {
          FSAgencyName: 'Forest Service Agency',
          LandOwner: 'Land Owner',
-         Deposit: 'Name',
+         DEPOSIT: 'Name',
          Mining_District: 'Mining District'
       });
       return out;
