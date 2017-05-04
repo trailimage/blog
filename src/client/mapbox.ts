@@ -162,7 +162,7 @@ $(function() {
       /**
        * Update map size variables when window is resized.
        */
-      windowResize: function() {
+      windowResize: ()=> {
          const $c = $('canvas');
          mapSize.width = $c.width();
          mapSize.height = $c.height();
@@ -180,7 +180,7 @@ $(function() {
        * Attach events to the map to hide preview as soon as there's user
        * interaction.
        */
-      previewShown: function() {
+      previewShown: ()=> {
          map.on('move', handle.mapInteraction);
       },
 
@@ -191,6 +191,10 @@ $(function() {
          $preview.hide();
          enableKeyNav(false);
          map.off('move', handle.mapInteraction);
+      },
+
+      legendToggle: function(this:Element) {
+         $(this).parents('ul').toggleClass('collapsed');
       },
 
       /**
@@ -257,6 +261,8 @@ $(function() {
    };
 
    if (qs.center) { enableZoomOut(); }
+
+   $('#legend .toggle i').click(handle.legendToggle);
 
    window.addEventListener('resize', handle.windowResize);
 

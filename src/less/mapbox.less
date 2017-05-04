@@ -81,14 +81,47 @@ nav {
    list-style-type: none;
    padding: 10px 20px 5px;
    font-size: 13px;
+   width: 125px;
 
    li {
       list-style: none;
       border-bottom: 2px solid #fff;
       padding-bottom: 2px;
       margin-bottom: 10px;
+
+      &.toggle {
+         border: none;
+         padding-bottom: 4px;
+         p {
+            margin: 0;
+            padding: 0;
+            display: none;
+         }
+         i {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            right: 0;
+            &.expand_less { display: none; }
+            &:hover { color: #fff; }
+         }
+      }
+
+      &.credit {
+         border: none;
+         font-size: 11px;
+         padding: 10px 0;
+
+         img { float: right; }
+         a { color: #dfa; }
+      }
    }
 
+   #photo {
+      border: none;
+      padding-bottom: 4px;
+      img { padding: 3px 0 0 6px; }
+   }
    #highway { border-color: #df0; }
    #automobile { border-color: #fff; }
    #jeep { border-color: #7e7; }
@@ -96,6 +129,23 @@ nav {
    #motorcycle { border-color: #f90; }
    #non-motor { border-color: #f28; }
    #seasonal { border-bottom-style: dotted; }
+
+   &.collapsed {
+      padding-bottom: 0;
+      .opacity(0.7);
+
+      li {
+         display: none;
+         &.toggle {
+            display: block;
+            padding-bottom: 0;
+            p { display: block; }
+            .expand_less { display: block; top: 5px; }
+            .expand_more { display: none; }
+         }
+      }
+      &:hover { .opacity(1); }
+   }
 }
 
 #photo-preview {
