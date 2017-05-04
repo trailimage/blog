@@ -18,9 +18,6 @@ const level = {
    ERROR: 'error'
 };
 
-// const RedisTx = require('winston-redis').Redis;
-// const tx = new RedisTx({
-
 let logger:Winston.LoggerInstance = null;
 
 function provider() {
@@ -44,18 +41,20 @@ function provider() {
 
                   tx.on('error', (err:Error) => {
                      // replace Redis transport with console
+                     console.error('Unable to initialize Redis logger', err);
+
                      try {
                         const r = logger.transports[logTo.REDIS];
                         logger.remove(r);
                      } catch (err) {
-                        console.error('Unable to remove Redis logger');
+                        console.error('Unable to remove Redis logger', err);
                      }
+
                      try {
-                        logger.add(new Winston.transports.Console());
+                        logger.add(new (Winston.transports.Console)());
                      } catch (err) {
                         console.error(err);
                      }
-                     //logger[level.ERROR]('Reverting logs to console', err.stack);
                   });
 
                   queryable = true;

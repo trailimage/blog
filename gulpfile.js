@@ -43,7 +43,7 @@ gulp.task('js', ()=> {
    return merge(
       tsConfig.src().pipe(tsConfig()),
       gulp.src(jsPath + 'jquery.lazyload.js')
-   )  
+   )
       .pipe(bundle('post','static-map','lazyload').as('post', { keep: 'static-map' }))
       .pipe(bundle('static-map').as('category'))
       .pipe(sourcemaps.init())
@@ -51,10 +51,6 @@ gulp.task('js', ()=> {
       .pipe(sourcemaps.write('maps', sourceMapConfig))
       .pipe(gulp.dest(dist + 'js'));
 });
-
-function js(glob) {
-
-}
 
 // act on changes
 gulp.task('watch', ()=> {
@@ -81,7 +77,7 @@ function handleError(error) { console.error(error); this.emit('end'); }
  * Bundle list of Javascript files as the target file. Source files are removed
  * from the stream and replaced by the target file unless listed in
  * options.keep.
- * 
+ *
  * Based on gulp-concat
  * @see https://github.com/contra/gulp-concat/blob/master/index.js
  */
@@ -93,23 +89,22 @@ const bundle = (...files) => ({
       // files to keep in the stream after bundling
       let keep = [];
       // vinyl file used as template to create output file
-      let template = null; 
+      let template = null;
 
       if (options.keep) {
          keep = Array.isArray(options.keep) ? options.keep : [options.keep];
       }
 
-      // prevent "post" from matching post-menu.js
+      // prevent e.g. "post" from matching post-menu.js
       files = files.map(f => f + ext);
       keep = keep.map(k => k + ext);
       target += ext;
 
-      // file passed in callback is kept in stream.     
       function transform(file, enc, cb) {
          const name = file.basename ? file.basename : file.relative;
          if (files.find(f => name.indexOf(f) >= 0)) {
             content.push(file.contents);
-            // use first file as template         
+            // use first file as template
             if (template == null) { template = file; }
             // if not keeping file then empty callback removes it from stream
             if (keep.length == 0 || keep.find(k => name.indexOf(k) == -1)) {
@@ -117,11 +112,12 @@ const bundle = (...files) => ({
                return;
             }
          }
+         // any file returned in callback is kept in stream
          cb(null, file)
       }
 
       // create merged file and place in stream
-      // `this` refers to current stream (array of vinyl files).
+      // `this` refers to current stream (array of vinyl files)
       function finish(cb) {
          if (content.length > 0) {
             const merged = template.clone({ contents: false });

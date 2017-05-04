@@ -2,10 +2,6 @@
    "extends": "./tsconfig.json",
    "compilerOptions": {
       "outDir": "./lib",
-      "sourceMap": true,
-      "noImplicitAny": true,
-      "noUnusedLocals": true,
-      "noImplicitThis": true,
       //"moduleResolution": "node",
       //"isolatedModules": true,
       //"types": [],
