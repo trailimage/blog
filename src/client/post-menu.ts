@@ -1,3 +1,4 @@
+/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts"/>
 
@@ -34,19 +35,23 @@ interface MenuPost {
 }
 
 /**
- * Menu data are loaded in menu-script.hbs referenced as /js/menu-data.js only available on post pages
+ * Menu data are loaded in menu-script.hbs referenced as /js/menu-data.js
+ * only available on post pages.
  */
 $(function() {
+   const eventCategory = 'Post Menu';
    const css = 'selected';
    const $button = $('#post-menu-button');
    const $menu = $('#post-menu');
    const $rootList = $('#menu-roots');
-   const $tagList = $('#menu-tags');
+   const $categoryList = $('#menu-categories');
    const $postList = $('#menu-posts');
    const $description = $('#post-description');
 
+   // default root category
    let selection = loadMenuSelection(['When', null]);
 
+   // handle click on the menu button
    $button
       .one('click', function() {
          // populate menu on first click
@@ -55,23 +60,27 @@ $(function() {
             $rootList.append($li);
             if (root == selection[0]) { $li.addClass(css); loadSubcategories(selection); }
          }
+         ga('send', 'event', eventCategory, 'Open');
       })
       .click(toggleMenu);
 
-   $rootList.on('click', 'li', function(this:Element, e:JQueryEventObject) {
+   // handle click on root category
+   $rootList.on('click', 'li', function(this:HTMLElement, e:JQueryEventObject) {
       e.stopPropagation();
       const $li = $(this);
       selection = [$li.text(), null];
       menuSelect($rootList, $li, loadSubcategories, selection);
    });
 
-   $tagList.on('click', 'li', function(this:HTMLElement, e:JQueryEventObject) {
+   // handle click on subcategory
+   $categoryList.on('click', 'li', function(this:HTMLElement, e:JQueryEventObject) {
       e.stopPropagation();
       const $li = $(this);
       selection[1] = $li.text();
-      menuSelect($tagList, $li, loadPosts, selection);
+      menuSelect($categoryList, $li, loadPosts, selection);
    });
 
+   // handle click on post title
    $postList
       .on('click', 'li.post', showSelection)
       .on('mouseover', 'li.post', function(this:HTMLElement) {
@@ -97,6 +106,9 @@ $(function() {
       if (forceHide) { hide(); } else { show(); }
    }
 
+   /**
+    * Show clicked post title or load track if viewing map.
+    */
    function showSelection(this:HTMLElement) {
       const slug = $(this).data('slug');
 
@@ -106,6 +118,7 @@ $(function() {
          window.location.href = '/' + slug;
       }
       toggleMenu();
+      ga('send', 'event', eventCategory, 'Click Post');
    }
 
    function menuSelect($list:JQuery, $clicked:JQuery, loader:(selected:string[])=>void, selected:string[]) {
@@ -118,17 +131,20 @@ $(function() {
    function loadSubcategories(selected:string[]) {
       const subcategories = postMenuData.category[selected[0]];
 
-      $tagList.empty();
+      $categoryList.empty();
 
       if (selected[1] == null) { selected[1] = subcategories[0].title; }
 
       for (let i = 0; i < subcategories.length; i++) {
          const $li = $('<li>').text(subcategories[i].title);
-         $tagList.append($li);
+         $categoryList.append($li);
          if (subcategories[i].title == selected[1]) { $li.addClass(css); loadPosts(selected); }
       }
    }
 
+   /**
+    * Build post HTML from separately loaded `postMenuData`.
+    */
    function loadPosts(selected:string[]) {
       const subcategories = postMenuData.category[selected[0]];
 

@@ -1,3 +1,4 @@
+/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts" />
 

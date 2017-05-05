@@ -1,3 +1,4 @@
+/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts"/>
 
@@ -9,6 +10,7 @@ declare const siteName:string;
 declare type JQueryResponse = (responseText:string, textStatus:string, XMLHttpRequest:XMLHttpRequest) => any;
 
 $(function() {
+   const eventCategory = 'Photo Tag';
    const css = 'selected';
    const $view = $('#photo-tag');
    const id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
@@ -30,6 +32,8 @@ $(function() {
       $list.hide();
       $list = $('#'+ $li.data('for'));
       $list.show();
+
+      ga('send', 'event', eventCategory, 'Click Index Letter');
    });
 
    $view.find('#tag-index a').click(function(this:HTMLElement, e) {
@@ -40,6 +44,8 @@ $(function() {
       $link.addClass(css);
 
       loadPhotoTag($link);
+
+      ga('send', 'event', eventCategory, 'Click Name');
 
       window.history.pushState(
          null,
@@ -58,6 +64,7 @@ $(function() {
             if (status === 'error') {
                $(this).empty();
                $link.removeClass(css);
+               ga('send', 'event', eventCategory, 'Load Photos Error', 'Error');
                alert('Sorry about that. Looking for "' + $link.html() + '" photos caused an error.');
             }
             $('#wait').hide();

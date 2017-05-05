@@ -1,3 +1,4 @@
+/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts" />
 
@@ -9,11 +10,17 @@
  * http://www.appelsiini.net/projects/lazyload
  */
 $(function() {
+   const eventCategory = 'Post';
    const $photos = $('figure');
    const $lb = $('#light-box');
 
-   $lb.on('click', function() { $lb.off('mousemove').hide(0, enablePageScroll); });
+   // clicking on lightbox hides it and re-enables page scroll
+   $lb.on('click', ()=> { $lb.off('mousemove').hide(0, enablePageScroll); });
+
+   // clicking an image opens it in a lightbox
    $photos.find('img').on('click', lightBox).lazyload();
+
+   // tapping mobile info button loads camera detail
    $photos.find('.mobile-button').on('touchstart', function(this:HTMLElement) {
       const $m = $(this);
       const $fig = $m.parent();
@@ -35,7 +42,11 @@ $(function() {
                   $m.show();
                });
          });
+
+      ga('send', 'event', eventCategory, 'Show Photo Info', 'Mobile');
    });
+
+   // hovering photo info button loads camera detail
    $photos.find('.info-button').one('mouseover', function(this:Element) {
       const $button = $(this);
       $button
@@ -44,6 +55,8 @@ $(function() {
          .load($button.parent().data('exif'), function() {
             $button.removeClass('loading').addClass('loaded');
          });
+
+      ga('send', 'event', eventCategory, 'Show Photo Info');
    });
 
    /**
@@ -147,6 +160,8 @@ $(function() {
       $lb.show(0, disablePageScroll);
       // update panning calculations if window resizes
       $(window).resize(updateSize);
+
+      ga('send', 'event', eventCategory, 'Show Lightbox');
    }
 
    function disablePageScroll() {

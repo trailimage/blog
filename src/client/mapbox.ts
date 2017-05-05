@@ -1,6 +1,7 @@
 /// <reference types="jquery" />
 /// <reference types="geojson" />
 /// <reference types="mapbox-gl" />
+/// <reference types="google.analytics" />
 /// <reference path="../types/mapbox-gl/index.d.ts" />
 /// <reference path="../types/jquery/index.d.ts"/>
 
@@ -41,6 +42,7 @@ $(function() {
     */
    const initial:UrlPosition = { zoom: 6.5, center: [-116.0987, 44.7] };
 
+   const eventCategory = 'Map';
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
    const $zoomOut = $('#zoom-out');
@@ -174,6 +176,7 @@ $(function() {
        */
       photoClick: function(e:mapboxgl.MapMouseEvent) {
          html.photoPreview(e, 'single', html.photo(e.features[0]));
+         ga('send', 'event', eventCategory, 'Click Photo Pin');
       },
 
       /**
@@ -185,7 +188,7 @@ $(function() {
       },
 
       /**
-       * Click to close photo preview
+       * Click to close photo preview.
        */
       closePreview: function() {
          $preview.hide();
@@ -195,6 +198,7 @@ $(function() {
 
       legendToggle: function(this:Element) {
          $(this).parents('ul').toggleClass('collapsed');
+         ga('send', 'event', eventCategory, 'Toggle Legend');
       },
 
       /**
@@ -257,6 +261,8 @@ $(function() {
                   .append(html.icon('arrow_forward', next)));
             }
          }
+
+         ga('send', 'event', eventCategory, 'Click Cluster');
       }
    };
 
@@ -391,7 +397,10 @@ $(function() {
       if (map.getZoom() > initial.zoom && !zoomOutEnabled) {
          zoomOutEnabled = true;
          $zoomOut
-            .click(() => { map.easeTo(initial); })
+            .click(() => {
+               map.easeTo(initial);
+               ga('send', 'event', eventCategory, 'Zoom Out');
+            })
             .removeClass('disabled');
       } else if (map.getZoom() <= initial.zoom && zoomOutEnabled) {
          zoomOutEnabled = false;

@@ -1,3 +1,4 @@
+{{! https://developers.google.com/analytics/devguides/collection/analyticsjs/ }}
 <script type="text/javascript">
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -6,15 +7,4 @@
 
 	ga('create', 'UA-{{config.google.analyticsID}}-1', '{{config.domain}}');
 	ga('send', 'pageview');
-
-	(function() {
-		var x = '';
-		var cx = '012532665638014192714:eb0vr5on0aw';
-		var gcse = document.createElement('script');
-		gcse.type = 'text/javascript';
-		gcse.async = true;
-		gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.google.com/cse/cse.js?cx={{config.google.searchEngineID}}';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(gcse, s);
-	})();
 </script>
