@@ -28,7 +28,7 @@ export const page = {
    CATEGORY_LIST: 'category-list',
    PHOTO_TAG: 'photo-tag',
    PHOTO_SEARCH: 'photo-search',
-   MAP: 'map',
+   //MAP: 'map',
    MAPBOX: 'mapbox',
    SEARCH: 'search',
    SITEMAP: 'sitemap-xml'

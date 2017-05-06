@@ -22,7 +22,7 @@ function view(post:Post, req:Blog.Request, res:Blog.Response) {
       const key = post.isPartial ? post.seriesKey : post.key;
       const photoID = req.params[ph.PHOTO_ID];
 
-      res.render(template.page.MAP, {
+      res.render(template.page.MAPBOX, {
          layout: template.layout.NONE,
          title: 'Map',
          post,
