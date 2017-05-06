@@ -17,7 +17,7 @@ describe('Map', ()=> {
 
    it('displays map for post', done => {
       res.onEnd = ()=> {
-         const options = expectTemplate(template.page.MAP);
+         const options = expectTemplate(template.page.MAPBOX);
          expect(options).has.property('title', 'Map');
          expect(options).has.property('key', 'kuna-cave-fails-to-impress');
          expect(options).has.property('photoID', 0);
@@ -31,7 +31,7 @@ describe('Map', ()=> {
 
    it('displays map for series', done => {
       res.onEnd = ()=> {
-         const options = expectTemplate(template.page.MAP);
+         const options = expectTemplate(template.page.MAPBOX);
          expect(options).has.property('title', 'Map');
          expect(options).has.property('photoID', 0);
          expect(options).has.property('post');
