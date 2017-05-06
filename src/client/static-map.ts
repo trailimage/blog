@@ -2,7 +2,10 @@
 
 /**
  * Generated URLs of all photo coordinates get quite long so create them
- * dynamically from element data
+ * dynamically from element data.
+ *
+ * Expects img elements with class `static-map` and `data-locations` and
+ * `data-href` attributes.
  */
 $(function() {
    /** Must be fully qualified path for use with Mapbox */

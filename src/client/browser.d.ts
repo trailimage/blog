@@ -6,57 +6,83 @@
  *
  * http://www.trailimage.com/js/post-menu-data.js
  */
-export interface PostMenu {
-   category:{[key:string]:MenuCategory[]};
-   post:{[key:string]:MenuPost};
+interface PostMenu {
+   category: { [key: string]: MenuCategory[] };
+   post: { [key: string]: MenuPost };
 }
 
 interface MenuCategory {
-   title:string;
-   posts:string[]
+   title: string;
+   posts: string[]
 }
 
+/**
+ * Post data within menu.
+ */
 interface MenuPost {
-   slug:string;
-   title:string;
-   icon:string;
-   description:string;
-   subTitle?:string;
+   slug: string;
+   title: string;
+   icon: string;
+   description: string;
+   subTitle?: string;
    /** Post position if part of a series */
-   part?:number;
+   part?: number;
 }
 
 /**
  * Which features to enable on a page — determines which libraries to lazy-load
  */
-export interface PageFeature {
-   sideMenu:boolean;
-   postMenu:boolean;
-   twitter:boolean;
-   facebook:boolean;
-   timestamp:number;
+interface PageFeature {
+   sideMenu: boolean;
+   postMenu: boolean;
+   twitter: boolean;
+   facebook: boolean;
+   timestamp: number;
 }
 
 /**
- * Used with administration
+ * Standard response for administrative actions.
  */
-export interface JsonResponse {
-   success:boolean;
-   message:string;
+interface JsonResponse {
+   success: boolean;
+   message: string;
 }
 
 /**
- * GeoJSON properties for post photos
+ * GeoJSON properties for post photos.
  */
-export interface MapPhoto {
-   url?:string;
-   title?:string;
-   partKey?:string;
+interface MapPhoto {
+   url?: string;
+   title?: string;
+   partKey?: string;
    /** Distance from clicked cluster */
-   distance?:number;
+   distance?: number;
 }
+
+/**
+ * Object generated in `mapbox.hbs` to display post details on the map.
+ */
+interface MapPost {
+   key: string;
+   photoID: number;
+   bounds: { sw: number[]; ne: number[] };
+}
+
+interface PointCluster { point_count?: number; }
+
+interface UrlPosition {
+   [key: string]: number | number[];
+   /** longitude, latitude */
+   center?: number[];
+   lon?: number;
+   lat?: number;
+   zoom?: number;
+}
+interface FakeEvent { reason: string; }
+
+interface CssPosition { top: number; left: number; }
 
 /**
  * Standard JQuery AJAX response
  */
-export type JQueryResponse = (responseText:string, textStatus:string, XMLHttpRequest:XMLHttpRequest) => any;
+type JQueryResponse = (responseText:string, textStatus:string, XMLHttpRequest:XMLHttpRequest) => any;

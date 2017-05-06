@@ -1,6 +1,7 @@
-/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts"/>
+/// <reference path="./browser.d.ts"/>
+/// <reference path="./util.ts"/>
 
 $(function() {
    const $button = $('#mobile-menu-button');
@@ -70,8 +71,7 @@ $(function() {
     * Load menu selection from browser storage
     */
    function loadMenuSelection(ifNone:string):string {
-      const re = new RegExp('\\bmobile=([^;\\b]+)', 'gi');
-      const match = re.exec(document.cookie);
+      const match = util.setting.load('mobile');
       return (match === null) ? ifNone : match[1];
    }
 
@@ -79,6 +79,6 @@ $(function() {
     * Save menu selection to browser storage
     */
    function saveMenuSelection(selected:string) {
-      document.cookie = 'mobile=' + selected;
+      util.setting.save('mobile', selected);
    }
 });

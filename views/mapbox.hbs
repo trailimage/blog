@@ -3,7 +3,7 @@
 	{{> head-meta}}
    <meta name="robots" content="noindex">
    <link href='/img/favicon.ico' rel='shortcut icon'/>
-   <link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>	
+   <link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
    {{> ga}}
    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet' />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -28,7 +28,7 @@
 <body>
    <nav>
       <h1><a href="/" alt="Home Page" title="Home Page">{{config.site.title}}</a></h1>
-      <div id='photo-count'></div>      
+      <div id='photo-count'></div>
       <div id='zoom-out' class="disabled">{{{icon 'zoom_out_map'}}} Zoom Out</div>
    </nav>
 {{#if key }}
@@ -42,7 +42,8 @@
          {{{ icon 'expand_more' }}}
          {{{ icon 'expand_less' }}}
       </li>
-      <li id='photo'>Click for photos<img src="/p.png"/></li>
+      <li id='photo'>Click to see photo<img src="/p.png"/></li>
+      <li id='track'>GPX Track</li>
       <li id='highway'>Highway</li>
       <li id='automobile'>Automobile</li>
       <li id='jeep'>Jeep</li>

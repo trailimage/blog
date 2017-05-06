@@ -1,0 +1,2 @@
+"use strict";var util={setting:{save:function(n,e){document.cookie=n+"="+e},load:function(n){var e=new RegExp("\\b"+n+"=([^;\\b]+)","gi"),t=e.exec(document.cookie);return null===t?null:t[1]}},html:{icon:function(n,e){var t=$("<i>").addClass("material-icons "+n).text(n);return void 0!==e&&t.click(e),t}},log:{event:function(n,e,t){ga("send","event",n,e,t)}}};
+//# sourceMappingURL=/js/maps/util.js.map

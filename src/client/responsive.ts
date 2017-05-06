@@ -1,17 +1,7 @@
-/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts" />
-
-/**
- * Which features to enable on a page — determines which libraries to lazy-load
- */
-interface PageFeature {
-   sideMenu:boolean;
-   postMenu:boolean;
-   twitter:boolean;
-   facebook:boolean;
-   timestamp:number;
-}
+/// <reference path="./browser.d.ts"/>
+/// <reference path="./util.ts"/>
 
 /**
  * Defined in /views/post.hbs

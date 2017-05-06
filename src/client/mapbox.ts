@@ -1,41 +1,17 @@
 /// <reference types="jquery" />
 /// <reference types="geojson" />
 /// <reference types="mapbox-gl" />
-/// <reference types="google.analytics" />
 /// <reference path="../types/mapbox-gl/index.d.ts" />
 /// <reference path="../types/jquery/index.d.ts"/>
+/// <reference path="./browser.d.ts"/>
+/// <reference path="./util.ts"/>
 
-declare interface MapPhoto {
-   url?:string;
-   title?:string;
-   partKey?:string;
-   /** Distance from clicked cluster */
-   distance?:number;
-}
-declare interface MapPost {
-   key:string;
-   photoID:number;
-   bounds:{ sw:number[]; ne:number[] };
-}
 /** Mapbox style identifier defined in /views/mapbox.hbs */
 declare const mapStyle:string;
 /** Post key if displaying map for post otherwise undefined */
 declare const post:MapPost;
-/** Photo ID if displaying map for post with photo ID */
-declare const mapPhotoID:number;
 /** Whether GPX downloads are allowed */
 declare const allowDownload:boolean;
-declare interface PointCluster { point_count?:number; }
-declare interface UrlPosition {
-   [key:string]:number|number[];
-   /** longitude, latitude */
-   center?:number[];
-   lon?:number;
-   lat?:number;
-   zoom?:number;
-}
-declare interface FakeEvent { reason:string; }
-declare interface CssPosition { top:number; left:number; }
 
 $(function() {
    const MAX_ZOOM = 18;
@@ -187,7 +163,7 @@ $(function() {
        */
       photoClick: function(e:mapboxgl.MapMouseEvent) {
          html.photoPreview(e, 'single', html.photo(e.features[0]));
-         ga('send', 'event', eventCategory, 'Click Photo Pin');
+         util.log.event(eventCategory, 'Click Photo Pin');
       },
 
       /**
@@ -209,7 +185,7 @@ $(function() {
 
       legendToggle: function(this:Element) {
          $(this).parents('ul').toggleClass('collapsed');
-         ga('send', 'event', eventCategory, 'Toggle Legend');
+         util.log.event(eventCategory, 'Toggle Legend');
       },
 
       /**
@@ -255,7 +231,7 @@ $(function() {
                   $('figure:nth-child(' + selected + ')', $photos).show();
                   $('i:nth-child(' + selected + ')', $markers).addClass('selected');
 
-                  ga('send', 'event', eventCategory, 'Navigate Photo Cluster');
+                  util.log.event(eventCategory, 'Navigate Photo Cluster');
                };
                const prev = ()=> { select(-1); };
                const next = ()=> { select(1); };
@@ -274,7 +250,8 @@ $(function() {
                   .append(html.icon('arrow_forward', next)));
             }
          }
-         ga('send', 'event', eventCategory, 'Click Cluster');
+
+         util.log.event(eventCategory, 'Click Cluster');
       }
    };
 
@@ -415,7 +392,7 @@ $(function() {
          $zoomOut
             .click(() => {
                map.easeTo(initial);
-               ga('send', 'event', eventCategory, 'Zoom Out');
+               util.log.event(eventCategory, 'Zoom Out');
             })
             .removeClass('disabled');
       } else if (map.getZoom() <= initial.zoom && zoomOutEnabled) {

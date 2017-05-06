@@ -1,6 +1,7 @@
-/// <reference types="google.analytics" />
 /// <reference types="jquery" />
 /// <reference path="../types/jquery/index.d.ts" />
+/// <reference path="./browser.d.ts"/>
+/// <reference path="./util.ts"/>
 
 /**
  * Set up lazy loading and light box for post images. Depends on post images
@@ -43,7 +44,7 @@ $(function() {
                });
          });
 
-      ga('send', 'event', eventCategory, 'Show Photo Info', 'Mobile');
+      util.log.event(eventCategory, 'Show Photo Info', 'Mobile');
    });
 
    // hovering photo info button loads camera detail
@@ -56,14 +57,14 @@ $(function() {
             $button.removeClass('loading').addClass('loaded');
          });
 
-      ga('send', 'event', eventCategory, 'Show Photo Info');
+      util.log.event(eventCategory, 'Show Photo Info');
    });
 
    /**
     * Material icon HTML
     */
    function iconHtml(name:string, text:string):string {
-      return '<i class="material-icons ' + name + '">' + name + '</i><p>' + text + '</p>';
+      return util.html.icon(name) + '<p>' + text + '</p>';
    }
 
    /**
@@ -161,7 +162,7 @@ $(function() {
       // update panning calculations if window resizes
       $(window).resize(updateSize);
 
-      ga('send', 'event', eventCategory, 'Show Lightbox');
+      util.log.event(eventCategory, 'Show Lightbox');
    }
 
    function disablePageScroll() {
