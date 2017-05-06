@@ -428,7 +428,10 @@ $(function() {
       // https://www.mapbox.com/mapbox-gl-js/api/#map#fitbounds
       map.fitBounds([post.bounds.sw, post.bounds.ne]);
 
-      if (track) { $('#gpx-download').show(); }
+      if (track) {
+         $('#gpx-download').show();
+         $('#legend #track').show();
+      }
    }
 
    /**
