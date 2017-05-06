@@ -1,4 +1,4 @@
-import { Post, Photo, Flickr, Provider } from '../types/';
+import { Post, Photo, Flickr, Provider, MapBounds } from '../types/';
 import { slug } from '../util/text';
 import { fromTimeStamp } from '../util/time';
 import is from '../is';
@@ -136,6 +136,7 @@ function empty(this:Post) {
 
    // from updatePhotos()
    this.photos = null;
+   this.bounds = null;
    this.happenedOn = null;
    this.photoTagList = null;
    this.photoLocations = null;
@@ -153,31 +154,45 @@ function name(this:Post|any):string {
 }
 
 /**
- * Coordinate path used by Mapbox static maps
+ * Coordinates used on Mapbox maps.
  *
  * https://www.mapbox.com/api-documentation/#static
- *
- *    Example:
- *    pin-s-a+9ed4bd(-122.46589,37.77343),pin-s-b+000(-122.42816,37.75965)
  */
 function updatePhotoLocations(this:Post) {
    let start = 1;  // always skip first photo
    let total = this.photos.length;
    const locations:number[][] = [];
+   const bounds:MapBounds = { sw:[0, 0], ne:[0, 0] };
 
    if (total > config.map.maxMarkers) {
-       start = 5;  // skip the first few which are often just prep shots
-       total = config.map.maxMarkers + 5;
-       if (total > this.photos.length) { total = this.photos.length; }
+      start = 5;  // skip the first few which are often just prep shots
+      total = config.map.maxMarkers + 5;
+      if (total > this.photos.length) { total = this.photos.length; }
    }
 
    for (let i = start; i < total; i++) {
-       const img = this.photos[i];
-       if (img.latitude > 0) {
-          locations.push([parseFloat(img.longitude.toFixed(5)), parseFloat(img.latitude.toFixed(5))]);
-       }
+      const img = this.photos[i];
+      if (img.latitude > 0) {
+         locations.push([
+            parseFloat(img.longitude.toFixed(5)),
+            parseFloat(img.latitude.toFixed(5))
+         ]);
+         if (bounds.sw[0] == 0 || bounds.sw[0] > img.longitude) {
+            bounds.sw[0] = img.longitude;
+         }
+         if (bounds.sw[1] == 0 || bounds.sw[1] > img.latitude) {
+            bounds.sw[1] = img.latitude;
+         }
+         if (bounds.ne[0] == 0 || bounds.ne[0] < img.longitude) {
+            bounds.ne[0] = img.longitude;
+         }
+         if (bounds.ne[1] == 0 || bounds.ne[1] < img.latitude) {
+            bounds.ne[1] = img.latitude;
+         }
+      }
    }
    this.photoLocations = locations.length > 0 ? locations : null;
+   this.bounds = bounds;
 }
 
 /**
@@ -242,6 +257,7 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
 
       // photo marker path for Mapbox static map
       photoLocations: null,
+      bounds: null,
 
       makeSeriesStart,
       ungroup,

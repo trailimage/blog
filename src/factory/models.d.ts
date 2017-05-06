@@ -1,3 +1,5 @@
+import { MapBounds } from '../types/';
+
 export interface EXIF {
    artist: string,
    compensation: string,
@@ -99,6 +101,8 @@ export interface Post {
    photoCount:number;
    photoTagList:string;
    photoLocations:number[][];
+   /** Top left and bottom right coordinates */
+   bounds:MapBounds;
    coverPhoto:Photo;
    /** Whether posts is featured in main navigation */
    feature:boolean;

@@ -12,10 +12,15 @@ declare interface MapPhoto {
    /** Distance from clicked cluster */
    distance?:number;
 }
+declare interface MapPost {
+   key:string;
+   photoID:number;
+   bounds:{ sw:number[]; ne:number[] };
+}
 /** Mapbox style identifier defined in /views/mapbox.hbs */
 declare const mapStyle:string;
 /** Post key if displaying map for post otherwise undefined */
-declare const postKey:string;
+declare const post:MapPost;
 /** Photo ID if displaying map for post with photo ID */
 declare const mapPhotoID:number;
 /** Whether GPX downloads are allowed */
@@ -51,7 +56,7 @@ $(function() {
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
    const $zoomOut = $('#zoom-out');
-   const slug = postKey ? '/' + postKey : '';
+   const slug = post ? '/' + post.key : '';
    const qs = parseUrl();
 
    /** https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol */
@@ -289,8 +294,8 @@ $(function() {
             handle.windowResize();
          });
 
-         if (postKey) {
-            $.getJSON('/' + postKey + '/geo.json', addPostLayers);
+         if (post.key) {
+            $.getJSON('/' + post.key + '/geo.json', addPostLayers);
          }
       });
 
@@ -451,12 +456,14 @@ $(function() {
             'line-cap': 'butt'
          },
          paint: {
-            'line-color': '#9f7',
+            'line-color': '#f22',
             'line-width': 5,
             'line-opacity': 0.7,
-            'line-dasharray': [1, 1]
+            'line-dasharray': [1, 0.8]
          }
       });
+      // https://www.mapbox.com/mapbox-gl-js/api/#map#fitbounds
+      map.fitBounds([post.bounds.sw, post.bounds.ne]);
 
       if (track) { $('#gpx-download').show(); }
    }

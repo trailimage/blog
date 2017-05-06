@@ -14,9 +14,12 @@
       {{! values used within mapbox.js }}
       mapboxgl.accessToken = '{{config.mapbox.accessToken}}';
       var mapStyle = '{{config.mapbox.style.dynamic}}';
-{{#if key }}
-      var postKey = '{{key}}';
-      var mapPhotoID = {{photoID}};
+{{#if post }}
+      var post = {
+         key: '{{key}}',
+         photoID: {{photoID}},
+         bounds: {{{json post.bounds}}}
+      };
       var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};
 {{/if}}
 	</script>

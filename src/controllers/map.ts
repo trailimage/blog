@@ -21,14 +21,16 @@ function view(post:Post, req:Blog.Request, res:Blog.Response) {
    if (is.value(post)) {
       const key = post.isPartial ? post.seriesKey : post.key;
       const photoID = req.params[ph.PHOTO_ID];
-
-      res.render(template.page.MAPBOX, {
-         layout: template.layout.NONE,
-         title: 'Map',
-         post,
-         key,
-         photoID: is.numeric(photoID) ? photoID : 0,
-         config
+      // ensure photos are loaded to calculate bounds for map zoom
+      post.getPhotos().then(()=> {
+         res.render(template.page.MAPBOX, {
+            layout: template.layout.NONE,
+            title: 'Map',
+            post,
+            key,
+            photoID: is.numeric(photoID) ? photoID : 0,
+            config
+         });
       });
    } else {
       res.notFound();
