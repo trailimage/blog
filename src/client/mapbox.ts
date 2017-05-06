@@ -12,9 +12,14 @@ declare interface MapPhoto {
    /** Distance from clicked cluster */
    distance?:number;
 }
-
 /** Mapbox style identifier defined in /views/mapbox.hbs */
 declare const mapStyle:string;
+/** Post key if displaying map for post otherwise undefined */
+declare const postKey:string;
+/** Photo ID if displaying map for post with photo ID */
+declare const mapPhotoID:number;
+/** Whether GPX downloads are allowed */
+declare const allowDownload:boolean;
 declare interface PointCluster { point_count?:number; }
 declare interface UrlPosition {
    [key:string]:number|number[];
@@ -46,6 +51,7 @@ $(function() {
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
    const $zoomOut = $('#zoom-out');
+   const slug = postKey ? '/' + postKey : '';
    const qs = parseUrl();
 
    /** https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol */
@@ -83,7 +89,7 @@ $(function() {
       /**
        * Generate Google material icon HTML
        *
-       * See https://material.io/icons/
+       * https://material.io/icons/
        */
       icon: function(name:string, handler?:Function):JQuery {
          const $icon = $('<i>')
@@ -114,7 +120,7 @@ $(function() {
                .attr('src', img.url)
                .attr('title', tip)
                .attr('alt', tip)
-               .click(function() { showPhotoInPost(img.url); })
+               .click(()=> { showPhotoInPost(img.url); })
             )
             .append($('<figcaption>')
                .html(this.coordinate(f.geometry.coordinates))
@@ -144,7 +150,7 @@ $(function() {
     * Event handlers
     */
    const handle = {
-      zoomEnd: function() {
+      zoomEnd: ()=> {
          updateUrl();
          enableZoomOut();
       },
@@ -215,7 +221,7 @@ $(function() {
       clusterClick: function(e:mapboxgl.MapMouseEvent) {
          const cluster:PointCluster = e.features[0].properties;
          const atZoom = map.getZoom();
-         const zoomIn = function() {
+         const zoomIn = ()=> {
             map.easeTo({
                center: e.lngLat,
                zoom: MAX_ZOOM - atZoom < 2 ? MAX_ZOOM : atZoom + 2
@@ -243,6 +249,8 @@ $(function() {
                   $('i', $markers).removeClass('selected');
                   $('figure:nth-child(' + selected + ')', $photos).show();
                   $('i:nth-child(' + selected + ')', $markers).addClass('selected');
+
+                  ga('send', 'event', eventCategory, 'Navigate Photo Cluster');
                };
                const prev = ()=> { select(-1); };
                const next = ()=> { select(1); };
@@ -261,7 +269,6 @@ $(function() {
                   .append(html.icon('arrow_forward', next)));
             }
          }
-
          ga('send', 'event', eventCategory, 'Click Cluster');
       }
    };
@@ -273,14 +280,18 @@ $(function() {
    window.addEventListener('resize', handle.windowResize);
 
    map.addControl(nav, 'top-right')
-      .on('load', function() {
-         $.getJSON('/geo.json', function(data) {
+      .on('load', ()=> {
+         $.getJSON('/geo.json', data => {
             geoJSON = data;
             $count.html(geoJSON.features.length + ' photos').show();
-            addMapLayers();
+            addBaseLayers();
             // set initial map dimensions
             handle.windowResize();
          });
+
+         if (postKey) {
+            $.getJSON('/' + postKey + '/geo.json', addPostLayers);
+         }
       });
 
    /**
@@ -386,7 +397,7 @@ $(function() {
     */
    function updateUrl() {
       const lngLat = map.getCenter();
-      const url = '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
+      const url = slug + '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
       window.history.replaceState(null, null, url);
    }
 
@@ -411,9 +422,7 @@ $(function() {
    /**
     * Curry function to update canvas cursor.
     */
-   function cursor(name:string = ''):Function {
-      return ()=> { canvas.style.cursor = name; };
-   }
+   const cursor = (name:string = '') => ()=> { canvas.style.cursor = name; };
 
    /**
     * Retrieve photo ID from preview URL and redirect to post with that photo.
@@ -427,9 +436,35 @@ $(function() {
    }
 
    /**
+    * Assign source and create layer for post track
+    *
+    * https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-line
+    */
+   function addPostLayers(track:GeoJSON.Feature<GeoJSON.LineString>) {
+      map.addSource('track', { type: 'geojson', data: track });
+      map.addLayer({
+         id: 'track',
+         type: 'line',
+         source: 'track',
+         layout: {
+            'line-join': 'round',
+            'line-cap': 'butt'
+         },
+         paint: {
+            'line-color': '#9f7',
+            'line-width': 5,
+            'line-opacity': 0.7,
+            'line-dasharray': [1, 1]
+         }
+      });
+
+      if (track) { $('#gpx-download').show(); }
+   }
+
+   /**
     * Assign source and define layers for clustering.
     */
-   function addMapLayers() {
+   function addBaseLayers() {
       map.addSource('photos', {
          type: 'geojson',
          data: geoJSON,

@@ -1,7 +1,6 @@
 @import "elements";
 @import "settings";
 
-@margin: 9px;
 @navHeight: 20px;
 
 html { overflow: hidden; }
@@ -40,7 +39,7 @@ nav {
 
    #zoom-out {
       cursor: pointer;
-      padding-right: 20px;      
+      padding-right: 20px;
       &:hover { color: #ff0; }
       &.disabled {
          .opacity();
@@ -81,11 +80,21 @@ a#back, a#gpx-download {
    cursor: pointer;
    background-color: #fff;
    text-decoration: none;
+   padding: 6px 6px 6px 30px;
    font-family: @sanSerifFont;
    font-weight: bold;
    font-size: 15px;
    .rounded(4px);
-   .opacity(0.7);
+   .opacity(0.8);
+
+   .material-icons {
+      position: absolute;
+      top: 3px;
+      left: 5px;
+      line-height: 1em;
+      padding: 0;
+      margin: 0;
+   }
 
    &:hover {
       color: @hoverColor;
@@ -94,27 +103,8 @@ a#back, a#gpx-download {
    }
 }
 
-a#back {
-   left: @margin + 1;
-   padding: 6px 0 6px 25px;
-   width: 85px;
-
-   .material-icons {
-      position: absolute;
-      top: 6px;
-      left: 7px;
-      width: 10px;
-      display: block;
-   }
-}
-
-a#gpx-download {
-   position: absolute;
-   right: 50px;
-   padding: 6px 6px 6px 10px;
-
-   .material-icons { padding-left: 1px; }
-}
+a#back { left: 10px; }
+a#gpx-download { right: 50px; display: none; }
 
 #legend {
    background-color: #222;
