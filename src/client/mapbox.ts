@@ -68,20 +68,6 @@ $(function() {
     */
    const html = {
       /**
-       * Generate Google material icon HTML
-       *
-       * https://material.io/icons/
-       */
-      icon: function(name:string, handler?:Function):JQuery {
-         const $icon = $('<i>')
-            .addClass('material-icons ' + name)
-            .text(name);
-
-         if (handler !== undefined) { $icon.click(handler); }
-         return $icon;
-      },
-
-      /**
        * Format coordinates
        */
       coordinate: function(pos:number[]):string {
@@ -122,7 +108,7 @@ $(function() {
          $preview
             .addClass(cssClass)
             .append(content)
-            .append(html.icon('close', handle.closePreview))
+            .append(util.html.icon('close', handle.closePreview))
             .show({ complete: handle.previewShown });
       }
    };
@@ -240,14 +226,14 @@ $(function() {
 
                for (let i = 0; i < photos.length; i++) {
                   $photos.append(html.photo(photos[i]));
-                  $markers.append(html.icon('place'));
+                  $markers.append(util.html.icon('place'));
                }
                $('i:first-child', $markers).addClass('selected');
 
                html.photoPreview(e, 'list', $photos, $('<nav>')
-                  .append(html.icon('arrow_back', prev))
+                  .append(util.html.icon('arrow_back', prev))
                   .append($markers)
-                  .append(html.icon('arrow_forward', next)));
+                  .append(util.html.icon('arrow_forward', next)));
             }
          }
 

@@ -45,7 +45,8 @@ gulp.task('js', ()=> {
       gulp.src(jsPath + 'jquery.lazyload.js')
    )
       .pipe(bundle('post','static-map','lazyload','util').as('post', { keep: ['static-map','util'] }))
-      .pipe(bundle('static-map','util').as('category'))
+      .pipe(bundle('mapbox','util').as('mapbox'))
+      .pipe(bundle('static-map').as('category'))
       .pipe(sourcemaps.init())
       .pipe(uglify()).on('error', handleError)
       .pipe(sourcemaps.write('maps', sourceMapConfig))
@@ -78,7 +79,11 @@ function handleError(error) { console.error(error); this.emit('end'); }
  * from the stream and replaced by the target file unless listed in
  * options.keep.
  *
+ * Each file in the stream is passed through each step in the pipe rather than
+ * each step in the pipe receiving all the files.
+ *
  * Based on gulp-concat
+ * @param {string[]} files Names of files to merge into single bundle
  * @see https://github.com/contra/gulp-concat/blob/master/index.js
  */
 const bundle = (...files) => ({
@@ -102,12 +107,12 @@ const bundle = (...files) => ({
 
       function transform(file, enc, cb) {
          const name = file.basename ? file.basename : file.relative;
-         if (files.find(f => name.indexOf(f) >= 0)) {
+         if (files.indexOf(name) >= 0) {
             content.push(file.contents);
             // use first file as template
             if (template == null) { template = file; }
             // if not keeping file then empty callback removes it from stream
-            if (keep.length == 0 || keep.find(k => name.indexOf(k) == -1)) {
+            if (keep.length == 0 || keep.indexOf(name) == -1) {
                cb();
                return;
             }

@@ -8,12 +8,7 @@ export { Cache } from '../cache/cache';
 export { Provider, Token } from '../providers/providers';
 export { Blog, Mock } from '../middleware.d';
 export { JsonLD } from '../json-ld.d';
-export {
-   PostMenu,
-   PageFeature,
-   JsonResponse,
-   JQueryResponse,
-   MapPhoto } from '../client/browser';
+//export { JsonResponse, MapPhoto } from '../client/browser';
 export {
    Library,
    Category,
@@ -51,4 +46,25 @@ export interface MapBounds {
     * longitude and latitude values.
     */
    ne:number[];
+}
+
+//= Duplicates from /src/client/browser.d.ts ==================================
+
+/**
+ * Standard response for administrative actions.
+ */
+export interface JsonResponse {
+   success:boolean;
+   message:string;
+}
+
+/**
+ * GeoJSON properties for post photos.
+ */
+export interface MapPhoto {
+   url?:string;
+   title?:string;
+   partKey?:string;
+   /** Distance from clicked cluster */
+   distance?:number;
 }
