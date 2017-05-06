@@ -44,7 +44,7 @@ gulp.task('js', ()=> {
       tsConfig.src().pipe(tsConfig()),
       gulp.src(jsPath + 'jquery.lazyload.js')
    )
-      .pipe(bundle('post','static-map','lazyload','util').as('post', { keep: ['static-map','util'] }))
+      .pipe(bundle('post','static-map','jquery.lazyload','util').as('post', { keep: ['static-map','util'] }))
       .pipe(bundle('mapbox','util').as('mapbox'))
       .pipe(bundle('static-map').as('category'))
       .pipe(sourcemaps.init())
