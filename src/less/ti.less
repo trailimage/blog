@@ -43,6 +43,51 @@ body {
 
 .clear { clear: both; }
 
+#bug {
+   position: absolute;
+   top: 15px;
+   left: 5px;
+   text-decoration: none;
+
+   @media @mobile { display: none; }
+
+   h1, h2 {
+      margin: 0 0 0 10px;
+      padding: 0;
+      color: rgba(255, 255, 255, 0.1);
+      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+      font-family: 'Oswald', Impact, Arial, sans-serif;
+      text-rendering: optimizeLegibility;
+      font-weight: normal;
+      line-height: 1em;
+   }
+
+   h1 { font-size: 40px; }
+   h2 {
+      font-size: 14px;
+      letter-spacing: 3.4px;
+      text-transform: uppercase;
+      padding: 2px 0 0 5px;
+      color: rgba(255, 255, 255, 0.2);
+   }
+
+   p {
+      margin: 2px 0 0 15px;
+      color: @trimColor;
+      font-size: 14px;
+      line-height: 1.3em;
+      font-family: @sanSerifFont;
+      width: 200px;
+   }
+
+   &:hover {
+      h1, h2, h3 { text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7); .transition(); }
+      h1 { color: rgba(255, 255, 255, 0.2); }
+      h2 { color: rgba(255, 255, 255, 0.4); }
+      p { color: rgba(255, 100, 100, 0.6); }
+   }
+}
+
 header.page {
    position: relative;
 
