@@ -159,9 +159,15 @@ $(function() {
        */
       mapLink: function(this:Element, e:JQueryMouseEventObject) {
          const lngLat = map.getCenter();
-         let link = $(this).data('link');
-         link = link.replace('{lat}', lngLat.lat).replace('{lon}', lngLat.lng).replace('{zoom}', map.getZoom());
-         window.location.href = link;
+         const zoom = map.getZoom();
+         // very rough conversion based on trail-and-error
+         const altitude = (1/(Math.pow(2.3, zoom))) * 375000000;
+
+         window.location.href = $(this).data('link')
+            .replace('{lat}', lngLat.lat)
+            .replace('{lon}', lngLat.lng)
+            .replace('{zoom}', zoom)
+            .replace('{altitude}', altitude);
       },
 
       /**

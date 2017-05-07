@@ -123,7 +123,7 @@ export const map = {
    maxMarkers: 70,
    /** Link patterns to external maps with `lat`, `lon` and `zoom` tokens */
    link: {
-      googleEarth: 'https://earth.google.com/web/@{lat},{lon},965.31871475a,231556.02816705d,35y,359.36588023h,0t,0r',
+      googleEarth: 'https://earth.google.com/web/@{lat},{lon},1100a,{altitude}d,35y,0h,0t,0r',
       // https://earth.google.com/web/@43.04130674,-115.80303058
       gaiaGPS: 'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
    },

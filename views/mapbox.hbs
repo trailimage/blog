@@ -45,11 +45,11 @@
       <div id='photo-count'><img src="/p.png"/><div></div>photos</div>
       <button class='zoom-out disabled'>{{{icon 'zoom_out_map'}}}<p>Zoom Out</p></button>
 {{#if post }}
-      <button class='post-info link'>{{{icon 'info'}}}<p><b>{{post.name}}</b>{{post.description}}</p></button>
+      <button class='post-info'>{{{icon 'info'}}}<p><b>{{post.name}}</b>{{post.description}}</p></button>
    {{#if config.map.allowDownload }}
-      <button class='gpx-download link' href="/{{key}}/gpx" rel="nofollow">{{{icon 'file_download'}}}<p>Download GPX</p></button>
+      <button class='gpx-download link' data-link="/{{post.key}}/gpx" rel="nofollow">{{{icon 'file_download'}}}<p>Download GPX</p></button>
    {{/if}}
-	   <button class='back' data-link="/{{key}}">{{{icon 'assignment_return'}}}<p>View Blog Post</p></button>
+	   <button class='back link' data-link="/{{post.key}}">{{{icon 'assignment_return'}}}<p>View Blog Post</p></button>
 {{/if}}
       <button class='google-earth map-link' data-link='{{{config.map.link.googleEarth}}}'>
          {{{icon '3d_rotation'}}}<p>View in Google Earth</p>
