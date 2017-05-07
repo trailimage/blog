@@ -25,7 +25,8 @@ function view(post:Post, req:Blog.Request, res:Blog.Response) {
       post.getPhotos().then(()=> {
          res.render(template.page.MAPBOX, {
             layout: template.layout.NONE,
-            title: 'Map',
+            title: post.name() + ' Map',
+            description: post.description,
             post,
             key,
             photoID: is.numeric(photoID) ? photoID : 0,

@@ -16,6 +16,7 @@ export {
    Photo,
    Size,
    VideoInfo,
+   Location,
    EXIF } from '../factory/models';
 
 export interface MapSource {

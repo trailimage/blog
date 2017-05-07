@@ -441,7 +441,7 @@ $(function() {
                   'line-opacity': 0.7,
                   'line-dasharray': [1, 0.8]
                }
-            });
+            }, 'photo');
 
          $('#gpx-download').show();
          $('#legend .track').removeClass('hidden');

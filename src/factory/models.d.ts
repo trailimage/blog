@@ -78,6 +78,11 @@ export interface Photo {
    //getExif(): Promise<EXIF>;
 }
 
+export interface Location {
+   lat:number,
+   lon:number
+}
+
 export interface Post {
    id:string;
    key:string;
@@ -100,9 +105,12 @@ export interface Post {
    photos:Photo[];
    photoCount:number;
    photoTagList:string;
+   /** Photo coordinates stored as longitude, latitude */
    photoLocations:number[][];
    /** Top left and bottom right coordinates */
    bounds:MapBounds;
+   /** Center of photo */
+   centroid:Location;
    coverPhoto:Photo;
    /** Whether posts is featured in main navigation */
    feature:boolean;

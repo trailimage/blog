@@ -1,3 +1,4 @@
+import { Location } from '../types/';
 import config from '../config';
 import C from '../constants';
 import index from './';
@@ -64,6 +65,11 @@ function pointDistance(p1:number[], p2:number[]):number {
 const toRadians = (deg:number) => deg * piDeg;
 
 /**
+ * Convert radians to degrees
+ */
+const toDegrees = (rad:number) => rad * 180 / Math.PI;
+
+/**
  * Shortest distance from a point to a segment defined by two points.
  */
 function pointLineDistance(p:number[], p1:number[], p2:number[]):number {
@@ -89,6 +95,41 @@ function pointLineDistance(p:number[], p1:number[], p2:number[]):number {
    Δy = p[index.LAT] - y;
 
    return Δx * Δx + Δy * Δy;
+}
+
+/**
+ * Find center of coordinates. Points are ordered as longitude, latitude.
+ *
+ * http://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
+ */
+function centroid(points:number[][]):Location {
+   const count = points.length;
+   if (count == 0) { return null; }
+   if (count == 1) { return { lon: points[0][index.LON], lat: points[0][index.LAT] }; }
+   const location:Location = { lon: 0, lat: 0 };
+   let x = 0;
+   let y = 0;
+   let z = 0;
+
+   points.forEach(p => {
+      const radLat = toRadians(p[index.LAT]);
+      const radLon = toRadians(p[index.LON]);
+      x += Math.cos(radLat) * Math.cos(radLon);
+      y += Math.cos(radLat) * Math.sin(radLon);
+      z += Math.sin(radLat);
+   });
+   x /= count;
+   y /= count;
+   z /= count;
+
+   const lon = Math.atan2(y, x);
+   const hyp = Math.sqrt(x * x + y * y);
+   const lat = Math.atan2(z, hyp);
+
+   location.lat = toDegrees(lat);
+   location.lon = toDegrees(lon);
+
+   return location;
 }
 
 /**
@@ -144,6 +185,7 @@ function simplify(points:number[][]):number[][] {
 export default {
    speed,
    length,
+   centroid,
    duration,
    toRadians,
    sameLocation,

@@ -4,6 +4,7 @@ import { fromTimeStamp } from '../util/time';
 import is from '../is';
 import re from '../regex';
 import log from '../logger';
+import measure from '../map/measure';
 import config from '../config';
 import photo from './photo.js';
 import videoInfo from './video-info';
@@ -154,7 +155,7 @@ function name(this:Post|any):string {
 }
 
 /**
- * Coordinates used on Mapbox maps.
+ * Coordinates used on Mapbox maps stored in longitude, latitude order.
  *
  * https://www.mapbox.com/api-documentation/#static
  */
@@ -193,6 +194,7 @@ function updatePhotoLocations(this:Post) {
    }
    this.photoLocations = locations.length > 0 ? locations : null;
    this.bounds = bounds;
+   this.centroid = measure.centroid(locations);
 }
 
 /**
@@ -258,6 +260,7 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
       // photo marker path for Mapbox static map
       photoLocations: null,
       bounds: null,
+      centroid: null,
 
       makeSeriesStart,
       ungroup,

@@ -1,7 +1,19 @@
 <html>
 <head>
 	{{> head-meta}}
-   <meta name="robots" content="noindex">
+{{#if post}}
+   {{! https://developers.facebook.com/docs/reference/opengraph/object-type/place/ }}
+   <meta property='og:title' content='{{post.name}} Map'/>
+   <meta property='fb:app_id' content='{{config.facebook.appID}}'/>
+   <meta property='fb:admins' content='{{config.facebook.adminID}}' />
+   <meta property='og:url' content='{{config.site.url}}/{{post.key}}/map'/>
+   <meta property='og:image' content='{{post.bigThumbURL}}'/>
+   <meta property='og:type' content='place'/>
+   {{#if post.centroid}}
+   <meta property='place:location:longitude' content="{{post.centroid.lon}}"/>
+   <meta property='place:location:latitude' content="{{post.centroid.lat}}"/>
+   {{/if}}
+{{/if}}
    <link href='/img/favicon.ico' rel='shortcut icon'/>
    <link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
    {{> ga}}
@@ -14,7 +26,7 @@
       {{! values used within mapbox.js }}
       mapboxgl.accessToken = '{{config.mapbox.accessToken}}';
       var mapStyle = '{{config.mapbox.style.dynamic}}';
-{{#if post }}
+{{#if post}}
       var post = {
          key: '{{key}}',
          photoID: {{photoID}},
