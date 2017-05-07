@@ -31,7 +31,7 @@ $(function() {
    const eventCategory = 'Map';
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
-   const $zoomOut = $('#zoom-out');
+   const $zoomOut = $('nav .zoom-out');
    const $legendToggle = $('#legend .toggle');
    const slug = post ? '/' + post.key : '';
    const qs = parseUrl();
@@ -147,6 +147,24 @@ $(function() {
       },
 
       /**
+       * Click on button with `data-link` attribute.
+       */
+      buttonClick: function(this:Element, e:JQueryMouseEventObject) {
+         window.location.href = $(this).data('link');
+      },
+
+      /**
+       * Click on button with `data-link` attribute having `lat`, `lon`
+       * and `zoom` tokens.
+       */
+      mapLink: function(this:Element, e:JQueryMouseEventObject) {
+         const lngLat = map.getCenter();
+         let link = $(this).data('link');
+         link = link.replace('{lat}', lngLat.lat).replace('{lon}', lngLat.lng).replace('{zoom}', map.getZoom());
+         window.location.href = link;
+      },
+
+      /**
        * Respond to mouse click on photo marker. When preview is shown, start
        * listening for map interaction events to hide the preview.
        */
@@ -248,6 +266,7 @@ $(function() {
    if (qs.center) { enableZoomOut(); }
 
    $legendToggle.click(handle.legendToggle);
+   $('nav button.map-link').click(handle.mapLink);
 
    window.addEventListener('resize', handle.windowResize);
 
@@ -258,7 +277,7 @@ $(function() {
       .on('load', ()=> {
          $.getJSON('/geo.json', data => {
             geoJSON = data;
-            $count.show().find('span').html(geoJSON.features.length + ' photos');
+            $count.find('div').html(geoJSON.features.length.toString());
             addBaseLayers();
             addMapHandlers();
             // set initial map dimensions
@@ -443,7 +462,7 @@ $(function() {
                }
             }, 'photo');
 
-         $('#gpx-download').show();
+         $('nav button.link').click(handle.buttonClick);
          $('#legend .track').removeClass('hidden');
       }
 

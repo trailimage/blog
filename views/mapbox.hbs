@@ -32,7 +32,6 @@
          photoID: {{photoID}},
          bounds: {{{json post.bounds}}}
       };
-      var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};
 {{else}}
       var post = null;
 {{/if}}
@@ -42,15 +41,23 @@
 </head>
 <body>
    <nav>
-      <img class='logo' src='/img/logo-small.png'/>
-      <h1><a href="/" alt="Home Page" title="Home Page">{{config.site.title}}</a></h1>
-      <div id='photo-count'><img src="/p.png"/><span></span></div>
-      <div id='zoom-out' class="disabled">{{{icon 'zoom_out_map'}}} Zoom Out</div>
+      <a href='/' title='{{config.site.title}} Home'><img class='logo' src='/img/logo-small.png'/></a>
+      <div id='photo-count'><img src="/p.png"/><div></div>photos</div>
+      <button class='zoom-out disabled'>{{{icon 'zoom_out_map'}}}<p>Zoom Out</p></button>
+{{#if post }}
+      <button class='post-info link'>{{{icon 'info'}}}<p><b>{{post.name}}</b>{{post.description}}</p></button>
+   {{#if config.map.allowDownload }}
+      <button class='gpx-download link' href="/{{key}}/gpx" rel="nofollow">{{{icon 'file_download'}}}<p>Download GPX</p></button>
+   {{/if}}
+	   <button class='back' data-link="/{{key}}">{{{icon 'assignment_return'}}}<p>View Blog Post</p></button>
+{{/if}}
+      <button class='google-earth map-link' data-link='{{{config.map.link.googleEarth}}}'>
+         {{{icon '3d_rotation'}}}<p>View in Google Earth</p>
+      </button>
+      <button class='gaia-gps map-link' data-link='{{{config.map.link.gaiaGPS}}}'>
+         {{{icon 'system_update'}}}<p><b>View in Gaia GPS</b>Draw routes and download to the mobile app</p>
+      </button>
    </nav>
-{{#if key }}
-   <a id="gpx-download" href="/{{key}}/gpx" rel="nofollow">{{{icon 'file_download'}}}Download GPX</a>
-	<a id="back" href="/{{key}}">{{{icon 'keyboard_arrow_left'}}}View Post</a>
-{{/if }}
 
    <ul id='legend'>
       <li class='toggle'>
