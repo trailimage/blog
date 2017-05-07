@@ -18,11 +18,10 @@ describe('Map', ()=> {
    it('displays map for post', done => {
       res.onEnd = ()=> {
          const options = expectTemplate(template.page.MAPBOX);
-         expect(options).has.property('title', 'Map');
-         expect(options).has.property('key', 'kuna-cave-fails-to-impress');
-         expect(options).has.property('photoID', 0);
          expect(options).has.property('post');
-         expect(options.post).has.property('originalTitle', 'Kuna Cave Fails to Impress');
+         expect(options).has.property('title', 'Kuna Cave Fails to Impress Map');
+         expect(options.post).has.property('key', 'kuna-cave-fails-to-impress');
+         expect(options).has.property('photoID', 0);
          done();
       };
       req.params[ph.POST_KEY] = 'kuna-cave-fails-to-impress';
@@ -32,7 +31,7 @@ describe('Map', ()=> {
    it('displays map for series', done => {
       res.onEnd = ()=> {
          const options = expectTemplate(template.page.MAPBOX);
-         expect(options).has.property('title', 'Map');
+         expect(options).has.property('title', 'Brother Ride 2015: Huckleberry Lookout Map');
          expect(options).has.property('photoID', 0);
          expect(options).has.property('post');
          expect(options.post).has.property('id', '72157658679070399');

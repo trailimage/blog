@@ -29,7 +29,7 @@ describe('Factory', ()=> {
    });
 
    it('creates GeoJSON for posts', ()=>
-      factory.map.forPost('owyhee-snow-and-sand/lowlands').then(item => {
+      factory.map.track('owyhee-snow-and-sand/lowlands').then(item => {
          expect(item).to.exist;
          expect(is.cacheItem(item)).is.true;
       })
