@@ -255,7 +255,19 @@ $(function() {
 
                for (let i = 0; i < photos.length; i++) {
                   $photos.append(html.photo(photos[i]));
-                  $markers.append(util.html.icon('place'));
+               }
+
+               if (photos.length > MAX_IN_CAROUSEL) {
+                  $markers.addClass('too-many');
+                  // use the same <i> tag that icons use to simplify CSS
+                  for (let i = 0; i < photos.length; i++) {
+                     $markers.append($('<i>').html((i + 1).toString()));
+                  }
+                  $markers.append('of ' + photos.length);
+               } else {
+                  for (let i = 0; i < photos.length; i++) {
+                     $markers.append(util.html.icon('place'));
+                  }
                }
                $('i:first-child', $markers).addClass('selected');
 
@@ -263,6 +275,7 @@ $(function() {
                   .append(util.html.icon('arrow_back', prev))
                   .append($markers)
                   .append(util.html.icon('arrow_forward', next)));
+
             }
          }
          util.log.event(eventCategory, 'Click Cluster');

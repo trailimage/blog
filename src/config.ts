@@ -121,10 +121,9 @@ export const map = {
    allowDownload: true,
    /** Maximum number of photo markers to show on Mapbox static map */
    maxMarkers: 70,
-   /** Link patterns to external maps with `lat`, `lon` and `zoom` tokens */
+   /** Link patterns to external maps with `lat`, `lon`, `zoom` and `altitude` tokens */
    link: {
       googleEarth: 'https://earth.google.com/web/@{lat},{lon},1100a,{altitude}d,35y,0h,0t,0r',
-      // https://earth.google.com/web/@43.04130674,-115.80303058
       gaiaGPS: 'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
    },
    /** Idaho map sources */

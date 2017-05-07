@@ -6,7 +6,7 @@
 
 html { overflow: hidden; }
 body { margin: 0; padding: 0; background: none; }
-nav {
+body > nav {
    position: absolute;
    width: @navWidth;
    top: 0;
@@ -226,12 +226,24 @@ nav {
          top: 0;
          position: absolute;
          text-align: center;
+
          .material-icons.place {
             font-size: 12px;
             padding: 3px 0 0;
             margin: 0 -1px;
             color: #444;
             &.selected { color: #f77; }
+         }
+         &.too-many {
+            font-size: 12px;
+            padding-top: 2px;
+
+            i {
+               display: none;
+               font-style: normal;
+               margin-right: 4px;
+               &.selected { display: inline; }
+            }
          }
       }
    }
