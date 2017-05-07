@@ -32,6 +32,7 @@ $(function() {
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
    const $zoomOut = $('#zoom-out');
+   const $legendToggle = $('#legend .toggle');
    const slug = post ? '/' + post.key : '';
    const qs = parseUrl();
 
@@ -57,6 +58,8 @@ $(function() {
     * Whether zoom-out button is enabled
     */
    let zoomOutEnabled = false;
+   let legendVisible = true;
+   let showPositionInUrl = false;
 
    /**
     * Cache GeoJSON photos so it can be reassigned if map style changes
@@ -171,6 +174,8 @@ $(function() {
 
       legendToggle: function(this:Element) {
          $(this).parents('ul').toggleClass('collapsed');
+         legendVisible = !legendVisible;
+         util.setting.showMapLegend = legendVisible;
          util.log.event(eventCategory, 'Toggle Legend');
       },
 
@@ -236,29 +241,38 @@ $(function() {
                   .append(util.html.icon('arrow_forward', next)));
             }
          }
-
          util.log.event(eventCategory, 'Click Cluster');
       }
    };
 
    if (qs.center) { enableZoomOut(); }
 
-   $('#legend .toggle i').click(handle.legendToggle);
+   $legendToggle.click(handle.legendToggle);
 
    window.addEventListener('resize', handle.windowResize);
+
+   // legend defaults open so toggle close if specified
+   if (!util.setting.showMapLegend) { $legendToggle.click(); }
 
    map.addControl(nav, 'top-right')
       .on('load', ()=> {
          $.getJSON('/geo.json', data => {
             geoJSON = data;
-            $count.html(geoJSON.features.length + ' photos').show();
+            $count.show().find('span').html(geoJSON.features.length + ' photos');
             addBaseLayers();
+            addMapHandlers();
             // set initial map dimensions
             handle.windowResize();
          });
 
-         if (post.key) {
+         if (post) {
+            post.bounds.sw[0] -= 0.01;
+            post.bounds.sw[1] -= 0.01;
+            post.bounds.ne[0] += 0.01;
+            post.bounds.ne[1] += 0.01;
             $.getJSON('/' + post.key + '/geo.json', addPostLayers);
+         } else {
+            showPositionInUrl = true;
          }
       });
 
@@ -364,9 +378,11 @@ $(function() {
     * Update URL with current zoom level and map center.
     */
    function updateUrl() {
-      const lngLat = map.getCenter();
-      const url = slug + '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
-      window.history.replaceState(null, null, url);
+      if (showPositionInUrl) {
+         const lngLat = map.getCenter();
+         const url = slug + '/map?lat=' + lngLat.lat + '&lon=' + lngLat.lng + '&zoom=' + map.getZoom();
+         window.history.replaceState(null, null, url);
+      }
    }
 
    /**
@@ -404,34 +420,39 @@ $(function() {
    }
 
    /**
-    * Assign source and create layer for post track
+    * Assign source and create layer for post track.
     *
     * https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-line
     */
-   function addPostLayers(track:GeoJSON.Feature<GeoJSON.LineString>) {
-      map.addSource('track', { type: 'geojson', data: track });
-      map.addLayer({
-         id: 'track',
-         type: 'line',
-         source: 'track',
-         layout: {
-            'line-join': 'round',
-            'line-cap': 'butt'
-         },
-         paint: {
-            'line-color': '#f22',
-            'line-width': 5,
-            'line-opacity': 0.7,
-            'line-dasharray': [1, 0.8]
-         }
+   function addPostLayers(track:GeoJSON.FeatureCollection<GeoJSON.LineString>) {
+      if (track.features.length > 0) {
+         map.addSource('track', { type: 'geojson', data: track })
+            .addLayer({
+               id: 'track',
+               type: 'line',
+               source: 'track',
+               layout: {
+                  'line-join': 'round',
+                  'line-cap': 'butt'
+               },
+               paint: {
+                  'line-color': '#f22',
+                  'line-width': 5,
+                  'line-opacity': 0.7,
+                  'line-dasharray': [1, 0.8]
+               }
+            });
+
+         $('#gpx-download').show();
+      }
+
+      // do not update URL with automatic reposition
+      map.once('zoomend', ()=> {
+         window.setTimeout(() => { showPositionInUrl = true; }, 500);
       });
+
       // https://www.mapbox.com/mapbox-gl-js/api/#map#fitbounds
       map.fitBounds([post.bounds.sw, post.bounds.ne]);
-
-      if (track) {
-         $('#gpx-download').show();
-         $('#legend #track').show();
-      }
    }
 
    /**
@@ -500,8 +521,12 @@ $(function() {
             'circle-opacity': markerOpacity
          }
       });
+   }
 
-      // https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/mapbox-gl/index.d.ts
+   /**
+    * https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/mapbox-gl/index.d.ts
+    */
+   function addMapHandlers() {
       map.on('mouseenter', 'cluster', cursor('pointer'))
          .on('mouseleave', 'cluster', cursor())
          .on('mouseenter', 'photo', cursor('pointer'))

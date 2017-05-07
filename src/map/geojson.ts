@@ -11,7 +11,7 @@ import measure from './measure';
 import transform from './transform';
 import { DOMParser as DOM } from 'xmldom';
 
-const type = {
+export const type = {
    FEATURE: 'Feature',
    COLLECTION: 'FeatureCollection',
    POINT: 'Point',
@@ -22,7 +22,7 @@ const type = {
 /**
  * Empty feature collection.
  */
-const features = ()=> ({
+export const features = ()=> ({
    type: type.COLLECTION,
    features: [] as GeoJSON.Feature<any>[]
 }  as GeoJSON.FeatureCollection<any>);
@@ -30,7 +30,7 @@ const features = ()=> ({
 /**
  * Basic GeoJSON geometry.
  */
-const geometry = (type:string, coordinates:number[]|number[][]|number[][][]) => ({
+export const geometry = (type:string, coordinates:number[]|number[][]|number[][][]) => ({
    type,
    coordinates
 }  as GeoJSON.DirectGeometryObject);
@@ -112,7 +112,7 @@ function lineFromKML(node:Element) {
  * http://geojson.org/geojson-spec.html
  * https://github.com/mapbox/togeojson
  */
-function featuresFromGPX(gpxString:string):GeoJSON.FeatureCollection<any> {
+export function featuresFromGPX(gpxString:string):GeoJSON.FeatureCollection<any> {
    const geo = features();
    let gpx = null;
 
@@ -136,7 +136,7 @@ function featuresFromGPX(gpxString:string):GeoJSON.FeatureCollection<any> {
  *
  * http://geojson.org/geojson-spec.html
  */
-const pointFromPhoto = (photo:Photo, partKey?:string) => {
+export const pointFromPhoto = (photo:Photo, partKey?:string) => {
    const properties:MapPhoto = { url: photo.size.preview.url };
 
    if (partKey !== undefined) {
@@ -174,7 +174,7 @@ function parseNodes<T extends GeoJSON.GeometryObject>(
  * Curried method captures map `sourceName` to faciliate custom transformation
  * look-ups.
  */
-const featuresFromKML = (sourceName:string) => (kml:string|Document) => {
+export const featuresFromKML = (sourceName:string) => (kml:string|Document) => {
    const geo = features();
    let doc:Document = null;
 

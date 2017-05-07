@@ -14,12 +14,22 @@ const util = {
          if (!window.localStorage) { return; }
          localStorage.setItem(key, value);
       },
+
       /**
        * Load setting from browser storage.
        */
       load(key:string):string {
          if (!window.localStorage) { return null; }
          return localStorage.getItem(key);
+      },
+
+      set showMapLegend(value:boolean) {
+          util.setting.save('map-legend', value ? 'true' : 'false');
+      },
+
+      get showMapLegend():boolean {
+         const value = util.setting.load('map-legend');
+         return value ? value == 'true' : true;
       }
    },
    html: {

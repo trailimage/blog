@@ -21,14 +21,17 @@
          bounds: {{{json post.bounds}}}
       };
       var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};
+{{else}}
+      var post = null;
 {{/if}}
 	</script>
 	<script src='/js/mapbox.js' type='text/javascript' defer></script>
 </head>
 <body>
    <nav>
+      <img class='logo' src='/img/logo-small.png'/>
       <h1><a href="/" alt="Home Page" title="Home Page">{{config.site.title}}</a></h1>
-      <div id='photo-count'></div>
+      <div id='photo-count'><img src="/p.png"/><span></span></div>
       <div id='zoom-out' class="disabled">{{{icon 'zoom_out_map'}}} Zoom Out</div>
    </nav>
 {{#if key }}
@@ -43,18 +46,19 @@
          {{{ icon 'expand_less' }}}
       </li>
       <li id='photo'>Click to see photo<img src="/p.png"/></li>
-      <li id='track'>GPX Track</li>
+      <li id='track' class='hidden'>GPX Track</li>
       <li id='highway'>Highway</li>
       <li id='automobile'>Automobile</li>
       <li id='jeep'>Jeep</li>
       <li id='atv'>ATV</li>
       <li id='motorcycle'>Motorcycle</li>
       <li id='non-motor'>Non-motorized</li>
+      <li id='osm-path'>Informal path</li>
       <li id='seasonal'>Seasonal</li>
       <li class='credit'>
          <img src='/img/idaho-parks-rec.png'>
-         Trail data from <a href="http://trails.idaho.gov">Idaho Parks &amp; Recreation</a>;
-         mine and hot spring data from <a href="http://www.idahogeology.org/Products/reverselook.asp?switch=title&value=Database_of_the_Mines_and_Prospects_of_Idaho">Idaho Geological Survey</a>
+         Trail data from <a href="http://trails.idaho.gov">Idaho Parks &amp; Recreation</a> and
+         mine data from <a href="http://www.idahogeology.org/Products/reverselook.asp?switch=title&value=Database_of_the_Mines_and_Prospects_of_Idaho">Idaho Geological Survey</a>
       </li>
    </ul>
    <div id='photo-preview'></div>

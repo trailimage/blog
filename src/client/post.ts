@@ -224,7 +224,7 @@ $(function() {
       }
 
       /**
-       * Get CSS image offset based on mouse position
+       * Get CSS image offset based on mouse position.
        */
       CSS(m:number):string {
          const subtract = (this.extra > 0) ? 0 : ((this.window / 2) - m) * this.panRatio;

@@ -18,7 +18,12 @@ const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
 }
 
-const tsConfig = ts.createProject('tsconfig.browser.json');
+/**
+ * https://github.com/ivogabe/gulp-typescript
+ */
+const tsConfig = ts.createProject('tsconfig.browser.json', {
+   noEmitOnError: true
+});
 
 // https://github.com/plus3network/gulp-less
 // https://github.com/jonathanepollack/gulp-minify-css
@@ -72,7 +77,11 @@ const lessPath = names => names.map(n => './src/less/' + n + '.less');
  * @param {object} error
  * @see http://stackoverflow.com/questions/23971388/prevent-errors-from-breaking-crashing-gulp-watch
  */
-function handleError(error) { console.error(error); this.emit('end'); }
+function handleError(error) {
+   console.error(error);
+
+   this.emit('end');
+}
 
 /**
  * Bundle list of Javascript files as the target file. Source files are removed
@@ -124,7 +133,7 @@ const bundle = (...files) => ({
       // create merged file and place in stream
       // `this` refers to current stream (array of vinyl files)
       function finish(cb) {
-         if (content.length > 0) {
+         if (content.length == files.length) {
             const merged = template.clone({ contents: false });
             merged.path = path.join(merged.base, target);
             merged.contents = Buffer.concat(content);

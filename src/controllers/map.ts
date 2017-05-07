@@ -15,7 +15,7 @@ import { route as ph, mimeType, httpStatus, header, encoding } from '../constant
 let google = realGoogle;
 
 /**
- * Map screen loads then makes AJAX call to fetch data
+ * Map screen loads then makes AJAX call to fetch data.
  */
 function view(post:Post, req:Blog.Request, res:Blog.Response) {
    if (is.value(post)) {
@@ -57,10 +57,10 @@ function blog(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * Compressed GeoJSON of all post photos
+ * Compressed GeoJSON of all site photos.
  */
-function blogJSON(req:Blog.Request, res:Blog.Response) {
-   factory.map.forBlog()
+function photoJSON(req:Blog.Request, res:Blog.Response) {
+   factory.map.photos()
       .then(item => { res.sendCompressed(mimeType.JSON, item); })
       .catch(err => {
          log.error(err);
@@ -69,10 +69,10 @@ function blogJSON(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * Compressed GeoJSON of photos and tracks for single post as zipped byte array
+ * Compressed GeoJSON of track for post.
  */
-function postJSON(req:Blog.Request, res:Blog.Response) {
-   factory.map.forPost(req.params[ph.POST_KEY])
+function trackJSON(req:Blog.Request, res:Blog.Response) {
+   factory.map.track(req.params[ph.POST_KEY])
       .then(item => { res.sendCompressed(mimeType.JSON, item); })
       .catch(err => {
          log.error(err);
@@ -151,8 +151,8 @@ export default {
    series,
    blog,
    json: {
-      blog: blogJSON,
-      post: postJSON
+      blog: photoJSON,
+      post: trackJSON
    },
    source,
    // inject different data providers

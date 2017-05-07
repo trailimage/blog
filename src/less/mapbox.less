@@ -16,11 +16,19 @@ nav {
    background-color: #444;
    font-family: @sanSerifFont;
 
+   .logo {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: @navHeight;
+      background-color: @lightTrimColor;
+   }
+
    h1 {
       position: absolute;
       margin: 0;
       padding: 0;
-      left: 10px;
+      left: @navHeight + 5;
       font-size: 14px;
       font-weight: bold;
       letter-spacing: 0.3em;
@@ -54,7 +62,9 @@ nav {
    }
 
    #photo-count {
+      display: none;
       padding-right: 10px;
+      img { padding-right: 5px; }
    }
 }
 
@@ -120,7 +130,7 @@ a#gpx-download { right: 50px; display: none; }
       list-style: none;
       border-bottom: 2px solid #fff;
       padding-bottom: 2px;
-      margin-bottom: 10px;
+      margin-bottom: 9px;
 
       &.toggle {
          border: none;
@@ -146,19 +156,27 @@ a#gpx-download { right: 50px; display: none; }
          padding: 10px 0;
 
          img { float: right; }
-         a { color: #dfa; }
+         a {
+            color: #cdb;
+            &:hover { color: #dfa; }
+         }
       }
    }
 
    #photo {
       border: none;
       padding-bottom: 4px;
-      img { padding: 3px 0 0 6px; }
+      line-height: 1.2em;
+
+      img {
+         padding: 0 0 1px 6px;
+         vertical-align: bottom;
+      }
    }
    #track {
-      display: none;
       border-color: #f22;
       border-bottom-style: dashed;
+      &.hidden { display: none; }
    }
    #highway { border-color: #df0; }
    #automobile { border-color: #fff; }
@@ -166,6 +184,7 @@ a#gpx-download { right: 50px; display: none; }
    #atv { border-color: #82d; }
    #motorcycle { border-color: #f90; }
    #non-motor { border-color: #f28; }
+   #osm-path { border-color: #0cf; }
    #seasonal { border-bottom-style: dotted; }
 
    &.collapsed {
@@ -177,7 +196,9 @@ a#gpx-download { right: 50px; display: none; }
          &.toggle {
             display: block;
             padding-bottom: 0;
+            cursor: pointer;
             p { display: block; }
+            i { top: 2px; right: 10px; }
             .expand_less { display: block; top: 5px; }
             .expand_more { display: none; }
          }
@@ -243,7 +264,7 @@ a#gpx-download { right: 50px; display: none; }
       font-weight: bold;
       top: 8px;
       left: 8px;
-      .opacity();
+      .opacity(0.8);
       color: #fff;
       cursor: pointer;
       &:hover { .opacity(1); }
