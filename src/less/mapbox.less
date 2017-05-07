@@ -150,6 +150,32 @@ a#gpx-download { right: 50px; display: none; }
          }
       }
 
+      &.photo {
+         border: none;
+         padding-bottom: 4px;
+         line-height: 1.2em;
+
+         img {
+            padding: 0 0 1px 6px;
+            vertical-align: bottom;
+         }
+      }
+
+      &.track {
+         border-color: #f22;
+         border-bottom-style: dashed;
+         &.hidden { display: none; }
+      }
+
+      &.highway { border-color: #df0; }
+      &.automobile { border-color: #fff; }
+      &.jeep { border-color: #7e7; }
+      &.atv { border-color: #82d; }
+      &.motorcycle { border-color: #f90; }
+      &.non-motor { border-color: #f28; }
+      &.osm-path { border-color: #0cf; }
+      &.seasonal { border-bottom-style: dotted; }
+
       &.credit {
          border: none;
          font-size: 11px;
@@ -162,30 +188,6 @@ a#gpx-download { right: 50px; display: none; }
          }
       }
    }
-
-   #photo {
-      border: none;
-      padding-bottom: 4px;
-      line-height: 1.2em;
-
-      img {
-         padding: 0 0 1px 6px;
-         vertical-align: bottom;
-      }
-   }
-   #track {
-      border-color: #f22;
-      border-bottom-style: dashed;
-      &.hidden { display: none; }
-   }
-   #highway { border-color: #df0; }
-   #automobile { border-color: #fff; }
-   #jeep { border-color: #7e7; }
-   #atv { border-color: #82d; }
-   #motorcycle { border-color: #f90; }
-   #non-motor { border-color: #f28; }
-   #osm-path { border-color: #0cf; }
-   #seasonal { border-bottom-style: dotted; }
 
    &.collapsed {
       padding-bottom: 0;

@@ -65,7 +65,18 @@ interface MapPhoto {
 interface MapPost {
    key:string;
    photoID:number;
-   bounds:{ sw:number[]; ne:number[] };
+   bounds:{
+      /**
+       * Southwest corner as lon, lat. For the U.S. this is the smallest
+       * longitude and latitude values.
+       */
+      sw:number[];
+      /**
+       * Northeast corner as lon, lat. For the U.S. this is the largest
+       * longitude and latitude values.
+       */
+      ne:number[];
+   };
 }
 
 interface PointCluster { point_count?: number; }

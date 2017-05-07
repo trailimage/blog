@@ -444,9 +444,10 @@ $(function() {
             });
 
          $('#gpx-download').show();
+         $('#legend .track').removeClass('hidden');
       }
 
-      // do not update URL with automatic reposition
+      // avoid updating URL with automatic reposition
       map.once('zoomend', ()=> {
          window.setTimeout(() => { showPositionInUrl = true; }, 500);
       });

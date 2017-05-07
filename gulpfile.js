@@ -19,11 +19,12 @@ const sourceMapConfig = {
 }
 
 /**
+ * TypeScript configuration should set noEmitOnError=true to keep incremental
+ * compilation from building and caching bad bundles.
+ *
  * https://github.com/ivogabe/gulp-typescript
  */
-const tsConfig = ts.createProject('tsconfig.browser.json', {
-   noEmitOnError: true
-});
+const tsConfig = ts.createProject('tsconfig.browser.json');
 
 // https://github.com/plus3network/gulp-less
 // https://github.com/jonathanepollack/gulp-minify-css
@@ -88,8 +89,8 @@ function handleError(error) {
  * from the stream and replaced by the target file unless listed in
  * options.keep.
  *
- * Each file in the stream is passed through each step in the pipe rather than
- * each step in the pipe receiving all the files.
+ * The TypeScript compiler should be configured not to emit if there are errors
+ * otherwise this method caches bad files.
  *
  * Based on gulp-concat
  * @param {string[]} files Names of files to merge into single bundle
