@@ -828,12 +828,13 @@ div.caption {
    // mobile caption
    @media @mobile {
       padding-top: 0;
-      font-size: @fontSize + 3;
+      font-size: @fontSize + 2;
       line-height: 1.3em;
 
       p {
-         padding: 0 1em 0.3em;
+         padding: 0 0.7em 0.3em;
          &:first-child, &.first { padding-top: 0; }
+         &:last-child { padding-bottom: 1em; }
       }
 
       blockquote {
@@ -855,8 +856,10 @@ div.caption {
          background-color: #333;
          margin: 6px 0 25px;
          padding: 6px 5px 0 25px;
+         color: @mobileFootnoteColor;
 
          li {
+            padding-bottom: 8px;
             span { color: darken(@mobileTextColor, 30%); }
             &.credit {
                text-indent: -8px;
