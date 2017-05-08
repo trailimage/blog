@@ -74,3 +74,15 @@ a {
    &.motorcycle { background-position: @modeSize * -2, 0; }
    &.jeep { background-position: @modeSize * -3, 0; }
 }
+
+.keyframes(@name; @arguments) {
+   @-moz-keyframes @name { @arguments(); }
+   @-webkit-keyframes @name { @arguments(); }
+   @keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+   -webkit-animation: @arguments;
+   -moz-animation: @arguments;
+   animation: @arguments;
+}

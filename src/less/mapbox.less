@@ -62,6 +62,14 @@ body > nav {
          z-index: 200;
       }
 
+      &:not(:active) {
+         transition: background-color 1000ms linear;
+      }
+
+      &:active {
+         background: @mobileLinkColor;
+      }
+
       &:hover {
          p { display: block; }
          .opacity(1);
@@ -380,3 +388,9 @@ body > nav {
       }
    }
 }
+
+.keyframes(button-press; {
+   0% { color: #fff; }
+   50% { color: #ff0; }
+   100% { color: #fff; }
+});

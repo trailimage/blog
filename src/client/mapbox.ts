@@ -158,6 +158,27 @@ $(function() {
       },
 
       /**
+       * Copy current URL to clipboard.
+       *
+       * https://css-tricks.com/native-browser-copy-clipboard/
+       */
+      copyUrl: function(this:Element, e:JQueryMouseEventObject) {
+         const $temp = $('<textarea>')
+            .text(window.location.href)
+            .appendTo(document.body)
+            .hide();
+         const range = document.createRange();
+         try {
+            range.selectNode($temp[0]);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+         } catch (ex) {
+            console.error(ex);
+         }
+         $temp.remove();
+      },
+
+      /**
        * Click on button with `data-link` attribute.
        */
       buttonClick: function(this:Element, e:JQueryMouseEventObject) {
@@ -303,6 +324,7 @@ $(function() {
    // legend nav button only visible on mobile
    $('nav button.toggle-legend').click(handle.legendToggle);
    $('nav button.map-link').click(handle.mapLink);
+   $('nav button.copy-url').click(handle.copyUrl);
 
    window.addEventListener('resize', handle.windowResize);
 
