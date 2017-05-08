@@ -6,6 +6,7 @@
    @tabWidth: 40px;
    @viewWidth: (@thumbWidth + 5) * 3;
    @mobileTabWidth: 28px;
+   @mobileTagWidth: 150px;
 
    @media @mobile {
       a {
@@ -23,7 +24,7 @@
       display: block;
       text-align: center;
 
-      @media @mobile { top: -50px; }
+      @media @mobile { display: none; }
    }
 
    #wait {
@@ -106,6 +107,7 @@
             white-space: nowrap;
             font-size: 14px;
             line-height: 1.3em;
+            text-overflow: ellipsis;
          }
       }
 
@@ -118,12 +120,11 @@
       }
 
       @media @mobile {
-         border-right: 1px solid #333;
-         width: @contentWidth - (@viewWidth + @mobileTabWidth + 7);
+         width: @mobileTagWidth;
 
          div {
             a {
-               font-size: 22px;
+               font-size: 18px;
                line-height: 3em;
                text-align: right;
 
@@ -161,14 +162,27 @@
       }
 
       @media @mobile {
+         float: none;
+         position: absolute;
+         width: auto;
+         left: @mobileTabWidth + @mobileTagWidth + 10;
+         right: 0;
+         top: 0;
          h4 {
+            font-size: 16px;
+            padding-right: 10px;
+            text-align: center;
             color: @mobileTextColor;
             font-weight: 400;
             text-shadow: none;
          }
          a {
-            img { border: none; }
+            float: left;
+            img { border: none; padding: 2px; }
          }
+      }
+      @media @phone {
+         a img { zoom: 0.6; }
       }
    }
 }
