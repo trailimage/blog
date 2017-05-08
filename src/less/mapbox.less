@@ -2,10 +2,22 @@
 @import "settings";
 
 @navWidth: 55px;
+@mobileNavWidth: 45px;
 @formColor: #252825;
 
 html { overflow: hidden; }
-body { margin: 0; padding: 0; background: none; }
+body {
+   margin: 0;
+   padding: 0;
+   background: none;
+   span.mobile-text { display: none; }
+
+   @media @mobile {
+      span.mobile-text { display: inline; }
+      span.desktop-text { display: none; }
+   }
+}
+
 body > nav {
    position: absolute;
    width: @navWidth;
@@ -16,7 +28,6 @@ body > nav {
    background-color: @formColor;
    font-family: @sanSerifFont;
    padding: @navWidth 0 0;
-   //.drop-shadow(0, 0, 20px, 1);
 
    .logo {
       position: absolute;
@@ -61,6 +72,8 @@ body > nav {
          cursor: default;
       }
 
+      &.toggle-legend { display: none; }
+
       &.post-info, &.gaia-gps {
          p {
             text-align: left;
@@ -77,9 +90,19 @@ body > nav {
       }
       &.post-info {
          p b { font-size: 14px; }
-         @media @mobile { display: none; }
       }
       &.gaia-gps p b { font-weight: normal; }
+   }
+
+   @media @mobile {
+      width: @mobileNavWidth;
+      padding-top: @mobileNavWidth;
+      .logo { width: @mobileNavWidth; }
+      button {
+         width: @mobileNavWidth;
+         &.gaia-gps, &.post-info { display: none; }
+         &.toggle-legend { display: block; }
+      }
    }
 
    #photo-count {
@@ -99,6 +122,8 @@ body > nav {
    left: @navWidth;
    right: 0;
    position: absolute;
+
+   @media @mobile { left: @mobileNavWidth; }
 }
 
 #legend, #photo-preview {
@@ -199,6 +224,13 @@ body > nav {
          }
       }
       &:hover { .opacity(1); }
+
+      @media @mobile { display: none; }
+   }
+
+   @media @mobile {
+      bottom: 40px;
+      li.toggle { display: none; }
    }
 }
 
@@ -210,6 +242,7 @@ body > nav {
    min-width: 200px;
 
    nav {
+      position: relative;
       background-color: @formColor;
       .material-icons {
          font-size: 17px;
@@ -219,6 +252,8 @@ body > nav {
          &:hover { color: #fff; }
          &.arrow_forward { float: right; }
       }
+
+      div.mobile-tip { display: none; }
 
       div.markers {
          left: 20px;
@@ -287,5 +322,43 @@ body > nav {
    &.list .material-icons.close {
       top: 25px;
       left: 4px;
+   }
+
+   @media @mobile {
+      figure {
+         figcaption {
+            padding: 2px;
+         }
+      }
+      .material-icons.close {
+         left: auto;
+         right: 8px;
+         font-size: 25px;
+      }
+
+      &.list .material-icons.close {
+         top: 45px;
+         left: auto;
+      }
+
+      nav {
+         .material-icons {
+            font-size: 30px;
+            padding: 5px 1px;
+         }
+         div.mobile-tip {
+            text-align: center;
+            font-size: 14px;
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            left: 50px;
+            right: 50px;
+            display: block;
+         }
+         div.markers {
+            padding-top: 3px;
+         }
+      }
    }
 }

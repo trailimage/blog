@@ -14,6 +14,11 @@ declare const post:MapPost;
 declare const allowDownload:boolean;
 
 $(function() {
+   /**
+    * Width of mobile navigation bar used to calculate position of
+    * preview image.
+    */
+   const MOBILE_NAV_BAR = 45;
    const MAX_ZOOM = 18;
    /**
     * Number of decimals to round coordinates to.
@@ -196,8 +201,8 @@ $(function() {
          map.off('move', handle.mapInteraction);
       },
 
-      legendToggle: function(this:Element) {
-         $(this).parents('ul').toggleClass('collapsed');
+      legendToggle: function() {
+         $legendToggle.parents('ul').toggleClass('collapsed');
          legendVisible = !legendVisible;
          util.setting.showMapLegend = legendVisible;
          util.log.event(eventCategory, 'Toggle Legend');
@@ -274,6 +279,7 @@ $(function() {
                html.photoPreview(e, 'list', $photos, $('<nav>')
                   .append(util.html.icon('arrow_back', prev))
                   .append($markers)
+                  .append($('<div>').addClass('mobile-tip').html('tap photo to view post'))
                   .append(util.html.icon('arrow_forward', next)));
 
             }
@@ -285,6 +291,8 @@ $(function() {
    if (qs.center) { enableZoomOut(); }
 
    $legendToggle.click(handle.legendToggle);
+   // legend nav button only visible on mobile
+   $('nav button.toggle-legend').click(handle.legendToggle);
    $('nav button.map-link').click(handle.mapLink);
 
    window.addEventListener('resize', handle.windowResize);
@@ -304,6 +312,8 @@ $(function() {
          });
 
          if (post) {
+            // Expand bounds so pictures aren't right at the edge. This should
+            // probably do something smarter like a percent of bounding box.
             post.bounds.sw[0] -= 0.01;
             post.bounds.sw[1] -= 0.01;
             post.bounds.ne[0] += 0.01;
@@ -315,32 +325,41 @@ $(function() {
       });
 
    /**
-    * Preview images may be 320 pixels on a side
+    * Preview images may be 320 pixels on a side.
     */
    function getPreviewPosition(e:mapboxgl.MapMouseEvent):CssPosition {
       let x = e.point.x;
       let y = e.point.y;
-      const offset = {
-         x: (x + previewSize.width) - mapSize.width,
-         y: (y + previewSize.height) - mapSize.height
-      };
-      offset.x = offset.x < 0 ? 0 : offset.x + 10;
-      offset.y = offset.y < 0 ? 0 : offset.y + 10;
 
-      x -= offset.x;
-      y -= offset.y;
+      if (mapSize.width < 1000) {
+         // probably mobile -- do not pan
+         return {
+            top: (mapSize.height - previewSize.height) / 2,
+            left: ((mapSize.width + MOBILE_NAV_BAR) - previewSize.width) / 2
+         };
+      } else {
+         const offset = {
+            x: (x + previewSize.width) - mapSize.width,
+            y: (y + previewSize.height) - mapSize.height
+         };
+         offset.x = offset.x < 0 ? 0 : offset.x + 10;
+         offset.y = offset.y < 0 ? 0 : offset.y + 10;
 
-      if (offset.x + offset.y > 0) {
-         map.panBy([offset.x, offset.y], { duration: 100 }, {
-            type: null,
-            point: null,
-            target: null,
-            reason: 'fit',
-            lngLat: null,
-            originalEvent: null
-         });
+         x -= offset.x;
+         y -= offset.y;
+
+         if (offset.x + offset.y > 0) {
+            map.panBy([offset.x, offset.y], { duration: 100 }, {
+               type: null,
+               point: null,
+               target: null,
+               reason: 'fit',
+               lngLat: null,
+               originalEvent: null
+            });
+         }
+         return { top: y + 15, left: x };
       }
-      return { top: y + 15, left: x };
    }
 
    /**
@@ -378,7 +397,8 @@ $(function() {
    }
 
    /**
-    * Get number of photos nearest to a location.
+    * Get number of photos nearest to a location. This is a hack while Mapbox
+    * clusters are unable to report which photos they contain.
     */
    function photosNearLocation(lngLat:mapboxgl.LngLat, count:number):GeoJSON.Feature<GeoJSON.Point>[] {
       const z = map.getZoom();

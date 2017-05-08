@@ -43,6 +43,7 @@
    <nav>
       <a href='/' title='{{config.site.title}} Home'><img class='logo' src='/img/logo-small.png'/></a>
       <div id='photo-count'><img src="/p.png"/><div></div>photos</div>
+      <button class='toggle-legend'>{{{icon 'apps'}}}</button>
       <button class='zoom-out disabled'>{{{icon 'zoom_out_map'}}}<p>Zoom Out</p></button>
 {{#if post }}
       <button class='post-info'>{{{icon 'info'}}}<p><b>{{post.name}}</b>{{post.description}}</p></button>
@@ -65,7 +66,7 @@
          {{{ icon 'expand_more' }}}
          {{{ icon 'expand_less' }}}
       </li>
-      <li class='photo'>Click to see photo<img src="/p.png"/></li>
+      <li class='photo'><span class='mobile-text'>Tap</span><span class='desktop-text'>Click</span> to see photo<img src="/p.png"/></li>
       <li class='track hidden'>GPX Track</li>
       <li class='highway'>Highway</li>
       <li class='automobile'>Automobile</li>
