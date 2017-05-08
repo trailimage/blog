@@ -7,6 +7,7 @@
 @mobileButtonColor: #fff;
 @mobileButtonBack: #000;
 @mobileButtonAlpha: 0.5;
+@mobileSynopsisMargin: 60px;
 
 header.page.post-header {
    z-index: 300;
@@ -122,29 +123,20 @@ header.page.post-header {
          position: fixed;
          z-index: 400;
          color: darken(@mobileTextColor, 30%);
-         font-size: 18px;
+         font-size: 13px;
          right: 10px;
       }
-      .video-link { display: none; }
-      .map {
-         position: absolute;
-         top: 0;
-         border: none;
-         img {
-            width: 100%;
-            height: auto;
-         }
-      }
+      .video-link, .map { display: none; }
+
       .synopsis {
-         margin-top: 100px;
          font-family: @sanSerifFont;
          color: #ddd;
          background-color: transparent;
          line-height: 1.1em;
-         font-size: 18px;
+         font-size: 16px;
          text-align: left;
          // space for navigation
-         padding: 0;
+         padding: 10px 0 @mobileSynopsisMargin + 10;
       }
    }
 }
@@ -169,23 +161,13 @@ body.has-date {
 //body.has-map {}
 //body.has-nav {}
 
-#nav-top {
+#nav-top, #nav-bottom {
    @media @mobile {
       div.next, div.previous {
-         margin-top: -100px;
-      }
-   }
-}
-
-#nav-bottom {
-   @media @mobile {
-      width: 100%;
-      margin: -20px 0 20px 0;
-      div.next, div.previous {
-         font-size: 16px;
+         font-size: 14px;
+         line-height: 1em;
          margin: 0;
          padding: 0;
-         line-height: 1em;
 
          .material-icons {
             font-size: 30px;
@@ -196,9 +178,22 @@ body.has-date {
             margin: 0;
             line-height: 1em;
          }
-
-         //margin: -15px 0 20px 0;
       }
+   }
+}
+
+#nav-top {
+   @media @mobile {
+      div.next, div.previous {
+         margin-top: -@mobileSynopsisMargin;
+      }
+   }
+}
+
+#nav-bottom {
+   @media @mobile {
+      width: 100%;
+      margin: 0 0 20px;
    }
 }
 
@@ -562,12 +557,22 @@ figure {
    }
 
    div.mobile-info {
-      left: 0;
-      top: 0;
       padding: 20px;
       position: absolute;
       background-color: rgba(0, 0, 0, 0.5);
       font-size: 17px;
+
+      @media @tablet {
+         right: 0;
+         // top of figure may be out of view so position above mobile buttons
+         bottom: @mobileButtonSize * 2 + @mobileButtonMargin * 2 + 50;
+      }
+
+      @media @phone {
+         right: auto;
+         left: 0;
+         top: 0;
+      }
    }
 
    a.map {
