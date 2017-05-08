@@ -5,7 +5,7 @@ import config from '../config';
 import { format } from './text';
 
 /**
- * Format paragraphs and prose
+ * Format paragraphs and prose.
  */
 export function story(text:string):string {
    if (!is.empty(text)) {
@@ -160,7 +160,7 @@ export function linkPattern(url:string):string {
 }
 
 /**
- * Replace UTF superscript with HTML superscript
+ * Replace UTF superscript with HTML superscript.
  */
 export function formatNotes(notes:string):string {
    // photo credit becomes note number 0
@@ -178,7 +178,7 @@ export function formatNotes(notes:string):string {
 }
 
 /**
- * Format Haiku text
+ * Format Haiku text into three lines.
  */
 export function formatHaiku(text:string, regex:RegExp):string {
    const match = regex.exec(text);
@@ -191,7 +191,7 @@ export function formatHaiku(text:string, regex:RegExp):string {
 }
 
 /**
- * Format poetry text
+ * Format poetry text within a blockquote.
  */
 export function formatPoem(text:string):string {
    return '<blockquote class="poem"><p>' + text

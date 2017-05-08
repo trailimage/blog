@@ -198,7 +198,7 @@ export default {
    style: {
       icon: {
          /**
-          * Match post categories to Material icons
+          * Match post categories to Material icons.
           *
           * https://material.io/icons/
           */
@@ -211,7 +211,8 @@ export default {
          }  as {[key:string]:string},
 
          /**
-          * Assign mode of transportation icon based on `What` category
+          * Assign mode of transportation icon based on pattern match to
+          * `What` category.
           */
          post: {
             motorcycle: /(KTM|BMW|Honda)/gi,
