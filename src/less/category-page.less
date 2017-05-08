@@ -32,6 +32,7 @@ header.page.category-header #top-bar {
    }
 
    @media @mobile {
+      position: fixed;
       height: @mobileHeaderHeight;
 
       h1 {
@@ -121,16 +122,8 @@ div.category {
                font-weight: bold;
                text-decoration: none;
                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-               text-rendering: optimizeLegibility;
 
                &:hover { color: @hoverColor; }
-            }
-
-            @media @mobile {
-               background-color: #333;
-               a.title, ul.info { color: #fff; }
-               a:active { color: @mobileHoverColor; }
-               .mode-icon { display: none; }
             }
          }
 
@@ -149,12 +142,6 @@ div.category {
             font-size: 16px;
             line-height: 1.2em;
             text-align: justify;
-
-            @media @mobile {
-               text-align: left;
-               color: @mobileTextColor;
-               font-size: 20px;
-            }
          }
 
          ul.categories {
@@ -162,10 +149,6 @@ div.category {
             list-style: none;
             margin: 0;
             padding: 10px 6px 10px 0;
-
-            @media @mobile {
-               padding: 10px 6px 20px 7px;
-            }
 
             li {
                position: relative;
@@ -190,30 +173,55 @@ div.category {
                   }
                   &:hover .material-icons { .opacity(1); }
                }
+            }
+         }
+      }
+   }
 
-               @media @mobile {
-                  font-size: 18px;
-                  padding: 15px 1px 0 7px;
-                  margin: 0 0 10px;
+   @media @mobile {
+      section.posts {
+         article.summary {
+            header.post {
+               padding-top: 4px;
+               background-color: #333;
+               a.title, ul.info { color: #fff; }
+               a:active { color: @mobileHoverColor; }
+               .mode-icon { display: none; }
+            }
+
+            a.thumb {
+               display: block;
+               text-align: center;
+               float: none;
+               margin: 0 auto;
+            }
+
+            a.map { display: none; }
+
+            p.summary {
+               text-align: left;
+               color: @mobileTextColor;
+               font-size: 18px;
+            }
+
+            ul.categories {
+               padding: 6px 10px;
+
+               li {
+                  font-size: 16px;
+                  padding: 0 0 0 6px;
+                  margin: 10px 0;
 
                   a {
                      color: #999;
-                     padding: 4px 12px 3px 30px;
+                     padding: 2px 12px 4px;
                      background-color: rgba(100, 100, 100, 0.4);
                      border: none;
 
-                     .material-icons {
-                        position: absolute;
-                        left: 15px;
-                        top: 15px;
-                        margin-right: 3px;
-                     }
-                     .rounded(12px);
+                     .material-icons { display: none; }
+                     .rounded(16px);
 
-                     &:active {
-                        color: @mobileActiveColor;
-                        .material-icons { color: @mobileActiveColor; .opacity(1); }
-                     }
+                     &:active { color: @mobileActiveColor; }
                   }
                }
             }

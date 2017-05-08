@@ -38,7 +38,7 @@ body {
    background-color: rgba(255, 255, 255, 0.9);
    width: @contentWidth;
 
-   @media @mobile { background: none; }
+   @media @mobile { background: none; width: 100%; }
 }
 
 .clear { clear: both; }
@@ -92,10 +92,9 @@ header.page {
    position: relative;
 
    #top-bar {
-      z-index: 300;
+      z-index: 500;
       position: relative;
       height: @headerHeight;
-      text-rendering: optimizeLegibility;
 
       h1 {
          padding: 10px 0 0 10px;
@@ -108,23 +107,29 @@ header.page {
          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
          vertical-align: top;
       }
+      a { color: #4e584c; }
+   }
 
-      @media @desktop {
+   @media @desktop {
+      #top-bar {
          background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
          border-bottom: 1px solid @lightTrimColor;
       }
+   }
 
-      @media @mobile {
+   @media @mobile {
+      position: fixed;
+      z-index: 500;
+      #top-bar {
          height: @mobileHeaderHeight;
          background-color: #666;
          border-bottom: none;
          position: fixed;
-         width: @contentWidth;
+         width: 100%;
          top: 0;
          z-index: 200;
 
          h1 {
-            //margin-top: 10px;
             font-size: 38px;
             font-weight: 400;
             letter-spacing: 1px;
@@ -132,8 +137,6 @@ header.page {
             text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
          }
       }
-
-      a { color: #4e584c; }
    }
 }
 
@@ -204,8 +207,6 @@ footer.page {
    text-align: center;
    background-color: rgba(255, 255, 255, 0.2);
 
-   @media @mobile { background: #444; }
-
    .inner-shadow(0, 2px, 2px, 0.1);
 
    p {
@@ -229,17 +230,32 @@ footer.page {
       margin-bottom: 10px;
       text-decoration: none;
       span.icon { height: 25px; width: 25px; }
+   }
 
-      @media @desktop {
+   @media @desktop {
+      a.repo {
          float: right;
          margin-top: 15px;
          img { margin: 0 0 2px 3px; }
          .opacity(0.3);
          &:hover { .opacity(1); }
       }
+   }
 
-      @media @mobile {
-         margin-top: 20px;
+   @media @mobile {
+      width: 100%;
+      background: #444;
+
+      p {
+         padding: 0 10px;
+         font-size: 10px;
+         margin: 0;
+         line-height: 1.1em;
+         &.rights { font-size: 10px; }
+      }
+
+      a.repo {
+         margin: 10px 0 0;
          img { margin: 0 0 2px 1px; }
       }
    }

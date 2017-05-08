@@ -32,21 +32,6 @@ header.page.post-header {
             letter-spacing: 0;
          }
       }
-
-      @media @mobile {
-         height: @mobileHeaderHeight;
-
-         h1 { padding-top: 10px; letter-spacing: -1px; }
-         .subtitle {
-            padding-top: 8px;
-            color: @mobileTextColor;
-            text-shadow: none;
-
-            .parts {
-               padding-bottom: 2px;
-            }
-         }
-      }
    }
 
    #post-date, .video-link {
@@ -61,13 +46,6 @@ header.page.post-header {
       font-weight: bold;
       font-size: 14px;
       color: lighten(@boldColor, 10%);
-
-      @media @mobile {
-         color: darken(@mobileTextColor, 30%);
-         font-size: 18px;
-         top: -18px;
-         right: 10px;
-      }
    }
 
    .video-link {
@@ -90,8 +68,6 @@ header.page.post-header {
       .glyphicon { margin-right: 6px; }
 
       &:hover { .opacity(1); }
-
-      @media @mobile { display: none; }
    }
 
    .synopsis {
@@ -107,17 +83,6 @@ header.page.post-header {
       text-rendering: optimizeLegibility;
 
       p { margin: 0; padding: 0; }
-
-      @media @mobile {
-         color: #ddd;
-         background-color: transparent;
-         line-height: 1.5em;
-         font-size: 18px;
-         text-align: left;
-         // space for navigation
-         padding: 0;
-         margin: 30px 40px 20px;
-      }
    }
 
    div.map {
@@ -128,8 +93,54 @@ header.page.post-header {
       width: 100%;
       padding: 0;
       margin: 0;
+   }
 
-      @media @mobile { display: none; }
+   @media @mobile {
+      position: relative;
+
+      #top-bar {
+         position: fixed;
+         height: @mobileHeaderHeight;
+
+         h1 { padding-top: 10px; letter-spacing: -1px; }
+         .subtitle {
+            padding-top: 8px;
+            color: @mobileTextColor;
+            text-shadow: none;
+
+            .parts {
+               padding-bottom: 2px;
+            }
+         }
+      }
+      #post-date {
+         position: fixed;
+         z-index: 400;
+         color: darken(@mobileTextColor, 30%);
+         font-size: 18px;
+         right: 10px;
+      }
+      .video-link { display: none; }
+      .map {
+         position: absolute;
+         top: 0;
+         border: none;
+         img {
+            width: 100%;
+            height: auto;
+         }
+      }
+      .synopsis {
+         margin-top: 100px;
+         font-family: @sanSerifFont;
+         color: #ddd;
+         background-color: transparent;
+         line-height: 1.1em;
+         font-size: 18px;
+         text-align: left;
+         // space for navigation
+         padding: 0;
+      }
    }
 }
 
@@ -163,8 +174,25 @@ body.has-date {
 
 #nav-bottom {
    @media @mobile {
+      width: 100%;
+      margin: -20px 0 20px 0;
       div.next, div.previous {
-         margin-top: -15px;
+         font-size: 16px;
+         margin: 0;
+         padding: 0;
+         line-height: 1em;
+
+         .material-icons {
+            font-size: 30px;
+            padding: 0;
+         }
+         h4 {
+            padding: 0;
+            margin: 0;
+            line-height: 1em;
+         }
+
+         //margin: -15px 0 20px 0;
       }
    }
 }
@@ -273,12 +301,6 @@ nav.tag-wrapper {
    line-height: 10px;
    .drop-shadow(0, 0, 2px, 0.4);
 
-   @media @mobile {
-      background-color: #555;
-      height: @mobileHeight;
-      line-height: @mobileHeight - 5;
-   }
-
    .material-icons {
       position: absolute;
       top: 3px;
@@ -311,19 +333,11 @@ nav.tag-wrapper {
          vertical-align: bottom;
          text-rendering: optimizeLegibility;
 
-         @media @mobile {
-            font-size: 17px;
-            padding: 0 2px 1px;
-            line-height: @mobileHeight - 10;
-         }
-
          &.label {
             padding-bottom: 2px;
             margin-left: 0;
             font-weight: bold;
             text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
-
-            @media @mobile { display: none; }
          }
 
          a {
@@ -334,27 +348,19 @@ nav.tag-wrapper {
             background-color: lighten(@trimColor, 7%);
             color: #fff;
 
-            @media @desktop {
-               &:hover {
-                  color: desaturate(lighten(@hoverColor, 55%), 20%);
-                  background-color: darken(@trimColor, 10%);
-               }
-            }
-
-            @media @mobile {
-               height: @mobileHeight - 12;
-               color: #555;
-               background-color: rgba(255, 255, 255, 0.5);
-               padding: 0 12px;
-               border: none;
-               .rounded(12px);
-
-               &:active {
-                  background-color: @mobileActiveColor;
-               }
+            &:hover {
+               color: desaturate(lighten(@hoverColor, 55%), 20%);
+               background-color: darken(@trimColor, 10%);
             }
          }
       }
+   }
+
+   @media @mobile {
+      display: none;
+      background-color: #555;
+      height: @mobileHeight;
+      line-height: @mobileHeight - 5;
    }
 }
 
@@ -406,7 +412,7 @@ figure {
    }
 
    @media @mobile {
-      margin: 0 auto 45px;
+      margin: 0 auto 20px;
       padding: 0;
 
       img {
@@ -523,25 +529,24 @@ figure {
    }
 
    div.mobile-button {
-      bottom: -35px;
+      bottom: -12px;
+      padding: 0;
       right: 0;
-      height: 60px;
-      width: 90px;
-      color: #fff;
-      background-color: darken(@mobileLinkColor, 25%);
-      .border-radius(0, 0, 30px, 30px);
-      .opacity();
+      height: 30px;
+      width: 80px;
+      color: #777;
+      background-color: #444;
+      .border-radius(0, 0, 20px, 0);
 
       .material-icons {
-         font-size: 30px;
-         top: 14px;
-         left: 20px;
+         top: 3px;
+         left: 15px;
       }
       p {
-         font-size: 20px;
-         line-height: 60px;
+         font-size: 17px;
+         line-height: 1em;
          text-align: right;
-         margin-right: 5px;
+         margin: 5px 5px 0 0;
       }
       &.loading {
          p { margin-right: 15px; }
@@ -650,12 +655,14 @@ figure {
       }
 
       @media @mobile {
-         margin-top: -8px;
+         font-size: 16px;
+         font-weight: normal;
+         margin-top: 2px;
          span {
+            color: #999;
             border: none;
-            .rounded(15px);
             padding-top: 2px;
-            background-color: rgba(255, 255, 255, 0.5);
+            background: none;
          }
       }
    }
@@ -673,12 +680,6 @@ div.caption {
    padding: 4px 0 0;
    font-size: @fontSize;
 
-   @media @mobile {
-      padding-top: 0;
-      font-size: @fontSize + 6;
-      line-height: 1.4em;
-   }
-
    sup {
       color: @footnoteColor;
       vertical-align: top;
@@ -686,10 +687,6 @@ div.caption {
       font-family: @sanSerifFont;
       font-size: 18px;
       cursor: help;
-
-      @media @mobile {
-         color: @mobileFootnoteColor;
-      }
    }
 
    .tab { display: inline-block; width: 2em; }
@@ -724,16 +721,6 @@ div.caption {
             padding: 0 0 1.4em 5em;
          }
       }
-
-      @media @mobile {
-         margin-bottom: 0;
-         text-align: left;
-         p {
-            color: @mobileTextColor;
-            line-height: 1.3em;
-            padding: 0 3em 0.5em;
-         }
-      }
    }
 
    p {
@@ -745,13 +732,9 @@ div.caption {
       &:first-child, &.first {
          text-indent: 0;
          padding-top: 1.4em;
-         @media @mobile { padding-top: 0; }
       }
       &:last-child { padding-bottom: 2em; }
       &.first { padding-top: 0.4em; }
-
-      @media @mobile { padding: 0 1em 0.3em; }
-
       &.quip {
          &:first-child, &.first { text-indent: 2em; }
       }
@@ -840,19 +823,46 @@ div.caption {
             }
          }
       }
+   }
 
-      @media @mobile {
+   // mobile caption
+   @media @mobile {
+      padding-top: 0;
+      font-size: @fontSize + 3;
+      line-height: 1.3em;
+
+      p {
+         padding: 0 1em 0.3em;
+         &:first-child, &.first { padding-top: 0; }
+      }
+
+      blockquote {
+         margin-bottom: 0;
+         text-align: left;
+         p {
+            color: @mobileTextColor;
+            line-height: 1.1em;
+            padding: 0 3em 0.5em;
+         }
+      }
+
+      sup {
+         color: @mobileFootnoteColor;
+      }
+
+      ol.footnotes {
          border: none;
          background-color: #333;
-         margin: 6px 0 35px;
+         margin: 6px 0 25px;
+         padding: 6px 5px 0 25px;
 
          li {
             span { color: darken(@mobileTextColor, 30%); }
             &.credit {
-               text-indent: -18px;
+               text-indent: -8px;
                .material-icons {
                   margin: 0;
-                  padding-right: 14px;
+                  padding: 2px 2px 0 0;
                }
             }
          }
@@ -890,6 +900,7 @@ div.by-line {
    p { padding: 25px 25px 20px 0; }
 
    @media @mobile {
+      p { margin-top: 40px; }
       text-align: center;
       color: @mobileTextColor;
    }
