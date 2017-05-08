@@ -13,9 +13,7 @@
       padding: 2px 0;
       font-size: 40px;
       color: @mobileTextColor;
-      cursor: pointer;
    }
-
    @media @mobile { display: block; }
 }
 
@@ -25,20 +23,21 @@
    @menuHeight: 500px;
 
    top: @mobileHeaderHeight;
+   bottom: 0;
    width: 100%;
    position: fixed;
-   height: @menuHeight;
    font-family: @sanSerifFont;
-   font-size: 24px;
+   font-size: 16px;
    line-height: 1em;
    color: @mobileTextColor;
    background-color: #222;
    z-index: 800;
-   margin: 0 auto;
-   border-bottom: 40px solid #444;
+   margin: 0;
    display: none;
 
    ul {
+      margin: 0;
+
       li {
          padding: 14px 0;
          cursor: pointer;
@@ -50,36 +49,31 @@
       }
 
       &.links {
+         width: 45%;
          position: absolute;
-         top: 10px;
+         top: 0;
          right: 0;
          text-align: right;
 
          li {
-            .glyphicon {
-               font-size: 18px;
-               padding: 10px 20px;
+            .material-icons {
+               vertical-align: middle;
+               font-size: 28px;
+               padding: 0 10px 4px;
                color: darken(@mobileTextColor, 50%);
             }
-            .glyphicon-info-sign { color: #44f; }
-            .glyphicon-tags { color: #dd0; }
-            .glyphicon-fire { color: #900; }
-            .glyphicon-leaf { color: #0a0; }
-            .glyphicon-comment { color: #09a; }
          }
       }
 
-      &.tag-list {
-         margin: @headerSize 0 0 0;
+      &.category-list {
+         width: 25%;
+         margin: 0;
          float: left;
          li {
+            text-align: center;
             white-space: nowrap;
-            padding: 30px 20px;
-            .glyphicon {
-               font-size: 18px;
-               padding-right: 10px;
-               color: @mobileLinkColor;
-            }
+            padding: 30px 15px;
+
             &.selected {
                background-color: @selectColor;
             }
@@ -87,26 +81,26 @@
       }
    }
 
-   .tags {
+   .categories {
       float: left;
       position: relative;
-      width: 300px;
-      margin: @headerSize 0;
-      height: @menuHeight - 30;
+      width: 33%;
+      height: 100%;
+      margin: 0;
       overflow-y: auto;
       overflow-x: hidden;
+      background-color: @selectColor;
       z-index: 90;
 
       ul {
          padding: 0;
          margin: 0;
          display: none;
-         background-color: @selectColor;
 
          li {
-            font-size: 20px;
-            text-align: center;
-            padding: 15px 20px;
+            font-size: 16px;
+            text-align: left;
+            padding: 15px 5px;
             .count {
                font-size: smaller;
                padding-left: 10px;
@@ -116,13 +110,15 @@
       }
    }
 
-   .glyphicon-chevron-down {
+   .material-icons.arrow_downward {
       color: #666;
       display: none;
+      padding: 0;
+      margin: 0 0 0 10px;
       font-size: 50px;
       position: absolute;
-      top: @menuHeight - 55;
-      left: 115px;
+      bottom: 0;
+      left: 55%;
       z-index: 100;
    }
 }

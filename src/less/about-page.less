@@ -17,11 +17,6 @@
       }
 
       &:hover { img { border-color: @hoverColor; } }
-
-      @media @mobile {
-         img { border: none; }
-         pointer-events: none;
-      }
    }
 
    p {
@@ -31,11 +26,6 @@
       line-height: 1.2em;
       margin: 0 0 1em;
       &.first { padding-top: 1em; }
-
-      @media @mobile {
-         font-size: 24px;
-         a { color: @mobileLinkColor; }
-      }
    }
 
    .by-line {
@@ -44,6 +34,27 @@
       padding: 0 20px 30px 0;
       font-family: @serifFont;
       font-style: italic;
-      @media @mobile { margin-bottom: 20px; }
+   }
+
+   @media @mobile {
+      .main-image img { border: none; }
+      p {
+         font-size: 20px;
+         a { color: @mobileLinkColor; }
+      }
+
+      .by-line { margin-bottom: 20px; }
+   }
+   @media @phone {
+      .main-image {
+         float: none;
+         padding: 0;
+         img {
+            border: none;
+            width: 100%;
+            height: auto;
+         }
+         pointer-events: none;
+      }
    }
 }

@@ -7,17 +7,16 @@ $(function() {
    const $button = $('#mobile-menu-button');
    const $menu = $('#mobile-menu');
    const $categories = $menu.find('.categories');
-   /**
-    * Down button
-    *
-    *    TODO: needs to be material icon
-    */
-   const $down = $menu.find('.glyphicon-chevron-down');
-   const tagHeight = $categories.height();
-   const selection = loadMenuSelection('when');
+   const $down = $menu.find('.material-icons.arrow_downward');
+   let menuHeight = 0;
+   // default root category
+   const setting = util.setting.menuCategory;
 
+   let selection = setting == null ? 'when' : setting[0].toLocaleLowerCase();
    let prepared = false;
    let visible = false;
+
+   if (selection.length < 4) { selection = 'when'; }
 
    $button.click(() => {
       if (visible) {
@@ -36,7 +35,7 @@ $(function() {
 
       const css = 'selected';
       const $categoryList = $menu.find('.category-list li');
-      //const $down = $menu.find('.glyphicon-chevron-down');
+      menuHeight = $menu.height();
 
       $menu.find('.close').click(()=> { $menu.hide(0, ()=> { visible = false; }); });
 
@@ -45,16 +44,16 @@ $(function() {
       $categoryList.filter('li.' + selection).addClass(css);
 
       $categoryList.click(function(this:HTMLElement) {
-         const $tag = $(this);
-         const tagClass = $tag.attr('class');
+         const $cat = $(this);
+         const catClass = $cat.attr('class');
 
          $down.hide();
          $categories.find('ul').hide();
-         $categories.find('ul.' + tagClass).show(0, toggleArrow);
+         $categories.find('ul.' + catClass).show(0, toggleArrow);
          $categoryList.removeClass(css);
-         $tag.addClass(css);
+         $cat.addClass(css);
 
-         saveMenuSelection(tagClass);
+         util.setting.menuCategory = [catClass, null];
       });
 
       prepared = true;
@@ -64,21 +63,6 @@ $(function() {
     * Show down arrow if list of categories exceeds display area.
     */
    function toggleArrow(this:HTMLElement) {
-      if ($(this).height() > tagHeight) {	$down.show(); }
-   }
-
-   /**
-    * Load menu selection from browser storage.
-    */
-   function loadMenuSelection(ifNone:string):string {
-      const match = util.setting.load('mobile');
-      return (match === null) ? ifNone : match[1];
-   }
-
-   /**
-    * Save menu selection to browser storage.
-    */
-   function saveMenuSelection(selected:string) {
-      util.setting.save('mobile', selected);
+      if ($(this).height() > menuHeight) { $down.show(); } else { $down.hide(); }
    }
 });

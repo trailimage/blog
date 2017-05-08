@@ -514,9 +514,10 @@ $(function() {
                }
             }, 'photo');
 
-         $('nav button.link').click(handle.buttonClick);
          $('#legend .track').removeClass('hidden');
       }
+
+      $('nav > button.link').click(handle.buttonClick);
 
       // avoid updating URL with automatic reposition
       map.once('zoomend', ()=> {

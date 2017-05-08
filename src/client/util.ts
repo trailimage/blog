@@ -32,6 +32,9 @@ const util = {
          return value ? value == 'true' : true;
       },
 
+      /**
+       * Value is array of root and sub-category names.
+       */
       set menuCategory(selected:string[]) {
          if (typeof selected === 'string') { selected = [selected, null]; }
          util.setting.save('menu', selected.join());

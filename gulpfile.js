@@ -50,10 +50,11 @@ gulp.task('js', ()=> {
       tsConfig.src().pipe(tsConfig()),
       gulp.src(jsPath + 'jquery.lazyload.js')
    )
-      .pipe(bundle('post','static-map','jquery.lazyload','util').as('post', { keep: ['static-map','util'] }))
+      .pipe(bundle('post','static-map','jquery.lazyload').as('post', { keep: ['static-map'] }))
       .pipe(bundle('mapbox','util').as('mapbox', { keep: 'util'}))
-      .pipe(bundle('static-map', 'util').as('category', { keep: 'util' }))
-      .pipe(bundle('photo-tag', 'util').as('photo-tag'))
+      // responsive script is on every page except map
+      .pipe(bundle('responsive', 'util').as('responsive'))
+      .pipe(bundle('static-map').as('category'))
       .pipe(sourcemaps.init())
       .pipe(uglify()).on('error', handleError)
       .pipe(sourcemaps.write('maps', sourceMapConfig))
