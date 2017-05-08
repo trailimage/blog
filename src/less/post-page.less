@@ -2,6 +2,11 @@
 @import "settings";
 
 @postHeaderHeight: @headerHeight + 15;
+@mobileButtonSize: 20px;
+@mobileButtonMargin: 5px;
+@mobileButtonColor: #fff;
+@mobileButtonBack: #000;
+@mobileButtonAlpha: 0.5;
 
 header.page.post-header {
    z-index: 300;
@@ -412,15 +417,16 @@ figure {
    }
 
    @media @mobile {
+      width: 100%;
       margin: 0 auto 20px;
       padding: 0;
 
       img {
+         // width set by inline style so can't override
          border: none;
          padding: 0;
          cursor: default;
          .box-shadow(none);
-         width: auto;
       }
    }
 
@@ -529,35 +535,35 @@ figure {
    }
 
    div.mobile-button {
-      bottom: -12px;
-      padding: 0;
-      right: 0;
-      height: 30px;
-      width: 80px;
-      color: #777;
-      background-color: #444;
-      .border-radius(0, 0, 20px, 0);
+      bottom: @mobileButtonMargin + 20;
+      padding: 3px;
+      right: @mobileButtonMargin;
+      height: @mobileButtonSize;
+      .opacity(@mobileButtonAlpha);
+      color: @mobileButtonColor;
+      background-color: @mobileButtonBack;
+      .rounded(20px);
 
       .material-icons {
-         top: 3px;
-         left: 15px;
+         position: relative;
+         font-size: @mobileButtonSize;
+         line-height: @mobileButtonSize;
+         &.info_outline { display: none; }
       }
-      p {
-         font-size: 17px;
-         line-height: 1em;
-         text-align: right;
-         margin: 5px 5px 0 0;
-      }
-      &.loading {
-         p { margin-right: 15px; }
+
+      &.active {
+         .material-icons {
+            &.info { display: none; }
+            &.info_outline { display: block; }
+         }
       }
 
       @media @desktop { display: none; }
    }
 
    div.mobile-info {
-      right: 0;
-      bottom: 40px;
+      left: 0;
+      top: 0;
       padding: 20px;
       position: absolute;
       background-color: rgba(0, 0, 0, 0.5);
@@ -591,7 +597,21 @@ figure {
       }
 
       @media @mobile {
-         display: none;
+         .opacity();
+         border: none;
+         padding: 2px 0 3px 7px;
+         bottom: @mobileButtonMargin + @mobileButtonSize + 30;
+         right: @mobileButtonMargin;
+         .rounded(20px);
+         span { display: none; }
+         background-color: @mobileButtonBack;
+         text-align: center;
+
+         .material-icons {
+            color: @mobileButtonColor;
+            position: relative;
+            line-height: 20px;
+         }
       }
    }
 
@@ -658,12 +678,18 @@ figure {
          font-size: 16px;
          font-weight: normal;
          margin-top: 2px;
+         letter-spacing: 0;
          span {
             color: #999;
             border: none;
             padding-top: 2px;
             background: none;
          }
+      }
+
+      @media @tablet {
+         font-size: 20px;
+         margin-top: 4px;
       }
    }
 }
@@ -873,6 +899,13 @@ div.caption {
          .opacity(1);
 
          a { color: @mobileLinkColor; }
+      }
+   }
+
+   @media @tablet {
+      font-size: @fontSize + 3;
+      p {
+         padding: 0 1.5em 1em 2em;
       }
    }
 }

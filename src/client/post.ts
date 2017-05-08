@@ -23,28 +23,36 @@ $(function() {
 
    // tapping mobile info button loads camera detail
    $photos.find('.mobile-button').on('touchstart', function(this:HTMLElement) {
-      const $m = $(this);
-      const $fig = $m.parent();
-      const content = $m.html();
+      const $button = $(this);
+      const infoClass = 'mobile-info';
+      const activeKey = 'info-visible';
+      const loadedKey = 'info-loaded';
+      const activeCSS = 'active';
+      const $fig = $button.parent();
 
-      $m.addClass('loading').html(iconHtml('hourglass_empty', '…'));
+      if ($fig.data(activeKey)) {
+         // hide info box
+         $button.removeClass(activeCSS);
+         $fig.data(activeKey, false).find('.' + infoClass).hide();
+      } else {
+         $button.addClass(activeCSS);
+         $fig.data(activeKey, true);
 
-      $('<div/>')
-         .addClass('mobile-info')
-         .load($fig.data('exif'), function(this:HTMLElement) {
-            const $info = $(this);
-            $m.hide().removeClass('loading').html(content);
-            $info
-               .appendTo($fig)
-               .one('touchstart', function(event) {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  $info.hide();
-                  $m.show();
+         if ($fig.data(loadedKey)) {
+            // show already loaded info box
+            $fig.find('.' + infoClass).show();
+         } else {
+            // load and show info box
+            $('<div/>')
+               .addClass(infoClass)
+               .load($fig.data('exif'), function(this:HTMLElement) {
+                  $(this).appendTo($fig);
+                  $fig.data(loadedKey, true);
                });
-         });
 
-      util.log.event(eventCategory, 'Show Photo Info', 'Mobile');
+            util.log.event(eventCategory, 'Show Photo Info', 'Mobile');
+         }
+      }
    });
 
    // hovering photo info button loads camera detail
@@ -68,8 +76,8 @@ $(function() {
    }
 
    /**
-    * Simple light box for clicked image
-    * Post image has HTML data attributes defining the big image URL and dimensions
+    * Simple light box for clicked image. Post image has HTML data attributes
+    * defining the big image URL and dimensions.
     */
    function lightBox(this:HTMLElement, event:JQueryMouseEventObject) {
       /** Post image */
@@ -86,7 +94,7 @@ $(function() {
       /**
        * Update image position and panning speed to accomodate window size
        */
-      const updateSize = function(event:JQueryEventObject) {
+      const updateSize = (event:JQueryEventObject) => {
          let cursor = 'zoom-out';
 
          size.update();
@@ -109,14 +117,14 @@ $(function() {
       /**
        * Update image position within light box
        */
-      const updateHoverPosition = function(event:JQueryEventObject) {
+      const updateHoverPosition = (event:JQueryEventObject) => {
          $big.css({
             top: size.height.CSS(event.clientY),
             left: size.width.CSS(event.clientX)
          });
       };
 
-      const beginDrag = function(event:JQueryEventObject|TouchEvent) {
+      const beginDrag = (event:JQueryEventObject|TouchEvent) => {
          const touchAt = event.targetTouches[0];
          const imageAt = $big.position();
 
@@ -124,7 +132,7 @@ $(function() {
          fromCorner.top = imageAt.top - touchAt.clientY;
       };
 
-      const updateDragPosition = function(event:JQueryEventObject) {
+      const updateDragPosition = (event:JQueryEventObject) => {
          // ignore multi-finger touches
          const at = event.targetTouches[0];
 
@@ -153,7 +161,6 @@ $(function() {
       }
 
       $big.height(size.height.image).width(size.width.image);
-
 
       // position based on initial click
       updateSize(event as JQueryEventObject);

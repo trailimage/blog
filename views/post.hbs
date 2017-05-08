@@ -102,7 +102,7 @@
 
 	{{#if longitude}}
       {{! http://handlebarsjs.com/#paths }}
-		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow">map{{{icon 'map'}}}</a>
+		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow"><span>map</span>{{{icon 'map'}}}</a>
 	{{/if}}
 
 	{{#if title}}
@@ -111,7 +111,7 @@
 	{{#if sourceUrl}}
 		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
 	{{/if}}
-		<div class="mobile-button">{{{icon 'photo_camera'}}}<p>Info</p></div>
+		<div class="mobile-button">{{{icon 'info'}}}{{{icon 'info_outline'}}}</div>
 	</figure>
 
 	<div class="caption content">{{{formatCaption description}}}</div>

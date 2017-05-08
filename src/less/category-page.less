@@ -199,10 +199,10 @@ div.category {
             a.map { display: none; }
 
             p.summary {
+               font-size: 18px;
                text-align: left;
                margin-top: 8px;
                color: @mobileTextColor;
-               font-size: 18px;
             }
 
             ul.categories {
@@ -226,6 +226,19 @@ div.category {
                   }
                }
             }
+         }
+      }
+   }
+
+   @media @tablet {
+      section.posts {
+         article.summary {
+            header.post {
+               font-size: 22px;
+               padding-top: 4px;
+            }
+            a.thumb img { zoom: 2; }
+            p.summary { font-size: 22px; }
          }
       }
    }

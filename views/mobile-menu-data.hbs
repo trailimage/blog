@@ -8,7 +8,7 @@
 	<li><a href="https://twitter.com/trailimage" rel="me">Twitter {{{icon 'comment'}}}</a></li>
 </ul>
 
-<ul class="tag-list">
+<ul class="category-list">
 {{#each library.categories}}
 	<li class="{{lowerCase this.title}}">{{{icon this.icon}}}{{this.title}}</li>
 {{/each}}
@@ -16,7 +16,7 @@
 
 {{{icon 'chevron-down'}}}
 
-<nav class="tags">
+<nav class="categories">
 {{#each library.categories}}
 	<ul class="{{lowerCase this.title}}">
 	{{#this.subcategories}}
