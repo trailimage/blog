@@ -100,8 +100,19 @@ body > nav {
       .logo { width: @mobileNavWidth; }
       button {
          width: @mobileNavWidth;
-         &.gaia-gps, &.post-info { display: none; }
-         &.toggle-legend { display: block; }
+         // hide buttons that depend on mouse hover tips
+         &.gaia-gps, &.post-info, &.google-earth { display: none; }
+
+         // enable the nav bar alternative to showing legend
+         &.toggle-legend {
+            display: block;
+            i.help_outline { display: none; }
+
+            &.active {
+               i.help_outline { display: block; }
+               i.help { display: none; }
+            }
+         }
       }
    }
 

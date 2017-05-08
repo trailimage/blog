@@ -63,7 +63,7 @@ $(function() {
     * Whether zoom-out button is enabled
     */
    let zoomOutEnabled = false;
-   let legendVisible = true;
+   let legendVisible = $('#legend').is(':visible');
    let showPositionInUrl = false;
 
    /**
@@ -203,6 +203,7 @@ $(function() {
 
       legendToggle: function() {
          $legendToggle.parents('ul').toggleClass('collapsed');
+         $('nav .toggle-legend').toggleClass('active');
          legendVisible = !legendVisible;
          util.setting.showMapLegend = legendVisible;
          util.log.event(eventCategory, 'Toggle Legend');
@@ -297,8 +298,12 @@ $(function() {
 
    window.addEventListener('resize', handle.windowResize);
 
-   // legend defaults open so toggle close if specified
-   if (!util.setting.showMapLegend) { $legendToggle.click(); }
+   if (legendVisible) {
+      if (!util.setting.showMapLegend) { $legendToggle.click(); }
+   } else {
+      // ensure that legend has 'collapsed' class to match its visibility
+      $legendToggle.parents('ul').addClass('collapsed');
+   }
 
    map.addControl(nav, 'top-right')
       .on('load', ()=> {
