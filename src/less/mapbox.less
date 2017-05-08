@@ -323,6 +323,7 @@ body > nav {
       .opacity(0.8);
       color: #fff;
       cursor: pointer;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
       &:hover { .opacity(1); }
    }
 
@@ -339,6 +340,8 @@ body > nav {
    }
 
    @media @mobile {
+      width: 320px;
+      text-align: center;
       figure {
          figcaption {
             padding: 2px;
@@ -356,6 +359,7 @@ body > nav {
       }
 
       nav {
+         text-align: left;
          .material-icons {
             font-size: 30px;
             padding: 5px 1px;

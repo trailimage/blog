@@ -14,11 +14,6 @@ declare const post:MapPost;
 declare const allowDownload:boolean;
 
 $(function() {
-   /**
-    * Width of mobile navigation bar used to calculate position of
-    * preview image.
-    */
-   const MOBILE_NAV_BAR = 45;
    const MAX_ZOOM = 18;
    /**
     * Number of decimals to round coordinates to.
@@ -342,7 +337,8 @@ $(function() {
          // probably mobile -- do not pan
          return {
             top: (mapSize.height - previewSize.height) / 2,
-            left: ((mapSize.width + MOBILE_NAV_BAR) - previewSize.width) / 2
+            // use window instead of map width to account for nav bar
+            left: (window.innerWidth - previewSize.width) / 2
          };
       } else {
          const offset = {
