@@ -52,6 +52,8 @@ $(function() {
       zoom: qs.zoom || initial.zoom,
       maxZoom: MAX_ZOOM,
       dragRotate: false,
+      // https://github.com/mapbox/mapbox-gl-js/issues/3371
+      touchZoomRotate: false,
       keyboard: false
    });
    const canvas = map.getCanvasContainer();

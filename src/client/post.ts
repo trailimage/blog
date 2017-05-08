@@ -27,7 +27,7 @@ $(function() {
       const $fig = $m.parent();
       const content = $m.html();
 
-      $m.addClass('loading').html(iconHtml('hourglass', '…'));
+      $m.addClass('loading').html(iconHtml('hourglass_empty', '…'));
 
       $('<div/>')
          .addClass('mobile-info')
@@ -64,7 +64,7 @@ $(function() {
     * Material icon HTML
     */
    function iconHtml(name:string, text:string):string {
-      return util.html.icon(name) + '<p>' + text + '</p>';
+      return util.html.icon(name).get(0).outerHTML + '<p>' + text + '</p>';
    }
 
    /**
