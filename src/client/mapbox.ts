@@ -55,12 +55,21 @@ $(function() {
    const markerOpacity = 0.6;
    const mapSize = { width: 0, height: 0 };
    const previewSize = { width: 322, height: 350 };
+   /**
+    * Whether styling for mobile device. Should match CSS media queries in
+    * `settings.less` and `breakAt` in `responsive.ts`.
+    */
+   const mobileLayout = (width:number = 1024)=> window.innerWidth <= width;
 
    /**
     * Whether zoom-out button is enabled
     */
    let zoomOutEnabled = false;
-   let legendVisible = $('#legend').is(':visible');
+   /**
+    * CSS media query hides legend for mobile. Browser setting will also be
+    * checkbed below to see if user hid legend.
+    */
+   let legendVisible = !mobileLayout();
    let showPositionInUrl = false;
 
    /**
@@ -162,7 +171,7 @@ $(function() {
       mapLink: function(this:Element, e:JQueryMouseEventObject) {
          const lngLat = map.getCenter();
          const zoom = map.getZoom();
-         // very rough conversion based on trail-and-error
+         // very rough conversion based on trial-and-error
          const altitude = (1/(Math.pow(2.3, zoom))) * 375000000;
 
          window.location.href = $(this).data('link')
@@ -202,7 +211,9 @@ $(function() {
          $legendToggle.parents('ul').toggleClass('collapsed');
          $('nav .toggle-legend').toggleClass('active');
          legendVisible = !legendVisible;
-         util.setting.showMapLegend = legendVisible;
+         if (!mobileLayout()) {
+            util.setting.showMapLegend = legendVisible;
+         }
          util.log.event(eventCategory, 'Toggle Legend');
       },
 
@@ -296,6 +307,7 @@ $(function() {
    window.addEventListener('resize', handle.windowResize);
 
    if (legendVisible) {
+      // if set visible but user hid it then toggle off
       if (!util.setting.showMapLegend) { $legendToggle.click(); }
    } else {
       // ensure that legend has 'collapsed' class to match its visibility
@@ -333,12 +345,10 @@ $(function() {
       let x = e.point.x;
       let y = e.point.y;
 
-      if (mapSize.width < 1000) {
-         // probably mobile -- do not pan
+      if (mobileLayout(767)) {
          return {
             top: (mapSize.height - previewSize.height) / 2,
-            // use window instead of map width to account for nav bar
-            left: (window.innerWidth - previewSize.width) / 2
+            right: 0
          };
       } else {
          const offset = {
@@ -361,7 +371,7 @@ $(function() {
                originalEvent: null
             });
          }
-         return { top: y + 15, left: x };
+         return { top: y + 15, left: x + 50 };
       }
    }
 
