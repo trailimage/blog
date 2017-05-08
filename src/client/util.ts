@@ -30,6 +30,16 @@ const util = {
       get showMapLegend():boolean {
          const value = util.setting.load('map-legend');
          return value ? value == 'true' : true;
+      },
+
+      set menuCategory(selected:string[]) {
+         if (typeof selected === 'string') { selected = [selected, null]; }
+         util.setting.save('menu', selected.join());
+      },
+
+      get menuCategory():string[] {
+         const value = util.setting.load('menu');
+         return (value === null) ? null : value[1].split(',');
       }
    },
    html: {

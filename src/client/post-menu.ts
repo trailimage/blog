@@ -8,11 +8,16 @@
  * /views/post-menu-data.hbs
  */
 declare const postMenuData:PostMenu;
-declare let loadPostTrack:Function;
 
 /**
  * Menu data are loaded in menu-script.hbs referenced as /js/menu-data.js
- * only available on post pages.
+ * only available on post pages. The menu shows three columns
+ *
+ * - menu-roots
+ * - menu-categories
+ * - menu-posts
+ *
+ * that have their HTML contents refreshed depending on clicks.
  */
 $(function() {
    const eventCategory = 'Post Menu';
@@ -25,16 +30,20 @@ $(function() {
    const $description = $('#post-description');
 
    // default root category
-   let selection = loadMenuSelection(['When', null]);
+   let selection = util.setting.menuCategory;
+   if (selection == null) { selection = ['When', null]; }
 
-   // handle click on the menu button
+   // handle click on main menu button
    $button
-      .one('click', function() {
+      .one('click', ()=> {
          // populate menu on first click
          for (const root in postMenuData.category) {
             const $li = $('<li>').text(root);
             $rootList.append($li);
-            if (root == selection[0]) { $li.addClass(css); loadSubcategories(selection); }
+            if (root == selection[0]) {
+               $li.addClass(css);
+               loadSubcategories(selection);
+            }
          }
          util.log.event(eventCategory, 'Open');
       })
@@ -83,28 +92,33 @@ $(function() {
    }
 
    /**
-    * Show clicked post title or load track if viewing map.
+    * Navigate to clicked post.
     */
    function showSelection(this:HTMLElement) {
-      const slug = $(this).data('slug');
-
-      if (typeof loadPostTrack !== 'undefined') {
-         loadPostTrack(slug);
-      } else {
-         window.location.href = '/' + slug;
-      }
+      window.location.href = '/' + $(this).data('slug');
       toggleMenu();
-
       util.log.event(eventCategory, 'Click Post');
    }
 
+   /**
+    * Apply CSS to show item clicked and use supplied loader to display child
+    * items.
+    *
+    * - `$list` column containing the clicked item
+    * - `$clicked` clicked element
+    * - `loader` method to load child elements (`loadSubcategories` or `loadPosts`)
+    * - `selected` text values of selections to this point
+    */
    function menuSelect($list:JQuery, $clicked:JQuery, loader:(selected:string[])=>void, selected:string[]) {
       $list.find('li').removeClass(css);
       loader(selected);
       $clicked.addClass(css);
-      saveMenuSelection(selected);
+      util.setting.menuCategory = selected;
    }
 
+   /**
+    * Build category HTML when root item is clicked.
+    */
    function loadSubcategories(selected:string[]) {
       const subcategories = postMenuData.category[selected[0]];
 
@@ -120,7 +134,8 @@ $(function() {
    }
 
    /**
-    * Build post HTML from separately loaded `postMenuData`.
+    * Build post HTML from separately loaded `postMenuData` when subcategory
+    * is clicked.
     */
    function loadPosts(selected:string[]) {
       const subcategories = postMenuData.category[selected[0]];
@@ -174,18 +189,5 @@ $(function() {
             }
          }
       }
-   }
-
-   function loadMenuSelection(ifNone:string[]):string[] {
-      const match = util.setting.load('menu');
-      return (match === null) ? ifNone : match[1].split(',');
-   }
-
-   /**
-    * Menu root and tag selection
-    */
-   function saveMenuSelection(selected:string|string[]) {
-      if (typeof selected === 'string') { selected = [selected, null]; }
-      util.setting.save('menu', selected.join());
    }
 });

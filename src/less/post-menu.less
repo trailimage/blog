@@ -5,9 +5,12 @@ header {
    #post-menu-button {
       bottom: 3px;
       left: 6px;
-      @media @mobile { display: none; }
    }
    #post-menu { top: 66px; left: 6px; }
+
+   @media @mobile {
+      #post-menu-button { display: none; }
+   }
 }
 
 #post-menu-button {
@@ -63,7 +66,7 @@ header {
    .drop-shadow(0, 4px, 6px, 0.5);
    .border-radius(3px, 3px, 3px, 0);
 
-   #menu-roots, #menu-tags, #menu-posts {
+   #menu-roots, #menu-categories, #menu-posts {
       float: left;
       display: block;
       list-style-type: none;
@@ -83,7 +86,7 @@ header {
       }
    }
 
-   #menu-roots li, #menu-tags li {
+   #menu-roots li, #menu-categories li {
       line-height: @itemHeight;
       height: @itemHeight;
       margin-right: @itemHeight / 2;
@@ -124,7 +127,7 @@ header {
    }
 
    #menu-roots { width: 15%; }
-   #menu-tags { width: 30%; }
+   #menu-categories { width: 30%; }
    #menu-posts {
       width: 55%;
 
