@@ -1,10 +1,14 @@
 ## 3.0.1
-- Style tweak
+- Fix alignment in map legend
+- Enable mobile map rotate to allow mobile zoom
+- Enlarge mobile photo buttons
+- Fix video link button
 
 ## 3.0.0
 - Change map provider to Mapbox
 - Add map view of all posts
-- Remove web fonts (performance)
+- Remove some web fonts (performance)
+- Convert codebase to TypeScript
 
 ## 2.2.4
 - Fix bad GPX caching in Redis

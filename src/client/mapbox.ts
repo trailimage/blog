@@ -48,7 +48,7 @@ $(function() {
       maxZoom: MAX_ZOOM,
       dragRotate: false,
       // https://github.com/mapbox/mapbox-gl-js/issues/3371
-      touchZoomRotate: false,
+      //touchZoomRotate: false,
       keyboard: false
    });
    const canvas = map.getCanvasContainer();
@@ -70,6 +70,14 @@ $(function() {
     * checkbed below to see if user hid legend.
     */
    let legendVisible = !mobileLayout();
+   let photosVisible = true;
+   /**
+    * Analytics: only track first use of photo navigation.
+    */
+   let navigatedPhoto = false;
+   /**
+    * Don't update URL with map position until after automatic movements.
+    */
    let showPositionInUrl = false;
 
    /**
@@ -82,7 +90,7 @@ $(function() {
     */
    const html = {
       /**
-       * Format coordinates
+       * Format coordinates.
        */
       coordinate: function(pos:number[]):string {
          const factor = Math.pow(10, COORD_DECIMALS);
@@ -91,7 +99,7 @@ $(function() {
       },
 
       /**
-       * Make photo HTML
+       * Make photo HTML.
        */
       photo: function(f:GeoJSON.Feature<GeoJSON.Point>):JQuery {
          const img:MapPhoto = f.properties;
@@ -109,7 +117,7 @@ $(function() {
       },
 
       /**
-       * Show photo preview
+       * Show photo preview.
        */
       photoPreview: function(e:mapboxgl.MapMouseEvent, cssClass:string, content:JQuery, navigation?:JQuery) {
          $preview
@@ -131,7 +139,7 @@ $(function() {
     * Event handlers
     */
    const handle = {
-      zoomEnd: ()=> {
+      zoomEnd() {
          updateUrl();
          enableZoomOut();
       },
@@ -144,14 +152,14 @@ $(function() {
       /**
        * Respond to user map interaction by hiding photo preview.
        */
-      mapInteraction: function(e?:mapboxgl.EventData|FakeEvent) {
+      mapInteraction(e?:mapboxgl.EventData|FakeEvent) {
          if (e !== undefined && e.reason != 'fit') { handle.closePreview(); }
       },
 
       /**
        * Update map size variables when window is resized.
        */
-      windowResize: ()=> {
+      windowResize() {
          const $c = $('canvas');
          mapSize.width = $c.width();
          mapSize.height = $c.height();
@@ -162,7 +170,7 @@ $(function() {
        *
        * https://css-tricks.com/native-browser-copy-clipboard/
        */
-      copyUrl: function(this:Element, e:JQueryMouseEventObject) {
+      copyUrl(this:Element, e:JQueryMouseEventObject) {
          const $temp = $('<textarea>')
             .text(window.location.href)
             .appendTo(document.body)
@@ -172,6 +180,7 @@ $(function() {
             range.selectNode($temp[0]);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
+            util.log.event(eventCategory, 'Copy URL');
          } catch (ex) {
             console.error(ex);
          }
@@ -181,7 +190,7 @@ $(function() {
       /**
        * Click on button with `data-link` attribute.
        */
-      buttonClick: function(this:Element, e:JQueryMouseEventObject) {
+      buttonClick(this:Element, e:JQueryMouseEventObject) {
          window.location.href = $(this).data('link');
       },
 
@@ -189,7 +198,7 @@ $(function() {
        * Click on button with `data-link` attribute having `lat`, `lon`
        * and `zoom` tokens.
        */
-      mapLink: function(this:Element, e:JQueryMouseEventObject) {
+      mapLink(this:Element, e:JQueryMouseEventObject) {
          const lngLat = map.getCenter();
          const zoom = map.getZoom();
          // very rough conversion based on trial-and-error
@@ -203,10 +212,9 @@ $(function() {
       },
 
       /**
-       * Respond to mouse click on photo marker. When preview is shown, start
-       * listening for map interaction events to hide the preview.
+       * Respond to mouse click on photo marker.
        */
-      photoClick: function(e:mapboxgl.MapMouseEvent) {
+      photoClick(e:mapboxgl.MapMouseEvent) {
          html.photoPreview(e, 'single', html.photo(e.features[0]));
          util.log.event(eventCategory, 'Click Photo Pin');
       },
@@ -215,20 +223,38 @@ $(function() {
        * Attach events to the map to hide preview as soon as there's user
        * interaction.
        */
-      previewShown: ()=> {
+      previewShown() {
          map.on('move', handle.mapInteraction);
       },
 
       /**
        * Click to close photo preview.
        */
-      closePreview: function() {
+      closePreview() {
          $preview.hide();
          enableKeyNav(false);
          map.off('move', handle.mapInteraction);
       },
 
-      legendToggle: function() {
+      /**
+       * Click to show or hide photo layer.
+       *
+       * https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/
+       * https://www.mapbox.com/mapbox-gl-js/api/#map#setlayoutproperty
+       */
+      photoLayerToggle(this:Element, e:JQueryMouseEventObject) {
+         photosVisible = !photosVisible;
+         const p = photosVisible ? 'visible' : 'none';
+
+         ['cluster', 'cluster-count', 'photo'].forEach(l => {
+            map.setLayoutProperty(l, 'visibility', p);
+         });
+
+         $(this).find('p').html((photosVisible ? 'Hide' : 'Show') + ' Photos');
+         util.log.event(eventCategory, (photosVisible ? 'Show' : 'Hide') + ' Photos');
+      },
+
+      legendToggle() {
          $legendToggle.parents('ul').toggleClass('collapsed');
          $('nav .toggle-legend').toggleClass('active');
          legendVisible = !legendVisible;
@@ -281,12 +307,16 @@ $(function() {
                   $('figure:nth-child(' + selected + ')', $photos).show();
                   $('i:nth-child(' + selected + ')', $markers).addClass('selected');
 
-                  util.log.event(eventCategory, 'Navigate Photo Cluster');
+                  if (!navigatedPhoto) {
+                     // only track first use so logs aren't spammed
+                     util.log.event(eventCategory, 'Navigate Photo Cluster');
+                     navigatedPhoto = true;
+                  }
                };
                const prev = ()=> { select(-1); };
                const next = ()=> { select(1); };
 
-               enableKeyNav(true, next, prev);
+               if (!mobileLayout()) { enableKeyNav(true, next, prev); }
 
                for (let i = 0; i < photos.length; i++) {
                   $photos.append(html.photo(photos[i]));
@@ -325,6 +355,7 @@ $(function() {
    $('nav button.toggle-legend').click(handle.legendToggle);
    $('nav button.map-link').click(handle.mapLink);
    $('nav button.copy-url').click(handle.copyUrl);
+   $('nav button.toggle-photos').click(handle.photoLayerToggle);
 
    window.addEventListener('resize', handle.windowResize);
 
