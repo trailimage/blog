@@ -10,4 +10,4 @@ Require minimal effort to publish photo blog entries while avoiding lock-in. No 
 Leverage Lightroom's Flickr plugin and the Flickr API such that pressing "Publish" on a set of photos in Lightroom immediately creates a blog page with the ordered set of images arranged above their EXIF descriptions.
 
 ### Technical
-![Data Diagram](https://cdn.rawgit.com/Jason-Abbott/trail-image/mapbox/src/img/diagram.svg)
+![Data Diagram](https://docs.google.com/drawings/d/1WBvWdW-vs6kReRAH_cVzMa6yvNkgkcK-czY-aRfD-9Y/pub?w=960&amp;h=720)
