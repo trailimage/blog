@@ -29,6 +29,15 @@ function image(img:Size):JsonLD.ImageObject {
    return ld<JsonLD.ImageObject>('ImageObject', schema);
 }
 
+/**
+ * Place for post
+ */
+function place(post:Post):JsonLD.Place {
+   return ld<JsonLD.Place>('Place', {
+      hasMap: config.site.url + '/' + post.key + '/map'
+   });
+}
+
 function webPage(path:string = ''):JsonLD.WebPage {
    return ld<JsonLD.WebPage>('WebPage', { id: pathUrl(path) });
 }
@@ -73,6 +82,12 @@ function searchAction():JsonLD.SearchAction {
    });
 }
 
+function discoverAction(post:Post):JsonLD.DiscoverAction {
+   return ld<JsonLD.DiscoverAction>('DiscoverAction', {
+      target: config.site.url + '/' + post.key + '/map'
+   });
+}
+
 /**
  * Convert link data to string with nulls and zeroes removed
  */
@@ -111,7 +126,7 @@ export default {
       const categoryTitle = Object
          .keys(post.categories)
          .map(key => post.categories[key]);
-      const schema = {
+      const schema:JsonLD.BlogPosting = {
          author: owner(),
          name: post.title,
          headline: post.title,
@@ -124,6 +139,10 @@ export default {
          articleSection: categoryTitle.join(',')
       };
 
+      if (post.chronological && post.centroid != null) {
+         schema.locationCreated = place(post);
+         schema.potentialAction = discoverAction(post);
+      }
 
       // implement video when full source data is ready
       // ld.video = Factory.fromVideo(post.video);
@@ -135,7 +154,7 @@ export default {
       //}
 
       if (is.value(post.coverPhoto.size.thumb)) {
-         schema.image.thumbnail = image(post.coverPhoto.size.thumb);
+         (schema.image as JsonLD.ImageObject).thumbnail = image(post.coverPhoto.size.thumb);
       }
 
       return ld<JsonLD.BlogPosting>('BlogPosting', schema);
