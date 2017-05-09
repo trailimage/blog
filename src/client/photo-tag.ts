@@ -36,7 +36,7 @@ $(function() {
       util.log.event(eventCategory, 'Click Index Letter');
    });
 
-   $view.find('#tag-index a').click(function(this:HTMLElement, e) {
+   $view.find('#tag-index a').click(function(this:HTMLElement, e:Event) {
       e.stopPropagation();
       e.preventDefault();
       $link.removeClass(css);
@@ -55,7 +55,7 @@ $(function() {
    });
 
    /**
-    * Load photo tag HTML
+    * Load photo-search.hbs rendered by server.
     */
    function loadPhotoTag($link:JQuery) {
       if ($link.length > 0) {

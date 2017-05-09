@@ -2,11 +2,11 @@
 @import "settings";
 
 @postHeaderHeight: @headerHeight + 15;
-@mobileButtonSize: 20px;
+@mobileButtonSize: 30px;
 @mobileButtonMargin: 5px;
 @mobileButtonColor: #fff;
 @mobileButtonBack: #000;
-@mobileButtonAlpha: 0.5;
+@mobileButtonAlpha: 0.3;
 @mobileSynopsisMargin: 60px;
 
 header.page.post-header {
@@ -63,15 +63,18 @@ header.page.post-header {
       text-decoration: none;
       letter-spacing: 1px;
       font-size: 12px;
-      line-height: 16px;
+      line-height: 12px;
       z-index: 21;
       color: #fff;
-      padding: 4px 6px 0 8px;
+      padding: 0 6px 4px 4px;
       .gradient(#800, #810, #966);
       .rounded(3px);
       .opacity(0.7);
 
-      .glyphicon { margin-right: 6px; }
+      .material-icons {
+         padding: 0 6px 4px 0;
+         vertical-align: middle;
+      }
 
       &:hover { .opacity(1); }
    }
@@ -530,6 +533,7 @@ figure {
    }
 
    div.mobile-button {
+      margin: 0;
       bottom: @mobileButtonMargin + 20;
       padding: 3px;
       right: @mobileButtonMargin;
@@ -602,20 +606,22 @@ figure {
       }
 
       @media @mobile {
-         .opacity();
+         margin: 0;
+         .opacity(@mobileButtonAlpha);
          border: none;
          padding: 2px 0 3px 7px;
          bottom: @mobileButtonMargin + @mobileButtonSize + 30;
-         right: @mobileButtonMargin;
+         right: @mobileButtonMargin + 2px;
          .rounded(20px);
          span { display: none; }
          background-color: @mobileButtonBack;
          text-align: center;
 
          .material-icons {
+            font-size: @mobileButtonSize - 5;
             color: @mobileButtonColor;
             position: relative;
-            line-height: 20px;
+            line-height: @mobileButtonSize;
          }
       }
    }

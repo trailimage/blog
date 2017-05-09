@@ -24,6 +24,7 @@
 <body class="post{{#if post.happenedOn}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoLocations}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
+   {{> bug}}
 	{{> side-menu}}
 	<header class="page post-header content">
 		<!--googleoff: index-->
@@ -54,7 +55,7 @@
 		<div class="fb-like" data-href="{{config.site.url}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
 
 	{{#if post.video}}
-		<a class="video-link" href="#video">{{{icon 'film'}}}jump to the video</a>
+		<a class="video-link" href="#video">{{{icon 'videocam'}}}jump to the video</a>
 	{{/if}}
 
 	{{#if post.description}}

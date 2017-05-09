@@ -47,7 +47,9 @@ function seriesRoutes(photoID:string):Express.Router {
 function photoTagRoutes():Express.Router {
    const r = Express.Router();
    r.get('/', ctrl.photo.tags);
+   // photo tag page
    r.get(`/:${ph.PHOTO_TAG}`, ctrl.photo.tags);
+   // API call for photo info
    r.get(`/search/:${ph.PHOTO_TAG}`, ctrl.photo.withTag);
    return r;
 }

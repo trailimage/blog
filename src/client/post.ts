@@ -22,13 +22,17 @@ $(function() {
    $photos.find('img').on('click', lightBox).lazyload();
 
    // tapping mobile info button loads camera detail
-   $photos.find('.mobile-button').on('touchstart', function(this:HTMLElement) {
+   $photos.find('.mobile-button').on('touchstart', function(this:HTMLElement, e:JQueryEventObject) {
       const $button = $(this);
       const infoClass = 'mobile-info';
       const activeKey = 'info-visible';
       const loadedKey = 'info-loaded';
       const activeCSS = 'active';
       const $fig = $button.parent();
+
+      // avoid triggering lightbox
+      e.preventDefault();
+      e.stopImmediatePropagation();
 
       if ($fig.data(activeKey)) {
          // hide info box
