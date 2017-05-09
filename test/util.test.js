@@ -1,7 +1,7 @@
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const config = require('../lib/config');
-const util = require('../lib/util');
+const config = require('../lib/config').default;
+const util = require('../lib/util/').default;
 const { lipsum } = require('./mocks/');
 let u;   // undefined
 
@@ -72,10 +72,10 @@ describe('Utilities', ()=> {
       });
 
       it('substitutes nicer typography', ()=> {
-         expect(util.typography(u)).is.empty;
-         expect(util.typography('')).is.empty;
-         expect(util.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
-         expect(util.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
+         expect(util.html.typography(u)).is.empty;
+         expect(util.html.typography('')).is.empty;
+         expect(util.html.typography('"He said," she said')).equals('&ldquo;He said,&rdquo; she said');
+         expect(util.html.typography('<a href="/page">so you "say"</a>')).equals('<a href="/page">so you &ldquo;say&rdquo;</a>');
       });
 
       it('fixes malformed links and URL decode text', ()=> {
@@ -169,6 +169,14 @@ describe('Utilities', ()=> {
          expect(util.number.parse('wow 28.9')).equals(28.9);
          expect(util.number.parse('nothing')).to.be.NaN;
       });
+
+      it('converts eligible strings to numbers', ()=> {
+         expect(util.number.maybe('3.5')).equals(3.5);
+         expect(util.number.maybe('3.5')).not.equals('3.5');
+         expect(util.number.maybe('-3.25')).equals(-3.25);
+         expect(util.number.maybe('563')).equals(563);
+         expect(util.number.maybe('asdfds')).equals('asdfds');
+      });
    });
 
    describe('Encoding', ()=> {
@@ -191,16 +199,16 @@ describe('Utilities', ()=> {
    });
 
    describe('Icons', ()=> {
-      it('creates glyphicons', ()=> {
-         expect(util.icon.tag('star')).equals('<span class="glyphicon glyphicon-star"></span>');
+      it('creates material icon tags', ()=> {
+         expect(util.icon.tag('star')).equals('<i class="material-icons star">star</i>');
       });
 
-      it('matches post categories to glyphicons', ()=> {
+      it('matches post categories to material icons', ()=> {
          config.style.icon.category = { Test: 'success', default: 'whatever' };
 
-         expect(util.icon.category('Test')).equals('<span class="glyphicon glyphicon-success"></span>');
+         expect(util.icon.category('Test')).equals('<i class="material-icons success">success</i>');
          // revert to default if provided
-         expect(util.icon.category('Nothing')).equals('<span class="glyphicon glyphicon-whatever"></span>');
+         expect(util.icon.category('Nothing')).equals('<i class="material-icons whatever">whatever</i>');
 
          // blank if no default
          delete config.style.icon.category['default'];
@@ -245,10 +253,10 @@ describe('Utilities', ()=> {
    });
 
 
-   it('adds .remove() method to strings', ()=> {
-      expect('string').to.have.property('remove');
-      expect(('some text').remove('text')).equals('some ');
-   });
+   // it('adds .remove() method to strings', ()=> {
+   //    expect('string').to.have.property('remove');
+   //    expect(('some text').remove('text')).equals('some ');
+   // });
 
    it('substitutes placeholders for values', ()=> {
       expect(util.format('nothing')).equals('nothing');
@@ -260,11 +268,24 @@ describe('Utilities', ()=> {
       expect(util.capitalize('one two')).equals('One two');
    });
 
+   it('converts to title case', ()=> {
+      expect(util.titleCase('one two')).equals('One Two');
+      expect(util.titleCase('onetwo 22')).equals('Onetwo 22');
+      expect(util.titleCase('BLM - BUREAU OF LAND MANAGEMENT')).equals('BLM - Bureau of Land Management');
+      expect(util.titleCase('some road 12-34R')).equals('Some Road 12-34R');
+      expect(util.titleCase('the sentence')).equals('The Sentence');
+      expect(util.titleCase('went to the south')).equals('Went to the South');
+      expect(util.titleCase('i haven\'t showered')).equals('I Haven\'t Showered');
+      expect(util.titleCase('IDAHO DEPARTMENT OF PARKS & RECREATION')).equals('Idaho Department of Parks & Recreation');
+      expect(util.titleCase('fan saddle south a')).equals('Fan Saddle South A');
+   });
+
    it('converts phrase to URL slug', ()=> {
       expect(util.slug('Wiggle and Roll')).equals('wiggle-and-roll');
       expect(util.slug('Wiggle and    Sing')).equals('wiggle-and-sing');
       expect(util.slug('Too---dashing')).equals('too-dashing');
       expect(util.slug('powerful/oz')).equals('powerful-oz');
+      expect(util.slug('three o\' clock')).equals('three-o-clock');
    });
 
    describe('Photo Captions', ()=> {
@@ -332,13 +353,13 @@ describe('Utilities', ()=> {
 
       it('identifies haiku', ()=> {
          let source = 'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
-         let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<span class="glyphicon glyphicon-leaf"></span></p>';
+         let target = '<p class="haiku">neck bent<br/>apply the brakes<br/>for the reign of fire<i class="material-icons spa">spa</i></p>';
 
          expect(util.html.story(source)).equals(target);
 
          source = 'cows stand chewing' + nl + 'wet meadow grass' + nl + 'while mud swallows wheels' + ds
             + 'Here we have Joel "Runs with Cows" Abbott. He did a little loop out among them—kind of became one of them.';
-         target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<span class="glyphicon glyphicon-leaf"></span></p>'
+         target = '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<i class="material-icons spa">spa</i></p>'
             + '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
 
          expect(util.html.story(source)).equals(target);
@@ -373,7 +394,7 @@ describe('Utilities', ()=> {
             + '¹ Some other note' + nl
             + '² Last note';
          let target = '<p>' + lipsum + '</p><ol class="footnotes" start="0">'
-            + '<li class="credit"><span class="glyphicon glyphicon-asterisk"></span><span>Note about photo credit</span></li>'
+            + '<li class="credit"><i class="material-icons star">star</i><span>Note about photo credit</span></li>'
             + '<li><span>Some other note</span></li>'
             + '<li><span>Last note</span></li></ol>';
 

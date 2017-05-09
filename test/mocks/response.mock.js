@@ -1,16 +1,17 @@
-'use strict';
-
 const util = require('util');
-const C = require('../../lib/constants');
-const is = require('../../lib/is');
+const C = require('../../lib/constants').default;
+const is = require('../../lib/is').default;
 
 /** @type {MockResponse} */
 module.exports = {
    httpStatus: C.httpStatus.OK,
-   // method to call when response is complete
-   // can be assigned as test middleware next() method so that response.end() and middelware next() are both captured
+   /**
+    * Method to call when response is complete. Can be assigned as test
+    * middleware next() method so that response.end() and middelware next()
+    * are both captured
+    */
    onEnd: null,
-   // whether response should be ended after render is called
+   /** Whether response should be ended after render is called */
    endOnRender: true,
    ended: false,
    headers: {},
@@ -27,10 +28,11 @@ module.exports = {
    status(value) { this.httpStatus = value; return this; },
    notFound() { return this.status(C.httpStatus.NOT_FOUND); },
    setHeader(key, value) { this.headers[key] = value; return this; },
+
    /**
     * Set header value(s)
-    * @param {String|Object} keyOrHash
-    * @param {String} [value]
+    * @param {string|object} keyOrHash
+    * @param {string} [value]
     */
    set(keyOrHash, value) {
       if (value !== undefined) {
@@ -45,15 +47,17 @@ module.exports = {
       this.redirected.url = url;
       this.end();
    },
+
    /**
     * Method added by Express
-    * @param {Object} o
+    * @param {object} o
     */
    json(o) {
       this.httpStatus = C.httpStatus.OK;
       this.rendered.json = o;
       return this.setHeader('Content-Type', C.mimeType.JSON).end();
    },
+
    /**
     * Serialize render options rather than actually rendering a view
     */
@@ -69,8 +73,8 @@ module.exports = {
 
    },
    /**
-    * @param {String|Buffer} chunk
-    * @param {String} [encoding]
+    * @param {string|Buffer} chunk
+    * @param {string} [encoding]
     * @param {function} [callback]
     * @see https://nodejs.org/api/stream.html#stream_class_stream_writable
     */

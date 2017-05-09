@@ -2,127 +2,123 @@
 @import "settings";
 
 #mobile-menu-button {
-	position: absolute;
-	z-index: 300;
-	top: 0;
-	right: 0;
-	display: none;
+   position: absolute;
+   z-index: 300;
+   top: 0;
+   right: 0;
+   width: 50px;
+   display: none;
 
-	.glyphicon {
-		padding: 10px;
-		font-size: 40px;
-		color: @mobileTextColor;
-		cursor: pointer;
-	}
-
-	@media @mobile { display: block; }
+   .material-icons {
+      padding: 2px 0;
+      font-size: 40px;
+      color: @mobileTextColor;
+   }
+   @media @mobile { display: block; }
 }
 
 #mobile-menu {
-	@headerSize: 15px;
-	@selectColor: #333;
-	@menuHeight: 500px;
+   @headerSize: 15px;
+   @selectColor: #333;
+   @menuHeight: 500px;
 
-	top: @mobileHeaderHeight;
-	width: @contentWidth;
-	position: fixed;
-	height: @menuHeight;
-	font-family: @sanSerifFont;
-	font-size: 24px;
-	line-height: 1em;
-	color: @mobileTextColor;
-	background-color: #222;
-	z-index: 800;
-	margin: 0 auto;
-	border-bottom: 40px solid #444;
-	display: none;
+   top: @mobileHeaderHeight;
+   bottom: 0;
+   width: 100%;
+   position: fixed;
+   font-family: @sanSerifFont;
+   font-size: 16px;
+   line-height: 1em;
+   color: @mobileTextColor;
+   background-color: #222;
+   z-index: 800;
+   margin: 0;
+   display: none;
 
-	ul {
-		li {
-			padding: 14px 0;
-			cursor: pointer;
-			a {
-				color: @mobileTextColor;
-				text-decoration: none;
-				&:active { color: @mobileActiveColor; }
-			}
-		}
+   ul {
+      margin: 0;
 
-		&.links {
-			position: absolute;
-			top: 10px;
-			right: 0;
-			text-align: right;
+      li {
+         padding: 14px 0;
+         cursor: pointer;
+         a {
+            color: @mobileTextColor;
+            text-decoration: none;
+            &:active { color: @mobileActiveColor; }
+         }
+      }
 
-			li {
-				.glyphicon {
-					font-size: 18px;
-					padding: 10px 20px;
-					color: darken(@mobileTextColor, 50%);
-				}
-				.glyphicon-info-sign { color: #44f; }
-				.glyphicon-tags { color: #dd0; }
-				.glyphicon-fire { color: #900; }
-				.glyphicon-leaf { color: #0a0; }
-				.glyphicon-comment { color: #09a; }
-			}
+      &.links {
+         width: 45%;
+         position: absolute;
+         top: 0;
+         right: 0;
+         text-align: right;
 
-		}
+         li {
+            .material-icons {
+               vertical-align: middle;
+               font-size: 28px;
+               padding: 0 10px 4px;
+               color: darken(@mobileTextColor, 50%);
+            }
+         }
+      }
 
-		&.tag-list {
-			margin: @headerSize 0 0 0;
-			float: left;
-			li {
-				white-space: nowrap;
-				padding: 30px 20px;
-				.glyphicon {
-					font-size: 18px;
-					padding-right: 10px;
-					color: @mobileLinkColor;
-				}
-				&.selected {
-					background-color: @selectColor;
-				}
-			}
-		}
-	}
+      &.category-list {
+         width: 25%;
+         margin: 0;
+         float: left;
+         li {
+            text-align: center;
+            white-space: nowrap;
+            padding: 30px 15px;
 
-	.tags {
-		float: left;
-		position: relative;
-		width: 300px;
-		margin: @headerSize 0;
-		height: @menuHeight - 30;
-		overflow-y: auto;
-		overflow-x: hidden;
-		z-index: 90;
+            &.selected {
+               background-color: @selectColor;
+            }
+         }
+      }
+   }
 
-		ul {
-			padding: 0;
-			margin: 0;
-			display: none;
-			background-color: @selectColor;
+   .categories {
+      float: left;
+      position: relative;
+      width: 33%;
+      height: 100%;
+      margin: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-color: @selectColor;
+      z-index: 90;
 
-			li {
-				font-size: 20px;
-				text-align: center;
-				padding: 15px 20px;
-				.count {
-					font-size: smaller;
-					padding-left: 10px;
-					color: #666;
-				}
-			}
-		}
-	}
+      ul {
+         padding: 0;
+         margin: 0;
+         display: none;
 
-	.glyphicon-chevron-down {
-		color: #666;
-		display: none;
-		font-size: 50px;
-		position: absolute;
-		top: @menuHeight - 55;
-		left: 115px;
-		z-index: 100;
-	}
+         li {
+            font-size: 16px;
+            text-align: left;
+            padding: 15px 5px;
+            .count {
+               font-size: smaller;
+               padding-left: 10px;
+               color: #666;
+            }
+         }
+      }
+   }
+
+   .material-icons.arrow_downward {
+      color: #666;
+      display: none;
+      padding: 0;
+      margin: 0 0 0 10px;
+      font-size: 50px;
+      position: absolute;
+      bottom: 0;
+      left: 55%;
+      z-index: 100;
+   }
 }

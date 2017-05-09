@@ -10,12 +10,10 @@
 @import "post-page";
 @import "category-page";
 @import "photo-tag-page";
-@import "@{bs-path}glyphicons.less";
 
 html {
    overflow-y: scroll;
    overflow: -moz-scrollbars-vertical;
-   /*-webkit-font-smoothing: subpixel-antialiased;*/
 }
 
 body {
@@ -40,12 +38,10 @@ body {
    background-color: rgba(255, 255, 255, 0.9);
    width: @contentWidth;
 
-   @media @mobile { background: none; }
+   @media @mobile { background: none; width: 100%; }
 }
 
 .clear { clear: both; }
-
-//region Header
 
 #bug {
    position: absolute;
@@ -55,7 +51,7 @@ body {
 
    @media @mobile { display: none; }
 
-   h1, h2, h3 {
+   h1, h2 {
       margin: 0 0 0 10px;
       padding: 0;
       color: rgba(255, 255, 255, 0.1);
@@ -65,29 +61,30 @@ body {
       font-weight: normal;
       line-height: 1em;
    }
+
    h1 { font-size: 40px; }
    h2 {
-      font-size: 13px;
-      letter-spacing: 2.3px;
+      font-size: 14px;
+      letter-spacing: 3.4px;
       text-transform: uppercase;
-      padding-left: 5px;
+      padding: 2px 0 0 5px;
       color: rgba(255, 255, 255, 0.2);
    }
-   h3 {
-      position: absolute;
-      top: 39px;
-      left: 6px;
-      margin: 0;
-      white-space: nowrap;
-      font-size: 46px;
-      font-family: 'Qwigley', Tahoma, Arial, sans-serif;
+
+   p {
+      margin: 2px 0 0 15px;
+      color: @trimColor;
+      font-size: 14px;
+      line-height: 1.3em;
+      font-family: @sanSerifFont;
+      width: 200px;
    }
 
    &:hover {
       h1, h2, h3 { text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7); .transition(); }
       h1 { color: rgba(255, 255, 255, 0.2); }
-      h3 { color: rgba(255, 100, 100, 0.6); }
       h2 { color: rgba(255, 255, 255, 0.4); }
+      p { color: rgba(255, 100, 100, 0.6); }
    }
 }
 
@@ -95,39 +92,44 @@ header.page {
    position: relative;
 
    #top-bar {
-      z-index: 300;
+      z-index: 500;
       position: relative;
       height: @headerHeight;
-      text-rendering: optimizeLegibility;
 
       h1 {
          padding: 10px 0 0 10px;
          font-family: @headerFont;
-         letter-spacing: -1px;
          font-weight: 700;
+         letter-spacing: -1.5px;
          font-size: 34px;
          line-height: 1em;
          color: @boldColor; /* 423938 or 5e685c */
          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
          vertical-align: top;
       }
+      a { color: #4e584c; }
+   }
 
-      @media @desktop {
+   @media @desktop {
+      #top-bar {
          background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
          border-bottom: 1px solid @lightTrimColor;
       }
+   }
 
-      @media @mobile {
+   @media @mobile {
+      position: fixed;
+      z-index: 500;
+      #top-bar {
          height: @mobileHeaderHeight;
          background-color: #666;
          border-bottom: none;
          position: fixed;
-         width: @contentWidth;
+         width: 100%;
          top: 0;
          z-index: 200;
 
          h1 {
-            //margin-top: 10px;
             font-size: 38px;
             font-weight: 400;
             letter-spacing: 1px;
@@ -135,8 +137,6 @@ header.page {
             text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
          }
       }
-
-      a { color: #4e584c; }
    }
 }
 
@@ -192,7 +192,7 @@ div.authorize {
       font-size: 40px;
       text-align: center;
       line-height: 1.5em;
-      padding: 4em 1em 0 1em;
+      padding: 4em 1em 0;
       color: #fff;
       text-shadow: 0 0 8px rgba(0, 0, 0, 1);
    }
@@ -207,8 +207,6 @@ footer.page {
    text-align: center;
    background-color: rgba(255, 255, 255, 0.2);
 
-   @media @mobile { background: #444; }
-
    .inner-shadow(0, 2px, 2px, 0.1);
 
    p {
@@ -216,10 +214,11 @@ footer.page {
       color: rgba(255, 255, 255, 0.6);
       font-weight: normal;
       font-family: @sanSerifFont;
-      font-size: 13px;
+      font-size: 14px;
       text-indent: 0;
       padding: 0;
       margin: 2px;
+      clear: right;
 
       a { color: @lightColor; }
 
@@ -231,20 +230,40 @@ footer.page {
       margin-bottom: 10px;
       text-decoration: none;
       span.icon { height: 25px; width: 25px; }
+   }
 
-      @media @desktop {
+   @media @desktop {
+      a.repo {
          float: right;
          margin-top: 15px;
          img { margin: 0 0 2px 3px; }
          .opacity(0.3);
          &:hover { .opacity(1); }
       }
+   }
 
-      @media @mobile {
-         margin-top: 20px;
+   @media @mobile {
+      width: 100%;
+      background: #444;
+
+      p {
+         padding: 0 10px;
+         font-size: 10px;
+         margin: 0;
+         line-height: 1.1em;
+         &.rights { font-size: 10px; }
+      }
+
+      a.repo {
+         margin: 10px 0 0;
          img { margin: 0 0 2px 1px; }
       }
    }
-}
 
-//endregion
+   @media @tablet {
+      p {
+         font-size: 14px;
+         &.rights { font-size: 14px; }
+      }
+   }
+}

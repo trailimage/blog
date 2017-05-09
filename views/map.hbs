@@ -7,6 +7,7 @@
 	<link href='/css/map.css' rel='stylesheet' type='text/css'/>
 	<script type='text/javascript'>
       {{! values used within map.js }}
+      var bounds = '{{bounds}}';
 		var postKey = '{{key}}';
 		var mapPhotoID = {{photoID}};
 		var allowDownload = {{#if config.map.allowDownload}}true{{else}}false{{/if}};

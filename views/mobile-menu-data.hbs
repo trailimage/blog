@@ -1,22 +1,23 @@
 <ul class="links">
 	<li><a href="/" rel="home">Home {{{icon 'home'}}}</a></li>
-	<li><a href="/about" rel="author">About {{{icon 'info-sign'}}}</a></li>
-	<li><a href="/photo-tag" rel="search">Photo Tags {{{icon 'tags'}}}</a></li>
-	<li><a href="/ruminations">Ruminations {{{icon 'leaf'}}}</a></li>
+   <li><a href="/map">Map {{{icon 'map'}}}</a></li>
+	<li><a href="/about" rel="author">About {{{icon 'info'}}}</a></li>
+	<li><a href="/photo-tag" rel="search">Photo Tags {{{icon 'collections'}}}</a></li>
+	<li><a href="/ruminations">Ruminations {{{icon 'local_florist'}}}</a></li>
 {{! contact-link}}
-	<li><a href="/rss" class="feed-icon" rel="alternate" type="application/rss+xml">RSS Feed {{{icon 'fire'}}}</a></li>
-	<li><a href="https://twitter.com/trailimage" rel="me">Twitter {{{icon 'comment'}}}</a></li>
+	<li><a href="/rss" class="feed-icon" rel="alternate" type="application/rss+xml">RSS Feed {{{icon 'rss_feed'}}}</a></li>
+	<li><a href="https://twitter.com/trailimage" rel="me">Twitter {{{icon 'forum'}}}</a></li>
 </ul>
 
-<ul class="tag-list">
+<ul class="category-list">
 {{#each library.categories}}
-	<li class="{{lowerCase this.title}}">{{{icon this.icon}}}{{this.title}}</li>
+	<li class="{{lowerCase this.title}}">{{this.title}}</li>
 {{/each}}
 </ul>
 
-{{{icon 'chevron-down'}}}
+{{{icon 'arrow_downward'}}}
 
-<nav class="tags">
+<nav class="categories">
 {{#each library.categories}}
 	<ul class="{{lowerCase this.title}}">
 	{{#this.subcategories}}

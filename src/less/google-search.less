@@ -2,80 +2,81 @@
 @import "settings";
 
 div.google-search {
-	@width: (@imageWidth - @contentWidth) / 2;
-	@buttonWidth: 50px;
+   @width: (@imageWidth - @contentWidth) / 2;
+   @buttonWidth: 50px;
 
-	width: @width;
-	height: 30px;
-	margin-left: -1px;
+   width: @width;
+   height: 30px;
+   margin-left: -1px;
 
-	div.gsc-control-searchbox-only {
-		@width: (@imageWidth - @contentWidth) / 2;
-		@buttonWidth: 50px;
+   div.gsc-control-searchbox-only {
+      @width: (@imageWidth - @contentWidth) / 2;
+      @buttonWidth: 50px;
 
-		form.gsc-search-box {
-			table.gsc-search-box {
-				width: auto;
-				line-height: 14px;
+      form.gsc-search-box {
+         table.gsc-search-box {
+            width: auto;
+            line-height: 14px;
 
-				td {
-					padding: 0;
-					margin: 0;
+            td {
+               padding: 0;
+               margin: 0;
 
-					&.gsc-input {
-						div.gsc-input-box {
-							width: @width - @buttonWidth;
-							position: relative;
-							border-color: #000;
-							border-right: none;
-							.inner-shadow(1px, 1px, 2px, 0.4);
+               &.gsc-input {
+                  div.gsc-input-box {
+                     width: @width - @buttonWidth;
+                     position: relative;
+                     border-color: #000;
+                     border-right: none;
+                     .inner-shadow(1px, 1px, 2px, 0.4);
 
-							table {
-								margin: 5px 0 0 5px;
+                     table {
+                        margin: 3px 0 0 5px;
 
-								td {
-									padding-right: 10px;
+                        td {
+                           padding-right: 10px;
 
-									input.gsc-input {
-										font-size: 14px;
-										font-family: @sanSerifFont;
-									}
-									/* cancel button */
-									div a span.gscb_a { position: absolute; top: -5px; right: 0; }
-								}
-							}
-						}
-					}
+                           input.gsc-input {
+                              font-size: 14px;
+                              font-family: @sanSerifFont;
+                           }
 
-					&.gsc-search-button {
-						width: @buttonWidth;
-						vertical-align: top;
+                           /* cancel button */
+                           div a span.gscb_a { position: absolute; top: -5px; right: 0; }
+                        }
+                     }
+                  }
+               }
 
-						input.gsc-search-button {
-							margin: 0;
-							background-color: @trimColor;
-							border-color: #000;
-							border-left: none;
-							padding: 6px 8px;
-							.border-radius(3px, 3px);
+               &.gsc-search-button {
+                  width: @buttonWidth;
+                  vertical-align: top;
 
-							&:hover {
-								background-color: @lightTrimColor;
-							}
-						}
-					}
+                  input.gsc-search-button {
+                     margin: 0;
+                     background-color: @trimColor;
+                     border-color: #000;
+                     border-left: none;
+                     padding: 6px 8px;
+                     .border-radius(3px, 3px);
 
-					&.gsc-clear-button {
-						div.gsc-clear-button { }
-					}
-				}
-			}
-		}
+                     &:hover {
+                        background-color: @lightTrimColor;
+                     }
+                  }
+               }
 
-		table.gsc-branding {
-			td.gsc-branding-user-defined { }
-			td.gsc-branding-text { div { } }
-			td.gsc-branding-img { img { } }
-		}
-	}
+               // &.gsc-clear-button {
+               //    div.gsc-clear-button { }
+               // }
+            }
+         }
+      }
+
+      // table.gsc-branding {
+      //    td.gsc-branding-user-defined { }
+      //    td.gsc-branding-text { div { } }
+      //    td.gsc-branding-img { img { } }
+      // }
+   }
 }

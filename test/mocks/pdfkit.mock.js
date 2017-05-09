@@ -1,38 +1,36 @@
-'use strict';
-
 module.exports = {
    title: null,
    author: null,
    /**
     * Registered fonts
-    * @type {Object.<String, String>}
+    * @type {object.<string, string>}
     */
    fonts: {},
    x: 0,
    y: 0,
-   /** @type String */
+   /** @type string */
    _font: null,
-   /** @type Number */
+   /** @type number */
    _fontSize: 0,
-   /** @type Number[] */
+   /** @type number[] */
    _fillColor: [],
    /**
-    * @param {String} name
-    * @param {String} path
-    * @param {String} [family]
+    * @param {string} name
+    * @param {string} path
+    * @param {string} [family]
     */
    registerFont(name, path, family) { this.fonts[name] = path;	},
 
    /**
-    * @param {Object} options
+    * @param {object} options
     */
    addPage(options) {
 
    },
 
-   /** @param {String} f */
+   /** @param {string} f */
    font(f) { this._font = f; },
 
-   /** @param {Number} s */
+   /** @param {number} s */
    fontSize(s) { this._fontSize = s; }
 };

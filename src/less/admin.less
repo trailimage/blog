@@ -1,6 +1,5 @@
 @import "settings";
 @import "elements";
-@import "@{bs-path}glyphicons.less";
 
 /* https://github.com/acdvorak/intellij-lessc-plugin */
 @sanSerifFont: 'Droid Sans', Trebuchet MS, Tahoma, Arial;
@@ -8,144 +7,144 @@
 @borderColor: #aaa;
 
 html {
-	padding: 0;
-	margin: 0;
+   padding: 0;
+   margin: 0;
 }
 
 body {
-	background-color: #eee;
-	font-family: @sanSerifFont;
-	margin: 0;
-	padding: 0;
+   background-color: #eee;
+   font-family: @sanSerifFont;
+   margin: 0;
+   padding: 0;
 }
 
 label {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 a {
-	text-decoration: none;
-	&:hover { text-decoration: underline !important; }
+   text-decoration: none;
+   &:hover { text-decoration: underline !important; }
 }
 
 fieldset {
-	position: relative;
-	border: 1px solid @borderColor;
-	.rounded(4px);
-	padding: 5px 10px 10px 10px;
-	margin-top: 10px;
+   position: relative;
+   border: 1px solid @borderColor;
+   .rounded(4px);
+   padding: 5px 10px 10px;
+   margin-top: 10px;
 
-	input, select { font-family: @sanSerifFont; font-size: 16px; }
+   input, select { font-family: @sanSerifFont; font-size: 16px; }
 
-	legend {
-		margin-left: 10px;
-		font-weight: bold;
-		color: #009;
-	}
+   legend {
+      margin-left: 10px;
+      font-weight: bold;
+      color: #009;
+   }
 
-	select {
-		margin: 4px;
-		padding: 4px;
-		display: block;
-		width: 75%;
-	}
+   select {
+      margin: 4px;
+      padding: 4px;
+      display: block;
+      width: 75%;
+   }
 
-	.message {
-		position: absolute;
-		bottom: 4px;
-		right: 8px;
-		display: none;
-		font-size: 20px;
-		font-weight: bold;
-		color: #f80;
-	}
+   .message {
+      position: absolute;
+      bottom: 4px;
+      right: 8px;
+      display: none;
+      font-size: 20px;
+      font-weight: bold;
+      color: #f80;
+   }
 
-	&.busy {
-		cursor: wait !important;
-	}
+   &.busy {
+      cursor: wait !important;
+   }
 }
 
 div.column {
-	width: 37%;
-	float: left;
-	margin: 10px;
+   width: 37%;
+   float: left;
+   margin: 10px;
 
-	form {
-		button { float: right; }
-	}
+   form {
+      button { float: right; }
+   }
 
-	&#reference {
-		width: 20%;
-		margin-left: 20px;
-	}
+   &#reference {
+      width: 20%;
+      margin-left: 20px;
+   }
 }
 
 #logs {
-	table {
-		border-collapse: collapse;
-		padding: 0;
-		margin: 0;
-		font-size: 12px;
-		width: 100%;
+   table {
+      border-collapse: collapse;
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+      width: 100%;
 
-		tr {
-			&.error	{ td { background-color: #f99; word-break: break-all; }}
-			&.warn { td { background-color: #ffe; }}
-			&:hover	{ td { background-color: #fff; }}
+      tr {
+         &.error { td { background-color: #f99; word-break: break-all; } }
+         &.warn { td { background-color: #ffe; } }
+         &:hover { td { background-color: #fff; } }
 
-			&.head {
-				text-align: center;
-				background-color: #000;
-				color: #fff;
-				font-weight: bold;
-				font-size: 25px;
+         &.head {
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            font-weight: bold;
+            font-size: 25px;
 
-				&:hover { td { background-color: #000; }}
-			}
+            &:hover { td { background-color: #000; } }
+         }
 
-			td {
-				border-bottom: 1px solid @borderColor;
-				margin: 0;
-				padding: 2px 4px;
-				line-height: 1em;
+         td {
+            border-bottom: 1px solid @borderColor;
+            margin: 0;
+            padding: 2px 4px;
+            line-height: 1em;
 
-				&.icon {
-					background-color: #444;
-					font-weight: normal;
-					font-size: 15px;
-					width: 15px;
-					height: 15px;
-					text-align: center;
+            &.icon {
+               background-color: #444;
+               font-weight: normal;
+               font-size: 15px;
+               width: 15px;
+               height: 15px;
+               text-align: center;
 
-					.glyphicon { color: #ccc; }
-					.glyphicon-ban-circle { color: #eee; }
-					.glyphicon-eye-open { color: #5ef; }
-					.glyphicon-flickr { color: #ff3797; }
-					.glyphicon-heart-empty { color: #f44; }
-					.glyphicon-link { color: #f6c; }
-					.glyphicon-lock { color: #0f0; }
-					.glyphicon-log-in { color: #fd0; }
-					.glyphicon-new-window { color: #ff8; }
-					.glyphicon-off { color: #5af; }
-					.glyphicon-remove { color: #f40; }
-					.glyphicon-save { color: #f94; }
-					.glyphicon-save-file { }
-					.glyphicon-screenshot { color: #af0; }
-				}
+               .glyphicon { color: #ccc; }
+               .glyphicon-ban-circle { color: #eee; }
+               .glyphicon-eye-open { color: #5ef; }
+               .glyphicon-flickr { color: #ff3797; }
+               .glyphicon-heart-empty { color: #f44; }
+               .glyphicon-link { color: #f6c; }
+               .glyphicon-lock { color: #0f0; }
+               .glyphicon-log-in { color: #fd0; }
+               .glyphicon-new-window { color: #ff8; }
+               .glyphicon-off { color: #5af; }
+               .glyphicon-remove { color: #f40; }
+               .glyphicon-save { color: #f94; }
+               .glyphicon-save-file { }
+               .glyphicon-screenshot { color: #af0; }
+            }
 
-				&.timestamp {
-					text-align: right;
-					padding-right: 6px;
-					color: #666;
-					white-space: nowrap;
-					letter-spacing: -1px;
-					cursor: pointer;
-				}
+            &.timestamp {
+               text-align: right;
+               padding-right: 6px;
+               color: #666;
+               white-space: nowrap;
+               letter-spacing: -1px;
+               cursor: pointer;
+            }
 
-				a {
-					color: #44d;
-				}
-			}
-		}
-	}
+            a {
+               color: #44d;
+            }
+         }
+      }
+   }
 }
