@@ -1,3 +1,6 @@
+## 3.0.1
+- Style tweak
+
 ## 3.0.0
 - Change map provider to Mapbox
 - Add map view of all posts
