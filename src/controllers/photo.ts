@@ -18,7 +18,7 @@ function exif(req:Blog.Request, res:Blog.Response) {
 }
 
 /**
- * Photos with tag
+ * Photos with tag rendered in response to click on label in photo tags page.
  */
 function withTag(req:Blog.Request, res:Blog.Response) {
    const slug = normalizeTag(decodeURIComponent(req.params[ph.PHOTO_TAG]));
