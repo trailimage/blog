@@ -1,7 +1,7 @@
-const ld = require('../lib/json-ld');
+const ld = require('../lib/json-ld').default;
 const mocha = require('mocha');
 const expect = require('chai').expect;
-const factory = require('../lib/factory');
+const factory = require('../lib/factory').default;
 /** @type {Post} */
 let post = null;
 /** @type {Category} */
@@ -46,7 +46,7 @@ describe('JSON-LD', ()=> {
          + '"image":{"url":"https://farm9.staticflickr.com/8109/8459503474_7fcb90b3e9_b.jpg","width":1024,"height":688,"@type":"ImageObject"},'
          + '"publisher":{"name":"Trail Image","logo":{"url":"http://www.trailimage.com/img/logo-title.png","width":308,"height":60,"@type":"ImageObject"},'
          + '"@type":"Organization"},"mainEntityOfPage":{"@id":"http://www.trailimage.com/spring-fish--chips","@type":"WebPage"},'
-         + '"datePublished":"2011-01-01T02:14:07.000Z","dateModified":"2016-06-04T22:07:20.000Z","articleSection":"2016,Boise River,Family,Bicycle","@type":"BlogPosting","@context":"http://schema.org"}';
+         + '"datePublished":"2013-02-09T19:35:56.000Z","dateModified":"2016-06-04T22:07:20.000Z","articleSection":"2016,Boise River,Family,Bicycle","@type":"BlogPosting","@context":"http://schema.org"}';
       const source = ld.serialize(ld.fromPost(post));
 
       expect(source).equals(target);

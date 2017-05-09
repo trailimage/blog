@@ -1,6 +1,6 @@
 <html>
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-	{{> head-meta}}	
+	{{> head-meta}}
 {{#unless post.feature}}
 	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
 	{{#if post.previousIsPart}}
@@ -12,19 +12,19 @@
 {{/unless}}
 	{{> head-files}}
 	{{> head-facebook}}
+   {{> google-search}}
 	{{> ga}}
    <script type="text/javascript">
-		window.feature = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
+		var pageFeatures = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
 	</script>
 	<script src='/js/post.js' type='text/javascript' defer></script>
 	{{> json-ld}}
 </head>
 {{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.dateTaken}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoCoordinates}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
+<body class="post{{#if post.happenedOn}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoLocations}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
 	{{! script is loaded in /js/responsive.js }}
 	<div id="fb-root"></div>
 	{{> side-menu}}
-	{{> bug}}
 	<header class="page post-header content">
 		<!--googleoff: index-->
 		<nav id="mobile-menu"></nav>
@@ -43,12 +43,12 @@
 			<!--googleoff: index-->
 			{{> post-menu}}
 			<!--googleon: index-->
-			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
+			<div id="mobile-menu-button">{{{icon "menu"}}}</div>
 		</div>
 
-	{{#if post.dateTaken}}
+	{{#if post.happenedOn}}
 	{{! outside top-bar to avoid its fixed positioning }}
-		<div id="post-date">{{date post.dateTaken}}</div>
+		<div id="post-date">{{date post.happenedOn}}</div>
 	{{/if}}
 
 		<div class="fb-like" data-href="{{config.site.url}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
@@ -66,11 +66,14 @@
 	{{#unless post.feature}}
 		{{> categories post.categories}}
 		<nav id="nav-top">{{> navigation}}</nav>
-		{{#if post.photoCoordinates}}
-		{{! https://developers.google.com/maps/documentation/static-maps/ }}
-		{{! 640 is maximum width of free API: https://developers.google.com/maps/documentation/static-maps/intro#Imagesizes }}
+		{{#if post.photoLocations}}
+		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
-			<a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow"><img src="http://maps.googleapis.com/maps/api/staticmap?&maptype=terrain&scale=1&sensor=false&size=640x200&key={{config.google.apiKey}}&markers={{post.photoCoordinates}}" width="640" height="200"/></a>
+         <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow">
+            <img src="./img/blank.png" width="650" height="200" class="static-map"
+               data-locations="{{json post.photoLocations}}"
+               data-href="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/-pins-/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false"/>
+         </a>
 		</div>
 		{{/if}}
 	{{/unless}}
@@ -87,11 +90,11 @@
 		<img src="{{size.preview.url}}" alt="{{title}}" data-original="{{size.normal.url}}"
 			 style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
 		     data-big="{{size.big.url}}" data-big-width="{{size.big.width}}" data-big-height="{{size.big.height}}"/>
-		<div class="info-button">{{{icon 'camera'}}}<p>Camera Settings</p></div>
+		<div class="info-button">{{{icon 'photo_camera'}}}<p>Camera Settings</p></div>
 
 	{{#if tags}}
 		<nav class="tags">
-			{{{icon 'tags'}}}
+			{{{icon 'local_offer'}}}
 			<h4>More photos like this</h4>
 			{{{makeTagList tags}}}
 		</nav>
@@ -99,7 +102,7 @@
 
 	{{#if longitude}}
       {{! http://handlebarsjs.com/#paths }}
-		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow">map{{{icon 'map-marker'}}}</a>
+		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow"><span>map</span>{{{icon 'map'}}}</a>
 	{{/if}}
 
 	{{#if title}}
@@ -108,7 +111,7 @@
 	{{#if sourceUrl}}
 		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
 	{{/if}}
-		<div class="mobile-button">{{{icon 'camera'}}}<p>Info</p></div>
+		<div class="mobile-button">{{{icon 'info'}}}{{{icon 'info_outline'}}}</div>
 	</figure>
 
 	<div class="caption content">{{{formatCaption description}}}</div>
@@ -127,7 +130,7 @@
 {{#unless post.feature}}
 	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}
-	<div class='by-line content'><p rel='author'><span>by</span>{{config.owner.name}}</p></div>
+	<div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
 
 	<footer class="post content">
 		<div class="fb-comments" data-href="{{config.site.url}}/{{post.key}}/" data-width="648" data-num-posts="20"></div>

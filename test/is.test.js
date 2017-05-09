@@ -1,4 +1,4 @@
-const is = require('../lib/is');
+const is = require('../lib/is.js').default;
 const mocha = require('mocha');
 const expect = require('chai').expect;
 let u;   // undefined

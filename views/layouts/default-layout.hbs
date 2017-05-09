@@ -3,13 +3,14 @@
 	{{> head-meta}}
 	{{> head-files}}
 	{{> ga}}
+   {{> google-search}}
 	{{{block "head"}}}
 	<style type="text/css">
 		#bug, #links, #tag-navigation { position: fixed; }
 	</style>
 	<script type="text/javascript">
 		{{! features determine which scripts to load }}
-		window.feature = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{config.timestamp}} };
+		pageFeatures = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{config.timestamp}} };
 	</script>
 </head>
 <body>
@@ -21,11 +22,11 @@
 		<div id="top-bar">
 			<h1>{{title}}</h1>
 			{{#if subtitle}}<h4>{{subtitle}}</h4>{{/if}}
-			<div id="mobile-menu-button">{{{icon "menu-hamburger"}}}</div>
+			<div id="mobile-menu-button">{{{icon "menu"}}}</div>
 		</div>
 	</header>
 	{{> side-menu}}
-	{{> bug}}
+   {{> bug}}
 	{{{body}}}
 	{{> footer}}
 </body>

@@ -1,0 +1,396 @@
+@import "elements";
+@import "settings";
+
+@navWidth: 55px;
+@mobileNavWidth: 45px;
+@formColor: #252825;
+
+html { overflow: hidden; }
+body {
+   margin: 0;
+   padding: 0;
+   background: none;
+   span.mobile-text { display: none; }
+
+   @media @mobile {
+      span.mobile-text { display: inline; }
+      span.desktop-text { display: none; }
+   }
+}
+
+body > nav {
+   position: absolute;
+   width: @navWidth;
+   top: 0;
+   bottom: 0;
+   color: #fff;
+   font-size: 14px;
+   background-color: @formColor;
+   font-family: @sanSerifFont;
+   padding: @navWidth 0 0;
+
+   .logo {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: @navWidth;
+      background-color: #444;
+      &:hover { background-color: #aaa; }
+   }
+
+   button {
+      position: relative;
+      width: @navWidth;
+      height: @navWidth;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      outline: none;
+      .opacity(0.7);
+
+      p {
+         font-size: 12px;
+         position: absolute;
+         display: none;
+         background-color: @formColor;
+         margin-top: -(@navWidth / 2);
+         padding: 10px 15px 10px 10px;
+         left: @navWidth;
+         width: auto;
+         white-space: nowrap;
+         z-index: 200;
+      }
+
+      &:not(:active) {
+         transition: background-color 1000ms linear;
+      }
+
+      &:active {
+         background: @mobileLinkColor;
+      }
+
+      &:hover {
+         p { display: block; }
+         .opacity(1);
+      }
+
+      &.disabled {
+         .opacity(0.2);
+         cursor: default;
+      }
+
+      &.toggle-legend { display: none; }
+
+      &.post-info, &.gaia-gps {
+         p {
+            text-align: left;
+            width: 200px;
+            white-space: pre-wrap;
+            color: #999;
+
+            b {
+               color: #fff;
+               display: block;
+               margin-bottom: 4px;
+            }
+         }
+      }
+      &.post-info {
+         p b { font-size: 14px; }
+      }
+      &.gaia-gps p b { font-weight: normal; }
+   }
+
+   @media @mobile {
+      width: @mobileNavWidth;
+      padding-top: @mobileNavWidth;
+      .logo { width: @mobileNavWidth; }
+      button {
+         width: @mobileNavWidth;
+
+         p { left: @mobileNavWidth; }
+
+         // hide buttons that depend on mouse hover tips
+         &.gaia-gps, &.post-info, &.google-earth { display: none; }
+
+         // enable the nav bar alternative to showing legend
+         &.toggle-legend {
+            display: block;
+            i.help_outline { display: none; }
+
+            &.active {
+               i.help_outline { display: block; }
+               i.help { display: none; }
+            }
+         }
+      }
+   }
+
+   #photo-count {
+      height: @navWidth;
+      font-size: 12px;
+      line-height: 1em;
+      margin: 10px 0 0;
+      text-align: center;
+      color: #999;
+      img { padding: 0 0 4px; }
+   }
+}
+
+#map-canvas {
+   top: 0;
+   bottom: 0;
+   left: @navWidth;
+   right: 0;
+   position: absolute;
+
+   @media @mobile { left: @mobileNavWidth; }
+}
+
+#legend, #photo-preview {
+   position: absolute;
+   font-family: @sanSerifFont;
+   .drop-shadow(0, 0, 20px, 0.5);
+   z-index: 50;
+}
+
+#legend {
+   background-color: @formColor;
+   bottom: 25px;
+   right: 10px;
+   color: #aaa;
+   list-style-type: none;
+   padding: 10px 20px 5px;
+   font-size: 13px;
+   width: 125px;
+
+   li {
+      list-style: none;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 2px;
+      margin-bottom: 9px;
+
+      &.toggle {
+         border: none;
+         padding: 10px 10px 0;
+         cursor: pointer;
+
+         p {
+            margin: 0;
+            padding: 0;
+            display: none;
+         }
+         i {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            &.expand_less { display: none; }
+         }
+
+         &:hover { i { color: #fff; } }
+      }
+
+      &.photo {
+         border: none;
+         padding-bottom: 4px;
+         line-height: 1.2em;
+
+         img {
+            padding: 0 0 1px 6px;
+            vertical-align: bottom;
+         }
+      }
+
+      &.track {
+         border-color: #f22;
+         border-bottom-style: dashed;
+         &.hidden { display: none; }
+      }
+
+      &.highway { border-color: #df0; }
+      &.automobile { border-color: #fff; }
+      &.jeep { border-color: #7e7; }
+      &.atv { border-color: #82d; }
+      &.motorcycle { border-color: #f90; }
+      &.non-motor { border-color: #f28; }
+      &.osm-path { border-color: #0cf; }
+      &.seasonal { border-bottom-style: dotted; }
+
+      &.credit {
+         border: none;
+         font-size: 11px;
+         padding: 10px 0;
+
+         img { float: right; }
+         a {
+            color: #cdb;
+            &:hover { color: #dfa; }
+         }
+      }
+   }
+
+   &.collapsed {
+      padding-bottom: 0;
+
+      li {
+         display: none;
+         &.toggle {
+            display: block;
+            padding: 0;
+            cursor: pointer;
+            p { display: block; }
+            i { top: 2px; right: 10px; }
+            .expand_less { display: block; top: 5px; }
+            .expand_more { display: none; }
+         }
+      }
+      &:hover { .opacity(1); }
+
+      @media @mobile { display: none; }
+   }
+
+   @media @mobile {
+      bottom: 40px;
+      li.toggle { display: none; }
+   }
+}
+
+#photo-preview {
+   display: none;
+   color: #fff;
+   background-color: @formColor;
+   min-height: 200px;
+   min-width: 200px;
+
+   nav {
+      position: relative;
+      background-color: @formColor;
+      .material-icons {
+         font-size: 17px;
+         margin: 1px 4px;
+         cursor: pointer;
+         color: #999;
+         &:hover { color: #fff; }
+         &.arrow_forward { float: right; }
+      }
+
+      div.mobile-tip { display: none; }
+
+      div.markers {
+         left: 20px;
+         right: 20px;
+         top: 0;
+         position: absolute;
+         text-align: center;
+
+         .material-icons.place {
+            font-size: 12px;
+            padding: 3px 0 0;
+            margin: 0 -1px;
+            color: #444;
+            &.selected { color: #f77; }
+         }
+         &.too-many {
+            font-size: 12px;
+            padding-top: 2px;
+
+            i {
+               display: none;
+               font-style: normal;
+               margin-right: 4px;
+               &.selected { display: inline; }
+            }
+         }
+      }
+   }
+
+   figure {
+      display: block;
+      text-align: center;
+      margin: 0;
+      img {
+         min-height: 200px;
+         cursor: pointer;
+      }
+      figcaption {
+         position: relative;
+         font-weight: normal;
+         font-size: 12px;
+         padding: 10px 0;
+      }
+   }
+
+   .material-icons.close {
+      position: absolute;
+      z-index: 100;
+      font-size: 18px;
+      font-weight: bold;
+      top: 8px;
+      left: 8px;
+      .opacity(0.8);
+      color: #fff;
+      cursor: pointer;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+      &:hover { .opacity(1); }
+   }
+
+   div.photo-list {
+      figure {
+         display: none;
+         &:first-child { display: block; }
+      }
+   }
+
+   &.list .material-icons.close {
+      top: 25px;
+      left: 4px;
+   }
+
+   @media @mobile {
+      width: 320px;
+      text-align: center;
+      figure {
+         figcaption {
+            padding: 2px;
+         }
+      }
+      .material-icons.close {
+         left: auto;
+         right: 8px;
+         font-size: 25px;
+      }
+
+      &.list .material-icons.close {
+         top: 45px;
+         left: auto;
+      }
+
+      nav {
+         text-align: left;
+         .material-icons {
+            font-size: 30px;
+            padding: 5px 1px;
+         }
+         div.mobile-tip {
+            text-align: center;
+            font-size: 14px;
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            left: 50px;
+            right: 50px;
+            display: block;
+         }
+         div.markers {
+            padding-top: 3px;
+         }
+      }
+   }
+}
+
+.keyframes(button-press; {
+   0% { color: #fff; }
+   50% { color: #ff0; }
+   100% { color: #fff; }
+});
