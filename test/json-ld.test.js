@@ -45,8 +45,14 @@ describe('JSON-LD', ()=> {
          + '"description":"Photography’s highest form is sometimes likened to poetry, capturing experiences that defy denotation. Both are diminished to the extent they require explanation, some say, so hopefully coercing them to explain each other is a right born of two wrongs.",'
          + '"image":{"url":"https://farm9.staticflickr.com/8109/8459503474_7fcb90b3e9_b.jpg","width":1024,"height":688,"@type":"ImageObject"},'
          + '"publisher":{"name":"Trail Image","logo":{"url":"http://www.trailimage.com/img/logo-title.png","width":308,"height":60,"@type":"ImageObject"},'
-         + '"@type":"Organization"},"mainEntityOfPage":{"@id":"http://www.trailimage.com/spring-fish--chips","@type":"WebPage"},'
-         + '"datePublished":"2013-02-09T19:35:56.000Z","dateModified":"2016-06-04T22:07:20.000Z","articleSection":"2016,Boise River,Family,Bicycle","@type":"BlogPosting","@context":"http://schema.org"}';
+         + '"@type":"Organization"},'
+         + '"mainEntityOfPage":{"@id":"http://www.trailimage.com/spring-fish--chips","@type":"WebPage"},'
+         + '"datePublished":"2013-02-09T19:35:56.000Z",'
+         + '"dateModified":"2016-06-04T22:07:20.000Z",'
+         + '"articleSection":"2016,Boise River,Family,Bicycle",'
+         + '"locationCreated":{"hasMap":"http://www.trailimage.com/spring-fish--chips/map","@type":"Place"},'
+         + '"potentialAction":{"target":"http://www.trailimage.com/spring-fish--chips/map","@type":"DiscoverAction"},'
+         + '"@type":"BlogPosting","@context":"http://schema.org"}';
       const source = ld.serialize(ld.fromPost(post));
 
       expect(source).equals(target);

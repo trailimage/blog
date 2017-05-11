@@ -150,7 +150,7 @@ export default {
    testing: false,
    isProduction: isProduction,
    /** Whether to use wwwhisper authentication (https://devcenter.heroku.com/articles/wwwhisper) */
-   usePersona: process.env['WWWHISPER_DISABLE'] !== '1',
+   usePersona: isProduction && process.env['WWWHISPER_DISABLE'] !== '1',
    /** Hours difference from GMT during standard (not daylight savings) time */
    timeZone: -7,
    repoUrl: 'https://github.com/Jason-Abbott/trail-image.git',

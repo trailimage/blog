@@ -50,12 +50,12 @@
 		<form id="json" action="/admin/json/delete">
 			<fieldset id="json">
 				<legend>JSON</legend>
-			{{#if json}}
+			{{#if apis}}
 				<button type="submit">Delete</button>
             <select name="json" size="4" multiple>
-				{{#json}}
+				{{#apis}}
 					<option value="{{this}}">{{this}}</option>
-				{{/json}}
+				{{/apis}}
 				</select>
 				<input type="hidden" name="remove-matches" value="true"/>
 			{{/if}}

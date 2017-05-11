@@ -22,7 +22,7 @@ describe('Administration Controller', ()=> {
          expect(res.headers).has.property('Cache-Control', 'no-cache, no-store, must-revalidate');
          expect(res.headers).has.property('Pragma', 'no-cache');
          expect(res.headers).has.property('Expires', 0);
-         expect(options).to.contain.all.keys(['json', 'library', 'logs', 'maps', 'views']);
+         expect(options).to.contain.all.keys(['apis', 'library', 'logs', 'maps', 'views']);
          done();
       };
       admin.home(req, res);
