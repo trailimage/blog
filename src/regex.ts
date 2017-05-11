@@ -72,7 +72,7 @@ export default {
       get html() { return /(&ldquo;|&rdquo;)/g; },
 
       /** Long quote followed by line break */
-      block: /(\r\n|\r|\n)?(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*(\r\n|\r|\n)?/g
+      block: /(\r\n|\r|\n)(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*(\r\n|\r|\n)?/g
       //get block() { return /[\r\n]*(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*[\r\n]/g; }
    },
 
