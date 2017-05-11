@@ -39,27 +39,27 @@ export namespace JsonLD {
     * http://schema.org/Article
     */
    interface Article extends CreativeWork {
-      articleBody: string,
-      articleSection: string,
-      pageStart: string|number,
-      pageEnd: string|number,
-      pagination: string,
-      wordCount: number
+      articleBody?:string,
+      articleSection?:string,
+      pageStart?:string|number,
+      pageEnd?:string|number,
+      pagination?:string,
+      wordCount?:number
    }
 
    /**
     * http://schema.org/Audience
     */
    interface Audience extends Thing {
-      audienceType: string,
-      geographicArea: AdministrativeArea
+      audienceType:string,
+      geographicArea:AdministrativeArea
    }
 
    /**
     * http://schema.org/Blog
     */
    interface Blog extends Thing {
-      blogPost: BlogPosting[]
+      blogPost:BlogPosting[]
    }
 
    /**
@@ -71,9 +71,9 @@ export namespace JsonLD {
     * http://schema.org/Brand
     */
    interface Brand extends Thing {
-      aggregateRating: AggregateRating,
-      review: Review,
-      logo: string
+      aggregateRating?:AggregateRating,
+      review?:Review,
+      logo?:string
    }
 
    /**
@@ -113,38 +113,38 @@ export namespace JsonLD {
     * http://schema.org/CreativeWork
     */
    interface CreativeWork extends Thing {
-      author?: Person|Organization,
-      creator?: Person|Organization,
-      provider?: Person|Organization,
-      producer?: Person|Organization,
-      sourceOrganization?: Organization,
-      editor?: Person,
-      associatedArticle?: NewsArticle,
-      requiresSubscription?: boolean,
-      contentSize?: string,
-      contentUrl?: URL|string,
-      encodingFormat?: string,
-      bitrate?: string,
-      duration?: Duration,
-      height?: Distance|QuantitativeValue|number,
-      width?: Distance|QuantitativeValue|number,
-      productionCompany?: Organization,
-      regionsAllowed?: Place,
-      copyrightHolder?: Person|Organization,
-      copyrightYear?: number,
-      audience?: Audience,
-      encoding?: MediaObject,
-      hasPart?: CreativeWork,
-      isPartOf?: CreativeWork,
-      headling?: string,
-      keywords?: string,
-      locationCreated?: Place,
-      review?: Review,
-      datePublished?: DateTime,
-      text?: string,
-      version?: number,
-      mainEntity?: Thing,
-      thumbnailUrl?: string
+      author?:Person|Organization,
+      creator?:Person|Organization,
+      provider?:Person|Organization,
+      producer?:Person|Organization,
+      sourceOrganization?:Organization,
+      editor?:Person,
+      associatedArticle?:NewsArticle,
+      requiresSubscription?:boolean,
+      contentSize?:string,
+      contentUrl?:URL|string,
+      encodingFormat?:string,
+      bitrate?:string,
+      duration?:Duration,
+      height?:Distance|QuantitativeValue|number,
+      width?:Distance|QuantitativeValue|number,
+      productionCompany?:Organization,
+      regionsAllowed?:Place,
+      copyrightHolder?:Person|Organization,
+      copyrightYear?:number,
+      audience?:Audience,
+      encoding?:MediaObject,
+      hasPart?:CreativeWork,
+      isPartOf?:CreativeWork,
+      headling?:string,
+      keywords?:string,
+      locationCreated?:Place,
+      review?:Review,
+      datePublished?:DateTime,
+      text?:string,
+      version?:number,
+      mainEntity?:Thing,
+      thumbnailUrl?:string
    }
 
    interface ContactPoint extends Thing {
@@ -869,6 +869,11 @@ export namespace JsonLD {
    }
 
    /**
+    * http://schema.org/DiscoverAction
+    */
+   interface DiscoverAction extends Action {}
+
+   /**
     * http://schema.org/Service
     */
    interface Service extends Thing {
@@ -910,7 +915,7 @@ export namespace JsonLD {
     * http://schema.org/SocialMediaPosting
     */
    interface SocialMediaPosting extends Article {
-      sharedContent: CreativeWork
+      sharedContent?:CreativeWork;
    }
 
    /**

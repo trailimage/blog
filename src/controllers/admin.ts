@@ -28,7 +28,7 @@ function view(res:Blog.Response, viewKeys:string[], apiKeys:string[], mapKeys:st
       layout: template.layout.NONE,
       maps: is.array(mapKeys) ? mapKeys.sort() : null,
       views: is.array(viewKeys) ? viewKeys.sort() : null,
-      json: is.array(apiKeys) ? apiKeys.sort() : null,
+      apis: is.array(apiKeys) ? apiKeys.sort() : null,
       library,
       config
    });
