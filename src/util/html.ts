@@ -204,7 +204,7 @@ export function formatPoem(text:string):string {
 }
 
 /**
- * Convert new lines to HTML paragraphs and normalize links
+ * Convert new lines to HTML paragraphs and normalize links.
  *
  * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */

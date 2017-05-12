@@ -864,7 +864,7 @@ div.caption {
 
    // mobile caption
    @media @mobile {
-      padding-top: 0;
+      padding: 0 0 15px;
       font-size: @fontSize + 2;
       line-height: 1.3em;
 
@@ -875,11 +875,12 @@ div.caption {
       }
 
       blockquote {
-         margin-bottom: 0;
+         margin-bottom: 15px;
          text-align: left;
          p {
+            font-size: 17px;
             color: @mobileTextColor;
-            line-height: 1.1em;
+            line-height: 1.2em;
             padding: 0 3em 0.5em;
          }
       }

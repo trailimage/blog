@@ -315,6 +315,18 @@ describe('Utilities', ()=> {
          expect(util.html.caption(source)).equals(target);
       });
 
+      it('does not blockquote interrupted quotes', ()=> {
+         // do no blockquote when quote is interrupted
+         // “The constitutions of nearly all the states have qualifications for voters simply on citizenship,” Pefley countered, “without question with regard to what they believe on this or that question. Then I ask, why make a distinction of the people of Idaho?
+         // “It appears to have been reserved for Idaho’s constitution to put in the first religious test in regard to the right of suffrage and holding office … Political and religious persecution are supposed to have died at the termination of the revolution but it appears that Idaho is again an exception.”¹
+         // Pefley’s arguments were unheeded and the section was approved. 
+         
+         const source = '“' + lipsum + ',” he said, “' + lipsum + ds + '“' + lipsum + '”' + ds;
+         const target = '<p>“' + lipsum + ',” he said, “' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
+
+         expect(util.html.caption(source)).equals(target);
+      });
+
       it('identifies inline poems', ()=> {
          // no text after
          let source = lipsum + ds + 'Have you ever stood on the top of a mountain' + nl
