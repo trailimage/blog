@@ -1,7 +1,7 @@
 import is from '../is';
 
 /**
- * Node content
+ * Node content.
  *
  * https://developer.mozilla.org/en-US/docs/Web/API/Node.normalize
  */
@@ -15,7 +15,7 @@ function firstValue(node:Element, tag:string):string {
 }
 
 /**
- * First child or null
+ * First child or null.
  */
 function firstNode(node:Element, tag:string):Element {
    const n = node.getElementsByTagName(tag);

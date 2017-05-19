@@ -28,7 +28,8 @@ export const features = ()=> ({
 }  as GeoJSON.FeatureCollection<any>);
 
 /**
- * Basic GeoJSON geometry.
+ * Basic GeoJSON geometry may contain a single point (lat, lon array), an array
+ * of points (line) or an array of lines.
  */
 export const geometry = (type:string, coordinates:number[]|number[][]|number[][][]) => ({
    type,
@@ -97,13 +98,23 @@ function pointFromKML(node:Element) {
    }  as GeoJSON.Feature<GeoJSON.Point>;
 }
 
-function lineFromKML(node:Element) {
-   const line = kml.line(node);
-   return (line == null) ? null : {
-      type: type.FEATURE,
-      properties: kml.properties(node),
-      geometry: geometry(type.LINE, line)
-   }  as GeoJSON.Feature<GeoJSON.LineString>;
+function lineFromKML(node:Element):GeoJSON.Feature<GeoJSON.MultiLineString|GeoJSON.LineString> {
+   const lines = kml.line(node);
+   if (lines != null) {
+      if (lines.length > 1) {
+         return {
+            type: type.FEATURE,
+            properties: kml.properties(node),
+            geometry: geometry(type.MULTILINE, lines)
+         }  as GeoJSON.Feature<GeoJSON.MultiLineString>;
+      } else {
+         return {
+            type: type.FEATURE,
+            properties: kml.properties(node),
+            geometry: geometry(type.LINE, lines[0])
+         }  as GeoJSON.Feature<GeoJSON.LineString>;
+      }
+   }
 }
 
 /**
