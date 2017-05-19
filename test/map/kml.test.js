@@ -4,10 +4,10 @@ const { expect } = require('chai');
 const mock = require('../mocks/');
 
 describe('KML', ()=> {
-   it('extracts KML from KMZ', ()=> mock.loadFile('motorcycle.kmz')
+   it.skip('extracts KML from KMZ', ()=> mock.loadFile('motorcycle.kmz')
       .then(kml.fromKMZ)
       .then(doc => { expect(doc).to.exist; })
-   ).timeout(10000);
+   ); //.timeout(10000);
 
    it('parses HTML property descriptions', ()=> {
       const properties = {
