@@ -8,40 +8,42 @@ import util from '../util/';
 import * as JSZip from 'jszip';
 
 /**
- * Coordinate values. In KML these are space-separated, comma-delimited points.
- * Example:
+ * Coordinate values for one or more segments. In KML these are
+ * space-separated, comma-delimited points. Example:
  *
  *    -113.2924677415256,44.70498119901985,0 -113.2924051073907,44.70509329841001,0 -113.2922923580428,44.70527906358436,0
  */
-function coordinates(node:Element, name:string):number[][] {
-   const geothing = xml.firstNode(node, name);
+function coordinates(node:Element, name:string):number[][][] {
+   const lines = node.getElementsByTagName(name);
 
-   if (geothing != null) {
-      const coordinates = xml.firstValue(geothing, 'coordinates');
+   if (lines != null && lines.length > 0) {
+      const segments:number[][][] = [];
 
-      if (coordinates != null) {
-         const locations:number[][] = [];
-         const points = coordinates.trim().split(' ');
+      for (let i = 0; i < lines.length; i++) {
+         const coordinates = xml.firstValue(lines[i], 'coordinates');
+         if (coordinates != null) {
+            const locations:number[][] = [];
+            const points = coordinates.trim().split(' ');
 
-         points.forEach(p => {
-            const location:number[] = new Array(3);
-            const parts = p.split(',').map(parseFloat);
+            points.forEach(p => {
+               const location:number[] = new Array(3);
+               const parts = p.split(',').map(parseFloat);
 
-            if (parts.length >= 2) {
-               location[index.LON] = parts[0];
-               location[index.LAT] = parts[1];
+               if (parts.length >= 2) {
+                  location[index.LON] = parts[0];
+                  location[index.LAT] = parts[1];
 
-               if (parts.length >= 3) {
-                  location[index.ELEVATION] = parts[2];
+                  if (parts.length >= 3) {
+                     location[index.ELEVATION] = parts[2];
+                  }
+                  locations.push(location);
                }
-               locations.push(location);
-            }
-         });
-
-         return locations.length > 0 ? locations : null;
+            });
+            if (locations.length > 0) { segments.push(locations); }
+         }
       }
+      if (segments.length > 0) { return segments; }
    }
-
    return null;
 }
 
@@ -51,13 +53,21 @@ function coordinates(node:Element, name:string):number[][] {
  */
 function location(node:Element):number[] {
    const locations = coordinates(node, 'Point');
-   return locations == null ? null : locations[0];
+   if (locations != null && locations.length > 0) {
+      if (locations.length > 1) {
+         return locations[0][0];
+      } else {
+         return locations[0][0];
+      }
+   }
+   return null;
 }
 
 /**
- * Get array of point arrays or null if the element contains no coordinates.
+ * Get array of segments (which are arrays of point arrays) or null if the
+ * element contains no coordinates.
  */
-function line(node:Element):number[][] {
+function line(node:Element):number[][][] {
    const l = coordinates(node, 'LineString');
    return l == null || l.length == 0 ? null : l;
 }

@@ -10,6 +10,7 @@
       "procfile": "yaml"
    },
 
+   "files.eol": "\n",
    "files.exclude": {
       "**/.git": true,
       "**/.svn": true,
@@ -18,6 +19,8 @@
       "**/.DS_Store": true,
       "lib/**/.js.map": true
    },
+
+   "typescript.referencesCodeLens.enabled": false,
 
    "search.exclude": {
       "**/node_modules": true,
