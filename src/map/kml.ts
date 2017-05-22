@@ -150,7 +150,7 @@ function fromKMZ(data:Buffer):Promise<Document> {
 }
 
 /**
- * Properties of a KML node
+ * Properties of a KML node.
  */
 function properties(node:Element, extras:string[] = []):MapProperties {
    const names = extras.concat(['name', 'description']);
