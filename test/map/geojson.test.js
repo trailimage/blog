@@ -52,7 +52,7 @@ describe('GeoJSON', ()=> {
       //       expect(geo.features[0].properties).has.property('DMSLAT', 443312);
       //    }),
 
-      mock.loadFile('motorcycle.kmz')
+      mock.loadFile('bicycle.kmz')
          .then(kml.fromKMZ)
          .then(geoJSON.featuresFromKML('Idaho Parks & Recreation'))
          .then(geo => {

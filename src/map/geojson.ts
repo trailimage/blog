@@ -203,9 +203,9 @@ export const featuresFromKML = (sourceName:string) => (kml:string|Document) => {
    }
 
    const lines = parseNodes(doc, 'Placemark', lineFromKML);
-   const points = parseNodes(doc, 'Placemark', pointFromKML);
+   //const points = parseNodes(doc, 'Placemark', pointFromKML);
 
-   geo.features = postProcess(sourceName, geo.features.concat(lines, points));
+   geo.features = postProcess(sourceName, lines); //geo.features.concat(lines, points));
 
    return geo;
 };

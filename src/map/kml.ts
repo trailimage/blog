@@ -157,8 +157,11 @@ function properties(node:Element, extras:string[] = []):MapProperties {
    const properties:MapProperties = {};
 
    for (const key of names) {
-      const value = xml.firstValue(node, key);
-      if (!is.empty(value)) { properties[key] = util.number.maybe(value); }
+      let value = xml.firstValue(node, key);
+      if (!is.empty(value)) {
+         if (key == 'name') { value = util.titleCase(value); }
+         properties[key] = util.number.maybe(value);
+      }
    }
    return parseDescription(properties);
 }
