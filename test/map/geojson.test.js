@@ -38,7 +38,7 @@ describe('GeoJSON', ()=> {
       });
    });
 
-   it.skip('converts KML files to GeoJSON', ()=> Promise.all([
+   it('converts KML files to GeoJSON', ()=> Promise.all([
       // mock.loadFile('mines.kmz')
       //    .then(kml.fromKMZ)
       //    .then(geoJSON.featuresFromKML('Idaho Geological Survey'))
