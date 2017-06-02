@@ -28,6 +28,11 @@ $(function() {
     */
    const initial:UrlPosition = { zoom: 6.5, center: [-116.0987, 44.7] };
 
+   const style = {
+      font: ['Open Sans Bold', 'Arial Unicode MS Bold'],
+      minZoom: 6,
+      maxZoom: 18
+   };
    const eventCategory = 'Map';
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
@@ -374,6 +379,7 @@ $(function() {
             $count.find('div').html(geoJSON.features.length.toString());
             addBaseLayers();
             addMapHandlers();
+            addMoscowMountainLayers();
             // set initial map dimensions
             handle.windowResize();
          });
@@ -582,6 +588,63 @@ $(function() {
    }
 
    /**
+    * https://www.mapbox.com/mapbox-gl-js/example/vector-source/
+    */
+   function addMoscowMountainLayers() {
+      map.addSource('moscow-mountain', {
+         type: 'vector',
+         url: 'mapbox://jabbott7.1q8zrllv',
+         tileSize: 512
+      });
+
+      map.addLayer({
+         id: 'mountain-labels',
+         type: 'symbol',
+         source: 'moscow-mountain',
+         'source-layer': 'moscow-mountain-dvde24',
+         layout: {
+            'text-font': style.font,
+            'text-field': '{name}',
+            'text-size': {
+               base: 1,
+               stops: [[10, 10], [14, 13]]
+            },
+            'symbol-placement': {
+               base: 1,
+               stops: [[10, 'point'], [14, 'line']]
+            },
+            'text-rotation-alignment': 'map',
+            'symbol-spacing': 50
+         },
+         paint: {
+            'text-color': '#fff',
+            'text-halo-color': '#000',
+            'text-halo-width': 1,
+            'text-halo-blur': 1
+         },
+         minzoom: 6,
+         maxzoom: 18
+      });
+
+      map.addLayer({
+         id: 'mountain-tracks',
+         type: 'line',
+         source: 'moscow-mountain',
+         'source-layer': 'moscow-mountain-dvde24',
+         paint: {
+            'line-color': '#55f',
+            'line-width': {
+               base: 1,
+               stops: [[8, 1], [13, 2]]
+            }
+         },
+         minzoom: style.minZoom,
+         maxzoom: style.maxZoom
+      }, 'mountain-labels');
+
+   }
+
+   /**
     * Assign source and define layers for clustering.
     */
    function addBaseLayers() {
@@ -625,7 +688,7 @@ $(function() {
          filter: ['has', 'point_count'],
          layout: {
             'text-field': '{point_count_abbreviated}',
-            'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+            'text-font': style.font,
             'text-size': 14
          },
          paint: {

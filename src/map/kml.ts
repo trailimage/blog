@@ -26,8 +26,8 @@ function coordinates(node:Element, name:string):number[][][] {
             const points = coordinates.trim().split(' ');
 
             points.forEach(p => {
-               const location:number[] = new Array(3);
-               const parts = p.split(',').map(parseFloat);
+               const location:number[] = [];
+               const parts = p.split(',').map(roundFromString(6));
 
                if (parts.length >= 2) {
                   location[index.LON] = parts[0];
@@ -46,6 +46,8 @@ function coordinates(node:Element, name:string):number[][][] {
    }
    return null;
 }
+
+const roundFromString = (places:number) => (n:string) => parseFloat(parseFloat(n).toFixed(places));
 
 /**
  * Return location as `[latitude, longitude, elevation]` or null if the element
@@ -157,9 +159,17 @@ function properties(node:Element, extras:string[] = []):MapProperties {
    const properties:MapProperties = {};
 
    for (const key of names) {
-      const value = xml.firstValue(node, key);
-      if (!is.empty(value)) { properties[key] = util.number.maybe(value); }
+      let value = xml.firstValue(node, key);
+      if (!is.empty(value)) {
+         switch (key) {
+            case 'name': value = util.titleCase(value); break;
+            //case 'description': value = value.replace(/[\n\r]/g, ' ').replace(/\s{2,}/g, ' '); break;
+         }
+         properties[key] = util.number.maybe(value);
+      }
    }
+   delete properties['description'];
+
    return parseDescription(properties);
 }
 
