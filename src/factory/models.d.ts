@@ -3,7 +3,7 @@ import { MapBounds } from '../types/';
 export interface EXIF {
    artist: string,
    compensation: string,
-   time: number,
+   time: string,
    fNumber: number,
    focalLength: number,
    ISO: number,
