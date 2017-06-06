@@ -112,7 +112,7 @@ export default {
    },
 
    poetry: {
-      /** Full poems have dash above and below */
+      /** Full poems have single dash above and below */
       get delimiter() { return /(^|[\r\n]+)-([\r\n]+|$)/g; },
 
       /**
@@ -133,7 +133,7 @@ export default {
 
       /**
        * Spaces are collapsed by Flickr so poems are indented with hard spaces
-       * and bullets
+       * and bullets.
        */
       get indent() { return /· · /g; }
    },

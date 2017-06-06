@@ -118,7 +118,7 @@ export function photoTagList(list:string[]):string {
 /**
  * Material icon tag
  *
- * See https://material.io/icons/
+ * https://material.io/icons/
  */
 export const iconTag = (name:string) => `<i class="material-icons ${name}">${name}</i>`;
 
