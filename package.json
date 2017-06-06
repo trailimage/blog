@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=7.8.0"
+    "node": ">=8.0.0"
   },
   "main": "lib/app.js",
   "scripts": {
@@ -17,7 +17,8 @@
     "tstest": "node_modules/.bin/mocha -r ts-node/register",
     "watch": "node_modules/.bin/gulp watch",
     "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
-    "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css"
+    "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+    "postinstall": "npm install git+https://github.com/wrr/connect-injector.git"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
