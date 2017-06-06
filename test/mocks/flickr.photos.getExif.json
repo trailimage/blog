@@ -108,7 +108,10 @@
             "tag": "ExposureTime",
             "label": "Exposure",
             "raw": {
-               "_content": 1
+               "_content": "1\/10"
+            },
+            "clean": {
+               "_content": "0.1 sec (1\/10)"
             }
          },
          {

@@ -75,5 +75,10 @@ export default {
       name: '',
       provider: 'Idaho Parks & Recreation',
       url: 'https://trails.idaho.gov/pages/kmz/Wilderness.kmz'
+   },
+   'moscow-mountain': {
+      name: '',
+      provider: 'Moscow Area Mountain Bike Association',
+      url: 'https://drive.google.com/uc?export=download&id=0B0lgcM9JCuSbbDV2UUNILWpUc28'
    }
 }  as {[key:string]:MapSource};

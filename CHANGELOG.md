@@ -1,3 +1,6 @@
+## 3.0.2
+- Fix exposure time always showing one second
+
 ## 3.0.1
 - Fix alignment in map legend
 - Enable mobile map rotate to allow mobile zoom
