@@ -1,5 +1,6 @@
 import { Blog } from '../types/';
 import config from '../config';
+import log from '../logger';
 import { layout, page } from '../template';
 import library from '../library';
 import { mimeType } from '../constants';
@@ -14,7 +15,15 @@ import * as uglify from 'uglify-js';
 function data(req:Blog.Request, res:Blog.Response)  {
    const slug = page.POST_MENU_DATA;
    const postProcess = (config.isProduction && !config.testing)
-      ? (text:string) => uglify.minify(text, { fromString: true }).code
+      ? (text:string) => {
+         const result = uglify.minify(text);
+         if (result.error) {
+            log.error(result.error);
+            return null;
+         } else {
+            return result.code;
+         }
+      }
       : null;
 
    res.setHeader('Vary', 'Accept-Encoding');
