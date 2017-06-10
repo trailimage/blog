@@ -8,13 +8,13 @@ function make(flickrExif:Flickr.Exif[]):EXIF {
          const e = exif[key];
          if (e.tag == tag) { return e.raw._content; }
       }
-      for (const e of exif) { if (e.tag == tag) { return e.raw._content; } }
+      //for (const e of exif) { if (e.tag == tag) { return e.raw._content; } }
       return empty;
    };
    return sanitizeExif({
       artist: parser(flickrExif, 'Artist'),
       compensation: parser(flickrExif, 'ExposureCompensation'),
-      time: parseFloat(parser(flickrExif, 'ExposureTime', '0')),
+      time: parser(flickrExif, 'ExposureTime', '0'),
       fNumber: parseFloat(parser(flickrExif, 'FNumber', '0')),
       focalLength: 0,   // calculated in sanitizeExif()
       ISO: parseFloat(parser(flickrExif, 'ISO', '0')),

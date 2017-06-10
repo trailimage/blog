@@ -33,12 +33,14 @@ describe('Photos', ()=> {
       expect(p.size.big.height).equals(2048);
    });
 
+   // https://www.flickr.com/services/api/explore/flickr.photos.getExif
    it('can retrieve EXIF', ()=> library.getEXIF('8459503474').then(exif => {
       expect(exif).to.exist;
       expect(exif).has.property('ISO', 400);
       expect(exif).has.property('artist', 'Jason Abbott');
       expect(exif).has.property('model', 'Nikon D700');
       expect(exif).has.property('fNumber', 5.6);
+      expect(exif).has.property('time', '1/10');
    }));
 
    it('have one designated as primary', ()=> {

@@ -237,7 +237,7 @@ function sendFromCacheOrRender(res:Blog.Response, slug:string, options:Blog.Rend
  * output.
  */
 function renderForType(res:Blog.Response, slug:string, options:Blog.RenderOptions) {
-   if (options.mimeType === mimeType.JSON) {
+   if ([mimeType.JSON, mimeType.JSONP].indexOf(options.mimeType) >= 0 && is.callable(options.generate)) {
       // JSON content always supplies a generate method
       cacheAndSend(res, JSON.stringify(options.generate()), slug, options.mimeType);
    } else if (is.callable(options.callback)) {
@@ -268,7 +268,12 @@ function renderTemplate(res:Blog.Response, slug:string, type:string):Blog.Render
             res.internalError();
          } else {
             if (is.callable(postProcess)) { text = postProcess(text); }
-            cacheAndSend(res, text, slug, type);
+            if (is.value(text)) {
+               cacheAndSend(res, text, slug, type);
+            } else {
+               log.error('renderTemplate(%s) returned no content', slug);
+               res.internalError();
+            }
          }
       });
    };
