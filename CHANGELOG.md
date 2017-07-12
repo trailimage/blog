@@ -1,3 +1,7 @@
+## 3.0.3
+- Switch to Yarn package manager
+- Update dependencies
+
 ## 3.0.2
 - Fix exposure time always showing one second
 
