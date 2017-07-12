@@ -237,7 +237,7 @@ export default {
       }
       return (new Promise((resolve, reject) => {
          if (hashKey !== undefined) {
-            client.hset(key, hashKey, normalize(value), makeHandler(key, dataType.NONE, resolve, reject));
+            client.hset(key, hashKey.toString(), normalize(value), makeHandler(key, dataType.NONE, resolve, reject));
          } else {
             client.set(key, normalize(value), makeHandler(key, dataType.OKAY, resolve, reject));
          }

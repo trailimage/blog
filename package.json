@@ -18,7 +18,7 @@
     "watch": "node_modules/.bin/gulp watch",
     "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
     "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
-    "postinstall": "npm install git+https://github.com/wrr/connect-injector.git"
+    "postinstall": "yarn add git+https://github.com/wrr/connect-injector.git"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
