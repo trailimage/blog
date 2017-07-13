@@ -2,42 +2,43 @@
    // See https://go.microsoft.com/fwlink/?LinkId=733558
    // for the documentation about the tasks.json format
    "version": "2.0.0",
-   "showOutput": "always",
    "suppressTaskName": true,
    "tasks": [
       {
          "taskName": "Run Server",
          "command": "./node_modules/.bin/nodemon ./lib/app.js",
-         "isShellCommand": true,
+         "type": "shell",
          "isBackground": true
       },
       {
          "taskName": "Module Install",
          "command": "npm install",
-         "isShellCommand": true
+         "type": "shell"
       },
       {
          "taskName": "Module Update",
          "command": "npm update",
-         "isShellCommand": true
+         "type": "shell"
       },
       {
          "taskName": "Test",
          "command": "npm run test-pretty",
-         "isShellCommand": true,
-         "isTestCommand": true
+         "type": "shell",
+         "group": "test",
+         "problemMatcher": []
       },
       {
          "taskName": "Build and Watch Client",
          "command": "npm run watch",
-         "isShellCommand": true,
-         "isBackground": true
+         "type": "shell",
+         "isBackground": true,
+         "problemMatcher": []
       },
       {
          "taskName": "Build and Watch Server",
-         "isBuildCommand": true,
+         "group": "build",
          "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
-         "isShellCommand": true,
+         "type": "shell",
          "problemMatcher": "$tsc"
       }
    ]

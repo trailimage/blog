@@ -147,7 +147,7 @@ export interface Post {
    getPhotos():Promise<Photo[]>;
    hasKey(key:string):boolean;
    //hasPhotoID(id:string):boolean;
-   ensureLoaded():Promise<null>;
+   ensureLoaded():Promise<any>;
    updatePhotoLocations():void;
 }
 
