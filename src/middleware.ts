@@ -119,7 +119,7 @@ function downloadSpammerList():Promise<string[]> {
          })
          .catch(err => {
             log.error('Failed to download referer blacklist: %s', err.toString());
-         });
+         }) as Promise<string[]>;
    }
 }
 
