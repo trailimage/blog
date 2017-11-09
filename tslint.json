@@ -20,7 +20,7 @@
       "no-duplicate-variable": true,
       "no-empty": true,
       "no-eval": true,
-      "no-require-imports": true,
+      "no-require-imports": false,
       "no-switch-case-fall-through": true,
       "no-trailing-whitespace": true,
       "no-unused-expression": true,

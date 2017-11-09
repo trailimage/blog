@@ -1,11 +1,18 @@
-import { Post, Provider, Token } from '../types';
-import * as Stream from 'stream';
-import config from '../config';
-import { header, mimeType } from '../constants';
-import is from '../is';
-import log from '../logger';
-import * as googleAPIs from 'googleapis';
-import * as googleAuth from 'google-auth-library';
+import { Post, Provider, Token } from "../types";
+import * as Stream from "stream";
+import config from "../config";
+import { header, mimeType } from "../constants";
+import is from "../is";
+import log from "../logger";
+import * as googleAPIs from "googleapis";
+import googleAuth = require("google-auth-library");
+
+interface GenerateAuthUrlOpts {
+   response_type?:string;
+   client_id?:string;
+   redirect_uri?:string;
+   scope?:string[]|string;
+}
 
 /**
  * Google access scopes
@@ -14,11 +21,11 @@ import * as googleAuth from 'google-auth-library';
  */
 const scope = {
    drive: {
-      READ_WRITE: 'https://www.googleapis.com/auth/drive',
-      READ_ONLY: 'https://www.googleapis.com/auth/drive.readonly'
+      READ_WRITE: "https://www.googleapis.com/auth/drive",
+      READ_ONLY: "https://www.googleapis.com/auth/drive.readonly"
    },
    photo: {
-      READ_ONLY: 'https://www.googleapis.com/auth/drive.photos.readonly'
+      READ_ONLY: "https://www.googleapis.com/auth/drive.photos.readonly"
    }
 };
 const auth = new googleAuth();
@@ -26,10 +33,15 @@ const authConfig = config.google.auth;
 const authClient = new auth.OAuth2(authConfig.clientID, authConfig.secret, authConfig.callback);
 
 const authorizationURL = ()=> authClient.generateAuthUrl({
-   access_type: 'offline',    // gets refresh token
-   approval_prompt: 'force',  // gets refresh token every time
+   access_type: "offline",    // gets refresh token
+   approval_prompt: "force",  // gets refresh token every time
    scope: scope.drive.READ_ONLY
-});
+} as GenerateAuthUrlOpts);
+
+// response_type?: string;
+// client_id?: string;
+// redirect_uri?: string;
+// scope?: string[] | string;
 
 /**
  * Whether access token needs to be refreshed. True if a refresh token is
@@ -54,19 +66,19 @@ const minuteEarlier = (ms:number) => {
  * https://developers.google.com/drive/v3/web/quickstart/nodejs
  */
 const verifyToken = ()=> new Promise<null>((resolve, reject) => {
-   authClient.setCredentials({
+   authClient.credentials = {
       access_token: authConfig.token.access,
       refresh_token: authConfig.token.refresh
-   });
+   };
    if (accessTokenExpired()) {
       authClient.refreshAccessToken((err:Error, tokens) => {
          if (is.value(err)) {
-            log.error('Unable to refresh Google access token: %s', err.message);
+            log.error("Unable to refresh Google access token: %s", err.message);
             reject(err);
          } else {
-            log.infoIcon('lock_outline', 'Refreshed Google access token');
+            log.infoIcon("lock_outline", "Refreshed Google access token");
 
-            authClient.setCredentials(tokens);
+            authClient.credentials = tokens;
 
             authConfig.token.type = tokens.token_type;
             authConfig.token.access = tokens.access_token;
@@ -102,7 +114,7 @@ const driveConfig = config.google.drive;
 let _drive:googleAPIs.Drive = null;
 
 function drive() {
-   if (_drive === null) { _drive = googleAPIs.drive('v3'); }
+   if (_drive === null) { _drive = googleAPIs.drive("v3"); }
    return _drive;
 }
 
@@ -118,7 +130,7 @@ const loadGPX = (post:Post, stream:Stream.Writable) =>
          post.triedTrack = true;
 
          if (err !== null) {
-            log.error('Error finding GPX for “%s”: %s', post.title, err.message);
+            log.error("Error finding GPX for “%s”: %s", post.title, err.message);
             reject(err);
          } else if (!is.array(list.files) || list.files.length == 0) {
             // no matches
@@ -127,14 +139,14 @@ const loadGPX = (post:Post, stream:Stream.Writable) =>
             reject();
          } else {
             const file = list.files[0];
-            let purpose = 'Retrieving';
-            let icon = 'save';
+            let purpose = "Retrieving";
+            let icon = "save";
 
             if (is.value(stream)) {
-               purpose = 'Downloading';
-               icon = 'file_download';
+               purpose = "Downloading";
+               icon = "file_download";
             }
-            log.infoIcon(icon, '%s GPX for “%s” (%s)', purpose, post.title, file.id);
+            log.infoIcon(icon, "%s GPX for “%s” (%s)", purpose, post.title, file.id);
             resolve(downloadFile(file.id, post, stream));
          }
       });
@@ -146,15 +158,15 @@ const loadGPX = (post:Post, stream:Stream.Writable) =>
  */
 const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
    verifyToken().then(()=> new Promise<string>((resolve, reject) => {
-      const options = { fileId, auth: authClient, alt: 'media', timeout: 10000 };
+      const options = { fileId, auth: authClient, alt: "media", timeout: 10000 };
       if (is.value(stream)) {
          // pipe to stream
-         stream.on('finish', resolve);
+         stream.on("finish", resolve);
          drive().files
             .get(options)
-            .on('error', reject)
-            .on('end', ()=> { post.hasTrack = true; })
-            .on('response', res => {
+            .on("error", reject)
+            .on("end", ()=> { post.hasTrack = true; })
+            .on("response", res => {
                // response headers are piped directly to the stream so changes
                // must happen here
                res.headers[header.content.DISPOSITION.toLowerCase()] = `attachment; filename=${post.key}.gpx`;
@@ -172,7 +184,7 @@ const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
                   resolve(body);
                }
             })
-            .on('error', reject);
+            .on("error", reject);
       }
    })
 );
