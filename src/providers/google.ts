@@ -38,11 +38,6 @@ const authorizationURL = ()=> authClient.generateAuthUrl({
    scope: scope.drive.READ_ONLY
 } as GenerateAuthUrlOpts);
 
-// response_type?: string;
-// client_id?: string;
-// redirect_uri?: string;
-// scope?: string[] | string;
-
 /**
  * Whether access token needs to be refreshed. True if a refresh token is
  * available and expiration is empty or old.
