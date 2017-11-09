@@ -1,14 +1,14 @@
 {
   "name": "trail-image",
   "description": "Trail Image blog",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "private": false,
   "author": {
     "name": "Jason Abbott"
   },
   "license": "MIT",
   "engines": {
-    "node": ">=8.1.4"
+    "node": ">=9.1.0"
   },
   "main": "lib/app.js",
   "scripts": {

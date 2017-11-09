@@ -1,3 +1,6 @@
+## 3.0.4
+- Update dependencies
+
 ## 3.0.3
 - Switch to Yarn package manager
 - Update dependencies
