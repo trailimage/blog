@@ -24,25 +24,25 @@ const util = {
       },
 
       set showMapLegend(value:boolean) {
-          util.setting.save('map-legend', value ? 'true' : 'false');
+          util.setting.save("map-legend", value ? "true" : "false");
       },
 
       get showMapLegend():boolean {
-         const value = util.setting.load('map-legend');
-         return value ? value == 'true' : true;
+         const value = util.setting.load("map-legend");
+         return value ? value == "true" : true;
       },
 
       /**
        * Value is array of root and sub-category names.
        */
       set menuCategory(selected:string[]) {
-         if (typeof selected === 'string') { selected = [selected, null]; }
-         util.setting.save('menu', selected.join());
+         if (typeof selected === "string") { selected = [selected, null]; }
+         util.setting.save("menu", selected.join());
       },
 
       get menuCategory():string[] {
-         const value = util.setting.load('menu');
-         return (value === null) ? null : value[1].split(',');
+         const value = util.setting.load("menu");
+         return (value === null) ? null : value[1].split(",");
       }
    },
    html: {
@@ -51,9 +51,9 @@ const util = {
        *
        * https://material.io/icons/
        */
-      icon(name:string, handler?:(e:JQueryMouseEventObject)=>void):JQuery {
-         const $icon = $('<i>')
-            .addClass('material-icons ' + name)
+      icon(name:string, handler?:(e:JQuery.Event)=>void):JQuery {
+         const $icon = $("<i>")
+            .addClass("material-icons " + name)
             .text(name);
 
          if (handler !== undefined) { $icon.click(handler); }
@@ -65,7 +65,7 @@ const util = {
        * Send Google Analytics event.
        */
       event(category:string, name:string, label?:string) {
-         ga('send', 'event', category, name, label);
+         ga("send", "event", category, name, label);
       }
    }
 };

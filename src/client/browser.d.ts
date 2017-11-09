@@ -91,7 +91,7 @@ interface UrlPosition {
 }
 interface FakeEvent { reason:string; }
 
-interface CssPosition { top?:number; left?:number; right?:number; bottom?:number; }
+interface CssPosition extends JQuery.PlainObject { top?:number; left?:number; right?:number; bottom?:number; }
 
 /**
  * Standard JQuery AJAX response
