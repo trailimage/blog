@@ -50,11 +50,11 @@
 
 ## 2.1.1
 - Handle unmatched photo tag searches
-- Upgrade to lastest Google APIs
+- Upgrade to latest Google APIs
 
 ## 2.1.0
 - Rewrite with Promises and functional style
-- Upgrade to lastest Google APIs
+- Upgrade to latest Google APIs
 
 ## 2.0.21
 #### Fixes
