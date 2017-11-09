@@ -1,15 +1,15 @@
-import { Location } from '../types/';
-import config from '../config';
-import C from '../constants';
-import index from './';
+import { Location } from "../types/";
+import config from "../config";
+import C from "../constants";
+import index from "./";
 
 const piDeg = Math.PI / 180.0;
 const radiusMiles = 3958.756;
 const radiusKm = 6371.0;
-const feetPerMeter = 3.28084;
+//const feetPerMeter = 3.28084;
 const units = { ENGLISH: 0, METRIC: 1 };
 let earthRadius = radiusMiles;
-let elevationConversion = feetPerMeter;
+//let elevationConversion = feetPerMeter;
 
 /**
  * Total distance between all points
@@ -194,10 +194,10 @@ export default {
    set unitType(u:number) {
       if (u == units.ENGLISH) {
          earthRadius = radiusMiles;
-         elevationConversion = feetPerMeter;
+         //elevationConversion = feetPerMeter;
       } else {
          earthRadius = radiusKm;
-         elevationConversion = 1;
+         //elevationConversion = 1;
       }
    }
 };

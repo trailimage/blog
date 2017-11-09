@@ -89,14 +89,14 @@ const pointFromGPX = (node:Element) => ({
    geometry: geometry(type.POINT, gpx.location(node))
 }  as GeoJSON.Feature<GeoJSON.Point>);
 
-function pointFromKML(node:Element) {
-   const location = kml.location(node);
-   return (location == null) ? null : {
-      type: type.FEATURE,
-      properties: kml.properties(node, ['sym']),
-      geometry: geometry(type.POINT, location)
-   }  as GeoJSON.Feature<GeoJSON.Point>;
-}
+// function pointFromKML(node:Element) {
+//    const location = kml.location(node);
+//    return (location == null) ? null : {
+//       type: type.FEATURE,
+//       properties: kml.properties(node, ['sym']),
+//       geometry: geometry(type.POINT, location)
+//    }  as GeoJSON.Feature<GeoJSON.Point>;
+// }
 
 function lineFromKML(node:Element):GeoJSON.Feature<GeoJSON.MultiLineString|GeoJSON.LineString> {
    const lines = kml.line(node);

@@ -1,11 +1,11 @@
-import { Provider, Photo, Flickr } from '../types/';
+import { Photo, Flickr } from '../types/';
 import is from '../is';
 import util from '../util/';
 import config from '../config';
 import photoSize from './photo-size';
-import realFlickr from '../providers/flickr';
+//import realFlickr from '../providers/flickr';
 
-let flickr:Provider.Flickr = realFlickr;
+//let flickr:Provider.Flickr = realFlickr;
 
 /**
  * Parse Flickr photo summary
@@ -84,8 +84,8 @@ function identifyOutliers(photos:Photo[]) {
 
 export default {
    make,
-   identifyOutliers,
-   inject: {
-      set flickr(f:Provider.Flickr) { flickr = f; }
-   }
+   identifyOutliers
+   // inject: {
+   //    set flickr(f:Provider.Flickr) { flickr = f; }
+   // }
 };

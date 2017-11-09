@@ -1,10 +1,10 @@
-import { Blog } from '../types/';
-import config from '../config';
-import log from '../logger';
-import { layout, page } from '../template';
-import library from '../library';
-import { mimeType } from '../constants';
-import * as uglify from 'uglify-js';
+import { Blog } from "../types/";
+import config from "../config";
+//import log from "../logger";
+import { layout, page } from "../template";
+import library from "../library";
+import { mimeType } from "../constants";
+import * as uglify from "uglify-js";
 
 /**
  * Minify menu JSON for production. Set `config.testing = true` if testing
@@ -17,16 +17,16 @@ function data(req:Blog.Request, res:Blog.Response)  {
    const postProcess = (config.isProduction && !config.testing)
       ? (text:string) => {
          const result = uglify.minify(text);
-         if (result.error) {
-            log.error(result.error);
-            return null;
-         } else {
+         // if (result.error) {
+         //    log.error(result.error);
+         //    return null;
+         // } else {
             return result.code;
-         }
+         // }
       }
       : null;
 
-   res.setHeader('Vary', 'Accept-Encoding');
+   res.setHeader("Vary", "Accept-Encoding");
    res.sendView(slug, {
       mimeType: mimeType.JSONP,
       callback: render => {

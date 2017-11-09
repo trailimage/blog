@@ -1,16 +1,16 @@
 // simplified Redis interface
-import { Cache } from '../types';
-import is from '../is';
-import log from '../logger';
-import config from '../config';
-import cacheItem from '../cache/item';
-import * as Redis from 'redis';
-import * as URL from 'url';
+import { Cache } from "../types";
+import is from "../is";
+import log from "../logger";
+import config from "../config";
+import cacheItem from "../cache/item";
+import * as Redis from "redis";
+import * as URL from "url";
 
 const url = URL.parse(config.redis.url);
 const client = Redis.createClient(parseInt(url.port), url.hostname, {
    no_ready_check: true,
-   password: url.auth.split(':')[1]
+   password: url.auth.split(":")[1]
 });
 
 /** Expected hash response used for validation and parsing */
@@ -30,9 +30,9 @@ const dataType = {
 };
 
 const code = {
-   BROKEN: 'CONNECTION_BROKEN',
-   TIMEOUT: 'ETIMEDOUT',
-   ERROR: 'ERR'
+   BROKEN: "CONNECTION_BROKEN",
+   TIMEOUT: "ETIMEDOUT",
+   ERROR: "ERR"
 };
 // const event = {
 //    CONNECTED: 'connected',
@@ -40,43 +40,43 @@ const code = {
 // };
 /** http://redis.io/commands */
 const command = {
-   AUTH: 'AUTH',
-   DEL: 'DEL',
-   EXEC: 'EXEC',
-   GET: 'GET',
-   HASH_GET: 'HGET',
-   HASH_DEL: 'HDEL'
+   AUTH: "AUTH",
+   DEL: "DEL",
+   EXEC: "EXEC",
+   GET: "GET",
+   HASH_GET: "HGET",
+   HASH_DEL: "HDEL"
 };
 let connected = false;
 
 /** Client is ready to cache commands before it's connected */
-let ready = true;
+//let ready = true;
 
-client.on('error', (err:any) => {
-   let fatal = false;
+client.on("error", (err:any) => {
+   //let fatal = false;
 
    if (err.code == code.BROKEN) {
       // if unable to connect to Redis then use in-memory hash only
-      log.error('Unable to connect to Redis at %s:%d', url.hostname, url.port);
-      fatal = true;
+      log.error("Unable to connect to Redis at %s:%d", url.hostname, url.port);
+      //fatal = true;
    } else if (err.code == code.ERROR && err.command == command.AUTH) {
-      log.error('Unable to authorize Redis at %s:%d (%s)', url.hostname, url.port, err.message);
-      fatal = true;
+      log.error("Unable to authorize Redis at %s:%d (%s)", url.hostname, url.port, err.message);
+      //fatal = true;
    } else {
       // log error but keep trying to connect
-      log.error('Error during redis call: %s', err.message);
+      log.error("Error during redis call: %s", err.message);
    }
 
-   if (fatal) { ready = false; }
+   //if (fatal) { ready = false; }
 });
 
-client.on('connect', ()=> {
-   log.infoIcon('settings_input_component', 'Redis connected to %s:%d', url.hostname, url.port);
+client.on("connect", ()=> {
+   log.infoIcon("settings_input_component", "Redis connected to %s:%d", url.hostname, url.port);
    connected = true;
 });
 
-client.on('end', ()=> {
-   log.warn('Redis connection has ended');
+client.on("end", ()=> {
+   log.warn("Redis connection has ended");
    connected = false;
 });
 
@@ -100,7 +100,7 @@ function parseObject<T>(value:string):T {
    try {
       return JSON.parse(value);
    } catch (err) {
-      log.error('Unable to JSON parse "%s"', value);
+      log.error("Unable to JSON parse \"%s\"", value);
       return null;
    }
 }
@@ -127,12 +127,12 @@ function makeHandler(
       } else {
          switch (type) {
             case dataType.BIT: answer(reply, 1); break;
-            case dataType.OKAY: answer(reply, 'OK'); break;
+            case dataType.OKAY: answer(reply, "OK"); break;
             case dataType.COUNT: answer(reply, howMany(key)); break;
             case dataType.RAW: answer(reply); break;
             case dataType.JSON: answer(parseObject(reply)); break;
             case dataType.NONE: resolve(); break;
-            default: reject('Unknown Redis data type');
+            default: reject("Unknown Redis data type");
          }
       }
    };
@@ -159,11 +159,11 @@ function getValue<T>(type:number, key:string, hashKey?:string) {
  */
 function hasError(key:string|string[], err:Error):boolean {
    if (is.value(err)) {
-      if (is.array(key)) { key = key.join(','); }
-      log.error('Operation with key "%s" resulted in', key, err);
-      if (err['message'] && err.message.indexOf(`memory > 'maxmemory'`) > 0) {
+      if (is.array(key)) { key = key.join(","); }
+      log.error("Operation with key \"%s\" resulted in", key, err);
+      if (err["message"] && err.message.indexOf(`memory > 'maxmemory'`) > 0) {
          // error indicates Redis will not respond to any queries
-         log.error('Disabling all caching');
+         log.error("Disabling all caching");
          config.cache.setAll(false);
       }
       return true;
@@ -259,11 +259,11 @@ export default {
     */
    remove: (key:string|string[], hashKey?:string|string[]) => new Promise((resolve, reject) => {
       if (is.empty(key)) {
-         reject('Attempt to delete hash item with empty key');
+         reject("Attempt to delete hash item with empty key");
       } else if (is.value(hashKey)) {
          // implies that hash field is the second argument
          if ((is.array(hashKey) && hashKey.length === 0) || is.empty(hashKey)) {
-            reject('Attempt to delete "' + key + '" field with empty field name');
+            reject("Attempt to delete \"" + key + "\" field with empty field name");
          } else {
             // Node redis is a little dumb and merely toString()'s the hashKey
             // array if passed as a second argument so instead combine the key
@@ -271,10 +271,10 @@ export default {
             // redis server hdel expects (http://redis.io/commands/hdel)
             if (is.array(key)) {
                resolve(Promise.all(key.map(k => new Promise((resolve, reject) => {
-                  client.hdel([k].concat(hashKey), makeHandler(key, dataType.COUNT, resolve, reject));
+                  client.hdel(...[k].concat(hashKey), makeHandler(key, dataType.COUNT, resolve, reject));
                }))));
             } else {
-               client.hdel([key].concat(hashKey), makeHandler(key, dataType.COUNT, resolve, reject));
+               client.hdel(...[key].concat(hashKey), makeHandler(key, dataType.COUNT, resolve, reject));
             }
          }
       } else {
