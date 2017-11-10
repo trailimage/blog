@@ -1,7 +1,7 @@
-import is from '../is';
-import redis from '../providers/redis';
+import is from "../is";
+import redis from "../providers/redis";
 
-const prefix = 'api:';
+const prefix = "api:";
 const provider = {
    prefix,
    getItem<T>(key:string, hashKey:string) {
@@ -14,7 +14,7 @@ const provider = {
    /**
     * All keys with standard prefix
     */
-   keys: ()=> redis.keys(prefix + '*'),
+   keys: ()=> redis.keys(prefix + "*"),
 
    remove: (key:string|string[], hashKey?:string|string[]) => redis.remove(
       is.array(key) ? key.map(k => prefix + k) : prefix + key,

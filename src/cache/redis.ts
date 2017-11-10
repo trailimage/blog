@@ -1,6 +1,6 @@
-import { Cache } from '../types/';
-import item from './item';
-import redis from '../providers/redis';
+import { Cache } from "../types/";
+import item from "./item";
+import redis from "../providers/redis";
 
 //const viewKey = 'view';
 

@@ -1,7 +1,7 @@
-import map from './map';
-import api from './api';
-import { getItem, add } from './redis';
-import memory from './memory';
+import map from "./map";
+import api from "./api";
+import { getItem, add } from "./redis";
+import memory from "./memory";
 
 export default {
    /** Flickr API JSON responses */

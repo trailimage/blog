@@ -1,11 +1,11 @@
-import { Blog } from '../types/';
-import is from '../is';
-import log from '../logger';
-import flickr from '../providers/flickr';
-import cache from '../cache/';
-import config from '../config';
-import template from '../template';
-import library from '../library';
+import { Blog } from "../types/";
+import is from "../is";
+import log from "../logger";
+import flickr from "../providers/flickr";
+import cache from "../cache/";
+import config from "../config";
+import template from "../template";
+import library from "../library";
 
 /**
  * Cache keys for site map and menu views
@@ -19,8 +19,8 @@ const menuKeys = [
 
 function view(res:Blog.Response, viewKeys:string[], apiKeys:string[], mapKeys:string[], logs:any) {
    res.set({
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      Pragma: 'no-cache',
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
       Expires: 0
    });
    res.render(template.page.ADMINISTRATION, {
@@ -38,7 +38,7 @@ function view(res:Blog.Response, viewKeys:string[], apiKeys:string[], mapKeys:st
  * Load all caches and logs
  */
 function home(req:Blog.Request, res:Blog.Response) {
-   log.warnIcon('security', '%s viewing administration', req.clientIP());
+   log.warnIcon("security", "%s viewing administration", req.clientIP());
 
    Promise.all([
       cache.api.keys(),
@@ -46,7 +46,7 @@ function home(req:Blog.Request, res:Blog.Response) {
       cache.map.keys(),
       log.query(7)
    ]).then(([apiKeys, viewKeys, mapKeys, logs]) => {
-      apiKeys = (is.array(apiKeys)) ? apiKeys.map(j => j.replace(cache.api.prefix, '')) : [];
+      apiKeys = (is.array(apiKeys)) ? apiKeys.map(j => j.replace(cache.api.prefix, "")) : [];
       view(res, viewKeys, apiKeys, mapKeys, logs);
    });
 }
@@ -79,9 +79,9 @@ function deleteViewCache(req:Blog.Request, res:Blog.Response) {
    let viewKeys:string[] = [];
    const apiHashKeys = [];
    const removals = [];
-   const includeRelated = req.body['includeRelated'] == 'true';
+   const includeRelated = req.body["includeRelated"] == "true";
 
-   for (const key of req.body['selected']) {
+   for (const key of req.body["selected"]) {
       const p = library.postWithKey(key);
 
       viewKeys.push(key);
