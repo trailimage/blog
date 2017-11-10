@@ -1,26 +1,26 @@
-import { Blog } from './types/';
-import config from './config';
-import log from './logger';
-import * as Express from 'express';
-import * as hbs from 'express-hbs';
-import * as path from 'path';
-import template from './template';
-import factory from './factory/';
-import route from './routes';
-import * as compress from 'compression';
-import * as bodyParser from 'body-parser';
-import middleware from './middleware';
-import * as wwwhisper from 'connect-wwwhisper';
+import { Blog } from "./types/";
+import config from "./config";
+import log from "./logger";
+import * as Express from "express";
+import * as hbs from "express-hbs";
+import * as path from "path";
+import template from "./template";
+import factory from "./factory/";
+import route from "./routes";
+import * as compress from "compression";
+import * as bodyParser from "body-parser";
+import middleware from "./middleware";
+import * as wwwhisper from "connect-wwwhisper";
 
-const root = path.normalize(__dirname + '/../');
+const root = path.normalize(__dirname + "/../");
 
 createWebService();
 
 function createWebService() {
    const app = Express();
-   const port = process.env['PORT'] || 3000;
+   const port = process.env["PORT"] || 3000;
 
-   log.infoIcon('power-settings_new', 'Starting %s application', config.isProduction ? 'production' : 'development');
+   log.infoIcon("power-settings_new", "Starting %s application", config.isProduction ? "production" : "development");
 
    defineViews(app);
 
@@ -28,7 +28,7 @@ function createWebService() {
       // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
-      log.infoIcon('lock', 'Listening for authentication on port %d', port);
+      log.infoIcon("lock", "Listening for authentication on port %d", port);
    } else {
       applyMiddleware(app);
 
@@ -36,7 +36,7 @@ function createWebService() {
          // library must be loaded before routes are defined
          route.standard(app);
          app.listen(port);
-         log.infoIcon('hearing', 'Listening on port %d', port);
+         log.infoIcon("hearing", "Listening on port %d", port);
       });
    }
 }
@@ -45,15 +45,15 @@ function createWebService() {
 // https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
 function defineViews(app:Express.Application) {
-   const engine = 'hbs';
-   const views = path.normalize(root + 'views/');
+   const engine = "hbs";
+   const views = path.normalize(root + "views/");
 
    // http://expressjs.com/4x/api.html#app-settings
-   app.set('views', views);
-   app.set('view engine', engine);
+   app.set("views", views);
+   app.set("view engine", engine);
    app.engine(engine, hbs.express4({
-      defaultLayout: views + template.layout.MAIN + '.hbs',
-      partialsDir: views + 'partials'
+      defaultLayout: views + template.layout.MAIN + ".hbs",
+      partialsDir: views + "partials"
    }));
 
    template.assignHelpers(hbs);
@@ -75,11 +75,11 @@ function applyMiddleware(app:Express.Application) {
       //app.use(['/admin','/wwwhisper'], wwwhisper(false));
    }
    // needed to parse admin page posts with extended enabled for form select arrays
-   app.use('/admin', bodyParser.urlencoded({ extended: true }));
+   app.use("/admin", bodyParser.urlencoded({ extended: true }));
    app.use(compress({}));
    app.use(middleware.enableStatusHelpers);
    app.use(middleware.enableViewCache);
-   app.use(Express.static(root + 'dist'));
+   app.use(Express.static(root + "dist"));
 }
 
 // this should be what Express already supports but it isn't behaving as expected
