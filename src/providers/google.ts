@@ -1,7 +1,7 @@
 import { Post, Provider, Token } from "../types";
 import * as Stream from "stream";
 import config from "../config";
-import { header, mimeType } from "../constants";
+import { header, mimeType, httpStatus } from "../constants";
 import is from "../is";
 import log from "../logger";
 import * as googleAPIs from "googleapis";
@@ -120,20 +120,25 @@ const loadGPX = (post: Post, stream: Stream.Writable) =>
          q: `name = '${post.title}.gpx' and '${driveConfig.tracksFolder}' in parents`
       };
 
-      drive().files.list(options, (err, list) => {
+      drive().files.list(options, (err, res: any) => {
          // set flag so it isn't tried repeatedly
          post.triedTrack = true;
 
-         if (err !== null) {
+         const files: any[] = is.defined(res, "data") && is.defined(res.data, "files") ? res.data.files : [];
+
+         if (res.status != httpStatus.OK) {
+            // try HTTP errors again
+            post.triedTrack = false;
+         } else if (err !== null) {
             log.error("Error finding GPX for “%s”: %s", post.title, err.message);
             reject(err);
-         } else if (!is.array(list.files) || list.files.length == 0) {
+         } else if (files.length == 0) {
             // no matches
             post.hasTrack = false;
             log.warn(`No GPX file found for “${post.title}”`);
             reject();
          } else {
-            const file = list.files[0];
+            const file = files[0];
             let purpose = "Retrieving";
             let icon = "save";
 
@@ -171,15 +176,18 @@ const downloadFile = (fileId: string, post: Post, stream: Stream.Writable) =>
       } else {
          // capture file contents
          drive().files
-            .get(options, (err: Error, body, response) => {
+            .get(options, (err: Error, res: any) => {
                if (is.value(err)) {
                   reject(err);
-               } else {
+               } else if (res.status != httpStatus.OK) {
+                  reject("Server returned " + res.status);
+               } else if (is.defined(res, "data")) {
                   post.hasTrack = true;
-                  resolve(body);
+                  resolve(res.data);
+               } else {
+                  reject("No data returned for file " + fileId);
                }
-            })
-            .on("error", reject);
+            });
       }
    })
    );

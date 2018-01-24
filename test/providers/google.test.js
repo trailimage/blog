@@ -5,26 +5,26 @@ const google = require('../../lib/providers/google').default;
 const factory = require('../../lib/factory/').default;
 const authConfig = config.google.auth;
 
-describe('Google', ()=> {
-   describe('OAuth', ()=> {
-      it('creates client', ()=> {
+describe('Google', () => {
+   describe('OAuth', () => {
+      it('creates client', () => {
          expect(google.auth.client).to.exist;
       });
 
-      it('genenerates authorization URL', ()=> {
+      it('genenerates authorization URL', () => {
          const url = google.auth.url();
          expect(url).to.exist;
          expect(url).to.include(authConfig.clientID);
          expect(url).to.include(config.domain);
       });
 
-      it('tests for expired access token', ()=> {
+      it('tests for expired access token', () => {
          expect(google.auth.expired()).is.true;
          authConfig.token.accessExpiration = new Date() + 1;
          expect(google.auth.expired()).is.false;
       });
 
-      it('refreshes access token', ()=> {
+      it('refreshes access token', () => {
          authConfig.token.accessExpiration = null;
          return google.auth.verify().then(() => {
             expect(authConfig.token.accessExpiration).to.exist;
@@ -33,7 +33,7 @@ describe('Google', ()=> {
       });
    });
 
-   describe('Drive', function() {
+   describe('Drive', function () {
       let post = null;
       this.timeout(10000);
 
@@ -42,7 +42,7 @@ describe('Google', ()=> {
          return true;
       }));
 
-      it('retrieve GPX file content', function() {
+      it('retrieve GPX file content', function () {
          this.timeout(10000);
          return google.drive.loadGPX(post).then(gpxText => {
             expect(gpxText).to.exist;
