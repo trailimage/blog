@@ -1,7 +1,7 @@
-import { Cache } from '../types/';
-import config from '../config';
-import item from './item';
-import is from '../is';
+import { Cache } from "../types/";
+import config from "../config";
+import item from "./item";
+import is from "../is";
 
 const memory:{[key:string]:Cache.Item} = {};
 

@@ -1,8 +1,8 @@
-import { Cache } from '../types/';
-import is from '../is';
-import C from '../constants';
+import { Cache } from "../types/";
+import is from "../is";
+import C from "../constants";
 // http://nodejs.org/api/zlib.html
-import * as compress from 'zlib';
+import * as compress from "zlib";
 
 /**
  * Create view cache item with eTag and compressed content
@@ -14,7 +14,7 @@ export function create(key:string, htmlOrJSON:string|GeoJSON.FeatureCollection<a
          if (is.value(err)) {
             reject(err);
          } else {
-            resolve({ buffer, eTag: key + '_' + (new Date()).getTime().toString() } as Cache.Item);
+            resolve({ buffer, eTag: key + "_" + (new Date()).getTime().toString() } as Cache.Item);
          }
       });
    });
