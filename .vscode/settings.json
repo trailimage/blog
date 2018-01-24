@@ -1,15 +1,12 @@
-// Place your settings in this file to overwrite default and user settings.
 {
    "css.validate": false,
-
    "editor.fontFamily": "Fira Code",
    "editor.fontLigatures": true,
+   "editor.formatOnSave": true,
    "editor.tabSize": 3,
-
    "files.associations": {
       "procfile": "yaml"
    },
-
    "files.eol": "\n",
    "files.exclude": {
       "**/.git": true,
@@ -19,28 +16,12 @@
       "**/.DS_Store": true,
       "lib/**/.js.map": true
    },
-
    "typescript.referencesCodeLens.enabled": false,
-
    "search.exclude": {
       "**/node_modules": true,
       "**/lib": true,
       "**/dist": true
    },
-
    "tslint.enable": true,
-   "eslint.enable": false,
-
-   "mocha.env": {
-      "FLICKR_API_KEY": "${env.FLICKR_API_KEY}",
-      "FLICKR_SECRET": "${env.FLICKR_SECRET}",
-      "REDISCLOUD_URL": "${env.REDISCLOUD_URL}",
-      "GOOGLE_DRIVE_KEY": "${env.GOOGLE_DRIVE_KEY}",
-      "GOOGLE_CLIENT_ID": "${env.GOOGLE_CLIENT_ID}",
-      "GOOGLE_SECRET": "${env.GOOGLE_SECRET}"
-   },
-   "mocha.files.glob": "test/**/*.test.js",
-   "mocha.options": {
-      "ui": "bdd"
-   }
+   "eslint.enable": false
 }

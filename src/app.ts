@@ -44,7 +44,7 @@ function createWebService() {
 // https://github.com/donpark/hbs/blob/master/examples/extend/app.js
 // https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
-function defineViews(app:Express.Application) {
+function defineViews(app: Express.Application) {
    const engine = "hbs";
    const views = path.normalize(root + "views/");
 
@@ -62,7 +62,7 @@ function defineViews(app:Express.Application) {
 /**
  * See http://expressjs.com/api.html#app.use
  */
-function applyMiddleware(app:Express.Application) {
+function applyMiddleware(app: Express.Application) {
    // https://github.com/expressjs/compression/blob/master/README.md
    app.use(middleware.blockSpamReferers);
 
@@ -83,8 +83,8 @@ function applyMiddleware(app:Express.Application) {
 }
 
 // this should be what Express already supports but it isn't behaving as expected
-function filter(regex:RegExp, fn:Function) {
-   return (req:Blog.Request, res:Blog.Response, next:Function) => {
+function filter(regex: RegExp, fn: Function) {
+   return (req: Blog.Request, res: Blog.Response, next: Function) => {
       if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
    };
 }

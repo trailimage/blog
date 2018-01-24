@@ -5,13 +5,13 @@ import { header, mimeType } from "../constants";
 import is from "../is";
 import log from "../logger";
 import * as googleAPIs from "googleapis";
-import googleAuth = require("google-auth-library");
+import { OAuth2Client } from "google-auth-library";
 
 interface GenerateAuthUrlOpts {
-   response_type?:string;
-   client_id?:string;
-   redirect_uri?:string;
-   scope?:string[]|string;
+   response_type?: string;
+   client_id?: string;
+   redirect_uri?: string;
+   scope?: string[] | string;
 }
 
 /**
@@ -28,11 +28,11 @@ const scope = {
       READ_ONLY: "https://www.googleapis.com/auth/drive.photos.readonly"
    }
 };
-const auth = new googleAuth();
-const authConfig = config.google.auth;
-const authClient = new auth.OAuth2(authConfig.clientID, authConfig.secret, authConfig.callback);
 
-const authorizationURL = ()=> authClient.generateAuthUrl({
+const authConfig = config.google.auth;
+const authClient = new OAuth2Client(authConfig.clientID, authConfig.secret, authConfig.callback);
+
+const authorizationURL = () => authClient.generateAuthUrl({
    access_type: "offline",    // gets refresh token
    approval_prompt: "force",  // gets refresh token every time
    scope: scope.drive.READ_ONLY
@@ -42,14 +42,14 @@ const authorizationURL = ()=> authClient.generateAuthUrl({
  * Whether access token needs to be refreshed. True if a refresh token is
  * available and expiration is empty or old.
  */
-const accessTokenExpired = ()=> is.value(authConfig.token.refresh) &&
+const accessTokenExpired = () => is.value(authConfig.token.refresh) &&
    (authConfig.token.accessExpiration === null || authConfig.token.accessExpiration < new Date());
 
 /**
  * Set expiration a minute earlier than actual so refresh occurs before Google
  * blocks the request.
  */
-const minuteEarlier = (ms:number) => {
+const minuteEarlier = (ms: number) => {
    const d = new Date(ms);
    d.setMinutes(d.getMinutes() - 1);
    return d;
@@ -60,13 +60,13 @@ const minuteEarlier = (ms:number) => {
  *
  * https://developers.google.com/drive/v3/web/quickstart/nodejs
  */
-const verifyToken = ()=> new Promise<null>((resolve, reject) => {
+const verifyToken = () => new Promise<null>((resolve, reject) => {
    authClient.credentials = {
       access_token: authConfig.token.access,
       refresh_token: authConfig.token.refresh
    };
    if (accessTokenExpired()) {
-      authClient.refreshAccessToken((err:Error, tokens) => {
+      authClient.refreshAccessToken((err: Error, tokens: any) => {
          if (is.value(err)) {
             log.error("Unable to refresh Google access token: %s", err.message);
             reject(err);
@@ -90,8 +90,8 @@ const verifyToken = ()=> new Promise<null>((resolve, reject) => {
 /**
  * Retrieve access and refresh tokens
  */
-const getAccessToken = (code:string) => new Promise<Token>((resolve, reject) => {
-   authClient.getToken(code, (err:Error, token) => {
+const getAccessToken = (code: string) => new Promise<Token>((resolve, reject) => {
+   authClient.getToken(code, (err: Error, token: any) => {
       if (is.value(err)) {
          reject(err);
       } else {
@@ -106,15 +106,15 @@ const getAccessToken = (code:string) => new Promise<Token>((resolve, reject) => 
 });
 
 const driveConfig = config.google.drive;
-let _drive:googleAPIs.Drive = null;
+let _drive: googleAPIs.Drive = null;
 
 function drive() {
    if (_drive === null) { _drive = googleAPIs.drive("v3"); }
    return _drive;
 }
 
-const loadGPX = (post:Post, stream:Stream.Writable) =>
-   verifyToken().then(()=> new Promise<string>((resolve, reject) => {
+const loadGPX = (post: Post, stream: Stream.Writable) =>
+   verifyToken().then(() => new Promise<string>((resolve, reject) => {
       const options = {
          auth: authClient,
          q: `name = '${post.title}.gpx' and '${driveConfig.tracksFolder}' in parents`
@@ -146,13 +146,13 @@ const loadGPX = (post:Post, stream:Stream.Writable) =>
          }
       });
    })
-);
+   );
 
 /**
  * Google downloader uses Request module
  */
-const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
-   verifyToken().then(()=> new Promise<string>((resolve, reject) => {
+const downloadFile = (fileId: string, post: Post, stream: Stream.Writable) =>
+   verifyToken().then(() => new Promise<string>((resolve, reject) => {
       const options = { fileId, auth: authClient, alt: "media", timeout: 10000 };
       if (is.value(stream)) {
          // pipe to stream
@@ -160,7 +160,7 @@ const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
          drive().files
             .get(options)
             .on("error", reject)
-            .on("end", ()=> { post.hasTrack = true; })
+            .on("end", () => { post.hasTrack = true; })
             .on("response", res => {
                // response headers are piped directly to the stream so changes
                // must happen here
@@ -171,7 +171,7 @@ const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
       } else {
          // capture file contents
          drive().files
-            .get(options, (err:Error, body, response) => {
+            .get(options, (err: Error, body, response) => {
                if (is.value(err)) {
                   reject(err);
                } else {
@@ -182,7 +182,7 @@ const downloadFile = (fileId:string, post:Post, stream:Stream.Writable) =>
             .on("error", reject);
       }
    })
-);
+   );
 
 export default {
    auth: {
