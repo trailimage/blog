@@ -40,20 +40,21 @@ export default {
    /**
     * Assign methods that will be available from within Handlebars templates.
     */
-   assignHelpers: function(hbs:any) {
-      const helpers:{[key:string]:Function} = {
+   assignHelpers: function(hbs: any) {
+      const helpers: { [key: string]: Function } = {
          formatCaption: util.html.story,
          formatTitle: util.html.typography,
-         lowerCase: (text:string) => text.toLocaleLowerCase(),
-         add: (a:number, b:number) => (a * 1) + b,
+         lowerCase: (text: string) => text.toLocaleLowerCase(),
+         add: (a: number, b: number) => a * 1 + b,
          date: util.date.toString,
-         subtract: (a:number, b:number) => (a * 1) - b,
-         plural: (count:number) => (count > 1) ? 's' : '',
+         subtract: (a: number, b: number) => a * 1 - b,
+         plural: (count: number) => (count > 1 ? 's' : ''),
          makeTagList: util.html.photoTagList,
          formatLogTime: util.date.toLogTime,
-         formatISO8601: (d:Date) => d.toISOString(),
+         formatISO8601: (d: Date) => d.toISOString(),
          formatFraction: util.html.fraction,
-         mapHeight: (width:number, height:number) => height > width ? config.style.map.maxInlineHeight : height,
+         mapHeight: (width: number, height: number) =>
+            height > width ? config.style.map.maxInlineHeight : height,
          icon: util.icon.tag,
          iconForCategory: util.icon.category,
          modeIconForPost: util.icon.mode,
@@ -61,6 +62,8 @@ export default {
          json: JSON.stringify,
          encode: encodeURIComponent
       };
-      for (const name in helpers) { hbs.registerHelper(name, helpers[name]); }
+      for (const name in helpers) {
+         hbs.registerHelper(name, helpers[name]);
+      }
    }
 };

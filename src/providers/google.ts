@@ -175,19 +175,18 @@ const downloadFile = (fileId: string, post: Post, stream: Stream.Writable) =>
             .pipe(stream);
       } else {
          // capture file contents
-         drive().files
-            .get(options, (err: Error, res: any) => {
-               if (is.value(err)) {
-                  reject(err);
-               } else if (res.status != httpStatus.OK) {
-                  reject("Server returned " + res.status);
-               } else if (is.defined(res, "data")) {
-                  post.hasTrack = true;
-                  resolve(res.data);
-               } else {
-                  reject("No data returned for file " + fileId);
-               }
-            });
+         drive().files.get(options, (err: Error, res: any) => {
+            if (is.value(err)) {
+               reject(err);
+            } else if (res.status != httpStatus.OK) {
+               reject("Server returned " + res.status);
+            } else if (is.defined(res, "data")) {
+               post.hasTrack = true;
+               resolve(res.data);
+            } else {
+               reject("No data returned for file " + fileId);
+            }
+         });
       }
    })
    );

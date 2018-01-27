@@ -22,24 +22,31 @@ export const type = {
 /**
  * Empty feature collection.
  */
-export const features = ()=> ({
-   type: type.COLLECTION,
-   features: [] as GeoJSON.Feature<any>[]
-}  as GeoJSON.FeatureCollection<any>);
+export const features = () =>
+   ({
+      type: type.COLLECTION,
+      features: [] as GeoJSON.Feature<any>[]
+   } as GeoJSON.FeatureCollection<any>);
 
 /**
  * Basic GeoJSON geometry may contain a single point (lat, lon array), an array
  * of points (line) or an array of lines.
  */
-export const geometry = (type:string, coordinates:number[]|number[][]|number[][][]) => ({
-   type,
-   coordinates
-}  as GeoJSON.DirectGeometryObject);
+export const geometry = (
+   type: string,
+   coordinates: number[] | number[][] | number[][][]
+) =>
+   ({
+      type,
+      coordinates
+   } as GeoJSON.DirectGeometryObject);
 
 /**
  * Convert GPX to GeoJSON with calculated speed and distance values.
  */
-function trackFromGPX(node:Element):GeoJSON.Feature<GeoJSON.LineString|GeoJSON.MultiLineString> {
+function trackFromGPX(
+   node: Element
+): GeoJSON.Feature<GeoJSON.LineString | GeoJSON.MultiLineString> {
    let count = 0;
    let topSpeed = 0;
    let totalTime = 0;
@@ -52,42 +59,54 @@ function trackFromGPX(node:Element):GeoJSON.Feature<GeoJSON.LineString|GeoJSON.M
          totalTime += measure.duration(line);
          totalDistance += measure.length(line);
 
-         return measure.simplify(line.map(point => {
-            const speed = point[index.SPEED];
+         return measure.simplify(
+            line.map(point => {
+               const speed = point[index.SPEED];
 
-            if (config.map.maxPossibleSpeed === 0 || speed < config.map.maxPossibleSpeed) {
-               count++;
-               totalSpeed += speed;
-               if (speed > topSpeed) { topSpeed = parseFloat(speed.toFixed(1)); }
-            }
-            return point.slice(0, 3);
-         }));
+               if (
+                  config.map.maxPossibleSpeed === 0 ||
+                  speed < config.map.maxPossibleSpeed
+               ) {
+                  count++;
+                  totalSpeed += speed;
+                  if (speed > topSpeed) {
+                     topSpeed = parseFloat(speed.toFixed(1));
+                  }
+               }
+               return point.slice(0, 3);
+            })
+         );
       });
 
-   return (track.length === 0 || track[0].length === 0) ? null : {
-      type: 'Feature',
-      properties: Object.assign(gpx.properties(node), {
-         topSpeed: topSpeed,
-         avgSpeed: parseFloat((totalSpeed / count).toFixed(1)),
-         duration: totalTime,
-         distance: parseFloat(totalDistance.toFixed(2))
-      }),
-      geometry: (track.length === 1)
-         ? geometry(type.LINE, track[0]) as GeoJSON.LineString
-         : geometry(type.MULTILINE, track) as GeoJSON.MultiLineString
-   };
+   return track.length === 0 || track[0].length === 0
+      ? null
+      : {
+           type: 'Feature',
+           properties: Object.assign(gpx.properties(node), {
+              topSpeed: topSpeed,
+              avgSpeed: parseFloat((totalSpeed / count).toFixed(1)),
+              duration: totalTime,
+              distance: parseFloat(totalDistance.toFixed(2))
+           }),
+           geometry:
+              track.length === 1
+                 ? (geometry(type.LINE, track[0]) as GeoJSON.LineString)
+                 : (geometry(type.MULTILINE, track) as GeoJSON.MultiLineString)
+        };
 }
 
-const routeFromGPX = (node:Element) => ({
-   properties: gpx.properties(node),
-   geometry: geometry(type.LINE, gpx.line(node, 'rtept'))
-}  as GeoJSON.Feature<GeoJSON.LineString>);
+const routeFromGPX = (node: Element) =>
+   ({
+      properties: gpx.properties(node),
+      geometry: geometry(type.LINE, gpx.line(node, 'rtept'))
+   } as GeoJSON.Feature<GeoJSON.LineString>);
 
-const pointFromGPX = (node:Element) => ({
-   type: type.FEATURE,
-   properties: gpx.properties(node, ['sym']),
-   geometry: geometry(type.POINT, gpx.location(node))
-}  as GeoJSON.Feature<GeoJSON.Point>);
+const pointFromGPX = (node: Element) =>
+   ({
+      type: type.FEATURE,
+      properties: gpx.properties(node, ['sym']),
+      geometry: geometry(type.POINT, gpx.location(node))
+   } as GeoJSON.Feature<GeoJSON.Point>);
 
 // function pointFromKML(node:Element) {
 //    const location = kml.location(node);
@@ -98,7 +117,9 @@ const pointFromGPX = (node:Element) => ({
 //    }  as GeoJSON.Feature<GeoJSON.Point>;
 // }
 
-function lineFromKML(node:Element):GeoJSON.Feature<GeoJSON.MultiLineString|GeoJSON.LineString> {
+function lineFromKML(
+   node: Element
+): GeoJSON.Feature<GeoJSON.MultiLineString | GeoJSON.LineString> {
    const lines = kml.line(node);
    if (lines != null) {
       if (lines.length > 1) {
@@ -106,13 +127,13 @@ function lineFromKML(node:Element):GeoJSON.Feature<GeoJSON.MultiLineString|GeoJS
             type: type.FEATURE,
             properties: kml.properties(node),
             geometry: geometry(type.MULTILINE, lines)
-         }  as GeoJSON.Feature<GeoJSON.MultiLineString>;
+         } as GeoJSON.Feature<GeoJSON.MultiLineString>;
       } else {
          return {
             type: type.FEATURE,
             properties: kml.properties(node),
             geometry: geometry(type.LINE, lines[0])
-         }  as GeoJSON.Feature<GeoJSON.LineString>;
+         } as GeoJSON.Feature<GeoJSON.LineString>;
       }
    }
 }
@@ -123,7 +144,9 @@ function lineFromKML(node:Element):GeoJSON.Feature<GeoJSON.MultiLineString|GeoJS
  * http://geojson.org/geojson-spec.html
  * https://github.com/mapbox/togeojson
  */
-export function featuresFromGPX(gpxString:string):GeoJSON.FeatureCollection<any> {
+export function featuresFromGPX(
+   gpxString: string
+): GeoJSON.FeatureCollection<any> {
    const geo = features();
    let gpx = null;
 
@@ -147,8 +170,8 @@ export function featuresFromGPX(gpxString:string):GeoJSON.FeatureCollection<any>
  *
  * http://geojson.org/geojson-spec.html
  */
-export const pointFromPhoto = (photo:Photo, partKey?:string) => {
-   const properties:MapPhoto = { url: photo.size.preview.url };
+export const pointFromPhoto = (photo: Photo, partKey?: string) => {
+   const properties: MapPhoto = { url: photo.size.preview.url };
 
    if (partKey !== undefined) {
       // implies GeoJSON for single post
@@ -166,12 +189,11 @@ export const pointFromPhoto = (photo:Photo, partKey?:string) => {
  * Find nodes with a tag name and parse them into GeoJSON.
  */
 function parseNodes<T extends GeoJSON.GeometryObject>(
-   doc:Document,
-   name:string,
-   parser:(el:Element)=>GeoJSON.Feature<T>):GeoJSON.Feature<T>[] {
-
-   return Array
-      .from(doc.getElementsByTagName(name))
+   doc: Document,
+   name: string,
+   parser: (el: Element) => GeoJSON.Feature<T>
+): GeoJSON.Feature<T>[] {
+   return Array.from(doc.getElementsByTagName(name))
       .map(parser)
       .filter(f => is.value(f));
 }
@@ -185,9 +207,11 @@ function parseNodes<T extends GeoJSON.GeometryObject>(
  * Curried method captures map `sourceName` to faciliate custom transformation
  * look-ups.
  */
-export const featuresFromKML = (sourceName:string) => (kml:string|Document) => {
+export const featuresFromKML = (sourceName: string) => (
+   kml: string | Document
+) => {
    const geo = features();
-   let doc:Document = null;
+   let doc: Document = null;
 
    if (is.text(kml)) {
       kml = kml.replace(/[\r\n]/g, '').replace(/>\s+</g, '><');
@@ -214,9 +238,13 @@ export const featuresFromKML = (sourceName:string) => (kml:string|Document) => {
  * Apply custom transformation to properties if one is defined for the map
  * source.
  */
-function postProcess(sourceName:string, features:GeoJSON.Feature<any>[]) {
+function postProcess(sourceName: string, features: GeoJSON.Feature<any>[]) {
    const tx = transform[sourceName];
-   if (tx) { features.map(f => { f.properties = tx(f.properties); }); }
+   if (tx) {
+      features.map(f => {
+         f.properties = tx(f.properties);
+      });
+   }
    return features;
 }
 

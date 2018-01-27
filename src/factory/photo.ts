@@ -10,7 +10,7 @@ import photoSize from './photo-size';
 /**
  * Parse Flickr photo summary
  */
-function make(json:Flickr.PhotoSummary, index:number):Photo {
+function make(json: Flickr.PhotoSummary, index: number): Photo {
    return {
       id: json.id,
       index: index + 1,
@@ -22,7 +22,7 @@ function make(json:Flickr.PhotoSummary, index:number):Photo {
       dateTaken: util.date.parse(json.datetaken),
       latitude: parseFloat(json.latitude),
       longitude: parseFloat(json.longitude),
-      primary: (parseInt(json.isprimary) == 1),
+      primary: parseInt(json.isprimary) == 1,
       /**
        * Whether taken date is an outlier compared to other photos in the same post
        * @see http://www.wikihow.com/Calculate-Outliers
@@ -35,7 +35,9 @@ function make(json:Flickr.PhotoSummary, index:number):Photo {
          big: photoSize.make(json, config.flickr.sizes.big)
       },
       // comma-delimited list of tags
-      get tagList(this:Photo):string { return this.tags.join(','); }
+      get tagList(this: Photo): string {
+         return this.tags.join(',');
+      }
    };
 }
 
@@ -51,14 +53,20 @@ function make(json:Flickr.PhotoSummary, index:number):Photo {
  * https://en.wikipedia.org/wiki/Outlier
  * http://www.wikihow.com/Calculate-Outliers
  */
-function identifyOutliers(photos:Photo[]) {
-   const median = (values:number[]) => {
+function identifyOutliers(photos: Photo[]) {
+   const median = (values: number[]) => {
       const half = Math.floor(values.length / 2);
-      return (values.length % 2 !== 0) ? values[half] : (values[half-1] + values[half]) / 2.0;
+      return values.length % 2 !== 0
+         ? values[half]
+         : (values[half - 1] + values[half]) / 2.0;
    };
-   const boundary = (values:number[], distance?:number) => {
-      if (!is.array(values) || values.length === 0) { return null; }
-      if (distance === undefined) { distance = 3; }
+   const boundary = (values: number[], distance?: number) => {
+      if (!is.array(values) || values.length === 0) {
+         return null;
+      }
+      if (distance === undefined) {
+         distance = 3;
+      }
 
       // sort lowest to highest
       values.sort((d1, d2) => d1 - d2);
@@ -68,8 +76,8 @@ function identifyOutliers(photos:Photo[]) {
       const range = q3 - q1;
 
       return {
-         min: q1 - (range * distance) as number,
-         max: q3 + (range * distance) as number
+         min: (q1 - range * distance) as number,
+         max: (q3 + range * distance) as number
       };
    };
    const fence = boundary(photos.map(p => p.dateTaken.getTime()));
@@ -77,7 +85,9 @@ function identifyOutliers(photos:Photo[]) {
    if (fence !== null) {
       for (const p of photos) {
          const d = p.dateTaken.getTime();
-         if (d > fence.max || d < fence.min) { p.outlierDate = true; }
+         if (d > fence.max || d < fence.min) {
+            p.outlierDate = true;
+         }
       }
    }
 }

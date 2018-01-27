@@ -33,16 +33,18 @@ describe('Google', () => {
       });
    });
 
-   describe('Drive', function () {
+   describe('Drive', function() {
       let post = null;
       this.timeout(10000);
 
-      before(() => factory.buildLibrary().then(library => {
-         post = library.postWithKey('owyhee-snow-and-sand/lowlands');
-         return true;
-      }));
+      before(() =>
+         factory.buildLibrary().then(library => {
+            post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+            return true;
+         })
+      );
 
-      it('retrieve GPX file content', function () {
+      it('retrieve GPX file content', function() {
          this.timeout(10000);
          return google.drive.loadGPX(post).then(gpxText => {
             expect(gpxText).to.exist;

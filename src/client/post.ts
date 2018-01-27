@@ -4,7 +4,7 @@
 /// <reference path="./util.ts"/>
 
 interface JQuery {
-   lazyload():void;
+   lazyload(): void;
 }
 
 /**
@@ -15,124 +15,134 @@ interface JQuery {
  * http://www.appelsiini.net/projects/lazyload
  */
 $(function() {
-   const eventCategory = "Post";
-   const $photos = $("figure");
-   const $lb = $("#light-box");
+   const eventCategory = 'Post';
+   const $photos = $('figure');
+   const $lb = $('#light-box');
 
    // clicking on lightbox hides it and re-enables page scroll
-   $lb.on("click", ()=> { $lb.off("mousemove").hide(0, enablePageScroll); });
-
-   // clicking an image opens it in a lightbox
-   $photos.find("img").on("click", lightBox).lazyload();
-
-   // tapping mobile info button loads camera detail
-   $photos.find(".mobile-button").on("touchstart", function(this:EventTarget, e:JQuery.Event) {
-      const $button = $(this);
-      const infoClass = "mobile-info";
-      const activeKey = "info-visible";
-      const loadedKey = "info-loaded";
-      const activeCSS = "active";
-      const $fig = $button.parent();
-
-      // avoid triggering lightbox
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
-      if ($fig.data(activeKey)) {
-         // hide info box
-         $button.removeClass(activeCSS);
-         $fig.data(activeKey, false).find("." + infoClass).hide();
-      } else {
-         $button.addClass(activeCSS);
-         $fig.data(activeKey, true);
-
-         if ($fig.data(loadedKey)) {
-            // show already loaded info box
-            $fig.find("." + infoClass).show();
-         } else {
-            // load and show info box
-            $("<div/>")
-               .addClass(infoClass)
-               .load($fig.data("exif"), function(this:HTMLElement) {
-                  $(this).appendTo($fig);
-                  $fig.data(loadedKey, true);
-               });
-
-            util.log.event(eventCategory, "Show Photo Info", "Mobile");
-         }
-      }
+   $lb.on('click', () => {
+      $lb.off('mousemove').hide(0, enablePageScroll);
    });
 
+   // clicking an image opens it in a lightbox
+   $photos
+      .find('img')
+      .on('click', lightBox)
+      .lazyload();
+
+   // tapping mobile info button loads camera detail
+   $photos
+      .find('.mobile-button')
+      .on('touchstart', function(this: EventTarget, e: JQuery.Event) {
+         const $button = $(this);
+         const infoClass = 'mobile-info';
+         const activeKey = 'info-visible';
+         const loadedKey = 'info-loaded';
+         const activeCSS = 'active';
+         const $fig = $button.parent();
+
+         // avoid triggering lightbox
+         e.preventDefault();
+         e.stopImmediatePropagation();
+
+         if ($fig.data(activeKey)) {
+            // hide info box
+            $button.removeClass(activeCSS);
+            $fig
+               .data(activeKey, false)
+               .find('.' + infoClass)
+               .hide();
+         } else {
+            $button.addClass(activeCSS);
+            $fig.data(activeKey, true);
+
+            if ($fig.data(loadedKey)) {
+               // show already loaded info box
+               $fig.find('.' + infoClass).show();
+            } else {
+               // load and show info box
+               $('<div/>')
+                  .addClass(infoClass)
+                  .load($fig.data('exif'), function(this: HTMLElement) {
+                     $(this).appendTo($fig);
+                     $fig.data(loadedKey, true);
+                  });
+
+               util.log.event(eventCategory, 'Show Photo Info', 'Mobile');
+            }
+         }
+      });
+
    // hovering photo info button loads camera detail
-   $photos.find(".info-button").one("mouseover", function(this:Element) {
+   $photos.find('.info-button').one('mouseover', function(this: Element) {
       const $button = $(this);
       $button
-         .addClass("loading")
-         .html(iconHtml("cloud_download", "Loading …"))
-         .load($button.parent().data("exif"), function() {
-            $button.removeClass("loading").addClass("loaded");
+         .addClass('loading')
+         .html(iconHtml('cloud_download', 'Loading …'))
+         .load($button.parent().data('exif'), function() {
+            $button.removeClass('loading').addClass('loaded');
          });
 
-      util.log.event(eventCategory, "Show Photo Info");
+      util.log.event(eventCategory, 'Show Photo Info');
    });
 
    /**
     * Material icon HTML
     */
-   function iconHtml(name:string, text:string):string {
-      return util.html.icon(name).get(0).outerHTML + "<p>" + text + "</p>";
+   function iconHtml(name: string, text: string): string {
+      return util.html.icon(name).get(0).outerHTML + '<p>' + text + '</p>';
    }
 
    /**
     * Simple light box for clicked image. Post image has HTML data attributes
     * defining the big image URL and dimensions.
     */
-   function lightBox(this:EventTarget, event:JQuery.Event) {
+   function lightBox(this: EventTarget, event: JQuery.Event) {
       /** Post image */
       const $img = $(this);
       /** Big image */
-      const $big = $lb.find("img");
+      const $big = $lb.find('img');
       /** Whether big image is already browser cached */
-      let loaded:boolean = $img.data("big-loaded");
+      let loaded: boolean = $img.data('big-loaded');
 
-      const size = new Size($img.data("big-width"), $img.data("big-height"));
+      const size = new Size($img.data('big-width'), $img.data('big-height'));
       /** click position relative to image corner */
       const fromCorner = { top: 0, left: 0 };
 
       /**
        * Update image position and panning speed to accomodate window size
        */
-      const updateSize = (event:JQuery.Event) => {
-         let cursor = "zoom-out";
+      const updateSize = (event: JQuery.Event) => {
+         let cursor = 'zoom-out';
 
          size.update();
 
          if (size.needsToPan) {
-            cursor = "move";
-            $lb.on("mousemove", updateHoverPosition);
-            $lb.on("touchstart", beginDrag);
-            $lb.on("touchmove", updateDragPosition);
+            cursor = 'move';
+            $lb.on('mousemove', updateHoverPosition);
+            $lb.on('touchstart', beginDrag);
+            $lb.on('touchmove', updateDragPosition);
          } else {
-            $lb.off("mousemove", updateHoverPosition);
-            $lb.off("touchstart", beginDrag);
-            $lb.off("touchmove", updateDragPosition);
+            $lb.off('mousemove', updateHoverPosition);
+            $lb.off('touchstart', beginDrag);
+            $lb.off('touchmove', updateDragPosition);
          }
          // set initial position
          updateHoverPosition(event);
-         $big.css("cursor", cursor);
+         $big.css('cursor', cursor);
       };
 
       /**
        * Update image position within light box
        */
-      const updateHoverPosition = (event:JQuery.Event) => {
+      const updateHoverPosition = (event: JQuery.Event) => {
          $big.css({
             top: size.height.CSS(event.clientY),
             left: size.width.CSS(event.clientX)
          });
       };
 
-      const beginDrag = (event:JQuery.Event|TouchEvent) => {
+      const beginDrag = (event: JQuery.Event | TouchEvent) => {
          const touchAt = event.targetTouches[0];
          const imageAt = $big.position();
 
@@ -140,7 +150,7 @@ $(function() {
          fromCorner.top = imageAt.top - touchAt.clientY;
       };
 
-      const updateDragPosition = (event:JQuery.Event) => {
+      const updateDragPosition = (event: JQuery.Event) => {
          // ignore multi-finger touches
          const at = event.targetTouches[0];
 
@@ -150,22 +160,24 @@ $(function() {
          });
       };
 
-      if (loaded === undefined) { loaded = false; }
+      if (loaded === undefined) {
+         loaded = false;
+      }
 
       if (loaded) {
          // assign directly if big image has already been loaded
-         $big.attr("src", $img.data("big"));
+         $big.attr('src', $img.data('big'));
       } else {
          // assign lower resolution image while the bigger one is loading
-         $big.attr("src", $img.data("original"));
+         $big.attr('src', $img.data('original'));
          // load photo in detached element
-         $("<img />")
-            .bind("load", function(this:HTMLImageElement) {
+         $('<img />')
+            .bind('load', function(this: HTMLImageElement) {
                // assign big image to light box once it's loaded
-               $big.attr("src", this.src);
-               $img.data("big-loaded", true);
+               $big.attr('src', this.src);
+               $img.data('big-loaded', true);
             })
-            .attr("src", $img.data("big"));
+            .attr('src', $img.data('big'));
       }
 
       $big.height(size.height.image).width(size.width.image);
@@ -177,18 +189,20 @@ $(function() {
       // update panning calculations if window resizes
       $(window).resize(updateSize);
 
-      util.log.event(eventCategory, "Show Lightbox");
+      util.log.event(eventCategory, 'Show Lightbox');
    }
 
    function disablePageScroll() {
-      $("html").css("overflow", "hidden");
+      $('html').css('overflow', 'hidden');
       // prevent iOS from dragging page underneath image
-      document.ontouchmove = function(event) { event.preventDefault(); };
+      document.ontouchmove = function(event) {
+         event.preventDefault();
+      };
    }
 
    function enablePageScroll() {
-      $("html").css("overflow", "auto");
-      $(window).off("resize");
+      $('html').css('overflow', 'auto');
+      $(window).off('resize');
       document.ontouchmove = null;
    }
 
@@ -206,25 +220,25 @@ $(function() {
     *  to offset against the image overlap
     */
    class Length {
-      constructor(forImage:string) {
+      constructor(forImage: string) {
          this.image = parseInt(forImage);
          this.window = 0;
          this.extra = 0;
          this.panRatio = 0;
       }
       /** Image edge length */
-      image:number;
+      image: number;
       /** Window edge length */
-      window:number;
+      window: number;
       /** How much longer is window edge (usually a negative number) */
-      extra:number;
+      extra: number;
       /** Ratio of mouse to image movement pixels for panning */
-      panRatio:number;
+      panRatio: number;
 
       /**
        * Update window dimension and calculate how much larger it is than image
        */
-      update(forWindow:number) {
+      update(forWindow: number) {
          this.window = forWindow;
          this.extra = (this.window - this.image) / 2;
       }
@@ -234,29 +248,30 @@ $(function() {
        * to accelerate panning so edge of image is visible before cursor
        * reaches edge of window.
        */
-      ratio():number {
+      ratio(): number {
          return 2 * ((this.window - this.image) / this.window);
       }
 
       /**
        * Get CSS image offset based on mouse position.
        */
-      CSS(m:number):string {
-         const subtract = (this.extra > 0) ? 0 : ((this.window / 2) - m) * this.panRatio;
-         return (this.extra - subtract).toFixed(0) + "px";
+      CSS(m: number): string {
+         const subtract =
+            this.extra > 0 ? 0 : (this.window / 2 - m) * this.panRatio;
+         return (this.extra - subtract).toFixed(0) + 'px';
       }
    }
 
    class Size {
-      constructor(imageWidth:string, imageHeight:string) {
+      constructor(imageWidth: string, imageHeight: string) {
          this.width = new Length(imageWidth);
          this.height = new Length(imageHeight);
       }
 
-      width:Length;
-      height:Length;
+      width: Length;
+      height: Length;
       /** Whether image needs to pan */
-      needsToPan:boolean;
+      needsToPan: boolean;
 
       update() {
          this.height.update(window.innerHeight);
@@ -266,9 +281,10 @@ $(function() {
          if (this.needsToPan) {
             // pan image using length with biggest ratio
             // or if one dimension needs no panning then use the other dimension
-            this.height.panRatio = this.width.panRatio = (this.width.extra < this.height.extra && this.width.extra < 0)
-               ? this.width.ratio()
-               : this.height.ratio();
+            this.height.panRatio = this.width.panRatio =
+               this.width.extra < this.height.extra && this.width.extra < 0
+                  ? this.width.ratio()
+                  : this.height.ratio();
          }
       }
    }

@@ -3,17 +3,20 @@ const mocha = require('mocha');
 const { expect } = require('chai');
 const mock = require('../mocks/');
 
-describe('KML', ()=> {
-   it.skip('extracts KML from KMZ', ()=> mock.loadFile('motorcycle.kmz')
-      .then(kml.fromKMZ)
-      .then(doc => { expect(doc).to.exist; })
-   ); //.timeout(10000);
+describe('KML', () => {
+   it.skip('extracts KML from KMZ', () =>
+      mock
+         .loadFile('motorcycle.kmz')
+         .then(kml.fromKMZ)
+         .then(doc => {
+            expect(doc).to.exist;
+         })); //.timeout(10000);
 
-   it('parses HTML property descriptions', ()=> {
+   it('parses HTML property descriptions', () => {
       const properties = {
          name: 'Test Name',
          description: sample
-      }
+      };
       const updated = kml.parseDescription(properties);
 
       expect(updated).to.exist;

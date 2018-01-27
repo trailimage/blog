@@ -25,9 +25,17 @@ module.exports = {
       status: null,
       url: null
    },
-   status(value) { this.httpStatus = value; return this; },
-   notFound() { return this.status(C.httpStatus.NOT_FOUND); },
-   setHeader(key, value) { this.headers[key] = value; return this; },
+   status(value) {
+      this.httpStatus = value;
+      return this;
+   },
+   notFound() {
+      return this.status(C.httpStatus.NOT_FOUND);
+   },
+   setHeader(key, value) {
+      this.headers[key] = value;
+      return this;
+   },
 
    /**
     * Set header value(s)
@@ -38,7 +46,7 @@ module.exports = {
       if (value !== undefined) {
          this.headers[keyOrHash] = value;
       } else if (typeof keyOrHash == is.type.OBJECT) {
-         Object.assign(this.headers, keyOrHash)
+         Object.assign(this.headers, keyOrHash);
       }
    },
 
@@ -69,8 +77,9 @@ module.exports = {
       if (is.callable(callback)) {
          callback(null, util.inspect(this.rendered));
       }
-      if (this.endOnRender) { this.end(); }
-
+      if (this.endOnRender) {
+         this.end();
+      }
    },
    /**
     * @param {string|Buffer} chunk
@@ -80,15 +89,19 @@ module.exports = {
     */
    write(chunk, encoding = C.encoding.UTF8, callback) {
       const text = Buffer.isBuffer(chunk) ? chunk.toString(encoding) : chunk;
-      this.content = (this.content === null) ? text : this.content + text;
-      if (is.callable(callback)) { callback(); }
+      this.content = this.content === null ? text : this.content + text;
+      if (is.callable(callback)) {
+         callback();
+      }
       return true;
    },
 
    end() {
       if (!this.ended) {
          this.ended = true;
-         if (is.callable(this.onEnd)) { this.onEnd(); }
+         if (is.callable(this.onEnd)) {
+            this.onEnd();
+         }
       }
       return this;
    },

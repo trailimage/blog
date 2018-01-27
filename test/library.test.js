@@ -5,18 +5,23 @@ const library = require('../lib/library').default;
 
 factory.inject.flickr = require('./mocks/flickr.mock');
 
-describe('Library', ()=> {
+describe('Library', () => {
    before(() => factory.buildLibrary());
 
-   it('is created by factory', ()=> {
+   it('is created by factory', () => {
       expect(library.loaded).is.true;
    });
 
-   it('has root categories', ()=> {
-      expect(library.categories).to.contain.all.keys(['What', 'When', 'Where', 'Who']);
+   it('has root categories', () => {
+      expect(library.categories).to.contain.all.keys([
+         'What',
+         'When',
+         'Where',
+         'Who'
+      ]);
    });
 
-   it('returns category for key', ()=> {
+   it('returns category for key', () => {
       const what = library.categoryWithKey('what');
       expect(what).to.exist;
       expect(what.title).equals('What');
@@ -30,7 +35,7 @@ describe('Library', ()=> {
       expect(bicycle.isParent).is.not.true;
    });
 
-   it('returns keys for category', ()=> {
+   it('returns keys for category', () => {
       const all = library.categoryKeys();
       const two = library.categoryKeys(['When', 'Bicycle']);
 
@@ -41,16 +46,24 @@ describe('Library', ()=> {
       expect(two).to.include('what/bicycle');
    });
 
-   it('includes all photo tags with their full names', ()=> {
-      expect(library.tags).to.contain.all.keys(['algae', 'andersonranchreservoir', 'dam', 'horse', 'jason']);
-      expect(library.tags['andersonranchreservoir']).equals('Anderson Ranch Reservoir');
+   it('includes all photo tags with their full names', () => {
+      expect(library.tags).to.contain.all.keys([
+         'algae',
+         'andersonranchreservoir',
+         'dam',
+         'horse',
+         'jason'
+      ]);
+      expect(library.tags['andersonranchreservoir']).equals(
+         'Anderson Ranch Reservoir'
+      );
    });
 
-   it('has post summaries', ()=> {
+   it('has post summaries', () => {
       expect(library.posts).is.lengthOf(168);
    });
 
-   it('finds posts by ID or key', ()=> {
+   it('finds posts by ID or key', () => {
       const post1 = library.postWithID('72157666685116730');
 
       expect(post1).to.exist;
@@ -65,7 +78,7 @@ describe('Library', ()=> {
       expect(post2.photoCount).equals(13);
    });
 
-   it('removes posts', ()=> {
+   it('removes posts', () => {
       let post = library.postWithKey('owyhee-snow-and-sand/lowlands');
       expect(post).to.exist;
       library.remove(post.key);
@@ -73,25 +86,27 @@ describe('Library', ()=> {
       expect(post).to.not.exist;
    });
 
-   it('finds post having a photo', ()=> library.getPostWithPhoto('8459503474').then(post => {
-      expect(post).to.exist;
-      expect(post).has.property('id', '72157632729508554');
-   }));
+   it('finds post having a photo', () =>
+      library.getPostWithPhoto('8459503474').then(post => {
+         expect(post).to.exist;
+         expect(post).has.property('id', '72157632729508554');
+      }));
 
-   it('finds photos with tags', ()=> library.getPhotosWithTags('horse').then(photos => {
-      expect(photos).to.exist;
-      expect(photos).is.instanceOf(Array);
-      expect(photos).to.have.length.above(10);
-      expect(photos[0]).to.contain.all.keys(['id', 'size']);
-   }));
+   it('finds photos with tags', () =>
+      library.getPhotosWithTags('horse').then(photos => {
+         expect(photos).to.exist;
+         expect(photos).is.instanceOf(Array);
+         expect(photos).to.have.length.above(10);
+         expect(photos[0]).to.contain.all.keys(['id', 'size']);
+      }));
 
-   it('creates list of post keys', ()=> {
+   it('creates list of post keys', () => {
       const keys = library.postKeys();
       expect(keys).is.lengthOf(167);
       expect(keys).to.include('brother-ride-2015/simmons-creek');
    });
 
-   it('can be emptied', ()=> {
+   it('can be emptied', () => {
       library.empty();
       expect(library.loaded).is.not.true;
       expect(library.posts).is.empty;

@@ -4,12 +4,14 @@ export default {
    mines: {
       name: '',
       provider: 'Idaho Geological Survey',
-      url: 'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz'
+      url:
+         'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz'
    },
    'hot-springs': {
       name: '',
       provider: 'Idaho Geological Survey',
-      url: 'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz'
+      url:
+         'http://www.idahogeology.org/PDF/Digital_Data_(D)/Digital_Databases_(DD)/Mines_Prospects/2016/MinesAndProspects.kmz'
    },
    atv: {
       name: '',
@@ -79,6 +81,7 @@ export default {
    'moscow-mountain': {
       name: '',
       provider: 'Moscow Area Mountain Bike Association',
-      url: 'https://drive.google.com/uc?export=download&id=0B0lgcM9JCuSbbDV2UUNILWpUc28'
+      url:
+         'https://drive.google.com/uc?export=download&id=0B0lgcM9JCuSbbDV2UUNILWpUc28'
    }
-}  as {[key:string]:MapSource};
+} as { [key: string]: MapSource };

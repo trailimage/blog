@@ -1,8 +1,12 @@
 const is = require('../../lib/is').default;
 
 function assert(methodName, pattern, handler) {
-   if (!is.value(pattern)) { throw new ReferenceError(`app.${methodName}() pattern cannot be null`); }
-   if (!is.value(handler)) { throw new ReferenceError(`app.${methodName}() handler cannot be null`); }
+   if (!is.value(pattern)) {
+      throw new ReferenceError(`app.${methodName}() pattern cannot be null`);
+   }
+   if (!is.value(handler)) {
+      throw new ReferenceError(`app.${methodName}() handler cannot be null`);
+   }
 }
 
 module.exports = {
@@ -21,7 +25,11 @@ module.exports = {
       assert('use', pattern, middleware);
       this.middleware[pattern] = middleware;
 
-      if (is.defined(middleware, 'name') && middleware.name == 'router' && is.defined(middleware, 'stack')) {
+      if (
+         is.defined(middleware, 'name') &&
+         middleware.name == 'router' &&
+         is.defined(middleware, 'stack')
+      ) {
          middleware.stack.reduce((routes, s) => {
             const handler = s.route.stack[0];
             routes[handler.method][pattern + s.route.path] = handler.handle;

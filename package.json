@@ -41,6 +41,8 @@
       "xmldom": "^0.1.19"
    },
    "devDependencies": {
+      "@toba/lint": "^1.2.0",
+      "@toba/utility": "^1.5.3",
       "@types/body-parser": "^1.16.3",
       "@types/chai": "^4.0.0",
       "@types/compression": "0.0.35",
@@ -99,9 +101,14 @@
       "bracketSpacing": true,
       "printWidth": 80,
       "semi": true,
-      "singleQuote": false,
+      "singleQuote": true,
       "tabWidth": 3,
       "trailingComma": "none",
       "useTabs": false
+   },
+   "stylelint": {
+      "plugins": [
+         "@toba/lint/style"
+      ]
    }
 }

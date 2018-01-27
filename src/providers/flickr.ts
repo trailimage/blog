@@ -6,7 +6,7 @@ import util from "../util/";
 import cache from "../cache/api";
 import fetch from "node-fetch";
 import { OAuth } from "oauth";
-import { globalAgent} from "https";
+import { globalAgent } from "https";
 
 globalAgent.maxSockets = 200;
 
@@ -42,7 +42,7 @@ const extra = {
 /**
  * Number of retries keyed to API method.
  */
-const retries:{[key:string]:number} = {};
+const retries: { [key: string]: number } = {};
 const host = "api.flickr.com";
 const oauth = new OAuth(
    url.REQUEST_TOKEN,
@@ -53,7 +53,7 @@ const oauth = new OAuth(
    config.flickr.auth.callback,
    "HMAC-SHA1");
 
-const defaultCallOptions:Flickr.Options<Flickr.Response> = {
+const defaultCallOptions: Flickr.Options<Flickr.Response> = {
    // method to retrieve value from JSON response
    value: r => r,
    // error message to log if call fails
@@ -70,19 +70,19 @@ const defaultCallOptions:Flickr.Options<Flickr.Response> = {
  * Load response from cache or call API
  */
 function call<T>(
-   method:string,
-   idType:string,
-   id:string,
-   options:Flickr.Options<T>):Promise<T> {
+   method: string,
+   idType: string,
+   id: string,
+   options: Flickr.Options<T>): Promise<T> {
 
    options = Object.assign({}, defaultCallOptions, options);
    // generate fallback API call
-   const noCache = ()=> callAPI<T>(method, idType, id, options);
+   const noCache = () => callAPI<T>(method, idType, id, options);
 
    return (config.cache.json && options.allowCache)
       ? cache.getItem<T>(method, id)
          .then(item => is.value(item) ? item : noCache())
-         .catch((err:Error) => {
+         .catch((err: Error) => {
             log.error("Error getting Flickr %s:%s from cache: %j", method, id, err);
             return noCache();
          })
@@ -95,10 +95,10 @@ function call<T>(
  * See http://www.flickr.com/services/api/response.json.html
  */
 function callAPI<T>(
-   method:string,
-   idType:string,
-   id:string,
-   options:Flickr.Options<T>):Promise<T> {
+   method: string,
+   idType: string,
+   id: string,
+   options: Flickr.Options<T>): Promise<T> {
 
    // create key to track retries and log messages
    const key = method + ":" + id;
@@ -107,7 +107,7 @@ function callAPI<T>(
    return new Promise<T>((resolve, reject) => {
       const token = config.flickr.auth.token;
       // response handler that may retry call
-      const handler = (err:any, body:string, attempt:Function) => {
+      const handler = (err: any, body: string, attempt: Function) => {
          let tryAgain = false;
          if (err === null) {
             const res = parse(body, key);
@@ -133,7 +133,7 @@ function callAPI<T>(
          ? () => oauth.get(methodUrl, token.access, token.secret, (error, body) => {
             handler(error, body, attempt);
          })
-         : () => fetch(methodUrl, { headers: { "User-Agent": "node.js" }})
+         : () => fetch(methodUrl, { headers: { "User-Agent": "node.js" } })
             .then(res => res.text())
             .then(body => { handler(null, body, attempt); })
             .catch(err => { handler(err, null, attempt); });
@@ -145,7 +145,7 @@ function callAPI<T>(
 /**
  * Parse Flickr response and handle different kinds of error conditions
  */
-function parse(body:string, key:string):Flickr.Response {
+function parse(body: string, key: string): Flickr.Response {
    const fail = { retry: true, stat: "fail" };
    let json = null;
 
@@ -178,7 +178,7 @@ function parse(body:string, key:string):Flickr.Response {
 /**
  * Retry service call if bad response and less than max retries
  */
-function retry(fn:Function, key:string):boolean {
+function retry(fn: Function, key: string): boolean {
    let count = 1;
 
    if (retries[key]) { count = ++retries[key]; } else { retries[key] = count; }
@@ -197,7 +197,7 @@ function retry(fn:Function, key:string):boolean {
 /**
  * Clear retry count and log success.
  */
-function clearRetries(key:string) {
+function clearRetries(key: string) {
    if (retries[key] && retries[key] > 0) {
       log.info("Call to %s succeeded", key);
       retries[key] = 0;
@@ -208,10 +208,10 @@ function clearRetries(key:string) {
  * Setup standard parameters.
  */
 function parameterize(
-   method:string,
-   idType?:string,
-   id?:string,
-   args:{[key:string]:string|number|boolean} = {}):string {
+   method: string,
+   idType?: string,
+   id?: string,
+   args: { [key: string]: string | number | boolean } = {}): string {
 
    let qs = "";
    let op = "?";
@@ -239,7 +239,7 @@ export default {
    auth: {
       isEmpty() { return is.empty(config.flickr.auth.token.access); },
       url() { return config.flickr.auth.callback; },
-      getRequestToken():Promise<string> {
+      getRequestToken(): Promise<string> {
          const token = config.flickr.auth.token;
          return new Promise<string>((resolve, reject) => {
             oauth.getOAuthRequestToken((error, t, secret) => {
@@ -256,7 +256,7 @@ export default {
          });
       },
 
-      getAccessToken(requestToken:string, verifier:string):Promise<Token> {
+      getAccessToken(requestToken: string, verifier: string): Promise<Token> {
          const token = config.flickr.auth.token;
          return new Promise((resolve, reject) => {
             oauth.getOAuthAccessToken(requestToken, token.secret, verifier, (error, accessToken, accessTokenSecret) => {
@@ -268,37 +268,37 @@ export default {
                      access: accessToken,
                      secret: accessTokenSecret,
                      accessExpiration: null
-                  }  as Token);
+                  } as Token);
                }
             });
          });
       }
    },
 
-   getCollections: ()=> call<Flickr.Collection[]>(method.COLLECTIONS, type.USER, config.flickr.userID, {
+   getCollections: () => call<Flickr.Collection[]>(method.COLLECTIONS, type.USER, config.flickr.userID, {
       value: r => r.collections.collection,
       allowCache: true
    }),
 
-   getSetInfo: (id:string) => call<Flickr.SetInfo>(method.set.INFO, type.SET, id, {
+   getSetInfo: (id: string) => call<Flickr.SetInfo>(method.set.INFO, type.SET, id, {
       value: r => r.photoset as Flickr.SetInfo,
       allowCache: true
    }),
 
-   getPhotoSizes: (id:string) => call<Flickr.Size[]>(method.photo.SIZES, type.PHOTO, id, {
+   getPhotoSizes: (id: string) => call<Flickr.Size[]>(method.photo.SIZES, type.PHOTO, id, {
       value: r => r.sizes.size
    }),
 
-   getPhotoContext: (id:string) => call<Flickr.MemberSet[]>(method.photo.SETS, type.PHOTO, id, {
+   getPhotoContext: (id: string) => call<Flickr.MemberSet[]>(method.photo.SETS, type.PHOTO, id, {
       value: r => r.set
    }),
 
-   getExif: (id:number) => call<Flickr.Exif[]>(method.photo.EXIF, type.PHOTO, id.toString(), {
+   getExif: (id: number) => call<Flickr.Exif[]>(method.photo.EXIF, type.PHOTO, id.toString(), {
       value: r => r.photo.exif,
       allowCache: true
    }),
 
-   getSetPhotos: (id:string) => call<Flickr.SetPhotos>(method.set.PHOTOS, type.SET, id, {
+   getSetPhotos: (id: string) => call<Flickr.SetPhotos>(method.set.PHOTOS, type.SET, id, {
       args: {
          extras: [extra.DESCRIPTION, extra.TAGS, extra.DATE_TAKEN, extra.LOCATION, extra.PATH_ALIAS]
             .concat(config.flickr.photoSize.post)
@@ -314,7 +314,7 @@ export default {
     *
     * https://www.flickr.com/services/api/flickr.photos.search.html
     */
-   photoSearch: (tags:string|string[]) => call<Flickr.PhotoSummary[]>(method.photo.SEARCH, type.USER, config.flickr.userID, {
+   photoSearch: (tags: string | string[]) => call<Flickr.PhotoSummary[]>(method.photo.SEARCH, type.USER, config.flickr.userID, {
       args: {
          extras: config.flickr.photoSize.search.join(),
          tags: is.array(tags) ? tags.join() : tags,

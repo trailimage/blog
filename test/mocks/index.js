@@ -8,7 +8,8 @@ const localPath = name => path.normalize(__dirname + '/' + name);
 
 // http://www.lipsum.com/
 module.exports = {
-   lipsum: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+   lipsum:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
    fontFile: 'test/pdf/droidsans.ttf',
    google,
 
@@ -23,8 +24,8 @@ module.exports = {
          const output = new stream();
          const rl = readline.createInterface(input, output);
          let file = '';
-         rl.on('line', line => file += line + nl);
-         rl.on('close', ()=> resolve(file));
+         rl.on('line', line => (file += line + nl));
+         rl.on('close', () => resolve(file));
       });
    },
 

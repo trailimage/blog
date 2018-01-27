@@ -3,9 +3,12 @@ const mocha = require('mocha');
 const redis = require('../../lib/providers/redis').default;
 const key = 'test-key';
 
-describe('Redis', ()=> {
-   it('stores a key and value', ()=> redis.add(key, 'test-value'));
-   it('removes a key and its value', ()=> redis.remove(key));
+describe('Redis', () => {
+   it('stores a key and value', () => redis.add(key, 'test-value'));
+   it('removes a key and its value', () => redis.remove(key));
 
-   after(done => { redis.disconnect(); done(); });
+   after(done => {
+      redis.disconnect();
+      done();
+   });
 });

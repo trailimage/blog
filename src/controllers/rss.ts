@@ -9,7 +9,7 @@ const MAX_RSS_RETRIES = 10;
 
 let rssRetries = 0;
 
-export default function postFeed(req:Blog.Request, res:Blog.Response) {
+export default function postFeed(req: Blog.Request, res: Blog.Response) {
    if (!library.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
          log.error('Unable to load library after %d tries', MAX_RSS_RETRIES);
@@ -18,17 +18,27 @@ export default function postFeed(req:Blog.Request, res:Blog.Response) {
          rssRetries = 0;
       } else {
          rssRetries++;
-         log.error('Library not ready when creating RSS feed — attempt %d', rssRetries);
-         setTimeout(() => { postFeed(req, res); }, 3000);
+         log.error(
+            'Library not ready when creating RSS feed — attempt %d',
+            rssRetries
+         );
+         setTimeout(() => {
+            postFeed(req, res);
+         }, 3000);
       }
       return;
    }
 
-   const author:Feed.Author = {
+   const author: Feed.Author = {
       name: config.owner.name,
       link: 'https://www.facebook.com/jason.e.abbott'
    };
-   const copyright = 'Copyright © ' + new Date().getFullYear() + ' ' + config.owner.name + '. All rights reserved.';
+   const copyright =
+      'Copyright © ' +
+      new Date().getFullYear() +
+      ' ' +
+      config.owner.name +
+      '. All rights reserved.';
    const feed = new Feed({
       title: config.site.title,
       description: config.site.description,

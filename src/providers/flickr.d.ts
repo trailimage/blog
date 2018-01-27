@@ -6,12 +6,12 @@ export namespace Flickr {
       sign?: boolean,
       allowCache?: boolean,
       error?: string,
-      args?: {[key:string]:string|number|boolean}
+      args?: { [key: string]: string | number | boolean }
    }
 
    export interface FeatureSet {
-      id:string;
-      title:string;
+      id: string;
+      title: string;
    }
 
    /**
@@ -146,8 +146,8 @@ export namespace Flickr {
       permissions: Permission;
       editability: EditAbility;
       publiceditability: EditAbility;
-      usage:Usage;
-      exif:Exif[];
+      usage: Usage;
+      exif: Exif[];
       tags: {
          tag: TagSummary;
       }
@@ -183,8 +183,8 @@ export namespace Flickr {
    }
 
    interface PhotoSummary extends Place {
-      id:string;
-      secret:string;
+      id: string;
+      secret: string;
       server: string;
       farm: number;
       title: string;
@@ -196,14 +196,14 @@ export namespace Flickr {
       latitude?: string;
       longitude?: string;
       context?: number;
-      geo_is_family?: Boolean|boolean;
-      geo_is_friend?: Boolean|boolean;
-      geo_is_contact?: Boolean|boolean;
-      geo_is_public?: Boolean|boolean;
+      geo_is_family?: Boolean | boolean;
+      geo_is_friend?: Boolean | boolean;
+      geo_is_contact?: Boolean | boolean;
+      geo_is_public?: Boolean | boolean;
       lastupdate?: string;
       pathalias?: string;
 
-      exif:Exif[];
+      exif: Exif[];
 
       url_s?: string;
       height_s?: string;
@@ -236,25 +236,25 @@ export namespace Flickr {
    }
 
    interface Response {
-      photoset?:SetPhotos|SetInfo;
-      set?:MemberSet[];
-      collections?:Tree;
-      photo?:PhotoInfo;
-      sizes?:SizeList;
+      photoset?: SetPhotos | SetInfo;
+      set?: MemberSet[];
+      collections?: Tree;
+      photo?: PhotoInfo;
+      sizes?: SizeList;
       /**
        * Dynamically added property indicating whether the request can be
        * retried.
        */
-      retry?:boolean;
-      stat:string;
-      code:number;
-      message:string;
+      retry?: boolean;
+      stat: string;
+      code: number;
+      message: string;
       photos: {
-         photo:SearchResult|PhotoSummary[];
+         photo: SearchResult | PhotoSummary[];
       }
       who: {
          tags: {
-            tag:Tag[];
+            tag: Tag[];
          }
       }
    }

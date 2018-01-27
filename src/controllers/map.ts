@@ -10,19 +10,25 @@ import library from '../library';
 import factory from '../factory/';
 import realGoogle from '../providers/google';
 import * as compress from 'zlib';
-import { route as ph, mimeType, httpStatus, header, encoding } from '../constants';
+import {
+   route as ph,
+   mimeType,
+   httpStatus,
+   header,
+   encoding
+} from '../constants';
 // can be replaced with injection
 let google = realGoogle;
 
 /**
  * Map screen loads then makes AJAX call to fetch data.
  */
-function view(post:Post, req:Blog.Request, res:Blog.Response) {
+function view(post: Post, req: Blog.Request, res: Blog.Response) {
    if (is.value(post)) {
       const key = post.isPartial ? post.seriesKey : post.key;
       const photoID = req.params[ph.PHOTO_ID];
       // ensure photos are loaded to calculate bounds for map zoom
-      post.getPhotos().then(()=> {
+      post.getPhotos().then(() => {
          res.render(template.page.MAPBOX, {
             layout: template.layout.NONE,
             title: post.name() + ' Map',
@@ -38,18 +44,22 @@ function view(post:Post, req:Blog.Request, res:Blog.Response) {
    }
 }
 
-function post(req:Blog.Request, res:Blog.Response) {
+function post(req: Blog.Request, res: Blog.Response) {
    view(library.postWithKey(req.params[ph.POST_KEY]), req, res);
 }
 
-function series(req:Blog.Request, res:Blog.Response) {
-   view(library.postWithKey(req.params[ph.SERIES_KEY], req.params[ph.PART_KEY]), req, res);
+function series(req: Blog.Request, res: Blog.Response) {
+   view(
+      library.postWithKey(req.params[ph.SERIES_KEY], req.params[ph.PART_KEY]),
+      req,
+      res
+   );
 }
 
 /**
  * https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
-function blog(req:Blog.Request, res:Blog.Response) {
+function blog(_req: Blog.Request, res: Blog.Response) {
    res.render(template.page.MAPBOX, {
       layout: template.layout.NONE,
       title: config.site.title + ' Map',
@@ -60,9 +70,12 @@ function blog(req:Blog.Request, res:Blog.Response) {
 /**
  * Compressed GeoJSON of all site photos.
  */
-function photoJSON(req:Blog.Request, res:Blog.Response) {
-   factory.map.photos()
-      .then(item => { res.sendCompressed(mimeType.JSON, item); })
+function photoJSON(_req: Blog.Request, res: Blog.Response) {
+   factory.map
+      .photos()
+      .then(item => {
+         res.sendCompressed(mimeType.JSON, item);
+      })
       .catch(err => {
          log.error(err);
          res.notFound();
@@ -72,9 +85,12 @@ function photoJSON(req:Blog.Request, res:Blog.Response) {
 /**
  * Compressed GeoJSON of track for post.
  */
-function trackJSON(req:Blog.Request, res:Blog.Response) {
-   factory.map.track(req.params[ph.POST_KEY])
-      .then(item => { res.sendCompressed(mimeType.JSON, item); })
+function trackJSON(req: Blog.Request, res: Blog.Response) {
+   factory.map
+      .track(req.params[ph.POST_KEY])
+      .then(item => {
+         res.sendCompressed(mimeType.JSON, item);
+      })
       .catch(err => {
          log.error(err);
          res.notFound();
@@ -84,35 +100,51 @@ function trackJSON(req:Blog.Request, res:Blog.Response) {
 /**
  * Retrieve and parse a map source
  */
-function source(req:Blog.Request, res:Blog.Response) {
-   const key:string = req.params[ph.MAP_SOURCE];
+function source(req: Blog.Request, res: Blog.Response) {
+   const key: string = req.params[ph.MAP_SOURCE];
 
-   if (!is.text(key)) { return res.notFound(); }
+   if (!is.text(key)) {
+      return res.notFound();
+   }
 
    const s = config.map.source[key.replace('.json', '')];
 
-   if (!is.value<MapSource>(s)) { return res.notFound(); }
+   if (!is.value<MapSource>(s)) {
+      return res.notFound();
+   }
 
    // for now hardcoded to KMZ
    const parser = fetchKMZ(s.provider);
 
-   fetch(s.url, { headers: { 'User-Agent': 'node.js' }}).then(reply => {
+   fetch(s.url, { headers: { 'User-Agent': 'node.js' } }).then(reply => {
       if (reply.status == httpStatus.OK) {
          parser(reply)
             .then(JSON.stringify)
             .then(geoText => {
-               compress.gzip(Buffer.from(geoText), (err:Error, buffer:Buffer) => {
-                  if (is.value(err)) {
-                     res.internalError(err);
-                  } else {
-                     res.setHeader(header.content.ENCODING, encoding.GZIP);
-                     res.setHeader(header.CACHE_CONTROL, 'max-age=86400, public');    // seconds
-                     res.setHeader(header.content.TYPE, mimeType.JSON + ';charset=utf-8');
-                     res.setHeader(header.content.DISPOSITION, `attachment; filename=${key}`);
-                     res.write(buffer);
-                     res.end();
+               compress.gzip(
+                  Buffer.from(geoText),
+                  (err: Error, buffer: Buffer) => {
+                     if (is.value(err)) {
+                        res.internalError(err);
+                     } else {
+                        res.setHeader(header.content.ENCODING, encoding.GZIP);
+                        res.setHeader(
+                           header.CACHE_CONTROL,
+                           'max-age=86400, public'
+                        ); // seconds
+                        res.setHeader(
+                           header.content.TYPE,
+                           mimeType.JSON + ';charset=utf-8'
+                        );
+                        res.setHeader(
+                           header.content.DISPOSITION,
+                           `attachment; filename=${key}`
+                        );
+                        res.write(buffer);
+                        res.end();
+                     }
                   }
-               });
+               );
             })
             .catch(err => {
                res.internalError(err);
@@ -127,18 +159,26 @@ function source(req:Blog.Request, res:Blog.Response) {
  * Curried method to capture `sourceName` used in the GeoJSON conversion to
  * load any custom transformations.
  */
-const fetchKMZ = (sourceName:string) => (res:Response) =>
-   res.buffer().then(kml.fromKMZ).then(geoJSON.featuresFromKML(sourceName));
+const fetchKMZ = (sourceName: string) => (res: Response) =>
+   res
+      .buffer()
+      .then(kml.fromKMZ)
+      .then(geoJSON.featuresFromKML(sourceName));
 
 /**
  * Initiate GPX download for a post.
  */
-function gpx(req:Blog.Request, res:Blog.Response) {
-   const post = config.map.allowDownload ? library.postWithKey(req.params[ph.POST_KEY]) : null;
+function gpx(req: Blog.Request, res: Blog.Response) {
+   const post = config.map.allowDownload
+      ? library.postWithKey(req.params[ph.POST_KEY])
+      : null;
 
    if (is.value(post)) {
-      google.drive.loadGPX(post, res)
-         .then(()=> { res.end(); })
+      google.drive
+         .loadGPX(post, res)
+         .then(() => {
+            res.end();
+         })
          // errors already logged by loadGPX()
          .catch(res.notFound);
    } else {
@@ -158,6 +198,8 @@ export default {
    source,
    // inject different data providers
    inject: {
-      set google(g:Provider.Google) { google = g; }
+      set google(g: Provider.Google) {
+         google = g;
+      }
    }
 };

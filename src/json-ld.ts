@@ -11,7 +11,7 @@ const idField = '@id';
 /**
  * Add standard Linked Data fields
  */
-function ld<T extends JsonLD.Thing>(type:string, fields:any = {}):T {
+function ld<T extends JsonLD.Thing>(type: string, fields: any = {}): T {
    if (is.defined(fields, 'id')) {
       // rename ID field to standard
       fields[idField] = fields['id'];
@@ -22,36 +22,40 @@ function ld<T extends JsonLD.Thing>(type:string, fields:any = {}):T {
    return fields;
 }
 
-function image(img:Size):JsonLD.ImageObject {
-   const schema:JsonLD.ImageObject = { url: img.url };
-   if (img.width) { schema.width = img.width; }
-   if (img.height) { schema.height = img.height; }
+function image(img: Size): JsonLD.ImageObject {
+   const schema: JsonLD.ImageObject = { url: img.url };
+   if (img.width) {
+      schema.width = img.width;
+   }
+   if (img.height) {
+      schema.height = img.height;
+   }
    return ld<JsonLD.ImageObject>('ImageObject', schema);
 }
 
 /**
  * Place for post
  */
-function place(post:Post):JsonLD.Place {
+function place(post: Post): JsonLD.Place {
    return ld<JsonLD.Place>('Place', {
       hasMap: config.site.url + '/' + post.key + '/map'
    });
 }
 
-function webPage(path:string = ''):JsonLD.WebPage {
+function webPage(path: string = ''): JsonLD.WebPage {
    return ld<JsonLD.WebPage>('WebPage', { id: pathUrl(path) });
 }
 
-const pathUrl = (path:string) => config.site.url + '/' + path;
+const pathUrl = (path: string) => config.site.url + '/' + path;
 
-function organization():JsonLD.Organization {
+function organization(): JsonLD.Organization {
    return ld<JsonLD.Organization>('Organization', {
       name: config.site.title,
       logo: image(config.site.companyLogo)
    });
 }
 
-function owner():JsonLD.Person {
+function owner(): JsonLD.Person {
    return ld<JsonLD.Person>('Person', {
       name: config.owner.name,
       url: config.site.url + '/about',
@@ -61,9 +65,15 @@ function owner():JsonLD.Person {
    });
 }
 
-function breadcrumb(url:string, title:string, position:number):JsonLD.BreadcrumbList {
-   const schema:{[key:string]:any} = { item: { id: url, name: title } };
-   if (!isNaN(position)) { schema.position = position; }
+function breadcrumb(
+   url: string,
+   title: string,
+   position: number
+): JsonLD.BreadcrumbList {
+   const schema: { [key: string]: any } = { item: { id: url, name: title } };
+   if (!isNaN(position)) {
+      schema.position = position;
+   }
    return ld<JsonLD.BreadcrumbList>('BreadcrumbList', schema);
 }
 
@@ -72,7 +82,7 @@ function breadcrumb(url:string, title:string, position:number):JsonLD.Breadcrumb
  * http://schema.org/SearchAction
  * https://developers.google.com/structured-data/slsb-overview
  */
-function searchAction():JsonLD.SearchAction {
+function searchAction(): JsonLD.SearchAction {
    const qi = 'query-input';
    const placeHolder = 'search_term_string';
 
@@ -82,7 +92,7 @@ function searchAction():JsonLD.SearchAction {
    });
 }
 
-function discoverAction(post:Post):JsonLD.DiscoverAction {
+function discoverAction(post: Post): JsonLD.DiscoverAction {
    return ld<JsonLD.DiscoverAction>('DiscoverAction', {
       target: config.site.url + '/' + post.key + '/map'
    });
@@ -91,17 +101,27 @@ function discoverAction(post:Post):JsonLD.DiscoverAction {
 /**
  * Convert link data to string with nulls and zeroes removed
  */
-function serialize(linkData:any):string {
+function serialize(linkData: any): string {
    removeContext(linkData);
-   return JSON.stringify(linkData, (key, value) => (value === null || value === 0) ? undefined : value);
+   return JSON.stringify(
+      linkData,
+      (_key, value) => (value === null || value === 0 ? undefined : value)
+   );
 }
 
 /**
  * Remove redundant context specifications
  */
-function removeContext(linkData:JsonLD.Thing, context:string = null) {
-   if (linkData !== undefined && linkData !== null && typeof(linkData) == is.type.OBJECT) {
-      if (linkData.hasOwnProperty(contextField) && linkData[contextField] !== null) {
+function removeContext(linkData: JsonLD.Thing, context: string = null) {
+   if (
+      linkData !== undefined &&
+      linkData !== null &&
+      typeof linkData == is.type.OBJECT
+   ) {
+      if (
+         linkData.hasOwnProperty(contextField) &&
+         linkData[contextField] !== null
+      ) {
          if (context !== null && linkData[contextField] == context) {
             // remove redundant value
             delete linkData[contextField];
@@ -110,7 +130,9 @@ function removeContext(linkData:JsonLD.Thing, context:string = null) {
             context = linkData[contextField];
          }
       }
-      for (const field in linkData) { removeContext(linkData[field], context); }
+      for (const field in linkData) {
+         removeContext(linkData[field], context);
+      }
    }
 }
 
@@ -122,11 +144,11 @@ export default {
     * https://developers.google.com/structured-data/testing-tool/
     * https://developers.google.com/structured-data/rich-snippets/articles
     */
-   fromPost(post:Post) {
-      const categoryTitle = Object
-         .keys(post.categories)
-         .map(key => post.categories[key]);
-      const schema:JsonLD.BlogPosting = {
+   fromPost(post: Post) {
+      const categoryTitle = Object.keys(post.categories).map(
+         key => post.categories[key]
+      );
+      const schema: JsonLD.BlogPosting = {
          author: owner(),
          name: post.title,
          headline: post.title,
@@ -154,7 +176,9 @@ export default {
       //}
 
       if (is.value(post.coverPhoto.size.thumb)) {
-         (schema.image as JsonLD.ImageObject).thumbnail = image(post.coverPhoto.size.thumb);
+         (schema.image as JsonLD.ImageObject).thumbnail = image(
+            post.coverPhoto.size.thumb
+         );
       }
 
       return ld<JsonLD.BlogPosting>('BlogPosting', schema);
@@ -163,7 +187,11 @@ export default {
    /**
     * https://developers.google.com/structured-data/breadcrumbs
     */
-   fromCategory(category:Category, key:string = category.key, homePage = false):JsonLD.Blog|JsonLD.WebPage {
+   fromCategory(
+      category: Category,
+      key: string = category.key,
+      homePage = false
+   ): JsonLD.Blog | JsonLD.WebPage {
       if (homePage) {
          return ld<JsonLD.Blog>('Blog', {
             url: config.site.url,
@@ -186,9 +214,21 @@ export default {
             // implies category is a subscategory
             const rootKey = category.key.split('/')[0];
             const rootCategory = library.categoryWithKey(rootKey);
-            schema.breadcrumb.push(breadcrumb(config.site.url + '/' + rootCategory.key, rootCategory.title, position++));
+            schema.breadcrumb.push(
+               breadcrumb(
+                  config.site.url + '/' + rootCategory.key,
+                  rootCategory.title,
+                  position++
+               )
+            );
          }
-         schema.breadcrumb.push(breadcrumb(config.site.url + '/' + category.key, category.title, position));
+         schema.breadcrumb.push(
+            breadcrumb(
+               config.site.url + '/' + category.key,
+               category.title,
+               position
+            )
+         );
          return schema;
       }
    },
@@ -196,14 +236,16 @@ export default {
    /**
     * Linked Data for YouTube video
     */
-   fromVideo(v:any):JsonLD.VideoObject {
-      return (v == null || v.empty) ? null : ld<JsonLD.VideoObject>('VideoObject', {
-         contentUrl: 'https://www.youtube.com/watch?v=' + v.id,
-         videoFrameSize: v.width + 'x' + v.height,
-         description: null,
-         uploadDate: null,
-         thumbnailUrl: null
-      });
+   fromVideo(v: any): JsonLD.VideoObject {
+      return v == null || v.empty
+         ? null
+         : ld<JsonLD.VideoObject>('VideoObject', {
+              contentUrl: 'https://www.youtube.com/watch?v=' + v.id,
+              videoFrameSize: v.width + 'x' + v.height,
+              description: null,
+              uploadDate: null,
+              thumbnailUrl: null
+           });
    },
    owner,
    serialize

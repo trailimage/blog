@@ -52,7 +52,7 @@ let connected = false;
 /** Client is ready to cache commands before it's connected */
 //let ready = true;
 
-client.on("error", (err:any) => {
+client.on("error", (err: any) => {
    //let fatal = false;
 
    if (err.code == code.BROKEN) {
@@ -70,12 +70,12 @@ client.on("error", (err:any) => {
    //if (fatal) { ready = false; }
 });
 
-client.on("connect", ()=> {
+client.on("connect", () => {
    log.infoIcon("settings_input_component", "Redis connected to %s:%d", url.hostname, url.port);
    connected = true;
 });
 
-client.on("end", ()=> {
+client.on("end", () => {
    log.warn("Redis connection has ended");
    connected = false;
 });
@@ -83,7 +83,7 @@ client.on("end", ()=> {
 /**
  * Normalize data value for cache storage
  */
-function normalize(value:string|string[]|Cache.Item):string {
+function normalize(value: string | string[] | Cache.Item): string {
    if (typeof value == is.type.OBJECT) {
       return is.cacheItem(value) ? cacheItem.serialize(value) : JSON.stringify(value);
    } else {
@@ -94,7 +94,7 @@ function normalize(value:string|string[]|Cache.Item):string {
 /**
  * Deserialize objects as needed
  */
-function parseObject<T>(value:string):T {
+function parseObject<T>(value: string): T {
    if (is.empty(value)) { return null; }
 
    try {
@@ -109,19 +109,19 @@ function parseObject<T>(value:string):T {
  * Curry method to handle Redis response and convert to expected type.
  */
 function makeHandler(
-   key:string|string[],
+   key: string | string[],
    type = dataType.NONE,
-   resolve:Function,
-   reject:Function):(err:Error, reply:any)=>void {
+   resolve: Function,
+   reject: Function): (err: Error, reply: any) => void {
 
    // calculate expected response
-   const howMany = (key:string|string[]) => is.array(key) ? key.length : 1;
+   const howMany = (key: string | string[]) => is.array(key) ? key.length : 1;
    // if expectation provided then result is whether it matches actual
    // otherwise return raw response
-   const answer = (actual:any, expected?:any) => {
+   const answer = (actual: any, expected?: any) => {
       resolve((expected === undefined) ? actual : (actual == expected));
    };
-   return (err:Error, reply:any) => {
+   return (err: Error, reply: any) => {
       if (hasError(key, err)) {
          reject(err);
       } else {
@@ -143,7 +143,7 @@ function makeHandler(
  *
  * http://redis.io/commands/get
  */
-function getValue<T>(type:number, key:string, hashKey?:string) {
+function getValue<T>(type: number, key: string, hashKey?: string) {
    return new Promise<T>((resolve, reject) => {
       const handler = makeHandler(key, type, resolve, reject);
       if (hashKey === undefined) {
@@ -157,7 +157,7 @@ function getValue<T>(type:number, key:string, hashKey?:string) {
 /**
  * Whether Redis returned an error
  */
-function hasError(key:string|string[], err:Error):boolean {
+function hasError(key: string | string[], err: Error): boolean {
    if (is.value(err)) {
       if (is.array(key)) { key = key.join(","); }
       log.error("Operation with key \"%s\" resulted in", key, err);
@@ -177,14 +177,14 @@ export default {
    /**
     * Get all items of a hash
     */
-   getAll: (key:string) => new Promise((resolve, reject) => {
+   getAll: (key: string) => new Promise((resolve, reject) => {
       client.hgetall(key, makeHandler(key, dataType.RAW, resolve, reject));
    }),
 
    /**
     * Whether key or hash key exists
     */
-   exists: (key:string, hashKey:string) => new Promise<boolean>((resolve, reject) => {
+   exists: (key: string, hashKey: string) => new Promise<boolean>((resolve, reject) => {
       const handler = makeHandler(key, dataType.BIT, resolve, reject);
       if (hashKey === undefined) {
          client.exists(key, handler);
@@ -198,7 +198,7 @@ export default {
     *
     * See http://redis.io/commands/keys
     */
-   keys: (key:string) => new Promise<string[]>((resolve, reject) => {
+   keys: (key: string) => new Promise<string[]>((resolve, reject) => {
       const handler = makeHandler(key, dataType.RAW, resolve, reject);
       if (/[\?\*\[\]]/.test(key)) {
          // wildcard match against root keys
@@ -212,14 +212,14 @@ export default {
    /**
     * Return raw value
     */
-   get(key:string, hashKey?:string) {
-       return getValue<string>(dataType.RAW, key, hashKey);
+   get(key: string, hashKey?: string) {
+      return getValue<string>(dataType.RAW, key, hashKey);
    },
 
    /**
     * Get key or hash field value as an object
     */
-   getObject<T>(key:string, hashKey?:string):Promise<T> {
+   getObject<T>(key: string, hashKey?: string): Promise<T> {
       return getValue<T>(dataType.JSON, key, hashKey);
    },
 
@@ -228,8 +228,8 @@ export default {
    /**
     * Add value to key or hash key
     */
-   add(key:string, hashKeyOrValue:string|object, value?:any) {
-      let hashKey:string|object;
+   add(key: string, hashKeyOrValue: string | object, value?: any) {
+      let hashKey: string | object;
       if (value === undefined) {
          value = hashKeyOrValue;
       } else {
@@ -242,13 +242,13 @@ export default {
             client.set(key, normalize(value), makeHandler(key, dataType.OKAY, resolve, reject));
          }
       }))
-         .then(()=> value);
+         .then(() => value);
    },
 
    /**
     * Add all hash items
     */
-   addAll: (key:string, hash:{[key:string]:string}) => new Promise((resolve, reject) => {
+   addAll: (key: string, hash: { [key: string]: string }) => new Promise((resolve, reject) => {
       client.hmset(key, hash, makeHandler(key, dataType.OKAY, resolve, reject));
    }),
 
@@ -257,7 +257,7 @@ export default {
     * key is an array then the same hashKey field will be removed from every
     * key value.
     */
-   remove: (key:string|string[], hashKey?:string|string[]) => new Promise((resolve, reject) => {
+   remove: (key: string | string[], hashKey?: string | string[]) => new Promise((resolve, reject) => {
       if (is.empty(key)) {
          reject("Attempt to delete hash item with empty key");
       } else if (is.value(hashKey)) {

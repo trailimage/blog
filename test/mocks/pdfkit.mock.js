@@ -19,18 +19,22 @@ module.exports = {
     * @param {string} path
     * @param {string} [family]
     */
-   registerFont(name, path, family) { this.fonts[name] = path;	},
+   registerFont(name, path, family) {
+      this.fonts[name] = path;
+   },
 
    /**
     * @param {object} options
     */
-   addPage(options) {
-
-   },
+   addPage(options) {},
 
    /** @param {string} f */
-   font(f) { this._font = f; },
+   font(f) {
+      this._font = f;
+   },
 
    /** @param {number} s */
-   fontSize(s) { this._fontSize = s; }
+   fontSize(s) {
+      this._fontSize = s;
+   }
 };

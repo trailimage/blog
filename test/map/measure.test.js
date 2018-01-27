@@ -13,13 +13,13 @@ function expectGeoPoint(point) {
    return point;
 }
 
-describe('Map Measurements', ()=> {
-   it('converts between degrees and radians', ()=> {
+describe('Map Measurements', () => {
+   it('converts between degrees and radians', () => {
       expect(measure.toRadians(48)).within(0.83, 0.84);
       expect(measure.toRadians(-122)).within(-2.13, -2.12);
    });
 
-   it('calculates distance between points', ()=> {
+   it('calculates distance between points', () => {
       const p1 = expectGeoPoint([-122.0, 48.0]);
       const p2 = expectGeoPoint([-121.0, 49.0]);
 
@@ -31,7 +31,7 @@ describe('Map Measurements', ()=> {
       expect(measure.pointDistance(p3, p4)).within(2482, 2483);
    });
 
-   it('identifies points at the same location', ()=> {
+   it('identifies points at the same location', () => {
       const p1 = expectGeoPoint([100, 50, 20]);
       const p2 = expectGeoPoint([100, 50, 30]);
       const p3 = expectGeoPoint([100, 51, 30]);
@@ -40,14 +40,14 @@ describe('Map Measurements', ()=> {
       expect(measure.sameLocation(p1, p3)).is.false;
    });
 
-   it('calculates speed between two points', ()=> {
+   it('calculates speed between two points', () => {
       const p1 = expectGeoPoint([-122, 48, 0, 100]);
       const p2 = expectGeoPoint([-120, 50, 0, 100 + 1000 * 60 * 60]); // an hour later in milliseconds
 
       expect(measure.speed(p1, p2)).within(165, 166);
    });
 
-   it('calculates distance between points', ()=> {
+   it('calculates distance between points', () => {
       const points = [
          expectGeoPoint([-122, 48]),
          expectGeoPoint([-121, 49]),

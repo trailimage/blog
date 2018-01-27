@@ -12,7 +12,8 @@
             "tag": "ImageDescription",
             "label": "Image Description",
             "raw": {
-               "_content": "-\nIn the half-light of fire\nSynthetic fibers recoil and wilt\nUnnoticed\n“Jeez, what happened to my gloves?” we might later lament.\n\nBut now we lean closer\nAnd watch the steam curl and rise\nWithout remark\nExcept to say, “Man, I wish this fire would get hotter.”\n\nAnd then we quietly contemplate\nThe meaning of life and death\nOnly to conclude\nThat Jeremy’s idea,“vanilla vodka and root-beer,” was not so bad.\n-"
+               "_content":
+                  "-\nIn the half-light of fire\nSynthetic fibers recoil and wilt\nUnnoticed\n“Jeez, what happened to my gloves?” we might later lament.\n\nBut now we lean closer\nAnd watch the steam curl and rise\nWithout remark\nExcept to say, “Man, I wish this fire would get hotter.”\n\nAnd then we quietly contemplate\nThe meaning of life and death\nOnly to conclude\nThat Jeremy’s idea,“vanilla vodka and root-beer,” was not so bad.\n-"
             }
          },
          {
@@ -108,10 +109,10 @@
             "tag": "ExposureTime",
             "label": "Exposure",
             "raw": {
-               "_content": "1\/10"
+               "_content": "1/10"
             },
             "clean": {
-               "_content": "0.1 sec (1\/10)"
+               "_content": "0.1 sec (1/10)"
             }
          },
          {
@@ -123,7 +124,7 @@
                "_content": 5.6
             },
             "clean": {
-               "_content": "f\/5.6"
+               "_content": "f/5.6"
             }
          },
          {
@@ -390,7 +391,7 @@
             "tag": "LensInfo",
             "label": "Lens Info",
             "raw": {
-               "_content": "58mm f\/1.4"
+               "_content": "58mm f/1.4"
             }
          },
          {
@@ -399,7 +400,7 @@
             "tag": "LensModel",
             "label": "Lens Model",
             "raw": {
-               "_content": "58.0 mm f\/1.4"
+               "_content": "58.0 mm f/1.4"
             }
          },
          {
@@ -579,7 +580,8 @@
                "_content": "Abbott"
             },
             "clean": {
-               "_content": "Abbott Fire \"Jeremy Abbott\" \"Jesse Abbott\" Night Snow"
+               "_content":
+                  "Abbott Fire \"Jeremy Abbott\" \"Jesse Abbott\" Night Snow"
             }
          },
          {
@@ -651,7 +653,8 @@
             "tag": "Caption-Abstract",
             "label": "Caption- Abstract",
             "raw": {
-               "_content": "-.In the half-light of fire.Synthetic fibers recoil and wilt.Unnoticed.“Jeez, what happened to my gloves?” we might later lament...But now we lean closer.And watch the steam curl and rise.Without remark.Except to say, “Man, I wish this fire would get hotter.”..And then we quietly contemplate.The meaning of life and death.Only to conclude.That Jeremy’s idea,“vanilla vodka and root-beer,” was not so bad..-"
+               "_content":
+                  "-.In the half-light of fire.Synthetic fibers recoil and wilt.Unnoticed.“Jeez, what happened to my gloves?” we might later lament...But now we lean closer.And watch the steam curl and rise.Without remark.Except to say, “Man, I wish this fire would get hotter.”..And then we quietly contemplate.The meaning of life and death.Only to conclude.That Jeremy’s idea,“vanilla vodka and root-beer,” was not so bad..-"
             }
          },
          {
@@ -741,7 +744,8 @@
             "tag": "XMPToolkit",
             "label": "XMPToolkit",
             "raw": {
-               "_content": "Adobe XMP Core 5.6-c011 79.156380, 2014\/05\/21-23:38:37        "
+               "_content":
+                  "Adobe XMP Core 5.6-c011 79.156380, 2014/05/21-23:38:37        "
             }
          },
          {
@@ -768,7 +772,7 @@
             "tag": "Lens",
             "label": "Lens",
             "raw": {
-               "_content": "58.0 mm f\/1.4"
+               "_content": "58.0 mm f/1.4"
             }
          },
          {
@@ -822,7 +826,7 @@
             "tag": "Format",
             "label": "Format",
             "raw": {
-               "_content": "image\/jpeg"
+               "_content": "image/jpeg"
             }
          },
          {
@@ -858,7 +862,8 @@
             "tag": "Description",
             "label": "Description",
             "raw": {
-               "_content": "-\nIn the half-light of fire\nSynthetic fibers recoil and wilt\nUnnoticed\n“Jeez, what happened to my gloves?” we might later lament.\n\nBut now we lean closer\nAnd watch the steam curl and rise\nWithout remark\nExcept to say, “Man, I wish this fire would get hotter.”\n\nAnd then we quietly contemplate\nThe meaning of life and death\nOnly to conclude\nThat Jeremy’s idea,“vanilla vodka and root-beer,” was not so bad.\n-"
+               "_content":
+                  "-\nIn the half-light of fire\nSynthetic fibers recoil and wilt\nUnnoticed\n“Jeez, what happened to my gloves?” we might later lament.\n\nBut now we lean closer\nAnd watch the steam curl and rise\nWithout remark\nExcept to say, “Man, I wish this fire would get hotter.”\n\nAnd then we quietly contemplate\nThe meaning of life and death\nOnly to conclude\nThat Jeremy’s idea,“vanilla vodka and root-beer,” was not so bad.\n-"
             }
          },
          {
@@ -912,7 +917,8 @@
             "tag": "HistoryParameters",
             "label": "History Parameters",
             "raw": {
-               "_content": "converted from image\/x-nikon-nef to image\/jpeg, saved to new location"
+               "_content":
+                  "converted from image/x-nikon-nef to image/jpeg, saved to new location"
             }
          },
          {
@@ -948,7 +954,7 @@
             "tag": "HistoryChanged",
             "label": "History Changed",
             "raw": {
-               "_content": "\/"
+               "_content": "/"
             }
          },
          {
@@ -984,7 +990,7 @@
             "tag": "CreatorWorkURL",
             "label": "Creator Work URL",
             "raw": {
-               "_content": "http:\/\/flickr.com\/photos\/boise\/"
+               "_content": "http://flickr.com/photos/boise/"
             }
          },
          {

@@ -1,24 +1,49 @@
 /**
  * https://github.com/ciaranj/node-oauth
  */
-declare module "oauth" {
+declare module 'oauth' {
    export class OAuth {
       constructor(
-         requestUrl:string,
-         accessUrl:string,
-         consumerKey:string,
-         consumerSecret:string,
-         version:string,
-         authorizeCallbackUrl:string,
-         signatureMethod:string,
-         nonceSize?:number,
-         customheaders?:{[key:string]:string});
+         requestUrl: string,
+         accessUrl: string,
+         consumerKey: string,
+         consumerSecret: string,
+         version: string,
+         authorizeCallbackUrl: string,
+         signatureMethod: string,
+         nonceSize?: number,
+         customheaders?: { [key: string]: string }
+      );
 
-      get(url:string, token:string, tokenSecret:string, callback:(error:any, body:string)=>void):void;   
-      get(url:string, token:string, tokenSecret:string, body:string, contentType:string, callback:(error:any, body:string)=>void):void;
-      put(url:string, token:string, tokenSecret:string, body:string, contentType:string):string;
-      post(url:string, token:string, tokenSecret:string, body:string, contentType:string):string;
-      delete(url:string, token:string, tokenSecret:string, ):string;
+      get(
+         url: string,
+         token: string,
+         tokenSecret: string,
+         callback: (error: any, body: string) => void
+      ): void;
+      get(
+         url: string,
+         token: string,
+         tokenSecret: string,
+         body: string,
+         contentType: string,
+         callback: (error: any, body: string) => void
+      ): void;
+      put(
+         url: string,
+         token: string,
+         tokenSecret: string,
+         body: string,
+         contentType: string
+      ): string;
+      post(
+         url: string,
+         token: string,
+         tokenSecret: string,
+         body: string,
+         contentType: string
+      ): string;
+      delete(url: string, token: string, tokenSecret: string): string;
 
       /**
        * Gets a request token from the OAuth provider and passes that information back
@@ -40,13 +65,43 @@ declare module "oauth" {
        * need to provide a requestTokenHttpMethod option when creating the client.
        *
        **/
-      getOAuthRequestToken(callback:(err:any, token:string, tokenSecret:string, parsedQueryString:string)=>void):void;
-      getOAuthRequestToken(extraParams:string, callback:(err:any, token:string, tokenSecret:string, parsedQueryString:string)=>void):void;
+      getOAuthRequestToken(
+         callback: (
+            err: any,
+            token: string,
+            tokenSecret: string,
+            parsedQueryString: string
+         ) => void
+      ): void;
+      getOAuthRequestToken(
+         extraParams: string,
+         callback: (
+            err: any,
+            token: string,
+            tokenSecret: string,
+            parsedQueryString: string
+         ) => void
+      ): void;
 
-      getOAuthAccessToken(token:string, tokenSecret:string, verifier:string, callback:(error:any, token:string, tokenSecret:string)=>void):void;
+      getOAuthAccessToken(
+         token: string,
+         tokenSecret: string,
+         verifier: string,
+         callback: (error: any, token: string, tokenSecret: string) => void
+      ): void;
 
-      signUrl(url:string, token:string, tokenSecret:string, method:string):string;
+      signUrl(
+         url: string,
+         token: string,
+         tokenSecret: string,
+         method: string
+      ): string;
 
-      authHeader(url:string, token:string, tokenSecret:string, method:string):string;
-   }  
+      authHeader(
+         url: string,
+         token: string,
+         tokenSecret: string,
+         method: string
+      ): string;
+   }
 }

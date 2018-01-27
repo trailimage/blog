@@ -1,13 +1,15 @@
 import is from '../is';
-import {Size} from './models';
+import { Size } from './models';
 
-function make(json:any, sizeField:string|string[]):Size {
+function make(json: any, sizeField: string | string[]): Size {
    const size = {
       url: null as string,
       width: 0,
       height: 0,
       // whether size is empty
-      get isEmpty() { return this.url === null && this.width === 0; }
+      get isEmpty() {
+         return this.url === null && this.width === 0;
+      }
    };
    let field = null;
 
@@ -15,7 +17,9 @@ function make(json:any, sizeField:string|string[]):Size {
       // iterate through size preferences to find first that isn't empty
       for (field of sizeField) {
          // break with given size url assignment if it exists in the photo summary
-         if (!is.empty(json[field])) { break; }
+         if (!is.empty(json[field])) {
+            break;
+         }
       }
    } else {
       field = sizeField;

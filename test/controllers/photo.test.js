@@ -8,12 +8,15 @@ const { expect } = require('chai');
 const photo = require('../../lib/controllers/photo').default;
 const ph = C.route;
 
-describe('Photos', ()=> {
+describe('Photos', () => {
    before(done => prepare(done));
-   beforeEach(() => { res.reset(); req.reset(); });
+   beforeEach(() => {
+      res.reset();
+      req.reset();
+   });
 
    it('loads all photo tags', done => {
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          const options = expectTemplate(template.page.PHOTO_TAG);
          expect(options).has.property('alphabet', C.alphabet);
          expect(options).has.property('tags');
@@ -24,7 +27,7 @@ describe('Photos', ()=> {
    });
 
    it('shows all photos with tag', done => {
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          const options = expectTemplate(template.page.PHOTO_SEARCH);
          expect(options).has.property('photos');
          expect(options.photos).is.instanceOf(Array);
@@ -36,10 +39,15 @@ describe('Photos', ()=> {
    });
 
    it('loads EXIF', done => {
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          const options = expectTemplate(template.page.EXIF);
          expect(options).has.property('EXIF');
-         expect(options.EXIF).to.contain.all.keys(['ISO', 'artist', 'lens', 'model']);
+         expect(options.EXIF).to.contain.all.keys([
+            'ISO',
+            'artist',
+            'lens',
+            'model'
+         ]);
          expect(options.EXIF).has.property('sanitized', true);
          done();
       };

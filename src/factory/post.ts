@@ -18,7 +18,7 @@ let flickr = realFlickr;
  * but had no other parts. This does not handle ungrouping from a legitimate
  * series.
  */
-function ungroup(this:Post) {
+function ungroup(this: Post) {
    this.title = this.originalTitle;
    this.subTitle = null;
    this.key = slug(this.originalTitle);
@@ -35,7 +35,7 @@ function ungroup(this:Post) {
 /**
  * Flag post as the start of a series
  */
-function makeSeriesStart(this:Post) {
+function makeSeriesStart(this: Post) {
    this.isSeriesStart = true;
    this.key = this.seriesKey;
 }
@@ -43,32 +43,43 @@ function makeSeriesStart(this:Post) {
 /**
  * Whether item matches key
  */
-function hasKey(this:Post, key:string):boolean {
-   return (this.key == key || (is.value(this.partKey) && key == this.seriesKey + '-' + this.partKey));
+function hasKey(this: Post, key: string): boolean {
+   return (
+      this.key == key ||
+      (is.value(this.partKey) && key == this.seriesKey + '-' + this.partKey)
+   );
 }
 
-function ensureLoaded(this:Post) { return Promise.all([this.getInfo(), this.getPhotos()]); }
+function ensureLoaded(this: Post) {
+   return Promise.all([this.getInfo(), this.getPhotos()]);
+}
 
 /**
  * Load photos for post and calculate summaries
  */
-function getPhotos(this:Post):Promise<Photo[]> {
+function getPhotos(this: Post): Promise<Photo[]> {
    return this.photosLoaded
       ? Promise.resolve(this.photos)
-      : flickr.getSetPhotos(this.id).then((res:Flickr.SetPhotos) => updatePhotos(this, res));
+      : flickr
+           .getSetPhotos(this.id)
+           .then((res: Flickr.SetPhotos) => updatePhotos(this, res));
 }
 
 /**
  * Add information to existing post object
  */
-function getInfo(this:Post):Promise<Post> {
+function getInfo(this: Post): Promise<Post> {
    return this.infoLoaded
       ? Promise.resolve(this)
-      : flickr.getSetInfo(this.id).then((info:Flickr.SetInfo) => updateInfo(this, info));
+      : flickr
+           .getSetInfo(this.id)
+           .then((info: Flickr.SetInfo) => updateInfo(this, info));
 }
 
-function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
-   const thumb = `http://farm${setInfo.farm}.staticflickr.com/${setInfo.server}/${setInfo.primary}_${setInfo.secret}`;
+function updateInfo(p: Post, setInfo: Flickr.SetInfo): Post {
+   const thumb = `http://farm${setInfo.farm}.staticflickr.com/${
+      setInfo.server
+   }/${setInfo.primary}_${setInfo.secret}`;
    return Object.assign(p, {
       // removes video information from setInfo.description
       video: videoInfo.make(setInfo),
@@ -81,13 +92,13 @@ function updateInfo(p:Post, setInfo:Flickr.SetInfo):Post {
       // http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
       // http://farm{{info.farm}}.static.flickr.com/{{info.server}}/{{info.primary}}_{{info.secret}}.jpg'
       // thumb URLs may be needed before photos are loaded, e.g. in RSS XML
-      bigThumbURL: thumb + '.jpg',     // 500px
+      bigThumbURL: thumb + '.jpg', // 500px
       smallThumbURL: thumb + '_s.jpg',
       infoLoaded: true
    });
 }
 
-function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
+function updatePhotos(p: Post, setPhotos: Flickr.SetPhotos): Photo[] {
    p.photos = setPhotos.photo.map((img, index) => photo.make(img, index));
 
    if (p.photos.length > 0) {
@@ -104,12 +115,17 @@ function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
       if (p.chronological) {
          photo.identifyOutliers(p.photos);
          const firstDatedPhoto = p.photos.find(i => !i.outlierDate);
-         if (is.value(firstDatedPhoto)) { p.happenedOn = firstDatedPhoto.dateTaken; }
+         if (is.value(firstDatedPhoto)) {
+            p.happenedOn = firstDatedPhoto.dateTaken;
+         }
       }
 
       if (!is.empty(p.description)) {
-         p.longDescription = `${p.description} (Includes ${p.photos.length} photos`;
-         p.longDescription += (is.value(p.video) && !p.video.empty) ? ' and one video)' : ')';
+         p.longDescription = `${p.description} (Includes ${
+            p.photos.length
+         } photos`;
+         p.longDescription +=
+            is.value(p.video) && !p.video.empty ? ' and one video)' : ')';
       }
 
       p.updatePhotoLocations();
@@ -122,7 +138,7 @@ function updatePhotos(p:Post, setPhotos:Flickr.SetPhotos):Photo[] {
 /**
  * Remove post details to force reload from data provider
  */
-function empty(this:Post) {
+function empty(this: Post) {
    // from updateInfo()
    this.video = null;
    this.createdOn = null;
@@ -148,10 +164,13 @@ function empty(this:Post) {
 /**
  * Title and optional subtitle
  */
-function name(this:Post|any):string {
+function name(this: Post | any): string {
    // context is screwed up when called from HBS template
-   const p:Post = this.post ? this.post : this as Post;
-   return p.title + ((p.isPartial) ? config.library.subtitleSeparator + ' ' + p.subTitle : '');
+   const p: Post = this.post ? this.post : (this as Post);
+   return (
+      p.title +
+      (p.isPartial ? config.library.subtitleSeparator + ' ' + p.subTitle : '')
+   );
 }
 
 /**
@@ -159,16 +178,18 @@ function name(this:Post|any):string {
  *
  * https://www.mapbox.com/api-documentation/#static
  */
-function updatePhotoLocations(this:Post) {
-   let start = 1;  // always skip first photo
+function updatePhotoLocations(this: Post) {
+   let start = 1; // always skip first photo
    let total = this.photos.length;
-   const locations:number[][] = [];
-   const bounds:MapBounds = { sw:[0, 0], ne:[0, 0] };
+   const locations: number[][] = [];
+   const bounds: MapBounds = { sw: [0, 0], ne: [0, 0] };
 
    if (total > config.map.maxMarkers) {
-      start = 5;  // skip the first few which are often just prep shots
+      start = 5; // skip the first few which are often just prep shots
       total = config.map.maxMarkers + 5;
-      if (total > this.photos.length) { total = this.photos.length; }
+      if (total > this.photos.length) {
+         total = this.photos.length;
+      }
    }
 
    for (let i = start; i < total; i++) {
@@ -202,8 +223,11 @@ function updatePhotoLocations(this:Post) {
  *
  * `chronological` whether set photos occurred together at a point in time.
  */
-function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boolean = true):Post {
-   const p:Post = {
+function make(
+   flickrSet: Flickr.SetSummary | Flickr.FeatureSet,
+   chronological: boolean = true
+): Post {
+   const p: Post = {
       key: null,
       title: null,
       subTitle: null,
@@ -231,7 +255,9 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
       feature: false,
       categories: {},
       // whether post has categories
-      get hasCategories() { return Object.keys(this.categories).length > 0; },
+      get hasCategories() {
+         return Object.keys(this.categories).length > 0;
+      },
 
       video: null,
       infoLoaded: false,
@@ -291,6 +317,8 @@ function make(flickrSet:Flickr.SetSummary|Flickr.FeatureSet, chronological:boole
 export default {
    make,
    inject: {
-      set flickr(f:Provider.Flickr) { flickr = f; }
+      set flickr(f: Provider.Flickr) {
+         flickr = f;
+      }
    }
 };

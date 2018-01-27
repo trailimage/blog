@@ -26,7 +26,10 @@ function expectTemplate(name) {
  */
 function expectRedirect(path) {
    expect(res.redirected).to.exist;
-   expect(res.redirected).has.property('status', C.httpStatus.PERMANENT_REDIRECT);
+   expect(res.redirected).has.property(
+      'status',
+      C.httpStatus.PERMANENT_REDIRECT
+   );
    expect(res.redirected).has.property('url', path);
 }
 
@@ -50,10 +53,13 @@ function expectJSON() {
  * @returns {Promise}
  */
 function expectInCache(keys, exists = true) {
-   return Promise
-      .all(keys.map(k => cache.view.exists(k)))
-      // all() returns an array of outputs from each method
-      .then(results => { results.forEach(r => expect(r).equals(exists)); });
+   return (
+      Promise.all(keys.map(k => cache.view.exists(k)))
+         // all() returns an array of outputs from each method
+         .then(results => {
+            results.forEach(r => expect(r).equals(exists));
+         })
+   );
 }
 
 /**
@@ -64,10 +70,16 @@ function prepare(done) {
    factory.inject.flickr = require('../mocks/flickr.mock');
    factory.inject.google = require('../mocks/google.mock');
    factory.buildLibrary().then(() => {
-      middleware.enableStatusHelpers(req, res, ()=> {
+      middleware.enableStatusHelpers(req, res, () => {
          middleware.enableViewCache(req, res, done);
       });
    });
 }
 
-module.exports = { prepare, expectTemplate, expectRedirect, expectJSON, expectInCache };
+module.exports = {
+   prepare,
+   expectTemplate,
+   expectRedirect,
+   expectJSON,
+   expectInCache
+};

@@ -17,18 +17,19 @@ export {
    Size,
    VideoInfo,
    Location,
-   EXIF } from '../factory/models';
+   EXIF
+} from '../factory/models';
 
 export interface MapSource {
-   name:string;
-   provider:string;
-   type?:MapDataType;
-   url:string;
+   name: string;
+   provider: string;
+   type?: MapDataType;
+   url: string;
 }
 
 export interface MapProperties {
-   [key:string]:string|number;
-   description?:string;
+   [key: string]: string | number;
+   description?: string;
 }
 
 /**
@@ -41,12 +42,12 @@ export interface MapBounds {
     * Southwest corner as lon, lat. For the U.S. this is the smallest
     * longitude and latitude values.
     */
-   sw:number[];
+   sw: number[];
    /**
     * Northeast corner as lon, lat. For the U.S. this is the largest
     * longitude and latitude values.
     */
-   ne:number[];
+   ne: number[];
 }
 
 //= Duplicates from /src/client/browser.d.ts ==================================
@@ -55,17 +56,17 @@ export interface MapBounds {
  * Standard response for administrative actions.
  */
 export interface JsonResponse {
-   success:boolean;
-   message:string;
+   success: boolean;
+   message: string;
 }
 
 /**
  * GeoJSON properties for post photos.
  */
 export interface MapPhoto {
-   url?:string;
-   title?:string;
-   partKey?:string;
+   url?: string;
+   title?: string;
+   partKey?: string;
    /** Distance from clicked cluster */
-   distance?:number;
+   distance?: number;
 }

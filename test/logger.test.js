@@ -6,14 +6,14 @@ const log = require('../lib/logger').default;
 const mockLogger = require('./mocks/logger.mock');
 const logEntry = [];
 
-describe('Logger', ()=> {
-   before(()=> {
+describe('Logger', () => {
+   before(() => {
       log.inject.transport = new mockLogger((level, msg, data) => {
          logEntry.push({ level, msg, data });
       });
    });
 
-   it('supports adding icons to messages', ()=> {
+   it('supports adding icons to messages', () => {
       log.errorIcon('some-icon', 'error message');
       const e = logEntry.pop();
       expect(e.level).equals('error');
@@ -22,7 +22,7 @@ describe('Logger', ()=> {
       expect(e.data.iconName).equals('some-icon');
    });
 
-   after(()=> {
+   after(() => {
       log.reset();
    });
 });

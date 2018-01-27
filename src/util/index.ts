@@ -1,14 +1,20 @@
-import is from '../is';
 import {
+   hoursAndMinutes,
+   sayNumber,
+   leadingZeros,
+   parseNumber,
+   maybeNumber,
+   inDaylightSavings,
+   dateString,
    format,
    rot13,
-   IPv6,
    slug,
-   titleCase,
    capitalize,
-   topDomain,
-   encodeBase64,
-   decodeBase64 } from './text';
+   titleCase
+} from '@toba/utility';
+
+import is from '../is';
+import { IPv6, topDomain, encodeBase64, decodeBase64 } from './text';
 import {
    typography,
    characterEntities,
@@ -21,22 +27,16 @@ import {
    iconTag,
    postModeIcon,
    postCategoryIcon,
-   logMessage } from './html';
+   logMessage
+} from './html';
 import {
    fromTimeStamp,
-   hoursAndMinutes,
    hourOfDay,
-   inDaylightSavings,
    iso8601time,
    parseDate,
    timeZoneOffset,
-   toDateString,
-   toLogTime } from './time';
-import {
-   sayNumber,
-   leadingZeros,
-   parseNumber,
-   maybeNumber } from './number';
+   toLogTime
+} from './time';
 
 export default {
    format,
@@ -55,9 +55,8 @@ export default {
       iso8601time,
       parse: parseDate,
       timeZoneOffset,
-      toString: toDateString,
+      toString: dateString,
       toLogTime
-
    },
 
    encode: {
@@ -95,8 +94,10 @@ export default {
     *
     * http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
     */
-   shuffle<T>(a:T[]):T[] {
-      if (!is.array(a) || a.length === 0) { return null; }
+   shuffle<T>(a: T[]): T[] {
+      if (!is.array(a) || a.length === 0) {
+         return null;
+      }
 
       let i = a.length;
 
@@ -109,4 +110,3 @@ export default {
       return a;
    }
 };
-

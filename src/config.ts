@@ -15,9 +15,11 @@ const sizes = {
 /**
  * Return environment value or throw an error if it isn't found
  */
-function env(key:string):string {
+function env(key: string): string {
    const value = process.env[key];
-   if (value === undefined) { throw new Error(`Environment value ${key} must be set`); }
+   if (value === undefined) {
+      throw new Error(`Environment value ${key} must be set`);
+   }
    return value;
 }
 
@@ -51,7 +53,13 @@ const flickr = {
       search: [s.SQUARE_150]
    },
    excludeSets: ['72157631638576162'],
-   excludeTags: ['Idaho', 'United States of America', 'Abbott', 'LensTagger', 'Boise'],
+   excludeTags: [
+      'Idaho',
+      'United States of America',
+      'Abbott',
+      'LensTagger',
+      'Boise'
+   ],
    maxRetries: 10,
    retryDelay: 300,
    auth: {
@@ -72,7 +80,7 @@ const flickr = {
 const google = {
    apiKey: process.env['GOOGLE_KEY'] as string,
    projectID: '316480757902',
-   analyticsID: '22180727',        // shown as 'UA-22180727-1
+   analyticsID: '22180727', // shown as 'UA-22180727-1
    searchEngineID: process.env['GOOGLE_SEARCH_ID'] as string,
    blogID: '118459106898417641',
    drive: {
@@ -123,8 +131,10 @@ export const map = {
    maxMarkers: 70,
    /** Link patterns to external maps with `lat`, `lon`, `zoom` and `altitude` tokens */
    link: {
-      googleEarth: 'https://earth.google.com/web/@{lat},{lon},1100a,{altitude}d,35y,0h,0t,0r',
-      gaiaGPS: 'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
+      googleEarth:
+         'https://earth.google.com/web/@{lat},{lon},1100a,{altitude}d,35y,0h,0t,0r',
+      gaiaGPS:
+         'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
    },
    /** Idaho map sources */
    source: mapsource
@@ -134,7 +144,7 @@ export default {
    env,
    domain,
    /** Whether any provider needs authorization tokens */
-   get needsAuth():boolean {
+   get needsAuth(): boolean {
       const f = flickr.auth.token.access;
       const g = google.auth.token.access;
       return f === null || f === '' || g === null || g === '';
@@ -159,7 +169,8 @@ export default {
       domain,
       title: 'Trail Image',
       subtitle: 'Adventure Photography by ' + owner.name,
-      description: 'Stories, images and videos of small adventure trips in and around the state of Idaho',
+      description:
+         'Stories, images and videos of small adventure trips in and around the state of Idaho',
       url: 'http://www.trailimage.com',
       postAlias: 'Adventure',
       logo: {
@@ -176,7 +187,7 @@ export default {
    library,
    cache: {
       /** Enable or disable all caching */
-      setAll(enabled:boolean) {
+      setAll(enabled: boolean) {
          this.views = enabled;
          this.maps = enabled;
          this.json = enabled;
@@ -208,7 +219,7 @@ export default {
             When: 'date_range',
             Where: 'map',
             default: 'local_offer' // tag icon
-         }  as {[key:string]:string},
+         } as { [key: string]: string },
 
          /**
           * Assign mode of transportation icon based on pattern match to
@@ -219,7 +230,7 @@ export default {
             bicycle: /bicycle/gi,
             hike: /hike/gi,
             jeep: /jeep/gi
-         }  as {[key:string]:RegExp},
+         } as { [key: string]: RegExp },
 
          /** Default transportation mode if none given */
          postDefault: 'motorcycle'
@@ -249,7 +260,8 @@ export default {
     */
    referralSpam: {
       updateFrequency: 0,
-      listUrl: 'https://raw.githubusercontent.com/piwik/referrer-spam-blacklist/master/spammers.txt'
+      listUrl:
+         'https://raw.githubusercontent.com/piwik/referrer-spam-blacklist/master/spammers.txt'
    },
    /**
     * https://developers.facebook.com/docs/reference/plugins/like/
@@ -282,14 +294,14 @@ export default {
       'brother-rider-2013-a-night-in-pierce': 'brother-ride-2013',
       'backroads-to-college': 'panhandle-past-and-future',
       'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
-   }  as {[key:string]:string},
+   } as { [key: string]: string },
 
    /** Support for renamed photo tags. The hash key is the old name. */
    photoTagChanges: {
       jeremy: 'jeremyabbott',
       jessica: 'jessicaabbott',
       jime: 'jimeldredge'
-   }  as {[key:string]:string},
+   } as { [key: string]: string },
 
    blog: {
       domain: 'trailimage.blogspot.com',
@@ -306,8 +318,10 @@ export default {
          'autumn-lowman-loop-over-hills': 'wintry-backroads-to-lowman',
          'st-joe-hidden-trails-day-5': 'brother-ride-2011/bailout-to-benewah',
          'st-joes-hidden-trails-day-4': 'brother-ride-2011/bailout-to-benewah',
-         'st-joe-hidden-trails-day-3': 'brother-ride-2011/exercise-and-elsie-lake',
-         'st-joes-hidden-trails-day-2': 'brother-ride-2011/tunnels-to-loop-creek',
+         'st-joe-hidden-trails-day-3':
+            'brother-ride-2011/exercise-and-elsie-lake',
+         'st-joes-hidden-trails-day-2':
+            'brother-ride-2011/tunnels-to-loop-creek',
          'st-joes-hidden-trails-day-1': 'brother-ride-2011',
          'edge-of-hells-canyon-oregon-side': 'hat-point-above-hells-canyon',
          'edge-of-hells-canyon-from-idaho': 'hat-point-above-hells-canyon',
@@ -322,7 +336,8 @@ export default {
          'swan-falls-but-once-birds-of-prey': 'swan-falls-but-once',
          'swan-falls-but-once-to-snake': 'swan-falls-but-once',
          'zeno-canyon-ride-not-taken': '',
-         'hells-canyon-2010-out-with-bang': 'wallowa-valley-rally/out-with-a-bang',
+         'hells-canyon-2010-out-with-bang':
+            'wallowa-valley-rally/out-with-a-bang',
          'hells-canyon-2010-ryan-ride': 'wallowa-valley-rally/ryan-ride',
          'hells-canyon-2010-being-there': 'wallowa-valley-rally/being-there',
          'hells-canyon-2010-getting-there': 'wallowa-valley-rally',
@@ -341,7 +356,8 @@ export default {
          'three-national-forests-boise': 'three-national-forests',
          'troy-days-and-moscow-mountain': 'troy-days-and-moscow-mountain',
          'silver-city': 'first-ride-to-silver-city',
-         'wallowa-valley-2010-out-with-bang': 'wallowa-valley-rally/out-with-a-bang',
+         'wallowa-valley-2010-out-with-bang':
+            'wallowa-valley-rally/out-with-a-bang',
          'wallowa-valley-2010-ryan-ride': 'wallowa-valley-rally/ryan-ride',
          'wallowa-valley-2010-being-there': 'wallowa-valley-rally/being-there',
          'wallowa-valley-2010-getting-there': 'wallowa-valley-rally',
@@ -350,7 +366,7 @@ export default {
          'tuscarora-in-hills': 'making-art-in-tuscarora/in-the-hills',
          'tuscarora-town': 'making-art-in-tuscarora/the-town',
          'tuscarora-getting-there': 'making-art-in-tuscarora',
-         'jump-creek-to-leslie-gulch-part-1': 'jump-creek-and-leslie-gulch',                 // old link
+         'jump-creek-to-leslie-gulch-part-1': 'jump-creek-and-leslie-gulch', // old link
          'jump-creek-to-leslie-gulch-part-2': 'jump-creek-and-leslie-gulch',
          'jump-creek-to-leslie-gulch-part-3': 'jump-creek-and-leslie-gulch',
          'owyhee-rocks-succor-creek': 'jump-creek-and-leslie-gulch',
@@ -360,13 +376,17 @@ export default {
          'sams-memorial-prairie-poker-run': 'mayfield-skull-rock-y-stop',
          'freezing-in-hells-canyon': 'freezing-in-hells-canyon',
          'pilot-sunset-and-jackson-peaks': 'one-day-three-peaks',
-         'lost-lake-crawdads-of-st-joe-day-4': 'brother-ride-2009/crater-peak-reunion',
-         'lost-lake-crawdads-of-st-joe-day-3': 'brother-ride-2009/rain-in-avery',
-         'lost-lake-crawdads-of-st-joe-day-2': 'brother-ride-2009/lost-lake-crawdads',
+         'lost-lake-crawdads-of-st-joe-day-4':
+            'brother-ride-2009/crater-peak-reunion',
+         'lost-lake-crawdads-of-st-joe-day-3':
+            'brother-ride-2009/rain-in-avery',
+         'lost-lake-crawdads-of-st-joe-day-2':
+            'brother-ride-2009/lost-lake-crawdads',
          'lost-lake-crawdads-of-st-joe-day-1': 'brother-ride-2009',
          'circumnavigating-oahu': 'circumnavigating-oahu',
          'boise-ridge-with-boy': 'boise-ridge-with-the-boy',
-         'three-brothers-three-days-three-loops': 'brother-ride-2008/cold-ride-home',        // old link
+         'three-brothers-three-days-three-loops':
+            'brother-ride-2008/cold-ride-home', // old link
          'three-loops-in-st-joe-day-3': 'brother-ride-2008/cold-ride-home',
          'three-loops-in-st-joe-day-2': 'brother-ride-2008/camping-with-cows',
          'three-loops-in-st-joe-day-1': 'brother-ride-2008',
@@ -379,8 +399,9 @@ export default {
          'lucky-peak-with-laura': 'lucky-peak-with-laura',
          'cricket-ridge-ride': 'cricket-ridge-ride',
          'caterpillar-ridge-ride': 'spring-caterpillars-on-the-boise-ridge'
-      }  as {[key:string]:string}
+      } as { [key: string]: string }
    },
    alwaysKeywords: 'Adventure, Scenery, Photography,',
-   keywords: 'BMW R1200GS, KTM XCW, jeep wrangler, motorcycle, motorcycling, riding, adventure, Jason Abbott, Abbott, outdoors, scenery, idaho, mountains'
+   keywords:
+      'BMW R1200GS, KTM XCW, jeep wrangler, motorcycle, motorcycling, riding, adventure, Jason Abbott, Abbott, outdoors, scenery, idaho, mountains'
 };

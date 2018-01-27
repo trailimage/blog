@@ -10,39 +10,45 @@ const util = {
        *
        * https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
        */
-      save(key:string, value:string):void {
-         if (!window.localStorage) { return; }
+      save(key: string, value: string): void {
+         if (!window.localStorage) {
+            return;
+         }
          localStorage.setItem(key, value);
       },
 
       /**
        * Load setting from browser storage.
        */
-      load(key:string):string {
-         if (!window.localStorage) { return null; }
+      load(key: string): string {
+         if (!window.localStorage) {
+            return null;
+         }
          return localStorage.getItem(key);
       },
 
-      set showMapLegend(value:boolean) {
-          util.setting.save("map-legend", value ? "true" : "false");
+      set showMapLegend(value: boolean) {
+         util.setting.save('map-legend', value ? 'true' : 'false');
       },
 
-      get showMapLegend():boolean {
-         const value = util.setting.load("map-legend");
-         return value ? value == "true" : true;
+      get showMapLegend(): boolean {
+         const value = util.setting.load('map-legend');
+         return value ? value == 'true' : true;
       },
 
       /**
        * Value is array of root and sub-category names.
        */
-      set menuCategory(selected:string[]) {
-         if (typeof selected === "string") { selected = [selected, null]; }
-         util.setting.save("menu", selected.join());
+      set menuCategory(selected: string[]) {
+         if (typeof selected === 'string') {
+            selected = [selected, null];
+         }
+         util.setting.save('menu', selected.join());
       },
 
-      get menuCategory():string[] {
-         const value = util.setting.load("menu");
-         return (value === null) ? null : value[1].split(",");
+      get menuCategory(): string[] {
+         const value = util.setting.load('menu');
+         return value === null ? null : value[1].split(',');
       }
    },
    html: {
@@ -51,12 +57,14 @@ const util = {
        *
        * https://material.io/icons/
        */
-      icon(name:string, handler?:(e:JQuery.Event)=>void):JQuery {
-         const $icon = $("<i>")
-            .addClass("material-icons " + name)
+      icon(name: string, handler?: (e: JQuery.Event) => void): JQuery {
+         const $icon = $('<i>')
+            .addClass('material-icons ' + name)
             .text(name);
 
-         if (handler !== undefined) { $icon.click(handler); }
+         if (handler !== undefined) {
+            $icon.click(handler);
+         }
          return $icon;
       }
    },
@@ -64,8 +72,8 @@ const util = {
       /**
        * Send Google Analytics event.
        */
-      event(category:string, name:string, label?:string) {
-         ga("send", "event", category, name, label);
+      event(category: string, name: string, label?: string) {
+         ga('send', 'event', category, name, label);
       }
    }
 };

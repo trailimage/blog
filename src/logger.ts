@@ -18,7 +18,7 @@ const level = {
    ERROR: 'error'
 };
 
-let logger:Winston.LoggerInstance = null;
+let logger: Winston.LoggerInstance = null;
 
 function provider() {
    if (logger === null) {
@@ -39,7 +39,7 @@ function provider() {
                      length: 10000
                   }) as Winston.TransportInstance;
 
-                  tx.on('error', (err:Error) => {
+                  tx.on('error', (err: Error) => {
                      // replace Redis transport with console
                      console.error('Unable to initialize Redis logger', err);
 
@@ -51,7 +51,7 @@ function provider() {
                      }
 
                      try {
-                        logger.add(new (Winston.transports.Console)());
+                        logger.add(new Winston.transports.Console());
                      } catch (err) {
                         console.error(err);
                      }
@@ -61,7 +61,6 @@ function provider() {
 
                   return tx;
                case logTo.FILE:
-
             }
          })
       });
@@ -74,7 +73,12 @@ function provider() {
  *
  * https://github.com/winstonjs/winston#logging-with-metadata
  */
-function iconInvoke(icon:string, level:string, message:string|Error, args:any[]) {
+function iconInvoke(
+   icon: string,
+   level: string,
+   message: string | Error,
+   args: any[]
+) {
    // avoid conflict with handlebars format function called icon()
    args.push({ iconName: icon });
    invoke(level, message, args);
@@ -83,25 +87,36 @@ function iconInvoke(icon:string, level:string, message:string|Error, args:any[])
 /**
  * Apply arguments to log writer function keyed to severity level
  */
-function invoke(l:string, message:string|Error, args:any[]) {
+function invoke(l: string, message: string | Error, args: any[]) {
    args.unshift(message);
    const p = provider();
    switch (l) {
-      case level.DEBUG: p.debug.apply(p, args); break;
-      case level.INFO: p.info.apply(p, args); break;
-      case level.WARN: p.warn.apply(p, args); break;
-      case level.ERROR: p.error.apply(p, args); break;
+      case level.DEBUG:
+         p.debug.apply(p, args);
+         break;
+      case level.INFO:
+         p.info.apply(p, args);
+         break;
+      case level.WARN:
+         p.warn.apply(p, args);
+         break;
+      case level.ERROR:
+         p.error.apply(p, args);
+         break;
    }
 }
 
 /**
  * Group logs by day
  */
-function parseLogs(results:any):{[key:string]:string[]} {
+function parseLogs(results: any): { [key: string]: string[] } {
    // whether two timestamps are the same day
-   const sameDay = (d1:Date, d2:Date) =>
-      (d1 != null && d2 != null && d1.getMonth() == d2.getMonth() && d1.getDate() == d2.getDate());
-   const grouped:{[key:string]:string[]} = {};
+   const sameDay = (d1: Date, d2: Date) =>
+      d1 != null &&
+      d2 != null &&
+      d1.getMonth() == d2.getMonth() &&
+      d1.getDate() == d2.getDate();
+   const grouped: { [key: string]: string[] } = {};
 
    if (is.defined(results, 'redis')) {
       let day = null;
@@ -112,16 +127,23 @@ function parseLogs(results:any):{[key:string]:string[]} {
          const d = new Date(r.timestamp);
          const h = d.getHours();
 
-         r.timestamp = util.format('{0}:{1}:{2}.{3} {4}',
-            (h > 12) ? h - 12 : h,
+         r.timestamp = util.format(
+            '{0}:{1}:{2}.{3} {4}',
+            h > 12 ? h - 12 : h,
             util.number.pad(d.getMinutes(), 2),
             util.number.pad(d.getSeconds(), 2),
             util.number.pad(d.getMilliseconds(), 3),
-            (h >= 12) ? 'PM' : 'AM');
+            h >= 12 ? 'PM' : 'AM'
+         );
 
          if (!sameDay(day, d)) {
             day = d;
-            dayKey = util.format('{0}, {1} {2}', weekday[d.getDay()], month[d.getMonth()], d.getDate());
+            dayKey = util.format(
+               '{0}, {1} {2}',
+               weekday[d.getDay()],
+               month[d.getMonth()],
+               d.getDate()
+            );
             grouped[dayKey] = [];
          }
          grouped[dayKey].push(r);
@@ -130,10 +152,10 @@ function parseLogs(results:any):{[key:string]:string[]} {
    return grouped;
 }
 
-function query(daysAgo:number, maxRows = 500) {
+function query(daysAgo: number, maxRows = 500) {
    // https://github.com/flatiron/winston/blob/master/lib/winston/transports/transport.js
-   const options:Winston.QueryOptions = {
-      from: new Date((new Date()).getTime() - (time.DAY * daysAgo)),
+   const options: Winston.QueryOptions = {
+      from: new Date(new Date().getTime() - time.DAY * daysAgo),
       rows: maxRows,
       fields: null
    };
@@ -154,25 +176,39 @@ function query(daysAgo:number, maxRows = 500) {
    });
 }
 
-function error(message:string|Error, ...args:any[]) { invoke(level.ERROR, message, args); }
+function error(message: string | Error, ...args: any[]) {
+   invoke(level.ERROR, message, args);
+}
 
 export default {
-   info(message:string, ...args:any[]) { invoke(level.INFO, message, args); },
+   info(message: string, ...args: any[]) {
+      invoke(level.INFO, message, args);
+   },
    /** Log information message with a Material icon attribute */
-   infoIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.INFO, message, args); },
-   warn(message:string, ...args:any[]) { invoke(level.WARN, message, args); },
+   infoIcon(icon: string, message: string, ...args: any[]) {
+      iconInvoke(icon, level.INFO, message, args);
+   },
+   warn(message: string, ...args: any[]) {
+      invoke(level.WARN, message, args);
+   },
    /** Log warning with a Material icon attribute */
-   warnIcon(icon:string, message:string, ...args:any[]) { iconInvoke(icon, level.WARN, message, args); },
+   warnIcon(icon: string, message: string, ...args: any[]) {
+      iconInvoke(icon, level.WARN, message, args);
+   },
    error,
    /** Log error with a Material icon attribute */
-   errorIcon(icon:string, message:string|Error, ...args:any[]) { iconInvoke(icon, level.ERROR, message, args); },
+   errorIcon(icon: string, message: string | Error, ...args: any[]) {
+      iconInvoke(icon, level.ERROR, message, args);
+   },
    query,
    /** Force provider(s) to be re-initialized */
-   reset() { logger = null; },
+   reset() {
+      logger = null;
+   },
 
    inject: {
-      set transport(t:Winston.TransportInstance) {
-          logger = new Winston.Logger({ transports: [t] });
+      set transport(t: Winston.TransportInstance) {
+         logger = new Winston.Logger({ transports: [t] });
       }
    }
 };

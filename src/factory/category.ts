@@ -5,18 +5,18 @@ import { slug } from '../util/text';
 import config from '../config';
 import library from '../library';
 
-function getSubcategory(this:Category, key:string):Category {
+function getSubcategory(this: Category, key: string): Category {
    return this.subcategories.find(c => c.title === key || c.key === key);
 }
 
-function has(this:Category, key:string):boolean {
+function has(this: Category, key: string): boolean {
    return this.getSubcategory(key) !== undefined;
 }
 
 /**
  * Add nested category and update its key to include parent
  */
-function add(this:Category, subcat:Category) {
+function add(this: Category, subcat: Category) {
    if (is.value(subcat)) {
       const oldKey = subcat.key;
 
@@ -34,43 +34,57 @@ function add(this:Category, subcat:Category) {
 /**
  * Remove post from category and subcategories (primarily for testing)
  */
-function removePost(this:Category, post:Post):Category {
+function removePost(this: Category, post: Post): Category {
    const index = this.posts.indexOf(post);
-   if (index >= 0) { this.posts.splice(index, 1); }
-   this.subcategories.forEach(s => { s.removePost(post); });
+   if (index >= 0) {
+      this.posts.splice(index, 1);
+   }
+   this.subcategories.forEach(s => {
+      s.removePost(post);
+   });
    return this;
 }
 
 /**
  * Ensure photos and information are loaded for all posts
  */
-function ensureLoaded(this:Category):Promise<any> {
-   return Promise.all(this.posts.map(p => p.getInfo().then(p => p.getPhotos())));
+function ensureLoaded(this: Category): Promise<any> {
+   return Promise.all(
+      this.posts.map(p => p.getInfo().then(p => p.getPhotos()))
+   );
 }
 
 /**
  * Add Flickr collection to library singleton as category
  */
-function make(collection:Flickr.Collection, root = false):Category {
+function make(collection: Flickr.Collection, root = false): Category {
    let exclude = config.flickr.excludeSets;
    const feature = config.flickr.featureSets;
-   const category:Category = {
+   const category: Category = {
       title: collection.title,
       key: slug(collection.title),
       subcategories: [] as Category[],
       posts: [] as Post[],
-      get isChild() { return this.key.includes('/'); },
-      get isParent() { return this.subcategories.length > 0; },
+      get isChild() {
+         return this.key.includes('/');
+      },
+      get isParent() {
+         return this.subcategories.length > 0;
+      },
       add,
       getSubcategory,
       has,
       removePost,
       ensureLoaded
    };
-   let p:Post = null;
+   let p: Post = null;
 
-   if (exclude === undefined) { exclude = []; }
-   if (root) { library.categories[category.title] = category; }
+   if (exclude === undefined) {
+      exclude = [];
+   }
+   if (root) {
+      library.categories[category.title] = category;
+   }
 
    if (is.array(collection.set) && collection.set.length > 0) {
       // category contains one or more posts
@@ -80,7 +94,9 @@ function make(collection:Flickr.Collection, root = false):Category {
             p = library.postWithID(s.id);
 
             // create item object if it isn't part of an already added group
-            if (!is.value(p)) { p = post.make(s); }
+            if (!is.value(p)) {
+               p = post.make(s);
+            }
 
             // add post to category and category to post
             category.posts.push(p);
@@ -94,7 +110,9 @@ function make(collection:Flickr.Collection, root = false):Category {
 
    if (is.array(collection.collection)) {
       // recursively add subcategories
-      collection.collection.forEach(c => { category.add(make(c)); });
+      collection.collection.forEach(c => {
+         category.add(make(c));
+      });
    }
 
    if (root && is.array(feature)) {

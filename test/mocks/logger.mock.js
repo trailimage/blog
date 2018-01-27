@@ -5,7 +5,9 @@ const winston = require('winston');
 /**
  * @param {Function} callback Method that will be called with log statement
  */
-let mockLogger = function(callback) { this.echo = callback; };
+let mockLogger = function(callback) {
+   this.echo = callback;
+};
 
 util.inherits(mockLogger, winston.Transport);
 

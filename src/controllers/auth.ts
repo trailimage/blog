@@ -12,7 +12,7 @@ import { httpStatus } from '../constants';
  *
  * https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
  */
-function view(req:Blog.Request, res:Blog.Response) {
+function view(_req: Blog.Request, res: Blog.Response) {
    if (config.needsAuth) {
       if (flickr.auth.isEmpty()) {
          res.redirect(flickr.auth.url());
@@ -30,7 +30,7 @@ function view(req:Blog.Request, res:Blog.Response) {
  *
  * http://www.flickr.com/services/api/auth.oauth.html
  */
-function flickrAuth(req:Blog.Request, res:Blog.Response) {
+function flickrAuth(req: Blog.Request, res: Blog.Response) {
    if (is.empty(req.param('oauth_token'))) {
       log.warn('%s is updating Flickr tokens', req.clientIP());
       flickr.auth.getRequestToken().then(url => res.redirect(url));
@@ -38,7 +38,8 @@ function flickrAuth(req:Blog.Request, res:Blog.Response) {
       const token = req.param('oauth_token');
       const verifier = req.param('oauth_verifier');
 
-      flickr.auth.getAccessToken(token, verifier)
+      flickr.auth
+         .getAccessToken(token, verifier)
          .then(token => {
             res.render(template.page.AUTHORIZE, {
                title: 'Flickr Access',
@@ -47,7 +48,9 @@ function flickrAuth(req:Blog.Request, res:Blog.Response) {
                layout: template.layout.NONE
             });
          })
-         .catch((err:Error) => { log.error(err); });
+         .catch((err: Error) => {
+            log.error(err);
+         });
    }
 }
 
@@ -57,13 +60,14 @@ function flickrAuth(req:Blog.Request, res:Blog.Response) {
  *
  * https://github.com/google/google-api-nodejs-client/
  */
-function googleAuth(req:Blog.Request, res:Blog.Response) {
+function googleAuth(req: Blog.Request, res: Blog.Response) {
    const code = req.param('code');
 
    if (is.empty(code)) {
       res.end('Cannot continue without Google authorization code');
    } else {
-      google.auth.getAccessToken(code)
+      google.auth
+         .getAccessToken(code)
          .then(token => {
             res.render(template.page.AUTHORIZE, {
                title: 'Google Access',

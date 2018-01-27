@@ -9,12 +9,15 @@ const { expect } = require('chai');
 const post = require('../../lib/controllers/post').default;
 const ph = C.route;
 
-describe('Post', ()=> {
+describe('Post', () => {
    before(done => prepare(done));
-   beforeEach(() => { res.reset(); req.reset(); });
+   beforeEach(() => {
+      res.reset();
+      req.reset();
+   });
 
    it('shows latest', done => {
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          const options = expectTemplate(template.page.POST);
          expect(options).has.property('slug', 'stanley-lake-snow-hike');
          expect(options.layout).is.null;
@@ -25,7 +28,7 @@ describe('Post', ()=> {
    });
 
    it('forwards to correct URL from Flickr set ID', done => {
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          expectRedirect('/ruminations');
          done();
       };
@@ -34,7 +37,7 @@ describe('Post', ()=> {
    });
 
    it('redirects to post containing photo', done => {
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          expectRedirect('/ruminations#8458410907');
          done();
       };
@@ -42,10 +45,9 @@ describe('Post', ()=> {
       post.withPhoto(req, res);
    });
 
-
    it('shows post with slug', done => {
       res.endOnRender = false;
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          const options = expectTemplate(template.page.POST);
          expect(options).has.property('title', 'Kuna Cave Fails to Impress');
          expect(options).has.property('post');
@@ -59,7 +61,7 @@ describe('Post', ()=> {
 
    it('shows post in series', done => {
       res.endOnRender = false;
-      res.onEnd = ()=> {
+      res.onEnd = () => {
          const options = expectTemplate(template.page.POST);
          expect(options).has.property('title', 'Brother Ride 2015');
          expect(options).has.property('post');

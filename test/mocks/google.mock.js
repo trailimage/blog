@@ -5,7 +5,9 @@ const C = require('../../lib/constants').default;
 let tokenExpired = false;
 
 module.exports = {
-   expireToken() { tokenExpired = true; },
+   expireToken() {
+      tokenExpired = true;
+   },
    auth: {
       //url: authorizationURL,
       //client: authClient,
@@ -18,15 +20,18 @@ module.exports = {
        * @param {Stream.Writable} [stream]
        * @returns {Promise}
        */
-      loadGPX: (post, stream) => new Promise((resolve, reject) => {
-         fs.readFile(__dirname + '/track-big.gpx', (err, data) => {
-            if (is.value(err)) {
-               reject(err);
-            } else {
-               if (is.value(stream)) { stream.write(body); }
-               resolve(data.toString(C.encoding.UTF8));
-            }
+      loadGPX: (post, stream) =>
+         new Promise((resolve, reject) => {
+            fs.readFile(__dirname + '/track-big.gpx', (err, data) => {
+               if (is.value(err)) {
+                  reject(err);
+               } else {
+                  if (is.value(stream)) {
+                     stream.write(body);
+                  }
+                  resolve(data.toString(C.encoding.UTF8));
+               }
+            });
          })
-      })
    }
 };

@@ -6,7 +6,7 @@ import { page } from '../template';
 import library from '../library';
 import { httpStatus, mimeType } from '../constants';
 
-function search(req:Blog.Request, res:Blog.Response) {
+function search(req: Blog.Request, res: Blog.Response) {
    const term = req.query['q'];
 
    if (is.value(term)) {
@@ -19,7 +19,7 @@ function search(req:Blog.Request, res:Blog.Response) {
    }
 }
 
-function about(req:Blog.Request, res:Blog.Response) {
+function about(_req: Blog.Request, res: Blog.Response) {
    res.sendView(page.ABOUT, {
       templateValues: {
          title: 'About ' + config.site.title,
@@ -28,7 +28,7 @@ function about(req:Blog.Request, res:Blog.Response) {
    });
 }
 
-function siteMap(req:Blog.Request, res:Blog.Response) {
+function siteMap(_req: Blog.Request, res: Blog.Response) {
    res.sendView(page.SITEMAP, {
       mimeType: mimeType.XML,
       callback: render => {
@@ -42,8 +42,11 @@ function siteMap(req:Blog.Request, res:Blog.Response) {
    });
 }
 
-function issues(req:Blog.Request, res:Blog.Response) {
-   res.redirect(httpStatus.PERMANENT_REDIRECT, 'http://issues.' + config.domain);
+function issues(_req: Blog.Request, res: Blog.Response) {
+   res.redirect(
+      httpStatus.PERMANENT_REDIRECT,
+      'http://issues.' + config.domain
+   );
 }
 
 export default { search, about, siteMap, issues };

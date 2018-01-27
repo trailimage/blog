@@ -22,7 +22,7 @@ function adminRoutes() {
    return r;
 }
 
-function postRoutes(photoID:string):Express.Router {
+function postRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
    r.get('/', ctrl.post.withKey);
    //r.get('/pdf', c.pdf);
@@ -36,7 +36,7 @@ function postRoutes(photoID:string):Express.Router {
 /**
  * Series should load the PDF, GPX and GeoJSON for the main post
  */
-function seriesRoutes(photoID:string):Express.Router {
+function seriesRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
    r.get('/', ctrl.post.inSeries);
    r.get('/map', ctrl.map.series);
@@ -44,7 +44,7 @@ function seriesRoutes(photoID:string):Express.Router {
    return r;
 }
 
-function photoTagRoutes():Express.Router {
+function photoTagRoutes(): Express.Router {
    const r = Express.Router();
    r.get('/', ctrl.photo.tags);
    // photo tag page
@@ -54,7 +54,7 @@ function photoTagRoutes():Express.Router {
    return r;
 }
 
-function categoryRoutes():Express.Router {
+function categoryRoutes(): Express.Router {
    const r = Express.Router(keepParams);
    r.get('/', ctrl.category.list);
    r.get(`/:${ph.CATEGORY}`, ctrl.category.forPath);
@@ -67,7 +67,7 @@ function categoryRoutes():Express.Router {
  * http://expressjs.com/en/4x/api.html
  * http://expressjs.com/en/guide/routing.html
  */
-function standard(app:Express.Application) {
+function standard(app: Express.Application) {
    // slug pattern
    const s = '([\\w\\d-]{4,})';
    // Flickr photo ID pattern
@@ -78,16 +78,23 @@ function standard(app:Express.Application) {
    const postKey = `:${ph.POST_KEY}${s}`;
    const series = `:${ph.SERIES_KEY}${s}/:${ph.PART_KEY}${s}`;
    // pattern matching any root category key
-   const rootCategory = ':' + ph.ROOT_CATEGORY + '(' + Object
-      .keys(library.categories)
-      .map(name => library.categories[name].key)
-      .join('|') + ')';
+   const rootCategory =
+      ':' +
+      ph.ROOT_CATEGORY +
+      '(' +
+      Object.keys(library.categories)
+         .map(name => library.categories[name].key)
+         .join('|') +
+      ')';
 
    app.use('/admin', adminRoutes());
 
    for (const slug in config.redirects) {
-      app.get('/' + slug, (req:Blog.Request, res:Blog.Response) => {
-         res.redirect(httpStatus.PERMANENT_REDIRECT, '/' + config.redirects[slug]);
+      app.get('/' + slug, (_req: Blog.Request, res: Blog.Response) => {
+         res.redirect(
+            httpStatus.PERMANENT_REDIRECT,
+            '/' + config.redirects[slug]
+         );
       });
    }
 
@@ -102,7 +109,7 @@ function standard(app:Express.Application) {
    app.get('/sitemap.xml', ctrl.siteMap);
    app.get(`/exif/${photoID}`, ctrl.photo.exif);
    app.get('/issues?', ctrl.issues);
-   app.get('/issues?/:slug'+s, ctrl.issues);
+   app.get('/issues?/:slug' + s, ctrl.issues);
    app.get('/category-menu', ctrl.category.menu);
    app.get('/mobile-menu', ctrl.menu.mobile);
    app.get('/search', ctrl.search);
@@ -122,7 +129,7 @@ function standard(app:Express.Application) {
 /**
  * If a provider isn't authenticated then all paths route to authentication pages
  */
-function authentication(app:Express.Application) {
+function authentication(app: Express.Application) {
    // provider authentication callbacks
    app.get('/auth/flickr', ctrl.auth.flickr);
    app.get('/auth/google', ctrl.auth.google);
