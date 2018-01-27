@@ -1,6 +1,7 @@
-const is = require('../../lib/is').default;
+import is from '../is';
+import { Blog } from '../types';
 
-function assert(methodName, pattern, handler) {
+function assert(methodName: string, pattern: string, handler: Function) {
    if (!is.value(pattern)) {
       throw new ReferenceError(`app.${methodName}() pattern cannot be null`);
    }
@@ -9,7 +10,7 @@ function assert(methodName, pattern, handler) {
    }
 }
 
-module.exports = {
+export default {
    routes: {
       get: {},
       post: {}
@@ -18,10 +19,11 @@ module.exports = {
 
    /**
     * Use middleware or router
-    * @param {string} pattern
-    * @param {function(BlogRequest, BlogResponse, function)} middleware
     */
-   use(pattern, middleware) {
+   use(
+      pattern: string,
+      middleware: (req: Blog.Request, res: Blog.Response, cb: Function) => {}
+   ) {
       assert('use', pattern, middleware);
       this.middleware[pattern] = middleware;
 
@@ -39,20 +41,16 @@ module.exports = {
    },
    /**
     * Add GET route
-    * @param {string} pattern
-    * @param {function(BlogRequest, BlogResponse)} handler
     */
-   get(pattern, handler) {
+   get(pattern: string, handler: Blog.Handler) {
       assert('get', pattern, handler);
       this.routes.get[pattern] = handler;
    },
 
    /**
     * Add POST route
-    * @param {string} pattern
-    * @param {function(BlogRequest, BlogResponse)} handler
     */
-   post(pattern, handler) {
+   post(pattern: string, handler: Blog.Handler) {
       assert('post', pattern, handler);
       this.routes.post[pattern] = handler;
    },

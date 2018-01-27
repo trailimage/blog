@@ -1,26 +1,24 @@
-const fs = require('fs');
-const is = require('../../lib/is.js').default;
-const C = require('../../lib/constants').default;
+import * as fs from 'fs';
+import is from '../is';
+import C from '../constants';
+import { Post } from '../types';
 
 let tokenExpired = false;
 
-module.exports = {
-   expireToken() {
+export namespace google {
+   export const expireToken = () => {
       tokenExpired = true;
-   },
-   auth: {
+   };
+
+   export const auth = {
       //url: authorizationURL,
       //client: authClient,
-      verify: () => {},
+      verify: () => true,
       expired: () => tokenExpired
-   },
-   drive: {
-      /**
-       * @param {Post|object} post
-       * @param {Stream.Writable} [stream]
-       * @returns {Promise}
-       */
-      loadGPX: (post, stream) =>
+   };
+
+   export const drive = {
+      loadGPX: (_post: Post, stream: NodeJS.WriteStream) =>
          new Promise((resolve, reject) => {
             fs.readFile(__dirname + '/track-big.gpx', (err, data) => {
                if (is.value(err)) {
@@ -33,5 +31,5 @@ module.exports = {
                }
             });
          })
-   }
-};
+   };
+}

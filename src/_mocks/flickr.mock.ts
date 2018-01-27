@@ -1,23 +1,22 @@
-const fs = require('fs');
-const flickr = require('../../lib/providers/flickr').default;
+import * as fs from 'fs';
+import flickr from '../providers/flickr';
 
 /**
  * @param {string} method Name of Flickr API method to call
  * @param {function} transform Method to transform the result for testing
- * @returns {Promise}
  */
-const call = (method, transform) =>
+const call = (method: string, transform: Function) =>
    new Promise((resolve, reject) => {
       fs.readFile(__dirname + '/flickr.' + method + '.json', (err, data) => {
          if (err === null) {
-            resolve(transform(JSON.parse(data)));
+            resolve(transform(JSON.parse(data.toString())));
          } else {
             reject(err);
          }
       });
    });
 
-module.exports = {
+export default {
    cache: flickr.cache,
    getCollections: () =>
       call('collections.getTree', r => r.collections.collection),

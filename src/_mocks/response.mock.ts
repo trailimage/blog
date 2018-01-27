@@ -1,10 +1,10 @@
-const util = require('util');
-const C = require('../../lib/constants').default;
-const is = require('../../lib/is').default;
+import util from 'util';
+import { httpStatus, mimeType, encoding } from '../constants';
+import is from '../is';
+import { Mock } from '../types';
 
-/** @type {MockResponse} */
-module.exports = {
-   httpStatus: C.httpStatus.OK,
+export default {
+   httpStatus: httpStatus.OK,
    /**
     * Method to call when response is complete. Can be assigned as test
     * middleware next() method so that response.end() and middelware next()
@@ -30,7 +30,7 @@ module.exports = {
       return this;
    },
    notFound() {
-      return this.status(C.httpStatus.NOT_FOUND);
+      return this.status(httpStatus.NOT_FOUND);
    },
    setHeader(key, value) {
       this.headers[key] = value;
@@ -58,12 +58,11 @@ module.exports = {
 
    /**
     * Method added by Express
-    * @param {object} o
     */
-   json(o) {
-      this.httpStatus = C.httpStatus.OK;
+   json(o: any) {
+      this.httpStatus = httpStatus.OK;
       this.rendered.json = o;
-      return this.setHeader('Content-Type', C.mimeType.JSON).end();
+      return this.setHeader('Content-Type', mimeType.JSON).end();
    },
 
    /**
@@ -82,12 +81,9 @@ module.exports = {
       }
    },
    /**
-    * @param {string|Buffer} chunk
-    * @param {string} [encoding]
-    * @param {function} [callback]
-    * @see https://nodejs.org/api/stream.html#stream_class_stream_writable
+    * https://nodejs.org/api/stream.html#stream_class_stream_writable
     */
-   write(chunk, encoding = C.encoding.UTF8, callback) {
+   write(chunk: string | Buffer, encoding = encoding.UTF8, callback: Function) {
       const text = Buffer.isBuffer(chunk) ? chunk.toString(encoding) : chunk;
       this.content = this.content === null ? text : this.content + text;
       if (is.callable(callback)) {
@@ -123,4 +119,4 @@ module.exports = {
       };
       return this;
    }
-};
+} as Mock.Response;

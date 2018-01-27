@@ -81,18 +81,18 @@ export const time = {
    WEEK: Time.Week
 };
 
-export default {
-   // distances in terms of feet
-   distance: { EQUATOR: equator, MILE: mile, YARD: yard },
-   time,
-   month,
-   weekday,
-   httpStatus,
-   alphabet,
-   logTo,
-   route,
-   encoding,
-   flickrSize,
-   mimeType,
-   header
-};
+// export default {
+//    // distances in terms of feet
+//    distance: { EQUATOR: equator, MILE: mile, YARD: yard },
+//    time,
+//    month,
+//    weekday,
+//    httpStatus,
+//    alphabet,
+//    logTo,
+//    route,
+//    encoding,
+//    flickrSize,
+//    mimeType,
+//    header
+// };

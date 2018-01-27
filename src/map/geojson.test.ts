@@ -1,23 +1,17 @@
-const geoJSON = require('../../lib/map/geojson').default;
-const mocha = require('mocha');
-const kml = require('../../lib/map/kml').default;
-const { expect } = require('chai');
-const mock = require('../mocks/');
-const nl = require('os').EOL;
+import { EOL as nl } from 'os';
+import geoJSON from './map/geojson';
+import kml from './map/kml';
 
-/**
- * @param {number[]} point
- * @returns {number[]}
- */
-function expectGeoPoint(point) {
+const mock = require('../mocks/');
+
+function expectGeoPoint(point: number[]) {
    expect(point).is.instanceOf(Array);
    expect(point[0]).within(-180, 180);
    expect(point[1]).within(-90, 90);
    return point;
 }
 
-describe('GeoJSON', () => {
-   it('converts GPX files to GeoJSON', () => {
+test('converts GPX files to GeoJSON', () => {
       const post = { key: 'whatever' };
       return mock.google.drive
          .loadGPX(post)
@@ -44,7 +38,7 @@ describe('GeoJSON', () => {
          });
    });
 
-   it('converts KML files to GeoJSON', () =>
+   test('converts KML files to GeoJSON', () =>
       Promise.all([
          // mock.loadFile('mines.kmz')
          //    .then(kml.fromKMZ)
@@ -67,4 +61,4 @@ describe('GeoJSON', () => {
                expect(geo).to.exist;
             })
       ])); //.timeout(15000);
-});
+

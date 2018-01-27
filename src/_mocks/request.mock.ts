@@ -1,17 +1,23 @@
-/** @type {MockRequest} */
-module.exports = {
+import { Mock } from '../types';
+
+export default {
    referer: null,
+   accepts: null,
    params: {},
    headers: {},
+   clientIP: null,
    connection: { remoteAddress: '' },
    // added by Express body parser
    body: { selected: [] },
-   get(field) {
+
+   get(field: string) {
       return this[field];
    },
-   header(name) {
+
+   header(name: string) {
       return this.headers[name];
    },
+
    reset() {
       this.referer = null;
       this.params = {};
@@ -20,4 +26,4 @@ module.exports = {
       this.body = { selected: [] };
       return this;
    }
-};
+} as Mock.Request;
