@@ -1,28 +1,25 @@
-const kml = require('../../lib/map/kml').default;
-const mocha = require('mocha');
-const { expect } = require('chai');
-const mock = require('../mocks/');
+import kml from './kml';
 
-describe('KML', () => {
-   it.skip('extracts KML from KMZ', () =>
-      mock
-         .loadFile('motorcycle.kmz')
-         .then(kml.fromKMZ)
-         .then(doc => {
-            expect(doc).to.exist;
-         })); //.timeout(10000);
+//const mock = require('../mocks/');
 
-   it('parses HTML property descriptions', () => {
-      const properties = {
-         name: 'Test Name',
-         description: sample
-      };
-      const updated = kml.parseDescription(properties);
+it.skip('extracts KML from KMZ', () =>
+   mock
+      .loadFile('motorcycle.kmz')
+      .then(kml.fromKMZ)
+      .then(doc => {
+         expect(doc).toBeDefined();
+      })); //.timeout(10000);
 
-      expect(updated).to.exist;
-      expect(updated).has.property('DEPOSIT', 'Tanner Manganese Prospect');
-      expect(updated).has.property('DMSLAT', 443312);
-   });
+it('parses HTML property descriptions', () => {
+   const properties = {
+      name: 'Test Name',
+      description: sample
+   };
+   const updated = kml.parseDescription(properties);
+
+   expect(updated).toBeDefined();
+   expect(updated).toHaveProperty('DEPOSIT', 'Tanner Manganese Prospect');
+   expect(updated).toHaveProperty('DMSLAT', 443312);
 });
 
 const sample = `<![CDATA[<html xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:msxsl="urn:schemas-microsoft-com:xslt">

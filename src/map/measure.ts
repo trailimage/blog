@@ -1,6 +1,6 @@
 import { Location } from '../types/';
 import config from '../config';
-import C from '../constants';
+import { time } from '../constants';
 import index from './';
 
 const piDeg = Math.PI / 180.0;
@@ -26,7 +26,7 @@ const length = (points: number[][]) =>
 function speed(p1: number[], p2: number[]): number {
    const t = Math.abs(p1[index.TIME] - p2[index.TIME]); // milliseconds
    const d = pointDistance(p1, p2);
-   return t > 0 && d > 0 ? d / (t / C.time.HOUR) : 0;
+   return t > 0 && d > 0 ? d / (t / time.HOUR) : 0;
 }
 
 function duration(line: number[][]): number {

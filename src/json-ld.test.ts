@@ -1,4 +1,4 @@
-import ld from './json-ld';
+import { ld } from './json-ld';
 import factory from './factory';
 import { Category, Post } from './types/';
 
@@ -7,7 +7,7 @@ let category: Category = null;
 
 factory.inject.flickr = require('./mocks/flickr.mock');
 
-before(() =>
+beforeAll(() =>
    factory.buildLibrary().then(library => {
       post = library.postWithID('72157666685116730');
       category = library.categoryWithKey('what');
@@ -25,11 +25,11 @@ test('creates link data for posts', () => {
       'headline',
       'articleSection'
    ]);
-   expect(schema).has.property('@context', 'http://schema.org');
+   expect(schema).toHaveProperty('@context', 'http://schema.org');
    expect(schema.name).toBe('Spring Fish & Chips');
    expect(schema.headline).toBe(schema.name);
-   expect(schema.author).has.property('name', 'Jason Abbott');
-   expect(schema.publisher).has.property('name', 'Trail Image');
+   expect(schema.author).toHaveProperty('name', 'Jason Abbott');
+   expect(schema.publisher).toHaveProperty('name', 'Trail Image');
    expect(schema.articleSection).to.contain('Family');
 });
 

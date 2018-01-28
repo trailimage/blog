@@ -1,11 +1,8 @@
 // Based on Winston-Spy https://github.com/manuelcabral/winston-spy
-const util = require('util');
-const winston = require('winston');
+import * as util from 'util';
+import winston from 'winston';
 
-/**
- * @param {Function} callback Method that will be called with log statement
- */
-let mockLogger = function(callback) {
+const mockLogger = function(callback) {
    this.echo = callback;
 };
 

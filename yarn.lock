@@ -28,8 +28,8 @@
     through2 "^2.0.3"
 
 "@toba/json-ld@^1.0.0-beta.1":
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.0.0-beta.1.tgz#ccd4da55e267b4f68a003401400d587f960dcb34"
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.0.0.tgz#a01b2effb12b7488a7eab80a609de05e785fc886"
 
 "@toba/lint@^1.2.0":
   version "1.3.0"
@@ -43,10 +43,10 @@
     tslint-consistent-codestyle "^1.10.0"
 
 "@toba/test@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.0.0.tgz#77d155a98bbaedd1d2f413cc13f8a2060962e1e3"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.0.2.tgz#17b61b1be5b2fe09e5b4bee935e92ee9c386eab4"
   dependencies:
-    "@types/jest" "^22.0.0"
+    "@types/jest" "^22.1.0"
     jest "^22.0.4"
     jest-localstorage-mock "^2.1.0"
     ts-jest "^22.0.0"
@@ -127,7 +127,7 @@
   version "3.30.5"
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.5.tgz#7c7c09b57cd448eb95c350d6664879a5d44de99a"
 
-"@types/jest@^22.0.0":
+"@types/jest@^22.1.0":
   version "22.1.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.1.0.tgz#c1de03bbac66fac4cc741f7a69cb73bc01a1707c"
 
@@ -1001,8 +1001,8 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000795"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000795.tgz#644f03fab00dd8bd1693e5e1e70d86b31c5cfece"
+  version "1.0.30000797"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000797.tgz#6eb0285c4db205dc8f46193f51b192d966d8f7e8"
 
 caniuse-lite@^1.0.30000791, caniuse-lite@^1.0.30000792:
   version "1.0.30000792"
@@ -3775,8 +3775,8 @@ jest@^22.0.4:
     jest-cli "^22.1.4"
 
 js-base64@^2.1.9:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.2.tgz#1896da010ef8862f385d8887648e9b6dc4a7a2e9"
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"
 
 js-beautify@1.6.8:
   version "1.6.8"
@@ -6773,8 +6773,8 @@ uglify-js@^2.6, uglify-js@^2.8.22:
     uglify-to-browserify "~1.0.0"
 
 uglify-js@^3.0.5, uglify-js@^3.3.0:
-  version "3.3.8"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.8.tgz#51e9a5db73afb53ac98603d08224edcd0be45fd8"
+  version "3.3.9"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.3.9.tgz#33869666c8ab7f7658ce3d22f0f1ced40097d33a"
   dependencies:
     commander "~2.13.0"
     source-map "~0.6.1"

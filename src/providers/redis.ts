@@ -1,16 +1,16 @@
 // simplified Redis interface
-import { Cache } from "../types";
-import is from "../is";
-import log from "../logger";
-import config from "../config";
-import cacheItem from "../cache/item";
-import * as Redis from "redis";
-import * as URL from "url";
+import { Cache } from '../types';
+import is from '../is';
+import log from '../logger';
+import config from '../config';
+import cacheItem from '../cache/item';
+import * as Redis from 'redis';
+import * as URL from 'url';
 
 const url = URL.parse(config.redis.url);
 const client = Redis.createClient(parseInt(url.port), url.hostname, {
    no_ready_check: true,
-   password: url.auth.split(":")[1]
+   password: url.auth.split(':')[1]
 });
 
 /** Expected hash response used for validation and parsing */
@@ -30,9 +30,9 @@ const dataType = {
 };
 
 const code = {
-   BROKEN: "CONNECTION_BROKEN",
-   TIMEOUT: "ETIMEDOUT",
-   ERROR: "ERR"
+   BROKEN: 'CONNECTION_BROKEN',
+   TIMEOUT: 'ETIMEDOUT',
+   ERROR: 'ERR'
 };
 // const event = {
 //    CONNECTED: 'connected',
@@ -40,43 +40,53 @@ const code = {
 // };
 /** http://redis.io/commands */
 const command = {
-   AUTH: "AUTH",
-   DEL: "DEL",
-   EXEC: "EXEC",
-   GET: "GET",
-   HASH_GET: "HGET",
-   HASH_DEL: "HDEL"
+   AUTH: 'AUTH',
+   DEL: 'DEL',
+   EXEC: 'EXEC',
+   GET: 'GET',
+   HASH_GET: 'HGET',
+   HASH_DEL: 'HDEL'
 };
 let connected = false;
 
 /** Client is ready to cache commands before it's connected */
 //let ready = true;
 
-client.on("error", (err: any) => {
+client.on('error', (err: any) => {
    //let fatal = false;
 
    if (err.code == code.BROKEN) {
       // if unable to connect to Redis then use in-memory hash only
-      log.error("Unable to connect to Redis at %s:%d", url.hostname, url.port);
+      log.error('Unable to connect to Redis at %s:%d', url.hostname, url.port);
       //fatal = true;
    } else if (err.code == code.ERROR && err.command == command.AUTH) {
-      log.error("Unable to authorize Redis at %s:%d (%s)", url.hostname, url.port, err.message);
+      log.error(
+         'Unable to authorize Redis at %s:%d (%s)',
+         url.hostname,
+         url.port,
+         err.message
+      );
       //fatal = true;
    } else {
       // log error but keep trying to connect
-      log.error("Error during redis call: %s", err.message);
+      log.error('Error during redis call: %s', err.message);
    }
 
    //if (fatal) { ready = false; }
 });
 
-client.on("connect", () => {
-   log.infoIcon("settings_input_component", "Redis connected to %s:%d", url.hostname, url.port);
+client.on('connect', () => {
+   log.infoIcon(
+      'settings_input_component',
+      'Redis connected to %s:%d',
+      url.hostname,
+      url.port
+   );
    connected = true;
 });
 
-client.on("end", () => {
-   log.warn("Redis connection has ended");
+client.on('end', () => {
+   log.warn('Redis connection has ended');
    connected = false;
 });
 
@@ -85,7 +95,9 @@ client.on("end", () => {
  */
 function normalize(value: string | string[] | Cache.Item): string {
    if (typeof value == is.type.OBJECT) {
-      return is.cacheItem(value) ? cacheItem.serialize(value) : JSON.stringify(value);
+      return is.cacheItem(value)
+         ? cacheItem.serialize(value)
+         : JSON.stringify(value);
    } else {
       return value as string;
    }
@@ -95,12 +107,14 @@ function normalize(value: string | string[] | Cache.Item): string {
  * Deserialize objects as needed
  */
 function parseObject<T>(value: string): T {
-   if (is.empty(value)) { return null; }
+   if (is.empty(value)) {
+      return null;
+   }
 
    try {
       return JSON.parse(value);
    } catch (err) {
-      log.error("Unable to JSON parse \"%s\"", value);
+      log.error('Unable to JSON parse "%s"', value);
       return null;
    }
 }
@@ -112,27 +126,40 @@ function makeHandler(
    key: string | string[],
    type = dataType.NONE,
    resolve: Function,
-   reject: Function): (err: Error, reply: any) => void {
-
+   reject: Function
+): (err: Error, reply: any) => void {
    // calculate expected response
-   const howMany = (key: string | string[]) => is.array(key) ? key.length : 1;
+   const howMany = (key: string | string[]) => (is.array(key) ? key.length : 1);
    // if expectation provided then result is whether it matches actual
    // otherwise return raw response
    const answer = (actual: any, expected?: any) => {
-      resolve((expected === undefined) ? actual : (actual == expected));
+      resolve(expected === undefined ? actual : actual == expected);
    };
    return (err: Error, reply: any) => {
       if (hasError(key, err)) {
          reject(err);
       } else {
          switch (type) {
-            case dataType.BIT: answer(reply, 1); break;
-            case dataType.OKAY: answer(reply, "OK"); break;
-            case dataType.COUNT: answer(reply, howMany(key)); break;
-            case dataType.RAW: answer(reply); break;
-            case dataType.JSON: answer(parseObject(reply)); break;
-            case dataType.NONE: resolve(); break;
-            default: reject("Unknown Redis data type");
+            case dataType.BIT:
+               answer(reply, 1);
+               break;
+            case dataType.OKAY:
+               answer(reply, 'OK');
+               break;
+            case dataType.COUNT:
+               answer(reply, howMany(key));
+               break;
+            case dataType.RAW:
+               answer(reply);
+               break;
+            case dataType.JSON:
+               answer(parseObject(reply));
+               break;
+            case dataType.NONE:
+               resolve();
+               break;
+            default:
+               reject('Unknown Redis data type');
          }
       }
    };
@@ -159,11 +186,13 @@ function getValue<T>(type: number, key: string, hashKey?: string) {
  */
 function hasError(key: string | string[], err: Error): boolean {
    if (is.value(err)) {
-      if (is.array(key)) { key = key.join(","); }
-      log.error("Operation with key \"%s\" resulted in", key, err);
-      if (err["message"] && err.message.indexOf(`memory > 'maxmemory'`) > 0) {
+      if (is.array(key)) {
+         key = key.join(',');
+      }
+      log.error('Operation with key "%s" resulted in', key, err);
+      if (err['message'] && err.message.indexOf(`memory > 'maxmemory'`) > 0) {
          // error indicates Redis will not respond to any queries
-         log.error("Disabling all caching");
+         log.error('Disabling all caching');
          config.cache.setAll(false);
       }
       return true;
@@ -177,37 +206,40 @@ export default {
    /**
     * Get all items of a hash
     */
-   getAll: (key: string) => new Promise((resolve, reject) => {
-      client.hgetall(key, makeHandler(key, dataType.RAW, resolve, reject));
-   }),
+   getAll: (key: string) =>
+      new Promise((resolve, reject) => {
+         client.hgetall(key, makeHandler(key, dataType.RAW, resolve, reject));
+      }),
 
    /**
     * Whether key or hash key exists
     */
-   exists: (key: string, hashKey: string) => new Promise<boolean>((resolve, reject) => {
-      const handler = makeHandler(key, dataType.BIT, resolve, reject);
-      if (hashKey === undefined) {
-         client.exists(key, handler);
-      } else {
-         client.hexists(key, hashKey, handler);
-      }
-   }),
+   exists: (key: string, hashKey: string) =>
+      new Promise<boolean>((resolve, reject) => {
+         const handler = makeHandler(key, dataType.BIT, resolve, reject);
+         if (hashKey === undefined) {
+            client.exists(key, handler);
+         } else {
+            client.hexists(key, hashKey, handler);
+         }
+      }),
 
    /**
     * All hash keys
     *
     * See http://redis.io/commands/keys
     */
-   keys: (key: string) => new Promise<string[]>((resolve, reject) => {
-      const handler = makeHandler(key, dataType.RAW, resolve, reject);
-      if (/[\?\*\[\]]/.test(key)) {
-         // wildcard match against root keys
-         client.keys(key, handler);
-      } else {
-         // all fields of a hash key
-         client.hkeys(key, handler);
-      }
-   }),
+   keys: (key: string) =>
+      new Promise<string[]>((resolve, reject) => {
+         const handler = makeHandler(key, dataType.RAW, resolve, reject);
+         if (/[\?\*\[\]]/.test(key)) {
+            // wildcard match against root keys
+            client.keys(key, handler);
+         } else {
+            // all fields of a hash key
+            client.hkeys(key, handler);
+         }
+      }),
 
    /**
     * Return raw value
@@ -235,52 +267,89 @@ export default {
       } else {
          hashKey = hashKeyOrValue;
       }
-      return (new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
          if (hashKey !== undefined) {
-            client.hset(key, hashKey.toString(), normalize(value), makeHandler(key, dataType.NONE, resolve, reject));
+            client.hset(
+               key,
+               hashKey.toString(),
+               normalize(value),
+               makeHandler(key, dataType.NONE, resolve, reject)
+            );
          } else {
-            client.set(key, normalize(value), makeHandler(key, dataType.OKAY, resolve, reject));
+            client.set(
+               key,
+               normalize(value),
+               makeHandler(key, dataType.OKAY, resolve, reject)
+            );
          }
-      }))
-         .then(() => value);
+      }).then(() => value);
    },
 
    /**
     * Add all hash items
     */
-   addAll: (key: string, hash: { [key: string]: string }) => new Promise((resolve, reject) => {
-      client.hmset(key, hash, makeHandler(key, dataType.OKAY, resolve, reject));
-   }),
+   addAll: (key: string, hash: { [key: string]: string }) =>
+      new Promise((resolve, reject) => {
+         client.hmset(
+            key,
+            hash,
+            makeHandler(key, dataType.OKAY, resolve, reject)
+         );
+      }),
 
    /**
     * Remove key or key field (hash) from storage. If hashKey is provided and
     * key is an array then the same hashKey field will be removed from every
     * key value.
     */
-   remove: (key: string | string[], hashKey?: string | string[]) => new Promise((resolve, reject) => {
-      if (is.empty(key)) {
-         reject("Attempt to delete hash item with empty key");
-      } else if (is.value(hashKey)) {
-         // implies that hash field is the second argument
-         if ((is.array(hashKey) && hashKey.length === 0) || is.empty(hashKey)) {
-            reject("Attempt to delete \"" + key + "\" field with empty field name");
-         } else {
-            // Node redis is a little dumb and merely toString()'s the hashKey
-            // array if passed as a second argument so instead combine the key
-            // and hashKeys as first argument which become list of arguments which
-            // redis server hdel expects (http://redis.io/commands/hdel)
-            if (is.array(key)) {
-               resolve(Promise.all(key.map(k => new Promise((resolve, reject) => {
-                  client.hdel(...[k].concat(hashKey), makeHandler(key, dataType.COUNT, resolve, reject));
-               }))));
+   remove: (key: string | string[], hashKey?: string | string[]) =>
+      new Promise((resolve, reject) => {
+         if (is.empty(key)) {
+            reject('Attempt to delete hash item with empty key');
+         } else if (is.value(hashKey)) {
+            // implies that hash field is the second argument
+            if (
+               (is.array(hashKey) && hashKey.length === 0) ||
+               is.empty(hashKey)
+            ) {
+               reject(
+                  'Attempt to delete "' + key + '" field with empty field name'
+               );
             } else {
-               client.hdel(...[key].concat(hashKey), makeHandler(key, dataType.COUNT, resolve, reject));
+               // Node redis is a little dumb and merely toString()'s the hashKey
+               // array if passed as a second argument so instead combine the key
+               // and hashKeys as first argument which become list of arguments which
+               // redis server hdel expects (http://redis.io/commands/hdel)
+               if (is.array(key)) {
+                  resolve(
+                     Promise.all(
+                        key.map(
+                           k =>
+                              new Promise((resolve, reject) => {
+                                 client.hdel(
+                                    ...[k].concat(hashKey),
+                                    makeHandler(
+                                       key,
+                                       dataType.COUNT,
+                                       resolve,
+                                       reject
+                                    )
+                                 );
+                              })
+                        )
+                     )
+                  );
+               } else {
+                  client.hdel(
+                     ...[key].concat(hashKey),
+                     makeHandler(key, dataType.COUNT, resolve, reject)
+                  );
+               }
             }
+         } else {
+            client.del(key, makeHandler(key, dataType.COUNT, resolve, reject));
          }
-      } else {
-         client.del(key, makeHandler(key, dataType.COUNT, resolve, reject));
-      }
-   }),
+      }),
 
    /**
     * Delete one key and add another.

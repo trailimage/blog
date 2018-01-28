@@ -1,15 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as stream from 'stream';
+import * as Stream from 'stream';
 import * as readline from 'readline';
 
 export google from './google.mock';
 
 const localPath = (name: string) => path.normalize(__dirname + '/' + name);
 
-/** http://www.lipsum.com/ */
-export const lipsum =
-   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 export const fontFile = 'test/pdf/droidsans.ttf';
 
 /**
@@ -17,7 +14,7 @@ export const fontFile = 'test/pdf/droidsans.ttf';
  */
 export const loadBigFile = (name: string) => new Promise(resolve => {
    const input = fs.createReadStream(localPath(name));
-   const output = new stream();
+   const output: NodeJS.WritableStream = new Stream() as NodeJS.WritableStream;
    const rl = readline.createInterface(input, output);
    let file = '';
    rl.on('line', line => (file += line + nl));

@@ -1,58 +1,53 @@
-const measure = require('../../lib/map/measure').default;
-const mocha = require('mocha');
-const { expect } = require('chai');
+import measure from './measure';
+import { time } from '../constants';
 
-/**
- * @param {number[]} point
- * @returns {number[]}
- */
-function expectGeoPoint(point) {
-   expect(point).is.instanceOf(Array);
-   expect(point[0]).within(-180, 180);
-   expect(point[1]).within(-90, 90);
+function expectGeoPoint(point: number[]): number[] {
+   expect(point).toBeInstanceOf(Array);
+   expect(point[0]).toBeGreaterThanOrEqual(-180);
+   expect(point[0]).toBeLessThanOrEqual(180);
+   expect(point[1]).toBeGreaterThanOrEqual(-90);
+   expect(point[1]).toBeLessThanOrEqual(90);
    return point;
 }
 
-describe('Map Measurements', () => {
-   it('converts between degrees and radians', () => {
-      expect(measure.toRadians(48)).within(0.83, 0.84);
-      expect(measure.toRadians(-122)).within(-2.13, -2.12);
-   });
+test('converts between degrees and radians', () => {
+   expect(measure.toRadians(48)).toBeCloseTo(0.8, 1);
+   expect(measure.toRadians(-122)).toBeCloseTo(-2.1, 1);
+});
 
-   it('calculates distance between points', () => {
-      const p1 = expectGeoPoint([-122.0, 48.0]);
-      const p2 = expectGeoPoint([-121.0, 49.0]);
+test('calculates distance between points', () => {
+   const p1 = expectGeoPoint([-122.0, 48.0]);
+   const p2 = expectGeoPoint([-121.0, 49.0]);
 
-      expect(measure.pointDistance(p1, p2)).within(82.0, 83.0);
+   expect(measure.pointDistance(p1, p2)).toBeCloseTo(82, 1);
 
-      const p3 = expectGeoPoint([-118.4081, 33.9425]);
-      const p4 = expectGeoPoint([-156.4305, 20.8987]);
+   const p3 = expectGeoPoint([-118.4081, 33.9425]);
+   const p4 = expectGeoPoint([-156.4305, 20.8987]);
 
-      expect(measure.pointDistance(p3, p4)).within(2482, 2483);
-   });
+   expect(measure.pointDistance(p3, p4)).toBeCloseTo(2482, 1);
+});
 
-   it('identifies points at the same location', () => {
-      const p1 = expectGeoPoint([100, 50, 20]);
-      const p2 = expectGeoPoint([100, 50, 30]);
-      const p3 = expectGeoPoint([100, 51, 30]);
+test('identifies points at the same location', () => {
+   const p1 = expectGeoPoint([100, 50, 20]);
+   const p2 = expectGeoPoint([100, 50, 30]);
+   const p3 = expectGeoPoint([100, 51, 30]);
 
-      expect(measure.sameLocation(p1, p2)).is.true;
-      expect(measure.sameLocation(p1, p3)).is.false;
-   });
+   expect(measure.sameLocation(p1, p2)).toBe(true);
+   expect(measure.sameLocation(p1, p3)).toBe(false);
+});
 
-   it('calculates speed between two points', () => {
-      const p1 = expectGeoPoint([-122, 48, 0, 100]);
-      const p2 = expectGeoPoint([-120, 50, 0, 100 + 1000 * 60 * 60]); // an hour later in milliseconds
+test('calculates speed between two points', () => {
+   const p1 = expectGeoPoint([-122, 48, 0, 100]);
+   const p2 = expectGeoPoint([-120, 50, 0, 100 + time.HOUR]);
 
-      expect(measure.speed(p1, p2)).within(165, 166);
-   });
+   expect(measure.speed(p1, p2)).toBeCloseTo(165, 1);
+});
 
-   it('calculates distance between points', () => {
-      const points = [
-         expectGeoPoint([-122, 48]),
-         expectGeoPoint([-121, 49]),
-         expectGeoPoint([-120, 50])
-      ];
-      expect(measure.length(points)).within(165, 166);
-   });
+test('calculates distance between points', () => {
+   const points = [
+      expectGeoPoint([-122, 48]),
+      expectGeoPoint([-121, 49]),
+      expectGeoPoint([-120, 50])
+   ];
+   expect(measure.length(points)).toBeCloseTo(165, 1);
 });

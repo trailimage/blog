@@ -1,17 +1,8 @@
-import {
-   alphabet,
-   month,
-   weekday,
-   header,
-   httpStatus,
-   mimeType,
-   encoding,
-   Time
-} from '@toba/utility';
+import { Time } from '@toba/utility';
 
-const yard = 3;
-const mile = yard * 1760;
-const equator = mile * 24901;
+//const yard = 3;
+//const mile = yard * 1760;
+//const equator = mile * 24901;
 
 export {
    month,
@@ -80,19 +71,3 @@ export const time = {
    DAY: Time.Day,
    WEEK: Time.Week
 };
-
-// export default {
-//    // distances in terms of feet
-//    distance: { EQUATOR: equator, MILE: mile, YARD: yard },
-//    time,
-//    month,
-//    weekday,
-//    httpStatus,
-//    alphabet,
-//    logTo,
-//    route,
-//    encoding,
-//    flickrSize,
-//    mimeType,
-//    header
-// };
