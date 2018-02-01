@@ -1,6 +1,6 @@
 import { Blog } from '../types/';
 import is from '../is';
-import ld from '../json-ld';
+import { serialize, owner } from '../json-ld';
 import config from '../config';
 import { page } from '../template';
 import library from '../library';
@@ -23,7 +23,7 @@ function about(_req: Blog.Request, res: Blog.Response) {
    res.sendView(page.ABOUT, {
       templateValues: {
          title: 'About ' + config.site.title,
-         jsonLD: ld.serialize(ld.owner)
+         jsonLD: serialize(owner)
       }
    });
 }

@@ -1,5 +1,5 @@
 import config from '../config';
-import is from '../is';
+import { is } from '@toba/utility';
 import xml from './xml';
 import measure from './measure';
 import index from './';

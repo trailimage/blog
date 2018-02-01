@@ -1,6 +1,6 @@
 import { Blog, Category } from '../types/';
-import is from '../is';
-import ld from '../json-ld';
+import { is } from '@toba/utility';
+import { fromCategory, serialize } from '../json-ld';
 import config from '../config';
 import util from '../util/';
 import template from '../template';
@@ -15,7 +15,7 @@ function view(res: Blog.Response, path: string, homePage = false) {
 
          if (is.value(category)) {
             category.ensureLoaded().then(() => {
-               const linkData = ld.fromCategory(category, path, homePage);
+               const linkData = fromCategory(category, path, homePage);
                const count = category.posts.length;
                const options = { posts: category.posts };
                const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
@@ -79,7 +79,7 @@ function list(req: Blog.Request, res: Blog.Response) {
             const category = library.categoryWithKey(key);
 
             if (is.value(category)) {
-               const linkData = ld.fromCategory(category);
+               const linkData = fromCategory(category);
                const count = category.subcategories.length;
                const options = { subcategories: category.subcategories };
                const subtitle = 'Subcategories';
@@ -128,7 +128,7 @@ function renderCategory(
       template,
       Object.assign(options, {
          title: category.title,
-         jsonLD: ld.serialize(linkData),
+         jsonLD: serialize(linkData),
          headerCSS: config.style.css.categoryHeader,
          subtitle: util.number.say(childCount) + ' ' + subtitle
       })

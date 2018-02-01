@@ -9,7 +9,9 @@ import factory from './factory/';
 import route from './routes';
 import * as compress from 'compression';
 import * as bodyParser from 'body-parser';
-import middleware from './middleware';
+import { enableStatusHelpers } from './middleware/helpers';
+import { blockSpamReferers } from './middleware/spamblock';
+import { enableViewCache } from './middleware/viewcache';
 import * as wwwhisper from 'connect-wwwhisper';
 
 const root = path.normalize(__dirname + '/../');
@@ -20,7 +22,11 @@ function createWebService() {
    const app = Express();
    const port = process.env['PORT'] || 3000;
 
-   log.infoIcon('power-settings_new', 'Starting %s application', config.isProduction ? 'production' : 'development');
+   log.infoIcon(
+      'power-settings_new',
+      'Starting %s application',
+      config.isProduction ? 'production' : 'development'
+   );
 
    defineViews(app);
 
@@ -51,10 +57,13 @@ function defineViews(app: Express.Application) {
    // http://expressjs.com/4x/api.html#app-settings
    app.set('views', views);
    app.set('view engine', engine);
-   app.engine(engine, hbs.express4({
-      defaultLayout: views + template.layout.MAIN + '.hbs',
-      partialsDir: views + 'partials'
-   }));
+   app.engine(
+      engine,
+      hbs.express4({
+         defaultLayout: views + template.layout.MAIN + '.hbs',
+         partialsDir: views + 'partials'
+      })
+   );
 
    template.assignHelpers(hbs);
 }
@@ -64,7 +73,7 @@ function defineViews(app: Express.Application) {
  */
 function applyMiddleware(app: Express.Application) {
    // https://github.com/expressjs/compression/blob/master/README.md
-   app.use(middleware.blockSpamReferers);
+   app.use(blockSpamReferers);
 
    if (config.usePersona) {
       // use wwwhisper middleware to authenticate some routes
@@ -77,14 +86,18 @@ function applyMiddleware(app: Express.Application) {
    // needed to parse admin page posts with extended enabled for form select arrays
    app.use('/admin', bodyParser.urlencoded({ extended: true }));
    app.use(compress({}));
-   app.use(middleware.enableStatusHelpers);
-   app.use(middleware.enableViewCache);
+   app.use(enableStatusHelpers);
+   app.use(enableViewCache);
    app.use(Express.static(root + 'dist'));
 }
 
 // this should be what Express already supports but it isn't behaving as expected
 function filter(regex: RegExp, fn: Function) {
    return (req: Blog.Request, res: Blog.Response, next: Function) => {
-      if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
+      if (regex.test(req.originalUrl)) {
+         fn(req, res, next);
+      } else {
+         next();
+      }
    };
 }

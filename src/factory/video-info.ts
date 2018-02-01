@@ -4,7 +4,7 @@ import re from '../regex';
 /**
  * Get video ID and dimensions
  */
-function make(setInfo: Flickr.SetInfo): VideoInfo {
+export function makeVideo(setInfo: Flickr.SetInfo): VideoInfo {
    const d = setInfo.description._content;
 
    if (re.video.test(d)) {
@@ -23,5 +23,3 @@ function make(setInfo: Flickr.SetInfo): VideoInfo {
       return null;
    }
 }
-
-export default { make };

@@ -1,85 +1,63 @@
-const C = require('../../lib/constants').default;
-const cache = require('../../lib/cache').default;
+import { httpStatus, header, mimeType } from '../constants';
+import cache from '../cache';
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
-const config = require('../../lib/config').default;
-const middleware = require('../../lib/middleware').default;
-const factory = require('../../lib/factory').default;
-const mocha = require('mocha');
-const { expect } = require('chai');
-const c = require('../../lib/controllers/').default;
+import config from '../config';
+import factory from '../factory';
+import { enableViewCache } from '../middleware/viewcache';
+import { enableStatusHelpers } from '../middleware/helpers';
 
 /**
  * Expect standard Handlexitebars template response
- * @param {string} name Template name
- * @returns {object}
  */
-function expectTemplate(name) {
-   expect(res.httpStatus).equals(C.httpStatus.OK);
-   expect(res.rendered).has.property('template', name);
-   expect(res.rendered).has.property('options');
+export function expectTemplate(name: string) {
+   expect(res.httpStatus).toBe(C.httpStatus.OK);
+   expect(res.rendered).toHaveProperty('template', name);
+   expect(res.rendered).toHaveProperty('options');
    return res.rendered.options;
 }
 
-/**
- * @param {string} path Redirection target
- */
-function expectRedirect(path) {
-   expect(res.redirected).to.exist;
-   expect(res.redirected).has.property(
+export function expectRedirect(path: string) {
+   expect(res.redirected).toBeDefined();
+   expect(res.redirected).toHaveProperty(
       'status',
       C.httpStatus.PERMANENT_REDIRECT
    );
-   expect(res.redirected).has.property('url', path);
+   expect(res.redirected).toHaveProperty('url', path);
 }
 
 /**
  * Expectations for JSON responses
- * @returns {string|object} response content
  */
-function expectJSON() {
-   expect(res.httpStatus).equals(C.httpStatus.OK);
-   expect(res.headers).has.property(C.header.content.TYPE, C.mimeType.JSON);
-   expect(res.rendered).has.property('json');
-   expect(res.rendered.json).has.property('success', true);
-   expect(res.rendered.json).has.property('message');
+export function expectJSON() {
+   expect(res.httpStatus).toBe(httpStatus.OK);
+   expect(res.headers).toHaveProperty(header.content.TYPE, mimeType.JSON);
+   expect(res.rendered).toHaveProperty('json');
+   expect(res.rendered.json).toHaveProperty('success', true);
+   expect(res.rendered.json).toHaveProperty('message');
    return res.rendered.json.message;
 }
 
 /**
  * Run exists() method for each key and confirm it does or does not exist
- * @param {string[]} keys
- * @param {boolean} [exists]
- * @returns {Promise}
  */
-function expectInCache(keys, exists = true) {
+export function expectInCache(keys: string[], exists = true) {
    return (
       Promise.all(keys.map(k => cache.view.exists(k)))
          // all() returns an array of outputs from each method
          .then(results => {
-            results.forEach(r => expect(r).equals(exists));
+            results.forEach(r => expect(r).toBe(exists));
          })
    );
 }
 
-/**
- * @param {function} done
- */
-function prepare(done) {
+export function prepare(done: Function) {
    config.testing = true;
    factory.inject.flickr = require('../mocks/flickr.mock');
    factory.inject.google = require('../mocks/google.mock');
    factory.buildLibrary().then(() => {
-      middleware.enableStatusHelpers(req, res, () => {
-         middleware.enableViewCache(req, res, done);
+      enableStatusHelpers(req, res, () => {
+         enableViewCache(req, res, done);
       });
    });
 }
-
-module.exports = {
-   prepare,
-   expectTemplate,
-   expectRedirect,
-   expectJSON,
-   expectInCache
-};

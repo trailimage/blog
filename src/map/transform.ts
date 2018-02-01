@@ -1,6 +1,6 @@
 import { MapProperties } from '../types/';
 import { titleCase } from '../util/text';
-import is from '../is';
+import { is } from '@toba/utility';
 
 /**
  * Travel restriction categories.

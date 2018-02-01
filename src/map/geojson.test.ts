@@ -17,7 +17,7 @@ test('converts GPX files to GeoJSON', () => {
       .loadGPX(post)
       .then(geoJSON.featuresFromGPX)
       .then(geo => {
-         expect(geo).to.exist;
+         expect(geo).toBeDefined();
          expect(geo).has.property('type', geoJSON.type.COLLECTION);
          expect(geo).has.property('features');
          expect(geo.features).is.instanceOf(Array);
@@ -41,7 +41,7 @@ test('converts KML files to GeoJSON', () =>
       //    .then(kml.fromKMZ)
       //    .then(geoJSON.featuresFromKML('Idaho Geological Survey'))
       //    .then(geo => {
-      //       expect(geo).to.exist;
+      //       expect(geo).toBeDefined();
       //       expect(geo).has.property('type', geoJSON.type.COLLECTION);
       //       expect(geo).has.property('features');
       //       expect(geo.features).is.instanceOf(Array);
@@ -55,6 +55,6 @@ test('converts KML files to GeoJSON', () =>
          .then(kml.fromKMZ)
          .then(geoJSON.featuresFromKML('Idaho Parks & Recreation'))
          .then(geo => {
-            expect(geo).to.exist;
+            expect(geo).toBeDefined();
          })
    ])); //.timeout(15000);

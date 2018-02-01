@@ -1,5 +1,5 @@
 import { Blog, Post, Provider, MapSource } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import log from '../logger';
 import fetch, { Response } from 'node-fetch';
 import config from '../config';

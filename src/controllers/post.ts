@@ -1,6 +1,6 @@
 import { Blog } from '../types/';
-import is from '../is';
-import ld from '../json-ld';
+import { is } from '@toba/utility';
+import { fromPost, serialize } from '../json-ld';
 import template from '../template';
 import library from '../library';
 import { route as ph, httpStatus } from '../constants';
@@ -24,7 +24,7 @@ function view(
                   post: p,
                   title: p.title,
                   // https://developers.google.com/structured-data/testing-tool/
-                  jsonLD: ld.serialize(ld.fromPost(p)),
+                  jsonLD: serialize(fromPost(p)),
                   description: p.longDescription,
                   slug: key,
                   layout: template.layout.NONE

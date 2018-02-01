@@ -1,4 +1,4 @@
-import is from '../is';
+import { is } from '@toba/utility';
 import { Size } from './models';
 
 function make(json: any, sizeField: string | string[]): Size {

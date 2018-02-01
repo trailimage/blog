@@ -10,7 +10,7 @@ import photoSize from './photo-size';
 /**
  * Parse Flickr photo summary
  */
-function make(json: Flickr.PhotoSummary, index: number): Photo {
+export function makePhoto(json: Flickr.PhotoSummary, index: number): Photo {
    return {
       id: json.id,
       index: index + 1,
@@ -53,7 +53,7 @@ function make(json: Flickr.PhotoSummary, index: number): Photo {
  * https://en.wikipedia.org/wiki/Outlier
  * http://www.wikihow.com/Calculate-Outliers
  */
-function identifyOutliers(photos: Photo[]) {
+export function identifyOutliers(photos: Photo[]) {
    const median = (values: number[]) => {
       const half = Math.floor(values.length / 2);
       return values.length % 2 !== 0
@@ -91,11 +91,3 @@ function identifyOutliers(photos: Photo[]) {
       }
    }
 }
-
-export default {
-   make,
-   identifyOutliers
-   // inject: {
-   //    set flickr(f:Provider.Flickr) { flickr = f; }
-   // }
-};

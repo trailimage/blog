@@ -1,5 +1,5 @@
 import { Category, Post, Flickr } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import post from './post';
 import { slug } from '../util/text';
 import config from '../config';

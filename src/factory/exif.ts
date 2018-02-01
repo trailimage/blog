@@ -1,5 +1,5 @@
 import { Flickr, EXIF } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import re from '../regex';
 
 function make(flickrExif: Flickr.Exif[]): EXIF {

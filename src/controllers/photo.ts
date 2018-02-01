@@ -1,5 +1,5 @@
 import { Blog } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import config from '../config';
 import util from '../util/';
 import template from '../template';

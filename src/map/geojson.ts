@@ -1,7 +1,7 @@
 /// <reference types="geojson" />
 
 import { Photo, MapPhoto } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import log from '../logger';
 import gpx from './gpx';
 import kml from './kml';

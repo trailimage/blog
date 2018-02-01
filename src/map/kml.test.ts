@@ -10,7 +10,7 @@ it.skip('extracts KML from KMZ', () =>
          expect(doc).toBeDefined();
       })); //.timeout(10000);
 
-it('parses HTML property descriptions', () => {
+test('parses HTML property descriptions', () => {
    const properties = {
       name: 'Test Name',
       description: sample

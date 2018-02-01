@@ -1,5 +1,5 @@
 import { MapProperties } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import xml from './xml';
 //import * as stream from 'stream';
 import { DOMParser as DOM } from 'xmldom';
