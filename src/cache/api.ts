@@ -1,4 +1,4 @@
-import is from '../is';
+import { is } from '@toba/utility';
 import redis from '../providers/redis';
 
 const prefix = 'api:';

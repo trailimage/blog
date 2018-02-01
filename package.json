@@ -12,13 +12,16 @@
    },
    "main": "lib/app.js",
    "scripts": {
-      "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
+      "test-pretty":
+         "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
       "test": "node_modules/.bin/mocha --recursive --reporter spec",
       "tstest": "node_modules/.bin/mocha -r ts-node/register",
       "watch": "node_modules/.bin/gulp watch",
       "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
-      "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
-      "renamed_from_postinstall": "yarn add git+https://github.com/wrr/connect-injector.git"
+      "webfont":
+         "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+      "renamed_from_postinstall":
+         "yarn add git+https://github.com/wrr/connect-injector.git"
    },
    "dependencies": {
       "body-parser": "^1.18.0",
@@ -52,11 +55,11 @@
       "@types/facebook-js-sdk": "^2.8.2",
       "@types/gapi": "0.0.35",
       "@types/geojson": "^1.0.1",
-      "@types/google.analytics": "0.0.36",
+      "@types/google.analytics": "^0.0.37",
       "@types/googlemaps": "^3.26.13",
       "@types/jquery": "^3.2.6",
-      "@types/jszip": "3.1.0",
-      "@types/mapbox-gl": "^0.40.0",
+      "@types/jszip": "^3.1.0",
+      "@types/mapbox-gl": "^0.43.2",
       "@types/node-fetch": "^1.6.7",
       "@types/redis": "^2.8.0",
       "@types/request": "^2.0.0",
@@ -94,22 +97,11 @@
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },
-      "transformIgnorePatterns": [
-         "<rootDir>/node_modules/(?!@toba)"
-      ],
+      "transformIgnorePatterns": ["<rootDir>/node_modules/(?!@toba)"],
       "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-      "moduleFileExtensions": [
-         "ts",
-         "tsx",
-         "js",
-         "jsx",
-         "json",
-         "node"
-      ]
+      "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
    },
    "stylelint": {
-      "plugins": [
-         "@toba/lint/style"
-      ]
+      "plugins": ["@toba/lint/style"]
    }
 }

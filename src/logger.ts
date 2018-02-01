@@ -1,4 +1,4 @@
-import is from './is';
+import { is } from '@toba/utility';
 import util from './util/';
 import config from './config';
 import { logTo, time, month, weekday } from './constants';

@@ -1,25 +1,23 @@
-const C = require('../lib/constants').default;
-const cache = require('../lib/cache').default;
-const config = require('../lib/config').default;
-const mocha = require('mocha');
-const expect = require('chai').expect;
+import { httpStatus } from './constants';
+import cache from './cache/index';
+import config from './config';
 const res = require('./mocks/response.mock');
 const req = require('./mocks/request.mock');
-const middleware = require('../lib/middleware').default;
+import middleware from './middleware';
 
-describe('Middleware', () => {
+
    beforeEach(() => {
       res.reset();
       req.reset();
    });
 
-   describe('Block Spam Referers', () => {
-      it('blocks black-listed URLs', done => {
+
+      test('blocks black-listed URLs', done => {
          req.referer = 'http://2323423423.copyrightclaims.org';
          res.onEnd = error => {
-            expect(error).is.undefined;
-            expect(res.ended).is.true;
-            expect(res.httpStatus).equals(C.httpStatus.NOT_FOUND);
+            expect(error).not.toBeDefined();
+            expect(res.ended).toBe(true);
+            expect(res.httpStatus).equals(httpStatus.NOT_FOUND);
             done();
          };
          middleware.blockSpamReferers(req, res, res.onEnd);
@@ -28,8 +26,8 @@ describe('Middleware', () => {
       it('allows unlisted URLs', done => {
          req.referer = 'http://microsoft.com';
          res.onEnd = error => {
-            expect(error).is.undefined;
-            expect(res.httpStatus).not.equals(C.httpStatus.NOT_FOUND);
+            expect(error).not.toBeDefined()
+            expect(res.httpStatus).not.equals(httpStatus.NOT_FOUND);
             done();
          };
          middleware.blockSpamReferers(req, res, res.onEnd);
@@ -38,7 +36,7 @@ describe('Middleware', () => {
       it('caches black list', done => {
          res.onEnd = () => {
             cache.getItem(middleware.spamBlackListCacheKey).then(value => {
-               expect(value).to.exist;
+               expect(value).toBeDefined();
                expect(value).to.be.an('array');
                expect(value.length).at.least(100);
                done();
@@ -50,10 +48,9 @@ describe('Middleware', () => {
       it.skip('refreshes the cache after a period of time', () => {
          // needs to call private method
       });
-   });
 
-   describe('Status Helpers', () => {
-      // add helper expando methods
+
+         // add helper expando methods
       before(done => {
          middleware.enableStatusHelpers(req, res, done);
       });
@@ -65,7 +62,7 @@ describe('Middleware', () => {
          req.headers['x-forwarded-for'] = 'value1, value2';
          expect(req.clientIP()).equals('value1');
       });
-   });
+
 
    describe('View Cache', () => {
       const viewSlug = 'test-slug';

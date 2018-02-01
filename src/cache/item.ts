@@ -1,6 +1,6 @@
 import { Cache } from '../types/';
-import is from '../is';
-import C from '../constants';
+import { is } from '@toba/utility';
+import { encoding } from '../constants';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
 
@@ -34,7 +34,7 @@ export function create(
  */
 export const serialize = (item: Cache.Item) =>
    JSON.stringify({
-      buffer: item.buffer.toString(C.encoding.HEXADECIMAL),
+      buffer: item.buffer.toString(encoding.HEXADECIMAL),
       eTag: item.eTag
    });
 
@@ -44,7 +44,7 @@ export function deserialize(item: {
 }): Cache.Item {
    return is.value(item)
       ? {
-           buffer: Buffer.from(item.buffer, C.encoding.HEXADECIMAL),
+           buffer: Buffer.from(item.buffer, encoding.HEXADECIMAL),
            eTag: item.eTag
         }
       : null;

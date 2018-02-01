@@ -1,114 +1,110 @@
-const mocha = require('mocha');
-const { expect } = require('chai');
-const factory = require('../lib/factory').default;
-const library = require('../lib/library').default;
+import factory from './factory';
+import library from './library';
 
 factory.inject.flickr = require('./mocks/flickr.mock');
 
-describe('Library', () => {
-   before(() => factory.buildLibrary());
+beforeAll(() => factory.buildLibrary());
 
-   it('is created by factory', () => {
-      expect(library.loaded).is.true;
-   });
+test('is created by factory', () => {
+   expect(library.loaded).toBe(true);
+});
 
-   it('has root categories', () => {
-      expect(library.categories).to.contain.all.keys([
-         'What',
-         'When',
-         'Where',
-         'Who'
-      ]);
-   });
+test('has root categories', () => {
+   expect(library.categories).to.contain.all.keys([
+      'What',
+      'When',
+      'Where',
+      'Who'
+   ]);
+});
 
-   it('returns category for key', () => {
-      const what = library.categoryWithKey('what');
-      expect(what).to.exist;
-      expect(what.title).equals('What');
-      expect(what.isChild).is.not.true;
-      expect(what.isParent).is.true;
+test('returns category for key', () => {
+   const what = library.categoryWithKey('what');
+   expect(what).toBeDefined();
+   expect(what.title).toBe('What');
+   expect(what.isChild).toBe(false);
+   expect(what.isParent).toBe(true);
 
-      const bicycle = library.categoryWithKey('what/bicycle');
-      expect(bicycle).to.exist;
-      expect(bicycle.title).equals('Bicycle');
-      expect(bicycle.isChild).is.true;
-      expect(bicycle.isParent).is.not.true;
-   });
+   const bicycle = library.categoryWithKey('what/bicycle');
+   expect(bicycle).toBeDefined();
+   expect(bicycle.title).toBe('Bicycle');
+   expect(bicycle.isChild).toBe(true);
+   expect(bicycle.isParent).toBe(false);
+});
 
-   it('returns keys for category', () => {
-      const all = library.categoryKeys();
-      const two = library.categoryKeys(['When', 'Bicycle']);
+test('returns keys for category', () => {
+   const all = library.categoryKeys();
+   const two = library.categoryKeys(['When', 'Bicycle']);
 
-      expect(all).is.lengthOf(62);
-      expect(all).to.include('what/jeep-wrangler');
+   expect(all).toHaveLength(62);
+   expect(all).to.include('what/jeep-wrangler');
 
-      expect(two).is.lengthOf(2);
-      expect(two).to.include('what/bicycle');
-   });
+   expect(two).toHaveLength(2);
+   expect(two).to.include('what/bicycle');
+});
 
-   it('includes all photo tags with their full names', () => {
-      expect(library.tags).to.contain.all.keys([
-         'algae',
-         'andersonranchreservoir',
-         'dam',
-         'horse',
-         'jason'
-      ]);
-      expect(library.tags['andersonranchreservoir']).equals(
-         'Anderson Ranch Reservoir'
-      );
-   });
+test('includes all photo tags with their full names', () => {
+   expect(library.tags).to.contain.all.keys([
+      'algae',
+      'andersonranchreservoir',
+      'dam',
+      'horse',
+      'jason'
+   ]);
+   expect(library.tags['andersonranchreservoir']).toBe(
+      'Anderson Ranch Reservoir'
+   );
+});
 
-   it('has post summaries', () => {
-      expect(library.posts).is.lengthOf(168);
-   });
+test('has post summaries', () => {
+   expect(library.posts).toHaveLength(168);
+});
 
-   it('finds posts by ID or key', () => {
-      const post1 = library.postWithID('72157666685116730');
+test('finds posts by ID or key', () => {
+   const post1 = library.postWithID('72157666685116730');
 
-      expect(post1).to.exist;
-      expect(post1.title).equals('Spring Fish & Chips');
-      expect(post1.photoCount).equals(13);
+   expect(post1).toBeDefined();
+   expect(post1.title).toBe('Spring Fish & Chips');
+   expect(post1.photoCount).toBe(13);
 
-      const post2 = library.postWithKey('owyhee-snow-and-sand/lowlands');
+   const post2 = library.postWithKey('owyhee-snow-and-sand/lowlands');
 
-      expect(post2).to.exist;
-      expect(post2.title).equals('Owyhee Snow and Sand');
-      expect(post2.subTitle).equals('Lowlands');
-      expect(post2.photoCount).equals(13);
-   });
+   expect(post2).toBeDefined();
+   expect(post2.title).toBe('Owyhee Snow and Sand');
+   expect(post2.subTitle).toBe('Lowlands');
+   expect(post2.photoCount).toBe(13);
+});
 
-   it('removes posts', () => {
-      let post = library.postWithKey('owyhee-snow-and-sand/lowlands');
-      expect(post).to.exist;
-      library.remove(post.key);
-      post = library.postWithKey('owyhee-snow-and-sand/lowlands');
-      expect(post).to.not.exist;
-   });
+test('removes posts', () => {
+   let post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+   expect(post).toBeDefined();
+   library.remove(post.key);
+   post = library.postWithKey('owyhee-snow-and-sand/lowlands');
+   expect(post).not.toBeDefined();
+});
 
-   it('finds post having a photo', () =>
-      library.getPostWithPhoto('8459503474').then(post => {
-         expect(post).to.exist;
-         expect(post).has.property('id', '72157632729508554');
-      }));
+test('finds post having a photo', () =>
+   library.getPostWithPhoto('8459503474').then(post => {
+      expect(post).toBeDefined();
+      expect(post).toHaveProperty('id', '72157632729508554');
+   }));
 
-   it('finds photos with tags', () =>
-      library.getPhotosWithTags('horse').then(photos => {
-         expect(photos).to.exist;
-         expect(photos).is.instanceOf(Array);
-         expect(photos).to.have.length.above(10);
-         expect(photos[0]).to.contain.all.keys(['id', 'size']);
-      }));
+test('finds photos with tags', () =>
+   library.getPhotosWithTags('horse').then(photos => {
+      expect(photos).toBeDefined();
+      expect(photos).is.instanceOf(Array);
+      expect(photos).to.have.length.above(10);
+      expect(photos[0]).to.contain.all.keys(['id', 'size']);
+   }));
 
-   it('creates list of post keys', () => {
-      const keys = library.postKeys();
-      expect(keys).is.lengthOf(167);
-      expect(keys).to.include('brother-ride-2015/simmons-creek');
-   });
+test('creates list of post keys', () => {
+   const keys = library.postKeys();
+   expect(keys).toHaveLength(167);
+   expect(keys).to.include('brother-ride-2015/simmons-creek');
+});
 
-   it('can be emptied', () => {
-      library.empty();
-      expect(library.loaded).is.not.true;
-      expect(library.posts).is.empty;
-   });
+test('can be emptied', () => {
+   library.empty();
+   expect(library.loaded).toBe(false);
+   expect(library.posts).is.empty;
 });

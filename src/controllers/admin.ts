@@ -1,5 +1,5 @@
 import { Blog } from '../types/';
-import is from '../is';
+import { is } from '@toba/utility';
 import log from '../logger';
 import flickr from '../providers/flickr';
 import cache from '../cache/';
