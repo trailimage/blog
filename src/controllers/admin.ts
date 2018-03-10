@@ -1,6 +1,6 @@
 import { Blog } from '../types/';
-import { is } from '@toba/utility';
-import log from '../logger';
+import { is } from '@toba/tools';
+import log from '@toba/logger';
 import flickr from '../providers/flickr';
 import cache from '../cache/';
 import config from '../config';

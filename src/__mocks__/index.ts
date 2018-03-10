@@ -12,7 +12,7 @@ export const fontFile = 'test/pdf/droidsans.ttf';
 /**
  * Technique that supports large text files
  */
-export const loadBigFile = (name: string) => new Promise(resolve => {
+export const loadBigFile = (name: string) => new Promise<string>(resolve => {
    const input = fs.createReadStream(localPath(name));
    const output: NodeJS.WritableStream = new Stream() as NodeJS.WritableStream;
    const rl = readline.createInterface(input, output);
