@@ -23,5 +23,6 @@
       "**/dist": true
    },
    "tslint.enable": true,
-   "eslint.enable": false
+   "eslint.enable": false,
+   "jest.autoEnable": false
 }
