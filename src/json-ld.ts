@@ -5,13 +5,11 @@ import {
    breadcrumb,
    organization,
    webPage,
-   place,
-   discoverAction
+   place
 } from '@toba/json-ld';
-import { Category, Post } from './types/';
-import is from './is';
+import { Category, Post, photoBlog } from './models/index';
+import { is } from '@toba/tools';
 import config from './config';
-import library from './library';
 
 export { serialize } from '@toba/json-ld';
 
@@ -129,7 +127,7 @@ export function fromCategory(
       if (category.key.includes('/')) {
          // implies category is a subscategory
          const rootKey = category.key.split('/')[0];
-         const rootCategory = library.categoryWithKey(rootKey);
+         const rootCategory = photoBlog.categoryWithKey(rootKey);
          schema.breadcrumb.push(
             breadcrumb(
                config.site.url + '/' + rootCategory.key,
