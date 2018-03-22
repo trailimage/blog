@@ -2,6 +2,7 @@ import { makePhotoSize } from './index';
 import { Photo } from '../models/index';
 import { Flickr } from '@toba/flickr';
 import { is } from '@toba/tools';
+import config from '../config';
 
 export function make(json: Flickr.PhotoSummary, index: number): Photo {
    const photo = new Photo(json.id, index);

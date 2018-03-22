@@ -1,4 +1,5 @@
-import { Token, Flickr } from './types/';
+import { Token } from './types/';
+import { ClientConfig as FlickrConfig, Flickr } from '@toba/flickr';
 import mapsource from './mapsource';
 import { flickrSize as s, logTo, time } from './constants';
 
@@ -6,10 +7,18 @@ const domain = 'trailimage.com';
 const isProduction = process.env['NODE_ENV'] === 'production';
 /** Preferred photo sizes */
 const sizes = {
-   thumb: s.SQUARE_150,
-   preview: s.SMALL_320,
-   normal: [s.LARGE_1024, s.MEDIUM_800, s.MEDIUM_640],
-   big: [s.LARGE_2048, s.LARGE_1600, s.LARGE_1024]
+   thumb: Flickr.SizeUrl.Square150,
+   preview: Flickr.SizeUrl.Small320,
+   normal: [
+      Flickr.SizeUrl.Large1024,
+      Flickr.SizeUrl.Medium800,
+      Flickr.SizeUrl.Medium640
+   ],
+   big: [
+      Flickr.SizeUrl.Large2048,
+      Flickr.SizeUrl.Large1600,
+      Flickr.SizeUrl.Large1024
+   ]
 };
 
 /**
@@ -39,12 +48,10 @@ const owner = {
    ]
 };
 
-const flickr = {
+const flickr: FlickrConfig = {
    userID: '60950751@N04',
    appID: '72157631007435048',
-   featureSets: [
-      { id: '72157632729508554', title: 'Ruminations' }
-   ] as Flickr.FeatureSet[],
+   featureSets: [{ id: '72157632729508554', title: 'Ruminations' }],
    sizes,
    /** Photo sizes that must be retrieved for certain contexts */
    photoSize: {

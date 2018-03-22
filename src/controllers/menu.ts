@@ -1,9 +1,9 @@
+import { photoBlog } from '../models/index';
 import { Blog } from '../types/';
 import config from '../config';
 //import log from "../logger";
-import { layout, page } from '../template';
-import library from '../library';
-import { mimeType } from '../constants';
+import { Layout, page } from '../template';
+import { MimeType } from '@toba/tools';
 import * as uglify from 'uglify-js';
 
 /**
@@ -29,9 +29,9 @@ function data(_req: Blog.Request, res: Blog.Response) {
 
    res.setHeader('Vary', 'Accept-Encoding');
    res.sendView(slug, {
-      mimeType: mimeType.JSONP,
+      mimeType: MimeType.JSONP,
       callback: render => {
-         render(slug, { library, layout: layout.NONE }, postProcess);
+         render(slug, { photoBlog, layout: Layout.None }, postProcess);
       }
    });
 }
@@ -40,7 +40,7 @@ function mobile(_req: Blog.Request, res: Blog.Response) {
    const slug = page.MOBILE_MENU_DATA;
    res.sendView(slug, {
       callback: render => {
-         render(slug, { library, layout: layout.NONE });
+         render(slug, { photoBlog, layout: Layout.None });
       }
    });
 }

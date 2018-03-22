@@ -1,9 +1,7 @@
 import { is } from '@toba/tools';
-import util from '../util/';
-import config from '../config';
-import { PhotoSize } from './index';
+import { PhotoSize, EXIF, IMakeJsonLD } from './index';
 
-export class Photo {
+export class Photo implements IMakeJsonLD {
    id: string = null;
    index: number;
    sourceUrl: string = null;
@@ -18,12 +16,14 @@ export class Photo {
    preview: PhotoSize = null;
    normal: PhotoSize = null;
    big: PhotoSize = null;
+
+   private _exif: EXIF = null;
+
    /**
     * Whether taken date is an outlier compared to other photos in the same post
     * @see http://www.wikihow.com/Calculate-Outliers
     */
    outlierDate?: boolean;
-   //getExif(): Promise<EXIF>;
 
    constructor(id: string, index: number) {
       this.id = id;
@@ -34,13 +34,13 @@ export class Photo {
    get tagList(this: Photo): string {
       return this.tags.join(',');
    }
-}
 
-// /**
-//  * @this {Photo}
-//  * @returns {Promise}
-//  */
-// function getEXIF() { return flickr.getExif(this.id).then(exif.make); }
+   getExif(): Promise<EXIF> {
+      return Promise.resolve(this._exif);
+   }
+
+   toJsonLD(): string {}
+}
 
 /**
  * Simplistic outlier calculation

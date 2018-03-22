@@ -50,8 +50,8 @@
     through2 "^2.0.3"
 
 "@toba/flickr@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.1.1.tgz#32463fb5117308e55de6b160b078d33eb3796a89"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.1.2.tgz#c1ad5d49bcd7c1513af47e0fee5b24fc50f4f782"
   dependencies:
     "@toba/logger" "^1.0.0"
     "@toba/oauth" "^1.1.0"

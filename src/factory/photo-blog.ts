@@ -64,7 +64,7 @@ export function make(emptyIfLoaded: boolean = true) {
       });
 }
 
-const getEXIF = (photoID: number): Promise<EXIF> =>
+const getEXIF = (photoID: string): Promise<EXIF> =>
    flickr.getExif(photoID).then(makeEXIF);
 
 function getPostWithPhoto(photo: Photo | string): Promise<Post> {

@@ -1,9 +1,8 @@
 import { Blog, JsonResponse } from '../types/';
-import { is } from '@toba/utility';
-import log from '../logger';
+import { is, HttpStatus } from '@toba/tools';
+import { log } from '@toba/logger';
 import config from '../config';
 import util from '../util/';
-import { httpStatus } from '../constants';
 
 /**
  * Express middleware: add expando methods to response and request objects.
@@ -26,11 +25,8 @@ export function enableStatusHelpers(
    };
 
    res.notFound = () => {
-      log.warnIcon(
-         'report_problem',
-         `${req.originalUrl} not found for ${req.clientIP()}`
-      );
-      res.status(httpStatus.NOT_FOUND);
+      log.warn(`${req.originalUrl} not found for ${req.clientIP()}`);
+      res.status(HttpStatus.NotFound);
       res.render(template.page.NOT_FOUND, { title: 'Page Not Found', config });
    };
 
@@ -38,7 +34,7 @@ export function enableStatusHelpers(
       if (is.value(err)) {
          log.error(err);
       }
-      res.status(httpStatus.INTERNAL_ERROR);
+      res.status(HttpStatus.InternalError);
       res.render(template.page.INTERNAL_ERROR, { title: 'Oops', config });
    };
 

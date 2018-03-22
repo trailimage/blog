@@ -1,14 +1,13 @@
-import { FlickrClient, Flickr } from '@toba/flickr';
+import { Flickr } from '@toba/flickr';
 import { slug, is } from '@toba/tools';
 import { Category, photoBlog, Post } from '../models/index';
 import { makePost } from './index';
+import config from '../config';
 
 export function make(collection: Flickr.Collection, root = false): Category {
    const category = new Category(slug(collection.title), collection.title);
-
-   // let exclude = config.flickr.excludeSets;
-   // const feature = config.flickr.featureSets;
-
+   const feature = config.flickr.featureSets;
+   let exclude = config.flickr.excludeSets;
    let p: Post = null;
 
    if (exclude === undefined) {
@@ -25,8 +24,8 @@ export function make(collection: Flickr.Collection, root = false): Category {
             // see if post is already present in the library in another category
             p = photoBlog.postWithID(s.id);
 
-            // create item object if it isn't part of an already added group
-            if (!is.value(p)) {
+            // create post if it isn't part of an already added category
+            if (!is.value<Post>(p)) {
                p = makePost(s);
             }
 
@@ -48,7 +47,8 @@ export function make(collection: Flickr.Collection, root = false): Category {
    }
 
    if (root && is.array(feature)) {
-      // sets to feature at the collection root can be manually defined in provider options
+      // sets to feature at the collection root can be manually defined in
+      // provider options
       for (const f of feature) {
          const p = makePost(f, false);
          p.feature = true;

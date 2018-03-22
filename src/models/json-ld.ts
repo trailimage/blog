@@ -7,9 +7,9 @@ import {
    webPage,
    place
 } from '@toba/json-ld';
-import { Category, Post, photoBlog } from './models/index';
+import { Category, Post, photoBlog, VideoInfo } from './index';
 import { is } from '@toba/tools';
-import config from './config';
+import config from '../config';
 
 export { serialize } from '@toba/json-ld';
 
@@ -55,53 +55,9 @@ export function discoverAction(post: Post): JsonLD.DiscoverAction {
 }
 
 /**
- * https://developers.google.com/structured-data/testing-tool/
- * https://developers.google.com/structured-data/rich-snippets/articles
- */
-export function fromPost(post: Post) {
-   const categoryTitle = Object.keys(post.categories).map(
-      key => post.categories[key]
-   );
-   const schema: JsonLD.BlogPosting = {
-      author: owner(),
-      name: post.title,
-      headline: post.title,
-      description: post.description,
-      image: image(post.coverPhoto.size.normal),
-      publisher: configOrg(),
-      mainEntityOfPage: configPage(post.key),
-      datePublished: post.createdOn,
-      dateModified: post.updatedOn,
-      articleSection: categoryTitle.join(',')
-   };
-
-   if (post.chronological && post.centroid != null) {
-      schema.locationCreated = postPlace(post);
-      schema.potentialAction = discoverAction(post);
-   }
-
-   // implement video when full source data is ready
-   // ld.video = Factory.fromVideo(post.video);
-
-   //if (is.empty(post.photoTagList)) {
-   //	content.keywords = config.keywords;
-   //} else {
-   //	content.keywords = config.alwaysKeywords + post.photoTagList;
-   //}
-
-   if (is.value(post.coverPhoto.size.thumb)) {
-      (schema.image as JsonLD.ImageObject).thumbnail = image(
-         post.coverPhoto.size.thumb
-      );
-   }
-
-   return ld<JsonLD.BlogPosting>('BlogPosting', schema);
-}
-
-/**
  * https://developers.google.com/structured-data/breadcrumbs
  */
-export function fromCategory(
+export function forCategory(
    category: Category,
    key: string = category.key,
    homePage = false
@@ -150,8 +106,8 @@ export function fromCategory(
 /**
  * Linked Data for YouTube video
  */
-export function fromVideo(v: any): JsonLD.VideoObject {
-   return v == null || v.empty
+export function forVideo(v: VideoInfo): JsonLD.VideoObject {
+   return v === null || v.empty
       ? null
       : ld<JsonLD.VideoObject>('VideoObject', {
            contentUrl: 'https://www.youtube.com/watch?v=' + v.id,
@@ -160,4 +116,48 @@ export function fromVideo(v: any): JsonLD.VideoObject {
            uploadDate: null,
            thumbnailUrl: null
         });
+}
+
+/**
+ * https://developers.google.com/structured-data/testing-tool/
+ * https://developers.google.com/structured-data/rich-snippets/articles
+ */
+export function forPost(p: Post): JsonLD.BlogPosting {
+   const categoryTitle = Object.keys(p.categories).map(
+      key => p.categories[key]
+   );
+   const schema: JsonLD.BlogPosting = {
+      author: owner(),
+      name: p.title,
+      headline: p.title,
+      description: p.description,
+      image: image(p.coverPhoto.size.normal),
+      publisher: configOrg(),
+      mainEntityOfPage: configPage(p.key),
+      datePublished: p.createdOn,
+      dateModified: p.updatedOn,
+      articleSection: categoryTitle.join(',')
+   };
+
+   if (this.chronological && this.centroid != null) {
+      schema.locationCreated = postPlace(p);
+      schema.potentialAction = discoverAction(p);
+   }
+
+   // implement video when full source data is ready
+   // ld.video = Factory.fromVideo(post.video);
+
+   //if (is.empty(post.photoTagList)) {
+   //	content.keywords = config.keywords;
+   //} else {
+   //	content.keywords = config.alwaysKeywords + post.photoTagList;
+   //}
+
+   if (is.value(this.coverPhoto.size.thumb)) {
+      (schema.image as JsonLD.ImageObject).thumbnail = image(
+         p.coverPhoto.size.thumb
+      );
+   }
+
+   return ld<JsonLD.BlogPosting>('BlogPosting', schema);
 }

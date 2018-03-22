@@ -1,24 +1,20 @@
-import { ld } from './json-ld';
-import factory from './factory';
-import { Category, Post } from './types/';
+import { makePhotoBlog } from '../factory/index';
+import { Category, Post, photoBlog } from './index';
 
 let post: Post = null;
 let category: Category = null;
 
-factory.inject.flickr = require('./mocks/flickr.mock');
-
-beforeAll(() =>
-   factory.buildLibrary().then(library => {
-      post = library.postWithID('72157666685116730');
-      category = library.categoryWithKey('what');
-      return post.getPhotos();
-   })
-);
+beforeAll(async () => {
+   await makePhotoBlog();
+   post = photoBlog.postWithID('72157666685116730');
+   category = photoBlog.categoryWithKey('what');
+   await post.getPhotos();
+});
 
 test('creates link data for posts', () => {
-   const schema = ld.fromPost(post);
+   const schema = post.toJsonLD();
 
-   expect(schema).to.contain.all.keys([
+   expect(schema).toHaveProperty([
       'author',
       'name',
       'publisher',
@@ -30,7 +26,7 @@ test('creates link data for posts', () => {
    expect(schema.headline).toBe(schema.name);
    expect(schema.author).toHaveProperty('name', 'Jason Abbott');
    expect(schema.publisher).toHaveProperty('name', 'Trail Image');
-   expect(schema.articleSection).to.contain('Family');
+   expect(schema.articleSection).toContain('Family');
 });
 
 test('creates link data for categories', () => {

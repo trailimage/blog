@@ -1,21 +1,21 @@
 import { Blog } from '../types/';
-import { is } from '@toba/utility';
+import { photoBlog } from '../models/index';
+import { is, alphabet } from '@toba/tools';
 import config from '../config';
 import util from '../util/';
-import template from '../template';
-import library from '../library';
-import { route as ph, alphabet } from '../constants';
+import { Page, Layout } from '../template';
+import { RouteParam } from '../routes';
 
 /**
  * Small HTML table of EXIF values for given photo
  */
 function exif(req: Blog.Request, res: Blog.Response) {
-   library
-      .getEXIF(req.params[ph.PHOTO_ID])
+   photoBlog
+      .getEXIF(req.params[RouteParam.PhotoID])
       .then(exif => {
-         res.render(template.page.EXIF, {
+         res.render(Page.EXIF, {
             EXIF: exif,
-            layout: template.layout.NONE
+            layout: Layout.None
          });
       })
       .catch(res.notFound);
@@ -25,15 +25,17 @@ function exif(req: Blog.Request, res: Blog.Response) {
  * Photos with tag rendered in response to click on label in photo tags page.
  */
 function withTag(req: Blog.Request, res: Blog.Response) {
-   const slug = normalizeTag(decodeURIComponent(req.params[ph.PHOTO_TAG]));
+   const slug = normalizeTag(
+      decodeURIComponent(req.params[RouteParam.PhotoTag])
+   );
 
-   library
+   photoBlog
       .getPhotosWithTags(slug)
       .then(photos => {
          if (photos === null || photos.length == 0) {
             res.notFound();
          } else {
-            const tag = library.tags[slug];
+            const tag = photoBlog.tags[slug];
             const title =
                util.number.say(photos.length) +
                ' &ldquo;' +
@@ -41,11 +43,11 @@ function withTag(req: Blog.Request, res: Blog.Response) {
                '&rdquo; Image' +
                (photos.length != 1 ? 's' : '');
 
-            res.render(template.page.PHOTO_SEARCH, {
+            res.render(Page.PhotoSearch, {
                photos,
                config,
                title,
-               layout: template.layout.NONE
+               layout: Layout.None
             });
          }
       })
@@ -53,8 +55,10 @@ function withTag(req: Blog.Request, res: Blog.Response) {
 }
 
 function tags(req: Blog.Request, res: Blog.Response) {
-   let selected = normalizeTag(decodeURIComponent(req.params[ph.PHOTO_TAG]));
-   const list = library.tags;
+   let selected = normalizeTag(
+      decodeURIComponent(req.params[RouteParam.PhotoTag])
+   );
+   const list = photoBlog.tags;
    const keys = Object.keys(list);
    const tags: { [key: string]: { [key: string]: string } } = {};
 
@@ -74,7 +78,7 @@ function tags(req: Blog.Request, res: Blog.Response) {
       }
    }
 
-   res.render(template.page.PHOTO_TAG, {
+   res.render(Page.PhotoTag, {
       tags,
       selected,
       alphabet,

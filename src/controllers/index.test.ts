@@ -1,17 +1,14 @@
-import { httpStatus, header, mimeType } from '../constants';
+import { HttpStatus, Header, MimeType } from '@toba/tools';
 import cache from '../cache';
-const res = require('../mocks/response.mock');
-const req = require('../mocks/request.mock');
 import config from '../config';
-import factory from '../factory';
 import { enableViewCache } from '../middleware/viewcache';
 import { enableStatusHelpers } from '../middleware/helpers';
 
 /**
- * Expect standard Handlexitebars template response
+ * Expect standard Handlebars template response
  */
 export function expectTemplate(name: string) {
-   expect(res.httpStatus).toBe(C.httpStatus.OK);
+   expect(res.httpStatus).toBe(HttpStatus.OK);
    expect(res.rendered).toHaveProperty('template', name);
    expect(res.rendered).toHaveProperty('options');
    return res.rendered.options;
@@ -21,7 +18,7 @@ export function expectRedirect(path: string) {
    expect(res.redirected).toBeDefined();
    expect(res.redirected).toHaveProperty(
       'status',
-      C.httpStatus.PERMANENT_REDIRECT
+      HttpStatus.PermanentRedirect
    );
    expect(res.redirected).toHaveProperty('url', path);
 }
@@ -30,8 +27,8 @@ export function expectRedirect(path: string) {
  * Expectations for JSON responses
  */
 export function expectJSON() {
-   expect(res.httpStatus).toBe(httpStatus.OK);
-   expect(res.headers).toHaveProperty(header.content.TYPE, mimeType.JSON);
+   expect(res.httpStatus).toBe(HttpStatus.OK);
+   expect(res.headers).toHaveProperty(Header.Content.Type, MimeType.JSON);
    expect(res.rendered).toHaveProperty('json');
    expect(res.rendered.json).toHaveProperty('success', true);
    expect(res.rendered.json).toHaveProperty('message');
@@ -53,8 +50,6 @@ export function expectInCache(keys: string[], exists = true) {
 
 export function prepare(done: Function) {
    config.testing = true;
-   factory.inject.flickr = require('../mocks/flickr.mock');
-   factory.inject.google = require('../mocks/google.mock');
    factory.buildLibrary().then(() => {
       enableStatusHelpers(req, res, () => {
          enableViewCache(req, res, done);

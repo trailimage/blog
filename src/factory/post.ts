@@ -1,7 +1,8 @@
-import { Flickr, FlickrClient } from '@toba/flickr';
+import { Flickr } from '@toba/flickr';
 import { slug, is } from '@toba/tools';
 import { Post, Photo, photoBlog } from '../models/index';
-import { makeVideoInfo, makePhoto } from './index';
+import re from '../regex';
+import { makeVideoInfo, makePhoto, flickr } from './index';
 
 /**
  * Create post from Flickr photo set
@@ -9,30 +10,15 @@ import { makeVideoInfo, makePhoto } from './index';
  * `chronological` whether set photos occurred together at a point in time.
  */
 export function make(
-   flickrSet: Flickr.SetSummary | Flickr.FeatureSet,
+   flickrSet: Flickr.SetSummary,
    chronological: boolean = true
 ): Post {
    const p = new Post();
-   const flickr = new FlickrClient(null);
 
    p.id = flickrSet.id;
    p.chronological = chronological;
 
-   p.getPhotos = (): Promise<Photo[]> => {
-      return p.photosLoaded
-         ? Promise.resolve(p.photos)
-         : flickr
-              .getSetPhotos(p.id)
-              .then((res: Flickr.SetPhotos) => updatePhotos(p, res));
-   };
-
-   p.getInfo = (): Promise<Post> => {
-      return p.infoLoaded
-         ? Promise.resolve(p)
-         : flickr
-              .getSetInfo(p.id)
-              .then((info: Flickr.SetInfo) => updateInfo(p, info));
-   };
+   assignFactoryMethods(p);
 
    const parts = p.originalTitle.split(re.subtitle);
 
@@ -46,6 +32,24 @@ export function make(
    } else {
       p.key = slug(p.originalTitle);
    }
+   return p;
+}
+
+function assignFactoryMethods(p: Post): Post {
+   p.getInfo = (): Promise<Post> =>
+      p.infoLoaded
+         ? Promise.resolve(p)
+         : flickr
+              .getSetInfo(p.id)
+              .then((info: Flickr.SetInfo) => updateInfo(p, info));
+
+   p.getPhotos = (): Promise<Photo[]> =>
+      p.photosLoaded
+         ? Promise.resolve(p.photos)
+         : flickr
+              .getSetPhotos(p.id)
+              .then((res: Flickr.SetPhotos) => updatePhotos(p, res));
+
    return p;
 }
 
@@ -79,7 +83,7 @@ function updatePhotos(p: Post, setPhotos: Flickr.SetPhotos): Photo[] {
       p.coverPhoto = p.photos.find(img => img.primary);
 
       if (!is.value(p.coverPhoto)) {
-         log.error('No cover photo defined for %s', p.title);
+         log.error(`No cover photo defined for ${p.title}`);
          p.coverPhoto = p.photos[0];
       }
 

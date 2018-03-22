@@ -1,24 +1,14 @@
-import { Blog, Post, Provider, MapSource } from '../types/';
-import { is } from '@toba/utility';
-import log from '../logger';
+import { Blog, MapSource } from '../types/';
+import { Post, photoBlog } from '../models/index';
+import { is, MimeType, HttpStatus, Header, Encoding } from '@toba/tools';
+import { log } from '@toba/logger';
 import fetch, { Response } from 'node-fetch';
 import config from '../config';
 import kml from '../map/kml';
 import geoJSON from '../map/geojson';
 import template from '../template';
-import library from '../library';
-import factory from '../factory/';
-import realGoogle from '../providers/google';
+import { RouteParam } from '../routes';
 import * as compress from 'zlib';
-import {
-   route as ph,
-   mimeType,
-   httpStatus,
-   header,
-   encoding
-} from '../constants';
-// can be replaced with injection
-let google = realGoogle;
 
 /**
  * Map screen loads then makes AJAX call to fetch data.
@@ -26,7 +16,7 @@ let google = realGoogle;
 function view(post: Post, req: Blog.Request, res: Blog.Response) {
    if (is.value(post)) {
       const key = post.isPartial ? post.seriesKey : post.key;
-      const photoID = req.params[ph.PHOTO_ID];
+      const photoID = req.params[RouteParam.PhotoID];
       // ensure photos are loaded to calculate bounds for map zoom
       post.getPhotos().then(() => {
          res.render(template.page.MAPBOX, {
@@ -44,13 +34,16 @@ function view(post: Post, req: Blog.Request, res: Blog.Response) {
    }
 }
 
-function post(req: Blog.Request, res: Blog.Response) {
-   view(library.postWithKey(req.params[ph.POST_KEY]), req, res);
+export function post(req: Blog.Request, res: Blog.Response) {
+   view(photoBlog.postWithKey(req.params[RouteParam.PostKey]), req, res);
 }
 
-function series(req: Blog.Request, res: Blog.Response) {
+export function series(req: Blog.Request, res: Blog.Response) {
    view(
-      library.postWithKey(req.params[ph.SERIES_KEY], req.params[ph.PART_KEY]),
+      photoBlog.postWithKey(
+         req.params[RouteParam.SeriesKey],
+         req.params[RouteParam.PartKey]
+      ),
       req,
       res
    );
@@ -59,7 +52,7 @@ function series(req: Blog.Request, res: Blog.Response) {
 /**
  * https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
-function blog(_req: Blog.Request, res: Blog.Response) {
+export function blog(_req: Blog.Request, res: Blog.Response) {
    res.render(template.page.MAPBOX, {
       layout: template.layout.NONE,
       title: config.site.title + ' Map',
@@ -70,11 +63,11 @@ function blog(_req: Blog.Request, res: Blog.Response) {
 /**
  * Compressed GeoJSON of all site photos.
  */
-function photoJSON(_req: Blog.Request, res: Blog.Response) {
+export function photoJSON(_req: Blog.Request, res: Blog.Response) {
    factory.map
       .photos()
       .then(item => {
-         res.sendCompressed(mimeType.JSON, item);
+         res.sendCompressed(MimeType.JSON, item);
       })
       .catch(err => {
          log.error(err);
@@ -85,11 +78,11 @@ function photoJSON(_req: Blog.Request, res: Blog.Response) {
 /**
  * Compressed GeoJSON of track for post.
  */
-function trackJSON(req: Blog.Request, res: Blog.Response) {
+export function trackJSON(req: Blog.Request, res: Blog.Response) {
    factory.map
-      .track(req.params[ph.POST_KEY])
+      .track(req.params[RouteParam.PostKey])
       .then(item => {
-         res.sendCompressed(mimeType.JSON, item);
+         res.sendCompressed(MimeType.JSON, item);
       })
       .catch(err => {
          log.error(err);
@@ -100,8 +93,8 @@ function trackJSON(req: Blog.Request, res: Blog.Response) {
 /**
  * Retrieve and parse a map source
  */
-function source(req: Blog.Request, res: Blog.Response) {
-   const key: string = req.params[ph.MAP_SOURCE];
+export function source(req: Blog.Request, res: Blog.Response) {
+   const key: string = req.params[RouteParam.MapSource];
 
    if (!is.text(key)) {
       return res.notFound();
@@ -117,7 +110,7 @@ function source(req: Blog.Request, res: Blog.Response) {
    const parser = fetchKMZ(s.provider);
 
    fetch(s.url, { headers: { 'User-Agent': 'node.js' } }).then(reply => {
-      if (reply.status == httpStatus.OK) {
+      if (reply.status == HttpStatus.OK) {
          parser(reply)
             .then(JSON.stringify)
             .then(geoText => {
@@ -127,17 +120,17 @@ function source(req: Blog.Request, res: Blog.Response) {
                      if (is.value(err)) {
                         res.internalError(err);
                      } else {
-                        res.setHeader(header.content.ENCODING, encoding.GZIP);
+                        res.setHeader(Header.Content.Encoding, Encoding.GZip);
                         res.setHeader(
-                           header.CACHE_CONTROL,
+                           Header.CacheControl,
                            'max-age=86400, public'
                         ); // seconds
                         res.setHeader(
-                           header.content.TYPE,
-                           mimeType.JSON + ';charset=utf-8'
+                           Header.Content.Type,
+                           MimeType.JSON + ';charset=utf-8'
                         );
                         res.setHeader(
-                           header.content.DISPOSITION,
+                           Header.Content.Disposition,
                            `attachment; filename=${key}`
                         );
                         res.write(buffer);
@@ -170,7 +163,7 @@ const fetchKMZ = (sourceName: string) => (res: Response) =>
  */
 function gpx(req: Blog.Request, res: Blog.Response) {
    const post = config.map.allowDownload
-      ? library.postWithKey(req.params[ph.POST_KEY])
+      ? photoBlog.postWithKey(req.params[RouteParam.PostKey])
       : null;
 
    if (is.value(post)) {
@@ -185,21 +178,3 @@ function gpx(req: Blog.Request, res: Blog.Response) {
       res.notFound();
    }
 }
-
-export default {
-   gpx,
-   post,
-   series,
-   blog,
-   json: {
-      blog: photoJSON,
-      post: trackJSON
-   },
-   source,
-   // inject different data providers
-   inject: {
-      set google(g: Provider.Google) {
-         google = g;
-      }
-   }
-};

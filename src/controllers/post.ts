@@ -1,18 +1,18 @@
 import { Blog } from '../types/';
-import { is } from '@toba/utility';
+import { photoBlog } from '../models/index';
+import { is, HttpStatus } from '@toba/tools';
 import { fromPost, serialize } from '../json-ld';
-import template from '../template';
-import library from '../library';
-import { route as ph, httpStatus } from '../constants';
+import { Page, Layout } from '../template';
+import { RouteParam } from '../routes';
 
 function view(
    res: Blog.Response,
    key: string,
-   pageTemplate: string = template.page.POST
+   pageTemplate: string = Page.Post
 ) {
    res.sendView(key, {
       callback: render => {
-         const p = library.postWithKey(key);
+         const p = photoBlog.postWithKey(key);
          if (!is.value(p)) {
             res.notFound();
             return;
@@ -27,7 +27,7 @@ function view(
                   jsonLD: serialize(fromPost(p)),
                   description: p.longDescription,
                   slug: key,
-                  layout: template.layout.NONE
+                  layout: Layout.None
                });
             })
             .catch(res.internalError);
@@ -39,11 +39,14 @@ function view(
  * Display post that's part of a series
  */
 function inSeries(req: Blog.Request, res: Blog.Response) {
-   view(res, req.params[ph.SERIES_KEY] + '/' + req.params[ph.PART_KEY]);
+   view(
+      res,
+      req.params[RouteParam.SeriesKey] + '/' + req.params[RouteParam.PartKey]
+   );
 }
 
 function withKey(req: Blog.Request, res: Blog.Response) {
-   view(res, req.params[ph.POST_KEY]);
+   view(res, req.params[RouteParam.PostKey]);
 }
 
 /**
@@ -51,10 +54,10 @@ function withKey(req: Blog.Request, res: Blog.Response) {
  * Redirect to normal URL
  */
 function withID(req: Blog.Request, res: Blog.Response) {
-   const post = library.postWithID(req.params[ph.POST_ID]);
+   const post = photoBlog.postWithID(req.params[RouteParam.PostID]);
 
    if (is.value(post)) {
-      res.redirect(httpStatus.PERMANENT_REDIRECT, '/' + post.key);
+      res.redirect(HttpStatus.PermanentRedirect, '/' + post.key);
    } else {
       res.notFound();
    }
@@ -64,14 +67,14 @@ function withID(req: Blog.Request, res: Blog.Response) {
  * Show post with given photo ID
  */
 function withPhoto(req: Blog.Request, res: Blog.Response) {
-   const photoID = req.params[ph.PHOTO_ID];
+   const photoID = req.params[RouteParam.PhotoID];
 
-   library
+   photoBlog
       .getPostWithPhoto(photoID)
       .then(post => {
          if (is.value(post)) {
             res.redirect(
-               httpStatus.PERMANENT_REDIRECT,
+               HttpStatus.PermanentRedirect,
                '/' + post.key + '#' + photoID
             );
          } else {

@@ -1,5 +1,3 @@
-import { is } from '@toba/tools';
-
 /**
  * URL of a specific photo size.
  */

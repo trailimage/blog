@@ -1,9 +1,12 @@
-import { Post } from './index';
+import { Post, IMakeJsonLD } from './index';
 import { is } from '@toba/tools';
-import { slug } from '../util/text';
-import config from '../config';
+import { JsonLD } from '@toba/json-ld';
+import { forCategory } from './json-ld';
 
-export class Category {
+/**
+ * Category contains posts.
+ */
+export class Category implements IMakeJsonLD<JsonLD.Blog | JsonLD.WebPage> {
    title: string = null;
    key: string = null;
    subcategories: Category[] = [];
@@ -71,5 +74,9 @@ export class Category {
 
    get isParent() {
       return this.subcategories.length > 0;
+   }
+
+   toJsonLD(): JsonLD.Blog | JsonLD.WebPage {
+      return forCategory(this);
    }
 }

@@ -1,12 +1,12 @@
-import { Photo, VideoInfo, photoBlog } from './index';
+import { Photo, VideoInfo, IMakeJsonLD } from './index';
+import { JsonLD } from '@toba/json-ld';
+import { forPost } from './json-ld';
 import { slug, is } from '@toba/tools';
 import { fromTimeStamp } from '../util/time';
-import re from '../regex';
-import { log } from '@toba/logger';
 import measure from '../map/measure';
 import config from '../config';
 
-export class Post {
+export class Post implements IMakeJsonLD<JsonLD.BlogPosting> {
    id: string = null;
    key: string = null;
    title: string = null;
@@ -193,5 +193,9 @@ export class Post {
       this.photoLocations = locations.length > 0 ? locations : null;
       this.bounds = bounds;
       this.centroid = measure.centroid(locations);
+   }
+
+   toJsonLD(): JsonLD.BlogPosting {
+      return forPost(this);
    }
 }
