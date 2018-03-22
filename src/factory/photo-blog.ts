@@ -39,17 +39,6 @@ export function make(emptyIfLoaded: boolean = true) {
             photoBlog.postInfoLoaded = true;
             log.info('Finished loading post details');
          });
-
-         return Promise.resolve();
-      })
-      .then(() => {
-         // attach Flickr lookup methods to the library so it doesn't have
-         // to require factory or Flickr modules (avoid circular dependencies)
-         //photoBlog.getPostWithPhoto = getPostWithPhoto;
-
-         // library.getPhotosWithTags = getPhotosWithTags;
-         // library.load = buildLibrary;
-         return Promise.resolve();
       })
       .then(() => {
          // find changed post and category keys so their caches can be invalidated
