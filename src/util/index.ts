@@ -11,7 +11,7 @@ import {
    slug,
    capitalize,
    titleCase
-} from '@toba/utility';
+} from '@toba/tools';
 
 import is from '../is';
 import { IPv6, topDomain, encodeBase64, decodeBase64 } from './text';

@@ -1,17 +1,8 @@
-import { is } from '@toba/utility';
-import { Size } from './models';
+import { is } from '@toba/tools';
+import { PhotoSize } from '../models/index';
 
-function make(json: any, sizeField: string | string[]): Size {
-   const size = {
-      url: null as string,
-      width: 0,
-      height: 0,
-      // whether size is empty
-      get isEmpty() {
-         return this.url === null && this.width === 0;
-      }
-   };
-   let field = null;
+export function make(json: any, sizeField: string | string[]): PhotoSize {
+   let field: string;
 
    if (is.array(sizeField)) {
       // iterate through size preferences to find first that isn't empty
@@ -29,12 +20,13 @@ function make(json: any, sizeField: string | string[]): Size {
       const suffix = field.replace('url', '');
 
       if (!is.empty(json[field])) {
-         size.url = json[field];
-         size.width = parseInt(json['width' + suffix]);
-         size.height = parseInt(json['height' + suffix]);
+         return new PhotoSize(
+            parseInt(json['width' + suffix]),
+            parseInt(json['height' + suffix]),
+            json[field]
+         );
       }
    }
-   return size;
-}
 
-export default { make };
+   return null;
+}
