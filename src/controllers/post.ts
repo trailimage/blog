@@ -1,7 +1,7 @@
 import { Blog } from '../types/';
 import { photoBlog } from '../models/index';
 import { is, HttpStatus } from '@toba/tools';
-import { fromPost, serialize } from '../json-ld';
+import { serialize } from '../models/json-ld';
 import { Page, Layout } from '../template';
 import { RouteParam } from '../routes';
 
@@ -24,7 +24,7 @@ function view(
                   post: p,
                   title: p.title,
                   // https://developers.google.com/structured-data/testing-tool/
-                  jsonLD: serialize(fromPost(p)),
+                  jsonLD: p.toJsonLD(), //serialize(fromPost(p)),
                   description: p.longDescription,
                   slug: key,
                   layout: Layout.None
@@ -88,7 +88,7 @@ function withPhoto(req: Blog.Request, res: Blog.Response) {
  * Show newest post on home page
  */
 function latest(_req: Blog.Request, res: Blog.Response) {
-   view(res, library.posts[0].key);
+   view(res, photoBlog.posts[0].key);
 }
 
 export default { latest, withID, withKey, withPhoto, inSeries };
