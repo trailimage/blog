@@ -1,7 +1,7 @@
 import { is } from '@toba/tools';
-import { PhotoSize, EXIF, IMakeJsonLD } from './index';
+import { PhotoSize, EXIF } from './index';
 
-export class Photo implements IMakeJsonLD {
+export class Photo {
    id: string = null;
    index: number;
    sourceUrl: string = null;
@@ -38,8 +38,6 @@ export class Photo implements IMakeJsonLD {
    getExif(): Promise<EXIF> {
       return Promise.resolve(this._exif);
    }
-
-   toJsonLD(): string {}
 }
 
 /**

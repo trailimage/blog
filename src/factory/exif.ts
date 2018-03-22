@@ -1,6 +1,9 @@
 import { Flickr } from '@toba/flickr';
 import { EXIF } from '../models/index';
 
+/**
+ * Create EXIF from Flickr data.
+ */
 export function make(flickrExif: Flickr.Exif[]): EXIF {
    const exif = new EXIF();
 

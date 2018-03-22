@@ -1,28 +1,29 @@
-import { Blog } from '../types/';
 import { Category, photoBlog } from '../models/index';
 import { is } from '@toba/tools';
-import { fromCategory, serialize } from '../json-ld';
+import { serialize } from '../json-ld';
 import config from '../config';
 import util from '../util/';
-import template from '../template';
+import { Page } from '../template';
 import { RouteParam } from '../routes';
+import { Response, Request } from 'express';
+import { sendView, notFound } from '../response';
 
-function view(res: Blog.Response, path: string, homePage = false) {
-   res.sendView(path, {
+function view(res: Response, path: string, homePage = false) {
+   sendView(res, path, {
       callback: render => {
          // use renderer to build view that wasn't cached
          const category = photoBlog.categoryWithKey(path);
 
          if (is.value(category)) {
             category.ensureLoaded().then(() => {
-               const linkData = fromCategory(category, path, homePage);
+               const linkData = category.linkDataString(path, homePage);
                const count = category.posts.length;
                const options = { posts: category.posts };
                const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
 
                renderCategory(
                   render,
-                  template.page.CATEGORY,
+                  Page.Category,
                   category,
                   linkData,
                   options,
@@ -31,7 +32,7 @@ function view(res: Blog.Response, path: string, homePage = false) {
                );
             });
          } else {
-            res.notFound();
+            notFound(res);
          }
       }
    });
@@ -40,7 +41,7 @@ function view(res: Blog.Response, path: string, homePage = false) {
 /**
  * A particular category like When/2013
  */
-function forPath(req: Blog.Request, res: Blog.Response) {
+export function forPath(req: Request, res: Response) {
    view(
       res,
       req.params[RouteParam.RootCategory] +
@@ -54,7 +55,7 @@ function forPath(req: Blog.Request, res: Blog.Response) {
  * This is still messed up from a configurability perspective since it assumes
  * the default tag has years as child tags
  */
-function home(_req: Blog.Request, res: Blog.Response) {
+export function home(_req: Request, res: Response) {
    const category = photoBlog.categories[config.library.defaultCategory];
    let year = new Date().getFullYear();
    let subcategory = null;
@@ -74,24 +75,24 @@ function home(_req: Blog.Request, res: Blog.Response) {
 /**
  * Show root category with list of subcategories
  */
-function list(req: Blog.Request, res: Blog.Response) {
+export function list(req: Request, res: Response) {
    const key = req.params[RouteParam.RootCategory] as string;
 
    if (is.value(key)) {
-      res.sendView(key, {
+      sendView(res, key, {
          callback: render => {
             // use renderer to build view that wasn't cached
             const category = photoBlog.categoryWithKey(key);
 
             if (is.value(category)) {
-               const linkData = fromCategory(category);
+               const linkData = category.linkDataString();
                const count = category.subcategories.length;
                const options = { subcategories: category.subcategories };
                const subtitle = 'Subcategories';
 
                renderCategory(
                   render as Blog.Renderer,
-                  template.page.CATEGORY_LIST,
+                  Page.CategoryList,
                   category,
                   linkData,
                   options,
@@ -99,18 +100,18 @@ function list(req: Blog.Request, res: Blog.Response) {
                   subtitle
                );
             } else {
-               res.notFound();
+               notFound(res);
             }
          }
       });
    } else {
-      res.notFound();
+      notFound(res);
    }
 }
 
-function menu(_req: Blog.Request, res: Blog.Response) {
+export function menu(_req: Request, res: Response) {
    const t = template.page.CATEGORY_MENU;
-   res.sendView(t, {
+   sendView(res, t, {
       callback: render => {
          render(t, { photoBlog, layout: template.layout.NONE });
       }
@@ -140,4 +141,4 @@ function renderCategory(
    );
 }
 
-export default { home, list, forPath, menu };
+export const category = { forPath, home, list, menu };

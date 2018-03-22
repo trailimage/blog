@@ -1,7 +1,7 @@
 import { Cache } from '../types/';
 import config from '../config';
 import item from './item';
-import { is } from '@toba/utility';
+import { is } from '@toba/tools';
 
 const memory: { [key: string]: Cache.Item } = {};
 

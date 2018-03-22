@@ -1,15 +1,16 @@
-import { Blog } from '../types/';
 import { photoBlog } from '../models/index';
 import { is, alphabet } from '@toba/tools';
 import config from '../config';
 import util from '../util/';
 import { Page, Layout } from '../template';
 import { RouteParam } from '../routes';
+import { Response, Request } from 'express';
+import { notFound } from '../response';
 
 /**
  * Small HTML table of EXIF values for given photo
  */
-function exif(req: Blog.Request, res: Blog.Response) {
+function exif(req: Request, res: Response) {
    photoBlog
       .getEXIF(req.params[RouteParam.PhotoID])
       .then(exif => {
@@ -18,13 +19,13 @@ function exif(req: Blog.Request, res: Blog.Response) {
             layout: Layout.None
          });
       })
-      .catch(res.notFound);
+      .catch(() => notFound(res));
 }
 
 /**
  * Photos with tag rendered in response to click on label in photo tags page.
  */
-function withTag(req: Blog.Request, res: Blog.Response) {
+function withTag(req: Request, res: Response) {
    const slug = normalizeTag(
       decodeURIComponent(req.params[RouteParam.PhotoTag])
    );
@@ -33,7 +34,7 @@ function withTag(req: Blog.Request, res: Blog.Response) {
       .getPhotosWithTags(slug)
       .then(photos => {
          if (photos === null || photos.length == 0) {
-            res.notFound();
+            notFound(res);
          } else {
             const tag = photoBlog.tags[slug];
             const title =
@@ -51,10 +52,10 @@ function withTag(req: Blog.Request, res: Blog.Response) {
             });
          }
       })
-      .catch(res.notFound);
+      .catch(() => notFound(res));
 }
 
-function tags(req: Blog.Request, res: Blog.Response) {
+function tags(req: Request, res: Response) {
    let selected = normalizeTag(
       decodeURIComponent(req.params[RouteParam.PhotoTag])
    );
@@ -94,4 +95,4 @@ function normalizeTag(slug: string): string {
    return config.photoTagChanges[slug] ? config.photoTagChanges[slug] : slug;
 }
 
-export default { withTag, tags, exif };
+export const photo = { withTag, tags, exif };

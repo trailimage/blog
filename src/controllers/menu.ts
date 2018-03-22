@@ -1,10 +1,11 @@
 import { photoBlog } from '../models/index';
-import { Blog } from '../types/';
 import config from '../config';
 //import log from "../logger";
-import { Layout, page } from '../template';
+import { Layout, Page } from '../template';
 import { MimeType } from '@toba/tools';
 import * as uglify from 'uglify-js';
+import { Response, Request } from 'express';
+import { sendView } from '../response';
 
 /**
  * Minify menu JSON for production. Set `config.testing = true` if testing
@@ -12,23 +13,23 @@ import * as uglify from 'uglify-js';
  *
  * https://npmjs.org/package/uglify-js
  */
-function data(_req: Blog.Request, res: Blog.Response) {
-   const slug = page.POST_MENU_DATA;
+export function data(_req: Request, res: Response) {
+   const slug = Page.PostMenuData;
    const postProcess =
       config.isProduction && !config.testing
          ? (text: string) => {
               const result = uglify.minify(text);
-              // if (result.error) {
-              //    log.error(result.error);
-              //    return null;
-              // } else {
-              return result.code;
-              // }
+              if (result.error) {
+                 log.error(result.error);
+                 return null;
+              } else {
+                 return result.code;
+              }
            }
          : null;
 
    res.setHeader('Vary', 'Accept-Encoding');
-   res.sendView(slug, {
+   sendView(res, slug, {
       mimeType: MimeType.JSONP,
       callback: render => {
          render(slug, { photoBlog, layout: Layout.None }, postProcess);
@@ -36,13 +37,13 @@ function data(_req: Blog.Request, res: Blog.Response) {
    });
 }
 
-function mobile(_req: Blog.Request, res: Blog.Response) {
-   const slug = page.MOBILE_MENU_DATA;
-   res.sendView(slug, {
+export function mobile(_req: Request, res: Response) {
+   const slug = Page.MobileMenuData;
+   sendView(res, slug, {
       callback: render => {
          render(slug, { photoBlog, layout: Layout.None });
       }
    });
 }
 
-export default { data, mobile };
+export const menu = { mobile, data };

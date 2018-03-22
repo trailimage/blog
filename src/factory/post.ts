@@ -1,4 +1,4 @@
-import { Flickr } from '@toba/flickr';
+import { Flickr, FeatureSet } from '@toba/flickr';
 import { slug, is } from '@toba/tools';
 import { Post, Photo, photoBlog } from '../models/index';
 import re from '../regex';
@@ -10,7 +10,7 @@ import { makeVideoInfo, makePhoto, flickr } from './index';
  * `chronological` whether set photos occurred together at a point in time.
  */
 export function make(
-   flickrSet: Flickr.SetSummary,
+   flickrSet: Flickr.SetSummary | FeatureSet,
    chronological: boolean = true
 ): Post {
    const p = new Post();

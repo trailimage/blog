@@ -1,7 +1,6 @@
 import { Token } from './types/';
 import { ClientConfig as FlickrConfig, Flickr } from '@toba/flickr';
 import mapsource from './mapsource';
-import { flickrSize as s, logTo, time } from './constants';
 
 const domain = 'trailimage.com';
 const isProduction = process.env['NODE_ENV'] === 'production';
@@ -56,8 +55,8 @@ const flickr: FlickrConfig = {
    /** Photo sizes that must be retrieved for certain contexts */
    photoSize: {
       post: sizes.normal.concat(sizes.big, sizes.preview),
-      map: [s.SMALL_320],
-      search: [s.SQUARE_150]
+      map: [Flickr.SizeUrl.Small320],
+      search: [Flickr.SizeUrl.Square150]
    },
    excludeSets: ['72157631638576162'],
    excludeTags: [

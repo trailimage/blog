@@ -1,20 +1,16 @@
-import { Blog } from '../types/';
 import { photoBlog } from '../models/index';
 import { is, HttpStatus } from '@toba/tools';
-import { serialize } from '../models/json-ld';
 import { Page, Layout } from '../template';
 import { RouteParam } from '../routes';
+import { Response, Request } from 'express';
+import { sendView, notFound, internalError } from '../response';
 
-function view(
-   res: Blog.Response,
-   key: string,
-   pageTemplate: string = Page.Post
-) {
-   res.sendView(key, {
+function view(res: Response, key: string, pageTemplate: string = Page.Post) {
+   sendView(res, key, {
       callback: render => {
          const p = photoBlog.postWithKey(key);
          if (!is.value(p)) {
-            res.notFound();
+            notFound(res);
             return;
          }
          p
@@ -24,13 +20,13 @@ function view(
                   post: p,
                   title: p.title,
                   // https://developers.google.com/structured-data/testing-tool/
-                  jsonLD: p.toJsonLD(), //serialize(fromPost(p)),
+                  jsonLD: p.linkDataString(),
                   description: p.longDescription,
                   slug: key,
                   layout: Layout.None
                });
             })
-            .catch(res.internalError);
+            .catch(err => internalError(res, err));
       }
    });
 }
@@ -38,14 +34,14 @@ function view(
 /**
  * Display post that's part of a series
  */
-function inSeries(req: Blog.Request, res: Blog.Response) {
+function inSeries(req: Request, res: Response) {
    view(
       res,
       req.params[RouteParam.SeriesKey] + '/' + req.params[RouteParam.PartKey]
    );
 }
 
-function withKey(req: Blog.Request, res: Blog.Response) {
+function withKey(req: Request, res: Response) {
    view(res, req.params[RouteParam.PostKey]);
 }
 
@@ -53,20 +49,20 @@ function withKey(req: Blog.Request, res: Blog.Response) {
  * Post with given Flickr ID
  * Redirect to normal URL
  */
-function withID(req: Blog.Request, res: Blog.Response) {
+function withID(req: Request, res: Response) {
    const post = photoBlog.postWithID(req.params[RouteParam.PostID]);
 
    if (is.value(post)) {
       res.redirect(HttpStatus.PermanentRedirect, '/' + post.key);
    } else {
-      res.notFound();
+      notFound(res);
    }
 }
 
 /**
  * Show post with given photo ID
  */
-function withPhoto(req: Blog.Request, res: Blog.Response) {
+function withPhoto(req: Request, res: Response) {
    const photoID = req.params[RouteParam.PhotoID];
 
    photoBlog
@@ -78,17 +74,17 @@ function withPhoto(req: Blog.Request, res: Blog.Response) {
                '/' + post.key + '#' + photoID
             );
          } else {
-            res.notFound();
+            notFound(res);
          }
       })
-      .catch(res.notFound);
+      .catch(() => notFound(res));
 }
 
 /**
  * Show newest post on home page
  */
-function latest(_req: Blog.Request, res: Blog.Response) {
+function latest(_req: Request, res: Response) {
    view(res, photoBlog.posts[0].key);
 }
 
-export default { latest, withID, withKey, withPhoto, inSeries };
+export const post = { latest, withID, withKey, withPhoto, inSeries };

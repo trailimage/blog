@@ -1,4 +1,4 @@
-import { Post, IMakeJsonLD } from './index';
+import { Post, LinkDataModel } from './index';
 import { is } from '@toba/tools';
 import { JsonLD } from '@toba/json-ld';
 import { forCategory } from './json-ld';
@@ -6,13 +6,14 @@ import { forCategory } from './json-ld';
 /**
  * Category contains posts.
  */
-export class Category implements IMakeJsonLD<JsonLD.Blog | JsonLD.WebPage> {
+export class Category extends LinkDataModel<JsonLD.Blog | JsonLD.WebPage> {
    title: string = null;
    key: string = null;
    subcategories: Category[] = [];
    posts: Post[] = [];
 
    constructor(key: string, title: string) {
+      super();
       this.key = key;
       this.title = title;
    }
@@ -76,7 +77,7 @@ export class Category implements IMakeJsonLD<JsonLD.Blog | JsonLD.WebPage> {
       return this.subcategories.length > 0;
    }
 
-   toJsonLD(): JsonLD.Blog | JsonLD.WebPage {
+   linkDataJSON(): JsonLD.Blog | JsonLD.WebPage {
       return forCategory(this);
    }
 }

@@ -1,5 +1,9 @@
 {
-   "extends": "./node_modules/@toba/lint/ts/config"
+   "extends": "./node_modules/@toba/lint/ts/config",
+   "compilerOptions": {
+      "target": "es2017"
+   },
+   "include": ["./src/**/*.ts"]
    // "compilerOptions": {
    //    "typeRoots": ["node_modules/@types", "./types"]
    // }

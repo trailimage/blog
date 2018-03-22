@@ -79,26 +79,26 @@ declare namespace Blog {
    }
 }
 
-declare namespace Mock {
-   export interface Request extends Blog.Request {
-      reset(): void;
-   }
+// declare namespace Mock {
+//    export interface Request extends Blog.Request {
+//       reset(): void;
+//    }
 
-   export interface Response extends Blog.Request {
-      reset(): void;
-      headers: { [key: string]: string };
-      content: Buffer | string;
-      redirected: {
-         status: number;
-         url: string;
-      };
-      rendered: {
-         template: string;
-         options: { [key: string]: string | number };
-         json: any;
-      };
-      ended: boolean;
-      endOnRender: boolean;
-      setHeader(key: string, value: string): Response;
-   }
-}
+//    export interface Response extends Blog.Request {
+//       reset(): void;
+//       headers: { [key: string]: string };
+//       content: Buffer | string;
+//       redirected: {
+//          status: number;
+//          url: string;
+//       };
+//       rendered: {
+//          template: string;
+//          options: { [key: string]: string | number };
+//          json: any;
+//       };
+//       ended: boolean;
+//       endOnRender: boolean;
+//       setHeader(key: string, value: string): Response;
+//    }
+// }

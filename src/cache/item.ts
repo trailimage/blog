@@ -1,5 +1,5 @@
 import { Cache } from '../types/';
-import { is } from '@toba/utility';
+import { is } from '@toba/tools';
 import { encoding } from '../constants';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
@@ -13,7 +13,7 @@ export function create(
 ): Promise<Cache.Item> {
    return new Promise<Cache.Item>((resolve, reject) => {
       const text =
-         typeof htmlOrJSON == is.type.OBJECT
+         typeof htmlOrJSON == is.Type.Object
             ? JSON.stringify(htmlOrJSON)
             : (htmlOrJSON as string);
       compress.gzip(Buffer.from(text), (err: Error, buffer: Buffer) => {

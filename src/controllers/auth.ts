@@ -1,18 +1,17 @@
-import { Blog } from '../types/';
-import { is } from '@toba/utility';
-import log from '../logger';
+import { is, HttpStatus } from '@toba/tools';
+import { log } from '@toba/logger';
 import config from '../config';
-import template from '../template';
+import { Page } from '../template';
+import { Response, Request } from 'express';
 import flickr from '../providers/flickr';
 import google from '../providers/google';
-import { httpStatus } from '../constants';
 
 /**
  * Redirect to authorization URL for unauthorized providers
  *
  * https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
  */
-function view(_req: Blog.Request, res: Blog.Response) {
+export function view(_req: Request, res: Response) {
    if (config.needsAuth) {
       if (flickr.auth.isEmpty()) {
          res.redirect(flickr.auth.url());
@@ -30,7 +29,7 @@ function view(_req: Blog.Request, res: Blog.Response) {
  *
  * http://www.flickr.com/services/api/auth.oauth.html
  */
-function flickrAuth(req: Blog.Request, res: Blog.Response) {
+export function flickrAuth(req: Request, res: Response) {
    if (is.empty(req.param('oauth_token'))) {
       log.warn('%s is updating Flickr tokens', req.clientIP());
       flickr.auth.getRequestToken().then(url => res.redirect(url));
@@ -60,7 +59,7 @@ function flickrAuth(req: Blog.Request, res: Blog.Response) {
  *
  * https://github.com/google/google-api-nodejs-client/
  */
-function googleAuth(req: Blog.Request, res: Blog.Response) {
+export function googleAuth(req: Request, res: Response) {
    const code = req.param('code');
 
    if (is.empty(code)) {
@@ -69,7 +68,7 @@ function googleAuth(req: Blog.Request, res: Blog.Response) {
       google.auth
          .getAccessToken(code)
          .then(token => {
-            res.render(template.page.AUTHORIZE, {
+            res.render(Page.Authorize, {
                title: 'Google Access',
                token: token.access,
                secret: token.refresh,
@@ -78,10 +77,10 @@ function googleAuth(req: Blog.Request, res: Blog.Response) {
          })
          .catch(err => {
             log.error(err);
-            res.status(httpStatus.INTERNAL_ERROR);
+            res.status(HttpStatus.InternalError);
             res.end(err.toString());
          });
    }
 }
 
-export default { flickr: flickrAuth, google: googleAuth, view };
+export const auth = { google: googleAuth, flickr: flickrAuth, view };

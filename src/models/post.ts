@@ -1,4 +1,4 @@
-import { Photo, VideoInfo, IMakeJsonLD } from './index';
+import { Photo, VideoInfo, LinkDataModel } from './index';
 import { JsonLD } from '@toba/json-ld';
 import { forPost } from './json-ld';
 import { slug, is } from '@toba/tools';
@@ -6,7 +6,7 @@ import { fromTimeStamp } from '../util/time';
 import measure from '../map/measure';
 import config from '../config';
 
-export class Post implements IMakeJsonLD<JsonLD.BlogPosting> {
+export class Post extends LinkDataModel<JsonLD.BlogPosting> {
    id: string = null;
    key: string = null;
    title: string = null;
@@ -195,7 +195,7 @@ export class Post implements IMakeJsonLD<JsonLD.BlogPosting> {
       this.centroid = measure.centroid(locations);
    }
 
-   toJsonLD(): JsonLD.BlogPosting {
+   linkDataJSON(): JsonLD.BlogPosting {
       return forPost(this);
    }
 }

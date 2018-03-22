@@ -1,26 +1,26 @@
-import { Blog } from '../types/';
-import is from '../is';
-import { serialize, owner } from '../json-ld';
+import { photoBlog } from '../models/index';
+import { is, HttpStatus, MimeType } from '@toba/tools';
+import { serialize, owner } from '../models/json-ld';
 import config from '../config';
-import { page } from '../template';
-import library from '../library';
-import { httpStatus, mimeType } from '../constants';
+import { Page } from '../template';
+import { Response, Request } from 'express';
+import { notFound, sendView } from '../response';
 
-function search(req: Blog.Request, res: Blog.Response) {
+export function search(req: Request, res: Response) {
    const term = req.query['q'];
 
    if (is.value(term)) {
-      res.render(page.SEARCH, {
+      res.render(Page.Search, {
          title: 'Search for “' + req.query['q'] + '”',
          config: config
       });
    } else {
-      res.notFound();
+      notFound(res);
    }
 }
 
-function about(_req: Blog.Request, res: Blog.Response) {
-   res.sendView(page.ABOUT, {
+export function about(_req: Request, res: Response) {
+   sendView(res, Page.About, {
       templateValues: {
          title: 'About ' + config.site.title,
          jsonLD: serialize(owner)
@@ -28,25 +28,22 @@ function about(_req: Blog.Request, res: Blog.Response) {
    });
 }
 
-function siteMap(_req: Blog.Request, res: Blog.Response) {
-   res.sendView(page.SITEMAP, {
-      mimeType: mimeType.XML,
+export function siteMap(_req: Request, res: Response) {
+   sendView(res, Page.Sitemap, {
+      mimeType: MimeType.XML,
       callback: render => {
-         render(page.SITEMAP, {
-            posts: library.posts,
-            categories: library.categoryKeys(),
-            tags: library.tags,
+         render(Page.Sitemap, {
+            posts: photoBlog.posts,
+            categories: photoBlog.categoryKeys(),
+            tags: photoBlog.tags,
             layout: null
          });
       }
    });
 }
 
-function issues(_req: Blog.Request, res: Blog.Response) {
-   res.redirect(
-      httpStatus.PERMANENT_REDIRECT,
-      'http://issues.' + config.domain
-   );
+export function issues(_req: Request, res: Response) {
+   res.redirect(HttpStatus.PermanentRedirect, 'http://issues.' + config.domain);
 }
 
-export default { search, about, siteMap, issues };
+export const staticPage = { issues, about, search, siteMap };

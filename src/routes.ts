@@ -1,12 +1,19 @@
 import { HttpStatus } from '@toba/tools';
-import { Blog } from './types/';
 import { photoBlog } from './models/index';
 import * as Express from 'express';
 import config from './config';
-import cx from './controllers/';
+import {
+   staticPage,
+   post,
+   photo,
+   category,
+   menu,
+   auth,
+   map
+} from './controllers/index';
 
 /**
- * Route placeholders that become req.params values
+ * Route placeholders that become req.params keys.
  */
 export enum RouteParam {
    Category = 'category',
@@ -23,29 +30,19 @@ export enum RouteParam {
 }
 
 /**
- * Need to capture top-level route parameters
+ * Need to capture top-level route parameters.
  *
  * http://expressjs.com/en/4x/api.html#express.router
  */
 const keepParams = { mergeParams: true };
 
-function adminRoutes() {
-   const r = Express.Router();
-   r.get('/', cx.admin.home);
-   r.post('/view/delete', cx.admin.cache.deleteView);
-   r.post('/map/delete', cx.admin.cache.deleteMap);
-   r.post('/json/delete', cx.admin.cache.deleteJSON);
-   r.post('/library/reload', cx.admin.updateLibrary);
-   return r;
-}
-
 function postRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', cx.post.withKey);
+   r.get('/', post.withKey);
    //r.get('/pdf', c.pdf);
-   r.get('/map', cx.map.post);
-   r.get('/gpx', cx.map.gpx);
-   r.get(`/map/${photoID}`, cx.map.post);
+   r.get('/map', map.post);
+   r.get('/gpx', map.gpx);
+   r.get(`/map/${photoID}`, map.post);
    r.get('/geo.json', cx.map.json.post);
    return r;
 }
@@ -55,26 +52,26 @@ function postRoutes(photoID: string): Express.Router {
  */
 function seriesRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', cx.post.inSeries);
-   r.get('/map', cx.map.series);
-   r.get(`/map/${photoID}`, cx.map.series);
+   r.get('/', post.inSeries);
+   r.get('/map', map.series);
+   r.get(`/map/${photoID}`, map.series);
    return r;
 }
 
 function photoTagRoutes(): Express.Router {
    const r = Express.Router();
-   r.get('/', cx.photo.tags);
+   r.get('/', photo.tags);
    // photo tag page
-   r.get(`/:${RouteParam.PhotoTag}`, cx.photo.tags);
+   r.get(`/:${RouteParam.PhotoTag}`, photo.tags);
    // API call for photo info
-   r.get(`/search/:${RouteParam.PhotoTag}`, cx.photo.withTag);
+   r.get(`/search/:${RouteParam.PhotoTag}`, photo.withTag);
    return r;
 }
 
 function categoryRoutes(): Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', cx.category.list);
-   r.get(`/:${RouteParam.Category}`, cx.category.forPath);
+   r.get('/', category.list);
+   r.get(`/:${RouteParam.Category}`, category.forPath);
    return r;
 }
 
@@ -104,10 +101,8 @@ function standard(app: Express.Application) {
          .join('|') +
       ')';
 
-   app.use('/admin', adminRoutes());
-
    for (const slug in config.redirects) {
-      app.get('/' + slug, (_req: Blog.Request, res: Blog.Response) => {
+      app.get('/' + slug, (_req: Express.Request, res: Express.Response) => {
          res.redirect(
             HttpStatus.PermanentRedirect,
             '/' + config.redirects[slug]
@@ -116,32 +111,32 @@ function standard(app: Express.Application) {
    }
 
    // the latest posts
-   app.get('/', cx.category.home);
-   app.get('/map', cx.map.blog);
+   app.get('/', category.home);
+   app.get('/map', map.blog);
    app.get(
       `/map/source/:${RouteParam.MapSource}([a-z\-]+\.json$)`,
-      cx.map.source
+      map.source
    );
    app.get('/geo.json', cx.map.json.blog);
-   app.get('/rss', cx.rss);
-   app.get('/about', cx.about);
-   app.get('/js/post-menu-data.js', cx.menu.data);
-   app.get('/sitemap.xml', cx.siteMap);
-   app.get(`/exif/${photoID}`, cx.photo.exif);
-   app.get('/issues?', cx.issues);
-   app.get('/issues?/:slug' + s, cx.issues);
-   app.get('/category-menu', cx.category.menu);
-   app.get('/mobile-menu', cx.menu.mobile);
-   app.get('/search', cx.search);
+   app.get('/rss', staticPage.rss);
+   app.get('/about', staticPage.about);
+   app.get('/js/post-menu-data.js', menu.data);
+   app.get('/sitemap.xml', staticPage.siteMap);
+   app.get(`/exif/${photoID}`, photo.exif);
+   app.get('/issues?', staticPage.issues);
+   app.get('/issues?/:slug' + s, staticPage.issues);
+   app.get('/category-menu', category.menu);
+   app.get('/mobile-menu', menu.mobile);
+   app.get('/search', staticPage.search);
 
    app.use(`/${rootCategory}`, categoryRoutes());
 
    // old blog links with format /YYYY/MM/slug
    //app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.date);
    app.use('/photo-tag', photoTagRoutes());
-   app.get(`/${photoID}`, cx.post.withPhoto);
-   app.get(`/${postID}`, cx.post.withID);
-   app.get(`/${postID}/${photoID}`, cx.post.withID);
+   app.get(`/${photoID}`, post.withPhoto);
+   app.get(`/${postID}`, post.withID);
+   app.get(`/${postID}/${photoID}`, post.withID);
    app.use(`/${postKey}`, postRoutes(photoID));
    app.use(`/${series}`, seriesRoutes(photoID));
 }
@@ -151,10 +146,10 @@ function standard(app: Express.Application) {
  */
 function authentication(app: Express.Application) {
    // provider authentication callbacks
-   app.get('/auth/flickr', cx.auth.flickr);
-   app.get('/auth/google', cx.auth.google);
+   app.get('/auth/flickr', auth.flickr);
+   app.get('/auth/google', auth.google);
    // all other routes begin authentication process
-   app.get('*', cx.auth.view);
+   app.get('*', auth.view);
 }
 
 export default {
