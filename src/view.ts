@@ -2,6 +2,19 @@ import { Header, HttpStatus, MimeType, Encoding, is } from '@toba/tools';
 import { Response, Request } from 'express';
 import { Page } from './template';
 
+/**
+ * Remove IPv6 prefix from transitional addresses.
+ *
+ * https://en.wikipedia.org/wiki/IPv6_address
+ */
+export const IPv6 = (ip: string) =>
+   is.empty(ip) || ip === '::1'
+      ? '127.0.0.1'
+      : ip.replace(/^::[0123456789abcdef]{4}:/g, '');
+
+/**
+ * Return normalized client IP address.
+ */
 export function clientIP(req: Request) {
    let ipAddress = req.connection.remoteAddress;
    const forwardedIP = req.headers[Header.ForwardedFor] as string;
@@ -11,14 +24,16 @@ export function clientIP(req: Request) {
       const parts = forwardedIP.split(',');
       ipAddress = parts[0];
    }
-   return util.IPv6(ipAddress);
+   return IPv6(ipAddress);
 }
 
-export function notFound(res: Response) {
-   log.warn(`${req.originalUrl} not found for ${req.clientIP()}`);
+/**
+ * Render standard 404 page.
+ */
+export function notFound(req: Request, res: Response) {
+   log.warn(`${req.originalUrl} not found for ${clientIP(req)}`);
    res.statusCode = HttpStatus.NotFound;
-   //res.status(HttpStatus.NotFound);
-   res.render(template.page.NOT_FOUND, { title: 'Page Not Found', config });
+   res.render(Page.NotFound, { title: 'Page Not Found', config });
 }
 
 export function internalError(res: Response, err?: Error) {
@@ -199,22 +214,20 @@ function renderTemplate(
  * Compress, cache and send content to client.
  */
 function cacheAndSend(
-   res: Blog.Response,
+   res: Response,
    html: string,
    slug: string,
-   type: string
+   type: MimeType
 ) {
    cache.view
       .add(slug, html)
       .then(item => {
-         res.sendCompressed(type, item);
+         sendCompressed(res, type, item);
       })
       .catch((err: Error) => {
          // log error and send uncompressed content
          log.error(
-            'cacheAndSend() failed to add %s view to cache: %s',
-            slug,
-            err.toString()
+            `cacheAndSend() failed to add ${slug} view to cache: ${err}`
          );
          res.write(html);
          res.end();

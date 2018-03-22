@@ -183,10 +183,13 @@ function gpx(req: Request, res: Response) {
 export const map = {
    gpx,
    fetchKMZ,
-   photoJSON,
-   trackJSON,
    post,
    series,
    source,
-   blog
+   blog,
+   json: {
+      photo: photoJSON,
+      track: trackJSON,
+      blog: blogJSON
+   }
 };

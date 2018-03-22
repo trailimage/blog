@@ -117,7 +117,7 @@ function standard(app: Express.Application) {
       `/map/source/:${RouteParam.MapSource}([a-z\-]+\.json$)`,
       map.source
    );
-   app.get('/geo.json', cx.map.json.blog);
+   app.get('/geo.json', map.json.blog);
    app.get('/rss', staticPage.rss);
    app.get('/about', staticPage.about);
    app.get('/js/post-menu-data.js', menu.data);

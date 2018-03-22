@@ -1,9 +1,6 @@
-import { Cache, Provider } from '../types/';
 import { is } from '@toba/tools';
 import config from '../config';
-import library from '../library';
 import geoJSON from '../map/geojson';
-import cache from '../cache';
 
 const BLOG_JSON_KEY = 'blog-map';
 
@@ -74,14 +71,3 @@ const makePhotoFeatures = (geo?: GeoJSON.FeatureCollection<any>) =>
          resolve(geo);
       });
    });
-
-export default {
-   track,
-   photos,
-   // inject different data providers
-   inject: {
-      set google(g: Provider.Google) {
-         google = g;
-      }
-   }
-};

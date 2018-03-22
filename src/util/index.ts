@@ -14,7 +14,7 @@ import {
 } from '@toba/tools';
 
 import is from '../is';
-import { IPv6, topDomain, encodeBase64, decodeBase64 } from './text';
+import { topDomain, encodeBase64, decodeBase64 } from './text';
 import {
    typography,
    characterEntities,
@@ -42,7 +42,6 @@ export default {
    format,
    logMessage,
    topDomain,
-   IPv6,
    slug,
    capitalize,
    titleCase,
@@ -87,26 +86,5 @@ export default {
       pad: leadingZeros,
       parse: parseNumber,
       maybe: maybeNumber
-   },
-
-   /**
-    * Shuffle an array
-    *
-    * http://sroucheray.org/blog/2009/11/array-sort-should-not-be-used-to-shuffle-an-array/
-    */
-   shuffle<T>(a: T[]): T[] {
-      if (!is.array(a) || a.length === 0) {
-         return null;
-      }
-
-      let i = a.length;
-
-      while (--i) {
-         const j = Math.floor(Math.random() * (i + 1));
-         const temp = a[i];
-         a[i] = a[j];
-         a[j] = temp;
-      }
-      return a;
    }
 };

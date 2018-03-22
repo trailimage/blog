@@ -1,5 +1,5 @@
-import { Category } from '../types/';
-import is from '../is';
+import { Category } from '../models/index';
+import { is } from '@toba/tools';
 import re from '../regex';
 import config from '../config';
 import { format } from './text';
