@@ -1,4 +1,4 @@
-import { Post, Category, Photo } from './index';
+import { Post, Category, Photo, EXIF } from './index';
 
 /**
  * Singleton collection of photos grouped into "posts" (called a "set" or
@@ -15,13 +15,17 @@ class PhotoBlog {
 
    /** All photos in all posts */
    // getPhotos(): Promise<Photo[]>;
-   // getEXIF(photoID: number): Promise<EXIF>;
+   getEXIF: (photoID: number) => Promise<EXIF>;
    // addPost(p: Post): void;
    // categoryKeys(filterList?: string[]): string[];
    // categoryWithKey(key: string): Category;
    // postKeys(): string[];
    // postWithID(id: string): Post;
    // postWithKey(key: string, partKey?: string): Post;
+
+   postKeys(): string[] {
+      return this.posts.map(p => p.key);
+   }
 
    empty(): PhotoBlog {
       this.categories = {};
@@ -32,8 +36,8 @@ class PhotoBlog {
       return this;
    }
 
-   // getPostWithPhoto(photo: Photo | string): Promise<Post>;
-   // getPhotosWithTags(tags: string | string[]): Promise<Photo[]>;
+   getPostWithPhoto: (photo: Photo | string) => Promise<Post>;
+   getPhotosWithTags: (tags: string | string[]) => Promise<Photo[]>;
    // photoTagList(photos: Photo[]): string;
    // load(emptyIfLoaded: boolean): Promise<Library>;
    // unload(keys: string | string[]): void;

@@ -1,32 +1,42 @@
-import { photoBlog } from '../models/index';
+import { is } from '@toba/tools';
+import { Flickr } from '@toba/flickr';
+import { photoBlog, Post, Photo, EXIF } from '../models/index';
+import { flickr, makeCategory, makeEXIF, makePhoto } from './index';
+import config from '../config';
 
 /**
- * `emptyIfLoaded` Whether to reset the library before loading
+ * @param emptyIfLoaded Whether to reset the library before loading
  */
-function make(emptyIfLoaded: boolean = true) {
+export function make(emptyIfLoaded: boolean = true) {
    // store existing post keys to compute changes
    const hadPostKeys = photoBlog.postKeys();
-   if (emptyIfLoaded && photoBlog.loaded) {
+
+   if (!photoBlog.loaded) {
+      assignFactoryMethods();
+   } else if (emptyIfLoaded) {
       photoBlog.empty();
    }
    // reset changed keys to none
-   library.changedKeys = [];
+   photoBlog.changedKeys = [];
 
    return Promise.all([flickr.getCollections(), flickr.getAllPhotoTags()])
       .then(([collections, tags]) => {
          // parse collections and photo tags
-         library.tags = is.value(tags) ? parsePhotoTags(tags) : {};
-         collections.forEach(c => category.make(c, true));
-         correlatePosts();
-         library.loaded = true;
-         log.infoIcon(
-            'photo_library',
-            'Loaded %d photo posts from Flickr: beginning detail retrieval',
-            library.posts.length
+         photoBlog.tags = is.value<Flickr.Tag[]>(tags)
+            ? parsePhotoTags(tags)
+            : {};
+         collections.forEach(c => makeCategory(c, true));
+         photoBlog.correlatePosts();
+         photoBlog.loaded = true;
+
+         log.info(
+            `Loaded ${
+               photoBlog.posts.length
+            } photo posts from Flickr: beginning detail retrieval`
          );
          // retrieve additional post info without waiting for it to finish
-         Promise.all(library.posts.map(p => p.getInfo())).then(() => {
-            library.postInfoLoaded = true;
+         Promise.all(photoBlog.posts.map(p => p.getInfo())).then(() => {
+            photoBlog.postInfoLoaded = true;
             log.info('Finished loading post details');
          });
 
@@ -35,17 +45,17 @@ function make(emptyIfLoaded: boolean = true) {
       .then(() => {
          // attach Flickr lookup methods to the library so it doesn't have
          // to require factory or Flickr modules (avoid circular dependencies)
-         library.getPostWithPhoto = getPostWithPhoto;
-         library.getEXIF = getEXIF;
-         library.getPhotosWithTags = getPhotosWithTags;
-         library.load = buildLibrary;
+         //photoBlog.getPostWithPhoto = getPostWithPhoto;
+
+         // library.getPhotosWithTags = getPhotosWithTags;
+         // library.load = buildLibrary;
          return Promise.resolve();
       })
       .then(() => {
          // find changed post and category keys so their caches can be invalidated
          if (hadPostKeys.length > 0) {
             let changedKeys: string[] = [];
-            library.posts
+            photoBlog.posts
                .filter(p => hadPostKeys.indexOf(p.key) == -1)
                .forEach(p => {
                   log.info('Found new post "%s"', p.title);
@@ -59,15 +69,18 @@ function make(emptyIfLoaded: boolean = true) {
                      changedKeys.push(p.previous.key);
                   }
                });
-            library.changedKeys = changedKeys;
+            photoBlog.changedKeys = changedKeys;
          }
-         return library;
+         return photoBlog;
       });
 }
 
-function getPostWithPhoto(this: Library, photo: Photo | string): Promise<Post> {
+const getEXIF = (photoID: number): Promise<EXIF> =>
+   flickr.getExif(photoID).then(makeEXIF);
+
+function getPostWithPhoto(photo: Photo | string): Promise<Post> {
    const id: string =
-      typeof photo == is.type.STRING ? (photo as string) : (photo as Photo).id;
+      typeof photo == is.Type.String ? (photo as string) : (photo as Photo).id;
 
    return flickr
       .getPhotoContext(id)
@@ -77,25 +90,17 @@ function getPostWithPhoto(this: Library, photo: Photo | string): Promise<Post> {
       );
 }
 
-function getEXIF(photoID: number): Promise<EXIF> {
-   return flickr.getExif(photoID).then(exif.make);
-}
-
 /**
- * All photos with given tags
+ * All photos with given tags.
  */
 const getPhotosWithTags = (tags: string | string[]) =>
-   flickr.photoSearch(tags).then(photos =>
-      photos.map(
-         json =>
-            ({
-               id: json.id,
-               size: {
-                  thumb: photoSize.make(json, config.flickr.photoSize.search[0])
-               }
-            } as Photo)
-      )
-   );
+   flickr.photoSearch(tags).then(photos => photos.map(makePhoto));
+
+function assignFactoryMethods() {
+   photoBlog.getEXIF = getEXIF;
+   photoBlog.getPostWithPhoto = getPostWithPhoto;
+   photoBlog.getPhotosWithTags = getPhotosWithTags;
+}
 
 /**
  * Convert tags to hash of phrases keyed to their "clean" abbreviation
