@@ -13,7 +13,6 @@ import {
    titleCase
 } from '@toba/tools';
 
-import is from '../is';
 import { topDomain, encodeBase64, decodeBase64 } from './text';
 import {
    typography,

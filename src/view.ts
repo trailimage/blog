@@ -2,6 +2,13 @@ import { Header, HttpStatus, MimeType, Encoding, is } from '@toba/tools';
 import { Response, Request } from 'express';
 import { Page } from './template';
 
+export interface RenderOptions {
+   mimeType: MimeType;
+   generate: () => string;
+   templateValues: { [key: string]: any };
+   callback?: Function;
+}
+
 /**
  * Remove IPv6 prefix from transitional addresses.
  *
@@ -63,14 +70,10 @@ export function sendJson(res: Response, key: string, generate: Function) {
    sendFromCacheOrRender(res, key, {
       mimeType: MimeType.JSON,
       generate
-   } as Blog.RenderOptions);
+   } as RenderOptions);
 }
 
-export function sendView(
-   res: Response,
-   key: string,
-   options: Blog.RenderOptions
-) {
+export function sendView(res: Response, key: string, options: RenderOptions) {
    if (!options.mimeType) {
       options.mimeType = MimeType.HTML;
    }
@@ -105,7 +108,7 @@ export function sendCompressed(
 function sendFromCacheOrRender(
    res: Response,
    slug: string,
-   options: Blog.RenderOptions
+   options: RenderOptions
 ) {
    // prepare fallback method to generate content depending on
    // MIME type and whether given generator is a callable function
@@ -138,11 +141,7 @@ function sendFromCacheOrRender(
  * Render or generate content depending on its type then compress and cache
  * output.
  */
-function renderForType(
-   res: Response,
-   slug: string,
-   options: Blog.RenderOptions
-) {
+function renderForType(res: Response, slug: string, options: RenderOptions) {
    if (
       [MimeType.JSON, MimeType.JSONP].indexOf(options.mimeType) >= 0 &&
       is.callable(options.generate)
@@ -171,7 +170,7 @@ function renderForType(
 function renderTemplate(
    res: Response,
    slug: string,
-   type: string
+   type: MimeType
 ): Blog.Renderer {
    return (
       view: string,

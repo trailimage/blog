@@ -90,6 +90,14 @@
     flat "^4.0.0"
     logfmt "^1.2.0"
 
+"@toba/map@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.0.0.tgz#36fd7dceb2292c06f84acd294f90e22edb647c5b"
+  dependencies:
+    "@toba/tools" "^1.13.0"
+    "@types/geojson" "^7946.0.2"
+    xmldom "^0.1.27"
+
 "@toba/oauth@^1.1.0":
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/@toba/oauth/-/oauth-1.1.6.tgz#495dda9d0c6b005b1b4903c1961c567d745446af"
@@ -111,6 +119,12 @@
 "@toba/tools@^1.10.0", "@toba/tools@^1.12.0", "@toba/tools@^1.8.0":
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-1.12.2.tgz#c1bea61755265c9d636586d82b89a53aa7148c5b"
+  dependencies:
+    zlib "^1.0.5"
+
+"@toba/tools@^1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-1.13.0.tgz#9a13488db96c5e699af5ac2ab877ca124e658ad7"
   dependencies:
     zlib "^1.0.5"
 
@@ -168,7 +182,7 @@
   version "0.0.35"
   resolved "https://registry.yarnpkg.com/@types/gapi/-/gapi-0.0.35.tgz#8e0d672d66d8c6ce8493f5e8e550344f7ff500dc"
 
-"@types/geojson@*":
+"@types/geojson@*", "@types/geojson@^7946.0.2":
   version "7946.0.2"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.2.tgz#0bd0a01ef04e813c2b7580318da9e37c2eadea9c"
 
@@ -7196,6 +7210,10 @@ xml-name-validator@^3.0.0:
 xml@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/xml/-/xml-1.0.1.tgz#78ba72020029c5bc87b8a81a3cfcd74b4a2fc1e5"
+
+xmldom@^0.1.27:
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
 "xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.1, xtend@~4.0.0, xtend@~4.0.1:
   version "4.0.1"

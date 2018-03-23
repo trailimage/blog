@@ -37,7 +37,7 @@ export enum Page {
 /**
  * Assign methods that will be available from within Handlebars templates.
  */
-export function assignHelpers(hbs: any) {
+export function addTemplateMethods(hbs: any) {
    const helpers: { [key: string]: Function } = {
       formatCaption: util.html.story,
       formatTitle: util.html.typography,

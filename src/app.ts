@@ -4,11 +4,10 @@ import { log } from '@toba/logger';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';
 import * as path from 'path';
-import { Layout } from './template';
+import { Layout, addTemplateMethods } from './template';
 import route from './routes';
 import * as compress from 'compression';
 import { blockSpamReferers } from '@toba/block-spam-referer';
-import { enableViewCache } from './middleware/viewcache';
 
 const root = path.join(__dirname, '..');
 
@@ -32,7 +31,10 @@ async function createWebService() {
       app.listen(port);
       log.info(`Listening for authentication on port ${port}`);
    } else {
-      enableMiddleware(app);
+      app.use(blockSpamReferers);
+      // https://github.com/expressjs/compression/blob/master/README.md
+      app.use(compress());
+      app.use(Express.static(root + 'dist'));
 
       await makePhotoBlog();
       // library must be loaded before routes are defined
@@ -60,16 +62,5 @@ function defineViews(app: Express.Application) {
       })
    );
 
-   template.assignHelpers(hbs);
-}
-
-/**
- * See http://expressjs.com/api.html#app.use
- */
-function enableMiddleware(app: Express.Application) {
-   app.use(blockSpamReferers);
-   // https://github.com/expressjs/compression/blob/master/README.md
-   app.use(compress());
-   app.use(enableViewCache);
-   app.use(Express.static(root + 'dist'));
+   addTemplateMethods(hbs);
 }

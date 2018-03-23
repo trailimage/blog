@@ -36,6 +36,7 @@
       "@toba/json-ld": "^1.0.0",
       "@toba/lint": "^1.3.4",
       "@toba/logger": "^1.0.3",
+      "@toba/map": "^1.0.0",
       "@toba/test": "^1.3.0",
       "@toba/tools": "^1.10.0",
       "@types/body-parser": "^1.16.3",

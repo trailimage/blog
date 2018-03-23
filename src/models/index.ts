@@ -14,3 +14,7 @@ export abstract class LinkDataModel<T extends JsonLD.Thing> {
       return serialize(this.linkDataJSON());
    }
 }
+
+export interface IMappable<T extends GeoJSON.GeometryObject> {
+   geoJSON(): GeoJSON.Feature<T>;
+}

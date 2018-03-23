@@ -1,7 +1,8 @@
 import { is } from '@toba/tools';
-import { PhotoSize, EXIF } from './index';
+import { geoJSON } from '@toba/map';
+import { PhotoSize, EXIF, IMappable } from './index';
 
-export class Photo {
+export class Photo implements IMappable<GeoJSON.Point> {
    id: string = null;
    index: number;
    sourceUrl: string = null;
@@ -37,6 +38,24 @@ export class Photo {
 
    getExif(): Promise<EXIF> {
       return Promise.resolve(this._exif);
+   }
+
+   geoJSON(partKey?: string): GeoJSON.Feature<GeoJSON.Point> {
+      const properties: MapPhoto = { url: this.size.preview.url };
+
+      if (partKey !== undefined) {
+         // implies GeoJSON for single post
+         properties.title = this.title;
+         properties.partKey = partKey;
+      }
+      return {
+         type: geoJSON.Type.Feature,
+         properties,
+         geometry: geoJSON.geometry(geoJSON.Type.Point, [
+            this.longitude,
+            this.latitude
+         ])
+      } as GeoJSON.Feature<GeoJSON.Point>;
    }
 }
 
@@ -83,4 +102,15 @@ export function identifyOutliers(photos: Photo[]) {
          }
       }
    }
+}
+
+/**
+ * GeoJSON properties for photos.
+ */
+export interface MapPhoto {
+   url?: string;
+   title?: string;
+   partKey?: string;
+   /** Distance from clicked cluster */
+   distance?: number;
 }
