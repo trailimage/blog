@@ -1,5 +1,6 @@
 import { Flickr } from '@toba/flickr';
-import { VideoInfo } from '../models/index';
+import { VideoInfo } from '../models/';
+import re from '../regex';
 
 /**
  * Get video ID and dimensions

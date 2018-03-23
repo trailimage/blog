@@ -1,5 +1,5 @@
 import { is } from '@toba/tools';
-import { photoBlog } from '../models/index';
+import { photoBlog } from '../models/';
 import config from '../config';
 import { geoJSON } from '@toba/map';
 
@@ -10,7 +10,7 @@ const BLOG_JSON_KEY = 'blog-map';
  *
  * http://geojsonlint.com/
  */
-export const track = (postKey: string) =>
+const track = (postKey: string) =>
    config.cache.maps
       ? cache.map
            .getItem(postKey)
@@ -20,7 +20,7 @@ export const track = (postKey: string) =>
 /**
  * Photos for all posts.
  */
-export const photos = () =>
+const photos = () =>
    config.cache.maps
       ? cache.map
            .getItem(BLOG_JSON_KEY)
@@ -67,3 +67,8 @@ async function makePhotoFeatures(geo: GeoJSON.FeatureCollection<any>) {
    );
    return geo;
 }
+
+export const map = {
+   track,
+   photos
+};

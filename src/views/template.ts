@@ -1,13 +1,13 @@
-import util from './util/';
-import config from './config';
+import { html } from './html';
+import config from '../config';
 
 /**
  * Handlebars layouts.
  */
-export enum Layout {
-   Main = 'layouts/default-layout',
-   None = ''
-}
+export const Layout: { [index: string]: string } = {
+   Main: 'layouts/default-layout',
+   None: null
+};
 
 /**
  * Handlebars page templates.
@@ -39,22 +39,22 @@ export enum Page {
  */
 export function addTemplateMethods(hbs: any) {
    const helpers: { [key: string]: Function } = {
-      formatCaption: util.html.story,
-      formatTitle: util.html.typography,
+      formatCaption: html.story,
+      formatTitle: html.typography,
       lowerCase: (text: string) => text.toLocaleLowerCase(),
       add: (a: number, b: number) => a * 1 + b,
       date: util.date.toString,
       subtract: (a: number, b: number) => a * 1 - b,
       plural: (count: number) => (count > 1 ? 's' : ''),
-      makeTagList: util.html.photoTagList,
+      makeTagList: html.photoTagList,
       formatLogTime: util.date.toLogTime,
       formatISO8601: (d: Date) => d.toISOString(),
-      formatFraction: util.html.fraction,
+      formatFraction: html.fraction,
       mapHeight: (width: number, height: number) =>
          height > width ? config.style.map.maxInlineHeight : height,
-      icon: util.icon.tag,
-      iconForCategory: util.icon.category,
-      modeIconForPost: util.icon.mode,
+      icon: html.icon.tag,
+      iconForCategory: html.icon.category,
+      modeIconForPost: html.icon.mode,
       rot13: util.encode.rot13,
       json: JSON.stringify,
       encode: encodeURIComponent

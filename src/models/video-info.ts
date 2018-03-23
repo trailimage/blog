@@ -1,4 +1,4 @@
-import { LinkDataModel } from './index';
+import { LinkDataModel } from './';
 import { JsonLD } from '@toba/json-ld';
 import { forVideo } from './json-ld';
 

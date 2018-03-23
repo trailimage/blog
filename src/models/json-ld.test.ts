@@ -12,7 +12,7 @@ beforeAll(async () => {
 });
 
 test('creates link data for posts', () => {
-   const schema = post.toJsonLD();
+   const schema = post.linkDataJSON();
 
    expect(schema).toHaveProperty([
       'author',

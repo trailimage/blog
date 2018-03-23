@@ -2,34 +2,33 @@ import { photoBlog } from '../models/index';
 import { is, HttpStatus, MimeType } from '@toba/tools';
 import { serialize, owner } from '../models/json-ld';
 import config from '../config';
-import { Page } from '../template';
+import { Page, view } from '../views/';
 import { Response, Request } from 'express';
-import { notFound, sendView } from '../response';
 
-export function search(req: Request, res: Response) {
+function search(req: Request, res: Response) {
    const term = req.query['q'];
 
    if (is.value(term)) {
       res.render(Page.Search, {
-         title: 'Search for “' + req.query['q'] + '”',
+         title: `Search for “${req.query['q']}”`,
          config: config
       });
    } else {
-      notFound(res);
+      view.notFound(req, res);
    }
 }
 
-export function about(_req: Request, res: Response) {
-   sendView(res, Page.About, {
-      templateValues: {
+function about(_req: Request, res: Response) {
+   view.send(res, Page.About, {
+      context: {
          title: 'About ' + config.site.title,
          jsonLD: serialize(owner)
       }
    });
 }
 
-export function siteMap(_req: Request, res: Response) {
-   sendView(res, Page.Sitemap, {
+function siteMap(_req: Request, res: Response) {
+   view.send(res, Page.Sitemap, {
       mimeType: MimeType.XML,
       callback: render => {
          render(Page.Sitemap, {
@@ -42,7 +41,7 @@ export function siteMap(_req: Request, res: Response) {
    });
 }
 
-export function issues(_req: Request, res: Response) {
+function issues(_req: Request, res: Response) {
    res.redirect(HttpStatus.PermanentRedirect, 'http://issues.' + config.domain);
 }
 

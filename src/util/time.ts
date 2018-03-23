@@ -1,12 +1,12 @@
 import config from '../config';
-import is from '../is';
-import { format } from './text';
+import { is } from '@toba/tools';
 import {
    inDaylightSavings,
    weekday,
    leadingZeros,
-   parseNumber
-} from '@toba/utility';
+   parseNumber,
+   format
+} from '@toba/tools';
 
 /**
  * Return AM or PM

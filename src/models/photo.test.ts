@@ -1,5 +1,5 @@
-import { Post, photoBlog } from './index';
-import { makePhotoBlog } from '../factory/index';
+import { Post, photoBlog } from './';
+import { makePhotoBlog } from '../factory/';
 
 let post: Post = null;
 

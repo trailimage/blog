@@ -1,13 +1,13 @@
 import { Flickr, FeatureSet } from '@toba/flickr';
 import { slug, is } from '@toba/tools';
-import { Post, Photo, photoBlog } from '../models/index';
+import { Post, Photo, photoBlog } from '../models/';
 import re from '../regex';
-import { makeVideoInfo, makePhoto, flickr } from './index';
+import { makeVideoInfo, makePhoto, flickr } from './';
 
 /**
- * Create post from Flickr photo set
+ * Create post from Flickr photo set.
  *
- * `chronological` whether set photos occurred together at a point in time.
+ * @param chronoligical Whether set photos occurred together at a point in time
  */
 export function make(
    flickrSet: Flickr.SetSummary | FeatureSet,
@@ -35,6 +35,9 @@ export function make(
    return p;
 }
 
+/**
+ * Assign post methods to lazy-load content.
+ */
 function assignFactoryMethods(p: Post): Post {
    p.getInfo = (): Promise<Post> =>
       p.infoLoaded

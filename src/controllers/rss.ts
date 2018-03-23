@@ -1,19 +1,20 @@
-import { Blog } from '../types/';
-import log from '../logger';
+import { log } from '@toba/logger';
+import { MimeType } from '@toba/tools';
+import { photoBlog } from '../models/';
+import { view } from '../views/';
 import config from '../config';
-import library from '../library';
 import * as Feed from 'feed';
-import { mimeType } from '../constants';
+import { Response, Request } from 'express';
 
 const MAX_RSS_RETRIES = 10;
 
 let rssRetries = 0;
 
-export default function postFeed(req: Blog.Request, res: Blog.Response) {
-   if (!library.postInfoLoaded) {
+export function postFeed(req: Request, res: Response) {
+   if (!photoBlog.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
          log.error('Unable to load library after %d tries', MAX_RSS_RETRIES);
-         res.notFound();
+         view.notFound(req, res);
          // reset tries so page can be refreshed
          rssRetries = 0;
       } else {
@@ -48,7 +49,7 @@ export default function postFeed(req: Blog.Request, res: Blog.Response) {
       author: author
    });
 
-   for (const p of library.posts.filter(p => p.chronological)) {
+   for (const p of photoBlog.posts.filter(p => p.chronological)) {
       feed.addItem({
          image: p.bigThumbURL,
          author: author,
@@ -59,6 +60,6 @@ export default function postFeed(req: Blog.Request, res: Blog.Response) {
          date: p.createdOn
       });
    }
-   res.set('Content-Type', mimeType.XML);
+   res.set('Content-Type', MimeType.XML);
    res.send(feed.rss2());
 }

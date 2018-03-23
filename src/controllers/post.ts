@@ -1,16 +1,15 @@
 import { photoBlog } from '../models/index';
 import { is, HttpStatus } from '@toba/tools';
-import { Page, Layout } from '../template';
+import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
 import { Response, Request } from 'express';
-import { sendView, notFound, internalError } from '../response';
 
-function view(res: Response, key: string, pageTemplate: string = Page.Post) {
-   sendView(res, key, {
+function send(res: Response, key: string, pageTemplate: string = Page.Post) {
+   view.send(res, key, {
       callback: render => {
          const p = photoBlog.postWithKey(key);
          if (!is.value(p)) {
-            notFound(res);
+            view.notFound(req, res);
             return;
          }
          p
@@ -26,7 +25,7 @@ function view(res: Response, key: string, pageTemplate: string = Page.Post) {
                   layout: Layout.None
                });
             })
-            .catch(err => internalError(res, err));
+            .catch(err => view.internalError(res, err));
       }
    });
 }
@@ -35,14 +34,14 @@ function view(res: Response, key: string, pageTemplate: string = Page.Post) {
  * Display post that's part of a series
  */
 function inSeries(req: Request, res: Response) {
-   view(
+   send(
       res,
       req.params[RouteParam.SeriesKey] + '/' + req.params[RouteParam.PartKey]
    );
 }
 
 function withKey(req: Request, res: Response) {
-   view(res, req.params[RouteParam.PostKey]);
+   send(res, req.params[RouteParam.PostKey]);
 }
 
 /**
@@ -55,7 +54,7 @@ function withID(req: Request, res: Response) {
    if (is.value(post)) {
       res.redirect(HttpStatus.PermanentRedirect, '/' + post.key);
    } else {
-      notFound(res);
+      view.notFound(req, res);
    }
 }
 
@@ -74,17 +73,17 @@ function withPhoto(req: Request, res: Response) {
                '/' + post.key + '#' + photoID
             );
          } else {
-            notFound(res);
+            view.notFound(req, res);
          }
       })
-      .catch(() => notFound(res));
+      .catch(() => view.notFound(req, res));
 }
 
 /**
  * Show newest post on home page
  */
 function latest(_req: Request, res: Response) {
-   view(res, photoBlog.posts[0].key);
+   send(res, photoBlog.posts[0].key);
 }
 
 export const post = { latest, withID, withKey, withPhoto, inSeries };

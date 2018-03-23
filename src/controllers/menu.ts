@@ -1,11 +1,10 @@
 import { photoBlog } from '../models/index';
 import config from '../config';
-//import log from "../logger";
-import { Layout, Page } from '../template';
+import { log } from '@toba/logger';
+import { Layout, Page, view } from '../views/';
 import { MimeType } from '@toba/tools';
 import * as uglify from 'uglify-js';
 import { Response, Request } from 'express';
-import { sendView } from '../view';
 
 /**
  * Minify menu JSON for production. Set `config.testing = true` if testing
@@ -29,7 +28,7 @@ export function data(_req: Request, res: Response) {
          : null;
 
    res.setHeader('Vary', 'Accept-Encoding');
-   sendView(res, slug, {
+   view.send(res, slug, {
       mimeType: MimeType.JSONP,
       callback: render => {
          render(slug, { photoBlog, layout: Layout.None }, postProcess);
@@ -39,7 +38,7 @@ export function data(_req: Request, res: Response) {
 
 export function mobile(_req: Request, res: Response) {
    const slug = Page.MobileMenuData;
-   sendView(res, slug, {
+   view.send(res, slug, {
       callback: render => {
          render(slug, { photoBlog, layout: Layout.None });
       }

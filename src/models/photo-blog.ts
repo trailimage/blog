@@ -1,5 +1,5 @@
 import { removeItem, is } from '@toba/tools';
-import { Post, Category, Photo, EXIF } from './index';
+import { Post, Category, Photo, EXIF } from './';
 
 /**
  * Singleton collection of photos grouped into "posts" (called a "set" or
@@ -115,12 +115,15 @@ class PhotoBlog {
    }
 
    /**
-    * Array of all post keys
+    * Array of all post keys.
     */
    postKeys(): string[] {
       return this.posts.map(p => p.key);
    }
 
+   /**
+    * Remove all blog data.
+    */
    empty(): PhotoBlog {
       this.categories = {};
       this.posts = [];
@@ -172,8 +175,6 @@ class PhotoBlog {
       }
       return postTags.length > 0 ? postTags.join(', ') : null;
    }
-
-   // load(emptyIfLoaded: boolean): Promise<Library>;
 
    /**
     * Unload particular posts to force refresh from source

@@ -1,4 +1,12 @@
-import { Header, HttpStatus, MimeType, Encoding, is, Cache } from '@toba/tools';
+import {
+   Header,
+   HttpStatus,
+   MimeType,
+   Encoding,
+   is,
+   merge,
+   Cache
+} from '@toba/tools';
 import { Response, Request } from 'express';
 import { Page } from './template';
 // http://nodejs.org/api/zlib.html
@@ -12,11 +20,32 @@ export interface ViewItem {
 }
 
 export interface RenderOptions {
-   mimeType: MimeType;
-   generate: () => string;
-   templateValues: { [key: string]: any };
-   callback?: Function;
+   /**
+    * Defaults to HTML if not specified
+    */
+   mimeType?: MimeType;
+   /**
+    * Method to generate response content if not found in cache.
+    */
+   generate?: () => string;
+   /**
+    * Key-values sent into tempate.
+    */
+   context?: { [key: string]: any };
+   callback?: (renderer: Renderer) => void;
 }
+
+export type Renderer = (
+   viewName: string,
+   /** Key-values sent into the view template. */
+   context: { [key: string]: any },
+   /** Optional method to post-process rendered template. */
+   postProcess?: Function
+) => void;
+
+const defaultRenderOptions: RenderOptions = {
+   mimeType: MimeType.HTML
+};
 
 /**
  * Create view cache item with eTag and compressed content.
@@ -107,11 +136,11 @@ export function sendJson(res: Response, key: string, generate: Function) {
    } as RenderOptions);
 }
 
+/**
+ * @param key Cache key
+ */
 export function sendView(res: Response, key: string, options: RenderOptions) {
-   if (!options.mimeType) {
-      options.mimeType = MimeType.HTML;
-   }
-   sendFromCacheOrRender(res, key, options);
+   sendFromCacheOrRender(res, key, merge(defaultRenderOptions, options));
 }
 
 export function sendCompressed(
@@ -187,7 +216,7 @@ function renderForType(res: Response, slug: string, options: RenderOptions) {
    } else {
       // invoke renderer directly assuming view name identical to slug
       const render = renderTemplate(res, slug, options.mimeType);
-      render(slug, options.templateValues);
+      render(slug, options.context);
    }
 }
 
@@ -195,11 +224,7 @@ function renderForType(res: Response, slug: string, options: RenderOptions) {
  * Curry standard function to render the view identified by the slug then
  * compress and cache it.
  */
-function renderTemplate(
-   res: Response,
-   slug: string,
-   type: MimeType
-): Blog.Renderer {
+function renderTemplate(res: Response, slug: string, type: MimeType): Renderer {
    return (
       view: string,
       context: { [key: string]: any },
@@ -245,3 +270,10 @@ async function cacheAndSend(
    cache.add(slug, item);
    sendCompressed(res, type, item);
 }
+
+export const view = {
+   send: sendView,
+   sendCompressed,
+   notFound,
+   internalError
+};

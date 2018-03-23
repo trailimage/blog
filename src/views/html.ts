@@ -1,8 +1,7 @@
 import { Category } from '../models/index';
-import { is } from '@toba/tools';
+import { is, format } from '@toba/tools';
 import re from '../regex';
 import config from '../config';
-import { format } from './text';
 
 /**
  * Format paragraphs and prose.
@@ -156,13 +155,13 @@ export function photoTagList(list: string[]): string {
  *
  * https://material.io/icons/
  */
-export const iconTag = (name: string) =>
+const iconTag = (name: string) =>
    `<i class="material-icons ${name}">${name}</i>`;
 
 /**
  * HTML tag for icon matched to post tag
  */
-export function postCategoryIcon(title: string): string {
+function postCategoryIcon(title: string): string {
    const map = config.style.icon.category;
 
    if (is.value(map)) {
@@ -178,7 +177,7 @@ export function postCategoryIcon(title: string): string {
    return '';
 }
 
-export function postModeIcon(
+function postModeIcon(
    categories: string[] | { [key: string]: Category }
 ): string {
    const icons = config.style.icon;
@@ -251,7 +250,7 @@ export function formatHaiku(text: string, regex: RegExp): string {
 /**
  * Format poetry text within a blockquote.
  */
-export function formatPoem(text: string): string {
+function formatPoem(text: string): string {
    return (
       '<blockquote class="poem"><p>' +
       text
@@ -269,7 +268,7 @@ export function formatPoem(text: string): string {
  *
  * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */
-export function caption(text: string): string {
+function caption(text: string): string {
    if (!is.empty(text)) {
       const ph = '[POEM]'; // poetry placeholder
       let footnotes = '';
@@ -325,7 +324,7 @@ export function caption(text: string): string {
    return '';
 }
 
-export const logMessage = (r: any, fieldName: string) => {
+const logMessage = (r: any, fieldName: string) => {
    if (is.defined(r, fieldName) && is.value(r[fieldName])) {
       r[fieldName] = r[fieldName]
          .replace(/(\d{10,11})/, linkPattern(config.log.photoUrl))
@@ -345,6 +344,21 @@ export const characterEntities = (text: string) =>
       /[\u00A0-\u2666<>\&]/g,
       c => '&' + (htmlEntity[c.charCodeAt(0)] || '#' + c.charCodeAt(0)) + ';'
    );
+
+export const html = {
+   story,
+   typography,
+   caption,
+   formatPoem,
+   formatHaiku,
+   photoTagList,
+   fraction,
+   icon: {
+      category: postCategoryIcon,
+      mode: postModeIcon,
+      tag: iconTag
+   }
+};
 
 /**
  * Character codes for HTML entities

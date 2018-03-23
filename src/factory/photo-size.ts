@@ -1,5 +1,5 @@
 import { is } from '@toba/tools';
-import { PhotoSize } from '../models/index';
+import { PhotoSize } from '../models/';
 
 export function make(json: any, sizeField: string | string[]): PhotoSize {
    let field: string;

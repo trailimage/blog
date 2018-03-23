@@ -1,20 +1,18 @@
-import { Post, photoBlog } from '../models/index';
+import { Post, photoBlog } from '../models/';
 import { is, MimeType, HttpStatus, Header, Encoding } from '@toba/tools';
 import { log } from '@toba/logger';
 import fetch from 'node-fetch';
 import config from '../config';
-import kml from '../map/kml';
-import geoJSON from '../map/geojson';
-import { Page, Layout } from '../template';
+import { kml, geoJSON } from '@toba/map';
+import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
 import * as compress from 'zlib';
 import { Response, Request } from 'express';
-import { notFound, internalError, sendCompressed } from '../response';
 
 /**
  * Map screen loads then makes AJAX call to fetch data.
  */
-function view(post: Post, req: Request, res: Response) {
+function send(post: Post, req: Request, res: Response) {
    if (is.value(post)) {
       const key = post.isPartial ? post.seriesKey : post.key;
       const photoID = req.params[RouteParam.PhotoID];
@@ -31,16 +29,16 @@ function view(post: Post, req: Request, res: Response) {
          });
       });
    } else {
-      notFound(res);
+      view.notFound(req, res);
    }
 }
 
-export function post(req: Request, res: Response) {
-   view(photoBlog.postWithKey(req.params[RouteParam.PostKey]), req, res);
+function post(req: Request, res: Response) {
+   send(photoBlog.postWithKey(req.params[RouteParam.PostKey]), req, res);
 }
 
-export function series(req: Request, res: Response) {
-   view(
+function series(req: Request, res: Response) {
+   send(
       photoBlog.postWithKey(
          req.params[RouteParam.SeriesKey],
          req.params[RouteParam.PartKey]
@@ -53,7 +51,7 @@ export function series(req: Request, res: Response) {
 /**
  * https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
-export function blog(_req: Request, res: Response) {
+function blog(_req: Request, res: Response) {
    res.render(Page.Mapbox, {
       layout: Layout.None,
       title: config.site.title + ' Map',
@@ -64,53 +62,56 @@ export function blog(_req: Request, res: Response) {
 /**
  * Compressed GeoJSON of all site photos.
  */
-export function photoJSON(_req: Request, res: Response) {
+function photoJSON(req: Request, res: Response) {
    photoBlog.map
       .photos()
       .then(item => {
-         sendCompressed(res, MimeType.JSON, item);
+         view.sendCompressed(res, MimeType.JSON, item);
       })
       .catch(err => {
          log.error(err);
-         notFound(res);
+         view.notFound(req, res);
       });
 }
 
 /**
  * Compressed GeoJSON of track for post.
  */
-export function trackJSON(req: Request, res: Response) {
+function trackJSON(req: Request, res: Response) {
    factory.map
       .track(req.params[RouteParam.PostKey])
       .then(item => {
-         sendCompressed(res, MimeType.JSON, item);
+         view.sendCompressed(res, MimeType.JSON, item);
       })
       .catch(err => {
          log.error(err);
-         notFound(res);
+         view.notFound(req, res);
       });
 }
 
 /**
  * Retrieve and parse a map source
  */
-export function source(req: Request, res: Response) {
+async function source(req: Request, res: Response) {
    const key: string = req.params[RouteParam.MapSource];
 
    if (!is.text(key)) {
-      return notFound(res);
+      return view.notFound(req, res);
    }
 
    const s = config.map.source[key.replace('.json', '')];
 
    if (!is.value<MapSource>(s)) {
-      return notFound(res);
+      return view.notFound(req, res);
    }
 
    // for now hardcoded to KMZ
    const parser = fetchKMZ(s.provider);
 
-   fetch(s.url, { headers: { [Header.UserAgent]: 'node.js' } }).then(reply => {
+   const reply = await fetch(s.url, {
+      headers: { [Header.UserAgent]: 'node.js' }
+   });
+
       if (reply.status == HttpStatus.OK) {
          parser(reply)
             .then(JSON.stringify)
@@ -119,7 +120,7 @@ export function source(req: Request, res: Response) {
                   Buffer.from(geoText),
                   (err: Error, buffer: Buffer) => {
                      if (is.value(err)) {
-                        internalError(res, err);
+                        view.internalError(res, err);
                      } else {
                         res.setHeader(Header.Content.Encoding, Encoding.GZip);
                         res.setHeader(
@@ -140,8 +141,8 @@ export function source(req: Request, res: Response) {
                   }
                );
             })
-            .catch(err => {
-               internalError(res, err);
+            .catch((err: Error) => {
+               view.internalError(res, err);
             });
       } else {
          res.end(reply.status);
@@ -174,9 +175,9 @@ function gpx(req: Request, res: Response) {
             res.end();
          })
          // errors already logged by loadGPX()
-         .catch(() => notFound(res));
+         .catch(() => view.notFound(req, res));
    } else {
-      notFound(res);
+      view.notFound(req, res);
    }
 }
 

@@ -1,11 +1,9 @@
 import { photoBlog } from '../models/index';
-import { is, alphabet } from '@toba/tools';
+import { is, alphabet, sayNumber } from '@toba/tools';
 import config from '../config';
-import util from '../util/';
-import { Page, Layout } from '../template';
+import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
 import { Response, Request } from 'express';
-import { notFound } from '../response';
 
 /**
  * Small HTML table of EXIF values for given photo
@@ -19,7 +17,7 @@ function exif(req: Request, res: Response) {
             layout: Layout.None
          });
       })
-      .catch(() => notFound(res));
+      .catch(() => view.notFound(req, res));
 }
 
 /**
@@ -34,15 +32,12 @@ function withTag(req: Request, res: Response) {
       .getPhotosWithTags(slug)
       .then(photos => {
          if (photos === null || photos.length == 0) {
-            notFound(res);
+            view.notFound(req, res);
          } else {
             const tag = photoBlog.tags[slug];
-            const title =
-               util.number.say(photos.length) +
-               ' &ldquo;' +
-               tag +
-               '&rdquo; Image' +
-               (photos.length != 1 ? 's' : '');
+            const title = `${sayNumber(
+               photos.length
+            )} &ldquo;${tag}&rdquo; Image${photos.length != 1 ? 's' : ''}`;
 
             res.render(Page.PhotoSearch, {
                photos,
@@ -52,7 +47,7 @@ function withTag(req: Request, res: Response) {
             });
          }
       })
-      .catch(() => notFound(res));
+      .catch(() => view.notFound(req, res));
 }
 
 function tags(req: Request, res: Response) {

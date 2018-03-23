@@ -1,5 +1,5 @@
-import { makePhotoSize } from './index';
-import { Photo } from '../models/index';
+import { makePhotoSize } from './';
+import { Photo } from '../models/';
 import { Flickr } from '@toba/flickr';
 import { is } from '@toba/tools';
 import config from '../config';

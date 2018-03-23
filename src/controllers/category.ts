@@ -1,15 +1,14 @@
 import { Category, photoBlog } from '../models/index';
-import { is } from '@toba/tools';
-import { serialize } from '../json-ld';
+import { is, merge, sayNumber } from '@toba/tools';
+import { serialize } from '@toba/json-ld';
 import config from '../config';
-import util from '../util/';
-import { Page } from '../template';
+import { Page, Layout } from '../views/template';
 import { RouteParam } from '../routes';
 import { Response, Request } from 'express';
-import { sendView, notFound } from '../response';
+import { view, Renderer } from '../views/view';
 
-function view(res: Response, path: string, homePage = false) {
-   sendView(res, path, {
+function viewIt(req: Request, res: Response, path: string, homePage = false) {
+   view.send(res, path, {
       callback: render => {
          // use renderer to build view that wasn't cached
          const category = photoBlog.categoryWithKey(path);
@@ -32,7 +31,7 @@ function view(res: Response, path: string, homePage = false) {
                );
             });
          } else {
-            notFound(res);
+            view.notFound(req, res);
          }
       }
    });
@@ -42,7 +41,8 @@ function view(res: Response, path: string, homePage = false) {
  * A particular category like When/2013
  */
 export function forPath(req: Request, res: Response) {
-   view(
+   viewIt(
+      req,
       res,
       req.params[RouteParam.RootCategory] +
          '/' +
@@ -55,7 +55,7 @@ export function forPath(req: Request, res: Response) {
  * This is still messed up from a configurability perspective since it assumes
  * the default tag has years as child tags
  */
-export function home(_req: Request, res: Response) {
+export function home(req: Request, res: Response) {
    const category = photoBlog.categories[config.library.defaultCategory];
    let year = new Date().getFullYear();
    let subcategory = null;
@@ -69,17 +69,17 @@ export function home(_req: Request, res: Response) {
       }
       year--;
    }
-   view(res, subcategory.key, true);
+   viewIt(req, res, subcategory.key, true);
 }
 
 /**
- * Show root category with list of subcategories
+ * Show root category with list of subcategories.
  */
 export function list(req: Request, res: Response) {
    const key = req.params[RouteParam.RootCategory] as string;
 
    if (is.value(key)) {
-      sendView(res, key, {
+      view.send(res, key, {
          callback: render => {
             // use renderer to build view that wasn't cached
             const category = photoBlog.categoryWithKey(key);
@@ -87,56 +87,55 @@ export function list(req: Request, res: Response) {
             if (is.value(category)) {
                const linkData = category.linkDataString();
                const count = category.subcategories.length;
-               const options = { subcategories: category.subcategories };
+               const context = { subcategories: category.subcategories };
                const subtitle = 'Subcategories';
 
                renderCategory(
-                  render as Blog.Renderer,
+                  render,
                   Page.CategoryList,
                   category,
                   linkData,
-                  options,
+                  context,
                   count,
                   subtitle
                );
             } else {
-               notFound(res);
+               view.notFound(req, res);
             }
          }
       });
    } else {
-      notFound(res);
+      view.notFound(req, res);
    }
 }
 
 export function menu(_req: Request, res: Response) {
-   const t = template.page.CATEGORY_MENU;
-   sendView(res, t, {
+   view.send(res, Page.CategoryMenu, {
       callback: render => {
-         render(t, { photoBlog, layout: template.layout.NONE });
+         render(Page.CategoryMenu, { photoBlog, layout: Layout.None });
       }
    });
 }
 
 /**
- * Render category if it wasn't cached
+ * Render category if it wasn't cached.
  */
 function renderCategory(
-   render: Blog.Renderer,
+   render: Renderer,
    template: string,
    category: Category,
    linkData: any,
-   options: { [key: string]: any },
+   context: { [key: string]: any },
    childCount: number,
    subtitle: string
 ) {
    render(
       template,
-      Object.assign(options, {
+      merge(context, {
          title: category.title,
          jsonLD: serialize(linkData),
          headerCSS: config.style.css.categoryHeader,
-         subtitle: util.number.say(childCount) + ' ' + subtitle
+         subtitle: `${sayNumber(childCount)} ${subtitle}`
       })
    );
 }

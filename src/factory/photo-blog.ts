@@ -1,7 +1,7 @@
 import { is } from '@toba/tools';
 import { Flickr } from '@toba/flickr';
-import { photoBlog, Post, Photo, EXIF } from '../models/index';
-import { flickr, makeCategory, makeEXIF, makePhoto } from './index';
+import { photoBlog, Photo, EXIF } from '../models/';
+import { flickr, makeCategory, makeEXIF, makePhoto } from './';
 import config from '../config';
 
 /**
@@ -67,16 +67,17 @@ export function make(emptyIfLoaded: boolean = true) {
 const getEXIF = (photoID: string): Promise<EXIF> =>
    flickr.getExif(photoID).then(makeEXIF);
 
-function getPostWithPhoto(photo: Photo | string): Promise<Post> {
+/**
+ * Get first post that includes the given photo.
+ */
+async function getPostWithPhoto(this: typeof photoBlog, photo: Photo | string) {
    const id: string =
       typeof photo == is.Type.String ? (photo as string) : (photo as Photo).id;
+   const photoSets = await flickr.getPhotoContext(id);
 
-   return flickr
-      .getPhotoContext(id)
-      .then(
-         sets =>
-            is.value(sets) ? this.posts.find(p => p.id == sets[0].id) : null
-      );
+   return is.value(photoSets)
+      ? this.posts.find(p => p.id == photoSets[0].id)
+      : null;
 }
 
 /**
@@ -87,7 +88,7 @@ const getPhotosWithTags = (tags: string | string[]) =>
 
 function assignFactoryMethods() {
    photoBlog.getEXIF = getEXIF;
-   photoBlog.getPostWithPhoto = getPostWithPhoto;
+   photoBlog.getPostWithPhoto = getPostWithPhoto.bind(photoBlog);
    photoBlog.getPhotosWithTags = getPhotosWithTags;
 }
 

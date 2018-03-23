@@ -4,6 +4,9 @@ import { Category, photoBlog, Post } from '../models/index';
 import { makePost } from './index';
 import config from '../config';
 
+/**
+ * Create post category from Flickr data.
+ */
 export function make(collection: Flickr.Collection, root = false): Category {
    const category = new Category(slug(collection.title), collection.title);
    const feature = config.flickr.featureSets;
