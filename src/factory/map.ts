@@ -1,6 +1,7 @@
 import { is } from '@toba/tools';
+import { photoBlog } from '../models/index';
 import config from '../config';
-import geoJSON from '../map/geojson';
+import { geoJSON } from '@toba/map';
 
 const BLOG_JSON_KEY = 'blog-map';
 
@@ -38,7 +39,7 @@ const loadPhotos = () =>
  * Get GeoJSON for single post. If post has no track then return empty GPX.
  */
 function loadTrack(postKey: string): Promise<Cache.Item> {
-   const post = library.postWithKey(postKey);
+   const post = photoBlog.postWithKey(postKey);
 
    if (!is.value(post)) {
       throw new ReferenceError(`Post ${postKey} not found in library`);
@@ -56,18 +57,13 @@ function loadTrack(postKey: string): Promise<Cache.Item> {
    return getFeatures.then(geo => cache.map.add(postKey, geo));
 }
 
-/**
+/**x
  * Append blog photo GeoFeatures to GeoJSON.
  */
-const makePhotoFeatures = (geo?: GeoJSON.FeatureCollection<any>) =>
-   new Promise<GeoJSON.FeatureCollection<any>>(resolve => {
-      library.getPhotos().then(photos => {
-         geo.features = geo.features.concat(
-            photos
-               .filter(p => p.latitude > 0)
-               .map(p => geoJSON.pointFromPhoto(p))
-         );
-
-         resolve(geo);
-      });
-   });
+async function makePhotoFeatures(geo: GeoJSON.FeatureCollection<any>) {
+   const photos = await photoBlog.getPhotos();
+   geo.features = geo.features.concat(
+      photos.filter(p => p.latitude > 0).map(p => p.geoJSON())
+   );
+   return geo;
+}

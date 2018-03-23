@@ -1,8 +1,3 @@
-// add helper expando methods
-beforeAll(done => {
-   middleware.enableStatusHelpers(req, res, done);
-});
-
 const viewSlug = 'test-slug';
 const pageContent = '<html><head></head><body>Test Page</body></html>';
 let cacheViews = false;

@@ -5,7 +5,7 @@ import { Layout, Page } from '../template';
 import { MimeType } from '@toba/tools';
 import * as uglify from 'uglify-js';
 import { Response, Request } from 'express';
-import { sendView } from '../response';
+import { sendView } from '../view';
 
 /**
  * Minify menu JSON for production. Set `config.testing = true` if testing

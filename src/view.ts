@@ -1,6 +1,15 @@
-import { Header, HttpStatus, MimeType, Encoding, is } from '@toba/tools';
+import { Header, HttpStatus, MimeType, Encoding, is, Cache } from '@toba/tools';
 import { Response, Request } from 'express';
 import { Page } from './template';
+// http://nodejs.org/api/zlib.html
+import * as compress from 'zlib';
+
+const cache = new Cache<ViewItem>();
+
+export interface ViewItem {
+   eTag: string;
+   buffer: Buffer;
+}
 
 export interface RenderOptions {
    mimeType: MimeType;
@@ -8,6 +17,31 @@ export interface RenderOptions {
    templateValues: { [key: string]: any };
    callback?: Function;
 }
+
+/**
+ * Create view cache item with eTag and compressed content.
+ */
+const createViewItem = (
+   key: string,
+   htmlOrJSON: string | GeoJSON.FeatureCollection<any>
+) =>
+   new Promise<ViewItem>((resolve, reject) => {
+      const text: string =
+         typeof htmlOrJSON == is.Type.Object
+            ? JSON.stringify(htmlOrJSON)
+            : (htmlOrJSON as string);
+
+      compress.gzip(Buffer.from(text), (err: Error, buffer: Buffer) => {
+         if (is.value(err)) {
+            reject(err);
+         } else {
+            resolve({
+               buffer,
+               eTag: key + '_' + new Date().getTime().toString()
+            });
+         }
+      });
+   });
 
 /**
  * Remove IPv6 prefix from transitional addresses.
@@ -83,7 +117,7 @@ export function sendView(res: Response, key: string, options: RenderOptions) {
 export function sendCompressed(
    res: Response,
    mimeType: MimeType,
-   item: Cache.Item,
+   item: ViewItem,
    cache = true
 ) {
    res.setHeader(Header.Content.Encoding, Encoding.GZip);
@@ -115,24 +149,18 @@ function sendFromCacheOrRender(
    const generate = () => renderForType(res, slug, options);
 
    if (config.cache.views) {
-      cache.view
-         .getItem(slug)
-         .then(item => {
-            if (is.cacheItem(item)) {
-               // send cached item directly
-               sendCompressed(res, options.mimeType, item);
-            } else {
-               // generate content to send
-               log.info('"%s" not cached', slug);
-               generate();
-            }
-         })
-         .catch(err => {
-            log.error('Error loading cached view', err);
-            generate();
-         });
+      const item = cache.get(slug);
+
+      if (item !== null) {
+         // send cached item directly
+         sendCompressed(res, options.mimeType, item);
+      } else {
+         // generate content to send
+         log.info(`"${slug}" not cached`, slug);
+         generate();
+      }
    } else {
-      log.warn('Caching disabled for "%s"', slug);
+      log.warn(`Caching disabled for ${slug}`, slug);
       generate();
    }
 }
@@ -174,25 +202,20 @@ function renderTemplate(
 ): Blog.Renderer {
    return (
       view: string,
-      options: { [key: string]: any },
+      context: { [key: string]: any },
       postProcess?: Function
    ) => {
       // use default meta tag description if none provided
-      if (is.empty(options.description)) {
-         options.description = config.site.description;
+      if (is.empty(context.description)) {
+         context.description = config.site.description;
       }
       // always send config to views
-      options.config = config;
+      context.config = config;
 
-      res.render(view, options, (renderError: Error, text: string) => {
+      res.render(view, context, (renderError: Error, text: string) => {
          if (is.value(renderError)) {
             // error message includes view name
-            log.error(
-               'Rendering %s %s',
-               slug,
-               renderError.message,
-               renderError
-            );
+            log.error(`Rendering ${slug} ${renderError.message}`, slug);
             internalError(res);
          } else {
             if (is.callable(postProcess)) {
@@ -201,7 +224,7 @@ function renderTemplate(
             if (is.value(text)) {
                cacheAndSend(res, text, slug, type);
             } else {
-               log.error('renderTemplate(%s) returned no content', slug);
+               log.error(`renderTemplate(${slug}) returned no content`, slug);
                internalError(res);
             }
          }
@@ -212,23 +235,13 @@ function renderTemplate(
 /**
  * Compress, cache and send content to client.
  */
-function cacheAndSend(
+async function cacheAndSend(
    res: Response,
    html: string,
    slug: string,
    type: MimeType
 ) {
-   cache.view
-      .add(slug, html)
-      .then(item => {
-         sendCompressed(res, type, item);
-      })
-      .catch((err: Error) => {
-         // log error and send uncompressed content
-         log.error(
-            `cacheAndSend() failed to add ${slug} view to cache: ${err}`
-         );
-         res.write(html);
-         res.end();
-      });
+   const item = await createViewItem(slug, html);
+   cache.add(slug, item);
+   sendCompressed(res, type, item);
 }
