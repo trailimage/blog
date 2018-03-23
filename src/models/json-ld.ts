@@ -7,7 +7,7 @@ import {
    webPage,
    place
 } from '@toba/json-ld';
-import { Category, Post, photoBlog, VideoInfo } from './index';
+import { Category, Post, photoBlog, VideoInfo } from './';
 import { is } from '@toba/tools';
 import config from '../config';
 
@@ -139,7 +139,7 @@ export function forPost(p: Post): JsonLD.BlogPosting {
       articleSection: categoryTitle.join(',')
    };
 
-   if (this.chronological && this.centroid != null) {
+   if (p.chronological && p.centroid != null) {
       schema.locationCreated = postPlace(p);
       schema.potentialAction = discoverAction(p);
    }
@@ -153,7 +153,7 @@ export function forPost(p: Post): JsonLD.BlogPosting {
    //	content.keywords = config.alwaysKeywords + post.photoTagList;
    //}
 
-   if (is.value(this.coverPhoto.size.thumb)) {
+   if (is.value(p.coverPhoto.size.thumb)) {
       (schema.image as JsonLD.ImageObject).thumbnail = image(
          p.coverPhoto.size.thumb
       );

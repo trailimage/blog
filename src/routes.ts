@@ -43,7 +43,7 @@ function postRoutes(photoID: string): Express.Router {
    r.get('/map', map.post);
    r.get('/gpx', map.gpx);
    r.get(`/map/${photoID}`, map.post);
-   r.get('/geo.json', cx.map.json.post);
+   r.get('/geo.json', map.json.post);
    return r;
 }
 

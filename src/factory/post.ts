@@ -1,8 +1,9 @@
 import { Flickr, FeatureSet } from '@toba/flickr';
 import { slug, is } from '@toba/tools';
 import { Post, Photo, photoBlog } from '../models/';
+import { identifyOutliers } from '../models/photo';
 import re from '../regex';
-import { makeVideoInfo, makePhoto, flickr } from './';
+import { makeVideoInfo, makePhoto, flickr, timeStampToDate } from './';
 
 /**
  * Create post from Flickr photo set.
@@ -39,19 +40,15 @@ export function make(
  * Assign post methods to lazy-load content.
  */
 function assignFactoryMethods(p: Post): Post {
-   p.getInfo = (): Promise<Post> =>
+   p.getInfo = async () =>
       p.infoLoaded
-         ? Promise.resolve(p)
-         : flickr
-              .getSetInfo(p.id)
-              .then((info: Flickr.SetInfo) => updateInfo(p, info));
+         ? p
+         : flickr.getSetInfo(p.id).then(info => updateInfo(p, info));
 
-   p.getPhotos = (): Promise<Photo[]> =>
+   p.getPhotos = async () =>
       p.photosLoaded
-         ? Promise.resolve(p.photos)
-         : flickr
-              .getSetPhotos(p.id)
-              .then((res: Flickr.SetPhotos) => updatePhotos(p, res));
+         ? p.photos
+         : flickr.getSetPhotos(p.id).then(res => updatePhotos(p, res));
 
    return p;
 }
@@ -63,8 +60,8 @@ function updateInfo(p: Post, setInfo: Flickr.SetInfo): Post {
 
    // removes video information from setInfo.description
    p.video = makeVideoInfo(setInfo);
-   p.createdOn = fromTimeStamp(setInfo.date_create);
-   p.updatedOn = fromTimeStamp(setInfo.date_update);
+   p.createdOn = timeStampToDate(setInfo.date_create);
+   p.updatedOn = timeStampToDate(setInfo.date_update);
    p.photoCount = setInfo.photos;
    p.description = setInfo.description._content.replace(/[\r\n\s]*$/, '');
    // long description is updated after photos are loaded
@@ -94,7 +91,7 @@ function updatePhotos(p: Post, setPhotos: Flickr.SetPhotos): Photo[] {
       p.photoTagList = photoBlog.photoTagList(p.photos);
 
       if (p.chronological) {
-         photo.identifyOutliers(p.photos);
+         identifyOutliers(p.photos);
          const firstDatedPhoto = p.photos.find(i => !i.outlierDate);
          if (is.value(firstDatedPhoto)) {
             p.happenedOn = firstDatedPhoto.dateTaken;

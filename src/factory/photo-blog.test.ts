@@ -1,5 +1,6 @@
 import { photoBlog } from '../models/photo-blog';
 import { makePhotoBlog } from './index';
+import '@toba/test';
 
 test('makes photo blog', async () => {
    expect(photoBlog.loaded).toBe(false);
@@ -8,12 +9,12 @@ test('makes photo blog', async () => {
 });
 
 test('has root categories', () => {
-   expect(photoBlog.categories).toHaveProperty([
+   expect(photoBlog.categories).toHaveAllProperties(
       'What',
       'When',
       'Where',
       'Who'
-   ]);
+   );
 });
 
 test('returns category for key', () => {
@@ -42,13 +43,13 @@ test('returns keys for category', () => {
 });
 
 test('includes all photo tags with their full names', () => {
-   expect(photoBlog.tags).toHaveProperty([
+   expect(photoBlog.tags).toHaveAllProperties(
       'algae',
       'andersonranchreservoir',
       'dam',
       'horse',
       'jason'
-   ]);
+   );
    expect(photoBlog.tags['andersonranchreservoir']).toBe(
       'Anderson Ranch Reservoir'
    );
@@ -92,7 +93,7 @@ test('finds photos with tags', async () => {
    expect(photos).toBeDefined();
    expect(photos).toBeInstanceOf(Array);
    expect(photos).toHaveLength(10);
-   expect(photos[0]).toHaveProperty(['id', 'size']);
+   expect(photos[0]).toHaveAllProperties('id', 'size');
 });
 
 test('creates list of post keys', () => {

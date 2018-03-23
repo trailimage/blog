@@ -1,5 +1,6 @@
-import { makePhotoBlog } from '../factory/index';
-import { Category, Post, photoBlog } from './index';
+import { makePhotoBlog } from '../factory/';
+import { Category, Post, photoBlog } from './';
+import '@toba/test';
 
 let post: Post = null;
 let category: Category = null;
@@ -14,13 +15,13 @@ beforeAll(async () => {
 test('creates link data for posts', () => {
    const schema = post.linkDataJSON();
 
-   expect(schema).toHaveProperty([
+   expect(schema).toHaveAllProperties(
       'author',
       'name',
       'publisher',
       'headline',
       'articleSection'
-   ]);
+   );
    expect(schema).toHaveProperty('@context', 'http://schema.org');
    expect(schema.name).toBe('Spring Fish & Chips');
    expect(schema.headline).toBe(schema.name);
@@ -30,7 +31,7 @@ test('creates link data for posts', () => {
 });
 
 test('creates link data for categories', () => {
-   ld.fromCategory(category);
+   expect(category.linkDataString()).toBe('');
 });
 
 test('serializes link data', () => {
@@ -55,7 +56,6 @@ test('serializes link data', () => {
       '"locationCreated":{"hasMap":"http://www.trailimage.com/spring-fish--chips/map","@type":"Place"},' +
       '"potentialAction":{"target":"http://www.trailimage.com/spring-fish--chips/map","@type":"DiscoverAction"},' +
       '"@type":"BlogPosting","@context":"http://schema.org"}';
-   const source = ld.serialize(ld.fromPost(post));
 
-   expect(source).toBe(target);
+   expect(post.linkDataString()).toBe(target);
 });

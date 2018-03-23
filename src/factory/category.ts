@@ -50,8 +50,8 @@ export function make(collection: Flickr.Collection, root = false): Category {
    }
 
    if (root && is.array(feature)) {
-      // sets to feature at the collection root can be manually defined in
-      // provider options
+      // sets to be featured at the collection root can be manually defined in
+      // configuration
       for (const f of feature) {
          const p = makePost(f, false);
          p.feature = true;
