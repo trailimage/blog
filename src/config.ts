@@ -1,4 +1,5 @@
-import { Token } from './types/';
+import { Token } from '@toba/oauth';
+import { Time } from '@toba/tools';
 import { ClientConfig as FlickrConfig, Flickr } from '@toba/flickr';
 import mapsource from './mapsource';
 
@@ -206,12 +207,6 @@ export default {
       json: isProduction
    },
    contactLink: `<a href="mailto:${owner.email}">Contact</a>`,
-   log: {
-      ipLookupUrl: 'http://www.ip-tracker.org/locator/ip-lookup.php?ip=',
-      photoUrl: 'http://flickr.com/photo.gne?id=',
-      targets: isProduction ? [logTo.REDIS, logTo.CONSOLE] : [logTo.CONSOLE],
-      save: isProduction
-   },
    style: {
       icon: {
          /**
@@ -256,8 +251,8 @@ export default {
    bing: {
       key: process.env['BING_KEY'] as string
    },
-   cacheDuration: time.DAY * 2,
-   retryDelay: time.SECOND * 30,
+   cacheDuration: Time.Day * 2,
+   retryDelay: Time.Second * 30,
 
    /**
     * Block referral spam

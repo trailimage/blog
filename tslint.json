@@ -1,5 +1,3 @@
 {
-   "extends": [
-      "@toba/lint/ts"
-   ]
+   "extends": ["@toba/build/ts"]
 }

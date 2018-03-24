@@ -1,9 +1,9 @@
-import { photoBlog } from '../models/index';
 import { is, alphabet, sayNumber } from '@toba/tools';
+import { Response, Request } from 'express';
+import { photoBlog } from '../models/index';
 import config from '../config';
 import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
-import { Response, Request } from 'express';
 
 /**
  * Small HTML table of EXIF values for given photo

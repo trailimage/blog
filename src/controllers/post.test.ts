@@ -1,76 +1,56 @@
-const C = require('../../lib/constants').default;
-const config = require('../../lib/config').default;
-const res = require('../mocks/response.mock');
-const req = require('../mocks/request.mock');
-const template = require('../../lib/template').default;
-const { prepare, expectTemplate, expectRedirect } = require('./index.test');
-const mocha = require('mocha');
-const { expect } = require('chai');
-const post = require('../../lib/controllers/post').default;
-const ph = C.route;
+import config from '../config';
+import { Page } from '../views/';
+import { prepare, expectTemplate, expectRedirect } from './index.test';
+import { RouteParam } from '../routes';
 
-describe('Post', () => {
-   before(done => prepare(done));
-   beforeEach(() => {
-      res.reset();
-      req.reset();
-   });
+test('shows latest', () => {
+   res.onEnd = () => {
+      const options = expectTemplate(Page.Post);
+      expect(options).toHaveProperty('slug', 'stanley-lake-snow-hike');
+      expect(options.layout).toBeNull();
+   };
+   post.latest(req, res);
+});
 
-   it('shows latest', done => {
-      res.onEnd = () => {
-         const options = expectTemplate(template.page.POST);
-         expect(options).has.property('slug', 'stanley-lake-snow-hike');
-         expect(options.layout).is.null;
+test('forwards to correct URL from Flickr set ID', () => {
+   res.onEnd = () => {
+      expectRedirect('/ruminations');
+   };
+   req.params[RouteParam.PostID] = config.flickr.featureSets[0].id;
+   post.withID(req, res);
+});
 
-         done();
-      };
-      post.latest(req, res);
-   });
+test('redirects to post containing photo', () => {
+   res.onEnd = () => {
+      expectRedirect('/ruminations#8458410907');
+   };
+   req.params[RouteParam.PhotoID] = '8458410907';
+   post.withPhoto(req, res);
+});
 
-   it('forwards to correct URL from Flickr set ID', done => {
-      res.onEnd = () => {
-         expectRedirect('/ruminations');
-         done();
-      };
-      req.params[ph.POST_ID] = config.flickr.featureSets[0].id;
-      post.withID(req, res);
-   });
+test('shows post with slug', () => {
+   res.endOnRender = false;
+   res.onEnd = () => {
+      const options = expectTemplate(Page.Post);
+      expect(options).toHaveProperty('title', 'Kuna Cave Fails to Impress');
+      expect(options).toHaveProperty('post');
+      expect(options.post).toHaveProperty('id', '72157668896453295');
+      expect(options.post).toHaveProperty('isPartial', false);
+   };
+   req.params[ph.POST_KEY] = 'kuna-cave-fails-to-impress';
+   post.withKey(req, res);
+});
 
-   it('redirects to post containing photo', done => {
-      res.onEnd = () => {
-         expectRedirect('/ruminations#8458410907');
-         done();
-      };
-      req.params[ph.PHOTO_ID] = '8458410907';
-      post.withPhoto(req, res);
-   });
-
-   it('shows post with slug', done => {
-      res.endOnRender = false;
-      res.onEnd = () => {
-         const options = expectTemplate(template.page.POST);
-         expect(options).has.property('title', 'Kuna Cave Fails to Impress');
-         expect(options).has.property('post');
-         expect(options.post).has.property('id', '72157668896453295');
-         expect(options.post).has.property('isPartial', false);
-         done();
-      };
-      req.params[ph.POST_KEY] = 'kuna-cave-fails-to-impress';
-      post.withKey(req, res);
-   });
-
-   it('shows post in series', done => {
-      res.endOnRender = false;
-      res.onEnd = () => {
-         const options = expectTemplate(template.page.POST);
-         expect(options).has.property('title', 'Brother Ride 2015');
-         expect(options).has.property('post');
-         expect(options.post).has.property('id', '72157658679070399');
-         expect(options.post).has.property('isPartial', true);
-         done();
-      };
-      req.params[ph.SERIES_KEY] = 'brother-ride-2015';
-      req.params[ph.PART_KEY] = 'huckleberry-lookout';
-      post.inSeries(req, res);
-   });
+test('shows post in series', () => {
+   res.endOnRender = false;
+   res.onEnd = () => {
+      const options = expectTemplate(Page.Post);
+      expect(options).toHaveProperty('title', 'Brother Ride 2015');
+      expect(options).toHaveProperty('post');
+      expect(options.post).toHaveProperty('id', '72157658679070399');
+      expect(options.post).toHaveProperty('isPartial', true);
+   };
+   req.params[RouteParam.SeriesKey] = 'brother-ride-2015';
+   req.params[RouteParam.PartKey] = 'huckleberry-lookout';
+   post.inSeries(req, res);
 });

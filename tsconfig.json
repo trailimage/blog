@@ -1,5 +1,5 @@
 {
-   "extends": "./node_modules/@toba/lint/ts/config",
+   "extends": "./node_modules/@toba/build/ts/config",
    "compilerOptions": {
       "target": "es2017"
    },

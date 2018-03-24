@@ -1,5 +1,5 @@
-import { LinkDataModel } from './';
 import { JsonLD } from '@toba/json-ld';
+import { LinkDataModel } from './';
 import { forVideo } from './json-ld';
 
 export class VideoInfo extends LinkDataModel<JsonLD.VideoObject> {

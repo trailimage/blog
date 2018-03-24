@@ -1,44 +1,45 @@
-import { Post, photoBlog } from '../models/';
 import { is, MimeType, HttpStatus, Header, Encoding } from '@toba/tools';
 import { log } from '@toba/logger';
-import fetch from 'node-fetch';
-import config from '../config';
 import { kml, geoJSON } from '@toba/map';
+import { Request, Response } from 'express';
+import fetch from 'node-fetch';
+import * as compress from 'zlib';
+import { Post, photoBlog } from '../models/';
+import config from '../config';
 import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
-import * as compress from 'zlib';
-import { Response, Request } from 'express';
 
 /**
  * Map screen loads then makes AJAX call to fetch data.
  */
-function send(post: Post, req: Request, res: Response) {
-   if (is.value(post)) {
-      const key = post.isPartial ? post.seriesKey : post.key;
-      const photoID = req.params[RouteParam.PhotoID];
-      // ensure photos are loaded to calculate bounds for map zoom
-      post.getPhotos().then(() => {
-         res.render(Page.Mapbox, {
-            layout: Layout.None,
-            title: post.name() + ' Map',
-            description: post.description,
-            post,
-            key,
-            photoID: is.numeric(photoID) ? photoID : 0,
-            config
-         });
-      });
-   } else {
+async function render(post: Post, req: Request, res: Response) {
+   if (!is.value(post)) {
       view.notFound(req, res);
+      return;
    }
+
+   const key = post.isPartial ? post.seriesKey : post.key;
+   const photoID = req.params[RouteParam.PhotoID];
+   // ensure photos are loaded to calculate bounds for map zoom
+   await post.getPhotos();
+
+   res.render(Page.Mapbox, {
+      layout: Layout.None,
+      title: post.name() + ' Map',
+      description: post.description,
+      post,
+      key,
+      photoID: is.numeric(photoID) ? photoID : 0,
+      config
+   });
 }
 
 function post(req: Request, res: Response) {
-   send(photoBlog.postWithKey(req.params[RouteParam.PostKey]), req, res);
+   render(photoBlog.postWithKey(req.params[RouteParam.PostKey]), req, res);
 }
 
 function series(req: Request, res: Response) {
-   send(
+   render(
       photoBlog.postWithKey(
          req.params[RouteParam.SeriesKey],
          req.params[RouteParam.PartKey]
@@ -147,7 +148,7 @@ async function source(req: Request, res: Response) {
       } else {
          res.end(reply.status);
       }
-   });
+   })
 }
 
 /**

@@ -1,10 +1,10 @@
+import { log } from '@toba/logger';
+import { MimeType } from '@toba/tools';
+import { Response, Request } from 'express';
+import * as uglify from 'uglify-js';
 import { photoBlog } from '../models/index';
 import config from '../config';
-import { log } from '@toba/logger';
 import { Layout, Page, view } from '../views/';
-import { MimeType } from '@toba/tools';
-import * as uglify from 'uglify-js';
-import { Response, Request } from 'express';
 
 /**
  * Minify menu JSON for production. Set `config.testing = true` if testing

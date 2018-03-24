@@ -1,20 +1,27 @@
 import { HttpStatus, Header, MimeType } from '@toba/tools';
-import cache from '../cache';
-import config from '../config';
-import { enableViewCache } from '../middleware/viewcache';
-import { enableStatusHelpers } from '../middleware/helpers';
+import { Response, Request } from 'express';
+
+export function createContext() {
+   const res = new Response();
+   const req = new Request(null);
+
+   res.end = jest.fn();
+   res.render = jest.fn();
+
+   return { req, res };
+}
 
 /**
  * Expect standard Handlebars template response
  */
-export function expectTemplate(name: string) {
-   expect(res.httpStatus).toBe(HttpStatus.OK);
+export function expectTemplate(res: Response, name: string) {
+   expect(res.statusCode).toBe(HttpStatus.OK);
    expect(res.rendered).toHaveProperty('template', name);
    expect(res.rendered).toHaveProperty('options');
    return res.rendered.options;
 }
 
-export function expectRedirect(path: string) {
+export function expectRedirect(res: Response, path: string) {
    expect(res.redirected).toBeDefined();
    expect(res.redirected).toHaveProperty(
       'status',
@@ -26,7 +33,7 @@ export function expectRedirect(path: string) {
 /**
  * Expectations for JSON responses
  */
-export function expectJSON() {
+export function expectJSON(res: Response) {
    expect(res.httpStatus).toBe(HttpStatus.OK);
    expect(res.headers).toHaveProperty(Header.Content.Type, MimeType.JSON);
    expect(res.rendered).toHaveProperty('json');
@@ -46,13 +53,4 @@ export function expectInCache(keys: string[], exists = true) {
             results.forEach(r => expect(r).toBe(exists));
          })
    );
-}
-
-export function prepare(done: Function) {
-   config.testing = true;
-   factory.buildLibrary().then(() => {
-      enableStatusHelpers(req, res, () => {
-         enableViewCache(req, res, done);
-      });
-   });
 }

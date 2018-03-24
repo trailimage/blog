@@ -1,7 +1,7 @@
 const res = require('../mocks/response.mock');
 const req = require('../mocks/request.mock');
 import { prepare, expectTemplate } from './index.test';
-import template from '../template';
+import { Page } from '../views/';
 import menu from '../controllers/menu';
 
 beforeAll(done => prepare(done));
@@ -10,21 +10,19 @@ beforeEach(() => {
    req.reset();
 });
 
-it('builds data for main menu', done => {
+test('builds data for main menu', () => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.POST_MENU_DATA);
+      const options = expectTemplate(Page.PostMenuData);
       expect(res.headers).toHaveProperty('Vary', 'Accept-Encoding');
       expect(options).toHaveProperty('library');
-      done();
    };
    menu.data(req, res);
 });
 
-it('renders mobile menu', done => {
+it('renders mobile menu', () => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.MOBILE_MENU_DATA);
+      const options = expectTemplate(Page.MobileMenuData);
       expect(options).toHaveProperty('library');
-      done();
    };
    menu.mobile(req, res);
 });

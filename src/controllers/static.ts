@@ -1,9 +1,9 @@
-import { photoBlog } from '../models/index';
 import { is, HttpStatus, MimeType } from '@toba/tools';
+import { Response, Request } from 'express';
+import { photoBlog } from '../models/';
 import { serialize, owner } from '../models/json-ld';
 import config from '../config';
 import { Page, view } from '../views/';
-import { Response, Request } from 'express';
 
 function search(req: Request, res: Response) {
    const term = req.query['q'];

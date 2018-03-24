@@ -8,9 +8,9 @@ import {
    Cache
 } from '@toba/tools';
 import { Response, Request } from 'express';
-import { Page } from './template';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
+import { Page } from './template';
 
 const cache = new Cache<ViewItem>();
 

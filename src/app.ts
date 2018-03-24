@@ -1,13 +1,13 @@
-import { makePhotoBlog } from './factory/index';
-import config from './config';
 import { log } from '@toba/logger';
+import { blockSpamReferers } from '@toba/block-spam-referer';
+import * as compress from 'compression';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';
 import * as path from 'path';
-import { Layout, addTemplateMethods } from './template';
+import { makePhotoBlog } from './factory/';
+import config from './config';
+import { Layout, addTemplateMethods } from './views/';
 import route from './routes';
-import * as compress from 'compression';
-import { blockSpamReferers } from '@toba/block-spam-referer';
 
 const root = path.join(__dirname, '..');
 

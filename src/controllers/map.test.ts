@@ -1,36 +1,28 @@
-import { route as ph, httpStatus, header } from '../constants';
-const res = require('../mocks/response.mock');
-const req = require('../mocks/request.mock');
-const { prepare, expectTemplate } = require('./index.test');
-import template from '../template';
-import map from './map';
+import { HttpStatus, Header, Encoding, MimeType } from '@toba/tools';
+import { RouteParam } from '../routes';
+// const { prepare, expectTemplate } = require('./index.test');
+import { Page } from '../views/';
+import { map } from './';
+import { createContext } from './index.test';
 
-beforeAll(done => {
-   prepare(done);
-   map.inject.google = require('../mocks/google.mock');
-});
+test('displays map for post', () => {
+   const { req, res } = createContext();
 
-beforeEach(() => {
-   res.reset();
-   req.reset();
-});
-
-test('displays map for post', done => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.MAPBOX);
+      const options = expectTemplate(Page.Mapbox);
       expect(options).toHaveProperty('post');
       expect(options).toHaveProperty('title', 'Kuna Cave Fails to Impress Map');
       expect(options.post).toHaveProperty('key', 'kuna-cave-fails-to-impress');
       expect(options).toHaveProperty('photoID', 0);
-      done();
    };
-   req.params[ph.POST_KEY] = 'kuna-cave-fails-to-impress';
+   req.params[RouteParam.PostKey] = 'kuna-cave-fails-to-impress';
+
    map.post(req, res);
 });
 
-test('displays map for series', done => {
+test('displays map for series', () => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.MAPBOX);
+      const options = expectTemplate(Page.Mapbox);
       expect(options).toHaveProperty(
          'title',
          'Brother Ride 2015: Huckleberry Lookout Map'
@@ -39,21 +31,20 @@ test('displays map for series', done => {
       expect(options).toHaveProperty('post');
       expect(options.post).toHaveProperty('id', '72157658679070399');
       expect(options.post).toHaveProperty('isPartial', true);
-      done();
    };
-   req.params[ph.SERIES_KEY] = 'brother-ride-2015';
-   req.params[ph.PART_KEY] = 'huckleberry-lookout';
+   req.params[RouteParam.SeriesKey] = 'brother-ride-2015';
+   req.params[RouteParam.PartKey] = 'huckleberry-lookout';
    map.series(req, res);
 });
 
 test('loads GeoJSON for post', done => {
    res.onEnd = () => {
-      expect(res.httpStatus).equals(httpStatus.OK);
-      expect(res.headers).toHaveProperty(header.content.TYPE);
-      expect(res.headers[C.header.content.TYPE]).to.include(C.mimeType.JSON);
+      expect(res.httpStatus).equals(HttpStatus.OK);
+      expect(res.headers).toHaveProperty(Header.Content.Type);
+      expect(res.headers[Header.Content.Type]).to.include(MimeType.JSON);
       expect(res.headers).toHaveProperty(
-         C.header.content.ENCODING,
-         C.encoding.GZIP
+         Header.Content.Encoding,
+         Encoding.GZip
       );
       expect(res.content).toBeDefined();
       expect(res.content).is.length.above(1000);
@@ -65,7 +56,7 @@ test('loads GeoJSON for post', done => {
 
 it.skip('downloads GPX', done => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.MAPBOX);
+      const options = expectTemplate(Page.Mapbox);
       expect(options).toHaveProperty('title', 'Map');
       expect(options).toHaveProperty('photoID', 0);
       expect(options).toHaveProperty('post');
@@ -73,6 +64,6 @@ it.skip('downloads GPX', done => {
       expect(options.post).toHaveProperty('isPartial', true);
       done();
    };
-   req.params[ph.POST_KEY] = 'stanley-lake-snow-hike';
+   req.params[RouteParam.PostKey] = 'stanley-lake-snow-hike';
    map.gpx(req, res);
 });

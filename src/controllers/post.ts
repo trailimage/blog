@@ -1,8 +1,8 @@
-import { photoBlog } from '../models/index';
 import { is, HttpStatus } from '@toba/tools';
+import { Response, Request } from 'express';
+import { photoBlog } from '../models/';
 import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
-import { Response, Request } from 'express';
 
 function send(res: Response, key: string, pageTemplate: string = Page.Post) {
    view.send(res, key, {

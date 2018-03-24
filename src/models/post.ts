@@ -1,9 +1,9 @@
-import { Photo, VideoInfo, LinkDataModel } from './index';
 import { JsonLD } from '@toba/json-ld';
-import { forPost } from './json-ld';
 import { slug, is } from '@toba/tools';
+import { measure, MapBounds } from '@toba/map';
+import { Photo, VideoInfo, LinkDataModel } from './';
+import { forPost } from './json-ld';
 import { fromTimeStamp } from '../util/time';
-import measure from '../map/measure';
 import config from '../config';
 
 export class Post extends LinkDataModel<JsonLD.BlogPosting> {
@@ -139,13 +139,11 @@ export class Post extends LinkDataModel<JsonLD.BlogPosting> {
    /**
     * Title and optional subtitle
     */
-   name(this: Post | any): string {
-      // context is screwed up when called from HBS template
-      const p: Post = this.post ? this.post : (this as Post);
+   name(): string {
       return (
-         p.title +
-         (p.isPartial
-            ? config.library.subtitleSeparator + ' ' + p.subTitle
+         this.title +
+         (this.isPartial
+            ? config.library.subtitleSeparator + ' ' + this.subTitle
             : '')
       );
    }
