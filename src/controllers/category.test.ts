@@ -1,9 +1,8 @@
-import res from '../__mocks__/response.mock';
-import req from '../__mocks__/request.mock';
-const { prepare, expectTemplate } = require('./index.test');
-import template from '../template';
-import category from './category';
-import { route as ph } from '../constants';
+import { Page } from '../views/index';
+import { RouteParam } from '../routes';
+import { category } from './index';
+
+import '@toba/test';
 
 beforeAll(done => prepare(done));
 beforeEach(() => {
@@ -11,61 +10,58 @@ beforeEach(() => {
    req.reset();
 });
 
-test('renders home page for default category', done => {
+test('renders home page for default category', () => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.CATEGORY);
-      expect(options).to.contain.all.keys([
+      const options = expectTemplate(Page.Category);
+      expect(options).toHaveAllProperties(
          'description',
          'headerCSS',
          'jsonLD',
          'posts',
          'subtitle',
          'title'
-      ]);
-      done();
+      );
    };
    category.home(req, res);
 });
 
-test('renders a list of subcategories', done => {
+test('renders a list of subcategories', () => {
    res.onEnd = () => {
       const options = expectTemplate(template.page.CATEGORY_LIST);
-      expect(options).to.contain.all.keys([
+      expect(options).toHaveAllProperties(
          'description',
          'headerCSS',
          'jsonLD',
          'subcategories',
          'subtitle',
          'title'
-      ]);
-      done();
+      );
    };
-   req.params[ph.ROOT_CATEGORY] = 'what';
+   req.params[RouteParam.RootCategory] = 'what';
    category.list(req, res);
 });
 
-test('displays category at path', done => {
+test('displays category at path', () => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.CATEGORY_LIST);
-      expect(options).to.contain.all.keys([
+      const options = expectTemplate(Page.CategoryList);
+      expect(options).toHaveAllProperties(
          'description',
          'headerCSS',
          'jsonLD',
          'subcategories',
          'subtitle',
          'title'
-      ]);
-      done();
+      );
    };
-   req.params[ph.ROOT_CATEGORY] = 'when';
-   req.params[ph.CATEGORY] = '2016';
+   req.params[RouteParam.RootCategory] = 'when';
+   req.params[RouteParam.Category] = '2016';
    category.list(req, res);
 });
 
 test('creates category menu', done => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.CATEGORY_MENU);
-      expect(options).to.contain.all.keys(['description', 'library']);
+      const options = expectTemplate(Page.CategoryMenu);
+      expect(options).toHaveAllProperties('description', 'library');
       done();
    };
    category.menu(req, res);
