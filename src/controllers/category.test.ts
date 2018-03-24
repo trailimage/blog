@@ -1,10 +1,13 @@
+import '@toba/test';
+import { MockRequest, MockResponse } from '@toba/test';
 import { Page } from '../views/index';
 import { RouteParam } from '../routes';
 import { category } from './index';
+import { expectTemplate } from './index.test';
 
-import '@toba/test';
+const req = new MockRequest();
+const res = new MockResponse(req);
 
-beforeAll(done => prepare(done));
 beforeEach(() => {
    res.reset();
    req.reset();
@@ -12,7 +15,7 @@ beforeEach(() => {
 
 test('renders home page for default category', () => {
    res.onEnd = () => {
-      const options = expectTemplate(Page.Category);
+      const options = expectTemplate(res, Page.Category);
       expect(options).toHaveAllProperties(
          'description',
          'headerCSS',
@@ -27,7 +30,7 @@ test('renders home page for default category', () => {
 
 test('renders a list of subcategories', () => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.CATEGORY_LIST);
+      const options = expectTemplate(res, Page.CategoryList);
       expect(options).toHaveAllProperties(
          'description',
          'headerCSS',
