@@ -1,9 +1,10 @@
-const res = require('../mocks/response.mock');
-const req = require('../mocks/request.mock');
-import { prepare } from './index.test';
+import '@toba/test';
+import { MockRequest, MockResponse } from '@toba/test';
 import * as Feed from 'feed';
 
-beforeAll(done => prepare(done));
+const req = new MockRequest();
+const res = new MockResponse(req);
+
 beforeEach(() => {
    res.reset();
    req.reset();

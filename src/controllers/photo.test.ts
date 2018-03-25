@@ -1,11 +1,14 @@
-import { route as ph } from '../constants';
-const res = require('../mocks/response.mock');
-const req = require('../mocks/request.mock');
-import { prepare, expectTemplate } from './index.test';
-import template from '../template';
-import photo from './photo';
+import '@toba/test';
+import { MockRequest, MockResponse } from '@toba/test';
+import { alphabet } from '@toba/tools';
+import { RouteParam } from '../routes';
+import { expectTemplate } from './index.test';
+import { Page } from '../views/';
+import { photo } from './';
 
-beforeAll(done => prepare(done));
+const req = new MockRequest();
+const res = new MockResponse(req);
+
 beforeEach(() => {
    res.reset();
    req.reset();
@@ -13,10 +16,10 @@ beforeEach(() => {
 
 it('loads all photo tags', done => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.PHOTO_TAG);
-      expect(options).toHaveProperty('alphabet', C.alphabet);
+      const options = expectTemplate(res, Page.PhotoTag);
+      expect(options).toHaveProperty('alphabet', alphabet);
       expect(options).toHaveProperty('tags');
-      expect(options.tags).to.contain.all.keys(['a', 'b', 'c']);
+      expect(options.tags).toHaveAllProperties('a', 'b', 'c');
       done();
    };
    photo.tags(req, res);
@@ -24,29 +27,29 @@ it('loads all photo tags', done => {
 
 it('shows all photos with tag', done => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.PHOTO_SEARCH);
+      const options = expectTemplate(res, Page.PhotoSearch);
       expect(options).toHaveProperty('photos');
-      expect(options.photos).is.instanceOf(Array);
-      expect(options.photos).is.length.above(10);
+      expect(options.photos).toBeInstanceOf(Array);
+      expect(options.photos).toHaveLength(10);
       done();
    };
-   req.params[ph.PHOTO_TAG] = 'horse';
+   req.params[RouteParam.PhotoTag] = 'horse';
    photo.withTag(req, res);
 });
 
 it('loads EXIF', done => {
    res.onEnd = () => {
-      const options = expectTemplate(template.page.EXIF);
+      const options = expectTemplate(res, Page.EXIF);
       expect(options).toHaveProperty('EXIF');
-      expect(options.EXIF).to.contain.all.keys([
+      expect(options.EXIF).toHaveAllProperties(
          'ISO',
          'artist',
          'lens',
          'model'
-      ]);
+      );
       expect(options.EXIF).toHaveProperty('sanitized', true);
       done();
    };
-   req.params[ph.PHOTO_TAG] = '8458410907';
+   req.params[RouteParam.PhotoID] = '8458410907';
    photo.exif(req, res);
 });

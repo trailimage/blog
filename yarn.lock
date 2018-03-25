@@ -105,8 +105,8 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.3.0":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.9.1.tgz#f157d4b44be4cecbf49ac5786be0f8a46a70fe5d"
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.9.4.tgz#b1db4862d893f0696f72ee52472ca22509d3634c"
   dependencies:
     "@toba/tools" "^1.12.0"
     "@types/jest" "^22.2.0"
@@ -976,8 +976,8 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     electron-to-chromium "^1.2.7"
 
 browserslist@^3.2.0:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-3.2.2.tgz#ad0559e3982786d80bfb24421ee2318daceffd2c"
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-3.2.3.tgz#ad36e56a43daeacf4d2b7bb16441b7ac30be4510"
   dependencies:
     caniuse-lite "^1.0.30000819"
     electron-to-chromium "^1.3.40"

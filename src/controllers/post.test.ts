@@ -1,11 +1,21 @@
+import '@toba/test';
+import { MockRequest, MockResponse } from '@toba/test';
 import config from '../config';
 import { Page } from '../views/';
-import { prepare, expectTemplate, expectRedirect } from './index.test';
+import { expectTemplate, expectRedirect } from './index.test';
 import { RouteParam } from '../routes';
+import { post } from './';
 
+const req = new MockRequest();
+const res = new MockResponse(req);
+
+beforeEach(() => {
+   res.reset();
+   req.reset();
+});
 test('shows latest', () => {
    res.onEnd = () => {
-      const options = expectTemplate(Page.Post);
+      const options = expectTemplate(res, Page.Post);
       expect(options).toHaveProperty('slug', 'stanley-lake-snow-hike');
       expect(options.layout).toBeNull();
    };
@@ -14,7 +24,7 @@ test('shows latest', () => {
 
 test('forwards to correct URL from Flickr set ID', () => {
    res.onEnd = () => {
-      expectRedirect('/ruminations');
+      expectRedirect(res, '/ruminations');
    };
    req.params[RouteParam.PostID] = config.flickr.featureSets[0].id;
    post.withID(req, res);
@@ -22,7 +32,7 @@ test('forwards to correct URL from Flickr set ID', () => {
 
 test('redirects to post containing photo', () => {
    res.onEnd = () => {
-      expectRedirect('/ruminations#8458410907');
+      expectRedirect(res, '/ruminations#8458410907');
    };
    req.params[RouteParam.PhotoID] = '8458410907';
    post.withPhoto(req, res);
@@ -31,20 +41,20 @@ test('redirects to post containing photo', () => {
 test('shows post with slug', () => {
    res.endOnRender = false;
    res.onEnd = () => {
-      const options = expectTemplate(Page.Post);
+      const options = expectTemplate(res, Page.Post);
       expect(options).toHaveProperty('title', 'Kuna Cave Fails to Impress');
       expect(options).toHaveProperty('post');
       expect(options.post).toHaveProperty('id', '72157668896453295');
       expect(options.post).toHaveProperty('isPartial', false);
    };
-   req.params[ph.POST_KEY] = 'kuna-cave-fails-to-impress';
+   req.params[RouteParam.PostKey] = 'kuna-cave-fails-to-impress';
    post.withKey(req, res);
 });
 
 test('shows post in series', () => {
    res.endOnRender = false;
    res.onEnd = () => {
-      const options = expectTemplate(Page.Post);
+      const options = expectTemplate(res, Page.Post);
       expect(options).toHaveProperty('title', 'Brother Ride 2015');
       expect(options).toHaveProperty('post');
       expect(options.post).toHaveProperty('id', '72157658679070399');

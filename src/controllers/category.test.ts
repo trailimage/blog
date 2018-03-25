@@ -48,7 +48,7 @@ test('renders a list of subcategories', done => {
 
 test('displays category at path', done => {
    res.onEnd = () => {
-      const options = expectTemplate(Page.CategoryList);
+      const options = expectTemplate(res, Page.CategoryList);
       expect(options).toHaveAllProperties(
          'description',
          'headerCSS',
@@ -66,7 +66,7 @@ test('displays category at path', done => {
 
 test('creates category menu', done => {
    res.onEnd = () => {
-      const options = expectTemplate(Page.CategoryMenu);
+      const options = expectTemplate(res, Page.CategoryMenu);
       expect(options).toHaveAllProperties('description', 'library');
       done();
    };
