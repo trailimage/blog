@@ -52,13 +52,20 @@ const flickr: FlickrConfig = {
    userID: '60950751@N04',
    appID: '72157631007435048',
    featureSets: [{ id: '72157632729508554', title: 'Ruminations' }],
-   sizes,
    /** Photo sizes that must be retrieved for certain contexts */
-   photoSize: {
-      post: sizes.normal.concat(sizes.big, sizes.preview),
-      map: [Flickr.SizeUrl.Small320],
-      search: [Flickr.SizeUrl.Square150]
-   },
+   // photoSize: {
+   //    post: sizes.normal.concat(sizes.big, sizes.preview),
+   //    map: [Flickr.SizeUrl.Small320],
+   //    search: [Flickr.SizeUrl.Square150]
+   // },
+   searchPhotoSizes: [Flickr.SizeUrl.Square150],
+   setPhotoSizes: [
+      Flickr.SizeUrl.Medium640,
+      Flickr.SizeUrl.Medium800,
+      Flickr.SizeUrl.Large1024,
+      Flickr.SizeUrl.Large1600,
+      Flickr.SizeUrl.Large2048
+   ],
    excludeSets: ['72157631638576162'],
    excludeTags: [
       'Idaho',
@@ -236,6 +243,7 @@ export default {
          /** Default transportation mode if none given */
          postDefault: 'motorcycle'
       },
+      photoSizes: sizes,
       map: {
          /** Maximum pixel height of static maps displayed with post summaries */
          maxInlineHeight: 200
