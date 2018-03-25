@@ -13,7 +13,7 @@ beforeEach(() => {
    req.reset();
 });
 
-test('renders home page for default category', () => {
+test('renders home page for default category', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.Category);
       expect(options).toHaveAllProperties(
@@ -24,11 +24,12 @@ test('renders home page for default category', () => {
          'subtitle',
          'title'
       );
+      done();
    };
    category.home(req, res);
 });
 
-test('renders a list of subcategories', () => {
+test('renders a list of subcategories', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.CategoryList);
       expect(options).toHaveAllProperties(
@@ -39,12 +40,13 @@ test('renders a list of subcategories', () => {
          'subtitle',
          'title'
       );
+      done();
    };
    req.params[RouteParam.RootCategory] = 'what';
    category.list(req, res);
 });
 
-test('displays category at path', () => {
+test('displays category at path', done => {
    res.onEnd = () => {
       const options = expectTemplate(Page.CategoryList);
       expect(options).toHaveAllProperties(
@@ -55,6 +57,7 @@ test('displays category at path', () => {
          'subtitle',
          'title'
       );
+      done();
    };
    req.params[RouteParam.RootCategory] = 'when';
    req.params[RouteParam.Category] = '2016';

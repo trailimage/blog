@@ -1,33 +1,4 @@
 {
    "extends": "./node_modules/@toba/build/ts/config",
-   "compilerOptions": {
-      "target": "es2017"
-   },
    "include": ["./src/**/*.ts"]
-   // "compilerOptions": {
-   //    "typeRoots": ["node_modules/@types", "./types"]
-   // }
-   //{
-   // https://www.typescriptlang.org/docs/handbook/compiler-options.html
-   //    "compilerOptions": {
-   //       "target": "es2015",
-   //       "moduleResolution": "node",
-   //       "module": "commonjs",
-   //       "baseUrl": "./src",
-   //       "newLine": "LF",
-   //       //"pretty": true,
-   //       "allowJs": false,
-   //       "sourceMap": true,
-   //       "noImplicitAny": true,
-   //       "noImplicitThis": true,
-   //       "alwaysStrict": true,
-   //       "strictFunctionTypes": false,
-   //       "removeComments": true,
-   //       "noUnusedLocals": true,
-   //       "strictNullChecks": false,
-   //       "allowSyntheticDefaultImports": false,
-   //       "forceConsistentCasingInFileNames": false,
-   //       "typeRoots": ["./node_modules/@types", "./src/types"]
-   //    }
-   // }
 }
