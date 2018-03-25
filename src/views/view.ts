@@ -11,6 +11,7 @@ import { Response, Request } from 'express';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
 import { Page } from './template';
+import config from '../config';
 
 const cache = new Cache<ViewItem>();
 
@@ -106,7 +107,7 @@ export function notFound(req: Request, res: Response) {
    res.render(Page.NotFound, { title: 'Page Not Found', config });
 }
 
-export function internalError(res: Response, err?: Error) {
+function internalError(res: Response, err?: Error) {
    if (is.value(err)) {
       log.error(err);
    }
@@ -118,18 +119,18 @@ export function internalError(res: Response, err?: Error) {
  * JSON helpers depend on Express .json() extension and standard response
  * structure.
  */
-export function jsonError(res: Response, message: string) {
+function jsonError(res: Response, message: string) {
    res.json({ success: false, message } as JsonResponse);
 }
 
-export function jsonMessage(res: Response, message: string) {
+function jsonMessage(res: Response, message: string) {
    res.json({
       success: true,
       message: is.value(message) ? message : ''
    } as JsonResponse);
 }
 
-export function sendJson(res: Response, key: string, generate: Function) {
+function sendJson(res: Response, key: string, generate: Function) {
    sendFromCacheOrRender(res, key, {
       mimeType: MimeType.JSON,
       generate
@@ -139,11 +140,11 @@ export function sendJson(res: Response, key: string, generate: Function) {
 /**
  * @param key Cache key
  */
-export function sendView(res: Response, key: string, options: RenderOptions) {
+function sendView(res: Response, key: string, options: RenderOptions) {
    sendFromCacheOrRender(res, key, merge(defaultRenderOptions, options));
 }
 
-export function sendCompressed(
+function sendCompressed(
    res: Response,
    mimeType: MimeType,
    item: ViewItem,
@@ -275,5 +276,10 @@ export const view = {
    send: sendView,
    sendCompressed,
    notFound,
-   internalError
+   internalError,
+   json: {
+      error: jsonError,
+      message: jsonMessage,
+      send: sendJson
+   }
 };

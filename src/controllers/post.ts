@@ -4,7 +4,12 @@ import { photoBlog } from '../models/';
 import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
 
-function send(res: Response, key: string, pageTemplate: string = Page.Post) {
+function send(
+   req: Request,
+   res: Response,
+   key: string,
+   pageTemplate: string = Page.Post
+) {
    view.send(res, key, {
       callback: render => {
          const p = photoBlog.postWithKey(key);
@@ -31,22 +36,22 @@ function send(res: Response, key: string, pageTemplate: string = Page.Post) {
 }
 
 /**
- * Display post that's part of a series
+ * Display post that's part of a series.
  */
 function inSeries(req: Request, res: Response) {
    send(
+      req,
       res,
       req.params[RouteParam.SeriesKey] + '/' + req.params[RouteParam.PartKey]
    );
 }
 
 function withKey(req: Request, res: Response) {
-   send(res, req.params[RouteParam.PostKey]);
+   send(req, res, req.params[RouteParam.PostKey]);
 }
 
 /**
- * Post with given Flickr ID
- * Redirect to normal URL
+ * Post with given Flickr ID. Redirect to normal URL.
  */
 function withID(req: Request, res: Response) {
    const post = photoBlog.postWithID(req.params[RouteParam.PostID]);
@@ -59,7 +64,7 @@ function withID(req: Request, res: Response) {
 }
 
 /**
- * Show post with given photo ID
+ * Show post with given photo ID.
  */
 function withPhoto(req: Request, res: Response) {
    const photoID = req.params[RouteParam.PhotoID];
@@ -70,7 +75,7 @@ function withPhoto(req: Request, res: Response) {
          if (is.value(post)) {
             res.redirect(
                HttpStatus.PermanentRedirect,
-               '/' + post.key + '#' + photoID
+               `/${post.key}#${photoID}`
             );
          } else {
             view.notFound(req, res);
@@ -80,10 +85,10 @@ function withPhoto(req: Request, res: Response) {
 }
 
 /**
- * Show newest post on home page
+ * Show newest post on home page.
  */
-function latest(_req: Request, res: Response) {
-   send(res, photoBlog.posts[0].key);
+function latest(req: Request, res: Response) {
+   send(req, res, photoBlog.posts[0].key);
 }
 
 export const post = { latest, withID, withKey, withPhoto, inSeries };

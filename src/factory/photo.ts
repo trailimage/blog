@@ -20,9 +20,9 @@ export function make(json: Flickr.PhotoSummary, index: number): Photo {
    photo.outlierDate = false;
 
    photo.size = {
-      preview: makePhotoSize(json, config.flickr.sizes.preview),
-      normal: makePhotoSize(json, config.flickr.sizes.normal),
-      big: makePhotoSize(json, config.flickr.sizes.big)
+      preview: makePhotoSize(json, config.style.photoSizes.preview),
+      normal: makePhotoSize(json, config.style.photoSizes.normal),
+      big: makePhotoSize(json, config.style.photoSizes.big)
    };
 
    return photo;
