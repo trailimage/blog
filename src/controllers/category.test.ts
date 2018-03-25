@@ -13,17 +13,19 @@ beforeEach(() => {
    req.reset();
 });
 
+const contextKeys = [
+   'description',
+   'headerCSS',
+   'jsonLD',
+   'subcategories',
+   'subtitle',
+   'title'
+];
+
 test('renders home page for default category', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.Category);
-      expect(options).toHaveAllProperties(
-         'description',
-         'headerCSS',
-         'jsonLD',
-         'posts',
-         'subtitle',
-         'title'
-      );
+      expect(options).toHaveAllProperties(...contextKeys);
       done();
    };
    category.home(req, res);
@@ -32,14 +34,7 @@ test('renders home page for default category', done => {
 test('renders a list of subcategories', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.CategoryList);
-      expect(options).toHaveAllProperties(
-         'description',
-         'headerCSS',
-         'jsonLD',
-         'subcategories',
-         'subtitle',
-         'title'
-      );
+      expect(options).toHaveAllProperties(...contextKeys);
       done();
    };
    req.params[RouteParam.RootCategory] = 'what';
@@ -49,14 +44,7 @@ test('renders a list of subcategories', done => {
 test('displays category at path', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.CategoryList);
-      expect(options).toHaveAllProperties(
-         'description',
-         'headerCSS',
-         'jsonLD',
-         'subcategories',
-         'subtitle',
-         'title'
-      );
+      expect(options).toHaveAllProperties(...contextKeys);
       done();
    };
    req.params[RouteParam.RootCategory] = 'when';
