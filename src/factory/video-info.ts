@@ -11,7 +11,7 @@ export function make(setInfo: Flickr.SetInfo): VideoInfo {
    if (re.video.test(d)) {
       const match = re.video.exec(d);
       // remove video link from description
-      //setInfo.description._content = d.replace(match[0], '');
+      setInfo.description._content = d.replace(match[0], '');
       return new VideoInfo(match[4], parseInt(match[2]), parseInt(match[3]));
    } else {
       return null;

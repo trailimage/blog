@@ -1,5 +1,5 @@
 import config from '../config';
-import { inDaylightSavings, weekday, leadingZeros, format } from '@toba/tools';
+import { weekday, leadingZeros, format } from '@toba/tools';
 
 /**
  * Return AM or PM
@@ -30,28 +30,6 @@ export function toLogTime(text: string): string {
 
 export const timeZoneOffset = (date = new Date()) =>
    config.timeZone + (inDaylightSavings(date) ? 1 : 0);
-
-/**
- * Convert text to date object. Date constructor uses local time which we
- * need to defeat since local time will be different on host servers. Example:
- *
- *    2012-06-17 17:34:33
- */
-export function parseDate(text: string): Date {
-   const parts = text.split(' ');
-   const date = parts[0].split('-').map(d => parseInt(d));
-   const time = parts[1].split(':').map(d => parseInt(d));
-   // convert local date to UTC time by adding offset
-   const h = time[0] - config.timeZone;
-   // date constructor automatically converts to local time
-   const d = new Date(
-      Date.UTC(date[0], date[1] - 1, date[2], h, time[1], time[2])
-   );
-   if (inDaylightSavings(d)) {
-      d.setHours(d.getHours() - 1);
-   }
-   return d;
-}
 
 /**
  * Convert decimal hours to hours:minutes
