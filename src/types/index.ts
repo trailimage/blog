@@ -1,7 +1,7 @@
 // Writing definition files:
 // https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 
-import { MapDataType } from '../constants';
+import { MapDataType } from '@toba/map';
 
 export interface MapSource {
    name: string;
