@@ -8,16 +8,6 @@ import { library } from './config';
 export default {
    ...re,
    /**
-    * Extract video link from specially formatted remark in set description.
-    * Example:
-    *
-    *    Video (960x720): <a href="http://youtu.be/obCgu3yJ4uw" rel="nofollow">youtu.be/obCgu3yJ4uw</a>
-    */
-   get video() {
-      return /Video(\s*\((\d+)[x×](\d+)\))?:\s*<a[^>]+>[^\/]+\/([\w\-_]+)<\/a>/gi;
-   },
-
-   /**
     * Facebook album ID to be inserted into Enum.url.facebookAlbum. Examples:
     *
     *    296706240428897.53174
