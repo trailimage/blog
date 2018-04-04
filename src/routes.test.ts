@@ -1,5 +1,7 @@
+import '@toba/test';
 import config from './config';
 import route from './routes';
+
 const app = require('./mocks/express.mock');
 
 beforeAll(() => {
@@ -10,10 +12,10 @@ test('creates admin routes', () => {
    const base = '/admin';
    expect(app.middleware).toHaveProperty(base);
    expect(app.routes.get).toHaveProperty(base + '/');
-   expect(app.routes.post).to.contain.all.keys([
+   expect(app.routes.post).toHaveAllProperties(
       `${base}/map/delete`,
       `${base}/view/delete`
-   ]);
+   );
 });
 
 test('creates series routes', () => {

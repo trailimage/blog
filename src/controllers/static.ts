@@ -1,6 +1,6 @@
-import { is, HttpStatus, MimeType } from '@toba/tools';
 import { Response, Request } from 'express';
-import { photoBlog } from '../models/';
+import { is, HttpStatus, MimeType } from '@toba/tools';
+import { photoBlog } from '@trailimage/models';
 import { serialize, owner } from '../models/json-ld';
 import config from '../config';
 import { Page, view } from '../views/';

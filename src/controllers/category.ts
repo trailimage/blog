@@ -1,7 +1,7 @@
+import { Response, Request } from 'express';
 import { is, merge, sayNumber } from '@toba/tools';
 import { serialize } from '@toba/json-ld';
-import { Response, Request } from 'express';
-import { Category, photoBlog } from '../models/';
+import { Category, photoBlog } from '@trailimage/models';
 import config from '../config';
 import { Page, Layout } from '../views/template';
 import { RouteParam } from '../routes';

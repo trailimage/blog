@@ -68,6 +68,10 @@
     tslint-config-prettier "^1.10.0"
     tslint-consistent-codestyle "^1.12.0"
 
+"@toba/json-ld@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.0.5.tgz#86811267fb82984cfaedacf546a6282ea569a324"
+
 "@toba/logger@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@toba/logger/-/logger-1.0.3.tgz#d9d0b80048cb53b6aef42a66fe1074269dfa1ccd"
@@ -76,6 +80,15 @@
     chalk "^2.3.0"
     flat "^4.0.0"
     logfmt "^1.2.0"
+
+"@toba/map@^1.0.4":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.0.7.tgz#76a4c3d76a65c458cc41a7d14a991794a1b530e3"
+  dependencies:
+    "@toba/tools" "^1.16.0"
+    "@types/geojson" "^7946.0.2"
+    jszip "^3.1.5"
+    xmldom "^0.1.27"
 
 "@toba/test@^1.3.0":
   version "1.9.4"
@@ -94,6 +107,20 @@
   resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-1.16.0.tgz#d0097c03366053a1e787ef5705d91296aa5ee869"
   dependencies:
     zlib "^1.0.5"
+
+"@toba/tools@^1.16.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-1.18.0.tgz#9f729fd69e162149e73df4172f65ed7b1ade4f87"
+  dependencies:
+    zlib "^1.0.5"
+
+"@trailimage/models@^1.0.0-alpha.3":
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.0.0-alpha.3.tgz#a771983bf8a62b0df322bed1974ce86985e6ea17"
+  dependencies:
+    "@toba/json-ld" "^1.0.5"
+    "@toba/map" "^1.0.4"
+    "@toba/tools" "^1.16.0"
 
 "@types/body-parser@*":
   version "1.16.8"
@@ -149,7 +176,7 @@
   version "0.0.35"
   resolved "https://registry.yarnpkg.com/@types/gapi/-/gapi-0.0.35.tgz#8e0d672d66d8c6ce8493f5e8e550344f7ff500dc"
 
-"@types/geojson@*":
+"@types/geojson@*", "@types/geojson@^7946.0.2":
   version "7946.0.2"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.2.tgz#0bd0a01ef04e813c2b7580318da9e37c2eadea9c"
 
@@ -2044,12 +2071,6 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-feed@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/feed/-/feed-1.1.1.tgz#914897517e94fa327cc6f73bb585a47c4a9ed321"
-  dependencies:
-    xml "^1.0.1"
-
 file-entry-cache@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/file-entry-cache/-/file-entry-cache-2.0.0.tgz#c392990c3e684783d838b8c84a45d8a048458361"
@@ -3716,7 +3737,7 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jszip@^3.1.3:
+jszip@^3.1.3, jszip@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.1.5.tgz#e3c2a6c6d706ac6e603314036d43cd40beefdf37"
   dependencies:
@@ -6953,9 +6974,9 @@ xml-name-validator@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
 
-xml@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/xml/-/xml-1.0.1.tgz#78ba72020029c5bc87b8a81a3cfcd74b4a2fc1e5"
+xmldom@^0.1.27:
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
 "xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.1, xtend@~4.0.0, xtend@~4.0.1:
   version "4.0.1"
