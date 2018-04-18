@@ -1,8 +1,8 @@
-import { Response, Request } from 'express';
-import { is, HttpStatus } from '@toba/tools';
+import { HttpStatus, is } from '@toba/tools';
 import { photoBlog } from '@trailimage/models';
-import { Page, Layout, view } from '../views/';
+import { Request, Response } from 'express';
 import { RouteParam } from '../routes';
+import { Layout, Page, view } from '../views/';
 
 function send(
    req: Request,

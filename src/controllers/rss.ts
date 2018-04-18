@@ -1,10 +1,10 @@
-import { Response, Request } from 'express';
 import { log } from '@toba/logger';
 import { MimeType } from '@toba/tools';
 import { photoBlog } from '@trailimage/models';
-import { view } from '../views/';
-import config from '../config';
+import { Request, Response } from 'express';
 import * as Feed from 'feed';
+import config from '../config';
+import { view } from '../views/';
 
 const MAX_RSS_RETRIES = 10;
 

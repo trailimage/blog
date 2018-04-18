@@ -1,13 +1,13 @@
+import { log } from '@toba/logger';
+import { geoJSON, kml } from '@toba/map';
+import { Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
+import { Post, photoBlog } from '@trailimage/models';
+import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import * as compress from 'zlib';
-import { Request, Response } from 'express';
-import { is, MimeType, HttpStatus, Header, Encoding } from '@toba/tools';
-import { log } from '@toba/logger';
-import { kml, geoJSON } from '@toba/map';
-import { Post, photoBlog } from '@trailimage/models';
 import config from '../config';
-import { Page, Layout, view } from '../views/';
 import { RouteParam } from '../routes';
+import { Layout, Page, view } from '../views/';
 
 /**
  * Map screen loads then makes AJAX call to fetch data.

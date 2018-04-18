@@ -1,11 +1,11 @@
-import { Response, Request } from 'express';
-import { is, merge, sayNumber } from '@toba/tools';
 import { serialize } from '@toba/json-ld';
+import { is, merge, sayNumber } from '@toba/tools';
 import { Category, photoBlog } from '@trailimage/models';
+import { Request, Response } from 'express';
 import config from '../config';
-import { Page, Layout } from '../views/template';
 import { RouteParam } from '../routes';
-import { view, Renderer } from '../views/view';
+import { Layout, Page } from '../views/template';
+import { Renderer, view } from '../views/view';
 
 function viewIt(req: Request, res: Response, path: string, homePage = false) {
    view.send(res, path, {

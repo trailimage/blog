@@ -1,8 +1,8 @@
-import { Response, Request } from 'express';
-import { is, HttpStatus, MimeType } from '@toba/tools';
+import { HttpStatus, MimeType, is } from '@toba/tools';
 import { photoBlog } from '@trailimage/models';
-import { serialize, owner } from '../models/json-ld';
+import { Request, Response } from 'express';
 import config from '../config';
+import { owner, serialize } from '../models/json-ld';
 import { Page, view } from '../views/';
 
 function search(req: Request, res: Response) {
