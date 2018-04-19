@@ -154,7 +154,7 @@
     "@types/node-fetch" "^1.6.7"
     node-fetch "^2.1.1"
 
-"@toba/build@^1.3.5":
+"@toba/build@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.4.0.tgz#9f2614b03ed6a42c3e7f89dac6f6e6964e614987"
   dependencies:
@@ -260,7 +260,7 @@
     "@toba/tools" "^1.20.0"
     "@trailimage/models" "^1.0.0"
 
-"@trailimage/models@^1.0.0", "@trailimage/models@^1.0.0-alpha.3":
+"@trailimage/models@^1.0.0":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.0.4.tgz#4ec8ee03a8bbf14aea173f484140919863eaad83"
   dependencies:
