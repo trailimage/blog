@@ -166,33 +166,6 @@
     tslint-consistent-codestyle "^1.13.0"
 
 "@toba/feed@^1.0.1":
-<<<<<<< HEAD
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.0.2.tgz#2b9a47e30974b60fef079fd5107a752211eaf8a2"
-  dependencies:
-    "@toba/tools" "^1.20.0"
-
-"@toba/google-drive@^1.2.0":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@toba/google-drive/-/google-drive-1.2.2.tgz#655e34a6e3bc003f49eef07a4664971079ac2de1"
-  dependencies:
-    "@toba/logger" "^1.0.3"
-    "@toba/oauth" "^1.2.0"
-    "@toba/tools" "^1.20.0"
-    googleapis "^28.0.0"
-
-"@toba/json-ld@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.0.5.tgz#86811267fb82984cfaedacf546a6282ea569a324"
-
-"@toba/json-ld@^1.1.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.1.1.tgz#12a494b879c588f9a98f7eb504459af062fc42ec"
-
-"@toba/logger@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@toba/logger/-/logger-1.0.3.tgz#d9d0b80048cb53b6aef42a66fe1074269dfa1ccd"
-=======
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.0.1.tgz#563a84474fd16e462cbc433826879bcb96468dc1"
   dependencies:
@@ -204,15 +177,23 @@
   dependencies:
     "@toba/tools" "^1.20.0"
 
-"@toba/flickr@^1.3.0", "@toba/flickr@^1.3.5":
+"@toba/flickr@^1.3.5":
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.3.8.tgz#3958c2fd833334b1256c54c2cef3f8f0911587a9"
->>>>>>> 4a7010af1b48f441a9c36165dd94e72d92c00783
   dependencies:
     "@toba/logger" "^1.0.0"
     "@toba/oauth" "^1.2.0"
     "@toba/tools" "^1.18.0"
     node-fetch "^2.1.0"
+
+"@toba/google-drive@^1.2.0":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@toba/google-drive/-/google-drive-1.2.2.tgz#655e34a6e3bc003f49eef07a4664971079ac2de1"
+  dependencies:
+    "@toba/logger" "^1.0.3"
+    "@toba/oauth" "^1.2.0"
+    "@toba/tools" "^1.20.0"
+    googleapis "^28.0.0"
 
 "@toba/json-ld@^1.1.0":
   version "1.1.1"
@@ -227,24 +208,9 @@
     flat "^4.0.0"
     logfmt "^1.2.0"
 
-<<<<<<< HEAD
-"@toba/map@^1.0.2":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.0.11.tgz#55500368d0a5bba6399464058c4d5c2a72700b4f"
-  dependencies:
-    "@toba/tools" "^1.20.0"
-    "@types/geojson" "^7946.0.2"
-    jszip "^3.1.5"
-    xmldom "^0.1.27"
-
-"@toba/map@^1.0.4":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.0.7.tgz#76a4c3d76a65c458cc41a7d14a991794a1b530e3"
-=======
 "@toba/map@^1.0.2", "@toba/map@^1.0.4":
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.0.11.tgz#55500368d0a5bba6399464058c4d5c2a72700b4f"
->>>>>>> 4a7010af1b48f441a9c36165dd94e72d92c00783
   dependencies:
     "@toba/tools" "^1.20.0"
     "@types/geojson" "^7946.0.2"
@@ -275,22 +241,15 @@
   dependencies:
     zlib "^1.0.5"
 
-"@trailimage/flickr-provider@^1.2.0-beta.1":
-  version "1.2.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-1.2.0-beta.1.tgz#c550d20090527f4ee7dd62c286844bce4cea3d88"
+"@trailimage/flickr-provider@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.0.0.tgz#d952499bf4a62b9d75b7838138edd23fc6fb8a1a"
   dependencies:
     "@toba/flickr" "^1.3.5"
     "@toba/logger" "^1.0.3"
     "@toba/map" "^1.0.2"
-    "@toba/tools" "^1.19.0"
+    "@toba/tools" "^1.20.0"
     "@trailimage/models" "^1.0.0"
-
-<<<<<<< HEAD
-"@toba/tools@^1.18.0", "@toba/tools@^1.20.0":
-  version "1.20.0"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-1.20.0.tgz#77f0c6b6c4443a42f5167ca1ce75426e3bbd7ad9"
-  dependencies:
-    zlib "^1.0.5"
 
 "@trailimage/google-provider@^2.0.0":
   version "2.0.0"
@@ -301,23 +260,9 @@
     "@toba/tools" "^1.20.0"
     "@trailimage/models" "^1.0.0"
 
-"@trailimage/models@^1.0.0":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.0.6.tgz#787a59de33d8975d65d9d01b07dcf6a97578bf7b"
-  dependencies:
-    "@toba/feed" "^1.0.1"
-    "@toba/json-ld" "^1.1.0"
-    "@toba/map" "^1.0.4"
-    "@toba/tools" "^1.18.0"
-
-"@trailimage/models@^1.0.0-alpha.3":
-  version "1.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.0.0-alpha.3.tgz#a771983bf8a62b0df322bed1974ce86985e6ea17"
-=======
 "@trailimage/models@^1.0.0", "@trailimage/models@^1.0.0-alpha.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.0.4.tgz#4ec8ee03a8bbf14aea173f484140919863eaad83"
->>>>>>> 4a7010af1b48f441a9c36165dd94e72d92c00783
   dependencies:
     "@toba/feed" "^1.0.1"
     "@toba/json-ld" "^1.1.0"
