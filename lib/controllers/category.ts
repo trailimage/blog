@@ -1,6 +1,6 @@
 import { serialize } from '@toba/json-ld';
 import { is, merge, sayNumber } from '@toba/tools';
-import { Category, photoBlog } from '@trailimage/models';
+import { Category, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import config from '../config';
 import { RouteParam } from '../routes';
@@ -11,7 +11,7 @@ function viewIt(req: Request, res: Response, path: string, homePage = false) {
    view.send(res, path, {
       callback: render => {
          // use renderer to build view that wasn't cached
-         const category = photoBlog.categoryWithKey(path);
+         const category = blog.categoryWithKey(path);
 
          if (is.value(category)) {
             category.ensureLoaded().then(() => {
@@ -56,7 +56,7 @@ export function forPath(req: Request, res: Response) {
  * the default tag has years as child tags
  */
 export function home(req: Request, res: Response) {
-   const category = photoBlog.categories[config.library.defaultCategory];
+   const category = blog.categories.get(config.library.defaultCategory);
    let year = new Date().getFullYear();
    let subcategory = null;
    let count = 0;
@@ -65,7 +65,7 @@ export function home(req: Request, res: Response) {
       // step backwards until a year with posts is found
       subcategory = category.getSubcategory(year.toString());
       if (is.value<Category>(subcategory)) {
-         count = subcategory.posts.length;
+         count = subcategory.posts.size;
       }
       year--;
    }
@@ -82,11 +82,11 @@ export function list(req: Request, res: Response) {
       view.send(res, key, {
          callback: render => {
             // use renderer to build view that wasn't cached
-            const category = photoBlog.categoryWithKey(key);
+            const category = blog.categoryWithKey(key);
 
             if (is.value(category)) {
                const linkData = category.linkDataString();
-               const count = category.subcategories.length;
+               const count = category.subcategories.size;
                const context = { subcategories: category.subcategories };
                const subtitle = 'Subcategories';
 
@@ -112,7 +112,7 @@ export function list(req: Request, res: Response) {
 export function menu(_req: Request, res: Response) {
    view.send(res, Page.CategoryMenu, {
       callback: render => {
-         render(Page.CategoryMenu, { photoBlog, layout: Layout.None });
+         render(Page.CategoryMenu, { blog, layout: Layout.None });
       }
    });
 }

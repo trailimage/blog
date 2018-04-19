@@ -1,5 +1,6 @@
 import { log } from '@toba/logger';
 import { MimeType } from '@toba/tools';
+import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import config from '../config';
@@ -9,7 +10,7 @@ import { Layout, Page, view } from '../views/';
  * Minify menu JSON for production. Set `config.testing = true` if testing
  * with the production flag enabled to avoid uglifying the mock response.
  *
- * https://npmjs.org/package/uglify-js
+ * @see https://npmjs.org/package/uglify-js
  */
 export function data(_req: Request, res: Response) {
    const slug = Page.PostMenuData;
@@ -30,7 +31,7 @@ export function data(_req: Request, res: Response) {
    view.send(res, slug, {
       mimeType: MimeType.JSONP,
       callback: render => {
-         render(slug, { photoBlog, layout: Layout.None }, postProcess);
+         render(slug, { blog, layout: Layout.None }, postProcess);
       }
    });
 }
@@ -39,7 +40,7 @@ export function mobile(_req: Request, res: Response) {
    const slug = Page.MobileMenuData;
    view.send(res, slug, {
       callback: render => {
-         render(slug, { photoBlog, layout: Layout.None });
+         render(slug, { blog, layout: Layout.None });
       }
    });
 }

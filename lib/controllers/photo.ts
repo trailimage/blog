@@ -1,5 +1,5 @@
 import { alphabet, is, sayNumber } from '@toba/tools';
-import { photoBlog } from '@trailimage/models';
+import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import config from '../config';
 import { RouteParam } from '../routes';
@@ -9,7 +9,7 @@ import { Layout, Page, view } from '../views/';
  * Small HTML table of EXIF values for given photo
  */
 function exif(req: Request, res: Response) {
-   photoBlog
+   blog
       .getEXIF(req.params[RouteParam.PhotoID])
       .then(exif => {
          res.render(Page.EXIF, {
@@ -28,13 +28,13 @@ function withTag(req: Request, res: Response) {
       decodeURIComponent(req.params[RouteParam.PhotoTag])
    );
 
-   photoBlog
+   blog
       .getPhotosWithTags(slug)
       .then(photos => {
          if (photos === null || photos.length == 0) {
             view.notFound(req, res);
          } else {
-            const tag = photoBlog.tags[slug];
+            const tag = blog.tags.get(slug);
             const title = `${sayNumber(
                photos.length
             )} &ldquo;${tag}&rdquo; Image${photos.length != 1 ? 's' : ''}`;
@@ -54,7 +54,7 @@ function tags(req: Request, res: Response) {
    let selected = normalizeTag(
       decodeURIComponent(req.params[RouteParam.PhotoTag])
    );
-   const list = photoBlog.tags;
+   const list = blog.tags;
    const keys = Object.keys(list);
    const tags: { [key: string]: { [key: string]: string } } = {};
 

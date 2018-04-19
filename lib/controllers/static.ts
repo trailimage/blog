@@ -1,5 +1,5 @@
 import { HttpStatus, MimeType, is } from '@toba/tools';
-import { photoBlog } from '@trailimage/models';
+import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import config from '../config';
 import { owner, serialize } from '../models/json-ld';
@@ -32,9 +32,9 @@ function siteMap(_req: Request, res: Response) {
       mimeType: MimeType.XML,
       callback: render => {
          render(Page.Sitemap, {
-            posts: photoBlog.posts,
-            categories: photoBlog.categoryKeys(),
-            tags: photoBlog.tags,
+            posts: blog.posts,
+            categories: blog.categoryKeys(),
+            tags: blog.tags,
             layout: null
          });
       }

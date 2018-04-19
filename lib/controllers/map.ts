@@ -1,7 +1,7 @@
 import { log } from '@toba/logger';
 import { geoJSON, kml } from '@toba/map';
 import { Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
-import { Post, photoBlog } from '@trailimage/models';
+import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import * as compress from 'zlib';
@@ -35,12 +35,12 @@ async function render(post: Post, req: Request, res: Response) {
 }
 
 function post(req: Request, res: Response) {
-   render(photoBlog.postWithKey(req.params[RouteParam.PostKey]), req, res);
+   render(blog.postWithKey(req.params[RouteParam.PostKey]), req, res);
 }
 
 function series(req: Request, res: Response) {
    render(
-      photoBlog.postWithKey(
+      blog.postWithKey(
          req.params[RouteParam.SeriesKey],
          req.params[RouteParam.PartKey]
       ),
@@ -52,7 +52,7 @@ function series(req: Request, res: Response) {
 /**
  * https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
-function blog(_req: Request, res: Response) {
+function blogJSON(_req: Request, res: Response) {
    res.render(Page.Mapbox, {
       layout: Layout.None,
       title: config.site.title + ' Map',
@@ -64,7 +64,7 @@ function blog(_req: Request, res: Response) {
  * Compressed GeoJSON of all site photos.
  */
 function photoJSON(req: Request, res: Response) {
-   photoBlog.map
+   blog.map
       .photos()
       .then(item => {
          view.sendCompressed(res, MimeType.JSON, item);
@@ -166,7 +166,7 @@ const fetchKMZ = (sourceName: string) => (res: Response) =>
  */
 function gpx(req: Request, res: Response) {
    const post = config.map.allowDownload
-      ? photoBlog.postWithKey(req.params[RouteParam.PostKey])
+      ? blog.postWithKey(req.params[RouteParam.PostKey])
       : null;
 
    if (is.value(post)) {

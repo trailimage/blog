@@ -1,5 +1,5 @@
 import { is, format } from '@toba/tools';
-import { Category } from '../models/index';
+import { Category } from '@trailimage/models';
 import re from '../regex';
 import config from '../config';
 
@@ -324,17 +324,17 @@ function caption(text: string): string {
    return '';
 }
 
-const logMessage = (r: any, fieldName: string) => {
-   if (is.defined(r, fieldName) && is.value(r[fieldName])) {
-      r[fieldName] = r[fieldName]
-         .replace(/(\d{10,11})/, linkPattern(config.log.photoUrl))
-         .replace(re.log.path, '<a href="$1" target="_blank">$1</a>$2')
-         .replace(re.ipAddress, linkPattern(config.log.ipLookupUrl));
-   } else {
-      r[fieldName] = '[no message]';
-   }
-   return r[fieldName];
-};
+// const logMessage = (r: any, fieldName: string) => {
+//    if (is.defined(r, fieldName) && is.value(r[fieldName])) {
+//       r[fieldName] = r[fieldName]
+//          .replace(/(\d{10,11})/, linkPattern(config.log.photoUrl))
+//          .replace(re.log.path, '<a href="$1" target="_blank">$1</a>$2')
+//          .replace(re.ipAddress, linkPattern(config.log.ipLookupUrl));
+//    } else {
+//       r[fieldName] = '[no message]';
+//    }
+//    return r[fieldName];
+// };
 
 /**
  * Obfuscate text as HTML character entities

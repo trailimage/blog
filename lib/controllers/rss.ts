@@ -1,6 +1,6 @@
 import { log } from '@toba/logger';
 import { MimeType } from '@toba/tools';
-import { photoBlog } from '@trailimage/models';
+import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as Feed from 'feed';
 import config from '../config';
@@ -11,7 +11,7 @@ const MAX_RSS_RETRIES = 10;
 let rssRetries = 0;
 
 export function postFeed(req: Request, res: Response) {
-   if (!photoBlog.postInfoLoaded) {
+   if (!blog.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
          log.error('Unable to load library after %d tries', MAX_RSS_RETRIES);
          view.notFound(req, res);
@@ -49,7 +49,7 @@ export function postFeed(req: Request, res: Response) {
       author: author
    });
 
-   for (const p of photoBlog.posts.filter(p => p.chronological)) {
+   for (const p of blog.posts.filter(p => p.chronological)) {
       feed.addItem({
          image: p.bigThumbURL,
          author: author,

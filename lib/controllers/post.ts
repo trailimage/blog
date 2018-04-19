@@ -1,5 +1,5 @@
 import { HttpStatus, is } from '@toba/tools';
-import { photoBlog } from '@trailimage/models';
+import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
@@ -12,7 +12,7 @@ function send(
 ) {
    view.send(res, key, {
       callback: render => {
-         const p = photoBlog.postWithKey(key);
+         const p = blog.postWithKey(key);
          if (!is.value(p)) {
             view.notFound(req, res);
             return;
@@ -54,7 +54,7 @@ function withKey(req: Request, res: Response) {
  * Post with given Flickr ID. Redirect to normal URL.
  */
 function withID(req: Request, res: Response) {
-   const post = photoBlog.postWithID(req.params[RouteParam.PostID]);
+   const post = blog.postWithID(req.params[RouteParam.PostID]);
 
    if (is.value(post)) {
       res.redirect(HttpStatus.PermanentRedirect, '/' + post.key);
@@ -69,8 +69,8 @@ function withID(req: Request, res: Response) {
 function withPhoto(req: Request, res: Response) {
    const photoID = req.params[RouteParam.PhotoID];
 
-   photoBlog
-      .getPostWithPhoto(photoID)
+   blog
+      .postWithPhoto(photoID)
       .then(post => {
          if (is.value(post)) {
             res.redirect(
@@ -88,7 +88,7 @@ function withPhoto(req: Request, res: Response) {
  * Show newest post on home page.
  */
 function latest(req: Request, res: Response) {
-   send(req, res, photoBlog.posts[0].key);
+   send(req, res, blog.posts[0].key);
 }
 
 export const post = { latest, withID, withKey, withPhoto, inSeries };
