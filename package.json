@@ -22,6 +22,7 @@
    },
    "dependencies": {
       "@toba/build": "^1.3.5",
+      "@trailimage/google-provider": "^2.0.0",
       "@trailimage/models": "^1.0.0-alpha.3",
       "compression": "^1.7.0",
       "express": "^4.16.0",

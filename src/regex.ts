@@ -20,14 +20,6 @@ export default {
    /** Match the first HTML paragraph if it's short and contains a quote */
    quip: /(<p>)(“(?=[^<]*”)[^<]{4,80}<\/p>)/i,
 
-   get artist() {
-      return new RegExp('(' + library.artistNames.join('|') + ')', 'gi');
-   },
-
-   get subtitle() {
-      return new RegExp(library.subtitleSeparator + '\\s*', 'g');
-   },
-
    footnote: {
       /**
        * Capture footnoted word and superscript. Match superscripts but don't
