@@ -1,19 +1,13 @@
 {
    "extends": "./tsconfig.json",
    "compilerOptions": {
-      "outDir": "./lib",
+      "outDir": "./public",
       //"moduleResolution": "node",
       //"isolatedModules": true,
       //"types": [],
-      "lib": ["es6","dom"],
+      "lib": ["es2017"],
       "watch": true
    },
-   "exclude": [
-      "./src/types",
-      "./src/client",
-      "node_modules"
-   ],
-   "include": [
-      "./src/app.ts"
-   ]
+   "exclude": ["./lib/types", "./lib/client", "node_modules"],
+   "include": ["./lib/app.ts"]
 }

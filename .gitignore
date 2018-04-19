@@ -1,5 +1,5 @@
 node_modules/
 profile/
+public/
 dist/js/maps/
 .vscode/chrome/
-lib/**/*.js.map
