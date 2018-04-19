@@ -1,8 +1,7 @@
-import * as uglify from 'uglify-js';
-import { Response, Request } from 'express';
 import { log } from '@toba/logger';
 import { MimeType } from '@toba/tools';
-import { photoBlog } from '@trailimage/models';
+import { Request, Response } from 'express';
+import * as uglify from 'uglify-js';
 import config from '../config';
 import { Layout, Page, view } from '../views/';
 

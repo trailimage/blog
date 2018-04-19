@@ -1,10 +1,10 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
 import config from '../config';
-import { Page } from '../views/';
-import { expectTemplate, expectRedirect } from './index.test';
 import { RouteParam } from '../routes';
+import { Page } from '../views/';
 import { post } from './';
+import { expectRedirect, expectTemplate } from './index.test';
 
 const req = new MockRequest();
 const res = new MockResponse(req);

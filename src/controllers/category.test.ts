@@ -1,7 +1,7 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import { Page } from '../views/index';
 import { RouteParam } from '../routes';
+import { Page } from '../views/index';
 import { category } from './index';
 import { expectTemplate } from './index.test';
 

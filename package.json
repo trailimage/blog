@@ -1,5 +1,5 @@
 {
-   "name": "trail-image",
+   "name": "@trail-image/blog",
    "description": "Trail Image blog",
    "version": "4.0.0",
    "private": false,
@@ -12,17 +12,22 @@
    },
    "main": "lib/app.js",
    "scripts": {
-      "test-pretty": "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
+      "test-pretty":
+         "node_modules/.bin/mocha --recursive --reporter mocha-pretty-spec-reporter",
       "test": "node_modules/.bin/mocha --recursive --reporter spec",
       "tstest": "node_modules/.bin/mocha -r ts-node/register",
       "watch": "node_modules/.bin/gulp watch",
       "ts": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/app.ts",
-      "webfont": "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
-      "renamed_from_postinstall": "yarn add git+https://github.com/wrr/connect-injector.git"
+      "webfont":
+         "webfont-dl \"http://fonts.googleapis.com/css?family=Oswald:400,700|Lora:400,400italic'\" --css-rel=./fonts -o dist/fonts/webfont.css",
+      "renamed_from_postinstall":
+         "yarn add git+https://github.com/wrr/connect-injector.git"
    },
    "dependencies": {
       "@toba/build": "^1.3.5",
+      "@toba/feed": "^1.0.2",
       "@trailimage/google-provider": "^2.0.0",
+      "@trailimage/flickr-provider": "^2.0.0",
       "@trailimage/models": "^1.0.0-alpha.3",
       "compression": "^1.7.0",
       "express": "^4.16.0",
@@ -63,23 +68,21 @@
       "through2": "^2.0.3",
       "ts-node": "^5.0.0",
       "tslint": "^5.9.0",
-      "typescript": "^2.7.0",
+      "typescript": "^2.8.0",
       "vinyl": "^2.1.0"
    },
    "repository": {
       "type": "git",
-      "url": "https://github.com/Jason-Abbott/trail-image.git"
+      "url": "https://github.com/trail-image/blog.git"
    },
    "bugs": {
-      "url": "https://github.com/Jason-Abbott/trail-image/issues"
+      "url": "https://github.com/trail-image/blog/issues"
    },
    "prettier": {
       "singleQuote": true,
       "tabWidth": 3
    },
    "stylelint": {
-      "plugins": [
-         "@toba/lint/style"
-      ]
+      "plugins": ["@toba/build/style"]
    }
 }

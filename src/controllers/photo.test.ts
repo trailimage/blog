@@ -2,9 +2,9 @@ import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
 import { alphabet } from '@toba/tools';
 import { RouteParam } from '../routes';
-import { expectTemplate } from './index.test';
 import { Page } from '../views/';
 import { photo } from './';
+import { expectTemplate } from './index.test';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
