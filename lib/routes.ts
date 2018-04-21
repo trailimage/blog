@@ -1,7 +1,7 @@
 import { HttpStatus } from '@toba/tools';
-import { photoBlog } from './models/';
+import { blog } from '@trailimage/models';
 import * as Express from 'express';
-import config from './config';
+import { config } from './config';
 import {
    staticPage,
    post,
@@ -96,8 +96,8 @@ function standard(app: Express.Application) {
       ':' +
       RouteParam.RootCategory +
       '(' +
-      Object.keys(photoBlog.categories)
-         .map(name => photoBlog.categories[name].key)
+      Object.keys(blog.categories)
+         .map(name => blog.categories[name].key)
          .join('|') +
       ')';
 

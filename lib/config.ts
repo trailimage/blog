@@ -1,45 +1,36 @@
 import { Token } from '@toba/oauth';
-import { Time } from '@toba/tools';
-import { ClientConfig as FlickrConfig, Flickr } from '@toba/flickr';
+import { Time, env } from '@toba/tools';
+import { OwnerConfig, SiteConfig } from '@trailimage/models';
+import { FlickrConfig, Flickr } from '@trailimage/flickr-provider';
+import { GoogleConfig } from '@trailimage/google-provider';
 import mapsource from './mapsource';
 
 const domain = 'trailimage.com';
 const isProduction = process.env['NODE_ENV'] === 'production';
 /** Preferred photo sizes */
 const sizes = {
-   thumb: Flickr.SizeUrl.Square150,
-   preview: Flickr.SizeUrl.Small320,
+   thumb: Flickr.SizeCode.Square150,
+   preview: Flickr.SizeCode.Small320,
    normal: [
-      Flickr.SizeUrl.Large1024,
-      Flickr.SizeUrl.Medium800,
-      Flickr.SizeUrl.Medium640
+      Flickr.SizeCode.Large1024,
+      Flickr.SizeCode.Medium800,
+      Flickr.SizeCode.Medium640
    ],
    big: [
-      Flickr.SizeUrl.Large2048,
-      Flickr.SizeUrl.Large1600,
-      Flickr.SizeUrl.Large1024
+      Flickr.SizeCode.Large2048,
+      Flickr.SizeCode.Large1600,
+      Flickr.SizeCode.Large1024
    ]
 };
 
-/**
- * Return environment value or throw an error if it isn't found
- */
-function env(key: string): string {
-   const value = process.env[key];
-   if (value === undefined) {
-      throw new Error(`Environment value ${key} must be set`);
-   }
-   return value;
-}
-
-const owner = {
+const owner: OwnerConfig = {
    name: 'Jason Abbott',
    image: {
       url: 'http://www.trailimage.com/img/face4_300px.jpg',
       width: 300,
       height: 300
    },
-   email: process.env['EMAIL_CONTACT'] as string,
+   email: env('EMAIL_CONTACT', null),
    urls: [
       'https://www.facebook.com/jason.e.abbott',
       'http://www.flickr.com/photos/boise',
@@ -48,23 +39,44 @@ const owner = {
    ]
 };
 
-const flickr: FlickrConfig = {
+const site: SiteConfig = {
+   domain,
+   title: 'Trail Image',
+   subtitle: 'Adventure Photography by ' + owner.name,
+   description:
+      'Stories, images and videos of small adventure trips in and around the state of Idaho',
+   url: 'http://www.trailimage.com',
+   postAlias: 'Adventure',
+   logo: {
+      url: 'http://www.' + domain + '/img/logo-large.png',
+      width: 200,
+      height: 200
+   },
+   companyLogo: {
+      url: 'http://www.' + domain + '/img/logo-title.png',
+      width: 308,
+      height: 60
+   }
+};
+
+export const flickr: FlickrConfig = {
    userID: '60950751@N04',
    appID: '72157631007435048',
    featureSets: [{ id: '72157632729508554', title: 'Ruminations' }],
+   timeZoneOffset: 0,
    /** Photo sizes that must be retrieved for certain contexts */
    // photoSize: {
    //    post: sizes.normal.concat(sizes.big, sizes.preview),
    //    map: [Flickr.SizeUrl.Small320],
    //    search: [Flickr.SizeUrl.Square150]
    // },
-   searchPhotoSizes: [Flickr.SizeUrl.Square150],
+   searchPhotoSizes: [Flickr.SizeCode.Square150],
    setPhotoSizes: [
-      Flickr.SizeUrl.Medium640,
-      Flickr.SizeUrl.Medium800,
-      Flickr.SizeUrl.Large1024,
-      Flickr.SizeUrl.Large1600,
-      Flickr.SizeUrl.Large2048
+      Flickr.SizeCode.Medium640,
+      Flickr.SizeCode.Medium800,
+      Flickr.SizeCode.Large1024,
+      Flickr.SizeCode.Large1600,
+      Flickr.SizeCode.Large2048
    ],
    excludeSets: ['72157631638576162'],
    excludeTags: [
@@ -81,35 +93,35 @@ const flickr: FlickrConfig = {
       secret: env('FLICKR_SECRET'),
       callback: 'http://www.' + domain + '/auth/flickr',
       token: {
-         access: process.env['FLICKR_ACCESS_TOKEN'] as string,
-         secret: process.env['FLICKR_TOKEN_SECRET'] as string,
+         access: env('FLICKR_ACCESS_TOKEN', null),
+         secret: env('FLICKR_TOKEN_SECRET', null),
          request: null as string
       } as Token
    }
 };
 
 /**
- * http://code.google.com/apis/console/#project:1033232213688
+ * @see http://code.google.com/apis/console/#project:1033232213688
  */
-const google = {
-   apiKey: process.env['GOOGLE_KEY'] as string,
-   projectID: '316480757902',
-   analyticsID: '22180727', // shown as 'UA-22180727-1
-   searchEngineID: process.env['GOOGLE_SEARCH_ID'] as string,
-   blogID: '118459106898417641',
-   drive: {
-      apiKey: env('GOOGLE_DRIVE_KEY') as string,
-      tracksFolder: '0B0lgcM9JCuSbMWluNjE4LVJtZWM'
-   },
+export const google: GoogleConfig = {
+   //apiKey: env('GOOGLE_KEY', null),
+   //projectID: '316480757902',
+   //analyticsID: '22180727', // shown as 'UA-22180727-1
+   //searchEngineID: env('GOOGLE_SEARCH_ID', null),
+   //blogID: '118459106898417641',
+   apiKey: env('GOOGLE_DRIVE_KEY'),
+   folderID: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
+   cacheSize: 2048,
+   useCache: true,
    auth: {
-      clientID: env('GOOGLE_CLIENT_ID') as string,
-      secret: env('GOOGLE_SECRET') as string,
+      clientID: env('GOOGLE_CLIENT_ID'),
+      secret: env('GOOGLE_SECRET'),
       callback: 'http://www.' + domain + '/auth/google',
       token: {
          type: null,
-         access: process.env['GOOGLE_ACCESS_TOKEN'] as string,
+         access: env('GOOGLE_ACCESS_TOKEN', null),
          accessExpiration: null as Date,
-         refresh: process.env['GOOGLE_REFRESH_TOKEN'] as string
+         refresh: env('GOOGLE_REFRESH_TOKEN', null)
       } as Token
    }
 };
@@ -154,7 +166,7 @@ export const map = {
    source: mapsource
 };
 
-export default {
+export const config = {
    env,
    domain,
    /** Whether any provider needs authorization tokens */
@@ -179,25 +191,7 @@ export default {
    timeZone: -7,
    repoUrl: 'https://github.com/Jason-Abbott/trail-image.git',
    owner,
-   site: {
-      domain,
-      title: 'Trail Image',
-      subtitle: 'Adventure Photography by ' + owner.name,
-      description:
-         'Stories, images and videos of small adventure trips in and around the state of Idaho',
-      url: 'http://www.trailimage.com',
-      postAlias: 'Adventure',
-      logo: {
-         url: 'http://www.' + domain + '/img/logo-large.png',
-         width: 200,
-         height: 200
-      },
-      companyLogo: {
-         url: 'http://www.' + domain + '/img/logo-title.png',
-         width: 308,
-         height: 60
-      }
-   },
+   site,
    library,
    cache: {
       /** Enable or disable all caching */
@@ -293,9 +287,6 @@ export default {
          /** Style used for static maps */
          static: 'jabbott7/cj1prg25g002o2ro2xtzos6cy'
       }
-   },
-   redis: {
-      url: env('REDISCLOUD_URL') as string
    },
    google,
    /** Maintain redirects to support previously used URLs */

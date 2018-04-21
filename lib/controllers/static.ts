@@ -1,7 +1,7 @@
 import { HttpStatus, MimeType, is } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
-import config from '../config';
+import { config } from '../config';
 import { owner, serialize } from '../models/json-ld';
 import { Page, view } from '../views/';
 

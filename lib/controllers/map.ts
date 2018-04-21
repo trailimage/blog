@@ -5,7 +5,7 @@ import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import * as compress from 'zlib';
-import config from '../config';
+import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 

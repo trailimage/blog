@@ -1,7 +1,7 @@
 import { alphabet, is, sayNumber } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
-import config from '../config';
+import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 
@@ -70,7 +70,7 @@ function tags(req: Request, res: Response) {
    for (const key in list) {
       const c = key.substr(0, 1).toLowerCase();
       if (alphabet.indexOf(c) >= 0) {
-         tags[c][key] = list[key];
+         tags[c][key] = list.get(key);
       }
    }
 

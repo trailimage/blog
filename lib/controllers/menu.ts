@@ -3,7 +3,7 @@ import { MimeType } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
-import config from '../config';
+import { config } from '../config';
 import { Layout, Page, view } from '../views/';
 
 /**

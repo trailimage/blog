@@ -4,14 +4,25 @@ import * as compress from 'compression';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';
 import * as path from 'path';
-import { makePhotoBlog } from './factory/';
-import config from './config';
+import { postProvider, postConfigure } from '@trailimage/flickr-provider';
+import { mapProvider, mapConfigure } from '@trailimage/google-provider';
+import { config as modelConfig, blog } from '@trailimage/models';
+import { config } from './config';
 import { Layout, addTemplateMethods } from './views/';
 import route from './routes';
 
 const root = path.join(__dirname, '..');
 
+configureModels();
 createWebService();
+
+function configureModels() {
+   modelConfig.owner = config.owner;
+   postConfigure(config.flickr);
+   mapConfigure(config.google);
+   modelConfig.providers.post = postProvider;
+   modelConfig.providers.map = mapProvider;
+}
 
 async function createWebService() {
    const app = Express();
@@ -36,8 +47,8 @@ async function createWebService() {
       app.use(compress());
       app.use(Express.static(root + 'dist'));
 
-      await makePhotoBlog();
-      // library must be loaded before routes are defined
+      await blog.build();
+      // blog must be loaded before routes are defined
       route.standard(app);
       app.listen(port);
       log.info(`Listening on port ${port}`);

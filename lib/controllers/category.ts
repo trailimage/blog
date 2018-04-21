@@ -2,7 +2,7 @@ import { serialize } from '@toba/json-ld';
 import { is, merge, sayNumber } from '@toba/tools';
 import { Category, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
-import config from '../config';
+import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Layout, Page } from '../views/template';
 import { Renderer, view } from '../views/view';

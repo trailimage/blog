@@ -3,7 +3,7 @@ import { MimeType } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as Feed from 'feed';
-import config from '../config';
+import { config } from '../config';
 import { view } from '../views/';
 
 const MAX_RSS_RETRIES = 10;
