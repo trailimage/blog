@@ -13,7 +13,7 @@ import {
 } from './controllers/index';
 
 /**
- * Route placeholders that become req.params keys.
+ * Route placeholders that become `req.params` keys.
  */
 export enum RouteParam {
    Category = 'category',
@@ -32,7 +32,7 @@ export enum RouteParam {
 /**
  * Need to capture top-level route parameters.
  *
- * http://expressjs.com/en/4x/api.html#express.router
+ * @see http://expressjs.com/en/4x/api.html#express.router
  */
 const keepParams = { mergeParams: true };
 
@@ -48,7 +48,7 @@ function postRoutes(photoID: string): Express.Router {
 }
 
 /**
- * Series should load the PDF, GPX and GeoJSON for the main post
+ * Series should load the PDF, GPX and GeoJSON for the main post.
  */
 function seriesRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
@@ -78,28 +78,23 @@ function categoryRoutes(): Express.Router {
 /**
  * Standard routes. Regular expressions must match the full string.
  *
- * http://expressjs.com/en/4x/api.html
- * http://expressjs.com/en/guide/routing.html
+ * @see http://expressjs.com/en/4x/api.html
+ * @see http://expressjs.com/en/guide/routing.html
  */
 function standard(app: Express.Application) {
-   // slug pattern
+   /** Slug pattern */
    const s = '([\\w\\d-]{4,})';
-   // Flickr photo ID pattern
+   /** Flickr photo ID pattern */
    const photoID = `:${RouteParam.PhotoID}(\\d{10,11})`;
-   // Flickr set ID pattern
+   /** Flickr set ID pattern */
    const postID = `:${RouteParam.PostID}(\\d{17})`;
-   // post key (slug or path) pattern
+   /** Post key (slug or path) pattern */
    const postKey = `:${RouteParam.PostKey}${s}`;
    const series = `:${RouteParam.SeriesKey}${s}/:${RouteParam.PartKey}${s}`;
-   // pattern matching any root category key
-   const rootCategory =
-      ':' +
-      RouteParam.RootCategory +
-      '(' +
-      Object.keys(blog.categories)
-         .map(name => blog.categories[name].key)
-         .join('|') +
-      ')';
+   /** Pattern matching any root category key */
+   const rootCategory = `:${RouteParam.RootCategory}(${Array.from(
+      blog.categories.values()
+   ).join('|')})`;
 
    for (const slug in config.redirects) {
       app.get('/' + slug, (_req: Express.Request, res: Express.Response) => {
@@ -139,7 +134,8 @@ function standard(app: Express.Application) {
 }
 
 /**
- * If a provider isn't authenticated then all paths route to authentication pages
+ * If a provider isn't authenticated then all paths route to authentication
+ * pages.
  */
 function authentication(app: Express.Application) {
    // provider authentication callbacks

@@ -2,7 +2,7 @@ import { log } from '@toba/logger';
 import { MimeType } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
-import * as Feed from 'feed';
+import { render } from '@toba/feed';
 import { config } from '../config';
 import { view } from '../views/';
 
@@ -13,7 +13,7 @@ let rssRetries = 0;
 export function postFeed(req: Request, res: Response) {
    if (!blog.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
-         log.error('Unable to load library after %d tries', MAX_RSS_RETRIES);
+         log.error(`Unable to load blog after ${MAX_RSS_RETRIES} tries`);
          view.notFound(req, res);
          // reset tries so page can be refreshed
          rssRetries = 0;
