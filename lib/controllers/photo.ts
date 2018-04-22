@@ -6,7 +6,7 @@ import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 
 /**
- * Small HTML table of EXIF values for given photo
+ * Render HTML table of EXIF values for given photo.
  */
 function exif(req: Request, res: Response) {
    blog

@@ -30,7 +30,7 @@ export interface RenderOptions {
     */
    generate?: () => string;
    /**
-    * Key-values sent into tempate.
+    * Key-values sent into the view tempate.
     */
    context?: { [key: string]: any };
    /**
@@ -44,7 +44,7 @@ export type Renderer = (
    /** Key-values sent into the view template. */
    context: { [key: string]: any },
    /** Optional method to post-process rendered template. */
-   postProcess?: Function
+   postProcess?: (text: string) => string
 ) => void;
 
 const defaultRenderOptions: RenderOptions = {
@@ -122,18 +122,18 @@ function internalError(res: Response, err?: Error): void {
  * JSON helpers depend on Express .json() extension and standard response
  * structure.
  */
-function jsonError(res: Response, message: string): void {
-   res.json({ success: false, message } as JsonResponse);
-}
+// function jsonError(res: Response, message: string): void {
+//    res.json({ success: false, message } as JsonResponse);
+// }
 
-function jsonMessage(res: Response, message: string) {
-   res.json({
-      success: true,
-      message: is.value(message) ? message : ''
-   } as JsonResponse);
-}
+// function jsonMessage(res: Response, message: string) {
+//    res.json({
+//       success: true,
+//       message: is.value(message) ? message : ''
+//    } as JsonResponse);
+// }
 
-function sendJson(res: Response, key: string, generate: Function) {
+function sendJson(res: Response, key: string, generate: () => void) {
    sendFromCacheOrRender(res, key, {
       mimeType: MimeType.JSON,
       generate
@@ -236,19 +236,19 @@ function renderTemplate(res: Response, slug: string, type: MimeType): Renderer {
    return (
       view: string,
       context: { [key: string]: any },
-      postProcess?: Function
+      postProcess?: (text: string) => string
    ) => {
       // use default meta tag description if none provided
       if (is.empty(context.description)) {
          context.description = config.site.description;
       }
-      // always send config to views
+      // always send full config to views
       context.config = config;
 
       res.render(view, context, (renderError: Error, text: string) => {
          if (is.value(renderError)) {
             // error message includes view name
-            log.error(`Rendering ${slug} ${renderError.message}`, slug);
+            log.error(`Rendering ${slug} ${renderError.message}`, { slug });
             internalError(res);
          } else {
             if (is.callable(postProcess)) {
@@ -285,8 +285,8 @@ export const view = {
    notFound,
    internalError,
    json: {
-      error: jsonError,
-      message: jsonMessage,
+      // error: jsonError,
+      // message: jsonMessage,
       send: sendJson
    }
 };

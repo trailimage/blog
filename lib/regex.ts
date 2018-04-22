@@ -1,5 +1,5 @@
 import { re } from '@toba/tools';
-import { library } from './config';
+//import { library } from './config';
 
 /**
  * Use getters to return new instances of global flagged patterns so lastIndex
@@ -8,7 +8,9 @@ import { library } from './config';
 export default {
    ...re,
    /**
-    * Facebook album ID to be inserted into Enum.url.facebookAlbum. Examples:
+    * Facebook album ID to be inserted into Enum.url.facebookAlbum.
+    *
+    * @example
     *
     *    296706240428897.53174
     *    296706240428897.53174
@@ -97,9 +99,11 @@ export default {
 
       /**
        * Flickr prematurely closes link tags around text with parentheses.
-       * Capture the wrongly excluded part of the URL. Examples:
+       * Capture the wrongly excluded part of the URL.
        *
+       * @example
        *    <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
+       * @example
        *    <a href="http://www.idahogeology.org/PDF/Technical_Reports_" rel="nofollow">www.idahogeology.org/PDF/Technical_Reports_</a>(T)/TR-81-1.pdf
        */
       get truncatedLink() {
@@ -108,8 +112,9 @@ export default {
 
       /**
        * Sites may intentionally truncate link name with ellipsis when the name
-       * is a long URL. Example:
+       * is a long URL.
        *
+       * @example
        *    <a href="http://idahohistory.cdmhost.com/cdm/singleitem/collection/p16281coll21/id/116/rec/2" rel="nofollow">idahohistory.cdmhost.com/cdm/singleitem/collection/p16281...</a>
        */
       get ellipsisLink() {
@@ -156,11 +161,11 @@ export default {
 
    /** Three lines of text 5–100 characters long */
    haiku: {
-      /* Whether text begins with a haiku */
+      /** Whether text begins with a haiku */
       get any() {
          return /^([ \w]{5,100})[\r\n]+([ \w]{5,100})[\r\n]+([ \w]{5,100})([\r\n]{2}|$)+/gi;
       },
-      /* Whether text is entirely haiku */
+      /** Whether text is entirely haiku */
       get all() {
          return /^([ \w]{5,100})[\r\n]+([ \w]{5,100})[\r\n]+([ \w]{5,100})$/gi;
       }

@@ -10,7 +10,7 @@ import { Layout, Page, view } from '../views/';
  * Minify menu JSON for production. Set `config.testing = true` if testing
  * with the production flag enabled to avoid uglifying the mock response.
  *
- * @see https://npmjs.org/package/uglify-js
+ * @see https://github.com/mishoo/UglifyJS2
  */
 export function data(_req: Request, res: Response) {
    const slug = Page.PostMenuData;

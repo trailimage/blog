@@ -63,7 +63,7 @@ export const flickr: FlickrConfig = {
    userID: '60950751@N04',
    appID: '72157631007435048',
    featureSets: [{ id: '72157632729508554', title: 'Ruminations' }],
-   timeZoneOffset: 0,
+   timeZoneOffset: -7,
    /** Photo sizes that must be retrieved for certain contexts */
    // photoSize: {
    //    post: sizes.normal.concat(sizes.big, sizes.preview),
@@ -175,7 +175,7 @@ export const config = {
       const g = google.auth.token.access;
       return f === null || f === '' || g === null || g === '';
    },
-   proxy: process.env['HTTPS_PROXY'] as string,
+   proxy: env('HTTPS_PROXY', null),
    timestamp: new Date().getTime(),
    /**
     * Whether site is running tests. This is only needed in a few particular
@@ -185,10 +185,6 @@ export const config = {
     */
    testing: false,
    isProduction: isProduction,
-   /** Whether to use wwwhisper authentication (https://devcenter.heroku.com/articles/wwwhisper) */
-   usePersona: isProduction && process.env['WWWHISPER_DISABLE'] !== '1',
-   /** Hours difference from GMT during standard (not daylight savings) time */
-   timeZone: -7,
    repoUrl: 'https://github.com/Jason-Abbott/trail-image.git',
    owner,
    site,
@@ -213,7 +209,7 @@ export const config = {
          /**
           * Match post categories to Material icons.
           *
-          * https://material.io/icons/
+          * @see https://material.io/icons/
           */
          category: {
             Who: 'person',
@@ -296,7 +292,10 @@ export const config = {
       'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
    } as { [key: string]: string },
 
-   /** Support for renamed photo tags. The hash key is the old name. */
+   /**
+    * Support for renamed photo tags. The key is the old name and value is the
+    * new name.
+    */
    photoTagChanges: {
       jeremy: 'jeremyabbott',
       jessica: 'jessicaabbott',

@@ -1,7 +1,7 @@
 import { is, format } from '@toba/tools';
 import { Category } from '@trailimage/models';
 import re from '../regex';
-import config from '../config';
+import { config } from '../config';
 
 /**
  * Format paragraphs and prose.

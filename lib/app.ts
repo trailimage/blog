@@ -17,9 +17,12 @@ configureModels();
 createWebService();
 
 function configureModels() {
-   modelConfig.owner = config.owner;
    postConfigure(config.flickr);
    mapConfigure(config.google);
+
+   modelConfig.owner = config.owner;
+   modelConfig.subtitleSeparator = config.library.subtitleSeparator;
+   modelConfig.maxPhotoMarkersOnMap = config.map.maxMarkers;
    modelConfig.providers.post = postProvider;
    modelConfig.providers.map = mapProvider;
 }

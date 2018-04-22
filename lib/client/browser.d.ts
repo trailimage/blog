@@ -43,10 +43,10 @@ interface PageFeature {
 /**
  * Standard response for administrative actions.
  */
-interface JsonResponse {
-   success: boolean;
-   message: string;
-}
+// interface JsonResponse {
+//    success: boolean;
+//    message: string;
+// }
 
 /**
  * GeoJSON properties for post photos.

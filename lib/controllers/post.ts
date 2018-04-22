@@ -46,12 +46,15 @@ function inSeries(req: Request, res: Response) {
    );
 }
 
+/**
+ * Render post with matching key.
+ */
 function withKey(req: Request, res: Response) {
    send(req, res, req.params[RouteParam.PostKey]);
 }
 
 /**
- * Post with given Flickr ID. Redirect to normal URL.
+ * Render post with matching provider (e.g. Flickr) ID. Redirect to normal URL.
  */
 function withID(req: Request, res: Response) {
    const post = blog.postWithID(req.params[RouteParam.PostID]);
@@ -64,7 +67,7 @@ function withID(req: Request, res: Response) {
 }
 
 /**
- * Show post with given photo ID.
+ * Render post that contains photo with given ID.
  */
 function withPhoto(req: Request, res: Response) {
    const photoID = req.params[RouteParam.PhotoID];
@@ -81,7 +84,10 @@ function withPhoto(req: Request, res: Response) {
             view.notFound(req, res);
          }
       })
-      .catch(() => view.notFound(req, res));
+      .catch(err => {
+         log.error(err, { photoID });
+         view.notFound(req, res);
+      });
 }
 
 /**

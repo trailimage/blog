@@ -21,7 +21,7 @@ export function expectRedirect(res: MockResponse, path: string) {
 }
 
 /**
- * Expectations for JSON responses
+ * Expectations for JSON responses.
  */
 export function expectJSON(res: MockResponse) {
    expect(res.httpStatus).toBe(HttpStatus.OK);
