@@ -191,7 +191,7 @@ export const map = {
    blog,
    json: {
       photo: photoJSON,
-      track: trackJSON,
+      post: trackJSON,
       blog: blogJSON
    }
 };

@@ -1,5 +1,6 @@
 import { html } from './html';
-import config from '../config';
+import { config } from '../config';
+import { rot13 } from '@toba/tools';
 
 /**
  * Handlebars layouts.
@@ -47,7 +48,6 @@ export function addTemplateMethods(hbs: any) {
       subtract: (a: number, b: number) => a * 1 - b,
       plural: (count: number) => (count > 1 ? 's' : ''),
       makeTagList: html.photoTagList,
-      formatLogTime: util.date.toLogTime,
       formatISO8601: (d: Date) => d.toISOString(),
       formatFraction: html.fraction,
       mapHeight: (width: number, height: number) =>
@@ -55,7 +55,7 @@ export function addTemplateMethods(hbs: any) {
       icon: html.icon.tag,
       iconForCategory: html.icon.category,
       modeIconForPost: html.icon.mode,
-      rot13: util.encode.rot13,
+      rot13: rot13,
       json: JSON.stringify,
       encode: encodeURIComponent
    };

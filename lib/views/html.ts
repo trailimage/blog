@@ -36,8 +36,9 @@ export function story(text: string): string {
 }
 
 /**
- * Flickr sometimes messes up URLs that have parenthesis within them. Example:
+ * Flickr sometimes messes up URLs that have parenthesis within them.
  *
+ * @example
  *    Newsletter, No. 2: <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
  */
 export function fixMalformedLink(text: string): string {
@@ -151,9 +152,9 @@ export function photoTagList(list: string[]): string {
 }
 
 /**
- * Material icon tag
+ * Material icon tag.
  *
- * https://material.io/icons/
+ * @see https://material.io/icons/
  */
 const iconTag = (name: string) =>
    `<i class="material-icons ${name}">${name}</i>`;
@@ -202,7 +203,7 @@ function postModeIcon(
 }
 
 export function linkPattern(url: string): string {
-   return '<a href="' + url + '$1" target="_blank">$1</a>';
+   return `<a href="${url}$1" target="_blank">$1</a>`;
 }
 
 /**
@@ -266,7 +267,7 @@ function formatPoem(text: string): string {
 /**
  * Convert new lines to HTML paragraphs and normalize links.
  *
- * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
+ * @see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/replace
  */
 function caption(text: string): string {
    if (!is.empty(text)) {
@@ -361,9 +362,9 @@ export const html = {
 };
 
 /**
- * Character codes for HTML entities
+ * Character codes for HTML entities.
  *
- * http://www.w3.org/TR/html4/sgml/entities.html
+ * @see http://www.w3.org/TR/html4/sgml/entities.html
  */
 const htmlEntity: { [key: number]: string } = {
    34: 'quot',

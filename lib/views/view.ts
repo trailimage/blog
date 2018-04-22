@@ -1,17 +1,17 @@
 import {
+   Cache,
+   Encoding,
    Header,
    HttpStatus,
    MimeType,
-   Encoding,
    is,
-   merge,
-   Cache
+   merge
 } from '@toba/tools';
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
+import { config } from '../config';
 import { Page } from './template';
-import config from '../config';
 
 const cache = new Cache<ViewItem>();
 
@@ -33,6 +33,9 @@ export interface RenderOptions {
     * Key-values sent into tempate.
     */
    context?: { [key: string]: any };
+   /**
+    * Method to generate content if not in cache.
+    */
    callback?: (renderer: Renderer) => void;
 }
 
@@ -76,17 +79,17 @@ const createViewItem = (
 /**
  * Remove IPv6 prefix from transitional addresses.
  *
- * https://en.wikipedia.org/wiki/IPv6_address
+ * @see https://en.wikipedia.org/wiki/IPv6_address
  */
-export const IPv6 = (ip: string) =>
+export const IPv6 = (ip: string): string =>
    is.empty(ip) || ip === '::1'
       ? '127.0.0.1'
       : ip.replace(/^::[0123456789abcdef]{4}:/g, '');
 
 /**
- * Return normalized client IP address.
+ * Normalized client IP address.
  */
-export function clientIP(req: Request) {
+export function clientIP(req: Request): string {
    let ipAddress = req.connection.remoteAddress;
    const forwardedIP = req.headers[Header.ForwardedFor] as string;
 
@@ -101,13 +104,13 @@ export function clientIP(req: Request) {
 /**
  * Render standard 404 page.
  */
-export function notFound(req: Request, res: Response) {
+export function notFound(req: Request, res: Response): void {
    log.warn(`${req.originalUrl} not found for ${clientIP(req)}`);
    res.statusCode = HttpStatus.NotFound;
    res.render(Page.NotFound, { title: 'Page Not Found', config });
 }
 
-function internalError(res: Response, err?: Error) {
+function internalError(res: Response, err?: Error): void {
    if (is.value(err)) {
       log.error(err);
    }
@@ -119,7 +122,7 @@ function internalError(res: Response, err?: Error) {
  * JSON helpers depend on Express .json() extension and standard response
  * structure.
  */
-function jsonError(res: Response, message: string) {
+function jsonError(res: Response, message: string): void {
    res.json({ success: false, message } as JsonResponse);
 }
 
@@ -138,12 +141,16 @@ function sendJson(res: Response, key: string, generate: Function) {
 }
 
 /**
+ * Send rendered view in HTTP response.
  * @param key Cache key
  */
 function sendView(res: Response, key: string, options: RenderOptions) {
    sendFromCacheOrRender(res, key, merge(defaultRenderOptions, options));
 }
 
+/**
+ * Send view item buffer as compressed response body.
+ */
 function sendCompressed(
    res: Response,
    mimeType: MimeType,

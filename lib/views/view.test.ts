@@ -1,20 +1,28 @@
+import { config } from '../config';
+
 const viewSlug = 'test-slug';
 const pageContent = '<html><head></head><body>Test Page</body></html>';
 let cacheViews = false;
 
-before(() => {
+beforeAll(() => {
    cacheViews = config.cache.views;
    config.cache.views = true;
 });
 
 // remove any left-over test data and add caching expando methods
-before(done => {
+afterAll(() => {
    cache.view.remove(viewSlug).then(() => {
       middleware.enableViewCache(req, res, done);
    });
 });
 
-it('compresses new pages and adds to cache', done => {
+// remove test page from cache
+after(() => {
+   cache.view.remove(viewSlug);
+   config.cache.views = cacheViews;
+});
+
+test('compresses new pages and adds to cache', done => {
    res.onEnd = () => {
       cache.view.getItem(viewSlug).then(item => {
          expect(item).to.exist;
@@ -35,7 +43,7 @@ it('compresses new pages and adds to cache', done => {
    });
 });
 
-it('sends already rendered pages from cache', done => {
+test('sends already rendered pages from cache', done => {
    res.onEnd = done;
    res.sendView(viewSlug, {
       callback: () => {
@@ -44,7 +52,7 @@ it('sends already rendered pages from cache', done => {
    });
 });
 
-it('adds caching headers to compressed content', () =>
+test('adds caching headers to compressed content', () =>
    cache.view.create(viewSlug, pageContent).then(item => {
       res.sendCompressed(C.mimeType.HTML, item);
 
@@ -54,9 +62,3 @@ it('adds caching headers to compressed content', () =>
       expect(res.headers[C.header.E_TAG]).to.contain(viewSlug);
       //expect(res.content).equals(pageContent);
    }));
-
-// remove test page from cache
-after(() => {
-   cache.view.remove(viewSlug);
-   config.cache.views = cacheViews;
-});
