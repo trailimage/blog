@@ -7,36 +7,39 @@ import { config } from '../config';
  * Format paragraphs and prose.
  */
 export function story(text: string): string {
-   if (!is.empty(text)) {
-      if (re.poetry.all.test(text)) {
-         // text is entirely a poem or haiku
-         text = text.replace(re.poetry.delimiter, '');
-
-         if (re.haiku.all.test(text)) {
-            // haiku
-            text = formatHaiku(text, re.haiku.all);
-         } else {
-            // not hiaku
-            text =
-               '<p class="poem">' +
-               text
-                  .replace(re.lineBreak, '<br/>')
-                  .replace(re.poetry.indent, '<span class="tab"></span>') +
-               '</p>';
-         }
-      } else if (re.haiku.any.test(text)) {
-         // text begins with a haiku
-         text = formatHaiku(text, re.haiku.any);
-      } else {
-         // text has no haiku but may be partially a poem
-         text = caption(text);
-      }
+   if (is.empty(text)) {
+      return text;
    }
+
+   if (re.poetry.all.test(text)) {
+      // text is entirely a poem or haiku
+      text = text.replace(re.poetry.delimiter, '');
+
+      if (re.haiku.all.test(text)) {
+         // haiku
+         text = formatHaiku(text, re.haiku.all);
+      } else {
+         // not hiaku
+         text =
+            '<p class="poem">' +
+            text
+               .replace(re.lineBreak, '<br/>')
+               .replace(re.poetry.indent, '<span class="tab"></span>') +
+            '</p>';
+      }
+   } else if (re.haiku.any.test(text)) {
+      // text begins with a haiku
+      text = formatHaiku(text, re.haiku.any);
+   } else {
+      // text has no haiku but may be partially a poem
+      text = caption(text);
+   }
+
    return text;
 }
 
 /**
- * Flickr sometimes messes up URLs that have parenthesis within them.
+ * Post provider sometimes messes up URLs that have parenthesis within them.
  *
  * @example
  *    Newsletter, No. 2: <a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf
@@ -137,7 +140,9 @@ export const typography = (text: string) =>
            );
 
 /**
- * Different slug style to match Flickr's photo tags
+ * Different slug style to match Flickr's photo tags.
+ *
+ * TODO: make provider agnostic
  */
 export function photoTagList(list: string[]): string {
    let links = '';
@@ -160,7 +165,7 @@ const iconTag = (name: string) =>
    `<i class="material-icons ${name}">${name}</i>`;
 
 /**
- * HTML tag for icon matched to post tag
+ * HTML tag for icon matched to post tag.
  */
 function postCategoryIcon(title: string): string {
    const map = config.style.icon.category;

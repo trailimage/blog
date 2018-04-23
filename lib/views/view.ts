@@ -7,6 +7,7 @@ import {
    is,
    merge
 } from '@toba/tools';
+import { log } from '@toba/logger';
 import { Request, Response } from 'express';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
@@ -26,19 +27,22 @@ export interface RenderOptions {
     */
    mimeType?: MimeType;
    /**
-    * Method to generate response content if not found in cache.
+    * Generate JSON response if not found in cache.
     */
-   generate?: () => string;
+   generateJSON?: () => string;
    /**
     * Key-values sent into the view tempate.
     */
    context?: { [key: string]: any };
    /**
-    * Method to generate content if not in cache.
+    * Build dynamic context to pass the template renderer.
     */
-   callback?: (renderer: Renderer) => void;
+   prepareContext?: (renderer: Renderer) => void;
 }
 
+/**
+ * Method to render an HTML view with context and optional post-processing.
+ */
 export type Renderer = (
    viewName: string,
    /** Key-values sent into the view template. */
@@ -67,6 +71,7 @@ const createViewItem = (
       compress.gzip(Buffer.from(text), (err: Error, buffer: Buffer) => {
          if (is.value(err)) {
             reject(err);
+            log.error(err, { slug: key });
          } else {
             resolve({
                buffer,
@@ -87,7 +92,7 @@ export const IPv6 = (ip: string): string =>
       : ip.replace(/^::[0123456789abcdef]{4}:/g, '');
 
 /**
- * Normalized client IP address.
+ * Normalized client IP address for use in error logs.
  */
 export function clientIP(req: Request): string {
    let ipAddress = req.connection.remoteAddress;
@@ -105,7 +110,8 @@ export function clientIP(req: Request): string {
  * Render standard 404 page.
  */
 export function notFound(req: Request, res: Response): void {
-   log.warn(`${req.originalUrl} not found for ${clientIP(req)}`);
+   const ip = clientIP(req);
+   log.warn(`${req.originalUrl} not found for ${ip}`, { clientIP: ip });
    res.statusCode = HttpStatus.NotFound;
    res.render(Page.NotFound, { title: 'Page Not Found', config });
 }
@@ -133,10 +139,13 @@ function internalError(res: Response, err?: Error): void {
 //    } as JsonResponse);
 // }
 
-function sendJson(res: Response, key: string, generate: () => void) {
+/**
+ * Send generated JSON in HTTP response.
+ */
+function sendJson(res: Response, key: string, generateJSON: () => void) {
    sendFromCacheOrRender(res, key, {
       mimeType: MimeType.JSON,
-      generate
+      generateJSON
    } as RenderOptions);
 }
 
@@ -174,7 +183,8 @@ function sendCompressed(
 }
 
 /**
- * Send content if it's cached otherwise generate with callback.
+ * Send content if it's cached otherwise generate with callback supplied in
+ * `RenderOptions`.
  */
 function sendFromCacheOrRender(
    res: Response,
@@ -193,11 +203,11 @@ function sendFromCacheOrRender(
          sendCompressed(res, options.mimeType, item);
       } else {
          // generate content to send
-         log.info(`"${slug}" not cached`, slug);
+         log.info(`"${slug}" not cached`, { slug });
          generate();
       }
    } else {
-      log.warn(`Caching disabled for ${slug}`, slug);
+      log.warn(`Caching disabled for ${slug}`, { slug });
       generate();
    }
 }
@@ -209,18 +219,18 @@ function sendFromCacheOrRender(
 function renderForType(res: Response, slug: string, options: RenderOptions) {
    if (
       [MimeType.JSON, MimeType.JSONP].indexOf(options.mimeType) >= 0 &&
-      is.callable(options.generate)
+      is.callable(options.generateJSON)
    ) {
       // JSON content always supplies a generate method
       cacheAndSend(
          res,
-         JSON.stringify(options.generate()),
+         JSON.stringify(options.generateJSON()),
          slug,
          options.mimeType
       );
-   } else if (is.callable(options.callback)) {
+   } else if (is.callable(options.prepareContext)) {
       // pass view renderer back to generator function to execute
-      options.callback(renderTemplate(res, slug, options.mimeType));
+      options.prepareContext(renderTemplate(res, slug, options.mimeType));
    } else {
       // invoke renderer directly assuming view name identical to slug
       const render = renderTemplate(res, slug, options.mimeType);
@@ -257,7 +267,9 @@ function renderTemplate(res: Response, slug: string, type: MimeType): Renderer {
             if (is.value(text)) {
                cacheAndSend(res, text, slug, type);
             } else {
-               log.error(`renderTemplate(${slug}) returned no content`, slug);
+               log.error(`renderTemplate(${slug}) returned no content`, {
+                  slug
+               });
                internalError(res);
             }
          }
@@ -267,14 +279,16 @@ function renderTemplate(res: Response, slug: string, type: MimeType): Renderer {
 
 /**
  * Compress, cache and send content to client.
+ *
+ * @param body HTML or JSON
  */
 async function cacheAndSend(
    res: Response,
-   html: string,
+   body: string,
    slug: string,
    type: MimeType
 ) {
-   const item = await createViewItem(slug, html);
+   const item = await createViewItem(slug, body);
    cache.add(slug, item);
    sendCompressed(res, type, item);
 }

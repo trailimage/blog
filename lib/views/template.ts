@@ -1,6 +1,6 @@
-import { html } from './html';
+import { rot13, dateString } from '@toba/tools';
 import { config } from '../config';
-import { rot13 } from '@toba/tools';
+import { html } from './html';
 
 /**
  * Handlebars layouts.
@@ -44,7 +44,7 @@ export function addTemplateMethods(hbs: any) {
       formatTitle: html.typography,
       lowerCase: (text: string) => text.toLocaleLowerCase(),
       add: (a: number, b: number) => a * 1 + b,
-      date: util.date.toString,
+      date: dateString,
       subtract: (a: number, b: number) => a * 1 - b,
       plural: (count: number) => (count > 1 ? 's' : ''),
       makeTagList: html.photoTagList,

@@ -30,7 +30,7 @@ function about(_req: Request, res: Response) {
 function siteMap(_req: Request, res: Response) {
    view.send(res, Page.Sitemap, {
       mimeType: MimeType.XML,
-      callback: render => {
+      prepareContext: render => {
          render(Page.Sitemap, {
             posts: blog.posts,
             categories: blog.categoryKeys(),

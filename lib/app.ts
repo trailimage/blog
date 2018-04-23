@@ -9,7 +9,7 @@ import { mapProvider, mapConfigure } from '@trailimage/google-provider';
 import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from './config';
 import { Layout, addTemplateMethods } from './views/';
-import route from './routes';
+import { route } from './routes';
 
 const root = path.join(__dirname, '..');
 
@@ -17,8 +17,8 @@ configureModels();
 createWebService();
 
 function configureModels() {
-   postConfigure(config.flickr);
-   mapConfigure(config.google);
+   postConfigure(config.providers.post);
+   mapConfigure(config.providers.map);
 
    modelConfig.owner = config.owner;
    modelConfig.subtitleSeparator = config.library.subtitleSeparator;

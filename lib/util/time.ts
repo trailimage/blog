@@ -1,5 +1,5 @@
-import config from '../config';
-import { weekday, leadingZeros, format } from '@toba/tools';
+import { format, inDaylightSavings, leadingZeros, weekday } from '@toba/tools';
+import { config } from '../config';
 
 /**
  * Return AM or PM
@@ -29,7 +29,7 @@ export function toLogTime(text: string): string {
 }
 
 export const timeZoneOffset = (date = new Date()) =>
-   config.timeZone + (inDaylightSavings(date) ? 1 : 0);
+   config.providers.post.timeZoneOffset + (inDaylightSavings(date) ? 1 : 0);
 
 /**
  * Convert decimal hours to hours:minutes

@@ -1,4 +1,3 @@
-import { serialize } from '@toba/json-ld';
 import { is, merge, sayNumber } from '@toba/tools';
 import { Category, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
@@ -9,14 +8,14 @@ import { Renderer, view } from '../views/view';
 
 function viewIt(req: Request, res: Response, path: string, homePage = false) {
    view.send(res, path, {
-      callback: render => {
+      prepareContext: render => {
          // use renderer to build view that wasn't cached
          const category = blog.categoryWithKey(path);
 
          if (is.value(category)) {
             category.ensureLoaded().then(() => {
                const linkData = category.linkDataString(path, homePage);
-               const count = category.posts.length;
+               const count = category.posts.size;
                const options = { posts: category.posts };
                const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
 
@@ -78,40 +77,40 @@ export function home(req: Request, res: Response) {
 export function list(req: Request, res: Response) {
    const key = req.params[RouteParam.RootCategory] as string;
 
-   if (is.value(key)) {
-      view.send(res, key, {
-         callback: render => {
-            // use renderer to build view that wasn't cached
-            const category = blog.categoryWithKey(key);
-
-            if (is.value(category)) {
-               const linkData = category.linkDataString();
-               const count = category.subcategories.size;
-               const context = { subcategories: category.subcategories };
-               const subtitle = 'Subcategories';
-
-               renderCategory(
-                  render,
-                  Page.CategoryList,
-                  category,
-                  linkData,
-                  context,
-                  count,
-                  subtitle
-               );
-            } else {
-               view.notFound(req, res);
-            }
-         }
-      });
-   } else {
-      view.notFound(req, res);
+   if (is.empty(key)) {
+      return view.notFound(req, res);
    }
+
+   view.send(res, key, {
+      prepareContext: render => {
+         // use renderer to build view that wasn't cached
+         const category = blog.categoryWithKey(key);
+
+         if (is.value(category)) {
+            const linkData = category.linkDataString();
+            const count = category.subcategories.size;
+            const context = { subcategories: category.subcategories };
+            const subtitle = 'Subcategories';
+
+            renderCategory(
+               render,
+               Page.CategoryList,
+               category,
+               linkData,
+               context,
+               count,
+               subtitle
+            );
+         } else {
+            view.notFound(req, res);
+         }
+      }
+   });
 }
 
 export function menu(_req: Request, res: Response) {
    view.send(res, Page.CategoryMenu, {
-      callback: render => {
+      prepareContext: render => {
          render(Page.CategoryMenu, { blog, layout: Layout.None });
       }
    });
@@ -124,7 +123,7 @@ function renderCategory(
    render: Renderer,
    template: string,
    category: Category,
-   linkData: any,
+   jsonLD: string,
    context: { [key: string]: any },
    childCount: number,
    subtitle: string
@@ -133,7 +132,7 @@ function renderCategory(
       template,
       merge(context, {
          title: category.title,
-         jsonLD: serialize(linkData),
+         jsonLD,
          headerCSS: config.style.css.categoryHeader,
          subtitle: `${sayNumber(childCount)} ${subtitle}`
       })

@@ -123,8 +123,6 @@ function standard(app: Express.Application) {
 
    app.use(`/${rootCategory}`, categoryRoutes());
 
-   // old blog links with format /YYYY/MM/slug
-   //app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.date);
    app.use('/photo-tag', photoTagRoutes());
    app.get(`/${photoID}`, post.withPhoto);
    app.get(`/${postID}`, post.withID);
@@ -145,7 +143,7 @@ function authentication(app: Express.Application) {
    app.get('*', auth.view);
 }
 
-export default {
+export const route = {
    standard,
    authentication
 };

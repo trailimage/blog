@@ -14,7 +14,7 @@ beforeEach(() => {
    req.reset();
 });
 
-it('loads all photo tags', done => {
+test('loads all photo tags', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.PhotoTag);
       expect(options).toHaveProperty('alphabet', alphabet);
@@ -25,7 +25,7 @@ it('loads all photo tags', done => {
    photo.tags(req, res);
 });
 
-it('shows all photos with tag', done => {
+test('shows all photos with tag', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.PhotoSearch);
       expect(options).toHaveProperty('photos');
@@ -37,7 +37,7 @@ it('shows all photos with tag', done => {
    photo.withTag(req, res);
 });
 
-it('loads EXIF', done => {
+test('loads EXIF', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.EXIF);
       expect(options).toHaveProperty('EXIF');

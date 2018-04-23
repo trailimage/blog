@@ -1,5 +1,6 @@
 import { alphabet, is, sayNumber } from '@toba/tools';
 import { blog } from '@trailimage/models';
+import { log } from '@toba/logger';
 import { Request, Response } from 'express';
 import { config } from '../config';
 import { RouteParam } from '../routes';
@@ -9,15 +10,19 @@ import { Layout, Page, view } from '../views/';
  * Render HTML table of EXIF values for given photo.
  */
 function exif(req: Request, res: Response) {
+   const photoID = req.params[RouteParam.PhotoID];
    blog
-      .getEXIF(req.params[RouteParam.PhotoID])
+      .getEXIF(photoID)
       .then(exif => {
          res.render(Page.EXIF, {
             EXIF: exif,
             layout: Layout.None
          });
       })
-      .catch(() => view.notFound(req, res));
+      .catch(err => {
+         log.error(err, { photoID });
+         view.notFound(req, res);
+      });
 }
 
 /**
@@ -47,7 +52,10 @@ function withTag(req: Request, res: Response) {
             });
          }
       })
-      .catch(() => view.notFound(req, res));
+      .catch(err => {
+         view.notFound(req, res);
+         log.error(err, { photoTag: slug });
+      });
 }
 
 function tags(req: Request, res: Response) {

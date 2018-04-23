@@ -1,6 +1,6 @@
-import { MapSource } from './types/';
+import { MapSource } from '@toba/map';
 
-export default {
+export const mapSource: { [key: string]: MapSource } = {
    mines: {
       name: '',
       provider: 'Idaho Geological Survey',
@@ -84,4 +84,4 @@ export default {
       url:
          'https://drive.google.com/uc?export=download&id=0B0lgcM9JCuSbbDV2UUNILWpUc28'
    }
-} as { [key: string]: MapSource };
+};

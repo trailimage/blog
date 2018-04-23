@@ -30,7 +30,7 @@ export function data(_req: Request, res: Response) {
    res.setHeader('Vary', 'Accept-Encoding');
    view.send(res, slug, {
       mimeType: MimeType.JSONP,
-      callback: render => {
+      prepareContext: render => {
          render(slug, { blog, layout: Layout.None }, postProcess);
       }
    });
@@ -39,7 +39,7 @@ export function data(_req: Request, res: Response) {
 export function mobile(_req: Request, res: Response) {
    const slug = Page.MobileMenuData;
    view.send(res, slug, {
-      callback: render => {
+      prepareContext: render => {
          render(slug, { blog, layout: Layout.None });
       }
    });

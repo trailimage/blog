@@ -1,5 +1,5 @@
 import { log } from '@toba/logger';
-import { geoJSON, kml } from '@toba/map';
+import { geoJSON, kml, MapSource } from '@toba/map';
 import { Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
