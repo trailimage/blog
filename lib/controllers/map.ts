@@ -84,15 +84,23 @@ function photoJSON(req: Request, res: Response) {
  * Compressed GeoJSON of track for post.
  */
 function trackJSON(req: Request, res: Response) {
-   factory.map
-      .track(req.params[RouteParam.PostKey])
-      .then(item => {
-         view.sendCompressed(res, MimeType.JSON, item);
-      })
-      .catch(err => {
-         log.error(err);
-         view.notFound(req, res);
-      });
+   const post = blog.postWithKey(req.params[RouteParam.PostKey]);
+
+   if (is.value(post)) {
+      view.sendCompressed(res, MimeType.JSON, item);
+   } else {
+      view.notFound(req, res);
+   }
+
+   // factory.map
+   //    .track(req.params[RouteParam.PostKey])
+   //    .then(item => {
+   //       view.sendCompressed(res, MimeType.JSON, item);
+   //    })
+   //    .catch(err => {
+   //       log.error(err);
+   //       view.notFound(req, res);
+   //    });
 }
 
 /**
