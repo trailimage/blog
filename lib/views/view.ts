@@ -61,7 +61,7 @@ const defaultRenderOptions: RenderOptions = {
 /**
  * Create view cache item with eTag and compressed content.
  */
-const createViewItem = (
+export const createViewItem = (
    key: string,
    htmlOrJSON: string | GeoJSON.FeatureCollection<any>
 ) =>
@@ -267,7 +267,7 @@ function renderTemplate(res: Response, slug: string, type: MimeType): Renderer {
             if (is.callable(postProcess)) {
                text = postProcess(text);
             }
-            if (is.value(text)) {
+            if (is.value<string>(text)) {
                cacheAndSend(res, text, slug, type);
             } else {
                log.error(`renderTemplate(${slug}) returned no content`, {

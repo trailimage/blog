@@ -1,33 +1,29 @@
-import { config } from '../config';
-import { cache } from './view';
+import '@toba/test';
+import { Header, MimeType } from '@toba/tools';
+import { MockRequest, MockResponse } from '@toba/test';
+import { cache, view, createViewItem } from './view';
 
+const req = new MockRequest();
+const res = new MockResponse(req);
 const viewSlug = 'test-slug';
 const pageContent = '<html><head></head><body>Test Page</body></html>';
-let cacheViews = false;
 
-beforeAll(() => {
-   cacheViews = config.cache.views;
-   config.cache.views = true;
+beforeEach(() => {
+   res.reset();
+   req.reset();
 });
 
-// remove test page from cache
-afterEach(() => {
-   cache.remove(viewSlug);
-   config.cache.views = cacheViews;
-});
-
-test('Compresses new pages and adds to cache', done => {
+test('compresses new pages and adds to cache', done => {
    res.onEnd = () => {
-      cache.view.getItem(viewSlug).then(item => {
-         expect(item).to.exist;
-         expect(item.eTag).to.contain(viewSlug);
-         expect(item.buffer).to.be.instanceOf(Buffer);
-         done();
-      });
+      const item = cache.get(viewSlug);
+      expect(item).toBeDefined();
+      expect(item.eTag).toHaveProperty(viewSlug);
+      expect(item.buffer).toBeInstanceOf(Buffer);
+      done();
    };
    res.endOnRender = false;
-   res.sendView(viewSlug, {
-      callback: render => {
+   view.send(res, viewSlug, {
+      ifNotCached: render => {
          // mock response echoes back parameters instead of rendering view
          render('test-template', {
             option1: 'value1',
@@ -39,20 +35,18 @@ test('Compresses new pages and adds to cache', done => {
 
 test('sends already rendered pages from cache', done => {
    res.onEnd = done;
-   res.sendView(viewSlug, {
-      callback: () => {
+   view.send(res, viewSlug, {
+      ifNotCached: () => {
          throw new Error('Attempt to render page that should be cached');
       }
    });
 });
 
-test('adds caching headers to compressed content', () =>
-   cache.view.create(viewSlug, pageContent).then(item => {
-      res.sendCompressed(C.mimeType.HTML, item);
+test('adds caching headers to compressed content', async () => {
+   const item = await createViewItem(viewSlug, pageContent);
+   //cache.add(slug, item);
+   view.sendCompressed(res, MimeType.HTML, item);
 
-      expect(res.headers[C.header.CACHE_CONTROL]).equals(
-         'max-age=86400, public'
-      );
-      expect(res.headers[C.header.E_TAG]).to.contain(viewSlug);
-      //expect(res.content).equals(pageContent);
-   }));
+   expect(res.headers[Header.CacheControl]).toBe('max-age=86400, public');
+   expect(res.headers[Header.eTag]).toHaveProperty(viewSlug);
+});

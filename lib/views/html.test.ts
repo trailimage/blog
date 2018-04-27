@@ -2,12 +2,11 @@ import { lipsum } from '@toba/test';
 import { html } from './html';
 import { config } from '../config';
 
+/** New-line */
 const nl = '\r\n';
-// double-space
+/** Double-space */
 const ds = nl + nl;
 const u: string = undefined;
-
-//it.skip('formats timestamp according to ISO 8601', () => {});
 
 test('formats fractions', () => {
    expect(html.fraction('1/2')).toBe('<sup>1</sup>&frasl;<sub>2</sub>');
@@ -122,20 +121,6 @@ test('shortens link text to domain and URL decoded page', () => {
    expect(html.shortenLinkText(source)).toBe(target);
 });
 
-// https://www.base64encode.org/
-test('base 64 encodes text', () => {
-   expect(
-      util.encode.toBase64('Neque porro quisquam est qui dolorem ipsum')
-   ).toBe('TmVxdWUgcG9ycm8gcXVpc3F1YW0gZXN0IHF1aSBkb2xvcmVtIGlwc3Vt');
-});
-test('base 64 decodes text', () => {
-   expect(
-      util.encode.fromBase64(
-         'TmVxdWUgcG9ycm8gcXVpc3F1YW0gZXN0IHF1aSBkb2xvcmVtIGlwc3Vt'
-      )
-   ).toBe('Neque porro quisquam est qui dolorem ipsum');
-});
-
 //it.skip('obfuscates characters as HTML entities', () => false);
 
 test('creates material icon tags', () => {
@@ -164,23 +149,11 @@ test('matches post categories to material icons', () => {
    expect(html.icon.category('Nothing')).not.toBeDefined();
 });
 
-test('truncates IPv6 to v4', () => {
-   expect(util.IPv6('::1')).toBe('127.0.0.1');
-   expect(util.IPv6('192.12.15.3')).toBe('192.12.15.3');
-   expect(util.IPv6('::abf2:192.12.15.3')).toBe('192.12.15.3');
-});
-
-test('extracts top domain from URL', () => {
-   expect(util.topDomain('http://www.microsoft.com')).toBe('microsoft.com');
-   expect(
-      util.topDomain(
-         'https://github.com/bjoshuanoah/express-spam-referral-blocker'
-      )
-   ).toBe('github.com');
-   expect(util.topDomain('342342342.copyrightclaims.org')).toBe(
-      'copyrightclaims.org'
-   );
-});
+// test('truncates IPv6 to v4', () => {
+//    expect(util.IPv6('::1')).toBe('127.0.0.1');
+//    expect(util.IPv6('192.12.15.3')).toBe('192.12.15.3');
+//    expect(util.IPv6('::abf2:192.12.15.3')).toBe('192.12.15.3');
+// });
 
 test('identifies quote at end of text', () => {
    const source = lipsum + ds + '“' + lipsum + '”';
