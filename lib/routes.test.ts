@@ -1,5 +1,5 @@
 import '@toba/test';
-import config from './config';
+import { config } from './config/';
 import route from './routes';
 
 const app = require('./mocks/express.mock');

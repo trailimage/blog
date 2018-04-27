@@ -14,7 +14,7 @@ test('matches quote characters', () => {
 
 test('matches quote block', () => {
    let quote = '“' + lipsum + nl + '“' + lipsum + '”' + nl;
-   expect(re.quote.block.test(quote)).toBe(false);
+   expect(re.quote.block.test(quote)).toBe(true);
 
    // but not if quote block is interrupted
    quote = '“' + lipsum + ',” he said, “' + lipsum + nl;
