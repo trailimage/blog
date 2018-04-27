@@ -9,9 +9,10 @@ import { domain } from './models';
 export const mapProvider: GoogleConfig = {
    apiKey: env('GOOGLE_DRIVE_KEY'),
    folderID: '0B0lgcM9JCuSbMWluNjE4LVJtZWM',
-   cacheSize: 2048,
-   useCache: true,
+   cacheSize: 0,
+   useCache: false,
    auth: {
+      apiKey: '',
       clientID: env('GOOGLE_CLIENT_ID'),
       secret: env('GOOGLE_SECRET'),
       callback: 'http://www.' + domain + '/auth/google',
@@ -19,7 +20,7 @@ export const mapProvider: GoogleConfig = {
          type: null,
          access: env('GOOGLE_ACCESS_TOKEN', null),
          accessExpiration: null as Date,
-         refresh: env('GOOGLE_REFRESH_TOKEN', null)
+         refresh: env('GOOGLE_REFRESH_TOKEN')
       } as Token
    }
 };

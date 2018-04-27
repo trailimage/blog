@@ -3,7 +3,7 @@ import { mapProvider } from './map-provider';
 import { postProvider } from './post-provider';
 import { owner, site, domain } from './models';
 import { redirects, photoTagChanges } from './redirects';
-import { bing, facebook, mapbox } from './vendors';
+import { bing, facebook, mapbox, google } from './vendors';
 import { keywords, style } from './views';
 import { mapSource } from './mapsource';
 

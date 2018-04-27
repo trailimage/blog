@@ -1,12 +1,13 @@
 import { lipsum } from '@toba/test';
 import { html } from './html';
-import { config } from '../config';
+import { config } from '../config/';
 
 /** New-line */
 const nl = '\r\n';
 /** Double-space */
 const ds = nl + nl;
 const u: string = undefined;
+const empty = '';
 
 test('formats fractions', () => {
    expect(html.fraction('1/2')).toBe('<sup>1</sup>&frasl;<sub>2</sub>');
@@ -19,8 +20,8 @@ test('creates HTML for a photo tag list', () => {
 });
 
 test('substitutes nicer typography', () => {
-   expect(html.typography(u)).not.toBeDefined();
-   expect(html.typography('')).not.toBeDefined();
+   expect(html.typography(u)).toBe(empty);
+   expect(html.typography(empty)).toBe(empty);
    expect(html.typography('"He said," she said')).toBe(
       '&ldquo;He said,&rdquo; she said'
    );
@@ -142,11 +143,11 @@ test('matches post categories to material icons', () => {
 
    // blank if no default
    delete config.style.icon.category['default'];
-   expect(html.icon.category('Nothing')).not.toBeDefined();
+   expect(html.icon.category('Nothing')).toBe(empty);
 
    // blank if no icons defined
    delete config.style.icon.category;
-   expect(html.icon.category('Nothing')).not.toBeDefined();
+   expect(html.icon.category('Nothing')).toBe(empty);
 });
 
 // test('truncates IPv6 to v4', () => {

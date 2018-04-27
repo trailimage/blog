@@ -1,6 +1,6 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import config from '../config';
+import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { post } from './';
@@ -13,6 +13,7 @@ beforeEach(() => {
    res.reset();
    req.reset();
 });
+
 test('shows latest', () => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.Post);

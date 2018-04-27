@@ -39,7 +39,8 @@ async function createWebService() {
 
    defineViews(app);
 
-   if (config.needsAuth) {
+   if (false) {
+      //config.needsAuth) {
       // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
