@@ -165,7 +165,7 @@ function send(
 /**
  * Send view item buffer as compressed response body.
  */
-function sendItem(res: Response, item: ViewItem, cache = true) {
+export function sendItem(res: Response, item: ViewItem, cache = true) {
    res.setHeader(Header.Content.Encoding, Encoding.GZip);
 
    if (cache) {
