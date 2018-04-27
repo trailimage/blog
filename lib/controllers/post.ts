@@ -11,7 +11,7 @@ function send(
    pageTemplate: string = Page.Post
 ) {
    view.send(res, key, {
-      prepareContext: render => {
+      ifNotCached: render => {
          const p = blog.postWithKey(key);
          if (!is.value(p)) {
             view.notFound(req, res);

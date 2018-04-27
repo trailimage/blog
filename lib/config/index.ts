@@ -5,6 +5,7 @@ import { owner, site, domain } from './models';
 import { redirects, photoTagChanges } from './redirects';
 import { bing, facebook, mapbox } from './vendors';
 import { keywords, style } from './views';
+import { mapSource } from './mapsource';
 
 const isProduction = process.env['NODE_ENV'] === 'production';
 
@@ -43,7 +44,8 @@ export const map = {
          'https://earth.google.com/web/@{lat},{lon},1100a,{altitude}d,35y,0h,0t,0r',
       gaiaGPS:
          'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
-   }
+   },
+   source: mapSource
 };
 
 export const config = {

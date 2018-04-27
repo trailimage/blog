@@ -37,7 +37,7 @@ export interface RenderOptions {
    /**
     * Build dynamic context to pass the template renderer.
     */
-   prepareContext?: (renderer: Renderer) => void;
+   ifNotCached?: (renderer: Renderer) => void;
 }
 
 /**
@@ -228,9 +228,9 @@ function renderForType(res: Response, slug: string, options: RenderOptions) {
          slug,
          options.mimeType
       );
-   } else if (is.callable(options.prepareContext)) {
+   } else if (is.callable(options.ifNotCached)) {
       // pass view renderer back to generator function to execute
-      options.prepareContext(renderTemplate(res, slug, options.mimeType));
+      options.ifNotCached(renderTemplate(res, slug, options.mimeType));
    } else {
       // invoke renderer directly assuming view name identical to slug
       const render = renderTemplate(res, slug, options.mimeType);

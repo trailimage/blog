@@ -10,16 +10,15 @@ import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 
 /**
- * Map screen loads then makes AJAX call to fetch data.
+ * Render map screen. Map data is loaded asynchronously when the page is ready.
  */
-async function render(post: Post, req: Request, res: Response) {
+async function render(post: Post, req: Request, res: Response): Promise<void> {
    if (!is.value(post)) {
-      view.notFound(req, res);
-      return;
+      return view.notFound(req, res);
    }
 
-   const key = post.isPartial ? post.seriesKey : post.key;
-   const photoID = req.params[RouteParam.PhotoID];
+   const key: string = post.isPartial ? post.seriesKey : post.key;
+   const photoID: string = req.params[RouteParam.PhotoID];
    // ensure photos are loaded to calculate bounds for map zoom
    await post.getPhotos();
 
@@ -34,10 +33,16 @@ async function render(post: Post, req: Request, res: Response) {
    });
 }
 
+/**
+ * Render map for a single post.
+ */
 function post(req: Request, res: Response) {
    render(blog.postWithKey(req.params[RouteParam.PostKey]), req, res);
 }
 
+/**
+ * Render map for posts in a series.
+ */
 function series(req: Request, res: Response) {
    render(
       blog.postWithKey(
@@ -50,7 +55,7 @@ function series(req: Request, res: Response) {
 }
 
 /**
- * https://www.mapbox.com/mapbox-gl-js/example/cluster/
+ * @see https://www.mapbox.com/mapbox-gl-js/example/cluster/
  */
 function blogJSON(_req: Request, res: Response) {
    res.render(Page.Mapbox, {
@@ -64,7 +69,7 @@ function blogJSON(_req: Request, res: Response) {
  * Compressed GeoJSON of all site photos.
  */
 function photoJSON(req: Request, res: Response) {
-   blog.map
+   factory.map
       .photos()
       .then(item => {
          view.sendCompressed(res, MimeType.JSON, item);
@@ -91,7 +96,7 @@ function trackJSON(req: Request, res: Response) {
 }
 
 /**
- * Retrieve and parse a map source
+ * Retrieve, parse and display a map source.
  */
 async function source(req: Request, res: Response) {
    const key: string = req.params[RouteParam.MapSource];
@@ -113,42 +118,36 @@ async function source(req: Request, res: Response) {
       headers: { [Header.UserAgent]: 'node.js' }
    });
 
-      if (reply.status == HttpStatus.OK) {
-         parser(reply)
-            .then(JSON.stringify)
-            .then(geoText => {
-               compress.gzip(
-                  Buffer.from(geoText),
-                  (err: Error, buffer: Buffer) => {
-                     if (is.value(err)) {
-                        view.internalError(res, err);
-                     } else {
-                        res.setHeader(Header.Content.Encoding, Encoding.GZip);
-                        res.setHeader(
-                           Header.CacheControl,
-                           'max-age=86400, public'
-                        ); // seconds
-                        res.setHeader(
-                           Header.Content.Type,
-                           MimeType.JSON + ';charset=utf-8'
-                        );
-                        res.setHeader(
-                           Header.Content.Disposition,
-                           `attachment; filename=${key}`
-                        );
-                        res.write(buffer);
-                        res.end();
-                     }
-                  }
-               );
-            })
-            .catch((err: Error) => {
+   if (reply.status !== HttpStatus.OK) {
+      res.end(reply.status);
+      return;
+   }
+
+   parser(reply)
+      .then(JSON.stringify)
+      .then(geoText => {
+         compress.gzip(Buffer.from(geoText), (err: Error, buffer: Buffer) => {
+            if (is.value(err)) {
                view.internalError(res, err);
-            });
-      } else {
-         res.end(reply.status);
-      }
-   })
+            } else {
+               res.setHeader(Header.Content.Encoding, Encoding.GZip);
+               res.setHeader(Header.CacheControl, 'max-age=86400, public'); // seconds
+               res.setHeader(
+                  Header.Content.Type,
+                  MimeType.JSON + ';charset=utf-8'
+               );
+               res.setHeader(
+                  Header.Content.Disposition,
+                  `attachment; filename=${key}`
+               );
+               res.write(buffer);
+               res.end();
+            }
+         });
+      })
+      .catch((err: Error) => {
+         view.internalError(res, err);
+      });
 }
 
 /**
@@ -170,6 +169,7 @@ function gpx(req: Request, res: Response) {
       : null;
 
    if (is.value(post)) {
+      //post.
       google.drive
          .loadGPX(post, res)
          .then(() => {

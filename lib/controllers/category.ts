@@ -8,7 +8,7 @@ import { Renderer, view } from '../views/view';
 
 function viewIt(req: Request, res: Response, path: string, homePage = false) {
    view.send(res, path, {
-      prepareContext: render => {
+      ifNotCached: render => {
          // use renderer to build view that wasn't cached
          const category = blog.categoryWithKey(path);
 
@@ -82,7 +82,7 @@ export function list(req: Request, res: Response) {
    }
 
    view.send(res, key, {
-      prepareContext: render => {
+      ifNotCached: render => {
          // use renderer to build view that wasn't cached
          const category = blog.categoryWithKey(key);
 
@@ -110,7 +110,7 @@ export function list(req: Request, res: Response) {
 
 export function menu(_req: Request, res: Response) {
    view.send(res, Page.CategoryMenu, {
-      prepareContext: render => {
+      ifNotCached: render => {
          render(Page.CategoryMenu, { blog, layout: Layout.None });
       }
    });

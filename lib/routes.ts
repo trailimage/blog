@@ -18,12 +18,26 @@ import {
 export enum RouteParam {
    Category = 'category',
    Month = 'month',
+   /**
+    * Unique portion of the key for posts in a series. For example, in
+    * `brother-ride/day-10` the `PartKey` is `day-10`.
+    */
    PartKey = 'partKey',
    PhotoID = 'photoID',
    PhotoTag = 'tagSlug',
    PostID = 'postID',
+   /**
+    * Unique identifier for a post, also used as its URL slug. If the post is
+    * part of a series then this is the combined key.
+    *
+    * @example brother-ride/day-10
+    */
    PostKey = 'postKey',
    RootCategory = 'rootCategory',
+   /**
+    * Common portion of the key for posts in a series. For example, in
+    * `brother-ride/day-10` the `SeriesKey` is `brother-ride`.
+    */
    SeriesKey = 'seriesKey',
    MapSource = 'mapSource',
    Year = 'year'
