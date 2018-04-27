@@ -358,6 +358,8 @@ export const html = {
    formatPoem,
    formatHaiku,
    photoTagList,
+   fixMalformedLink,
+   shortenLinkText,
    fraction,
    icon: {
       category: postCategoryIcon,

@@ -2,9 +2,6 @@
    "extends": "./tsconfig.json",
    "compilerOptions": {
       "outDir": "./public",
-      //"moduleResolution": "node",
-      //"isolatedModules": true,
-      //"types": [],
       "lib": ["es2017"]
    },
    "exclude": ["./lib/types", "./lib/client", "node_modules"],

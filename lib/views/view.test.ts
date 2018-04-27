@@ -1,4 +1,5 @@
 import { config } from '../config';
+import { cache } from './view';
 
 const viewSlug = 'test-slug';
 const pageContent = '<html><head></head><body>Test Page</body></html>';
@@ -9,20 +10,13 @@ beforeAll(() => {
    config.cache.views = true;
 });
 
-// remove any left-over test data and add caching expando methods
-afterAll(() => {
-   cache.view.remove(viewSlug).then(() => {
-      middleware.enableViewCache(req, res, done);
-   });
-});
-
 // remove test page from cache
-after(() => {
-   cache.view.remove(viewSlug);
+afterEach(() => {
+   cache.remove(viewSlug);
    config.cache.views = cacheViews;
 });
 
-test('compresses new pages and adds to cache', done => {
+test('Compresses new pages and adds to cache', done => {
    res.onEnd = () => {
       cache.view.getItem(viewSlug).then(item => {
          expect(item).to.exist;

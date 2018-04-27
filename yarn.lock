@@ -190,8 +190,8 @@
     googleapis "^28.0.0"
 
 "@toba/json-ld@^1.1.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.1.1.tgz#12a494b879c588f9a98f7eb504459af062fc42ec"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.1.2.tgz#c149c825fc3d5f0ad66b36b972d5bf74444e06d0"
 
 "@toba/logger@^1.0.0", "@toba/logger@^1.0.3", "@toba/logger@^1.0.4":
   version "1.0.4"
@@ -202,9 +202,9 @@
     flat "^4.0.0"
     logfmt "^1.2.0"
 
-"@toba/map@^1.0.2", "@toba/map@^1.0.4":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.1.1.tgz#f3589753d1ad13aba89a891f044e1d2e7b3ed1f0"
+"@toba/map@^1.0.2", "@toba/map@^1.2.0":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.2.1.tgz#71e2aef27d9e6216a937a8e9cdfefd9c0c2de46a"
   dependencies:
     "@toba/tools" "^2.0.0"
     "@types/geojson" "^7946.0.2"
@@ -212,8 +212,8 @@
     xmldom "^0.1.27"
 
 "@toba/oauth@^1.2.0":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@toba/oauth/-/oauth-1.2.1.tgz#83b3991dc52d1fc0a045e567fc877ddfd7959c91"
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@toba/oauth/-/oauth-1.2.2.tgz#e8955a32bcbe0c96a1a288f0ae97f2348541611e"
   dependencies:
     oauth "^0.9.15"
 
@@ -236,8 +236,8 @@
     zlib "^1.0.5"
 
 "@toba/tools@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-2.0.1.tgz#c5b3b7330588e1d4338f436ff8c81038801f21ef"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-2.1.0.tgz#c90bbb00e6be7281dbdb2b2fa882d70fbf1a4787"
   dependencies:
     zlib "^1.0.5"
 
@@ -252,22 +252,22 @@
     "@trailimage/models" "^1.0.0"
 
 "@trailimage/google-provider@^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@trailimage/google-provider/-/google-provider-2.0.2.tgz#d7e847619ca111faa68627927a48fd488c607f52"
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@trailimage/google-provider/-/google-provider-2.0.3.tgz#511d9429273dd0af7af54c3f9aef276148f3d980"
   dependencies:
     "@toba/google-drive" "^1.2.0"
     "@toba/map" "^1.0.2"
     "@toba/tools" "^2.0.0"
-    "@trailimage/models" "^1.0.0"
+    "@trailimage/models" "^1.1.0"
     geojson "^0.5.0"
 
-"@trailimage/models@^1.0.0":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.0.7.tgz#13390a3cfba0c585a141cd556fb23b595b8f6249"
+"@trailimage/models@^1.0.0", "@trailimage/models@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.1.0.tgz#b29ed446fde5c619d914ab33fad3002422af9784"
   dependencies:
     "@toba/feed" "^1.0.1"
     "@toba/json-ld" "^1.1.0"
-    "@toba/map" "^1.0.4"
+    "@toba/map" "^1.2.0"
     "@toba/tools" "^2.0.0"
 
 "@types/body-parser@*":
@@ -786,8 +786,8 @@ babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     js-tokens "^3.0.2"
 
 babel-core@^6.0.0, babel-core@^6.26.0:
-  version "6.26.2"
-  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.2.tgz#b67a120521dcd6baf1a2ecceeceb595e223da06c"
+  version "6.26.3"
+  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.3.tgz#b2e2f09e342d0f0c88e2f02e067794125e75c207"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-generator "^6.26.0"
@@ -1440,8 +1440,8 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
 concat-with-sourcemaps@^1.0.0:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.0.5.tgz#8964bc2347d05819b63798104d87d6e001bed8d0"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.0.6.tgz#83a68dbc1f86858effb1249218a4042f303347f2"
   dependencies:
     source-map "^0.6.1"
 
@@ -2622,8 +2622,8 @@ global-prefix@^1.0.1:
     which "^1.2.14"
 
 globals@^11.1.0:
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-11.4.0.tgz#b85c793349561c16076a3c13549238a27945f1bc"
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-11.5.0.tgz#6bc840de6771173b191f13d3a9c94d441ee92642"
 
 globals@^9.18.0:
   version "9.18.0"

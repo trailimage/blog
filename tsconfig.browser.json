@@ -4,16 +4,11 @@
       "target": "es5",
       "module": "none",
       "outDir": "./dist/js",
-      "baseUrl": "./src/client",
+      "baseUrl": "./lib/client",
       "noEmitOnError": true,
       "alwaysStrict": true,
-      "lib": ["es6","dom"]
+      "lib": ["es2017", "dom"]
    },
-   "include": [
-      "./src/client/*.ts"
-   ],
-   "exclude": [
-      "./src/types/",
-      "node_modules"
-   ]
+   "include": ["./lib/client/*.ts"],
+   "exclude": ["./lib/types/", "node_modules"]
 }

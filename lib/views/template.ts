@@ -7,6 +7,7 @@ import { html } from './html';
  */
 export const Layout: { [index: string]: string } = {
    Main: 'layouts/default-layout',
+   /** Render template without a layout. */
    None: null
 };
 

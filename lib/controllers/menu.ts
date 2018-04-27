@@ -1,5 +1,5 @@
 import { log } from '@toba/logger';
-import { MimeType } from '@toba/tools';
+import { MimeType, Header } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
@@ -27,7 +27,8 @@ export function data(_req: Request, res: Response) {
            }
          : null;
 
-   res.setHeader('Vary', 'Accept-Encoding');
+   // vary caching depending on the accepted encoding
+   res.setHeader(Header.Vary, Header.Accept.Encoding);
    view.send(res, slug, {
       mimeType: MimeType.JSONP,
       ifNotCached: render => {

@@ -59,7 +59,6 @@ async function createWebService() {
 }
 
 // https://github.com/donpark/hbs/blob/master/examples/extend/app.js
-// https://npmjs.org/package/express-hbs
 // http://mustache.github.com/mustache.5.html
 function defineViews(app: Express.Application) {
    const engine = 'hbs';

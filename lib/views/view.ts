@@ -14,7 +14,10 @@ import * as compress from 'zlib';
 import { config } from '../config';
 import { Page } from './template';
 
-const cache = new Cache<ViewItem>();
+/**
+ * Rendered page cache.
+ */
+export const cache = new Cache<ViewItem>();
 
 export interface ViewItem {
    eTag: string;
