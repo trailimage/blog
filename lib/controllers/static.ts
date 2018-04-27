@@ -28,17 +28,14 @@ function about(_req: Request, res: Response) {
 }
 
 function siteMap(_req: Request, res: Response) {
-   view.send(res, Page.Sitemap, {
-      mimeType: MimeType.XML,
-      ifNotCached: render => {
+   view.send(res, Page.Sitemap, render => {
          render(Page.Sitemap, {
             posts: blog.posts,
             categories: blog.categoryKeys(),
             tags: blog.tags,
             layout: null
-         });
-      }
-   });
+         }, MimeType.XML)
+   };
 }
 
 function issues(_req: Request, res: Response) {

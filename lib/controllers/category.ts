@@ -4,34 +4,32 @@ import { Request, Response } from 'express';
 import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Layout, Page } from '../views/template';
-import { Renderer, view } from '../views/view';
+import { Renderer, view, ViewContext } from '../views/view';
 
 function viewIt(req: Request, res: Response, path: string, homePage = false) {
-   view.send(res, path, {
-      ifNotCached: render => {
-         // use renderer to build view that wasn't cached
-         const category = blog.categoryWithKey(path);
+   view.send(res, path, renderer => {
+      // use renderer to build view that wasn't cached
+      const category = blog.categoryWithKey(path);
 
-         if (is.value(category)) {
-            category.ensureLoaded().then(() => {
-               const linkData = category.linkDataString(path, homePage);
-               const count = category.posts.size;
-               const options = { posts: category.posts };
-               const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
+      if (is.value(category)) {
+         category.ensureLoaded().then(() => {
+            const linkData = category.linkDataString(path, homePage);
+            const count = category.posts.size;
+            const options = { posts: category.posts };
+            const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
 
-               renderCategory(
-                  render,
-                  Page.Category,
-                  category,
-                  linkData,
-                  options,
-                  count,
-                  subtitle
-               );
-            });
-         } else {
-            view.notFound(req, res);
-         }
+            renderCategory(
+               renderer,
+               Page.Category,
+               category,
+               linkData,
+               options,
+               count,
+               subtitle
+            );
+         });
+      } else {
+         view.notFound(req, res);
       }
    });
 }
@@ -81,38 +79,34 @@ export function list(req: Request, res: Response) {
       return view.notFound(req, res);
    }
 
-   view.send(res, key, {
-      ifNotCached: render => {
-         // use renderer to build view that wasn't cached
-         const category = blog.categoryWithKey(key);
+   view.send(res, key, renderer => {
+      // use renderer to build view that wasn't cached
+      const category = blog.categoryWithKey(key);
 
-         if (is.value(category)) {
-            const linkData = category.linkDataString();
-            const count = category.subcategories.size;
-            const context = { subcategories: category.subcategories };
-            const subtitle = 'Subcategories';
+      if (is.value(category)) {
+         const linkData = category.linkDataString();
+         const count = category.subcategories.size;
+         const context = { subcategories: category.subcategories };
+         const subtitle = 'Subcategories';
 
-            renderCategory(
-               render,
-               Page.CategoryList,
-               category,
-               linkData,
-               context,
-               count,
-               subtitle
-            );
-         } else {
-            view.notFound(req, res);
-         }
+         renderCategory(
+            renderer,
+            Page.CategoryList,
+            category,
+            linkData,
+            context,
+            count,
+            subtitle
+         );
+      } else {
+         view.notFound(req, res);
       }
    });
 }
 
 export function menu(_req: Request, res: Response) {
-   view.send(res, Page.CategoryMenu, {
-      ifNotCached: render => {
-         render(Page.CategoryMenu, { blog, layout: Layout.None });
-      }
+   view.send(res, Page.CategoryMenu, render => {
+      render(Page.CategoryMenu, { blog, layout: Layout.None });
    });
 }
 
@@ -124,7 +118,7 @@ function renderCategory(
    template: string,
    category: Category,
    jsonLD: string,
-   context: { [key: string]: any },
+   context: ViewContext,
    childCount: number,
    subtitle: string
 ) {

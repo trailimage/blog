@@ -1,18 +1,12 @@
-import {
-   Cache,
-   Encoding,
-   Header,
-   HttpStatus,
-   MimeType,
-   is,
-   merge
-} from '@toba/tools';
+import { Cache, Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
 import { log } from '@toba/logger';
 import { Request, Response } from 'express';
 // http://nodejs.org/api/zlib.html
 import * as compress from 'zlib';
 import { config } from '../config';
 import { Page } from './template';
+
+export type ViewContext = { [key: string]: any };
 
 /**
  * Rendered page cache.
@@ -22,25 +16,7 @@ export const cache = new Cache<ViewItem>();
 export interface ViewItem {
    eTag: string;
    buffer: Buffer;
-}
-
-export interface RenderOptions {
-   /**
-    * Defaults to HTML if not specified
-    */
-   mimeType?: MimeType;
-   /**
-    * Generate JSON response if not found in cache.
-    */
-   generateJSON?: () => string;
-   /**
-    * Key-values sent into the view tempate.
-    */
-   context?: { [key: string]: any };
-   /**
-    * Build dynamic context to pass the template renderer.
-    */
-   ifNotCached?: (renderer: Renderer) => void;
+   type: MimeType;
 }
 
 /**
@@ -49,27 +25,37 @@ export interface RenderOptions {
 export type Renderer = (
    viewName: string,
    /** Key-values sent into the view template. */
-   context: { [key: string]: any },
+   context: ViewContext,
+   type?: MimeType,
    /** Optional method to post-process rendered template. */
    postProcess?: (text: string) => string
 ) => void;
 
-const defaultRenderOptions: RenderOptions = {
-   mimeType: MimeType.HTML
-};
-
 /**
- * Create view cache item with eTag and compressed content.
+ * Create view item with eTag and compressed content for cache persistence.
+ *
+ * @param mimeType Optionally set an explicit content type otherwise it will
+ * be inferred
  */
 export const createViewItem = (
    key: string,
-   htmlOrJSON: string | GeoJSON.FeatureCollection<any>
+   htmlOrJSON: string | GeoJSON.FeatureCollection<any>,
+   type?: MimeType
 ) =>
    new Promise<ViewItem>((resolve, reject) => {
-      const text: string =
-         typeof htmlOrJSON == is.Type.Object
-            ? JSON.stringify(htmlOrJSON)
-            : (htmlOrJSON as string);
+      let text: string;
+      let inferredType: MimeType;
+
+      if (is.text(htmlOrJSON)) {
+         text = htmlOrJSON;
+         inferredType = MimeType.HTML;
+      } else {
+         text = JSON.stringify(htmlOrJSON);
+         inferredType = MimeType.JSON;
+      }
+      if (type === undefined) {
+         type = inferredType;
+      }
 
       compress.gzip(Buffer.from(text), (err: Error, buffer: Buffer) => {
          if (is.value(err)) {
@@ -78,7 +64,8 @@ export const createViewItem = (
          } else {
             resolve({
                buffer,
-               eTag: key + '_' + new Date().getTime().toString()
+               eTag: key + '_' + new Date().getTime().toString(),
+               type
             });
          }
       });
@@ -128,47 +115,57 @@ function internalError(res: Response, err?: Error): void {
 }
 
 /**
- * JSON helpers depend on Express .json() extension and standard response
- * structure.
- */
-// function jsonError(res: Response, message: string): void {
-//    res.json({ success: false, message } as JsonResponse);
-// }
-
-// function jsonMessage(res: Response, message: string) {
-//    res.json({
-//       success: true,
-//       message: is.value(message) ? message : ''
-//    } as JsonResponse);
-// }
-
-/**
  * Send generated JSON in HTTP response.
+ *
+ * @param fallback Method to generate JSON if not cached
  */
-function sendJson(res: Response, key: string, generateJSON: () => void) {
-   sendFromCacheOrRender(res, key, {
-      mimeType: MimeType.JSON,
-      generateJSON
-   } as RenderOptions);
-}
+// function json(res: Response, slug: string, fallback: () => any) {
+//    if (config.cache.views) {
+//       const item = cache.get(slug);
+
+//       if (item !== null) {
+//          // send cached item directly
+//          return sendItem(res, item);
+//       } else {
+//          log.info(`"${slug}" not cached`, { slug });
+//       }
+//    } else {
+//       log.warn(`Caching disabled for ${slug}`, { slug });
+//    }
+
+//    cacheAndSend(res, JSON.stringify(fallback()), slug, MimeType.JSON);
+// }
 
 /**
  * Send rendered view in HTTP response.
- * @param key Cache key
+ * @param slug Cache key and usually the view name as well
+ * @param fallback Method to create context and render view if not cached
  */
-function sendView(res: Response, key: string, options: RenderOptions) {
-   sendFromCacheOrRender(res, key, merge(defaultRenderOptions, options));
+function send(
+   res: Response,
+   slug: string,
+   fallback: (renderer: Renderer) => void
+) {
+   if (config.cache.views) {
+      const item = cache.get(slug);
+
+      if (item !== null) {
+         // send cached item directly
+         return sendItem(res, item);
+      } else {
+         log.info(`"${slug}" not cached`, { slug });
+      }
+   } else {
+      log.warn(`Caching disabled for ${slug}`, { slug });
+   }
+
+   fallback(makeRenderer(res, slug));
 }
 
 /**
  * Send view item buffer as compressed response body.
  */
-function sendCompressed(
-   res: Response,
-   mimeType: MimeType,
-   item: ViewItem,
-   cache = true
-) {
+function sendItem(res: Response, item: ViewItem, cache = true) {
    res.setHeader(Header.Content.Encoding, Encoding.GZip);
 
    if (cache) {
@@ -180,75 +177,20 @@ function sendCompressed(
       res.setHeader(Header.PRAGMA, 'no-cache');
    }
    res.setHeader(Header.eTag, item.eTag);
-   res.setHeader(Header.Content.Type, mimeType + ';charset=utf-8');
+   res.setHeader(Header.Content.Type, item.type + ';charset=utf-8');
    res.write(item.buffer);
    res.end();
-}
-
-/**
- * Send content if it's cached otherwise generate with callback supplied in
- * `RenderOptions`.
- */
-function sendFromCacheOrRender(
-   res: Response,
-   slug: string,
-   options: RenderOptions
-) {
-   // prepare fallback method to generate content depending on
-   // MIME type and whether given generator is a callable function
-   const generate = () => renderForType(res, slug, options);
-
-   if (config.cache.views) {
-      const item = cache.get(slug);
-
-      if (item !== null) {
-         // send cached item directly
-         sendCompressed(res, options.mimeType, item);
-      } else {
-         // generate content to send
-         log.info(`"${slug}" not cached`, { slug });
-         generate();
-      }
-   } else {
-      log.warn(`Caching disabled for ${slug}`, { slug });
-      generate();
-   }
-}
-
-/**
- * Render or generate content depending on its type then compress and cache
- * output.
- */
-function renderForType(res: Response, slug: string, options: RenderOptions) {
-   if (
-      [MimeType.JSON, MimeType.JSONP].indexOf(options.mimeType) >= 0 &&
-      is.callable(options.generateJSON)
-   ) {
-      // JSON content always supplies a generate method
-      cacheAndSend(
-         res,
-         JSON.stringify(options.generateJSON()),
-         slug,
-         options.mimeType
-      );
-   } else if (is.callable(options.ifNotCached)) {
-      // pass view renderer back to generator function to execute
-      options.ifNotCached(renderTemplate(res, slug, options.mimeType));
-   } else {
-      // invoke renderer directly assuming view name identical to slug
-      const render = renderTemplate(res, slug, options.mimeType);
-      render(slug, options.context);
-   }
 }
 
 /**
  * Curry standard function to render the view identified by the slug then
  * compress and cache it.
  */
-function renderTemplate(res: Response, slug: string, type: MimeType): Renderer {
+function makeRenderer(res: Response, slug: string): Renderer {
    return (
       view: string,
-      context: { [key: string]: any },
+      context: ViewContext,
+      type?: MimeType,
       postProcess?: (text: string) => string
    ) => {
       // use default meta tag description if none provided
@@ -289,21 +231,15 @@ async function cacheAndSend(
    res: Response,
    body: string,
    slug: string,
-   type: MimeType
+   type?: MimeType
 ) {
-   const item = await createViewItem(slug, body);
+   const item = await createViewItem(slug, body, type);
    cache.add(slug, item);
-   sendCompressed(res, type, item);
+   sendItem(res, item);
 }
 
 export const view = {
-   send: sendView,
-   sendCompressed,
+   send,
    notFound,
-   internalError,
-   json: {
-      // error: jsonError,
-      // message: jsonMessage,
-      send: sendJson
-   }
+   internalError
 };

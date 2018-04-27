@@ -10,28 +10,26 @@ function send(
    key: string,
    pageTemplate: string = Page.Post
 ) {
-   view.send(res, key, {
-      ifNotCached: render => {
-         const p = blog.postWithKey(key);
-         if (!is.value(p)) {
-            view.notFound(req, res);
-            return;
-         }
-         p
-            .ensureLoaded()
-            .then(() => {
-               render(pageTemplate, {
-                  post: p,
-                  title: p.title,
-                  // https://developers.google.com/structured-data/testing-tool/
-                  jsonLD: p.linkDataString(),
-                  description: p.longDescription,
-                  slug: key,
-                  layout: Layout.None
-               });
-            })
-            .catch(err => view.internalError(res, err));
+   view.send(res, key, render => {
+      const p = blog.postWithKey(key);
+      if (!is.value(p)) {
+         view.notFound(req, res);
+         return;
       }
+      p
+         .ensureLoaded()
+         .then(() => {
+            render(pageTemplate, {
+               post: p,
+               title: p.title,
+               // https://developers.google.com/structured-data/testing-tool/
+               jsonLD: p.linkDataString(),
+               description: p.longDescription,
+               slug: key,
+               layout: Layout.None
+            });
+         })
+         .catch(err => view.internalError(res, err));
    });
 }
 

@@ -80,14 +80,11 @@ export const config = {
       setAll(enabled: boolean) {
          this.views = enabled;
          this.maps = enabled;
-         this.json = enabled;
       },
       /** Whether to cache rendered template views */
       views: isProduction,
       /** Whether to cache GeoJSON */
-      maps: true,
-      /** Whether to cache API JSON */
-      json: isProduction
+      maps: true
    },
    contactLink: `<a href="mailto:${owner.email}">Contact</a>`,
    map,

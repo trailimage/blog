@@ -29,20 +29,15 @@ export function data(_req: Request, res: Response) {
 
    // vary caching depending on the accepted encoding
    res.setHeader(Header.Vary, Header.Accept.Encoding);
-   view.send(res, slug, {
-      mimeType: MimeType.JSONP,
-      ifNotCached: render => {
-         render(slug, { blog, layout: Layout.None }, postProcess);
-      }
+   view.send(res, slug, render => {
+      render(slug, { blog, layout: Layout.None }, MimeType.JSONP, postProcess);
    });
 }
 
 export function mobile(_req: Request, res: Response) {
    const slug = Page.MobileMenuData;
-   view.send(res, slug, {
-      ifNotCached: render => {
-         render(slug, { blog, layout: Layout.None });
-      }
+   view.send(res, slug, render => {
+      render(slug, { blog, layout: Layout.None });
    });
 }
 
