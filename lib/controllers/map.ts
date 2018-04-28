@@ -10,7 +10,8 @@ import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 
 /**
- * Render map screen. Map data is loaded asynchronously when the page is ready.
+ * Render map screen for a post. Map data is loaded asynchronously when the page
+ * is ready.
  */
 async function render(post: Post, req: Request, res: Response): Promise<void> {
    if (!is.value(post)) {

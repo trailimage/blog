@@ -1,17 +1,18 @@
 import { HttpStatus, MimeType, is } from '@toba/tools';
-import { blog } from '@trailimage/models';
+import { blog, owner } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { config } from '../config';
-import { owner, serialize } from '../models/json-ld';
 import { Page, view } from '../views/';
 
+/**
+ * Google search results page.
+ */
 function search(req: Request, res: Response) {
-   const term = req.query['q'];
+   const term: string = req.query['q'];
 
    if (is.value(term)) {
       res.render(Page.Search, {
-         title: `Search for “${req.query['q']}”`,
-         config: config
+         title: `Search for “${term}”`
       });
    } else {
       view.notFound(req, res);
@@ -20,22 +21,25 @@ function search(req: Request, res: Response) {
 
 function about(_req: Request, res: Response) {
    view.send(res, Page.About, {
-      context: {
-         title: 'About ' + config.site.title,
-         jsonLD: serialize(owner)
-      }
+      title: 'About ' + config.site.title,
+      jsonLD: owner()
    });
 }
 
+/**
+ * XML Sitemap.
+ */
 function siteMap(_req: Request, res: Response) {
-   view.send(res, Page.Sitemap, render => {
-         render(Page.Sitemap, {
-            posts: blog.posts,
-            categories: blog.categoryKeys(),
-            tags: blog.tags,
-            layout: null
-         }, MimeType.XML)
-   };
+   view.send(
+      res,
+      Page.Sitemap,
+      {
+         posts: blog.posts,
+         categories: blog.categoryKeys(),
+         tags: blog.tags
+      },
+      MimeType.XML
+   );
 }
 
 function issues(_req: Request, res: Response) {

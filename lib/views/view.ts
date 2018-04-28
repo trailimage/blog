@@ -1,12 +1,24 @@
-import { Cache, Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
+import { JsonLD, serialize } from '@toba/json-ld';
 import { log } from '@toba/logger';
+import { Cache, Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
 import { Request, Response } from 'express';
-// http://nodejs.org/api/zlib.html
+import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
 import { config } from '../config';
-import { Page } from './template';
+import { Layout, Page } from './template';
 
-export type ViewContext = { [key: string]: any };
+/**
+ * Values available within view template.
+ */
+export interface ViewContext {
+   [key: string]: any;
+   /** Text rendered with `<title/>` tags. */
+   title?: string;
+   subtitle?: string;
+   jsonLD?: JsonLD.Thing;
+   /** Name of layout to use or `null` for no template. */
+   layout?: string;
+}
 
 /**
  * Rendered page cache.
@@ -27,15 +39,30 @@ export type Renderer = (
    /** Key-values sent into the view template. */
    context: ViewContext,
    type?: MimeType,
-   /** Optional method to post-process rendered template. */
+   /** Optional method to post-process (e.g. minify) rendered template. */
    postProcess?: (text: string) => string
 ) => void;
+
+/**
+ * Minify text.
+ */
+export function minify(text: string, options?: uglify.MinifyOptions): string {
+   const output = uglify.minify(text, options);
+   if (output.error) {
+      log.error(output.error);
+      return text;
+   } else {
+      return output.code;
+   }
+}
 
 /**
  * Create view item with eTag and compressed content for cache persistence.
  *
  * @param mimeType Optionally set an explicit content type otherwise it will
  * be inferred
+ *
+ * @see http://nodejs.org/api/zlib.html
  */
 export const createViewItem = (
    key: string,
@@ -82,7 +109,7 @@ export const IPv6 = (ip: string): string =>
       : ip.replace(/^::[0123456789abcdef]{4}:/g, '');
 
 /**
- * Normalized client IP address for use in error logs.
+ * Normalize client IP address for error logs.
  */
 export function clientIP(req: Request): string {
    let ipAddress = req.connection.remoteAddress;
@@ -106,6 +133,9 @@ export function notFound(req: Request, res: Response): void {
    res.render(Page.NotFound, { title: 'Page Not Found', config });
 }
 
+/**
+ * Render status `500` page.
+ */
 function internalError(res: Response, err?: Error): void {
    if (is.value(err)) {
       log.error(err);
@@ -115,36 +145,34 @@ function internalError(res: Response, err?: Error): void {
 }
 
 /**
- * Send generated JSON in HTTP response.
- *
- * @param fallback Method to generate JSON if not cached
+ * Send rendered view in HTTP response.
+ * @param viewName View name and cache key
+ * @param context Values available within view template
+ * @param type Optional mime type set in response header
  */
-// function json(res: Response, slug: string, fallback: () => any) {
-//    if (config.cache.views) {
-//       const item = cache.get(slug);
-
-//       if (item !== null) {
-//          // send cached item directly
-//          return sendItem(res, item);
-//       } else {
-//          log.info(`"${slug}" not cached`, { slug });
-//       }
-//    } else {
-//       log.warn(`Caching disabled for ${slug}`, { slug });
-//    }
-
-//    cacheAndSend(res, JSON.stringify(fallback()), slug, MimeType.JSON);
-// }
+function send(
+   res: Response,
+   viewName: string,
+   context: ViewContext,
+   type?: MimeType
+): void;
 
 /**
  * Send rendered view in HTTP response.
- * @param slug Cache key and usually the view name as well
+ * @param slug Cache key
  * @param fallback Method to create context and render view if not cached
  */
 function send(
    res: Response,
    slug: string,
    fallback: (renderer: Renderer) => void
+): void;
+
+function send(
+   res: Response,
+   slug: string,
+   fallbackOrContext: (renderer: Renderer) => void | ViewContext,
+   type?: MimeType
 ) {
    if (config.cache.views) {
       const item = cache.get(slug);
@@ -159,7 +187,13 @@ function send(
       log.warn(`Caching disabled for ${slug}`, { slug });
    }
 
-   fallback(makeRenderer(res, slug));
+   const renderer = makeRenderer(res, slug);
+
+   if (is.callable(fallbackOrContext)) {
+      fallbackOrContext(renderer);
+   } else {
+      renderer(slug, fallbackOrContext, type);
+   }
 }
 
 /**
@@ -197,6 +231,15 @@ function makeRenderer(res: Response, slug: string): Renderer {
       if (is.empty(context.description)) {
          context.description = config.site.description;
       }
+
+      if (!is.defined(context, 'layout')) {
+         context.layout = Layout.None;
+      }
+
+      if (is.defined(context, 'jsonLD')) {
+         context.thing = serialize(context.jsonLD);
+      }
+
       // always send full config to views
       context.config = config;
 
@@ -240,6 +283,7 @@ async function cacheAndSend(
 
 export const view = {
    send,
+   minify,
    notFound,
    internalError
 };

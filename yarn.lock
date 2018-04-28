@@ -166,10 +166,10 @@
     tslint-consistent-codestyle "^1.13.0"
 
 "@toba/feed@^1.0.1", "@toba/feed@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.0.2.tgz#2b9a47e30974b60fef079fd5107a752211eaf8a2"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.0.3.tgz#b4a0496dd655348f0a70fa509942004b74545361"
   dependencies:
-    "@toba/tools" "^1.20.0"
+    "@toba/tools" "^2.2.0"
 
 "@toba/flickr@^1.3.5":
   version "1.3.8"
@@ -190,8 +190,8 @@
     googleapis "^28.0.0"
 
 "@toba/json-ld@^1.1.0":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.1.2.tgz#c149c825fc3d5f0ad66b36b972d5bf74444e06d0"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.2.1.tgz#933cfcdff9f7d90cb9c42c50f68ca24a58ee66bf"
 
 "@toba/logger@^1.0.0", "@toba/logger@^1.0.3", "@toba/logger@^1.0.4":
   version "1.0.4"
@@ -218,13 +218,13 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.12.0":
-  version "1.12.8"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.12.8.tgz#d7d401ec381af1a9f170866af95bcae3de401308"
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.2.tgz#5dfb41b4548696603476678b70616849abb13758"
   dependencies:
     "@toba/logger" "^1.0.4"
-    "@toba/tools" "^1.20.0"
+    "@toba/tools" "^2.2.0"
     "@types/jest" "^22.2.0"
-    "@types/node" "^9.6.0"
+    "@types/node" "^10.0.0"
     jest "^22.4.0"
     jest-localstorage-mock "^2.2.0"
     ts-jest "^22.4.0"
@@ -235,7 +235,7 @@
   dependencies:
     zlib "^1.0.5"
 
-"@toba/tools@^2.0.0":
+"@toba/tools@^2.0.0", "@toba/tools@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-2.2.0.tgz#dd3090ccab75de546e5b6e37fa6fcd1836350790"
   dependencies:
@@ -262,8 +262,8 @@
     geojson "^0.5.0"
 
 "@trailimage/models@^1.0.0", "@trailimage/models@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.1.0.tgz#b29ed446fde5c619d914ab33fad3002422af9784"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.1.2.tgz#9e497aa16fa19da951e6c8d6270c435036392e25"
   dependencies:
     "@toba/feed" "^1.0.1"
     "@toba/json-ld" "^1.1.0"
@@ -372,13 +372,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*":
+"@types/node@*", "@types/node@^10.0.0":
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.0.tgz#c40f8e07dce607d3ef25a626b93a6a7cdcf97881"
-
-"@types/node@^9.6.0":
-  version "9.6.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.7.tgz#5f3816d1db2155edcde1b2e3aa5d0e5c520cb564"
 
 "@types/request@^2.47.0":
   version "2.47.0"
@@ -4612,8 +4608,8 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
 needle@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/needle/-/needle-2.2.0.tgz#f14efc69cee1024b72c8b21c7bdf94a731dc12fa"
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/needle/-/needle-2.2.1.tgz#b5e325bd3aae8c2678902fa296f729455d1d3a7d"
   dependencies:
     debug "^2.1.2"
     iconv-lite "^0.4.4"
@@ -6908,8 +6904,8 @@ unzip-response@^2.0.1:
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
 
 upath@^1.0.0:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/upath/-/upath-1.0.4.tgz#ee2321ba0a786c50973db043a50b7bcba822361d"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/upath/-/upath-1.0.5.tgz#02cab9ecebe95bbec6d5fc2566325725ab6d1a73"
 
 update-notifier@^2.3.0:
   version "2.5.0"

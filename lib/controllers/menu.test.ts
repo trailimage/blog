@@ -1,8 +1,9 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import { expectTemplate } from './index.test';
+import { Header } from '@toba/tools';
+import { menu } from '../controllers/';
 import { Page } from '../views/';
-import { menu } from '../controllers/index';
+import { expectTemplate } from './index.test';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
@@ -15,8 +16,8 @@ beforeEach(() => {
 test('builds data for main menu', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.PostMenuData);
-      expect(res.headers).toHaveProperty('Vary', 'Accept-Encoding');
-      expect(options).toHaveProperty('library');
+      expect(res.headers).toHaveProperty(Header.Vary, Header.Accept.Encoding);
+      expect(options).toHaveProperty('blog');
       done();
    };
    menu.data(req, res);
@@ -25,7 +26,7 @@ test('builds data for main menu', done => {
 it('renders mobile menu', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.MobileMenuData);
-      expect(options).toHaveProperty('library');
+      expect(options).toHaveProperty('blog');
       done();
    };
    menu.mobile(req, res);

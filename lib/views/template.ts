@@ -3,7 +3,7 @@ import { config } from '../config';
 import { html } from './html';
 
 /**
- * Handlebars layouts.
+ * Handlebars layouts (`views/` path without `hbs` extension).
  */
 export const Layout: { [index: string]: string } = {
    Main: 'layouts/default-layout',
@@ -12,7 +12,7 @@ export const Layout: { [index: string]: string } = {
 };
 
 /**
- * Handlebars page templates.
+ * Handlebars page templates (`views/` path without `hbs` extension).
  */
 export enum Page {
    NotFound = 'error/404',

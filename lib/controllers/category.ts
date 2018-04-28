@@ -1,5 +1,6 @@
 import { is, merge, sayNumber } from '@toba/tools';
 import { Category, blog } from '@trailimage/models';
+import { JsonLD } from '@toba/json-ld';
 import { Request, Response } from 'express';
 import { config } from '../config';
 import { RouteParam } from '../routes';
@@ -13,7 +14,7 @@ function viewIt(req: Request, res: Response, path: string, homePage = false) {
 
       if (is.value(category)) {
          category.ensureLoaded().then(() => {
-            const linkData = category.linkDataString(path, homePage);
+            const jsonLD = category.jsonLD(path, homePage);
             const count = category.posts.size;
             const options = { posts: category.posts };
             const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
@@ -22,7 +23,7 @@ function viewIt(req: Request, res: Response, path: string, homePage = false) {
                renderer,
                Page.Category,
                category,
-               linkData,
+               jsonLD,
                options,
                count,
                subtitle
@@ -84,7 +85,7 @@ export function list(req: Request, res: Response) {
       const category = blog.categoryWithKey(key);
 
       if (is.value(category)) {
-         const linkData = category.linkDataString();
+         const jsonLD = category.jsonLD();
          const count = category.subcategories.size;
          const context = { subcategories: category.subcategories };
          const subtitle = 'Subcategories';
@@ -93,7 +94,7 @@ export function list(req: Request, res: Response) {
             renderer,
             Page.CategoryList,
             category,
-            linkData,
+            jsonLD,
             context,
             count,
             subtitle
@@ -117,14 +118,14 @@ function renderCategory(
    render: Renderer,
    template: string,
    category: Category,
-   jsonLD: string,
+   jsonLD: JsonLD.Blog | JsonLD.WebPage,
    context: ViewContext,
    childCount: number,
    subtitle: string
 ) {
    render(
       template,
-      merge(context, {
+      merge<ViewContext>(context, {
          title: category.title,
          jsonLD,
          headerCSS: config.style.css.categoryHeader,
