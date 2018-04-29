@@ -2,13 +2,13 @@ import { HttpStatus, is } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { RouteParam } from '../routes';
-import { Layout, Page, view } from '../views/';
+import { Page, view } from '../views/';
 
 function send(
    req: Request,
    res: Response,
    key: string,
-   pageTemplate: string = Page.Post
+   viewName: string = Page.Post
 ) {
    view.send(res, key, render => {
       const p = blog.postWithKey(key);
@@ -19,14 +19,12 @@ function send(
       p
          .ensureLoaded()
          .then(() => {
-            render(pageTemplate, {
+            render(viewName, {
                post: p,
                title: p.title,
-               // https://developers.google.com/structured-data/testing-tool/
-               jsonLD: p.linkDataString(),
+               jsonLD: p.jsonLD(),
                description: p.longDescription,
-               slug: key,
-               layout: Layout.None
+               slug: key
             });
          })
          .catch(err => view.internalError(res, err));

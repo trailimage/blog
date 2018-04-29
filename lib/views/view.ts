@@ -15,8 +15,9 @@ export interface ViewContext {
    /** Text rendered with `<title/>` tags. */
    title?: string;
    subtitle?: string;
+   /** Link Data JSON that's serialized to page. */
    jsonLD?: JsonLD.Thing;
-   /** Name of layout to use or `null` for no template. */
+   /** Name of layout to use or `null` to render view only. */
    layout?: string;
 }
 
@@ -26,8 +27,14 @@ export interface ViewContext {
 export const cache = new Cache<ViewItem>();
 
 export interface ViewItem {
+   /**
+    * Entity Tag used to validate cache contents.
+    * @see https://en.wikipedia.org/wiki/HTTP_ETag
+    */
    eTag: string;
+   /** GZipped view content. */
    buffer: Buffer;
+   /** Mime Type to set in response header. */
    type: MimeType;
 }
 
@@ -39,14 +46,18 @@ export type Renderer = (
    /** Key-values sent into the view template. */
    context: ViewContext,
    type?: MimeType,
-   /** Optional method to post-process (e.g. minify) rendered template. */
-   postProcess?: (text: string) => string
+   /**
+    * Whether to minify the rendered view — generally applicable only to
+    * JavaScript views.
+    */
+   minify?: boolean
 ) => void;
 
 /**
- * Minify text.
+ * Compact text by removing whitespace and more. If an error occurs then the
+ * original text is returned unchanged.
  */
-export function minify(text: string, options?: uglify.MinifyOptions): string {
+export function compact(text: string, options?: uglify.MinifyOptions): string {
    const output = uglify.minify(text, options);
    if (output.error) {
       log.error(output.error);
@@ -154,7 +165,8 @@ function send(
    res: Response,
    viewName: string,
    context: ViewContext,
-   type?: MimeType
+   type?: MimeType,
+   minify?: boolean
 ): void;
 
 /**
@@ -172,7 +184,8 @@ function send(
    res: Response,
    slug: string,
    fallbackOrContext: (renderer: Renderer) => void | ViewContext,
-   type?: MimeType
+   type?: MimeType,
+   minify = false
 ) {
    if (config.cache.views) {
       const item = cache.get(slug);
@@ -192,7 +205,7 @@ function send(
    if (is.callable(fallbackOrContext)) {
       fallbackOrContext(renderer);
    } else {
-      renderer(slug, fallbackOrContext, type);
+      renderer(slug, fallbackOrContext, type, minify);
    }
 }
 
@@ -225,7 +238,7 @@ function makeRenderer(res: Response, slug: string): Renderer {
       view: string,
       context: ViewContext,
       type?: MimeType,
-      postProcess?: (text: string) => string
+      minify = false
    ) => {
       // use default meta tag description if none provided
       if (is.empty(context.description)) {
@@ -249,10 +262,10 @@ function makeRenderer(res: Response, slug: string): Renderer {
             log.error(`Rendering ${slug} ${renderError.message}`, { slug });
             internalError(res);
          } else {
-            if (is.callable(postProcess)) {
-               text = postProcess(text);
-            }
             if (is.value<string>(text)) {
+               if (minify) {
+                  text = compact(text);
+               }
                cacheAndSend(res, text, slug, type);
             } else {
                log.error(`renderTemplate(${slug}) returned no content`, {
@@ -283,7 +296,6 @@ async function cacheAndSend(
 
 export const view = {
    send,
-   minify,
    notFound,
    internalError
 };
