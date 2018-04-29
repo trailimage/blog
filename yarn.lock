@@ -218,8 +218,8 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.12.0":
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.2.tgz#5dfb41b4548696603476678b70616849abb13758"
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.3.tgz#21c6f13e0b6582278fec5f205f0d5192acf36b6a"
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^2.2.0"
@@ -1151,12 +1151,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000830"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000830.tgz#6e45255b345649fd15ff59072da1e12bb3de2f13"
+  version "1.0.30000832"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000832.tgz#afe34c9f7c62139fd1c607db2ab7308bbb6a5158"
 
 caniuse-lite@^1.0.30000830:
-  version "1.0.30000830"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000830.tgz#cb96b8a2dd3cbfe04acea2af3c4e894249095328"
+  version "1.0.30000831"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000831.tgz#ae109aa23218f721ca87cf45cd2ce56de3d2980d"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"

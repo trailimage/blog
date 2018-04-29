@@ -44,3 +44,13 @@ test('redirects to issues page', done => {
    };
    staticPage.issues(req, res);
 });
+
+test('displays search results', done => {
+   res.onEnd = () => {
+      const options = expectTemplate(res, Page.Search);
+      expect(options).toBeDefined();
+      done();
+   };
+   req.query['q'] = 'search';
+   staticPage.search(req, res);
+});
