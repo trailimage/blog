@@ -56,6 +56,8 @@ export type Renderer = (
 /**
  * Compact text by removing whitespace and more. If an error occurs then the
  * original text is returned unchanged.
+ *
+ * @see https://github.com/mishoo/UglifyJS2
  */
 export function compact(text: string, options?: uglify.MinifyOptions): string {
    const output = uglify.minify(text, options);

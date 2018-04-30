@@ -1,8 +1,8 @@
 import { log } from '@toba/logger';
-import { MimeType } from '@toba/tools';
+import { MimeType, Header } from '@toba/tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
-import { render } from '@toba/feed';
+import { render, Feed, Person } from '@toba/feed';
 import { config } from '../config';
 import { view } from '../views/';
 
@@ -20,8 +20,7 @@ export function postFeed(req: Request, res: Response) {
       } else {
          rssRetries++;
          log.error(
-            'Library not ready when creating RSS feed — attempt %d',
-            rssRetries
+            `Blog posts not ready when creating RSS feed — attempt ${rssRetries}`
          );
          setTimeout(() => {
             postFeed(req, res);
@@ -30,7 +29,7 @@ export function postFeed(req: Request, res: Response) {
       return;
    }
 
-   const author: Feed.Author = {
+   const author: Person = {
       name: config.owner.name,
       link: 'https://www.facebook.com/jason.e.abbott'
    };
@@ -60,6 +59,6 @@ export function postFeed(req: Request, res: Response) {
          date: p.createdOn
       });
    }
-   res.set('Content-Type', MimeType.XML);
+   res.set(Header.Content.Type, MimeType.XML);
    res.send(feed.rss2());
 }

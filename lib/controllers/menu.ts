@@ -7,8 +7,6 @@ import { Page, view } from '../views/';
 /**
  * Minify menu JSON for production. Set `config.testing = true` if testing
  * with the production flag enabled to avoid uglifying the mock response.
- *
- * @see https://github.com/mishoo/UglifyJS2
  */
 export function data(_req: Request, res: Response) {
    const minify = config.isProduction && !config.testing;
