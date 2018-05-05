@@ -35,7 +35,7 @@ export const style = {
        * Assign mode of transportation icon based on pattern match to
        * `What` category.
        */
-      post: {
+      mode: {
          motorcycle: /(KTM|BMW|Honda)/gi,
          bicycle: /bicycle/gi,
          hike: /hike/gi,
@@ -43,7 +43,7 @@ export const style = {
       } as { [key: string]: RegExp },
 
       /** Default transportation mode if none given */
-      postDefault: 'motorcycle'
+      defaultMode: 'motorcycle'
    },
    photoSizes: sizes,
    map: {

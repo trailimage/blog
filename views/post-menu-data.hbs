@@ -8,13 +8,13 @@
 }}
 var postMenuData = { category: {}, post: {} };
 
-{{#each library.categories}}
+{{#each blog.categories}}
 postMenuData.category['{{this.title}}'] = [
 	{{#this.subcategories}}
 	{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
    {{/this.subcategories}}];
 {{/each}}
-{{#each library.posts}}
+{{#each blog.posts}}
 postMenuData.post['{{this.id}}'] = {
    'slug': '{{this.key}}',
    'title': '{{this.title}}',

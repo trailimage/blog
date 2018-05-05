@@ -1,4 +1,4 @@
-import { Time, env } from '@toba/tools';
+import { Duration, env } from '@toba/tools';
 import { mapProvider } from './map-provider';
 import { postProvider } from './post-provider';
 import { owner, site, domain } from './models';
@@ -89,8 +89,8 @@ export const config = {
    contactLink: `<a href="mailto:${owner.email}">Contact</a>`,
    map,
    style,
-   cacheDuration: Time.Day * 2,
-   retryDelay: Time.Second * 30,
+   cacheDuration: Duration.Day * 2,
+   retryDelay: Duration.Second * 30,
 
    bing,
    google,

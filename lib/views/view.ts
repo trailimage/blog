@@ -39,7 +39,7 @@ export interface ViewItem {
 }
 
 /**
- * Method to render an HTML view with context and optional post-processing.
+ * Method to render an HTML view with context and optional content minification.
  */
 export type Renderer = (
    viewName: string,
@@ -54,8 +54,8 @@ export type Renderer = (
 ) => void;
 
 /**
- * Compact text by removing whitespace and more. If an error occurs then the
- * original text is returned unchanged.
+ * Compact text by removing whitespace and more. If an error occurs then return
+ * original text unchanged.
  *
  * @see https://github.com/mishoo/UglifyJS2
  */
@@ -137,7 +137,7 @@ export function clientIP(req: Request): string {
 }
 
 /**
- * Render standard 404 page.
+ * Render standard `404` page.
  */
 export function notFound(req: Request, res: Response): void {
    const ip = clientIP(req);
