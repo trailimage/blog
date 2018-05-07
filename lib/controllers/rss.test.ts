@@ -1,6 +1,5 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import * as Feed from 'feed';
 
 const req = new MockRequest();
 const res = new MockResponse(req);

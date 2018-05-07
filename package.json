@@ -20,13 +20,13 @@
    },
    "dependencies": {
       "@toba/block-spam-referer": "^1.0.0",
-      "@toba/build": "^1.4.0",
-      "@toba/feed": "^1.0.2",
+      "@toba/build": "^1.5.0",
+      "@toba/feed": "^1.2.0",
       "@toba/logger": "^1.0.3",
-      "@toba/tools": "^2.0.0",
+      "@toba/tools": "^3.0.0",
       "@trailimage/flickr-provider": "^2.0.0",
       "@trailimage/google-provider": "^2.0.0",
-      "@trailimage/models": "^1.0.0",
+      "@trailimage/models": "^1.1.0",
       "compression": "^1.7.0",
       "express": "^4.16.0",
       "express-hbs": "^1.0.0",
@@ -35,7 +35,7 @@
       "uglify-js": "^3.3.0"
    },
    "devDependencies": {
-      "@toba/test": "^1.12.0",
+      "@toba/test": "^1.13.0",
       "@types/compression": "0.0.35",
       "@types/core-js": "^0.9.41",
       "@types/express": "^4.11.0",
@@ -46,7 +46,7 @@
       "@types/googlemaps": "^3.30.0",
       "@types/jquery": "^3.3.0",
       "@types/jszip": "^3.1.0",
-      "@types/mapbox-gl": "^0.43.2",
+      "@types/mapbox-gl": "^0.44.0",
       "@types/node-fetch": "^1.6.7",
       "@types/request": "^2.47.0",
       "@types/twitter": "0.0.28",
@@ -62,7 +62,6 @@
       "nodemon": "^1.17.0",
       "through2": "^2.0.3",
       "ts-node": "^6.0.0",
-      "tslint": "^5.9.0",
       "typescript": "^2.8.0",
       "vinyl": "^2.1.0"
    },
