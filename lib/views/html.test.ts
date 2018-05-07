@@ -136,7 +136,7 @@ test('matches post categories to material icons', () => {
    expect(html.icon.category('Test')).toBe(
       '<i class="material-icons success">success</i>'
    );
-   // revert to default if provided
+   // revert to default if one provided and no other match
    expect(html.icon.category('Nothing')).toBe(
       '<i class="material-icons whatever">whatever</i>'
    );
@@ -150,11 +150,6 @@ test('matches post categories to material icons', () => {
    expect(html.icon.category('Nothing')).toBe(empty);
 });
 
-// test('truncates IPv6 to v4', () => {
-//    expect(util.IPv6('::1')).toBe('127.0.0.1');
-//    expect(util.IPv6('192.12.15.3')).toBe('192.12.15.3');
-//    expect(util.IPv6('::abf2:192.12.15.3')).toBe('192.12.15.3');
-// });
 
 test('identifies quote at end of text', () => {
    const source = lipsum + ds + '“' + lipsum + '”';

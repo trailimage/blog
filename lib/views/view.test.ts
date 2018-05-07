@@ -1,7 +1,7 @@
 import '@toba/test';
 import { Header, MimeType } from '@toba/tools';
 import { MockRequest, MockResponse } from '@toba/test';
-import { cache, view, createViewItem, sendItem } from './view';
+import { cache, view, createViewItem, sendItem, IPv6 } from './view';
 import { config } from '../config/';
 
 const req = new MockRequest();
@@ -42,6 +42,12 @@ test('compresses new pages and adds to cache', done => {
    });
 });
 
+test('truncates IPv6 to v4', () => {
+   expect(IPv6('::1')).toBe('127.0.0.1');
+   expect(IPv6('192.12.15.3')).toBe('192.12.15.3');
+   expect(IPv6('::abf2:192.12.15.3')).toBe('192.12.15.3');
+});
+
 test('sends already rendered pages from cache', done => {
    res.onEnd = done;
    view.send(res, viewSlug, _render => {
@@ -53,9 +59,9 @@ test('adds caching headers to compressed content', async () => {
    const item = await createViewItem(viewSlug, pageContent, MimeType.HTML);
 
    sendItem(res, item);
-   expect(res.headers[Header.CacheControl]).toBe('max-age=86400, public');
+   expect(res.header(Header.CacheControl)).toBe('max-age=86400, public');
 
-   const eTagHeader = res.headers[Header.eTag];
+   const eTagHeader = res.header(Header.eTag);
    expect(eTagHeader).toBeDefined();
    expect(eTagHeader.includes(viewSlug)).toBe(true);
 });
