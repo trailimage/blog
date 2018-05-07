@@ -165,18 +165,6 @@
     tslint-config-prettier "^1.10.0"
     tslint-consistent-codestyle "^1.13.0"
 
-<<<<<<< HEAD
-"@toba/feed@^1.0.1":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.0.3.tgz#b4a0496dd655348f0a70fa509942004b74545361"
-=======
-"@toba/feed@^1.0.2", "@toba/feed@^1.2.0":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.2.3.tgz#f180f7ecd9db1afbeb11f9cd51e3a33d78ffb52f"
->>>>>>> 49f46715c0835e2d007dedf3dc5468f22742e581
-  dependencies:
-    "@toba/tools" "^3.0.0"
-
 "@toba/feed@^1.2.0":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.2.3.tgz#f180f7ecd9db1afbeb11f9cd51e3a33d78ffb52f"
@@ -230,13 +218,8 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.13.0":
-<<<<<<< HEAD
-  version "1.13.5"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.5.tgz#24feeb3a3ddcc9e1ba0889577b4137f741f6bf05"
-=======
   version "1.13.6"
   resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.6.tgz#ad8eaa7ce65b672bf01973c49f2b5eb8f83b9d0b"
->>>>>>> 49f46715c0835e2d007dedf3dc5468f22742e581
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^3.0.0"
@@ -247,14 +230,8 @@
     ts-jest "^22.4.0"
 
 "@toba/tools@^3.0.0":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.0.1.tgz#22a9ae374a56e3354049ec4362a174dfd67e0e23"
-  dependencies:
-    zlib "^1.0.5"
-
-"@toba/tools@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.0.0.tgz#a6665aace9bd9281968368790ce02135f416eb8d"
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.1.0.tgz#8ee9eed36fec141fc99c73d636a613c94109fece"
   dependencies:
     zlib "^1.0.5"
 
@@ -278,7 +255,7 @@
     "@trailimage/models" "^1.1.0"
     geojson "^0.5.0"
 
-"@trailimage/models@^1.0.0", "@trailimage/models@^1.1.0":
+"@trailimage/models@^1.1.0":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.1.4.tgz#75709e114969d9b8e5812f0964583ffe59a2fa09"
   dependencies:
@@ -1164,12 +1141,18 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000833"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000833.tgz#2bd7be72a401658d2cbcb8f4d7600deebeb1c676"
+  version "1.0.30000835"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000835.tgz#6556931cdf035903d8655d6303f9501b5915fbe9"
 
 caniuse-lite@^1.0.30000830, caniuse-lite@^1.0.30000832:
-  version "1.0.30000833"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000833.tgz#98e84fcdb4399c6fa0b0fd41490d3217ac7802b4"
+  version "1.0.30000835"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000835.tgz#517c4d3807a8527b0cbce1d84c85d4487f877268"
+
+capture-exit@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/capture-exit/-/capture-exit-1.2.0.tgz#1c5fcc489fd0ab00d4f1ac7ae1072e3173fbab6f"
+  dependencies:
+    rsvp "^3.3.3"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1501,8 +1484,8 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
 
 core-js@^2.4.0, core-js@^2.5.0:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.6.tgz#0fe6d45bf3cac3ac364a9d72de7576f4eb221b9d"
 
 core-js@~2.3.0:
   version "2.3.0"
@@ -3052,10 +3035,10 @@ iconv-lite@0.4.19:
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
 iconv-lite@^0.4.4:
-  version "0.4.21"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.21.tgz#c47f8733d02171189ebc4a400f3218d348094798"
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
   dependencies:
-    safer-buffer "^2.1.0"
+    safer-buffer ">= 2.1.2 < 3"
 
 ignore-by-default@^1.0.1:
   version "1.0.1"
@@ -4050,8 +4033,8 @@ left-pad@^1.2.0:
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
 
 "less@2.6.x || ^3.0.0":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/less/-/less-3.0.2.tgz#1bcb9813bb6090c884ac142f02c633bd42931844"
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/less/-/less-3.0.4.tgz#d27dcedbac96031c9e7b76f1da1e4b7d83760814"
   optionalDependencies:
     errno "^0.1.1"
     graceful-fs "^4.1.2"
@@ -4060,7 +4043,7 @@ left-pad@^1.2.0:
     mkdirp "^0.5.0"
     promise "^7.1.1"
     request "^2.83.0"
-    source-map "^0.5.3"
+    source-map "~0.6.0"
 
 leven@^2.1.0:
   version "2.1.0"
@@ -4556,8 +4539,8 @@ minimist@~0.0.1:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
 minipass@^2.2.1, minipass@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.2.4.tgz#03c824d84551ec38a8d1bb5bc350a5a30a354a40"
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.3.0.tgz#2e11b1c46df7fe7f1afbe9a490280add21ffe384"
   dependencies:
     safe-buffer "^5.1.1"
     yallist "^3.0.0"
@@ -4673,8 +4656,8 @@ node-pre-gyp@^0.9.0:
     tar "^4"
 
 nodemon@^1.17.0:
-  version "1.17.3"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.17.3.tgz#3b0bbc2ee05ccb43b1aef15ba05c63c7bc9b8530"
+  version "1.17.4"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.17.4.tgz#243ff9c69ffbf1175f2460f9b023f35a072c15e9"
   dependencies:
     chokidar "^2.0.2"
     debug "^3.1.0"
@@ -5935,6 +5918,10 @@ rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
+rsvp@^3.3.3:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
+
 safe-buffer@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
@@ -5949,15 +5936,16 @@ safe-regex@^1.1.0:
   dependencies:
     ret "~0.1.10"
 
-safer-buffer@^2.1.0:
+"safer-buffer@>= 2.1.2 < 3":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
 sane@^2.0.0:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/sane/-/sane-2.5.1.tgz#a55cee7074bed3213b54b40889ee791fa2f50176"
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/sane/-/sane-2.5.2.tgz#b4dc1861c21b427e929507a3e751e2a2cb8ab3fa"
   dependencies:
     anymatch "^2.0.0"
+    capture-exit "^1.2.0"
     exec-sh "^0.2.0"
     fb-watchman "^2.0.0"
     micromatch "^3.1.4"
@@ -6686,8 +6674,8 @@ ts-jest@^22.4.0:
     yargs "^11.0.0"
 
 ts-node@^6.0.0:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.0.2.tgz#e132d530e53173bc6a8c21ea65f64d8b47bc573e"
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.0.3.tgz#28bf74bcad134fad17f7469dad04638ece03f0f4"
   dependencies:
     arrify "^1.0.0"
     chalk "^2.3.0"
