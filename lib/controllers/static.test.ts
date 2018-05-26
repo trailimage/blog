@@ -21,7 +21,7 @@ afterAll(() => {
 beforeEach(() => {
    res.reset();
    req.reset();
-   res.endOnRender = false;
+   res.endOnRender = true;
 });
 
 test('renders sitemap', done => {
@@ -34,6 +34,7 @@ test('renders sitemap', done => {
       );
       done();
    };
+   res.endOnRender = false;
    staticPage.siteMap(req, res);
 });
 

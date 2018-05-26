@@ -5,7 +5,8 @@ import { config } from '../config';
 import { Page, view } from '../views/';
 
 /**
- * Google search results page.
+ * Google search results page rendered directly without the `view.send` cache
+ * pipeline.
  */
 function search(req: Request, res: Response) {
    const term: string = req.query['q'];

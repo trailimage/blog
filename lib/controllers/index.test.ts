@@ -1,8 +1,8 @@
-import { HttpStatus, Header, MimeType } from '@toba/tools';
+import { HttpStatus } from '@toba/tools';
 import { MockResponse } from '@toba/test';
 
 /**
- * Expect standard Handlebars template response
+ * Expect standard Handlebars template response.
  */
 export function expectTemplate(res: MockResponse, name: string) {
    expect(res.statusCode).toBe(HttpStatus.OK);
@@ -11,6 +11,9 @@ export function expectTemplate(res: MockResponse, name: string) {
    return res.rendered.options;
 }
 
+/**
+ *  Expect redirected response.
+ */
 export function expectRedirect(res: MockResponse, path: string) {
    expect(res.redirected).toBeDefined();
    expect(res.redirected).toHaveProperty(
