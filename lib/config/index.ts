@@ -9,7 +9,7 @@ import { mapSource } from './mapsource';
 
 const isProduction = process.env['NODE_ENV'] === 'production';
 
-export const library = {
+export const posts = {
    /**
     * Characters separating title and subtitle in library source. Posts with
     * different subtitles but the same title are considered parts of a series
@@ -74,7 +74,7 @@ export const config = {
    repoUrl: 'https://github.com/Jason-Abbott/trail-image.git',
    owner,
    site,
-   library,
+   posts,
    cache: {
       /** Enable or disable all caching */
       setAll(enabled: boolean) {

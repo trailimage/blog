@@ -3,7 +3,7 @@ import { RouteParam } from '../routes';
 // const { prepare, expectTemplate } = require('./index.test');
 import { Page } from '../views/';
 import { map } from './';
-import { createContext } from './index.test';
+import { expectTemplate } from './index.test';
 
 test('displays map for post', () => {
    const { req, res } = createContext();

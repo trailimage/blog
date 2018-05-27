@@ -20,8 +20,9 @@ function configureModels() {
    postConfigure(config.providers.post);
    mapConfigure(config.providers.map);
 
+   modelConfig.site = config.site;
    modelConfig.owner = config.owner;
-   modelConfig.subtitleSeparator = config.library.subtitleSeparator;
+   modelConfig.subtitleSeparator = config.posts.subtitleSeparator;
    modelConfig.maxPhotoMarkersOnMap = config.map.maxMarkers;
    modelConfig.providers.post = postProvider;
    modelConfig.providers.map = mapProvider;
