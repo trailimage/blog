@@ -24,5 +24,6 @@
    },
    "tslint.enable": true,
    "eslint.enable": false,
-   "jest.autoEnable": false
+   "jest.autoEnable": false,
+   "typescript.tsdk": "node_modules\\typescript\\lib"
 }
