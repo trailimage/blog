@@ -4,22 +4,39 @@ import { alphabet } from '@toba/tools';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { photo } from './';
+import { normalizeTag } from './photo';
 import { expectTemplate } from './index.test';
+import { loadMockData } from './.test-data';
+import { config } from '../config';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
+
+beforeAll(async done => {
+   await loadMockData();
+   console.debug = jest.fn();
+   done();
+});
 
 beforeEach(() => {
    res.reset();
    req.reset();
 });
 
+test('normalizes photo tags', () => {
+   config.photoTagChanges['old-slug'] = 'new-slug';
+   expect(normalizeTag('Camel-Case')).toBe('camel-case');
+   expect(normalizeTag('old-slug')).toBe('new-slug');
+   expect(normalizeTag(undefined)).toBeNull();
+});
+
 test('loads all photo tags', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.PhotoTag);
-      expect(options).toHaveProperty('alphabet', alphabet);
-      expect(options).toHaveProperty('tags');
-      expect(options.tags).toHaveAllProperties('a', 'b', 'c');
+      const context = expectTemplate(res, Page.PhotoTag);
+      expect(context).toHaveProperty('alphabet', alphabet);
+      expect(context).toHaveAllProperties('tags', 'selected');
+      expect(context.tags).toHaveAllProperties('a', 'b', 'c');
+      expect(context.tags['c']).toHaveProperty('cactus', 'Cactus');
       done();
    };
    photo.tags(req, res);
@@ -27,10 +44,10 @@ test('loads all photo tags', done => {
 
 test('shows all photos with tag', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.PhotoSearch);
-      expect(options).toHaveProperty('photos');
-      expect(options.photos).toBeInstanceOf(Array);
-      expect(options.photos).toHaveLength(10);
+      const context = expectTemplate(res, Page.PhotoSearch);
+      expect(context).toHaveProperty('photos');
+      expect(context.photos).toBeInstanceOf(Array);
+      expect(context.photos).toHaveLength(19);
       done();
    };
    req.params[RouteParam.PhotoTag] = 'horse';
@@ -39,15 +56,15 @@ test('shows all photos with tag', done => {
 
 test('loads EXIF', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.EXIF);
-      expect(options).toHaveProperty('EXIF');
-      expect(options.EXIF).toHaveAllProperties(
+      const context = expectTemplate(res, Page.EXIF);
+      expect(context).toHaveProperty('EXIF');
+      expect(context.EXIF).toHaveAllProperties(
          'ISO',
          'artist',
          'lens',
          'model'
       );
-      expect(options.EXIF).toHaveProperty('sanitized', true);
+      expect(context.EXIF).toHaveProperty('sanitized', true);
       done();
    };
    req.params[RouteParam.PhotoID] = '8458410907';

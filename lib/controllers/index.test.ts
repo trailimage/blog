@@ -3,12 +3,16 @@ import { MockResponse } from '@toba/test';
 
 /**
  * Expect standard Handlebars template response.
+ * @returns template context
  */
-export function expectTemplate(res: MockResponse, name: string) {
+export function expectTemplate(
+   res: MockResponse,
+   name: string
+): { [key: string]: any } {
    expect(res.statusCode).toBe(HttpStatus.OK);
    expect(res.rendered).toHaveProperty('template', name);
-   expect(res.rendered).toHaveProperty('options');
-   return res.rendered.options;
+   expect(res.rendered).toHaveProperty('context');
+   return res.rendered.context;
 }
 
 /**

@@ -29,9 +29,7 @@ function exif(req: Request, res: Response) {
  * Photos with tag rendered in response to click on label in photo tags page.
  */
 function withTag(req: Request, res: Response) {
-   const slug = normalizeTag(
-      decodeURIComponent(req.params[RouteParam.PhotoTag])
-   );
+   const slug = tagParam(req);
 
    blog
       .getPhotosWithTags(slug)
@@ -58,44 +56,60 @@ function withTag(req: Request, res: Response) {
       });
 }
 
+/**
+ * Return normalized tag name matching the requested tag or `null` if no tag
+ * requested.
+ */
+const tagParam = (req: Request): string =>
+   is.defined(req.params, RouteParam.PhotoTag)
+      ? normalizeTag(decodeURIComponent(req.params[RouteParam.PhotoTag]))
+      : null;
+
 function tags(req: Request, res: Response) {
-   let selected = normalizeTag(
-      decodeURIComponent(req.params[RouteParam.PhotoTag])
-   );
+   let slug = tagParam(req);
    const list = blog.tags;
-   const keys = Object.keys(list);
+   const keys = Array.from(list.keys());
    const tags: { [key: string]: { [key: string]: string } } = {};
 
-   if (is.empty(selected)) {
+   if (is.empty(slug)) {
       // select a random tag
-      selected = keys[Math.floor(Math.random() * keys.length + 1)];
+      slug = keys[Math.floor(Math.random() * keys.length + 1)];
    }
 
    // group tags by first letter (character)
    for (const c of alphabet) {
       tags[c] = {};
    }
-   for (const key in list) {
+   for (const [key, value] of list.entries()) {
       const c = key.substr(0, 1).toLowerCase();
       if (alphabet.indexOf(c) >= 0) {
-         tags[c][key] = list.get(key);
+         // ignore tags that don't start with a letter of the alphabet
+         tags[c][key] = value;
       }
    }
 
    res.render(Page.PhotoTag, {
       tags,
-      selected,
+      selected: slug,
       alphabet,
       title: keys.length + ' Photo Tags',
       config
    });
 }
 
-function normalizeTag(slug: string): string {
+/**
+ * Convert photo tag to lowercase and substitute changed tag if one has been
+ * defined.
+ */
+export function normalizeTag(slug: string): string {
    if (is.value(slug)) {
       slug = slug.toLowerCase();
+   } else {
+      return null;
    }
-   return config.photoTagChanges[slug] ? config.photoTagChanges[slug] : slug;
+   return is.defined(config.photoTagChanges, slug)
+      ? config.photoTagChanges[slug]
+      : slug;
 }
 
 export const photo = { withTag, tags, exif };

@@ -132,14 +132,14 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.13.0":
-  version "1.13.7"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.7.tgz#459422ca404f6830d9d908997b24b3c3ae33b0a4"
+  version "1.13.8"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.8.tgz#d390483189f7ad2a498b017e585d937dada1c34d"
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^3.1.0"
-    "@types/jest" "^22.2.0"
-    "@types/node" "^10.1.0"
-    jest "^23.0.0"
+    "@types/jest" "^23.0.0"
+    "@types/node" "^10.3.0"
+    jest "^23.1.0"
     jest-localstorage-mock "^2.2.0"
     ts-jest "^22.4.0"
 
@@ -251,9 +251,9 @@
   version "3.30.9"
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.9.tgz#893eb307bfcbff95ef6c9ce70f72e6f9a2068cc4"
 
-"@types/jest@^22.2.0":
-  version "22.2.3"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
+"@types/jest@^23.0.0":
+  version "23.0.0"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.0.0.tgz#760cac74f00bb9c3075587716d2b3b4435663bc0"
 
 "@types/jquery@^3.3.0":
   version "3.3.2"
@@ -287,7 +287,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^10.1.0":
+"@types/node@*", "@types/node@^10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.0.tgz#078516315a84d56216b5d4fed8f75d59d3b16cac"
 
@@ -3857,7 +3857,7 @@ jest-worker@^23.0.1:
   dependencies:
     merge-stream "^1.0.1"
 
-jest@^23.0.0:
+jest@^23.1.0:
   version "23.1.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-23.1.0.tgz#bbb7f893100a11a742dd8bd0d047a54b0968ad1a"
   dependencies:
