@@ -14,5 +14,5 @@ export function loadMockData() {
    modelConfig.providers.map = mapProvider;
    modelConfig.site = config.site;
 
-   return blog.build();
+   return blog.load();
 }

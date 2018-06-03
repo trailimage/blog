@@ -16,7 +16,7 @@ beforeEach(() => {
 test('builds data for main menu', done => {
    res.onEnd = () => {
       const options = expectTemplate(res, Page.PostMenuData);
-      expect(res.headers).toHaveProperty(Header.Vary, Header.Accept.Encoding);
+      expect(res.headers).toHaveKeyValue(Header.Vary, Header.Accept.Encoding);
       expect(options).toHaveProperty('blog');
       done();
    };

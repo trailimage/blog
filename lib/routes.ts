@@ -100,7 +100,7 @@ function standard(app: Express.Application) {
    const s = '([\\w\\d-]{4,})';
    /** Flickr photo ID pattern */
    const photoID = `:${RouteParam.PhotoID}(\\d{10,11})`;
-   /** Flickr set ID pattern */
+   /** Provider set ID pattern */
    const postID = `:${RouteParam.PostID}(\\d{17})`;
    /** Post key (slug or path) pattern */
    const postKey = `:${RouteParam.PostKey}${s}`;
