@@ -78,6 +78,8 @@
       "tabWidth": 3
    },
    "stylelint": {
-      "plugins": ["@toba/build/style"]
+      "plugins": [
+         "@toba/build/style"
+      ]
    }
 }

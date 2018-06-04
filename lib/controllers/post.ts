@@ -87,7 +87,8 @@ function withPhoto(req: Request, res: Response) {
 }
 
 /**
- * Show newest post on home page.
+ * Show newest post on home page. Provider should have populated posts newest-
+ * first.
  */
 function latest(req: Request, res: Response) {
    send(req, res, blog.posts[0].key);
