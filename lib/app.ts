@@ -4,8 +4,14 @@ import * as compress from 'compression';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';
 import * as path from 'path';
-import { postProvider, postConfigure } from '@trailimage/flickr-provider';
-import { mapProvider, mapConfigure } from '@trailimage/google-provider';
+import {
+   postProvider,
+   config as flickrConfig
+} from '@trailimage/flickr-provider';
+import {
+   mapProvider,
+   config as googleConfig
+} from '@trailimage/google-provider';
 import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from './config';
 import { Layout, addTemplateMethods } from './views/';
@@ -17,8 +23,8 @@ configureModels();
 createWebService();
 
 function configureModels() {
-   postConfigure(config.providers.post);
-   mapConfigure(config.providers.map);
+   Object.assign(googleConfig, config.providers.map);
+   Object.assign(flickrConfig, config.providers.post);
 
    modelConfig.site = config.site;
    modelConfig.owner = config.owner;
