@@ -70,7 +70,7 @@ function blogJSON(_req: Request, res: Response) {
  * Compressed GeoJSON of all site photos.
  */
 function photoJSON(req: Request, res: Response) {
-   factory.map
+   blog
       .photos()
       .then(item => {
          view.sendCompressed(res, MimeType.JSON, item);

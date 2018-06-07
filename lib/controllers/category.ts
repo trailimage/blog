@@ -14,7 +14,7 @@ function viewIt(req: Request, res: Response, path: string, homePage = false) {
 
       if (is.value(category)) {
          category.ensureLoaded().then(() => {
-            const jsonLD = category.jsonLD(path, homePage);
+            const jsonLD = category.jsonLD(); //(path, homePage);
             const count = category.posts.size;
             const options = { posts: category.posts };
             const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
@@ -36,7 +36,7 @@ function viewIt(req: Request, res: Response, path: string, homePage = false) {
 }
 
 /**
- * A particular category like When/2013
+ * A particular category like When/2013.
  */
 export function forPath(req: Request, res: Response) {
    viewIt(
@@ -54,7 +54,7 @@ export function forPath(req: Request, res: Response) {
  * the default tag has years as child tags
  */
 export function home(req: Request, res: Response) {
-   const category = blog.categories.get(config.library.defaultCategory);
+   const category = blog.categories.get(config.posts.defaultCategory);
    let year = new Date().getFullYear();
    let subcategory = null;
    let count = 0;
