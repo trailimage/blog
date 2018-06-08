@@ -7,28 +7,28 @@ import { RouteParam } from '../routes';
 import { Layout, Page } from '../views/template';
 import { Renderer, view, ViewContext } from '../views/view';
 
-function viewIt(req: Request, res: Response, path: string, homePage = false) {
-   view.send(res, path, renderer => {
+function send(req: Request, res: Response, path: string, homePage = false) {
+   view.send(res, path, async renderer => {
       // use renderer to build view that wasn't cached
       const category = blog.categoryWithKey(path);
 
       if (is.value(category)) {
-         category.ensureLoaded().then(() => {
-            const jsonLD = category.jsonLD(); //(path, homePage);
-            const count = category.posts.size;
-            const options = { posts: category.posts };
-            const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
+         await category.ensureLoaded();
 
-            renderCategory(
-               renderer,
-               Page.Category,
-               category,
-               jsonLD,
-               options,
-               count,
-               subtitle
-            );
-         });
+         const jsonLD = category.jsonLD(); //(path, homePage);
+         const count = category.posts.size;
+         const options = { posts: category.posts };
+         const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
+
+         renderCategory(
+            renderer,
+            Page.Category,
+            category,
+            jsonLD,
+            options,
+            count,
+            subtitle
+         );
       } else {
          view.notFound(req, res);
       }
@@ -39,7 +39,7 @@ function viewIt(req: Request, res: Response, path: string, homePage = false) {
  * A particular category like When/2013.
  */
 export function forPath(req: Request, res: Response) {
-   viewIt(
+   send(
       req,
       res,
       req.params[RouteParam.RootCategory] +
@@ -67,7 +67,7 @@ export function home(req: Request, res: Response) {
       }
       year--;
    }
-   viewIt(req, res, subcategory.key, true);
+   send(req, res, subcategory.key, true);
 }
 
 /**
