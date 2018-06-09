@@ -3,7 +3,6 @@ import { Header, MimeType } from '@toba/tools';
 import { MockRequest, MockResponse } from '@toba/test';
 import { Page } from '../views/index';
 import { staticPage } from './static';
-import { expectTemplate, expectRedirect } from './index.test';
 import { config } from '../config';
 
 const req = new MockRequest();
@@ -26,8 +25,9 @@ beforeEach(() => {
 
 test('renders sitemap', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.Sitemap);
-      expect(options).toHaveAllProperties('posts', 'categories', 'tags');
+      expect(res).toRenderTemplate(Page.Sitemap);
+      const context = res.rendered.context;
+      expect(context).toHaveAllProperties('posts', 'categories', 'tags');
       expect(res.headers).toHaveKeyValue(
          Header.Content.Type,
          MimeType.XML + ';charset=utf-8'
@@ -40,7 +40,7 @@ test('renders sitemap', done => {
 
 test('redirects to issues page', done => {
    res.onEnd = () => {
-      expectRedirect(res, 'http://issues.' + config.domain);
+      expect(res).toRedirectTo('http://issues.' + config.domain);
       done();
    };
    staticPage.issues(req, res);
@@ -48,8 +48,8 @@ test('redirects to issues page', done => {
 
 test('displays search results', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.Search);
-      expect(options).toBeDefined();
+      expect(res).toRenderTemplate(Page.Search);
+      expect(res.rendered.context).toBeDefined();
       done();
    };
    req.query['q'] = 'search';

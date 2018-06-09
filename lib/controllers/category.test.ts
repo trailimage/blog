@@ -3,7 +3,6 @@ import { MockRequest, MockResponse } from '@toba/test';
 import { RouteParam } from '../routes';
 import { Page } from '../views/index';
 import { category } from './index';
-import { expectTemplate } from './index.test';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
@@ -24,8 +23,8 @@ const contextKeys = [
 
 test('renders home page for default category', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.Category);
-      expect(options).toHaveAllProperties(...contextKeys);
+      expect(res).toRenderTemplate(Page.Category);
+      expect(res.rendered.context).toHaveAllProperties(...contextKeys);
       done();
    };
    category.home(req, res);
@@ -33,8 +32,8 @@ test('renders home page for default category', done => {
 
 test('renders a list of subcategories', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.CategoryList);
-      expect(options).toHaveAllProperties(...contextKeys);
+      expect(res).toRenderTemplate(Page.CategoryList);
+      expect(res.rendered.context).toHaveAllProperties(...contextKeys);
       done();
    };
    req.params[RouteParam.RootCategory] = 'what';
@@ -43,8 +42,8 @@ test('renders a list of subcategories', done => {
 
 test('displays category at path', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.CategoryList);
-      expect(options).toHaveAllProperties(...contextKeys);
+      expect(res).toRenderTemplate(Page.CategoryList);
+      expect(res.rendered.context).toHaveAllProperties(...contextKeys);
       done();
    };
    req.params[RouteParam.RootCategory] = 'when';
@@ -54,8 +53,11 @@ test('displays category at path', done => {
 
 test('creates category menu', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.CategoryMenu);
-      expect(options).toHaveAllProperties('description', 'library');
+      expect(res).toRenderTemplate(Page.CategoryMenu);
+      expect(res.rendered.context).toHaveAllProperties(
+         'description',
+         'library'
+      );
       done();
    };
    category.menu(req, res);

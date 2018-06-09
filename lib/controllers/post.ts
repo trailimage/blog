@@ -1,4 +1,5 @@
 import { HttpStatus, is } from '@toba/tools';
+import { log } from '@toba/logger';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { RouteParam } from '../routes';
@@ -16,8 +17,7 @@ function send(
          view.notFound(req, res);
          return;
       }
-      p
-         .ensureLoaded()
+      p.ensureLoaded()
          .then(() => {
             render(viewName, {
                post: p,

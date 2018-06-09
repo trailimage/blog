@@ -3,7 +3,6 @@ import { MockRequest, MockResponse } from '@toba/test';
 import { Header } from '@toba/tools';
 import { menu } from '../controllers/';
 import { Page } from '../views/';
-import { expectTemplate } from './index.test';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
@@ -15,9 +14,9 @@ beforeEach(() => {
 
 test('builds data for main menu', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.PostMenuData);
+      expect(res).toRenderTemplate(Page.PostMenuData);
       expect(res.headers).toHaveKeyValue(Header.Vary, Header.Accept.Encoding);
-      expect(options).toHaveProperty('blog');
+      expect(res.rendered.context).toHaveProperty('blog');
       done();
    };
    menu.data(req, res);
@@ -25,8 +24,8 @@ test('builds data for main menu', done => {
 
 it('renders mobile menu', done => {
    res.onEnd = () => {
-      const options = expectTemplate(res, Page.MobileMenuData);
-      expect(options).toHaveProperty('blog');
+      expect(res).toRenderTemplate(Page.MobileMenuData);
+      expect(res.rendered.context).toHaveProperty('blog');
       done();
    };
    menu.mobile(req, res);

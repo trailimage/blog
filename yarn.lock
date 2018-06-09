@@ -133,8 +133,8 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.13.0":
-  version "1.13.8"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.13.8.tgz#d390483189f7ad2a498b017e585d937dada1c34d"
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.14.1.tgz#3006b424a1dcdcca40ec27119cfd1edc96ad8ed8"
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^3.1.0"
@@ -151,14 +151,14 @@
     zlib "^1.0.5"
 
 "@trailimage/flickr-provider@^2.2.0":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.2.1.tgz#5e336e824a25e06b8a7f1912221878c2af5b8d96"
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.2.2.tgz#a65f1c6381b012cb5b27a1602ded230d82572706"
   dependencies:
     "@toba/flickr" "^1.4.0"
     "@toba/logger" "^1.0.3"
     "@toba/map" "^1.2.0"
     "@toba/tools" "^3.1.0"
-    "@trailimage/models" "^1.4.0"
+    "@trailimage/models" "^1.4.6"
 
 "@trailimage/google-provider@^2.0.0":
   version "2.1.0"
@@ -170,9 +170,9 @@
     "@trailimage/models" "^1.4.0"
     geojson "^0.5.0"
 
-"@trailimage/models@^1.1.0", "@trailimage/models@^1.4.0":
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.4.5.tgz#8cbc9ff2cf26c434ceaad48c34fcc9e4c846ac45"
+"@trailimage/models@^1.1.0", "@trailimage/models@^1.4.0", "@trailimage/models@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.4.6.tgz#601f726313a490cf82b1a275c069e05402d17dd5"
   dependencies:
     "@toba/feed" "^1.2.0"
     "@toba/json-ld" "^1.2.0"
@@ -290,8 +290,8 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^10.3.0":
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.1.tgz#51092fbacaed768a122a293814474fbf6e5e8b6d"
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.2.tgz#3840ec6c12556fdda6e0e6d036df853101d732a4"
 
 "@types/range-parser@*":
   version "1.2.2"
@@ -665,11 +665,11 @@ autoprefixer@^6.3.1:
     postcss-value-parser "^3.2.3"
 
 autoprefixer@^8.0.0:
-  version "8.6.1"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.6.1.tgz#cb186e6c904cd54a4af7bda078fd27a1fddc7be5"
+  version "8.6.2"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.6.2.tgz#51d42ff13243820a582a53ecca20dedaeb7f2efd"
   dependencies:
     browserslist "^3.2.8"
-    caniuse-lite "^1.0.30000850"
+    caniuse-lite "^1.0.30000851"
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
     postcss "^6.0.22"
@@ -1059,12 +1059,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000850"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000850.tgz#965c816641576d08709bee12256a0550164b95d5"
+  version "1.0.30000851"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000851.tgz#8a0d3ca4dde72068560acc98bacf75a359e8d3e3"
 
-caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000850:
-  version "1.0.30000850"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000850.tgz#e68a88db4ea598b4c33b8419f7385473e4802495"
+caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000851:
+  version "1.0.30000851"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000851.tgz#3b498aebf9f92cf6cff4ab54d13b557c0b590533"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -7163,8 +7163,8 @@ whatwg-mimetype@^2.0.0, whatwg-mimetype@^2.1.0:
   resolved "https://registry.yarnpkg.com/whatwg-mimetype/-/whatwg-mimetype-2.1.0.tgz#f0f21d76cbba72362eb609dbed2a30cd17fcc7d4"
 
 whatwg-url@^6.4.0, whatwg-url@^6.4.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-6.4.1.tgz#fdb94b440fd4ad836202c16e9737d511f012fd67"
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-6.5.0.tgz#f2df02bff176fd65070df74ad5ccbb5a199965a8"
   dependencies:
     lodash.sortby "^4.7.0"
     tr46 "^1.0.1"

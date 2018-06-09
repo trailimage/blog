@@ -5,7 +5,6 @@ import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { photo } from './';
 import { normalizeTag } from './photo';
-import { expectTemplate } from './index.test';
 import { loadMockData } from './.test-data';
 import { config } from '../config';
 
@@ -32,7 +31,8 @@ test('normalizes photo tags', () => {
 
 test('loads all photo tags', done => {
    res.onEnd = () => {
-      const context = expectTemplate(res, Page.PhotoTag);
+      expect(res).toRenderTemplate(Page.PhotoTag);
+      const context = res.rendered.context;
       expect(context).toHaveProperty('alphabet', alphabet);
       expect(context).toHaveAllProperties('tags', 'selected');
       expect(context.tags).toHaveAllProperties('a', 'b', 'c');
@@ -44,7 +44,8 @@ test('loads all photo tags', done => {
 
 test('shows all photos with tag', done => {
    res.onEnd = () => {
-      const context = expectTemplate(res, Page.PhotoSearch);
+      expect(res).toRenderTemplate(Page.PhotoSearch);
+      const context = res.rendered.context;
       expect(context).toHaveProperty('photos');
       expect(context.photos).toBeInstanceOf(Array);
       expect(context.photos).toHaveLength(19);
@@ -56,7 +57,8 @@ test('shows all photos with tag', done => {
 
 test('loads EXIF', done => {
    res.onEnd = () => {
-      const context = expectTemplate(res, Page.EXIF);
+      expect(res).toRenderTemplate(Page.EXIF);
+      const context = res.rendered.context;
       expect(context).toHaveProperty('EXIF');
       expect(context.EXIF).toHaveAllProperties(
          'ISO',

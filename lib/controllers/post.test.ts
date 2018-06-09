@@ -4,7 +4,6 @@ import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { post } from './';
-import { expectRedirect, expectTemplate } from './index.test';
 import { loadMockData } from './.test-data';
 
 const req = new MockRequest();
@@ -21,52 +20,60 @@ beforeEach(() => {
    req.reset();
 });
 
-test('shows latest', () => {
+test('shows latest', done => {
    res.onEnd = () => {
-      const context = expectTemplate(res, Page.Post);
+      expect(res).toRenderTemplate(Page.Post);
+      const context = res.rendered.context;
       expect(context).toHaveProperty('slug', 'stanley-lake-snow-hike');
       expect(context.layout).toBeNull();
+      done();
    };
    post.latest(req, res);
 });
 
-test('forwards to correct URL from Flickr set ID', () => {
+test('forwards to correct URL from Flickr set ID', done => {
    res.onEnd = () => {
-      expectRedirect(res, '/ruminations');
+      expect(res).toRedirectTo('./ruminations');
+      done();
    };
    req.params[RouteParam.PostID] = config.providers.post.featureSets[0].id;
    post.withID(req, res);
 });
 
-test('redirects to post containing photo', () => {
+test('redirects to post containing photo', done => {
    res.onEnd = () => {
-      expectRedirect(res, '/ruminations#8458410907');
+      expect(res).toRedirectTo('/ruminations#8458410907');
+      done();
    };
    req.params[RouteParam.PhotoID] = '8458410907';
    post.withPhoto(req, res);
 });
 
-test('shows post with slug', () => {
+test('shows post with slug', done => {
    res.endOnRender = false;
    res.onEnd = () => {
-      const context = expectTemplate(res, Page.Post);
+      expect(res).toRenderTemplate(Page.Post);
+      const context = res.rendered.context;
       expect(context).toHaveProperty('title', 'Kuna Cave Fails to Impress');
       expect(context).toHaveProperty('post');
       expect(context.post).toHaveProperty('id', '72157668896453295');
       expect(context.post).toHaveProperty('isPartial', false);
+      done();
    };
    req.params[RouteParam.PostKey] = 'kuna-cave-fails-to-impress';
    post.withKey(req, res);
 });
 
-test('shows post in series', () => {
+test('shows post in series', done => {
    res.endOnRender = false;
    res.onEnd = () => {
-      const context = expectTemplate(res, Page.Post);
+      expect(res).toRenderTemplate(Page.Post);
+      const context = res.rendered.context;
       expect(context).toHaveProperty('title', 'Brother Ride 2015');
       expect(context).toHaveProperty('post');
       expect(context.post).toHaveProperty('id', '72157658679070399');
       expect(context.post).toHaveProperty('isPartial', true);
+      done();
    };
    req.params[RouteParam.SeriesKey] = 'brother-ride-2015';
    req.params[RouteParam.PartKey] = 'huckleberry-lookout';

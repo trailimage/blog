@@ -1,19 +1,26 @@
+import '@toba/test';
+import { MockRequest, MockResponse } from '@toba/test';
 import { HttpStatus, Header, Encoding, MimeType } from '@toba/tools';
 import { RouteParam } from '../routes';
-// const { prepare, expectTemplate } = require('./index.test');
 import { Page } from '../views/';
 import { map } from './';
-import { expectTemplate } from './index.test';
+
+const req = new MockRequest();
+const res = new MockResponse(req);
+
+beforeEach(() => {
+   res.reset();
+   req.reset();
+});
 
 test('displays map for post', () => {
-   const { req, res } = createContext();
-
    res.onEnd = () => {
-      const options = expectTemplate(Page.Mapbox);
-      expect(options).toHaveProperty('post');
-      expect(options).toHaveProperty('title', 'Kuna Cave Fails to Impress Map');
-      expect(options.post).toHaveProperty('key', 'kuna-cave-fails-to-impress');
-      expect(options).toHaveProperty('photoID', 0);
+      expect(res).toRenderTemplate(Page.Mapbox);
+      const context = res.rendered.context;
+      expect(context).toHaveProperty('post');
+      expect(context).toHaveProperty('title', 'Kuna Cave Fails to Impress Map');
+      expect(context.post).toHaveProperty('key', 'kuna-cave-fails-to-impress');
+      expect(context).toHaveProperty('photoID', 0);
    };
    req.params[RouteParam.PostKey] = 'kuna-cave-fails-to-impress';
 
@@ -22,15 +29,16 @@ test('displays map for post', () => {
 
 test('displays map for series', () => {
    res.onEnd = () => {
-      const options = expectTemplate(Page.Mapbox);
-      expect(options).toHaveProperty(
+      expect(res).toRenderTemplate(Page.Mapbox);
+      const context = res.rendered.context;
+      expect(context).toHaveProperty(
          'title',
          'Brother Ride 2015: Huckleberry Lookout Map'
       );
-      expect(options).toHaveProperty('photoID', 0);
-      expect(options).toHaveProperty('post');
-      expect(options.post).toHaveProperty('id', '72157658679070399');
-      expect(options.post).toHaveProperty('isPartial', true);
+      expect(context).toHaveProperty('photoID', 0);
+      expect(context).toHaveProperty('post');
+      expect(context.post).toHaveProperty('id', '72157658679070399');
+      expect(context.post).toHaveProperty('isPartial', true);
    };
    req.params[RouteParam.SeriesKey] = 'brother-ride-2015';
    req.params[RouteParam.PartKey] = 'huckleberry-lookout';
@@ -39,29 +47,30 @@ test('displays map for series', () => {
 
 test('loads GeoJSON for post', done => {
    res.onEnd = () => {
-      expect(res.httpStatus).equals(HttpStatus.OK);
+      expect(res.httpStatus).toBe(HttpStatus.OK);
       expect(res.headers).toHaveProperty(Header.Content.Type);
-      expect(res.headers[Header.Content.Type]).to.include(MimeType.JSON);
+      expect(res.headers[Header.Content.Type]).toHaveProperty(MimeType.JSON);
       expect(res.headers).toHaveProperty(
          Header.Content.Encoding,
          Encoding.GZip
       );
       expect(res.content).toBeDefined();
-      expect(res.content).is.length.above(1000);
+      expect(res.content).toHaveLength(1000);
       done();
    };
-   req.params[ph.POST_KEY] = 'stanley-lake-snow-hike';
+   req.params[RouteParam.PostKey] = 'stanley-lake-snow-hike';
    map.json.post(req, res);
 });
 
 it.skip('downloads GPX', done => {
    res.onEnd = () => {
-      const options = expectTemplate(Page.Mapbox);
-      expect(options).toHaveProperty('title', 'Map');
-      expect(options).toHaveProperty('photoID', 0);
-      expect(options).toHaveProperty('post');
-      expect(options.post).toHaveProperty('id', '72157658679070399');
-      expect(options.post).toHaveProperty('isPartial', true);
+      expect(res).toRenderTemplate(Page.Mapbox);
+      const context = res.rendered.context;
+      expect(context).toHaveProperty('title', 'Map');
+      expect(context).toHaveProperty('photoID', 0);
+      expect(context).toHaveProperty('post');
+      expect(context.post).toHaveProperty('id', '72157658679070399');
+      expect(context.post).toHaveProperty('isPartial', true);
       done();
    };
    req.params[RouteParam.PostKey] = 'stanley-lake-snow-hike';
