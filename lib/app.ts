@@ -22,7 +22,7 @@ const root = path.join(__dirname, '..');
 configureModels();
 createWebService();
 
-function configureModels() {
+export function configureModels() {
    Object.assign(googleConfig, config.providers.map);
    Object.assign(flickrConfig, config.providers.post);
 
