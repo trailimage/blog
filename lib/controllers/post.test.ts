@@ -11,16 +11,16 @@ const res = new MockResponse(req);
 
 beforeAll(async done => {
    await loadMockData();
-   console.debug = jest.fn();
+   console.debug = console.log = jest.fn();
    done();
 });
 
 beforeEach(() => {
    res.reset();
-   req.reset();
 });
 
 test('shows latest', done => {
+   res.endOnRender = false;
    res.onEnd = () => {
       expect(res).toRenderTemplate(Page.Post);
       const context = res.rendered.context;
@@ -33,7 +33,7 @@ test('shows latest', done => {
 
 test('forwards to correct URL from Flickr set ID', done => {
    res.onEnd = () => {
-      expect(res).toRedirectTo('./ruminations');
+      expect(res).toRedirectTo('/ruminations');
       done();
    };
    req.params[RouteParam.PostID] = config.providers.post.featureSets[0].id;

@@ -13,26 +13,20 @@
          "cwd": "${workspaceRoot}"
       },
       {
-         "name": "Attach to Node",
+         "name": "Jest",
          "type": "node",
-         "request": "attach",
-         "port": 9229
-      },
-      // https://github.com/Microsoft/vscode/issues/13405
-      // https://github.com/gulp-sourcemaps/gulp-sourcemaps
-      {
-         "name": "Chrome Debug",
-         "type": "chrome",
          "request": "launch",
-         "url": "http://localhost:3000/map/",
-         "userDataDir": "${workspaceRoot}/.vscode/chrome",
-         "webRoot": "${workspaceRoot}/dist",
-         "showAsyncStacks": true,
-         "skipFiles": ["jquery.js"],
-         "sourceMaps": true
-         // "sourceMapPathOverrides": {
-         //    "/source/*": "${workspaceRoot}/*"
-         // }
+         "port": 9229,
+         "address": "localhost",
+         //"program": "${workspaceRoot}/node_modules/.bin/jest",
+         "runtimeArgs": [
+            "--inspect-brk",
+            "./node_modules/jest/bin/jest.js",
+            "--runInBand",
+            "post.test.ts"
+         ],
+         //"args": ["post"],
+         "cwd": "${workspaceRoot}"
       },
       {
          "name": "Gulp",
