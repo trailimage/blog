@@ -71,16 +71,18 @@ function blogJSON(_req: Request, res: Response) {
 /**
  * Compressed GeoJSON of all site photos.
  */
-function photoJSON(req: Request, res: Response) {
-   blog
-      .photos()
-      .then(item => {
-         view.sendCompressed(res, MimeType.JSON, item);
-      })
-      .catch(err => {
-         log.error(err);
-         view.notFound(req, res);
-      });
+async function photoJSON(req: Request, res: Response) {
+   const features = await blog.makePhotoFeatures();
+
+   // blog
+   //    .photos()
+   //    .then(item => {
+   //       view.sendCompressed(res, MimeType.JSON, item);
+   //    })
+   //    .catch(err => {
+   //       log.error(err);
+   //       view.notFound(req, res);
+   //    });
 }
 
 /**
