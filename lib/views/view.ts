@@ -17,6 +17,8 @@ export interface ViewContext {
    subtitle?: string;
    /** Link Data JSON that's serialized to page. */
    jsonLD?: JsonLD.Thing;
+   /** Serialized Link Data JSON. */
+   linkData?: string;
    /** Name of layout to use or `null` to render view only. */
    layout?: string;
 }
@@ -162,6 +164,7 @@ function internalError(res: Response, err?: Error): void {
  * @param viewName View name and cache key
  * @param context Values available within view template
  * @param type Optional mime type set in response header
+ * @param minify Whether to minify the rendered output
  */
 function send(
    res: Response,
@@ -173,7 +176,7 @@ function send(
 
 /**
  * Send rendered view in HTTP response.
- * @param slug Cache key
+ * @param slug URL path used as cache key
  * @param fallback Method to create context and render view if not cached
  */
 function send(
@@ -252,7 +255,8 @@ function makeRenderer(res: Response, slug: string): Renderer {
       }
 
       if (is.defined(context, 'jsonLD')) {
-         context.thing = serialize(context.jsonLD);
+         context.linkData = serialize(context.jsonLD);
+         delete context['jsonLD'];
       }
 
       // always send full config to views

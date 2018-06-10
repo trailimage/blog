@@ -17,8 +17,8 @@ export const posts = {
    subtitleSeparator: ':',
    /** Photo EXIF is only shown for named artists */
    artistNames: ['Abbott', 'Wright', 'Bowman', 'Thomas', 'Reed'],
-   /** Root category displayed on home page */
-   defaultCategory: 'When'
+   /** Key (slug) of root category to display on home page */
+   defaultCategory: 'when'
 };
 
 export const map = {

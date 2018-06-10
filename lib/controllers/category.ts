@@ -17,7 +17,7 @@ function send(req: Request, res: Response, path: string, homePage = false) {
 
          const jsonLD = category.jsonLD(); //(path, homePage);
          const count = category.posts.size;
-         const options = { posts: category.posts };
+         const context = { posts: Array.from(category.posts) };
          const subtitle = config.site.postAlias + (count > 1 ? 's' : '');
 
          renderCategory(
@@ -25,7 +25,7 @@ function send(req: Request, res: Response, path: string, homePage = false) {
             Page.Category,
             category,
             jsonLD,
-            options,
+            context,
             count,
             subtitle
          );
@@ -49,7 +49,7 @@ export function forPath(req: Request, res: Response) {
 }
 
 /**
- * "Home" page shows latest default category that contains posts
+ * "Home" page shows latest default category that contains posts.
  * This is still messed up from a configurability perspective since it assumes
  * the default tag has years as child tags
  */
@@ -87,7 +87,7 @@ export function list(req: Request, res: Response) {
       if (is.value(category)) {
          const jsonLD = category.jsonLD();
          const count = category.subcategories.size;
-         const context = { subcategories: category.subcategories };
+         const context = { subcategories: Array.from(category.subcategories) };
          const subtitle = 'Subcategories';
 
          renderCategory(

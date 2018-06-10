@@ -133,8 +133,8 @@
     oauth "^0.9.15"
 
 "@toba/test@^1.13.0":
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.14.2.tgz#69b04135bd89cf714873f983ed99f9fef63d6a1e"
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.14.3.tgz#0e57414a6542d7dc26df1150279775206e2b78cb"
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^3.1.0"
