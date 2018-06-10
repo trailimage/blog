@@ -160,8 +160,8 @@ function internalError(res: Response, err?: Error): void {
 }
 
 /**
- * Send rendered view in HTTP response.
- * @param viewName View name and cache key
+ * Send rendered template in HTTP response.
+ * @param viewName Template name and cache key
  * @param context Values available within view template
  * @param type Optional mime type set in response header
  * @param minify Whether to minify the rendered output
@@ -175,20 +175,21 @@ function send(
 ): void;
 
 /**
- * Send rendered view in HTTP response.
+ * Send rendered template in HTTP response. If view is not cached then return
+ * method to capture the render context to create the view content.
  * @param slug URL path used as cache key
- * @param fallback Method to create context and render view if not cached
+ * @param contextify Method to create context and render template if not cached
  */
 function send(
    res: Response,
    slug: string,
-   fallback: (renderer: Renderer) => void
+   contextify: (renderer: Renderer) => void
 ): void;
 
 function send(
    res: Response,
    slug: string,
-   fallbackOrContext: (renderer: Renderer) => void | ViewContext,
+   context: (renderer: Renderer) => void | ViewContext,
    type?: MimeType,
    minify = false
 ) {
@@ -207,10 +208,25 @@ function send(
 
    const renderer = makeRenderer(res, slug);
 
-   if (is.callable(fallbackOrContext)) {
-      fallbackOrContext(renderer);
+   if (is.callable(context)) {
+      context(renderer);
    } else {
-      renderer(slug, fallbackOrContext, type, minify);
+      renderer(slug, context, type, minify);
+   }
+}
+
+function sendJSON(res: Response, slug: string) {
+   if (config.cache.views) {
+      const item = cache.get(slug);
+
+      if (item !== null) {
+         // send cached item directly
+         return sendItem(res, item);
+      } else {
+         log.info(`"${slug}" not cached`, { slug });
+      }
+   } else {
+      log.warn(`Caching disabled for ${slug}`, { slug });
    }
 }
 
