@@ -4,16 +4,22 @@ import { HttpStatus, Header, Encoding, MimeType } from '@toba/tools';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { map } from './';
+import { loadMockData } from './.test-data';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
 
-beforeEach(() => {
-   res.reset();
-   req.reset();
+beforeAll(async done => {
+   await loadMockData();
+   console.debug = console.log = jest.fn();
+   done();
 });
 
-test('displays map for post', () => {
+beforeEach(() => {
+   res.reset();
+});
+
+test('displays map for post', done => {
    res.onEnd = () => {
       expect(res).toRenderTemplate(Page.Mapbox);
       const context = res.rendered.context;
@@ -21,13 +27,14 @@ test('displays map for post', () => {
       expect(context).toHaveProperty('title', 'Kuna Cave Fails to Impress Map');
       expect(context.post).toHaveProperty('key', 'kuna-cave-fails-to-impress');
       expect(context).toHaveProperty('photoID', 0);
+      done();
    };
    req.params[RouteParam.PostKey] = 'kuna-cave-fails-to-impress';
 
    map.post(req, res);
 });
 
-test('displays map for series', () => {
+test('displays map for series', done => {
    res.onEnd = () => {
       expect(res).toRenderTemplate(Page.Mapbox);
       const context = res.rendered.context;
@@ -39,6 +46,7 @@ test('displays map for series', () => {
       expect(context).toHaveProperty('post');
       expect(context.post).toHaveProperty('id', '72157658679070399');
       expect(context.post).toHaveProperty('isPartial', true);
+      done();
    };
    req.params[RouteParam.SeriesKey] = 'brother-ride-2015';
    req.params[RouteParam.PartKey] = 'huckleberry-lookout';
@@ -48,9 +56,8 @@ test('displays map for series', () => {
 test('loads GeoJSON for post', done => {
    res.onEnd = () => {
       expect(res.httpStatus).toBe(HttpStatus.OK);
-      expect(res.headers).toHaveProperty(Header.Content.Type);
-      expect(res.headers[Header.Content.Type]).toHaveProperty(MimeType.JSON);
-      expect(res.headers).toHaveProperty(
+      expect(res.headers).toHaveKeyValue(Header.Content.Type, MimeType.JSON);
+      expect(res.headers).toHaveKeyValue(
          Header.Content.Encoding,
          Encoding.GZip
       );
