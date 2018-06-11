@@ -7,7 +7,7 @@ import {
    mapProvider,
    config as googleConfig
 } from '@trailimage/google-provider';
-import { config } from '../config';
+import { config } from './config';
 
 export function loadMockData() {
    Object.assign(googleConfig, config.providers.map);

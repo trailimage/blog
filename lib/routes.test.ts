@@ -1,27 +1,32 @@
 import '@toba/test';
 import { config } from './config/';
 import { route, RouteParam } from './routes';
-import Express from 'express';
+import { ExpressApp } from './express-mock';
+import { loadMockData } from './.test-data';
 
-const app: Express.Application = Express();
+const app = new ExpressApp();
 
-beforeAll(() => {
+beforeAll(async done => {
+   await loadMockData();
    route.standard(app);
+   done();
 });
 
 test('creates series routes', () => {
    const base = '/:postKey([\\w\\d-]{4,})';
-   //expect(app.middleware).toHaveProperty(base);
-   expect(app.routes.get).toHaveValues(base + '/', base + '/gpx');
+   expect(app.middleware).toHaveKeys(base);
+   expect(app.routes.get).toHaveKeys(base + '/', base + '/gpx');
 });
 
 test('creates photo tag routes', () => {
    const base = '/photo-tag';
    const ph = ':' + RouteParam.PhotoTag;
-   expect(app.middleware).toHaveProperty(base);
-   expect(app.routes.get).toHaveProperty(base + '/');
-   expect(app.routes.get).toHaveProperty(base + '/' + ph);
-   expect(app.routes.get).toHaveProperty(base + '/search/' + ph);
+   expect(app.middleware).toHaveKeys(base);
+   expect(app.routes.get).toHaveKeys(
+      base + '/',
+      base + '/' + ph,
+      base + '/search/' + ph
+   );
 });
 
 // it.skip('forwards old blog paths to new location', ()=> {
@@ -34,7 +39,7 @@ test('creates photo tag routes', () => {
 // });
 //
 test('forwards deprecated urls to new location', () => {
-   expect(app.routes.get).toHaveAllProperties(
+   expect(app.routes.get).toHaveKeys(
       ...Object.keys(config.redirects).map(r => '/' + r)
    );
 });

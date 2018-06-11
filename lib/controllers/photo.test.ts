@@ -5,7 +5,7 @@ import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { photo } from './';
 import { normalizeTag } from './photo';
-import { loadMockData } from './.test-data';
+import { loadMockData } from '../.test-data';
 import { config } from '../config';
 
 const req = new MockRequest();

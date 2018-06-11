@@ -4,7 +4,7 @@ import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { post } from './';
-import { loadMockData } from './.test-data';
+import { loadMockData } from '../.test-data';
 
 const req = new MockRequest();
 const res = new MockResponse(req);

@@ -109,7 +109,9 @@ function standard(app: Express.Application) {
    /** Pattern matching any root category key */
    const rootCategory = `:${RouteParam.RootCategory}(${Array.from(
       blog.categories.values()
-   ).join('|')})`;
+   )
+      .map(c => c.key)
+      .join('|')})`;
 
    for (const slug in config.redirects) {
       app.get('/' + slug, (_req: Express.Request, res: Express.Response) => {

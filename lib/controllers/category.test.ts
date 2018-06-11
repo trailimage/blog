@@ -3,7 +3,7 @@ import { MockRequest, MockResponse } from '@toba/test';
 import { RouteParam } from '../routes';
 import { Page } from '../views/index';
 import { category } from './index';
-import { loadMockData } from './.test-data';
+import { loadMockData } from '../.test-data';
 
 const req = new MockRequest();
 const res = new MockResponse(req);

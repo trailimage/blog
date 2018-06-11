@@ -2,7 +2,7 @@ import '@toba/test';
 import { Header, MimeType } from '@toba/tools';
 import { postFeed } from './rss';
 import { MockRequest, MockResponse } from '@toba/test';
-import { loadMockData } from './.test-data';
+import { loadMockData } from '../.test-data';
 
 const req = new MockRequest();
 const res = new MockResponse(req);
