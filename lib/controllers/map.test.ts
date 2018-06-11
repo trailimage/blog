@@ -1,6 +1,12 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import { HttpStatus, Header, Encoding, MimeType } from '@toba/tools';
+import {
+   HttpStatus,
+   Header,
+   Encoding,
+   MimeType,
+   addCharSet
+} from '@toba/tools';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { map } from './';
@@ -56,7 +62,10 @@ test('displays map for series', done => {
 test('loads GeoJSON for post', done => {
    res.onEnd = () => {
       expect(res.httpStatus).toBe(HttpStatus.OK);
-      expect(res.headers).toHaveKeyValue(Header.Content.Type, MimeType.JSON);
+      expect(res.headers).toHaveKeyValue(
+         Header.Content.Type,
+         addCharSet(MimeType.JSON)
+      );
       expect(res.headers).toHaveKeyValue(
          Header.Content.Encoding,
          Encoding.GZip

@@ -58,7 +58,7 @@ async function createWebService() {
       app.use(compress());
       app.use(Express.static(root + 'dist'));
 
-      await blog.build();
+      await blog.load();
       // blog must be loaded before routes are defined
       route.standard(app);
       app.listen(port);

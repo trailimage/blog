@@ -1,33 +1,41 @@
 import { is } from '@toba/tools';
-import { Request, Response, RequestHandler } from 'express';
+import { IncomingMessage, ServerResponse } from 'http';
 
-function assert(methodName, pattern, handler) {
-   if (!is.value(pattern)) {
-      throw new ReferenceError(`app.${methodName}() pattern cannot be null`);
-   }
-   if (!is.value(handler)) {
-      throw new ReferenceError(`app.${methodName}() handler cannot be null`);
-   }
+enum HandlerType {
+   Route = 'router'
 }
 
-type MiddlewareMap = { [key: string]: RequestHandler };
+interface NextFunction {
+   (err?: any): void;
+}
 
-export default class ExpressApp {
+interface RequestHandler {
+   (req: IncomingMessage, res: ServerResponse, next: NextFunction): any;
+}
+
+interface Middleware extends RequestHandler {
+   name: HandlerType;
+   /** Internal stack of handlers */
+   stack: any[];
+}
+
+class ExpressApp {
    routes: {
-      get: MiddlewareMap;
-      post: MiddlewareMap;
+      get: Map<string, RequestHandler>;
+      post: Map<string, RequestHandler>;
    };
 
-   middleware: MiddlewareMap = {};
+   middleware: Map<string, Middleware> = new Map();
+
+   constructor() {
+      this.reset();
+   }
 
    /**
-    * Use middleware or router
-    * @param {string} pattern
-    * @param {function(BloRequest, BlogResponse, function)} middleware
+    * Use middleware or router.
     */
-   use(pattern: string, middleware: RequestHandler) {
-      assert('use', pattern, middleware);
-      this.middleware[pattern] = middleware;
+   use(pattern: string, middleware: Middleware) {
+      this.middleware.set(pattern, middleware);
 
       if (
          is.defined(middleware, 'name') &&
@@ -36,33 +44,35 @@ export default class ExpressApp {
       ) {
          middleware.stack.reduce((routes, s) => {
             const handler = s.route.stack[0];
-            routes[handler.method][pattern + s.route.path] = handler.handle;
+            routes[handler.method].set(pattern + s.route.path, handler.handle);
             return routes;
          }, this.routes);
       }
    }
 
    /**
-    * Add GET route.
+    * Add `GET` route
     */
    get(pattern: string, handler: RequestHandler) {
-      assert('get', pattern, handler);
-      this.routes.get[pattern] = handler;
+      this.routes.get.set(pattern, handler);
    }
 
    /**
-    * Add POST route
+    * Add `POST` route.
     */
    post(pattern: string, handler: RequestHandler) {
-      assert('post', pattern, handler);
-      this.routes.post[pattern] = handler;
+      this.routes.post.set(pattern, handler);
    }
 
    reset() {
       this.routes = {
-         get: {},
-         post: {}
+         get: new Map(),
+         post: new Map()
       };
-      this.middleware = {};
+      this.middleware = new Map();
    }
+}
+
+export default function() {
+   return new ExpressApp();
 }

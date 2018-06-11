@@ -1,6 +1,14 @@
 import { JsonLD, serialize } from '@toba/json-ld';
 import { log } from '@toba/logger';
-import { Cache, Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
+import {
+   Cache,
+   Encoding,
+   Header,
+   HttpStatus,
+   MimeType,
+   is,
+   addCharSet
+} from '@toba/tools';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
@@ -193,41 +201,43 @@ function send(
    type?: MimeType,
    minify = false
 ) {
-   if (config.cache.views) {
-      const item = cache.get(slug);
+   if (!sendFromCache(res, slug)) {
+      const renderer = makeRenderer(res, slug);
 
-      if (item !== null) {
-         // send cached item directly
-         return sendItem(res, item);
+      if (is.callable(context)) {
+         context(renderer);
       } else {
-         log.info(`"${slug}" not cached`, { slug });
+         renderer(slug, context, type, minify);
       }
-   } else {
-      log.warn(`Caching disabled for ${slug}`, { slug });
-   }
-
-   const renderer = makeRenderer(res, slug);
-
-   if (is.callable(context)) {
-      context(renderer);
-   } else {
-      renderer(slug, context, type, minify);
    }
 }
 
-function sendJSON(res: Response, slug: string) {
+/**
+ * @param cacheKey
+ * @param generator Method to generate JSON if not in cache
+ */
+function sendJSON(res: Response, cacheKey: string, generator: () => object) {
+   if (!sendFromCache(res, cacheKey)) {
+      const json = JSON.stringify(generator());
+      cacheAndSend(res, json, cacheKey, MimeType.JSON);
+   }
+}
+
+function sendFromCache(res: Response, slug: string): boolean {
    if (config.cache.views) {
       const item = cache.get(slug);
 
       if (item !== null) {
          // send cached item directly
-         return sendItem(res, item);
+         sendItem(res, item);
+         return true;
       } else {
          log.info(`"${slug}" not cached`, { slug });
       }
    } else {
       log.warn(`Caching disabled for ${slug}`, { slug });
    }
+   return false;
 }
 
 /**
@@ -245,7 +255,7 @@ export function sendItem(res: Response, item: ViewItem, cache = true) {
       res.setHeader(Header.PRAGMA, 'no-cache');
    }
    res.setHeader(Header.eTag, item.eTag);
-   res.setHeader(Header.Content.Type, item.type + ';charset=utf-8');
+   res.setHeader(Header.Content.Type, addCharSet(item.type));
    res.write(item.buffer);
    res.end();
 }
@@ -318,6 +328,7 @@ async function cacheAndSend(
 
 export const view = {
    send,
+   sendJSON,
    notFound,
    internalError
 };

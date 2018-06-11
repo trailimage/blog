@@ -1,21 +1,12 @@
 import '@toba/test';
 import { config } from './config/';
-import route from './routes';
+import { route } from './routes';
+import Express from 'express';
 
-const app = require('./mocks/express.mock');
+const app: Express.Application = Express();
 
 beforeAll(() => {
    route.standard(app);
-});
-
-test('creates admin routes', () => {
-   const base = '/admin';
-   expect(app.middleware).toHaveProperty(base);
-   expect(app.routes.get).toHaveProperty(base + '/');
-   expect(app.routes.post).toHaveAllProperties(
-      `${base}/map/delete`,
-      `${base}/view/delete`
-   );
 });
 
 test('creates series routes', () => {
@@ -44,7 +35,7 @@ test('creates photo tag routes', () => {
 // });
 //
 test('forwards deprecated urls to new location', () => {
-   expect(app.routes.get).to.contain.all.keys(
-      Object.keys(config.redirects).map(r => '/' + r)
+   expect(app.routes.get).toHaveAllProperties(
+      ...Object.keys(config.redirects).map(r => '/' + r)
    );
 });

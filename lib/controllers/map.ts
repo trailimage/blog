@@ -1,6 +1,13 @@
 import { log } from '@toba/logger';
 import { geoJSON, kml, MapSource } from '@toba/map';
-import { Encoding, Header, HttpStatus, MimeType, is } from '@toba/tools';
+import {
+   Encoding,
+   Header,
+   HttpStatus,
+   MimeType,
+   is,
+   addCharSet
+} from '@toba/tools';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import fetch from 'node-fetch';
@@ -71,41 +78,22 @@ function blogJSON(_req: Request, res: Response) {
 /**
  * Compressed GeoJSON of all site photos.
  */
-async function photoJSON(req: Request, res: Response) {
-   const features = await blog.makePhotoFeatures();
-
-   // blog
-   //    .photos()
-   //    .then(item => {
-   //       view.sendCompressed(res, MimeType.JSON, item);
-   //    })
-   //    .catch(err => {
-   //       log.error(err);
-   //       view.notFound(req, res);
-   //    });
+async function photoJSON(_req: Request, res: Response) {
+   view.sendJSON(res, 'map', async () => await blog.geoJSON());
 }
 
 /**
- * Compressed GeoJSON of track for post.
+ * Compressed GeoJSON of post photos and possible track.
  */
-function trackJSON(req: Request, res: Response) {
-   const post = blog.postWithKey(req.params[RouteParam.PostKey]);
+async function trackJSON(req: Request, res: Response) {
+   const slug = req.params[RouteParam.PostKey];
+   const post = blog.postWithKey(slug);
 
    if (is.value(post)) {
-      view.sendCompressed(res, MimeType.JSON, item);
+      view.sendJSON(res, slug + '/map', async () => await post.geoJSON());
    } else {
       view.notFound(req, res);
    }
-
-   // factory.map
-   //    .track(req.params[RouteParam.PostKey])
-   //    .then(item => {
-   //       view.sendCompressed(res, MimeType.JSON, item);
-   //    })
-   //    .catch(err => {
-   //       log.error(err);
-   //       view.notFound(req, res);
-   //    });
 }
 
 /**
@@ -145,10 +133,7 @@ async function source(req: Request, res: Response) {
             } else {
                res.setHeader(Header.Content.Encoding, Encoding.GZip);
                res.setHeader(Header.CacheControl, 'max-age=86400, public'); // seconds
-               res.setHeader(
-                  Header.Content.Type,
-                  MimeType.JSON + ';charset=utf-8'
-               );
+               res.setHeader(Header.Content.Type, addCharSet(MimeType.JSON));
                res.setHeader(
                   Header.Content.Disposition,
                   `attachment; filename=${key}`

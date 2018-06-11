@@ -8,13 +8,11 @@
          "command": "./node_modules/.bin/nodemon ./lib/app.js",
          "type": "shell",
          "isBackground": true,
-         "problemMatcher": [
-            "$tsc-watch"
-         ]
+         "problemMatcher": ["$tsc-watch"]
       },
       {
          "label": "Test",
-         "command": "npm run test-pretty",
+         "command": "./node_modules/.bin/jest",
          "type": "shell",
          "group": "test",
          "problemMatcher": []
