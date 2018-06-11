@@ -55,7 +55,7 @@ export class ExpressApp extends EventEmitter {
    /**
     * Add `GET` route
     */
-   get(pattern: string, handler: RequestHandler) {
+   get(pattern: string, handler: RequestHandler): any {
       this.routes.get.set(pattern, handler);
    }
 
@@ -82,11 +82,11 @@ export class ExpressApp extends EventEmitter {
       return;
    }
 
-   engine(_ext: string, _fn: Function): this {
+   engine(_ext: string, _fn: Function): any {
       return this;
    }
 
-   set(_setting: string, _val: any): this {
+   set(_setting: string, _val: any): any {
       return this;
    }
    //get: ((name: string) => any) & IRouterMatcher<this>;
@@ -173,11 +173,38 @@ export class ExpressApp extends EventEmitter {
    }
    on: (event: string, callback: (parent: ExpressApp) => void) => this;
 
-   router: string;
-   settings: any;
-   resource: any;
-   map: any;
-   locals: any;
    _router: any;
+   all: any;
+   checkout: any;
+   connect: any;
+   copy: any;
+   delete: any;
+   head: any;
+   lock: any;
+   locals: any;
+   ['m-search']: any;
+   map: any;
+   merge: any;
+   mkactivity: any;
+   mkcol: any;
    mountpath: string | string[];
+   move: any;
+   notify: any;
+   options: any;
+   patch: any;
+   propfind: any;
+   proppatch: any;
+   purge: any;
+   put: any;
+   report: any;
+   resource: any;
+   router: string;
+   search: any;
+   settings: any;
+   subscribe: any;
+   trace: any;
+   unlock: any;
+   unsubscribe: any;
+   route: any;
+   stack: any;
 }
