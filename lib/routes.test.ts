@@ -1,6 +1,6 @@
 import '@toba/test';
 import { config } from './config/';
-import { route } from './routes';
+import { route, RouteParam } from './routes';
 import Express from 'express';
 
 const app: Express.Application = Express();
@@ -11,14 +11,13 @@ beforeAll(() => {
 
 test('creates series routes', () => {
    const base = '/:postKey([\\w\\d-]{4,})';
-   expect(app.middleware).toHaveProperty(base);
-   expect(app.routes.get).toHaveProperty(base + '/');
-   expect(app.routes.get).toHaveProperty(base + '/gpx');
+   //expect(app.middleware).toHaveProperty(base);
+   expect(app.routes.get).toHaveValues(base + '/', base + '/gpx');
 });
 
 test('creates photo tag routes', () => {
    const base = '/photo-tag';
-   const ph = ':' + C.route.PHOTO_TAG;
+   const ph = ':' + RouteParam.PhotoTag;
    expect(app.middleware).toHaveProperty(base);
    expect(app.routes.get).toHaveProperty(base + '/');
    expect(app.routes.get).toHaveProperty(base + '/' + ph);
