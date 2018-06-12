@@ -19,10 +19,10 @@
       },
       {
          "label": "Build and Watch Client",
-         "command": "npm run watch",
-         "type": "shell",
-         "isBackground": true,
-         "problemMatcher": []
+         "script": "watch",
+         "group": "build",
+         "type": "npm",
+         "problemMatcher": ["$tsc"]
       },
       {
          "label": "Build and Watch Server",
@@ -30,6 +30,13 @@
          "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
          "type": "shell",
          "problemMatcher": "$tsc"
+      },
+      {
+         "label": "Build Server",
+         "type": "npm",
+         "group": "build",
+         "script": "prepare",
+         "problemMatcher": ["$tsc"]
       }
    ]
 }
