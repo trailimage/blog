@@ -3,14 +3,14 @@
 
 
 "@babel/code-frame@^7.0.0-beta.35":
-  version "7.0.0-beta.49"
-  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.49.tgz#becd805482734440c9d137e46d77340e64d7f51b"
+  version "7.0.0-beta.50"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.50.tgz#45dcddf66dd003c511019af4ceffde91e8121772"
   dependencies:
-    "@babel/highlight" "7.0.0-beta.49"
+    "@babel/highlight" "7.0.0-beta.50"
 
-"@babel/highlight@7.0.0-beta.49":
-  version "7.0.0-beta.49"
-  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.49.tgz#96bdc6b43e13482012ba6691b1018492d39622cc"
+"@babel/highlight@7.0.0-beta.50":
+  version "7.0.0-beta.50"
+  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.50.tgz#fb0ccbd720de30985111f5af4ff6538080208ef0"
   dependencies:
     chalk "^2.0.0"
     esutils "^2.0.2"
@@ -62,16 +62,16 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
 "@toba/block-spam-referer@^1.0.0":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@toba/block-spam-referer/-/block-spam-referer-1.0.4.tgz#737422eaf0b3aea8820ab83565206a0b92aba3dd"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@toba/block-spam-referer/-/block-spam-referer-1.0.6.tgz#bd758d39e117385f09303097ad9ce6d755c170b9"
   dependencies:
-    "@toba/tools" "^3.0.0"
-    "@types/node-fetch" "^1.6.7"
+    "@toba/tools" "^3.2.0"
+    "@types/node-fetch" "^2.1.0"
     node-fetch "^2.1.1"
 
 "@toba/build@^1.5.0":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.5.1.tgz#20d07fc1a941cb84fd42fc0d7a7a2ba53352cef6"
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@toba/build/-/build-1.7.1.tgz#da7ad0bd5c66d98aa8a7b5809949c58401867d8f"
   dependencies:
     stylelint "^9.2.0"
     stylelint-config-standard "^18.2.0"
@@ -81,14 +81,14 @@
     tslint-consistent-codestyle "^1.13.0"
 
 "@toba/feed@^1.2.0", "@toba/feed@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.3.0.tgz#8d96706ec82fe219924b6bf7dfa37de34549beb6"
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@toba/feed/-/feed-1.3.2.tgz#acdcceba53a48bcff346c788ca9a673336b996a5"
   dependencies:
     "@toba/tools" "^3.1.0"
 
 "@toba/flickr@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.4.0.tgz#ad0df3a33c9aa8c6ad545389d8da8116f563d62a"
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.4.1.tgz#5b46bf8df5f053058e36687bc4710b0a61ed9110"
   dependencies:
     "@toba/logger" "^1.0.0"
     "@toba/oauth" "^1.2.0"
@@ -106,21 +106,21 @@
     googleapis "^32.0.0"
 
 "@toba/json-ld@^1.2.0":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.2.3.tgz#4d7e14168106345d9e6c8760cfd7d54df2caa964"
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@toba/json-ld/-/json-ld-1.2.4.tgz#ba4bb7a9237c1ac53de160a03ae873b49daef52c"
 
 "@toba/logger@^1.0.0", "@toba/logger@^1.0.3", "@toba/logger@^1.0.4", "@toba/logger@^1.0.5":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@toba/logger/-/logger-1.0.6.tgz#b789b393bf017ea7b3fe6277f913c8004379e737"
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@toba/logger/-/logger-1.0.9.tgz#035758df52f90235e94c5be4db2f0a003441ad81"
   dependencies:
-    "@toba/tools" "^3.1.0"
+    "@toba/tools" "^3.0.0"
     chalk "^2.4.0"
     flat "^4.0.0"
     logfmt "^1.2.0"
 
 "@toba/map@^1.2.0":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.2.3.tgz#adb7e9a43b40d53054ff5848a238c789efaa9165"
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@toba/map/-/map-1.2.4.tgz#7f5878b9d96ffc6964f17129c133742928b1aaef"
   dependencies:
     "@toba/tools" "^3.1.0"
     "@types/geojson" "^7946.0.2"
@@ -128,8 +128,8 @@
     xmldom "^0.1.27"
 
 "@toba/oauth@^1.2.0":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@toba/oauth/-/oauth-1.2.2.tgz#e8955a32bcbe0c96a1a288f0ae97f2348541611e"
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@toba/oauth/-/oauth-1.2.4.tgz#aca999538c7528178b20606e2f5ffd9744364db2"
   dependencies:
     oauth "^0.9.15"
 
@@ -138,8 +138,8 @@
   resolved "https://registry.yarnpkg.com/@toba/open/-/open-1.0.1.tgz#33339287cd1dadb98bcc97a2bd93b106864744a7"
 
 "@toba/test@^1.13.0":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.16.0.tgz#0654d88b74e3c39a17d9097a5f15c3db987242cc"
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.16.2.tgz#1de34bec03a42e20d00b9b2a7bc11e898754fa1a"
   dependencies:
     "@toba/logger" "^1.0.4"
     "@toba/tools" "^3.2.0"
@@ -150,14 +150,14 @@
     ts-jest "^22.4.0"
 
 "@toba/tools@^3.0.0", "@toba/tools@^3.1.0", "@toba/tools@^3.2.0":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.2.1.tgz#c941f68dabaf845c6fe682c635a3cc98a8d4b62d"
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.2.3.tgz#2d05a8607566db6cbd16d1768a6beb6ab7753603"
   dependencies:
     zlib "^1.0.5"
 
 "@trailimage/flickr-provider@^2.2.0":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.2.2.tgz#a65f1c6381b012cb5b27a1602ded230d82572706"
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.2.3.tgz#6b73cbefb16a3bef7e663583f6534525ebb8b4d2"
   dependencies:
     "@toba/flickr" "^1.4.0"
     "@toba/logger" "^1.0.3"
@@ -176,8 +176,8 @@
     geojson "^0.5.0"
 
 "@trailimage/models@^1.1.0", "@trailimage/models@^1.4.0", "@trailimage/models@^1.4.6":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.5.1.tgz#063766a4979a138ad045b742c4836a3b21d89033"
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-1.5.2.tgz#162203bd41febb60ccf6b84aa68bef35aadcbace"
   dependencies:
     "@toba/feed" "^1.3.0"
     "@toba/json-ld" "^1.2.0"
@@ -281,12 +281,6 @@
 "@types/mime@*":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
-
-"@types/node-fetch@^1.6.7":
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-1.6.9.tgz#a750fb0f4cf2960bf72b462e4c86908022dd69c5"
-  dependencies:
-    "@types/node" "*"
 
 "@types/node-fetch@^2.1.0":
   version "2.1.1"
