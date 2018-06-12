@@ -1,10 +1,10 @@
 import '@toba/test';
 import { config } from './config/';
 import { route, RouteParam } from './routes';
-import { ExpressApp } from './express-mock';
+import { MockExpressApp } from '@toba/test';
 import { loadMockData } from './.test-data';
 
-const app = new ExpressApp();
+const app = new MockExpressApp();
 
 beforeAll(async done => {
    await loadMockData();

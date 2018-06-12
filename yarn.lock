@@ -138,18 +138,18 @@
   resolved "https://registry.yarnpkg.com/@toba/open/-/open-1.0.1.tgz#33339287cd1dadb98bcc97a2bd93b106864744a7"
 
 "@toba/test@^1.13.0":
-  version "1.14.3"
-  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.14.3.tgz#0e57414a6542d7dc26df1150279775206e2b78cb"
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.16.0.tgz#0654d88b74e3c39a17d9097a5f15c3db987242cc"
   dependencies:
     "@toba/logger" "^1.0.4"
-    "@toba/tools" "^3.1.0"
+    "@toba/tools" "^3.2.0"
     "@types/jest" "^23.0.0"
     "@types/node" "^10.3.0"
     jest "^23.1.0"
     jest-localstorage-mock "^2.2.0"
     ts-jest "^22.4.0"
 
-"@toba/tools@^3.0.0", "@toba/tools@^3.1.0":
+"@toba/tools@^3.0.0", "@toba/tools@^3.1.0", "@toba/tools@^3.2.0":
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.2.1.tgz#c941f68dabaf845c6fe682c635a3cc98a8d4b62d"
   dependencies:
@@ -259,8 +259,8 @@
   resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.9.tgz#893eb307bfcbff95ef6c9ce70f72e6f9a2068cc4"
 
 "@types/jest@^23.0.0":
-  version "23.0.0"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.0.0.tgz#760cac74f00bb9c3075587716d2b3b4435663bc0"
+  version "23.0.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.0.2.tgz#f03f9e6dd2206cc2a2e8fd033161b0b7cf905db6"
 
 "@types/jquery@^3.3.0":
   version "3.3.2"
@@ -1064,12 +1064,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000851"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000851.tgz#8a0d3ca4dde72068560acc98bacf75a359e8d3e3"
+  version "1.0.30000852"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000852.tgz#c37a706048f8d81f87946a7c13f39ed636876659"
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000851:
-  version "1.0.30000851"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000851.tgz#3b498aebf9f92cf6cff4ab54d13b557c0b590533"
+  version "1.0.30000852"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000852.tgz#8b7510cec030cac7842e52beca2bf292af65f935"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -1275,12 +1275,16 @@ collection-visit@^1.0.0:
     object-visit "^1.0.0"
 
 color-convert@^1.3.0, color-convert@^1.9.0:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.2.tgz#49881b8fba67df12a96bdf3f56c0aab9e7913147"
   dependencies:
-    color-name "^1.1.1"
+    color-name "1.1.1"
 
-color-name@^1.0.0, color-name@^1.1.1:
+color-name@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.1.tgz#4b1415304cf50028ea81643643bd82ea05803689"
+
+color-name@^1.0.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
@@ -6729,8 +6733,8 @@ ts-jest@^22.4.0:
     yargs "^11.0.0"
 
 ts-node@^6.0.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.1.0.tgz#a2c37a11fdb58e60eca887a1269b025cf4d2f8b8"
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.1.1.tgz#19607140acb06150441fcdb61be11f73f7b6657e"
   dependencies:
     arrify "^1.0.0"
     diff "^3.1.0"
