@@ -3,5 +3,12 @@
    "compilerOptions": {
       "declaration": false
    },
-   "exclude": ["./lib/types", "./lib/client", "node_modules"]
+   "include": ["./src/**/*.ts"],
+   "exclude": [
+      "./src/types",
+      "./src/client",
+      "./src/**/*.test.ts",
+      "./src/**/__mocks__",
+      "node_modules"
+   ]
 }

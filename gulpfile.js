@@ -9,7 +9,7 @@ const vinyl = require('vinyl');
 const path = require('path');
 const sourcemaps = require('gulp-sourcemaps');
 const merge = require('merge2');
-const jsPath = './lib/client/';
+const jsPath = './src/client/';
 const dist = './dist/';
 /**
  * https://github.com/gulp-sourcemaps/gulp-sourcemaps

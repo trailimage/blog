@@ -4,12 +4,12 @@
       "target": "es5",
       "module": "none",
       "outDir": "./public/js",
-      "baseUrl": "./lib/client",
+      "baseUrl": "./src/client",
       "noEmitOnError": true,
       "alwaysStrict": true,
       "declaration": false,
       "lib": ["es2017", "dom"]
    },
-   "include": ["./lib/client/*.ts"],
-   "exclude": ["./lib/types/", "node_modules"]
+   "include": ["./src/client/*.ts"],
+   "exclude": ["./src/types/", "node_modules"]
 }
