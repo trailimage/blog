@@ -3,14 +3,14 @@
 
 
 "@babel/code-frame@^7.0.0-beta.35":
-  version "7.0.0-beta.50"
-  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.50.tgz#45dcddf66dd003c511019af4ceffde91e8121772"
+  version "7.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.51.tgz#bd71d9b192af978df915829d39d4094456439a0c"
   dependencies:
-    "@babel/highlight" "7.0.0-beta.50"
+    "@babel/highlight" "7.0.0-beta.51"
 
-"@babel/highlight@7.0.0-beta.50":
-  version "7.0.0-beta.50"
-  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.50.tgz#fb0ccbd720de30985111f5af4ff6538080208ef0"
+"@babel/highlight@7.0.0-beta.51":
+  version "7.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.51.tgz#e8844ae25a1595ccfd42b89623b4376ca06d225d"
   dependencies:
     chalk "^2.0.0"
     esutils "^2.0.2"
@@ -96,13 +96,12 @@
     node-fetch "^2.1.0"
 
 "@toba/google-drive@^1.2.0":
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/@toba/google-drive/-/google-drive-1.2.4.tgz#d84d4f062cec08d1989752e6454d5ca6b53de825"
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@toba/google-drive/-/google-drive-1.2.5.tgz#2535d3cf41b696a0158e8ef80bd13ba2087d28b4"
   dependencies:
     "@toba/logger" "^1.0.3"
     "@toba/oauth" "^1.2.0"
-    "@toba/open" "^1.0.1"
-    "@toba/tools" "^3.1.0"
+    "@toba/tools" "^3.2.0"
     googleapis "^32.0.0"
 
 "@toba/json-ld@^1.2.0":
@@ -133,10 +132,6 @@
   dependencies:
     oauth "^0.9.15"
 
-"@toba/open@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@toba/open/-/open-1.0.1.tgz#33339287cd1dadb98bcc97a2bd93b106864744a7"
-
 "@toba/test@^1.13.0":
   version "1.16.2"
   resolved "https://registry.yarnpkg.com/@toba/test/-/test-1.16.2.tgz#1de34bec03a42e20d00b9b2a7bc11e898754fa1a"
@@ -166,8 +161,8 @@
     "@trailimage/models" "^1.4.6"
 
 "@trailimage/google-provider@^2.0.0":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@trailimage/google-provider/-/google-provider-2.1.1.tgz#e03f70ed5acf6da8d66abc59e60d20429cbeb0f0"
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@trailimage/google-provider/-/google-provider-2.1.2.tgz#2fa3048ef3994c1ee5383bca7c2f7f5a0e1534ea"
   dependencies:
     "@toba/google-drive" "^1.2.0"
     "@toba/map" "^1.2.0"
@@ -1058,12 +1053,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000852"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000852.tgz#c37a706048f8d81f87946a7c13f39ed636876659"
+  version "1.0.30000853"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000853.tgz#32901a7d6b93a87d59f08aaee47ea8ff6ec90fdf"
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000851:
-  version "1.0.30000852"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000852.tgz#8b7510cec030cac7842e52beca2bf292af65f935"
+  version "1.0.30000853"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000853.tgz#505249fc78d60e20ad47af3c13706d6f9fd209fd"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -5546,8 +5541,8 @@ pseudomap@^1.0.1, pseudomap@^1.0.2:
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
 psl@^1.1.24:
-  version "1.1.27"
-  resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.27.tgz#2b2c77019db86855170d903532400bf71ee085b6"
+  version "1.1.28"
+  resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.28.tgz#4fb6ceb08a1e2214d4fd4de0ca22dae13740bc7b"
 
 pstree.remy@^1.1.0:
   version "1.1.0"
