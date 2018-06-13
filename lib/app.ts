@@ -66,8 +66,10 @@ async function createWebService() {
    }
 }
 
-// https://github.com/donpark/hbs/blob/master/examples/extend/app.js
-// http://mustache.github.com/mustache.5.html
+/**
+ * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
+ * @see http://mustache.github.com/mustache.5.html
+ */
 function defineViews(app: Express.Application) {
    const engine = 'hbs';
    const views = path.normalize(root + 'views/');

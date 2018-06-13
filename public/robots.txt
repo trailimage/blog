@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /js/
+Disallow: /script/
+Disallow: /css/
+Disallow: /style/
+Disallow: /img/
+Disallow: /image/
+Disallow: /fonts/
+Disallow: /map/
+Disallow: /geo.json
+Disallow: /channel.html
+Disallow: /contact

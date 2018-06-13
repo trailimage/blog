@@ -1,12 +1,13 @@
 {
-   "extends": "./tsconfig.json",
+   "extends": "./node_modules/@toba/build/ts/config",
    "compilerOptions": {
       "target": "es5",
       "module": "none",
-      "outDir": "./dist/js",
+      "outDir": "./public/js",
       "baseUrl": "./lib/client",
       "noEmitOnError": true,
       "alwaysStrict": true,
+      "declaration": false,
       "lib": ["es2017", "dom"]
    },
    "include": ["./lib/client/*.ts"],

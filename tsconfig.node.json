@@ -1,9 +1,7 @@
 {
-   "extends": "./tsconfig.json",
+   "extends": "./node_modules/@toba/build/ts/config",
    "compilerOptions": {
-      "outDir": "./public",
-      "lib": ["es2017"]
+      "declaration": false
    },
-   "exclude": ["./lib/types", "./lib/client", "node_modules"],
-   "include": ["./lib/app.ts"]
+   "exclude": ["./lib/types", "./lib/client", "node_modules"]
 }
