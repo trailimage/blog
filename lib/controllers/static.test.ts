@@ -1,5 +1,5 @@
 import '@toba/test';
-import { Header, MimeType } from '@toba/tools';
+import { Header, MimeType. addCharSet } from '@toba/tools';
 import { MockRequest, MockResponse } from '@toba/test';
 import { Page } from '../views/index';
 import { staticPage } from './static';
@@ -30,7 +30,7 @@ test('renders sitemap', done => {
       expect(context).toHaveAllProperties('posts', 'categories', 'tags');
       expect(res.headers).toHaveKeyValue(
          Header.Content.Type,
-         MimeType.XML + ';charset=utf-8'
+         addCharSet(MimeType.XML)
       );
       done();
    };
