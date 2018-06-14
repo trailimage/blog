@@ -1,16 +1,8 @@
 //import { log } from '@toba/logger';
-import { geoJSON, kml, MapSource } from '@toba/map';
-import {
-   Encoding,
-   Header,
-   HttpStatus,
-   MimeType,
-   is,
-   addCharSet
-} from '@toba/tools';
+import { MapSource, loadSource } from '@toba/map';
+import { Encoding, Header, MimeType, is, addCharSet } from '@toba/tools';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
-import fetch from 'node-fetch';
 import * as compress from 'zlib';
 import { config } from '../config';
 import { RouteParam } from '../routes';
@@ -113,57 +105,34 @@ async function source(req: Request, res: Response) {
       return view.notFound(req, res);
    }
 
-   const s = config.map.source[key.replace('.json', '')];
+   const geo = await loadSource(key.replace('.json', ''));
 
-   if (!is.value<MapSource>(s)) {
+   if (!is.value<MapSource>(geo)) {
       return view.notFound(req, res);
    }
 
-   // for now hardcoded to KMZ
-   const parser = fetchKMZ(s.provider);
+   const geoText = JSON.stringify(geo);
 
-   const reply = await fetch(s.url, {
-      headers: { [Header.UserAgent]: 'node.js' }
-   });
-
-   if (reply.status !== HttpStatus.OK) {
-      res.end(reply.status);
-      return;
-   }
-
-   parser(reply)
-      .then(JSON.stringify)
-      .then(geoText => {
-         compress.gzip(Buffer.from(geoText), (err: Error, buffer: Buffer) => {
-            if (is.value(err)) {
-               view.internalError(res, err);
-            } else {
-               res.setHeader(Header.Content.Encoding, Encoding.GZip);
-               res.setHeader(Header.CacheControl, 'max-age=86400, public'); // seconds
-               res.setHeader(Header.Content.Type, addCharSet(MimeType.JSON));
-               res.setHeader(
-                  Header.Content.Disposition,
-                  `attachment; filename=${key}`
-               );
-               res.write(buffer);
-               res.end();
-            }
-         });
-      })
-      .catch((err: Error) => {
-         view.internalError(res, err);
+   try {
+      compress.gzip(Buffer.from(geoText), (err: Error, buffer: Buffer) => {
+         if (is.value(err)) {
+            view.internalError(res, err);
+         } else {
+            res.setHeader(Header.Content.Encoding, Encoding.GZip);
+            res.setHeader(Header.CacheControl, 'max-age=86400, public'); // seconds
+            res.setHeader(Header.Content.Type, addCharSet(MimeType.JSON));
+            res.setHeader(
+               Header.Content.Disposition,
+               `attachment; filename=${key}`
+            );
+            res.write(buffer);
+            res.end();
+         }
       });
+   } catch (err) {
+      view.internalError(res, err);
+   }
 }
-
-/**
- * Curried method to capture `sourceName` used in the GeoJSON conversion to
- * load any custom transformations.
- */
-const fetchKMZ = (sourceName: string) => (res: Response) =>
-   res
-      .buffer()
-      .then(kml.fromKMZ)
-      .then(geoJSON.featuresFromKML(sourceName));
 
 /**
  * Initiate GPX download for a post.
@@ -183,7 +152,6 @@ async function gpx(req: Request, res: Response) {
 
 export const map = {
    gpx,
-   fetchKMZ,
    post,
    series,
    source,
