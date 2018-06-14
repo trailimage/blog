@@ -1,4 +1,4 @@
-import { log } from '@toba/logger';
+//import { log } from '@toba/logger';
 import { geoJSON, kml, MapSource } from '@toba/map';
 import {
    Encoding,
@@ -15,6 +15,9 @@ import * as compress from 'zlib';
 import { config } from '../config';
 import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
+
+const mapPath = 'map';
+const gpxPath = 'gpx';
 
 /**
  * Render map screen for a post. Add photo ID to template context if given so
@@ -79,7 +82,7 @@ function blogJSON(_req: Request, res: Response) {
  * Compressed GeoJSON of all site photos.
  */
 async function photoJSON(_req: Request, res: Response) {
-   view.sendJSON(res, 'map', async () => await blog.geoJSON());
+   view.sendJSON(res, mapPath, async () => await blog.geoJSON());
 }
 
 /**
@@ -90,7 +93,11 @@ async function trackJSON(req: Request, res: Response) {
    const post = blog.postWithKey(slug);
 
    if (is.value(post)) {
-      view.sendJSON(res, slug + '/map', async () => await post.geoJSON());
+      view.sendJSON(
+         res,
+         `${slug}/${mapPath}`,
+         async () => await post.geoJSON()
+      );
    } else {
       view.notFound(req, res);
    }
@@ -161,20 +168,14 @@ const fetchKMZ = (sourceName: string) => (res: Response) =>
 /**
  * Initiate GPX download for a post.
  */
-function gpx(req: Request, res: Response) {
+async function gpx(req: Request, res: Response) {
    const post = config.map.allowDownload
       ? blog.postWithKey(req.params[RouteParam.PostKey])
       : null;
 
    if (is.value(post)) {
-      //post.
-      google.drive
-         .loadGPX(post, res)
-         .then(() => {
-            res.end();
-         })
-         // errors already logged by loadGPX()
-         .catch(() => view.notFound(req, res));
+      const geo = await post.geoJSON();
+      //view.sendJSON(res, 'some key',
    } else {
       view.notFound(req, res);
    }
