@@ -65,6 +65,9 @@ function trails(from: MapProperties): MapProperties {
    return out;
 }
 
+/**
+ * Normalize mining field names.
+ */
 function mines(from: MapProperties): MapProperties {
    const out: MapProperties = {};
    // lowercase "name" is the county name
