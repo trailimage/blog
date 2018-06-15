@@ -12,6 +12,7 @@ import {
    mapProvider,
    config as googleConfig
 } from '@trailimage/google-provider';
+import { config as mapConfig } from '@toba/map';
 import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from './config';
 import { Layout, addTemplateMethods } from './views/';
@@ -25,6 +26,7 @@ createWebService();
 export function configureModels() {
    Object.assign(googleConfig, config.providers.map);
    Object.assign(flickrConfig, config.providers.post);
+   Object.assign(mapConfig, config.map);
 
    modelConfig.site = config.site;
    modelConfig.owner = config.owner;

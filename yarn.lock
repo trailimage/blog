@@ -62,8 +62,8 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
 "@toba/block-spam-referer@^1.0.0":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@toba/block-spam-referer/-/block-spam-referer-1.0.7.tgz#9f2be35a2ca0ac7b4e260f8113e95797a7d8fdfd"
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@toba/block-spam-referer/-/block-spam-referer-1.0.8.tgz#f970aacbeaf3cc24871adbae5b85e6e37b43b3dd"
   dependencies:
     "@toba/tools" "^3.2.0"
     "@types/node-fetch" "^2.1.0"
@@ -364,8 +364,8 @@ acorn-globals@^4.1.0:
     acorn "^5.0.0"
 
 acorn@5.X, acorn@^5.0.0, acorn@^5.0.3, acorn@^5.3.0:
-  version "5.6.2"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.6.2.tgz#b1da1d7be2ac1b4a327fb9eab851702c5045b4e7"
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.1.tgz#f095829297706a7c9776958c0afc8930a9b9d9d8"
 
 ajv-keywords@^3.0.0:
   version "3.2.0"
@@ -1055,12 +1055,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000855"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000855.tgz#34f88bf1577aa505395e48e412dc21f7dd41ef3b"
+  version "1.0.30000856"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000856.tgz#fbebb99abe15a5654fc7747ebb5315bdfde3358f"
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000851:
-  version "1.0.30000855"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000855.tgz#d5a26a9093b932d6266bf4ed9294b41b84945d14"
+  version "1.0.30000856"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000856.tgz#ecc16978135a6f219b138991eb62009d25ee8daa"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -5236,21 +5236,21 @@ postcss-filter-plugins@^2.0.0:
   dependencies:
     postcss "^5.0.4"
 
-postcss-html@^0.23.6:
-  version "0.23.7"
-  resolved "https://registry.yarnpkg.com/postcss-html/-/postcss-html-0.23.7.tgz#47146c15e21b9c00746c40115dcff8270c439f32"
+postcss-html@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/postcss-html/-/postcss-html-0.28.0.tgz#3dd0f5b5d7f886b8181bf844396d43a7898162cb"
   dependencies:
     htmlparser2 "^3.9.2"
 
-postcss-less@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/postcss-less/-/postcss-less-1.1.5.tgz#a6f0ce180cf3797eeee1d4adc0e9e6d6db665609"
+postcss-less@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-less/-/postcss-less-2.0.0.tgz#5d190b8e057ca446d60fe2e2587ad791c9029fb8"
   dependencies:
     postcss "^5.2.16"
 
-postcss-markdown@^0.23.6:
-  version "0.23.7"
-  resolved "https://registry.yarnpkg.com/postcss-markdown/-/postcss-markdown-0.23.7.tgz#7e3a398794295c425e51e4f0abdee6d13ad3d134"
+postcss-markdown@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/postcss-markdown/-/postcss-markdown-0.28.0.tgz#99d1c4e74967af9e9c98acb2e2b66df4b3c6ed86"
   dependencies:
     remark "^9.0.0"
     unist-util-find-all-after "^1.0.2"
@@ -5428,9 +5428,9 @@ postcss-svgo@^2.1.1:
     postcss-value-parser "^3.2.3"
     svgo "^0.7.0"
 
-postcss-syntax@^0.9.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/postcss-syntax/-/postcss-syntax-0.9.1.tgz#5dbd90af1631ab8805b8f594bef2c2e8002d3758"
+postcss-syntax@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/postcss-syntax/-/postcss-syntax-0.28.0.tgz#e17572a7dcf5388f0c9b68232d2dad48fa7f0b12"
 
 postcss-unique-selectors@^2.0.2:
   version "2.0.2"
@@ -6435,8 +6435,8 @@ stylelint-scss@^3.1.0:
     postcss-value-parser "^3.3.0"
 
 stylelint@^9.2.0:
-  version "9.2.1"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-9.2.1.tgz#fe63c169f6cd3bc81e77f0e3c6443df3267ec211"
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-9.3.0.tgz#fe176e4e421ac10eac1a6b6d9f28e908eb58c5db"
   dependencies:
     autoprefixer "^8.0.0"
     balanced-match "^1.0.0"
@@ -6461,9 +6461,9 @@ stylelint@^9.2.0:
     normalize-selector "^0.2.0"
     pify "^3.0.0"
     postcss "^6.0.16"
-    postcss-html "^0.23.6"
-    postcss-less "^1.1.5"
-    postcss-markdown "^0.23.6"
+    postcss-html "^0.28.0"
+    postcss-less "^2.0.0"
+    postcss-markdown "^0.28.0"
     postcss-media-query-parser "^0.2.3"
     postcss-reporter "^5.0.0"
     postcss-resolve-nested-selector "^0.1.1"
@@ -6471,7 +6471,7 @@ stylelint@^9.2.0:
     postcss-sass "^0.3.0"
     postcss-scss "^1.0.2"
     postcss-selector-parser "^3.1.0"
-    postcss-syntax "^0.9.0"
+    postcss-syntax "^0.28.0"
     postcss-value-parser "^3.3.0"
     resolve-from "^4.0.0"
     signal-exit "^3.0.2"
