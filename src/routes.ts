@@ -154,10 +154,11 @@ function standard(app: Express.Application) {
  */
 function authentication(app: Express.Application) {
    // provider authentication callbacks
-   app.get('/auth/flickr', auth.flickr);
-   app.get('/auth/google', auth.google);
+   // TODO: use config for these URLs
+   app.get('/auth/flickr', auth.post);
+   app.get('/auth/google', auth.map);
    // all other routes begin authentication process
-   app.get('*', auth.view);
+   app.get('*', auth.main);
 }
 
 export const route = {
