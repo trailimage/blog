@@ -71,7 +71,7 @@ test('loads GeoJSON for post', done => {
          Encoding.GZip
       );
       expect(res.content).toBeDefined();
-      expect(res.content).toHaveLength(1000);
+      expect(res.content.length).toBeWithin(10, 1000);
       done();
    };
    req.params[RouteParam.PostKey] = 'stanley-lake-snow-hike';
