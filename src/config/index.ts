@@ -1,5 +1,4 @@
 import { Duration, env } from '@toba/tools';
-import { MapConfig } from '@toba/map';
 import { mapProvider } from './map-provider';
 import { postProvider } from './post-provider';
 import { owner, site, domain } from './models';

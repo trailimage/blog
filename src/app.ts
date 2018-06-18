@@ -23,7 +23,7 @@ export function configureModels() {
    modelConfig.site = config.site;
    modelConfig.owner = config.owner;
    modelConfig.subtitleSeparator = config.posts.subtitleSeparator;
-   modelConfig.maxPhotoMarkersOnMap = config.map.maxMarkers;
+   modelConfig.maxPhotoMarkersOnMap = config.providers.map.maxMarkers;
    modelConfig.providers.post = postProvider;
    modelConfig.providers.map = mapProvider;
 }
