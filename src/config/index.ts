@@ -6,7 +6,6 @@ import { owner, site, domain } from './models';
 import { redirects, photoTagChanges } from './redirects';
 import { bing, facebook, mapbox, google } from './vendors';
 import { keywords, style } from './views';
-import { mapSource } from './mapsource';
 
 const isProduction = process.env['NODE_ENV'] === 'production';
 
@@ -20,33 +19,6 @@ export const posts = {
    artistNames: ['Abbott', 'Wright', 'Bowman', 'Thomas', 'Reed'],
    /** Key (slug) of root category to display on home page */
    defaultCategory: 'when'
-};
-
-export const map: MapConfig = {
-   minimumTrackLength: 0.2,
-   minimumTrackPoints: 5,
-   /** Distance a track point must deviate from others to avoid Douglas-Peucker simplification */
-   maxPointDeviationFeet: 0.5,
-   /** Manually adjusted tracks may have infinite speeds between points so throw out anything over a threshold */
-   maxPossibleSpeed: 150,
-   /** Erase tracks around given latitude and longitude */
-   privacyCenter: null as number[],
-   /** Radius around `privacyCenter` to exclude from GeoJSON */
-   privacyMiles: 1,
-   /** Whether to enforce `privacy` settings */
-   checkPrivacy: false,
-   /** Whether track GPX files can be downloaded */
-   allowDownload: true,
-   /** Maximum number of photo markers to show on Mapbox static map */
-   maxMarkers: 70,
-   /** Link patterns to external maps with `lat`, `lon`, `zoom` and `altitude` tokens */
-   link: {
-      googleEarth:
-         'https://earth.google.com/web/@{lat},{lon},1100a,{altitude}d,35y,0h,0t,0r',
-      gaiaGPS:
-         'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
-   },
-   source: mapSource
 };
 
 export const config = {
@@ -88,7 +60,6 @@ export const config = {
       maps: true
    },
    contactLink: `<a href="mailto:${owner.email}">Contact</a>`,
-   map,
    style,
    cacheDuration: Duration.Day * 2,
    retryDelay: Duration.Second * 30,

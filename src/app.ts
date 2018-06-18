@@ -4,15 +4,8 @@ import * as compress from 'compression';
 import * as Express from 'express';
 import * as hbs from 'express-hbs';
 import * as path from 'path';
-import {
-   postProvider,
-   config as flickrConfig
-} from '@trailimage/flickr-provider';
-import {
-   mapProvider,
-   config as googleConfig
-} from '@trailimage/google-provider';
-import { config as mapConfig } from '@toba/map';
+import { postProvider } from '@trailimage/flickr-provider';
+import { mapProvider } from '@trailimage/google-provider';
 import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from './config';
 import { Layout, addTemplateMethods } from './views/';
@@ -24,9 +17,8 @@ configureModels();
 createWebService();
 
 export function configureModels() {
-   Object.assign(googleConfig, config.providers.map);
-   Object.assign(flickrConfig, config.providers.post);
-   Object.assign(mapConfig, config.map);
+   postProvider.configure(config.providers.post);
+   mapProvider.configure(config.providers.map);
 
    modelConfig.site = config.site;
    modelConfig.owner = config.owner;

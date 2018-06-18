@@ -1,21 +1,15 @@
 import { config as modelConfig, blog } from '@trailimage/models';
-import {
-   postProvider,
-   config as flickrConfig
-} from '@trailimage/flickr-provider';
-import {
-   mapProvider,
-   config as googleConfig
-} from '@trailimage/google-provider';
+import { postProvider } from '@trailimage/flickr-provider';
+import { mapProvider } from '@trailimage/google-provider';
 import { config } from './config';
 
 export function loadMockData() {
-   Object.assign(googleConfig, config.providers.map);
-   Object.assign(flickrConfig, config.providers.post);
+   postProvider.configure(config.providers.post);
+   mapProvider.configure(config.providers.map);
 
    modelConfig.owner = config.owner;
    modelConfig.subtitleSeparator = config.posts.subtitleSeparator;
-   modelConfig.maxPhotoMarkersOnMap = config.map.maxMarkers;
+   modelConfig.maxPhotoMarkersOnMap = config.providers.map.maxMarkers;
    modelConfig.providers.post = postProvider;
    modelConfig.providers.map = mapProvider;
    modelConfig.site = config.site;
