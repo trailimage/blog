@@ -2,7 +2,7 @@ import { log } from '@toba/logger';
 import { blockSpamReferers } from '@toba/block-spam-referer';
 import * as compress from 'compression';
 import * as Express from 'express';
-import * as hbs from 'express-hbs';
+import { ExpressHandlebars } from '@toba/handlebars';
 import * as path from 'path';
 import { postProvider } from '@trailimage/flickr-provider';
 import { mapProvider } from '@trailimage/google-provider';
@@ -65,19 +65,16 @@ async function createWebService() {
  * @see http://mustache.github.com/mustache.5.html
  */
 function defineViews(app: Express.Application) {
-   const engine = 'hbs';
-   const views = path.normalize(root + 'views/');
+   const viewPath = path.join(root, 'views');
+   const ehb = new ExpressHandlebars({
+      viewPath,
+      defaultLayout: path.join(viewPath, Layout.Main)
+   });
 
    // http://expressjs.com/4x/api.html#app-settings
-   app.set('views', views);
-   app.set('view engine', engine);
-   app.engine(
-      engine,
-      hbs.express4({
-         defaultLayout: views + Layout.Main + '.hbs',
-         partialsDir: views + 'partials'
-      })
-   );
+   app.set('views', viewPath);
+   app.set('view engine', ehb.fileExtension);
+   app.engine(ehb.fileExtension, ehb.renderer);
 
-   addTemplateMethods(hbs);
+   addTemplateMethods(ehb);
 }

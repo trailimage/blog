@@ -1,4 +1,5 @@
 import { rot13, dateString } from '@toba/tools';
+import { ExpressHandlebars } from '@toba/handlebars';
 import { config } from '../config';
 import { html } from './html';
 
@@ -6,7 +7,7 @@ import { html } from './html';
  * Handlebars layouts (`views/` path without `hbs` extension).
  */
 export const Layout: { [index: string]: string } = {
-   Main: 'layouts/default-layout',
+   Main: 'default-layout',
    /** Render template without a layout. */
    None: null
 };
@@ -39,7 +40,7 @@ export enum Page {
 /**
  * Assign methods that will be available from within Handlebars templates.
  */
-export function addTemplateMethods(hbs: any) {
+export function addTemplateMethods(ehb: ExpressHandlebars) {
    const helpers: { [key: string]: Function } = {
       formatCaption: html.story,
       formatTitle: html.typography,
@@ -61,6 +62,6 @@ export function addTemplateMethods(hbs: any) {
       encode: encodeURIComponent
    };
    for (const name in helpers) {
-      hbs.registerHelper(name, helpers[name]);
+      ehb.registerHelper(name, helpers[name]);
    }
 }
