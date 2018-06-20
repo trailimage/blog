@@ -138,7 +138,7 @@ async function source(req: Request, res: Response) {
  * Initiate GPX download for a post.
  */
 async function gpx(req: Request, res: Response) {
-   const post = config.map.allowDownload
+   const post = config.providers.map.allowDownload
       ? blog.postWithKey(req.params[RouteParam.PostKey])
       : null;
 

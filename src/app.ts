@@ -67,7 +67,6 @@ async function createWebService() {
 function defineViews(app: Express.Application) {
    const viewPath = path.join(root, 'views');
    const ehb = new ExpressHandlebars({
-      viewPath,
       defaultLayout: path.join(viewPath, Layout.Main)
    });
 

@@ -41,7 +41,7 @@ export enum Page {
  * Assign methods that will be available from within Handlebars templates.
  */
 export function addTemplateMethods(ehb: ExpressHandlebars) {
-   const helpers: { [key: string]: Function } = {
+   ehb.registerHelper({
       formatCaption: html.story,
       formatTitle: html.typography,
       lowerCase: (text: string) => text.toLocaleLowerCase(),
@@ -60,8 +60,5 @@ export function addTemplateMethods(ehb: ExpressHandlebars) {
       rot13: rot13,
       json: JSON.stringify,
       encode: encodeURIComponent
-   };
-   for (const name in helpers) {
-      ehb.registerHelper(name, helpers[name]);
-   }
+   });
 }
