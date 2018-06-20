@@ -4,13 +4,6 @@
    "version": "2.0.0",
    "tasks": [
       {
-         "label": "Run Server",
-         "command": "./node_modules/.bin/nodemon ./lib/app.js",
-         "type": "shell",
-         "isBackground": true,
-         "problemMatcher": ["$tsc-watch"]
-      },
-      {
          "label": "Test",
          "command": "./node_modules/.bin/jest",
          "type": "shell",
@@ -25,9 +18,25 @@
          "problemMatcher": ["$tsc"]
       },
       {
-         "label": "Build and Watch Server",
+         "label": "Build",
          "group": "build",
          "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
+         "type": "shell",
+         "problemMatcher": "$tsc"
+      },
+      {
+         "label": "Run Server",
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         },
+         "command": "./node_modules/.bin/nodemon",
+         "args": [
+            "--exec",
+            "./node_modules/.bin/ts-node",
+            "--",
+            "./src/app.ts"
+         ],
          "type": "shell",
          "problemMatcher": "$tsc"
       },
