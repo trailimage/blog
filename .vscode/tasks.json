@@ -15,7 +15,9 @@
          "script": "watch",
          "group": "build",
          "type": "npm",
-         "problemMatcher": ["$tsc"]
+         "problemMatcher": [
+            "$tsc"
+         ]
       },
       {
          "label": "Build",
@@ -25,7 +27,16 @@
          "problemMatcher": "$tsc"
       },
       {
-         "label": "Run Server",
+         "label": "Run",
+         "command": "node",
+         "args": [
+            "./lib/app.js"
+         ],
+         "type": "shell",
+         "problemMatcher": []
+      },
+      {
+         "label": "Run with nodemon",
          "group": {
             "kind": "build",
             "isDefault": true
@@ -45,7 +56,9 @@
          "type": "npm",
          "group": "build",
          "script": "prepare",
-         "problemMatcher": ["$tsc"]
+         "problemMatcher": [
+            "$tsc"
+         ]
       }
    ]
 }
