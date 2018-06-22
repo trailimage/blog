@@ -21,7 +21,7 @@
       "@toba/block-spam-referer": "^1.0.0",
       "@toba/build": "^1.7.0",
       "@toba/feed": "^1.3.0",
-      "@toba/handlebars": "^1.0.0",
+      "@toba/handlebars": "^1.1.1",
       "@toba/logger": "^1.0.3",
       "@toba/tools": "^3.3.0",
       "@trailimage/flickr-provider": "^2.3.0",
