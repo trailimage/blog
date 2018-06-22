@@ -15,24 +15,30 @@
          "script": "watch",
          "group": "build",
          "type": "npm",
-         "problemMatcher": [
-            "$tsc"
-         ]
+         "problemMatcher": ["$tsc"]
       },
       {
-         "label": "Build",
+         "label": "Build Server",
          "group": "build",
-         "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
+         "command": "./node_modules/.bin/tsc",
+         "args": ["-p", "tsconfig.node.json"],
+         "type": "shell",
+         "problemMatcher": "$tsc"
+      },
+      {
+         "label": "Build and Watch Server",
+         "group": "build",
+         "command": "./node_modules/.bin/tsc",
+         "args": ["-p", "tsconfig.node.json", "-w"],
          "type": "shell",
          "problemMatcher": "$tsc"
       },
       {
          "label": "Run",
          "command": "node",
-         "args": [
-            "./lib/app.js"
-         ],
+         "args": ["./lib/app.js"],
          "type": "shell",
+         "dependsOn": ["Build Server"],
          "problemMatcher": []
       },
       {
@@ -50,15 +56,6 @@
          ],
          "type": "shell",
          "problemMatcher": "$tsc"
-      },
-      {
-         "label": "Build Server",
-         "type": "npm",
-         "group": "build",
-         "script": "prepare",
-         "problemMatcher": [
-            "$tsc"
-         ]
       }
    ]
 }

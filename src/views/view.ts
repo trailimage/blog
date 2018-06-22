@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
 import { config } from '../config';
-import { Layout, Page } from './template';
+import { Page } from './template';
 
 /**
  * Values available within view template.
@@ -276,9 +276,9 @@ function makeRenderer(res: Response, slug: string): Renderer {
          context.description = config.site.description;
       }
 
-      if (!is.defined(context, 'layout')) {
-         context.layout = Layout.None;
-      }
+      // if (!is.defined(context, 'layout')) {
+      //    context.layout = Layout.None;
+      // }
 
       if (is.defined(context, 'jsonLD')) {
          context.linkData = serialize(context.jsonLD);

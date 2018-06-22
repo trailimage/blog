@@ -50,7 +50,7 @@ async function createWebService() {
       app.use(blockSpamReferers);
       // https://github.com/expressjs/compression/blob/master/README.md
       app.use(compress());
-      app.use(Express.static(root + 'dist'));
+      app.use(Express.static(path.join(root, 'public')));
 
       await blog.load();
       // blog must be loaded before routes are defined
@@ -67,7 +67,7 @@ async function createWebService() {
 function defineViews(app: Express.Application) {
    const viewPath = path.join(root, 'views');
    const ehb = new ExpressHandlebars({
-      defaultLayout: path.join(viewPath, Layout.Main)
+      defaultLayout: Layout.Main
    });
 
    // http://expressjs.com/4x/api.html#app-settings
