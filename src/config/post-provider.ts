@@ -29,6 +29,7 @@ export const postProvider: ProviderConfig = {
       timeZoneOffset: -7,
       searchPhotoSizes: [Flickr.SizeCode.Square150],
       setPhotoSizes: [
+         Flickr.SizeCode.Small320,
          Flickr.SizeCode.Medium640,
          Flickr.SizeCode.Medium800,
          Flickr.SizeCode.Large1024,
