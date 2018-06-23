@@ -161,8 +161,8 @@
     zlib "^1.0.5"
 
 "@trailimage/flickr-provider@^2.3.0":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.3.1.tgz#db8393184cc4aee091573d31da31fec9bbabde3c"
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@trailimage/flickr-provider/-/flickr-provider-2.3.2.tgz#a4cd1a3252c8941315b5b51e96afa76c1e4bfe7e"
   dependencies:
     "@toba/flickr" "^1.5.0"
     "@toba/logger" "^1.0.3"

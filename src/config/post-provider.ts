@@ -28,14 +28,7 @@ export const postProvider: ProviderConfig = {
       appID: '72157631007435048',
       timeZoneOffset: -7,
       searchPhotoSizes: [Flickr.SizeCode.Square150],
-      setPhotoSizes: [
-         Flickr.SizeCode.Small320,
-         Flickr.SizeCode.Medium640,
-         Flickr.SizeCode.Medium800,
-         Flickr.SizeCode.Large1024,
-         Flickr.SizeCode.Large1600,
-         Flickr.SizeCode.Large2048
-      ],
+      // setPhotoSizes will be copied from provider configuration
       excludeSets: ['72157631638576162'],
       excludeTags: [
          'Idaho',
