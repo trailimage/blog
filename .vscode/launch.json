@@ -3,7 +3,7 @@
    "configurations": [
       // http://www.mithunvp.com/typescript-tutorials-setting-visual-studio-code/
       {
-         "name": "Node Server",
+         "name": "Server (precompiled)",
          "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/lib/app.js",
@@ -11,6 +11,16 @@
          "sourceMaps": true,
          "outFiles": ["${workspaceRoot}/lib"],
          "cwd": "${workspaceRoot}"
+      },
+      {
+         "name": "Server (ts-node)",
+         "type": "node",
+         "request": "launch",
+         "args": ["${workspaceRoot}/src/app.ts"],
+         "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+         "sourceMaps": true,
+         "cwd": "${workspaceRoot}",
+         "protocol": "inspector"
       },
       {
          "name": "Jest",

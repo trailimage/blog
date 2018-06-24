@@ -4,7 +4,7 @@ import { config } from '../config';
 import { html } from './html';
 
 /**
- * Handlebars layouts (`views/` path without `hbs` extension).
+ * Handlebars layouts (`views/layouts/` path without `hbs` extension).
  */
 export const Layout: { [index: string]: string } = {
    Main: 'default-layout',

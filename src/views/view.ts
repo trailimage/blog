@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
 import { config } from '../config';
-import { Page } from './template';
+import { Page, Layout } from './template';
 
 /**
  * Values available within view template.
@@ -27,7 +27,11 @@ export interface ViewContext {
    jsonLD?: JsonLD.Thing;
    /** Serialized Link Data JSON. */
    linkData?: string;
-   /** Name of layout to use or `null` to render view only. */
+   /**
+    * Name of layout without file extension in configured layout directory.
+    * Use `null` to render view only or leave `undefined` to use the default
+    * layout.
+    */
    layout?: string;
 }
 
@@ -229,7 +233,7 @@ function sendFromCache(res: Response, slug: string): boolean {
 
       if (item !== null) {
          // send cached item directly
-         sendItem(res, item);
+         writeItemToResponse(res, item);
          return true;
       } else {
          log.info(`"${slug}" not cached`, { slug });
@@ -241,9 +245,13 @@ function sendFromCache(res: Response, slug: string): boolean {
 }
 
 /**
- * Send view item buffer as compressed response body.
+ * Set headers and write view item buffer to the response.
  */
-export function sendItem(res: Response, item: ViewItem, cache = true) {
+export function writeItemToResponse(
+   res: Response,
+   item: ViewItem,
+   cache = true
+) {
    res.setHeader(Header.Content.Encoding, Encoding.GZip);
 
    if (cache) {
@@ -275,10 +283,6 @@ function makeRenderer(res: Response, slug: string): Renderer {
       if (is.empty(context.description)) {
          context.description = config.site.description;
       }
-
-      // if (!is.defined(context, 'layout')) {
-      //    context.layout = Layout.None;
-      // }
 
       if (is.defined(context, 'jsonLD')) {
          context.linkData = serialize(context.jsonLD);
@@ -323,7 +327,7 @@ async function cacheAndSend(
 ) {
    const item = await createViewItem(slug, body, type);
    cache.add(slug, item);
-   sendItem(res, item);
+   writeItemToResponse(res, item);
 }
 
 export const view = {
