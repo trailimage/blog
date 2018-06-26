@@ -124,7 +124,7 @@ function standard(app: Express.Application) {
 
    // the latest posts
    app.get('/', category.home);
-   //app.get('/map', map.blog);
+   app.get('/map', map.blog);
    app.get(`/map/source/:${RouteParam.MapSource}([a-z\-]+\.json$)`, map.source);
    app.get('/geo.json', map.json.blog);
    app.get('/rss', postFeed);
