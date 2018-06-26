@@ -18,11 +18,11 @@
 {{{icon 'arrow_downward'}}}
 
 <nav class="categories">
-{{#each library.categories}}
+{{#each blog.categories}}
 	<ul class="{{lowerCase this.title}}">
-	{{#this.subcategories}}
-		<li><a href="/{{this.key}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.length}})</span></li>
-	{{/this.subcategories}}
+	{{#each this.subcategories}}
+		<li><a href="/{{this.key}}" rel="tag">{{this.title}}</a><span class="count">({{this.posts.size}})</span></li>
+	{{/each}}
 	</ul>
 {{/each}}
 </nav>
