@@ -6,23 +6,23 @@
    Rendered to
    http://www.trailimage.com/js/post-menu-data.js
 }}
-var postMenuData = { category: {}, post: {} };
-
+var postMenuData = {
+   category: {
 {{#each blog.categories}}
-postMenuData.category['{{this.title}}'] = [
-	{{#this.subcategories}}
-	{ 'title': '{{this.title}}', 'posts':[{{#this.posts}}'{{this.id}}',{{/this.posts}}]},
-   {{/this.subcategories}}];
+      '{{this.title}}': [{{#each this.subcategories}} {
+            title: '{{this.title}}',
+            posts: [{{#each this.posts}}'{{this.id}}'{{#unless @last}},{{/unless}}{{/each}}]
+         },{{/each}}],
 {{/each}}
-{{#each blog.posts}}
-postMenuData.post['{{this.id}}'] = {
-   'slug': '{{this.key}}',
-   'title': '{{this.title}}',
-   'icon': '{{modeIconForPost this.categories}}',
-   'description': '{{this.description}}'
-	{{#this.isPartial}},
-   'subTitle': '{{this.subTitle}}',
-   'part': {{this.part}}
-	{{/this.isPartial}}
+   },
+   post: { {{#each blog.posts}}
+      '{{this.id}}': {
+         slug: '{{this.key}}',
+         title: '{{this.title}}',
+         icon: '{{modeIconForPost this.categories}}',
+         description: '{{this.description}}'{{#this.isPartial}},
+         subTitle: '{{this.subTitle}}',
+         part: {{this.part}}{{/this.isPartial}}
+      }{{#unless @last}},{{/unless}}{{/each}}
+   }
 };
-{{/each}}
