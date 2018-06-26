@@ -3,7 +3,7 @@ import { log } from '@toba/logger';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { RouteParam } from '../routes';
-import { Page, view } from '../views/';
+import { Page, Layout, view } from '../views/';
 
 function send(
    req: Request,
@@ -23,6 +23,7 @@ function send(
                post: p,
                title: p.title,
                jsonLD: p.jsonLD(),
+               layout: Layout.None,
                description: p.longDescription,
                slug: key
             });

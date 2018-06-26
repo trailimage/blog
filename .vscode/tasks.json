@@ -42,13 +42,6 @@
          "problemMatcher": []
       },
       {
-         "type": "node",
-         "request": "launch",
-         "name": "Launch Program",
-         "runtimeArgs": ["-r", "ts-node/register"],
-         "args": ["${workspaceFolder}/index.ts"]
-      },
-      {
          "label": "Run with nodemon",
          "group": {
             "kind": "build",
