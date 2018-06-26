@@ -81,7 +81,11 @@ function tags(req: Request, res: Response) {
       tags[c] = {};
    }
    for (const [key, value] of list.entries()) {
-      const c = key.substr(0, 1).toLowerCase();
+      // key is sometimes a number
+      const c = key
+         .toString()
+         .substr(0, 1)
+         .toLowerCase();
       if (alphabet.indexOf(c) >= 0) {
          // ignore tags that don't start with a letter of the alphabet
          tags[c][key] = value;
