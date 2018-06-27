@@ -39,6 +39,17 @@ async function render(post: Post, req: Request, res: Response): Promise<void> {
 }
 
 /**
+ * @see https://www.mapbox.com/mapbox-gl-js/example/cluster/
+ */
+function blogMap(_req: Request, res: Response) {
+   res.render(Page.Mapbox, {
+      layout: Layout.None,
+      title: config.site.title + ' Map',
+      config
+   });
+}
+
+/**
  * Render map for a single post.
  */
 function post(req: Request, res: Response) {
@@ -60,21 +71,10 @@ function series(req: Request, res: Response) {
 }
 
 /**
- * @see https://www.mapbox.com/mapbox-gl-js/example/cluster/
- */
-function blogJSON(_req: Request, res: Response) {
-   res.render(Page.Mapbox, {
-      layout: Layout.None,
-      title: config.site.title + ' Map',
-      config
-   });
-}
-
-/**
  * Compressed GeoJSON of all site photos.
  */
-async function photoJSON(_req: Request, res: Response) {
-   view.sendJSON(res, mapPath, async () => await blog.geoJSON());
+function photoJSON(_req: Request, res: Response) {
+   view.sendJSON(res, mapPath, blog.geoJSON.bind(blog));
 }
 
 /**
@@ -85,11 +85,7 @@ async function trackJSON(req: Request, res: Response) {
    const post = blog.postWithKey(slug);
 
    if (is.value(post)) {
-      view.sendJSON(
-         res,
-         `${slug}/${mapPath}`,
-         async () => await post.geoJSON()
-      );
+      view.sendJSON(res, `${slug}/${mapPath}`, post.geoJSON.bind(post));
    } else {
       view.notFound(req, res);
    }
@@ -155,10 +151,10 @@ export const map = {
    post,
    series,
    source,
-   blog,
+   blog: blogMap,
    json: {
       photo: photoJSON,
       post: trackJSON,
-      blog: blogJSON
+      blog: photoJSON
    }
 };

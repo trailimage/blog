@@ -220,9 +220,13 @@ function send(
  * @param cacheKey
  * @param generator Method to generate JSON if not in cache
  */
-function sendJSON(res: Response, cacheKey: string, generator: () => object) {
+async function sendJSON(
+   res: Response,
+   cacheKey: string,
+   generator: () => Promise<object>
+) {
    if (!sendFromCache(res, cacheKey)) {
-      const json = JSON.stringify(generator());
+      const json = JSON.stringify(await generator());
       cacheAndSend(res, json, cacheKey, MimeType.JSON);
    }
 }
