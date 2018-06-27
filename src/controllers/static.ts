@@ -2,7 +2,7 @@ import { HttpStatus, MimeType, is } from '@toba/tools';
 import { blog, owner } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { config } from '../config';
-import { Page, view } from '../views/';
+import { Page, Layout, view } from '../views/';
 
 /**
  * Google search results page rendered directly without the `view.send` cache
@@ -36,6 +36,7 @@ function siteMap(_req: Request, res: Response) {
       Page.Sitemap,
       {
          posts: blog.posts,
+         layout: Layout.None,
          categories: blog.categoryKeys(),
          tags: blog.tags
       },
