@@ -1,7 +1,6 @@
 node_modules/
 profile/
 dist/
-lib/
 dist/js/maps/
 .vscode/chrome/
 yarn-error.log
