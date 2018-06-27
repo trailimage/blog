@@ -4,6 +4,13 @@
    "version": "2.0.0",
    "tasks": [
       {
+         "label": "View Heroku test logs",
+         "command": "heroku",
+         "args": ["logs", "-a", "trail-image-test"],
+         "type": "shell",
+         "problemMatcher": []
+      },
+      {
          "label": "Test",
          "command": "./node_modules/.bin/jest",
          "type": "shell",
