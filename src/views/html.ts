@@ -145,9 +145,13 @@ export const typography = (text: string) =>
  *
  * TODO: make provider agnostic
  */
-export function photoTagList(list: string[]): string {
+export function photoTagList(list: string[] | Set<string>): string {
    let links = '';
    const link = `<a href="/photo-tag/{0}" rel="${LinkRelation.Tag}">{1}</a>`;
+
+   if (list instanceof Set) {
+      list = Array.from(list);
+   }
 
    if (is.array(list)) {
       list.sort().forEach(t => {

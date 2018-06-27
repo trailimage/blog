@@ -82,7 +82,7 @@
 
 	<div id="light-box"><img src="/img/topo-map-tile.jpg"/></div>
 
-	{{#post.photos}}
+{{#each post.photos}}
 
 	<figure itemscope title="Click to enlarge image {{index}}" data-exif="/exif/{{id}}" style='width: {{size.normal.width}}px; max-width: 100%;'>
 		{{! links from photo tag search are anchored to ID }}
@@ -117,7 +117,7 @@
 
 	<div class="caption content">{{{formatCaption description}}}</div>
 
-	{{/post.photos}}
+{{/each}}
 
 {{#if post.video}}
 	<a name="video">

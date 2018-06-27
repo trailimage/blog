@@ -181,8 +181,8 @@
     geojson "^0.5.0"
 
 "@trailimage/models@^2.0.0", "@trailimage/models@^2.1.0":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-2.1.5.tgz#8de981cba94dc1486c7fa4edd16a8c3391f24bde"
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/@trailimage/models/-/models-2.1.6.tgz#35df0a14c81b3d22e86a78261a5d3261af9cc16b"
   dependencies:
     "@toba/feed" "^1.3.0"
     "@toba/json-ld" "^1.2.0"
