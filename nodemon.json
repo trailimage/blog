@@ -1,5 +1,5 @@
 {
    "verbose": true,
-   "watch": ["src"],
+   "watch": ["src", "lib", "public"],
    "ignore": ["*.test.*"]
 }

@@ -9,7 +9,7 @@
 declare const pageFeatures: PageFeature;
 
 /**
- * Only load scripts and data for the current view port and features
+ * Only load scripts and data for the current view port and features.
  */
 $(function() {
    /** Whether mobile resources have been loaded */
@@ -113,7 +113,8 @@ $(function() {
    }
 
    /**
-    * jQuery getScript() might work but this is the pattern both Facebook and Twitter employ
+    * jQuery getScript() might work but this is the pattern both Facebook and
+    * Twitter employ.
     */
    function loadSource(id: string, url: string, async: boolean = false) {
       let js;

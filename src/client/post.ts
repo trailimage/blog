@@ -12,7 +12,7 @@ interface JQuery {
  * having data-original, data-big, data-big-width and data-big-height
  * attributes.
  *
- * http://www.appelsiini.net/projects/lazyload
+ * @see http://www.appelsiini.net/projects/lazyload
  */
 $(function() {
    const eventCategory = 'Post';
@@ -33,7 +33,7 @@ $(function() {
    // tapping mobile info button loads camera detail
    $photos
       .find('.mobile-button')
-      .on('touchstart', function(this: EventTarget, e: JQuery.Event) {
+      .on('touchstart', function(this: HTMLElement, e: JQuery.Event) {
          const $button = $(this);
          const infoClass = 'mobile-info';
          const activeKey = 'info-visible';

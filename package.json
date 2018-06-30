@@ -8,7 +8,7 @@
    },
    "license": "MIT",
    "engines": {
-      "node": ">=9.11.1"
+      "node": ">=10.4.0"
    },
    "main": "lib/app.js",
    "scripts": {
@@ -60,10 +60,10 @@
       "merge2": "^1.2.0",
       "nodemon": "^1.17.0",
       "through2": "^2.0.3",
-      "ts-node": "^6.0.0",
+      "ts-node": "^7.0.0",
       "tslint": "^5.10.0",
       "typescript": "^2.9.0",
-      "vinyl": "^2.1.0"
+      "vinyl": "^2.2.0"
    },
    "repository": {
       "type": "git",

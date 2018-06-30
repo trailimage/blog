@@ -10,9 +10,9 @@ const path = require('path');
 const sourcemaps = require('gulp-sourcemaps');
 const merge = require('merge2');
 const jsPath = './src/client/';
-const dist = './dist/';
+const dist = './public/';
 /**
- * https://github.com/gulp-sourcemaps/gulp-sourcemaps
+ * @see https://github.com/gulp-sourcemaps/gulp-sourcemaps
  */
 const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
@@ -22,7 +22,7 @@ const sourceMapConfig = {
  * TypeScript configuration should set noEmitOnError=true to keep incremental
  * compilation from building and caching bad bundles.
  *
- * https://github.com/ivogabe/gulp-typescript
+ * @see https://github.com/ivogabe/gulp-typescript
  */
 const tsConfig = ts.createProject('tsconfig.browser.json');
 
@@ -81,7 +81,7 @@ gulp.task('watch', () => {
    gulp.watch('./src/client/*.?s', ['js']);
 });
 
-//= Helper functions ==========================================================
+//#region Helpers
 
 /**
  * @param {string[]} names
@@ -164,3 +164,5 @@ const bundle = (...files) => ({
       return through.obj(transform, finish);
    }
 });
+
+//#endregion

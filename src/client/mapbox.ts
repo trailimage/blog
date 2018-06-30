@@ -41,7 +41,9 @@ $(function() {
    const slug = post ? '/' + post.key : '';
    const qs = parseUrl();
 
-   /** https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol */
+   /**
+    * @see https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
+    */
    const nav = new mapboxgl.NavigationControl();
 
    /** https://www.mapbox.com/mapbox-gl-js/api/ */
@@ -187,7 +189,7 @@ $(function() {
       /**
        * Copy current URL to clipboard.
        *
-       * https://css-tricks.com/native-browser-copy-clipboard/
+       * @see https://css-tricks.com/native-browser-copy-clipboard/
        */
       copyUrl(this: EventTarget, _e: JQuery.Event) {
          const $temp = $('<textarea>')
@@ -221,7 +223,7 @@ $(function() {
          const lngLat = map.getCenter();
          const zoom = map.getZoom();
          // very rough conversion based on trial-and-error
-         const altitude = 1 / Math.pow(2.3, zoom) * 375000000;
+         const altitude = (1 / Math.pow(2.3, zoom)) * 375000000;
 
          window.location.href = $(this)
             .data('link')
@@ -259,8 +261,8 @@ $(function() {
       /**
        * Click to show or hide photo layer.
        *
-       * https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/
-       * https://www.mapbox.com/mapbox-gl-js/api/#map#setlayoutproperty
+       * @see https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/
+       * @see https://www.mapbox.com/mapbox-gl-js/api/#map#setlayoutproperty
        */
       photoLayerToggle(this: EventTarget, _e: JQuery.Event) {
          photosVisible = !photosVisible;
@@ -298,7 +300,7 @@ $(function() {
        * and I've not been able to find a function that exactly relates zoom
        * level to the radius represented by the cluster.
        *
-       * https://github.com/mapbox/mapbox-gl-js/issues/2384
+       * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
       clusterClick: function(e: mapboxgl.MapMouseEvent) {
          const cluster: PointCluster = e.features[0].properties;
@@ -421,19 +423,20 @@ $(function() {
          addMoscowMountainLayers();
          // set initial map dimensions
          handle.windowResize();
-      });
 
-      if (post) {
-         // Expand bounds so pictures aren't right at the edge. This should
-         // probably do something smarter like a percent of bounding box.
-         post.bounds.sw[0] -= 0.01;
-         post.bounds.sw[1] -= 0.01;
-         post.bounds.ne[0] += 0.01;
-         post.bounds.ne[1] += 0.01;
-         $.getJSON('/' + post.key + '/geo.json', addPostLayers);
-      } else {
-         showPositionInUrl = true;
-      }
+         // can't add post layers until base layers are ready
+         if (post) {
+            // Expand bounds so pictures aren't right at the edge. This should
+            // probably do something smarter like a percent of bounding box.
+            post.bounds.sw[0] -= 0.01;
+            post.bounds.sw[1] -= 0.01;
+            post.bounds.ne[0] += 0.01;
+            post.bounds.ne[1] += 0.01;
+            $.getJSON('/' + post.key + '/geo.json', addPostLayers);
+         } else {
+            showPositionInUrl = true;
+         }
+      });
    });
 
    /**
@@ -528,7 +531,7 @@ $(function() {
       count: number
    ): GeoJSON.Feature<GeoJSON.Point>[] {
       const z = map.getZoom();
-      const f = z * 3 / Math.pow(2, z);
+      const f = (z * 3) / Math.pow(2, z);
       const sw = [lngLat.lng - f, lngLat.lat - f];
       const ne = [lngLat.lng + f, lngLat.lat + f];
       const photos = geoJSON.features
@@ -626,7 +629,7 @@ $(function() {
    /**
     * Assign source and create layer for post track.
     *
-    * https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-line
+    * @see https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-line
     */
    function addPostLayers(
       track: GeoJSON.FeatureCollection<GeoJSON.LineString>
@@ -668,7 +671,7 @@ $(function() {
    }
 
    /**
-    * https://www.mapbox.com/mapbox-gl-js/example/vector-source/
+    * @see https://www.mapbox.com/mapbox-gl-js/example/vector-source/
     */
    function addMoscowMountainLayers() {
       map.addSource('moscow-mountain', {
@@ -790,11 +793,10 @@ $(function() {
    }
 
    /**
-    * https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/mapbox-gl/index.d.ts
+    * @see https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/mapbox-gl/index.d.ts
     */
    function addMapHandlers() {
-      map
-         .on('mouseenter', 'cluster', cursor('pointer'))
+      map.on('mouseenter', 'cluster', cursor('pointer'))
          .on('mouseleave', 'cluster', cursor())
          .on('mouseenter', 'photo', cursor('pointer'))
          .on('mouseleave', 'photo', cursor())

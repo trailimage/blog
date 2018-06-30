@@ -6,7 +6,22 @@
       {
          "label": "View Heroku test logs",
          "command": "heroku",
-         "args": ["logs", "-a", "trail-image-test"],
+         "args": [
+            "logs",
+            "-a",
+            "trail-image-test"
+         ],
+         "type": "shell",
+         "problemMatcher": []
+      },
+      {
+         "label": "View Heroku live logs",
+         "command": "heroku",
+         "args": [
+            "logs",
+            "-a",
+            "trail-image"
+         ],
          "type": "shell",
          "problemMatcher": []
       },
@@ -19,16 +34,32 @@
       },
       {
          "label": "Build and Watch Client",
-         "script": "watch",
+         "command": "node_modules/.bin/gulp",
+         "args": [
+            "watch"
+         ],
          "group": "build",
-         "type": "npm",
-         "problemMatcher": ["$tsc"]
+         "type": "shell",
+         "problemMatcher": []
+      },
+      {
+         "label": "Build Client JavaScript",
+         "command": "node_modules/.bin/gulp",
+         "args": [
+            "js"
+         ],
+         "group": "build",
+         "type": "shell",
+         "problemMatcher": []
       },
       {
          "label": "Build Server",
          "group": "build",
          "command": "./node_modules/.bin/tsc",
-         "args": ["-p", "tsconfig.node.json"],
+         "args": [
+            "-p",
+            "tsconfig.node.json"
+         ],
          "type": "shell",
          "problemMatcher": "$tsc"
       },
@@ -36,16 +67,24 @@
          "label": "Build and Watch Server",
          "group": "build",
          "command": "./node_modules/.bin/tsc",
-         "args": ["-p", "tsconfig.node.json", "-w"],
+         "args": [
+            "-p",
+            "tsconfig.node.json",
+            "-w"
+         ],
          "type": "shell",
          "problemMatcher": "$tsc"
       },
       {
          "label": "Run",
          "command": "node",
-         "args": ["./lib/app.js"],
+         "args": [
+            "./lib/app.js"
+         ],
          "type": "shell",
-         "dependsOn": ["Build Server"],
+         "dependsOn": [
+            "Build Server"
+         ],
          "problemMatcher": []
       },
       {
@@ -63,6 +102,13 @@
          ],
          "type": "shell",
          "problemMatcher": "$tsc"
+      },
+      {
+         "type": "gulp",
+         "task": "js",
+         "problemMatcher": [
+            "$gulp-tsc"
+         ]
       }
    ]
 }

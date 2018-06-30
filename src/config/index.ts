@@ -32,7 +32,7 @@ export const config = {
    //    },
    proxy: env('HTTPS_PROXY', null),
 
-   /** When the application started. */
+   /** When the application started. Used for cache busting. */
    timestamp: new Date().getTime(),
 
    /**
@@ -42,7 +42,7 @@ export const config = {
     * variable.
     */
    testing: false,
-   isProduction: isProduction,
+   isProduction,
    repoUrl: 'https://github.com/Jason-Abbott/trail-image.git',
    owner,
    site,
@@ -62,7 +62,6 @@ export const config = {
    style,
    cacheDuration: Duration.Day * 2,
    retryDelay: Duration.Second * 30,
-
    bing,
    google,
    facebook,

@@ -17,11 +17,11 @@
    <link href='/img/favicon.ico' rel='shortcut icon'/>
    <link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
    {{> ga}}
-   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css' rel='stylesheet' />
+   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link href='/css/mapbox.css' rel='stylesheet' type='text/css'/>
-   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js'></script>
-   <script src='//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js' type='text/javascript'></script>
+   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+   <script src='//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
    <script type='text/javascript'>
       {{! values used within mapbox.js }}
       mapboxgl.accessToken = '{{config.mapbox.accessToken}}';
@@ -49,7 +49,7 @@
       <button class='copy-url'>{{{icon 'link'}}}<p>Copy Map Link</p></button>
 {{#if post }}
       <button class='post-info'>{{{icon 'info'}}}<p><b>{{post.name}}</b>{{post.description}}</p></button>
-   {{#if config.map.allowDownload }}
+   {{#if config.providers.map.allowDownload }}
       <button class='gpx-download link' data-link="/{{post.key}}/gpx" rel="nofollow">{{{icon 'file_download'}}}<p>Download GPX</p></button>
    {{/if}}
 	   <button class='back link' data-link="/{{post.key}}">{{{icon 'assignment_return'}}}<p>View Blog Post</p></button>

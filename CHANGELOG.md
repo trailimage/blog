@@ -1,6 +1,7 @@
 ## 4.0.0
 
 -  Rewrite as separate modules
+-  Update dependencies
 
 ## 3.0.5
 

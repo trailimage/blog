@@ -4,7 +4,7 @@
 /**
  * Structure of data generated in views/post-menu-data.hbs visible at
  *
- * http://www.trailimage.com/js/post-menu-data.js
+ * @see http://www.trailimage.com/js/post-menu-data.js
  */
 interface PostMenu {
    category: { [key: string]: MenuCategory[] };

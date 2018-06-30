@@ -8,7 +8,7 @@ const util = {
       /**
        * Save setting to browser storage.
        *
-       * https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
+       * @see https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
        */
       save(key: string, value: string): void {
          if (!window.localStorage) {
@@ -55,7 +55,7 @@ const util = {
       /**
        * Generate Google material icon HTML with optional click handler.
        *
-       * https://material.io/icons/
+       * @see https://material.io/icons/
        */
       icon(name: string, handler?: (e: JQuery.Event) => void): JQuery {
          const $icon = $('<i>')

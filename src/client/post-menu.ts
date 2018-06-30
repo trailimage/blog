@@ -52,7 +52,7 @@ $(function() {
       .click(toggleMenu);
 
    // handle click on root category
-   $rootList.on('click', 'li', function(this: EventTarget, e: JQuery.Event) {
+   $rootList.on('click', 'li', function(this: HTMLElement, e: JQuery.Event) {
       e.stopPropagation();
       const $li = $(this);
       selection = [$li.text(), null];
@@ -61,7 +61,7 @@ $(function() {
 
    // handle click on subcategory
    $categoryList.on('click', 'li', function(
-      this: EventTarget,
+      this: HTMLElement,
       e: JQuery.Event
    ) {
       e.stopPropagation();

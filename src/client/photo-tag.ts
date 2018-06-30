@@ -38,7 +38,7 @@ $(function() {
 
    $view
       .find('#tag-index a')
-      .click(function(this: EventTarget, e: JQuery.Event) {
+      .click(function(this: HTMLElement, e: JQuery.Event) {
          e.stopPropagation();
          e.preventDefault();
          $link.removeClass(css);
