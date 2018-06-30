@@ -139,8 +139,12 @@ async function gpx(req: Request, res: Response) {
       : null;
 
    if (is.value(post)) {
-      const geo = await post.geoJSON();
-      //view.sendJSON(res, 'some key',
+      try {
+         post.gpx(res);
+      } catch (err) {
+         log.error(err);
+         view.notFound(req, res);
+      }
    } else {
       view.notFound(req, res);
    }
