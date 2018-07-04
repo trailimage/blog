@@ -4,16 +4,16 @@
    "version": "2.0.0",
    "tasks": [
       {
-         "label": "View Heroku test logs",
+         "label": "Heroku test logs",
          "command": "heroku",
-         "args": ["logs", "-a", "trail-image-test"],
+         "args": ["logs", "-a", "trail-image-test", "--tail"],
          "type": "shell",
          "problemMatcher": []
       },
       {
-         "label": "View Heroku live logs",
+         "label": "Heroku production logs",
          "command": "heroku",
-         "args": ["logs", "-a", "trail-image"],
+         "args": ["logs", "-a", "trail-image", "--source", "app", "--tail"],
          "type": "shell",
          "problemMatcher": []
       },
