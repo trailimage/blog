@@ -1,7 +1,7 @@
 import '@toba/test';
 import { Header, MimeType } from '@toba/tools';
 import { MockRequest, MockResponse } from '@toba/test';
-import { cache, view, createViewItem, sendItem, IPv6 } from './view';
+import { cache, view, createViewItem, writeItemToResponse, IPv6 } from './view';
 import { config } from '../config/';
 
 const req = new MockRequest();
@@ -58,7 +58,7 @@ test('sends already rendered pages from cache', done => {
 test('adds caching headers to compressed content', async () => {
    const item = await createViewItem(viewSlug, pageContent, MimeType.HTML);
 
-   sendItem(res, item);
+   writeItemToResponse(res, item);
    expect(res.header(Header.CacheControl)).toBe('max-age=86400, public');
 
    const eTagHeader = res.header(Header.eTag);

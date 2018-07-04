@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
 import { config } from '../config';
-import { Page, Layout } from './template';
+import { Page } from './template';
 
 /**
  * Values available within view template.
@@ -68,8 +68,8 @@ export type Renderer = (
 ) => void;
 
 /**
- * Compact text by removing whitespace and more. If an error occurs then return
- * original text unchanged.
+ * Compact JavaScript text by removing whitespace and more. If an error occurs
+ * then return original text unchanged.
  *
  * @see https://github.com/mishoo/UglifyJS2
  */
