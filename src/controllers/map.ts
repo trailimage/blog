@@ -1,6 +1,13 @@
 //import { log } from '@toba/logger';
 import { MapSource, loadSource } from '@toba/map';
-import { Encoding, Header, MimeType, is, addCharSet } from '@toba/tools';
+import {
+   Encoding,
+   Header,
+   MimeType,
+   is,
+   addCharSet,
+   inferMimeType
+} from '@toba/tools';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as compress from 'zlib';
@@ -9,7 +16,6 @@ import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 
 const mapPath = 'map';
-const gpxPath = 'gpx';
 
 /**
  * Render map screen for a post. Add photo ID to template context if given so
@@ -139,7 +145,13 @@ async function gpx(req: Request, res: Response) {
       : null;
 
    if (is.value(post)) {
+      const fileName = post.title + '.gpx';
       try {
+         res.setHeader(
+            Header.Content.Disposition,
+            `attachment; filename=${fileName}`
+         );
+         res.setHeader(Header.Content.Type, inferMimeType(fileName));
          post.gpx(res);
       } catch (err) {
          log.error(err);
