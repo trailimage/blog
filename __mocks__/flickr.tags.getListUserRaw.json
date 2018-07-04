@@ -1,0 +1,4805 @@
+{
+   "who": {
+      "id": "60950751@N04",
+      "tags": {
+         "tag": [
+            {
+               "clean": "767",
+               "raw": [{ "_content": "767" }]
+            },
+            {
+               "clean": "8be",
+               "raw": [{ "_content": "8BE" }]
+            },
+            {
+               "clean": "abbott",
+               "raw": [{ "_content": "Abbott" }]
+            },
+            {
+               "clean": "abstract",
+               "raw": [{ "_content": "Abstract" }]
+            },
+            {
+               "clean": "aerial",
+               "raw": [{ "_content": "Aerial" }]
+            },
+            {
+               "clean": "ailing",
+               "raw": [{ "_content": "Ailing" }]
+            },
+            {
+               "clean": "airplane",
+               "raw": [{ "_content": "Airplane" }]
+            },
+            {
+               "clean": "airport",
+               "raw": [{ "_content": "Airport" }]
+            },
+            {
+               "clean": "algae",
+               "raw": [{ "_content": "Algae" }]
+            },
+            {
+               "clean": "alitemantis",
+               "raw": [{ "_content": "Alite Mantis" }]
+            },
+            {
+               "clean": "andersonranchreservoir",
+               "raw": [{ "_content": "Anderson Ranch Reservoir" }]
+            },
+            {
+               "clean": "antelope",
+               "raw": [{ "_content": "Antelope" }]
+            },
+            {
+               "clean": "arch",
+               "raw": [{ "_content": "Arch" }]
+            },
+            {
+               "clean": "arrowleafbalsamroot",
+               "raw": [{ "_content": "Arrowleaf Balsamroot" }]
+            },
+            {
+               "clean": "arrowrockdam",
+               "raw": [{ "_content": "Arrowrock Dam" }]
+            },
+            {
+               "clean": "arrowrockreservoir",
+               "raw": [{ "_content": "Arrowrock Reservoir" }]
+            },
+            {
+               "clean": "art",
+               "raw": [{ "_content": "Art" }]
+            },
+            {
+               "clean": "aspen",
+               "raw": [{ "_content": "Aspen" }]
+            },
+            {
+               "clean": "atlanta",
+               "raw": [{ "_content": "Atlanta" }]
+            },
+            {
+               "clean": "atlantahotsprings",
+               "raw": [{ "_content": "Atlanta Hot Springs" }]
+            },
+            {
+               "clean": "atv",
+               "raw": [{ "_content": "ATV" }]
+            },
+            {
+               "clean": "autumn",
+               "raw": [{ "_content": "Autumn" }]
+            },
+            {
+               "clean": "avery",
+               "raw": [{ "_content": "Avery" }]
+            },
+            {
+               "clean": "averyabbott",
+               "raw": [{ "_content": "Avery Abbott" }]
+            },
+            {
+               "clean": "averytradingpost",
+               "raw": [{ "_content": "Avery Trading Post" }]
+            },
+            {
+               "clean": "axe",
+               "raw": [{ "_content": "Axe" }]
+            },
+            {
+               "clean": "babybackpack",
+               "raw": [{ "_content": "Baby Backpack" }]
+            },
+            {
+               "clean": "backyard",
+               "raw": [{ "_content": "Back Yard" }]
+            },
+            {
+               "clean": "badmemory",
+               "raw": [{ "_content": "badmemory" }]
+            },
+            {
+               "clean": "baldeagle",
+               "raw": [{ "_content": "Bald Eagle" }]
+            },
+            {
+               "clean": "balderdash",
+               "raw": [{ "_content": "Balderdash" }]
+            },
+            {
+               "clean": "baldmountaincampground",
+               "raw": [{ "_content": "Bald Mountain Campground" }]
+            },
+            {
+               "clean": "baldmountainlookout",
+               "raw": [{ "_content": "Bald Mountain Lookout" }]
+            },
+            {
+               "clean": "bankslowmanroad",
+               "raw": [{ "_content": "Banks Lowman Road" }]
+            },
+            {
+               "clean": "bar",
+               "raw": [{ "_content": "Bar" }]
+            },
+            {
+               "clean": "barbie",
+               "raw": [{ "_content": "Barbie" }]
+            },
+            {
+               "clean": "barn",
+               "raw": [{ "_content": "Barn" }]
+            },
+            {
+               "clean": "batchlake",
+               "raw": [{ "_content": "Batch Lake" }]
+            },
+            {
+               "clean": "bath",
+               "raw": [{ "_content": "Bath" }]
+            },
+            {
+               "clean": "bauer",
+               "raw": [{ "_content": "Bauer" }]
+            },
+            {
+               "clean": "baybrookcourtbridge",
+               "raw": [{ "_content": "Baybrook Court Bridge" }]
+            },
+            {
+               "clean": "beach",
+               "raw": [{ "_content": "Beach" }]
+            },
+            {
+               "clean": "bear",
+               "raw": [{ "_content": "Bear" }]
+            },
+            {
+               "clean": "bearcreek",
+               "raw": [{ "_content": "Bear Creek" }]
+            },
+            {
+               "clean": "beargrass",
+               "raw": [{ "_content": "Beargrass" }]
+            },
+            {
+               "clean": "bearvalleycreek",
+               "raw": [{ "_content": "Bear Valley Creek" }]
+            },
+            {
+               "clean": "beavercreek",
+               "raw": [{ "_content": "Beaver Creek" }]
+            },
+            {
+               "clean": "beavercreekroad",
+               "raw": [{ "_content": "Beaver Creek Road" }]
+            },
+            {
+               "clean": "bed",
+               "raw": [{ "_content": "Bed" }]
+            },
+            {
+               "clean": "bee",
+               "raw": [{ "_content": "Bee" }]
+            },
+            {
+               "clean": "beehive",
+               "raw": [{ "_content": "Bee Hive" }]
+            },
+            {
+               "clean": "beer",
+               "raw": [{ "_content": "Beer" }]
+            },
+            {
+               "clean": "beetle",
+               "raw": [{ "_content": "Beetle" }]
+            },
+            {
+               "clean": "bell",
+               "raw": [{ "_content": "Bell" }]
+            },
+            {
+               "clean": "ben",
+               "raw": [{ "_content": "Ben" }]
+            },
+            {
+               "clean": "benewahlake",
+               "raw": [{ "_content": "Benewah Lake" }]
+            },
+            {
+               "clean": "benjohnson",
+               "raw": [{ "_content": "Ben Johnson" }]
+            },
+            {
+               "clean": "bentz",
+               "raw": [{ "_content": "Bentz" }]
+            },
+            {
+               "clean": "berry",
+               "raw": [{ "_content": "Berry" }]
+            },
+            {
+               "clean": "bethelcemetery",
+               "raw": [{ "_content": "Bethel Cemetery" }]
+            },
+            {
+               "clean": "bicycle",
+               "raw": [{ "_content": "Bicycle" }]
+            },
+            {
+               "clean": "bigcreek",
+               "raw": [{ "_content": "Big Creek" }]
+            },
+            {
+               "clean": "bighornsheep",
+               "raw": [{ "_content": "Big Horn Sheep" }]
+            },
+            {
+               "clean": "bigsmokyriver",
+               "raw": [{ "_content": "Big Smoky River" }]
+            },
+            {
+               "clean": "bigtrinitylake",
+               "raw": [{ "_content": "Big Trinity Lake" }]
+            },
+            {
+               "clean": "bikepath",
+               "raw": [{ "_content": "Bike Path" }]
+            },
+            {
+               "clean": "billyabbott",
+               "raw": [{ "_content": "Billy Abbott" }]
+            },
+            {
+               "clean": "bird",
+               "raw": [{ "_content": "Bird" }]
+            },
+            {
+               "clean": "birthday",
+               "raw": [{ "_content": "Birthday" }]
+            },
+            {
+               "clean": "bitterbrush",
+               "raw": [{ "_content": "Bitter Brush" }]
+            },
+            {
+               "clean": "bitterroot",
+               "raw": [{ "_content": "Bitterroot" }]
+            },
+            {
+               "clean": "blackcanyon",
+               "raw": [{ "_content": "Black Canyon" }]
+            },
+            {
+               "clean": "blackcanyonreservoir",
+               "raw": [{ "_content": "Black Canyon Reservoir" }]
+            },
+            {
+               "clean": "blackcliffs",
+               "raw": [{ "_content": "Black Cliffs" }]
+            },
+            {
+               "clean": "blacksandsresort",
+               "raw": [{ "_content": "Black Sands Resort" }]
+            },
+            {
+               "clean": "blackscreekroad",
+               "raw": [{ "_content": "Blacks Creek Road" }]
+            },
+            {
+               "clean": "blossom",
+               "raw": [{ "_content": "Blossom" }]
+            },
+            {
+               "clean": "bmw650gs",
+               "raw": [{ "_content": "BMW 650GS" }]
+            },
+            {
+               "clean": "bmwf800gs",
+               "raw": [{ "_content": "BMW F800GS" }]
+            },
+            {
+               "clean": "bmwr1200gsadventure",
+               "raw": [{ "_content": "BMW R1200GS Adventure" }]
+            },
+            {
+               "clean": "boat",
+               "raw": [{ "_content": "Boat" }]
+            },
+            {
+               "clean": "boating",
+               "raw": [{ "_content": "Boating" }]
+            },
+            {
+               "clean": "bobabbott",
+               "raw": [{ "_content": "Bob Abbott" }]
+            },
+            {
+               "clean": "boeing",
+               "raw": [{ "_content": "Boeing" }]
+            },
+            {
+               "clean": "boggle",
+               "raw": [{ "_content": "Boggle" }]
+            },
+            {
+               "clean": "boiler",
+               "raw": [{ "_content": "Boiler" }]
+            },
+            {
+               "clean": "boise",
+               "raw": [{ "_content": "Boise" }]
+            },
+            {
+               "clean": "boiseridge",
+               "raw": [{ "_content": "Boise Ridge" }]
+            },
+            {
+               "clean": "boiseridgeroad",
+               "raw": [{ "_content": "Boise Ridge Road" }]
+            },
+            {
+               "clean": "boiseriver",
+               "raw": [{ "_content": "Boise River" }]
+            },
+            {
+               "clean": "boisestateuniversity",
+               "raw": [{ "_content": "Boise State University" }]
+            },
+            {
+               "clean": "bone",
+               "raw": [{ "_content": "Bone" }]
+            },
+            {
+               "clean": "bonnevillepoint",
+               "raw": [{ "_content": "Bonneville Point" }]
+            },
+            {
+               "clean": "book",
+               "raw": [{ "_content": "Book" }]
+            },
+            {
+               "clean": "bookstore",
+               "raw": [{ "_content": "Bookstore" }]
+            },
+            {
+               "clean": "boulderbasin",
+               "raw": [{ "_content": "Boulder Basin" }]
+            },
+            {
+               "clean": "bouldercity",
+               "raw": [{ "_content": "Boulder City" }]
+            },
+            {
+               "clean": "bouldercreek",
+               "raw": [{ "_content": "Boulder Creek" }]
+            },
+            {
+               "clean": "boulderlake",
+               "raw": [{ "_content": "Boulder Lake" }]
+            },
+            {
+               "clean": "bovill",
+               "raw": [{ "_content": "Bovill" }]
+            },
+            {
+               "clean": "bowman",
+               "raw": [{ "_content": "Bowman" }]
+            },
+            {
+               "clean": "breakfast",
+               "raw": [{ "_content": "Breakfast" }]
+            },
+            {
+               "clean": "brennaabbott",
+               "raw": [{ "_content": "Brenna Abbott" }]
+            },
+            {
+               "clean": "brettbauer",
+               "raw": [{ "_content": "Brett Bauer" }]
+            },
+            {
+               "clean": "bridalveilfalls",
+               "raw": [{ "_content": "Bridal Veil Falls" }]
+            },
+            {
+               "clean": "bridge",
+               "raw": [{ "_content": "Bridge" }]
+            },
+            {
+               "clean": "bridgestreetgrill",
+               "raw": [{ "_content": "Bridge Street Grill" }]
+            },
+            {
+               "clean": "brittany",
+               "raw": [{ "_content": "Brittany" }]
+            },
+            {
+               "clean": "brownleedam",
+               "raw": [{ "_content": "Brownlee Dam" }]
+            },
+            {
+               "clean": "brownleereservoir",
+               "raw": [{ "_content": "Brownlee Reservoir" }]
+            },
+            {
+               "clean": "brownscreek",
+               "raw": [{ "_content": "Browns Creek" }]
+            },
+            {
+               "clean": "bruisedbooks",
+               "raw": [{ "_content": "Bruised Books" }]
+            },
+            {
+               "clean": "bruneau",
+               "raw": [{ "_content": "Bruneau" }]
+            },
+            {
+               "clean": "bruneaudunesstatepark",
+               "raw": [{ "_content": "Bruneau Dunes State Park" }]
+            },
+            {
+               "clean": "bruneaujasper",
+               "raw": [{ "_content": "Bruneau Jasper" }]
+            },
+            {
+               "clean": "bruneauonestop",
+               "raw": [{ "_content": "Bruneau One Stop" }]
+            },
+            {
+               "clean": "bruneauriver",
+               "raw": [{ "_content": "Bruneau River" }]
+            },
+            {
+               "clean": "bsu",
+               "raw": [{ "_content": "BSU" }]
+            },
+            {
+               "clean": "bubbles",
+               "raw": [{ "_content": "Bubbles" }]
+            },
+            {
+               "clean": "bus",
+               "raw": [{ "_content": "Bus" }]
+            },
+            {
+               "clean": "butterfly",
+               "raw": [{ "_content": "Butterfly" }]
+            },
+            {
+               "clean": "cactus",
+               "raw": [{ "_content": "Cactus" }]
+            },
+            {
+               "clean": "cafeoasis",
+               "raw": [{ "_content": "Cafe Oasis" }]
+            },
+            {
+               "clean": "cairn",
+               "raw": [{ "_content": "Cairn" }]
+            },
+            {
+               "clean": "cake",
+               "raw": [{ "_content": "Cake" }]
+            },
+            {
+               "clean": "calder",
+               "raw": [{ "_content": "Calder" }]
+            },
+            {
+               "clean": "caldwell",
+               "raw": [{ "_content": "Caldwell" }]
+            },
+            {
+               "clean": "camelfalls",
+               "raw": [{ "_content": "Camel Falls" }]
+            },
+            {
+               "clean": "campchair",
+               "raw": [{ "_content": "Camp Chair" }]
+            },
+            {
+               "clean": "campcreek",
+               "raw": [{ "_content": "Camp Creek" }]
+            },
+            {
+               "clean": "camper",
+               "raw": [{ "_content": "Camper" }]
+            },
+            {
+               "clean": "campground",
+               "raw": [{ "_content": "Campground" }]
+            },
+            {
+               "clean": "camping",
+               "raw": [{ "_content": "Camping" }]
+            },
+            {
+               "clean": "canal",
+               "raw": [{ "_content": "Canal" }]
+            },
+            {
+               "clean": "candle",
+               "raw": [{ "_content": "Candle" }]
+            },
+            {
+               "clean": "candystore",
+               "raw": [{ "_content": "Candy Store" }]
+            },
+            {
+               "clean": "cannondalecaadx",
+               "raw": [{ "_content": "Cannondale CAADX" }]
+            },
+            {
+               "clean": "canyon",
+               "raw": [{ "_content": "Canyon" }]
+            },
+            {
+               "clean": "car",
+               "raw": [{ "_content": "Car" }]
+            },
+            {
+               "clean": "carrietown",
+               "raw": [{ "_content": "Carrietown" }]
+            },
+            {
+               "clean": "cascade",
+               "raw": [{ "_content": "Cascade" }]
+            },
+            {
+               "clean": "cascadereservoir",
+               "raw": [{ "_content": "Cascade Reservoir" }]
+            },
+            {
+               "clean": "caseyestes",
+               "raw": [{ "_content": "Casey Estes" }]
+            },
+            {
+               "clean": "cassidy",
+               "raw": [{ "_content": "Cassidy" }]
+            },
+            {
+               "clean": "castlebuttelookout",
+               "raw": [{ "_content": "Castle Butte Lookout" }]
+            },
+            {
+               "clean": "castlecreek",
+               "raw": [{ "_content": "Castle Creek" }]
+            },
+            {
+               "clean": "cat",
+               "raw": [{ "_content": "Cat" }]
+            },
+            {
+               "clean": "caterpillar",
+               "raw": [{ "_content": "Caterpillar" }]
+            },
+            {
+               "clean": "cattail",
+               "raw": [{ "_content": "Cattail" }]
+            },
+            {
+               "clean": "cave",
+               "raw": [{ "_content": "Cave" }]
+            },
+            {
+               "clean": "cayusecreek",
+               "raw": [{ "_content": "Cayuse Creek" }]
+            },
+            {
+               "clean": "cedartree",
+               "raw": [{ "_content": "Cedar Tree" }]
+            },
+            {
+               "clean": "celebrationpark",
+               "raw": [{ "_content": "Celebration Park" }]
+            },
+            {
+               "clean": "cemetery",
+               "raw": [{ "_content": "Cemetery" }]
+            },
+            {
+               "clean": "chair",
+               "raw": [{ "_content": "Chair" }]
+            },
+            {
+               "clean": "chalkhills",
+               "raw": [{ "_content": "Chalk Hills" }]
+            },
+            {
+               "clean": "championcreek",
+               "raw": [{ "_content": "Champion Creek" }]
+            },
+            {
+               "clean": "chattanoogahotspring",
+               "raw": [{ "_content": "Chattanooga Hot Spring" }]
+            },
+            {
+               "clean": "cheesecake",
+               "raw": [{ "_content": "Cheesecake" }]
+            },
+            {
+               "clean": "cherrytree",
+               "raw": [{ "_content": "Cherry Tree" }]
+            },
+            {
+               "clean": "cherylreed",
+               "raw": [{ "_content": "Cheryl Reed" }]
+            },
+            {
+               "clean": "chevyaveo5",
+               "raw": [{ "_content": "Chevy Aveo 5" }]
+            },
+            {
+               "clean": "chipmunk",
+               "raw": [{ "_content": "Chipmunk" }]
+            },
+            {
+               "clean": "christmaslights",
+               "raw": [{ "_content": "Christmas Lights" }]
+            },
+            {
+               "clean": "christophergrapes",
+               "raw": [{ "_content": "Christopher Grapes" }]
+            },
+            {
+               "clean": "church",
+               "raw": [{ "_content": "Church" }]
+            },
+            {
+               "clean": "cjstrikereservoir",
+               "raw": [{ "_content": "C. J. Strike Reservoir" }]
+            },
+            {
+               "clean": "clarkia",
+               "raw": [{ "_content": "Clarkia" }]
+            },
+            {
+               "clean": "clarkston",
+               "raw": [{ "_content": "Clarkston" }]
+            },
+            {
+               "clean": "classroom",
+               "raw": [{ "_content": "Classroom" }]
+            },
+            {
+               "clean": "clayyockey",
+               "raw": [{ "_content": "Clay Yockey" }]
+            },
+            {
+               "clean": "clearcreek",
+               "raw": [{ "_content": "Clear Creek" }]
+            },
+            {
+               "clean": "clearcut",
+               "raw": [{ "_content": "Clearcut" }]
+            },
+            {
+               "clean": "clearwaterriver",
+               "raw": [{ "_content": "Clearwater River" }]
+            },
+            {
+               "clean": "cliff",
+               "raw": [{ "_content": "Cliff" }]
+            },
+            {
+               "clean": "climbing",
+               "raw": [{ "_content": "Climbing" }]
+            },
+            {
+               "clean": "closeup",
+               "raw": [{ "_content": "Close-up" }]
+            },
+            {
+               "clean": "clouds",
+               "raw": [{ "_content": "Clouds" }]
+            },
+            {
+               "clean": "coffee",
+               "raw": [{ "_content": "Coffee" }]
+            },
+            {
+               "clean": "coffeeshop",
+               "raw": [{ "_content": "Coffee Shop" }]
+            },
+            {
+               "clean": "colby",
+               "raw": [{ "_content": "Colby" }]
+            },
+            {
+               "clean": "computer",
+               "raw": [{ "_content": "Computer" }]
+            },
+            {
+               "clean": "construction",
+               "raw": [{ "_content": "Construction" }]
+            },
+            {
+               "clean": "cooking",
+               "raw": [{ "_content": "Cooking" }]
+            },
+            {
+               "clean": "costume",
+               "raw": [{ "_content": "Costume" }]
+            },
+            {
+               "clean": "cottonwood",
+               "raw": [{ "_content": "Cottonwood" }]
+            },
+            {
+               "clean": "cow",
+               "raw": [{ "_content": "Cow" }]
+            },
+            {
+               "clean": "cowboy",
+               "raw": [{ "_content": "Cowboy" }]
+            },
+            {
+               "clean": "crane",
+               "raw": [{ "_content": "Crane" }]
+            },
+            {
+               "clean": "crater",
+               "raw": [{ "_content": "Crater" }]
+            },
+            {
+               "clean": "crawdad",
+               "raw": [{ "_content": "Crawdad" }]
+            },
+            {
+               "clean": "creek",
+               "raw": [{ "_content": "Creek" }]
+            },
+            {
+               "clean": "cricket",
+               "raw": [{ "_content": "Cricket" }]
+            },
+            {
+               "clean": "cross",
+               "raw": [{ "_content": "Cross" }]
+            },
+            {
+               "clean": "crouch",
+               "raw": [{ "_content": "Crouch" }]
+            },
+            {
+               "clean": "crystallake",
+               "raw": [{ "_content": "Crystal Lake" }]
+            },
+            {
+               "clean": "currentcreek",
+               "raw": [{ "_content": "Current Creek" }]
+            },
+            {
+               "clean": "daggerfalls",
+               "raw": [{ "_content": "Dagger Falls" }]
+            },
+            {
+               "clean": "daggettcreek",
+               "raw": [{ "_content": "Daggett Creek" }]
+            },
+            {
+               "clean": "daisy",
+               "raw": [{ "_content": "Daisy" }]
+            },
+            {
+               "clean": "dam",
+               "raw": [{ "_content": "Dam" }]
+            },
+            {
+               "clean": "damselfly",
+               "raw": [{ "_content": "Damselfly" }]
+            },
+            {
+               "clean": "dancing",
+               "raw": [{ "_content": "Dancing" }]
+            },
+            {
+               "clean": "daveabbott",
+               "raw": [{ "_content": "Dave Abbott" }]
+            },
+            {
+               "clean": "deadwooddam",
+               "raw": [{ "_content": "Deadwood Dam" }]
+            },
+            {
+               "clean": "deadwoodreservoir",
+               "raw": [{ "_content": "Deadwood Reservoir" }]
+            },
+            {
+               "clean": "deadwoodriver",
+               "raw": [{ "_content": "Deadwood River" }]
+            },
+            {
+               "clean": "dearyharvardcutoff",
+               "raw": [{ "_content": "Deary-Harvard Cutoff" }]
+            },
+            {
+               "clean": "deer",
+               "raw": [{ "_content": "Deer" }]
+            },
+            {
+               "clean": "deerpoint",
+               "raw": [{ "_content": "Deer Point" }]
+            },
+            {
+               "clean": "delormeearthmatepn30",
+               "raw": [{ "_content": "Delorme Earthmate PN-30" }]
+            },
+            {
+               "clean": "dennys",
+               "raw": [{ "_content": "Denny's" }]
+            },
+            {
+               "clean": "diamondhead",
+               "raw": [{ "_content": "Diamond Head" }]
+            },
+            {
+               "clean": "diamondlake",
+               "raw": [{ "_content": "Diamond Lake" }]
+            },
+            {
+               "clean": "diamondlils",
+               "raw": [{ "_content": "Diamond Lil's" }]
+            },
+            {
+               "clean": "digging",
+               "raw": [{ "_content": "Digging" }]
+            },
+            {
+               "clean": "diningroom",
+               "raw": [{ "_content": "Dining Room" }]
+            },
+            {
+               "clean": "dinner",
+               "raw": [{ "_content": "Dinner" }]
+            },
+            {
+               "clean": "dinosaur",
+               "raw": [{ "_content": "Dinosaur" }]
+            },
+            {
+               "clean": "dirtpath",
+               "raw": [{ "_content": "Dirt Path" }]
+            },
+            {
+               "clean": "dirtroad",
+               "raw": [{ "_content": "Dirt Road" }]
+            },
+            {
+               "clean": "diversiondam",
+               "raw": [{ "_content": "Diversion Dam" }]
+            },
+            {
+               "clean": "dock",
+               "raw": [{ "_content": "Dock" }]
+            },
+            {
+               "clean": "doecreek",
+               "raw": [{ "_content": "Doe Creek" }]
+            },
+            {
+               "clean": "doecreekroad",
+               "raw": [{ "_content": "Doe Creek Road" }]
+            },
+            {
+               "clean": "dog",
+               "raw": [{ "_content": "Dog" }]
+            },
+            {
+               "clean": "doll",
+               "raw": [{ "_content": "Doll" }]
+            },
+            {
+               "clean": "dollarhidemountain",
+               "raw": [{ "_content": "Dollarhide Mountain" }]
+            },
+            {
+               "clean": "dolphin",
+               "raw": [{ "_content": "Dolphin" }]
+            },
+            {
+               "clean": "donnasplace",
+               "raw": [{ "_content": "Donna's Place" }]
+            },
+            {
+               "clean": "donnelly",
+               "raw": [{ "_content": "Donnelly" }]
+            },
+            {
+               "clean": "doug",
+               "raw": [{ "_content": "Doug" }]
+            },
+            {
+               "clean": "downtown",
+               "raw": [{ "_content": "Downtown" }]
+            },
+            {
+               "clean": "drawing",
+               "raw": [{ "_content": "Drawing" }]
+            },
+            {
+               "clean": "dredge",
+               "raw": [{ "_content": "Dredge" }]
+            },
+            {
+               "clean": "drinking",
+               "raw": [{ "_content": "Drinking" }]
+            },
+            {
+               "clean": "driving",
+               "raw": [{ "_content": "Driving" }]
+            },
+            {
+               "clean": "droplet",
+               "raw": [{ "_content": "Droplet" }]
+            },
+            {
+               "clean": "drycreek",
+               "raw": [{ "_content": "Dry Creek" }]
+            },
+            {
+               "clean": "dryplant",
+               "raw": [{ "_content": "Dry Plant" }]
+            },
+            {
+               "clean": "duck",
+               "raw": [{ "_content": "Duck" }]
+            },
+            {
+               "clean": "dumptruck",
+               "raw": [{ "_content": "Dump Truck" }]
+            },
+            {
+               "clean": "dworshakdam",
+               "raw": [{ "_content": "Dworshak Dam" }]
+            },
+            {
+               "clean": "dworshakreservoir",
+               "raw": [{ "_content": "Dworshak Reservoir" }]
+            },
+            {
+               "clean": "eagle",
+               "raw": [{ "_content": "Eagle" }]
+            },
+            {
+               "clean": "eating",
+               "raw": [{ "_content": "Eating" }]
+            },
+            {
+               "clean": "ed",
+               "raw": [{ "_content": "Ed" }]
+            },
+            {
+               "clean": "eldredge",
+               "raw": [{ "_content": "Eldredge" }]
+            },
+            {
+               "clean": "elephant",
+               "raw": [{ "_content": "Elephant" }]
+            },
+            {
+               "clean": "elk",
+               "raw": [{ "_content": "Elk" }]
+            },
+            {
+               "clean": "elkcreek",
+               "raw": [{ "_content": "Elk Creek" }]
+            },
+            {
+               "clean": "elkriver",
+               "raw": [{ "_content": "Elk River" }]
+            },
+            {
+               "clean": "elsielake",
+               "raw": [{ "_content": "Elsie Lake" }]
+            },
+            {
+               "clean": "elyhudson",
+               "raw": [{ "_content": "Ely Hudson" }]
+            },
+            {
+               "clean": "emeraldcreekgarnetarea",
+               "raw": [{ "_content": "Emerald Creek Garnet Area" }]
+            },
+            {
+               "clean": "enterprise",
+               "raw": [{ "_content": "Enterprise" }]
+            },
+            {
+               "clean": "eric",
+               "raw": [{ "_content": "Eric" }]
+            },
+            {
+               "clean": "ericweston",
+               "raw": [{ "_content": "Eric Weston" }]
+            },
+            {
+               "clean": "everlee",
+               "raw": [{ "_content": "Everlee" }]
+            },
+            {
+               "clean": "fairfield",
+               "raw": [{ "_content": "Fairfield" }]
+            },
+            {
+               "clean": "fairviewcemetery",
+               "raw": [{ "_content": "Fairview Cemetery" }]
+            },
+            {
+               "clean": "fallcreek",
+               "raw": [{ "_content": "Fall Creek" }]
+            },
+            {
+               "clean": "farmington",
+               "raw": [{ "_content": "Farmington" }]
+            },
+            {
+               "clean": "farrotcreek",
+               "raw": [{ "_content": "Farrot Creek" }]
+            },
+            {
+               "clean": "fence",
+               "raw": [{ "_content": "Fence" }]
+            },
+            {
+               "clean": "fern",
+               "raw": [{ "_content": "Fern" }]
+            },
+            {
+               "clean": "fire",
+               "raw": [{ "_content": "Fire" }]
+            },
+            {
+               "clean": "fireengine",
+               "raw": [{ "_content": "Fire Engine" }]
+            },
+            {
+               "clean": "fireman",
+               "raw": [{ "_content": "Fireman" }]
+            },
+            {
+               "clean": "fish",
+               "raw": [{ "_content": "Fish" }]
+            },
+            {
+               "clean": "fishhookcreek",
+               "raw": [{ "_content": "Fishhook Creek" }]
+            },
+            {
+               "clean": "fishing",
+               "raw": [{ "_content": "Fishing" }]
+            },
+            {
+               "clean": "fishladder",
+               "raw": [{ "_content": "Fish Ladder" }]
+            },
+            {
+               "clean": "fishway",
+               "raw": [{ "_content": "Fishway" }]
+            },
+            {
+               "clean": "fixing",
+               "raw": [{ "_content": "Fixing" }]
+            },
+            {
+               "clean": "flag",
+               "raw": [{ "_content": "Flag" }]
+            },
+            {
+               "clean": "flask",
+               "raw": [{ "_content": "Flask" }]
+            },
+            {
+               "clean": "flickr",
+               "raw": [{ "_content": "Flickr" }]
+            },
+            {
+               "clean": "flood",
+               "raw": [{ "_content": "Flood" }]
+            },
+            {
+               "clean": "flores",
+               "raw": [{ "_content": "Flores" }]
+            },
+            {
+               "clean": "flower",
+               "raw": [{ "_content": "Flower" }]
+            },
+            {
+               "clean": "flume",
+               "raw": [{ "_content": "Flume" }]
+            },
+            {
+               "clean": "flying",
+               "raw": [{ "_content": "Flying" }]
+            },
+            {
+               "clean": "flyingm",
+               "raw": [{ "_content": "Flying M" }]
+            },
+            {
+               "clean": "fog",
+               "raw": [{ "_content": "Fog" }]
+            },
+            {
+               "clean": "foothills",
+               "raw": [{ "_content": "Foothills" }]
+            },
+            {
+               "clean": "fordf100",
+               "raw": [{ "_content": "Ford F-100" }]
+            },
+            {
+               "clean": "fordranger",
+               "raw": [{ "_content": "Ford Ranger" }]
+            },
+            {
+               "clean": "foresthighway61",
+               "raw": [{ "_content": "Forest Highway 61" }]
+            },
+            {
+               "clean": "forestservicemap",
+               "raw": [{ "_content": "Forest Service Map" }]
+            },
+            {
+               "clean": "forestserviceroad",
+               "raw": [{ "_content": "Forest Service Road" }]
+            },
+            {
+               "clean": "forks",
+               "raw": [{ "_content": "Forks" }]
+            },
+            {
+               "clean": "fossil",
+               "raw": [{ "_content": "Fossil" }]
+            },
+            {
+               "clean": "fourwheeler",
+               "raw": [{ "_content": "Four Wheeler" }]
+            },
+            {
+               "clean": "fraser",
+               "raw": [{ "_content": "Fraser" }]
+            },
+            {
+               "clean": "freemanpiercereed",
+               "raw": [{ "_content": "Freeman Pierce Reed" }]
+            },
+            {
+               "clean": "frisbee",
+               "raw": [{ "_content": "Frisbee" }]
+            },
+            {
+               "clean": "frog",
+               "raw": [{ "_content": "Frog" }]
+            },
+            {
+               "clean": "frontyard",
+               "raw": [{ "_content": "Front Yard" }]
+            },
+            {
+               "clean": "frost",
+               "raw": [{ "_content": "Frost" }]
+            },
+            {
+               "clean": "fsroad172",
+               "raw": [{ "_content": "F.S. Road 172" }]
+            },
+            {
+               "clean": "fsroad197",
+               "raw": [{ "_content": "F.S. Road 197" }]
+            },
+            {
+               "clean": "fsroad227",
+               "raw": [{ "_content": "F.S. Road 227" }]
+            },
+            {
+               "clean": "fsroad301",
+               "raw": [{ "_content": "F.S. Road 301" }]
+            },
+            {
+               "clean": "funnyface",
+               "raw": [{ "_content": "Funny Face" }]
+            },
+            {
+               "clean": "game",
+               "raw": [{ "_content": "Game" }]
+            },
+            {
+               "clean": "garage",
+               "raw": [{ "_content": "Garage" }]
+            },
+            {
+               "clean": "garbage",
+               "raw": [{ "_content": "Garbage" }]
+            },
+            {
+               "clean": "gary",
+               "raw": [{ "_content": "Gary" }]
+            },
+            {
+               "clean": "garyumland",
+               "raw": [{ "_content": "Gary Umland" }]
+            },
+            {
+               "clean": "gasstation",
+               "raw": [{ "_content": "Gas Station" }]
+            },
+            {
+               "clean": "gate",
+               "raw": [{ "_content": "Gate" }]
+            },
+            {
+               "clean": "gayfeather",
+               "raw": [{ "_content": "Gay Feather" }]
+            },
+            {
+               "clean": "geodeticsurveymarker",
+               "raw": [{ "_content": "Geodetic Survey Marker" }]
+            },
+            {
+               "clean": "germaniacreek",
+               "raw": [{ "_content": "Germania Creek" }]
+            },
+            {
+               "clean": "gesturing",
+               "raw": [{ "_content": "Gesturing" }]
+            },
+            {
+               "clean": "ghosttown",
+               "raw": [{ "_content": "Ghost Town" }]
+            },
+            {
+               "clean": "gift",
+               "raw": [{ "_content": "Gift" }]
+            },
+            {
+               "clean": "gitzo1550t",
+               "raw": [{ "_content": "Gitzo 1550T" }]
+            },
+            {
+               "clean": "gnamma",
+               "raw": [{ "_content": "Gnamma" }]
+            },
+            {
+               "clean": "goat",
+               "raw": [{ "_content": "Goat" }]
+            },
+            {
+               "clean": "goatcreek",
+               "raw": [{ "_content": "Goat Creek" }]
+            },
+            {
+               "clean": "goatlake",
+               "raw": [{ "_content": "Goat Lake" }]
+            },
+            {
+               "clean": "goldcreek",
+               "raw": [{ "_content": "Gold Creek" }]
+            },
+            {
+               "clean": "goose",
+               "raw": [{ "_content": "Goose" }]
+            },
+            {
+               "clean": "goprohdhero2",
+               "raw": [{ "_content": "GoPro HD HERO2" }]
+            },
+            {
+               "clean": "gorge",
+               "raw": [{ "_content": "Gorge" }]
+            },
+            {
+               "clean": "gpsreceiver",
+               "raw": [{ "_content": "GPS Receiver" }]
+            },
+            {
+               "clean": "gracebaptist",
+               "raw": [{ "_content": "Grace Baptist" }]
+            },
+            {
+               "clean": "graffiti",
+               "raw": [{ "_content": "Graffiti" }]
+            },
+            {
+               "clean": "grandadbridge",
+               "raw": [{ "_content": "Grandad Bridge" }]
+            },
+            {
+               "clean": "grandview",
+               "raw": [{ "_content": "Grand View" }]
+            },
+            {
+               "clean": "grangeville",
+               "raw": [{ "_content": "Grangeville" }]
+            },
+            {
+               "clean": "grasmere",
+               "raw": [{ "_content": "Grasmere" }]
+            },
+            {
+               "clean": "grasshopper",
+               "raw": [{ "_content": "Grasshopper" }]
+            },
+            {
+               "clean": "gravelroad",
+               "raw": [{ "_content": "Gravel Road" }]
+            },
+            {
+               "clean": "gravestone",
+               "raw": [{ "_content": "Gravestone" }]
+            },
+            {
+               "clean": "greenbelt",
+               "raw": [{ "_content": "Greenbelt" }]
+            },
+            {
+               "clean": "gregbunce",
+               "raw": [{ "_content": "Greg Bunce" }]
+            },
+            {
+               "clean": "greylockmountain",
+               "raw": [{ "_content": "Greylock Mountain" }]
+            },
+            {
+               "clean": "grill",
+               "raw": [{ "_content": "Grill" }]
+            },
+            {
+               "clean": "grilling",
+               "raw": [{ "_content": "Grilling" }]
+            },
+            {
+               "clean": "grimescreek",
+               "raw": [{ "_content": "Grimes Creek" }]
+            },
+            {
+               "clean": "grousecreekmine",
+               "raw": [{ "_content": "Grouse Creek Mine" }]
+            },
+            {
+               "clean": "guardstation",
+               "raw": [{ "_content": "Guard Station" }]
+            },
+            {
+               "clean": "guffeybridge",
+               "raw": [{ "_content": "Guffey Bridge" }]
+            },
+            {
+               "clean": "gulch",
+               "raw": [{ "_content": "Gulch" }]
+            },
+            {
+               "clean": "hamburger",
+               "raw": [{ "_content": "Hamburger" }]
+            },
+            {
+               "clean": "hammer",
+               "raw": [{ "_content": "Hammer" }]
+            },
+            {
+               "clean": "hansonlakes",
+               "raw": [{ "_content": "Hanson Lakes" }]
+            },
+            {
+               "clean": "hanumabay",
+               "raw": [{ "_content": "Hanuma Bay" }]
+            },
+            {
+               "clean": "harper",
+               "raw": [{ "_content": "Harper" }]
+            },
+            {
+               "clean": "hatpoint",
+               "raw": [{ "_content": "Hat Point" }]
+            },
+            {
+               "clean": "hawaii",
+               "raw": [{ "_content": "Hawai'i" }]
+            },
+            {
+               "clean": "haydenpeak",
+               "raw": [{ "_content": "Hayden Peak" }]
+            },
+            {
+               "clean": "hayman",
+               "raw": [{ "_content": "Hayman" }]
+            },
+            {
+               "clean": "hbtoni",
+               "raw": [{ "_content": "HBToni" }]
+            },
+            {
+               "clean": "headquarters",
+               "raw": [{ "_content": "Headquarters" }]
+            },
+            {
+               "clean": "heather",
+               "raw": [{ "_content": "Heather" }]
+            },
+            {
+               "clean": "heathersteward",
+               "raw": [{ "_content": "Heather Steward" }]
+            },
+            {
+               "clean": "heathhiatt",
+               "raw": [{ "_content": "Heath Hiatt" }]
+            },
+            {
+               "clean": "helicopter",
+               "raw": [{ "_content": "Helicopter" }]
+            },
+            {
+               "clean": "hellscanyon",
+               "raw": [{ "_content": "Hells Canyon" }]
+            },
+            {
+               "clean": "hellscanyoninncafe",
+               "raw": [{ "_content": "Hells Canyon Inn & Cafe" }]
+            },
+            {
+               "clean": "hellscanyonoverlook",
+               "raw": [{ "_content": "Hells Canyon Overlook" }]
+            },
+            {
+               "clean": "hessroad",
+               "raw": [{ "_content": "Hess Road" }]
+            },
+            {
+               "clean": "highvalleyroad",
+               "raw": [{ "_content": "High Valley Road" }]
+            },
+            {
+               "clean": "highway",
+               "raw": [{ "_content": "Highway" }]
+            },
+            {
+               "clean": "highway11",
+               "raw": [{ "_content": "Highway 11" }]
+            },
+            {
+               "clean": "highway17",
+               "raw": [{ "_content": "Highway 17" }]
+            },
+            {
+               "clean": "highway20",
+               "raw": [{ "_content": "Highway 20" }]
+            },
+            {
+               "clean": "highway21",
+               "raw": [{ "_content": "Highway 21" }]
+            },
+            {
+               "clean": "highway225",
+               "raw": [{ "_content": "Highway 225" }]
+            },
+            {
+               "clean": "highway51",
+               "raw": [{ "_content": "Highway 51" }]
+            },
+            {
+               "clean": "highway55",
+               "raw": [{ "_content": "Highway 55" }]
+            },
+            {
+               "clean": "highway6",
+               "raw": [{ "_content": "Highway 6" }]
+            },
+            {
+               "clean": "highway71",
+               "raw": [{ "_content": "Highway 71" }]
+            },
+            {
+               "clean": "highway75",
+               "raw": [{ "_content": "Highway 75" }]
+            },
+            {
+               "clean": "highway8",
+               "raw": [{ "_content": "Highway 8" }]
+            },
+            {
+               "clean": "highway82",
+               "raw": [{ "_content": "Highway 82" }]
+            },
+            {
+               "clean": "highway9",
+               "raw": [{ "_content": "Highway 9" }]
+            },
+            {
+               "clean": "highway95",
+               "raw": [{ "_content": "Highway 95" }]
+            },
+            {
+               "clean": "highway99",
+               "raw": [{ "_content": "Highway 99" }]
+            },
+            {
+               "clean": "hiking",
+               "raw": [{ "_content": "Hiking" }]
+            },
+            {
+               "clean": "hillclimb",
+               "raw": [{ "_content": "Hill Climb" }]
+            },
+            {
+               "clean": "history",
+               "raw": [{ "_content": "History" }]
+            },
+            {
+               "clean": "home",
+               "raw": [{ "_content": "Home" }]
+            },
+            {
+               "clean": "homedale",
+               "raw": [{ "_content": "Homedale" }]
+            },
+            {
+               "clean": "homestead",
+               "raw": [{ "_content": "Homestead" }]
+            },
+            {
+               "clean": "hondacr250r",
+               "raw": [{ "_content": "Honda CR 250R" }]
+            },
+            {
+               "clean": "hondacrf230l",
+               "raw": [{ "_content": "Honda CRF 230L" }]
+            },
+            {
+               "clean": "hondacrf450x",
+               "raw": [{ "_content": "Honda CRF 450X" }]
+            },
+            {
+               "clean": "hondaxl185s",
+               "raw": [{ "_content": "Honda XL 185S" }]
+            },
+            {
+               "clean": "hondaxr250r",
+               "raw": [{ "_content": "Honda XR 250R" }]
+            },
+            {
+               "clean": "hondaxr350r",
+               "raw": [{ "_content": "Honda XR 350R" }]
+            },
+            {
+               "clean": "hondaxr50",
+               "raw": [{ "_content": "Honda XR 50" }]
+            },
+            {
+               "clean": "hondaxr600r",
+               "raw": [{ "_content": "Honda XR 600R" }]
+            },
+            {
+               "clean": "hondaxr650l",
+               "raw": [{ "_content": "Honda XR 650L" }]
+            },
+            {
+               "clean": "hoodoo",
+               "raw": [{ "_content": "Hoodoo" }]
+            },
+            {
+               "clean": "hoodoopass",
+               "raw": [{ "_content": "Hoodoo Pass" }]
+            },
+            {
+               "clean": "hoots",
+               "raw": [{ "_content": "Hoot's" }]
+            },
+            {
+               "clean": "horse",
+               "raw": [{ "_content": "Horse" }]
+            },
+            {
+               "clean": "horsebackriding",
+               "raw": [{ "_content": "Horseback Riding" }]
+            },
+            {
+               "clean": "horseshoebend",
+               "raw": [{ "_content": "Horseshoe Bend" }]
+            },
+            {
+               "clean": "horseshoelake",
+               "raw": [{ "_content": "Horseshoe Lake" }]
+            },
+            {
+               "clean": "hospital",
+               "raw": [{ "_content": "Hospital" }]
+            },
+            {
+               "clean": "hotdogs",
+               "raw": [{ "_content": "Hot Dogs" }]
+            },
+            {
+               "clean": "hotel",
+               "raw": [{ "_content": "Hotel" }]
+            },
+            {
+               "clean": "hotspring",
+               "raw": [{ "_content": "Hot Spring" }]
+            },
+            {
+               "clean": "house",
+               "raw": [{ "_content": "House" }]
+            },
+            {
+               "clean": "huckleberrylookout",
+               "raw": [{ "_content": "Huckleberry Lookout" }]
+            },
+            {
+               "clean": "hugging",
+               "raw": [{ "_content": "Hugging" }]
+            },
+            {
+               "clean": "hullsgulch",
+               "raw": [{ "_content": "Hulls Gulch" }]
+            },
+            {
+               "clean": "hummingbird",
+               "raw": [{ "_content": "Hummingbird" }]
+            },
+            {
+               "clean": "hunter",
+               "raw": [{ "_content": "Hunter" }]
+            },
+            {
+               "clean": "hunterthomas",
+               "raw": [{ "_content": "Hunter Thomas" }]
+            },
+            {
+               "clean": "husqvarnate450",
+               "raw": [{ "_content": "Husqvarna TE 450" }]
+            },
+            {
+               "clean": "ice",
+               "raw": [{ "_content": "Ice" }]
+            },
+            {
+               "clean": "icecreamparlor",
+               "raw": [{ "_content": "Ice Cream Parlor" }]
+            },
+            {
+               "clean": "icicle",
+               "raw": [{ "_content": "Icicle" }]
+            },
+            {
+               "clean": "idaho",
+               "raw": [{ "_content": "Idaho" }]
+            },
+            {
+               "clean": "idahocity",
+               "raw": [{ "_content": "Idaho City" }]
+            },
+            {
+               "clean": "idahohotel",
+               "raw": [{ "_content": "Idaho Hotel" }]
+            },
+            {
+               "clean": "idahosam",
+               "raw": [{ "_content": "Idahosam" }]
+            },
+            {
+               "clean": "imnahariver",
+               "raw": [{ "_content": "Imnaha River" }]
+            },
+            {
+               "clean": "indianhotsprings",
+               "raw": [{ "_content": "Indian Hot Springs" }]
+            },
+            {
+               "clean": "indianpaintbrush",
+               "raw": [{ "_content": "Indian Paintbrush" }]
+            },
+            {
+               "clean": "indianpostofficelake",
+               "raw": [{ "_content": "Indian Postoffice Lake" }]
+            },
+            {
+               "clean": "initialpoint",
+               "raw": [{ "_content": "Initial Point" }]
+            },
+            {
+               "clean": "insect",
+               "raw": [{ "_content": "Insect" }]
+            },
+            {
+               "clean": "interstate",
+               "raw": [{ "_content": "Interstate" }]
+            },
+            {
+               "clean": "interstate84",
+               "raw": [{ "_content": "Interstate 84" }]
+            },
+            {
+               "clean": "island",
+               "raw": [{ "_content": "Island" }]
+            },
+            {
+               "clean": "islandcity",
+               "raw": [{ "_content": "Island City" }]
+            },
+            {
+               "clean": "ivy",
+               "raw": [{ "_content": "Ivy" }]
+            },
+            {
+               "clean": "jack",
+               "raw": [{ "_content": "Jack" }]
+            },
+            {
+               "clean": "japanesemaple",
+               "raw": [{ "_content": "Japanese Maple" }]
+            },
+            {
+               "clean": "jason",
+               "raw": [{ "_content": "Jason" }]
+            },
+            {
+               "clean": "jasper",
+               "raw": [{ "_content": "Jasper" }]
+            },
+            {
+               "clean": "jataya",
+               "raw": [{ "_content": "Jataya" }]
+            },
+            {
+               "clean": "jatayatoliver",
+               "raw": [{ "_content": "Jataya Toliver" }]
+            },
+            {
+               "clean": "jaxonflores",
+               "raw": [{ "_content": "Jaxon Flores" }]
+            },
+            {
+               "clean": "jeep",
+               "raw": [{ "_content": "Jeep" }]
+            },
+            {
+               "clean": "jeepwrangler",
+               "raw": [{ "_content": "Jeep Wrangler" }]
+            },
+            {
+               "clean": "jeremyabbott",
+               "raw": [{ "_content": "Jeremy Abbott" }]
+            },
+            {
+               "clean": "jesseabbott",
+               "raw": [{ "_content": "Jesse Abbott" }]
+            },
+            {
+               "clean": "jessecrocker",
+               "raw": [{ "_content": "Jesse Crocker" }]
+            },
+            {
+               "clean": "jessicaabbott",
+               "raw": [{ "_content": "Jessica Abbott" }]
+            },
+            {
+               "clean": "jessjackson",
+               "raw": [{ "_content": "Jess Jackson" }]
+            },
+            {
+               "clean": "jestop",
+               "raw": [{ "_content": "J&E Stop" }]
+            },
+            {
+               "clean": "jetboil",
+               "raw": [{ "_content": "Jetboil" }]
+            },
+            {
+               "clean": "jillabbott",
+               "raw": [{ "_content": "Jill Abbott" }]
+            },
+            {
+               "clean": "jimabbott",
+               "raw": [{ "_content": "Jim Abbott" }]
+            },
+            {
+               "clean": "jimeldredge",
+               "raw": [{ "_content": "Jim Eldredge" }]
+            },
+            {
+               "clean": "joe",
+               "raw": [{ "_content": "Joe" }]
+            },
+            {
+               "clean": "joeabbott",
+               "raw": [{ "_content": "Joe Abbott" }]
+            },
+            {
+               "clean": "joel",
+               "raw": [{ "_content": "Joel" }]
+            },
+            {
+               "clean": "joelabbott",
+               "raw": [{ "_content": "Joel Abbott" }]
+            },
+            {
+               "clean": "john",
+               "raw": [{ "_content": "John" }]
+            },
+            {
+               "clean": "johnabbott",
+               "raw": [{ "_content": "John Abbott" }]
+            },
+            {
+               "clean": "johndye",
+               "raw": [{ "_content": "John Dye" }]
+            },
+            {
+               "clean": "johnsoncreekroad",
+               "raw": [{ "_content": "Johnson Creek Road" }]
+            },
+            {
+               "clean": "jordancraters",
+               "raw": [{ "_content": "Jordan Craters" }]
+            },
+            {
+               "clean": "jordancreek",
+               "raw": [{ "_content": "Jordan Creek" }]
+            },
+            {
+               "clean": "jordanvalley",
+               "raw": [{ "_content": "Jordan Valley" }]
+            },
+            {
+               "clean": "jughandlemountain",
+               "raw": [{ "_content": "Jughandle Mountain" }]
+            },
+            {
+               "clean": "juliadavispark",
+               "raw": [{ "_content": "Julia Davis Park" }]
+            },
+            {
+               "clean": "julianeabbott",
+               "raw": [{ "_content": "Juliane Abbott" }]
+            },
+            {
+               "clean": "julie",
+               "raw": [{ "_content": "Julie" }]
+            },
+            {
+               "clean": "jumpcreek",
+               "raw": [{ "_content": "Jump Creek" }]
+            },
+            {
+               "clean": "jumpcreekcanyon",
+               "raw": [{ "_content": "Jump Creek Canyon" }]
+            },
+            {
+               "clean": "jumpcreekfalls",
+               "raw": [{ "_content": "Jump Creek Falls" }]
+            },
+            {
+               "clean": "jumping",
+               "raw": [{ "_content": "Jumping" }]
+            },
+            {
+               "clean": "juntura",
+               "raw": [{ "_content": "Juntura" }]
+            },
+            {
+               "clean": "jvclubcafe",
+               "raw": [{ "_content": "J-V Club Cafe" }]
+            },
+            {
+               "clean": "kadenabbott",
+               "raw": [{ "_content": "Kaden Abbott" }]
+            },
+            {
+               "clean": "kailua",
+               "raw": [{ "_content": "Kailua" }]
+            },
+            {
+               "clean": "kawasakiklr650",
+               "raw": [{ "_content": "Kawasaki KLR 650" }]
+            },
+            {
+               "clean": "kawasakininjazx6r",
+               "raw": [{ "_content": "Kawasaki Ninja ZX-6R" }]
+            },
+            {
+               "clean": "kayak",
+               "raw": [{ "_content": "Kayak" }]
+            },
+            {
+               "clean": "kayla",
+               "raw": [{ "_content": "Kayla" }]
+            },
+            {
+               "clean": "kaylabowman",
+               "raw": [{ "_content": "Kayla Bowman" }]
+            },
+            {
+               "clean": "kellycreek",
+               "raw": [{ "_content": "Kelly Creek" }]
+            },
+            {
+               "clean": "kermitchair",
+               "raw": [{ "_content": "Kermit Chair" }]
+            },
+            {
+               "clean": "ketchum",
+               "raw": [{ "_content": "Ketchum" }]
+            },
+            {
+               "clean": "kind",
+               "raw": [{ "_content": "Kind" }]
+            },
+            {
+               "clean": "kindle",
+               "raw": [{ "_content": "Kindle" }]
+            },
+            {
+               "clean": "kirkhamhotsprings",
+               "raw": [{ "_content": "Kirkham Hot Springs" }]
+            },
+            {
+               "clean": "kissing",
+               "raw": [{ "_content": "Kissing" }]
+            },
+            {
+               "clean": "kitchen",
+               "raw": [{ "_content": "Kitchen" }]
+            },
+            {
+               "clean": "kitten",
+               "raw": [{ "_content": "Kitten" }]
+            },
+            {
+               "clean": "knife",
+               "raw": [{ "_content": "Knife" }]
+            },
+            {
+               "clean": "kokaneesalmon",
+               "raw": [{ "_content": "Kokanee Salmon" }]
+            },
+            {
+               "clean": "koolina",
+               "raw": [{ "_content": "Ko Olina" }]
+            },
+            {
+               "clean": "ktm450excr",
+               "raw": [{ "_content": "KTM 450 EXCR" }]
+            },
+            {
+               "clean": "ktm500xcw",
+               "raw": [{ "_content": "KTM 500 XC-W" }]
+            },
+            {
+               "clean": "ktm690enduror",
+               "raw": [{ "_content": "KTM 690 Enduro R" }]
+            },
+            {
+               "clean": "ktm950adventure",
+               "raw": [{ "_content": "KTM 950 Adventure" }]
+            },
+            {
+               "clean": "ktm990adventure",
+               "raw": [{ "_content": "KTM 990 Adventure" }]
+            },
+            {
+               "clean": "kuna",
+               "raw": [{ "_content": "Kuna" }]
+            },
+            {
+               "clean": "kunacave",
+               "raw": [{ "_content": "Kuna Cave" }]
+            },
+            {
+               "clean": "ladder",
+               "raw": [{ "_content": "Ladder" }]
+            },
+            {
+               "clean": "ladybug",
+               "raw": [{ "_content": "Ladybug" }]
+            },
+            {
+               "clean": "lairdpark",
+               "raw": [{ "_content": "Laird Park" }]
+            },
+            {
+               "clean": "lake",
+               "raw": [{ "_content": "Lake" }]
+            },
+            {
+               "clean": "lakecreek",
+               "raw": [{ "_content": "Lake Creek" }]
+            },
+            {
+               "clean": "lantern",
+               "raw": [{ "_content": "Lantern" }]
+            },
+            {
+               "clean": "laughing",
+               "raw": [{ "_content": "Laughing" }]
+            },
+            {
+               "clean": "lauraabbott",
+               "raw": [{ "_content": "Laura Abbott" }]
+            },
+            {
+               "clean": "lavacreek",
+               "raw": [{ "_content": "Lava Creek" }]
+            },
+            {
+               "clean": "lavafield",
+               "raw": [{ "_content": "Lava Field" }]
+            },
+            {
+               "clean": "lavatube",
+               "raw": [{ "_content": "Lava Tube" }]
+            },
+            {
+               "clean": "lawnmower",
+               "raw": [{ "_content": "Lawn Mower" }]
+            },
+            {
+               "clean": "leaves",
+               "raw": [{ "_content": "Leaves" }]
+            },
+            {
+               "clean": "leeabbott",
+               "raw": [{ "_content": "Lee Abbott" }]
+            },
+            {
+               "clean": "lenstagger",
+               "raw": [{ "_content": "LensTagger" }]
+            },
+            {
+               "clean": "lesliegulch",
+               "raw": [{ "_content": "Leslie Gulch" }]
+            },
+            {
+               "clean": "letter",
+               "raw": [{ "_content": "Letter" }]
+            },
+            {
+               "clean": "lewiston",
+               "raw": [{ "_content": "Lewiston" }]
+            },
+            {
+               "clean": "liatris",
+               "raw": [{ "_content": "Liatris" }]
+            },
+            {
+               "clean": "lichen",
+               "raw": [{ "_content": "Lichen" }]
+            },
+            {
+               "clean": "lickcreekroad",
+               "raw": [{ "_content": "Lick Creek Road" }]
+            },
+            {
+               "clean": "lightning",
+               "raw": [{ "_content": "Lightning" }]
+            },
+            {
+               "clean": "lightpainting",
+               "raw": [{ "_content": "Light Painting" }]
+            },
+            {
+               "clean": "lilac",
+               "raw": [{ "_content": "Lilac" }]
+            },
+            {
+               "clean": "lionspark",
+               "raw": [{ "_content": "Lions Park" }]
+            },
+            {
+               "clean": "lippincottdredge",
+               "raw": [{ "_content": "Lippincott Dredge" }]
+            },
+            {
+               "clean": "littlecamasreservoir",
+               "raw": [{ "_content": "Little Camas Reservoir" }]
+            },
+            {
+               "clean": "littlejackscreek",
+               "raw": [{ "_content": "Little Jacks Creek" }]
+            },
+            {
+               "clean": "littlejoemountain",
+               "raw": [{ "_content": "Little Joe Mountain" }]
+            },
+            {
+               "clean": "littlenorthforkoftheclearwater",
+               "raw": [{ "_content": "Little North Fork of the Clearwater" }]
+            },
+            {
+               "clean": "littlestpetshop",
+               "raw": [{ "_content": "Littlest Pet Shop" }]
+            },
+            {
+               "clean": "littletrinitylake",
+               "raw": [{ "_content": "Little Trinity Lake" }]
+            },
+            {
+               "clean": "lizard",
+               "raw": [{ "_content": "Lizard" }]
+            },
+            {
+               "clean": "lochsalodge",
+               "raw": [{ "_content": "Lochsa Lodge" }]
+            },
+            {
+               "clean": "locusttree",
+               "raw": [{ "_content": "Locust Tree" }]
+            },
+            {
+               "clean": "lodge",
+               "raw": [{ "_content": "Lodge" }]
+            },
+            {
+               "clean": "loghouservpark",
+               "raw": [{ "_content": "Log House R.V. Park" }]
+            },
+            {
+               "clean": "lolomotorway",
+               "raw": [{ "_content": "Lolo Motorway" }]
+            },
+            {
+               "clean": "longexposure",
+               "raw": [{ "_content": "Long Exposure" }]
+            },
+            {
+               "clean": "longhornsteakhouseandsaloon",
+               "raw": [{ "_content": "Longhorn Steakhouse and Saloon" }]
+            },
+            {
+               "clean": "lookouttower",
+               "raw": [{ "_content": "Lookout Tower" }]
+            },
+            {
+               "clean": "looncreekroad",
+               "raw": [{ "_content": "Loon Creek Road" }]
+            },
+            {
+               "clean": "loopcreek",
+               "raw": [{ "_content": "Loop Creek" }]
+            },
+            {
+               "clean": "lostlake",
+               "raw": [{ "_content": "Lost Lake" }]
+            },
+            {
+               "clean": "lostpackermine",
+               "raw": [{ "_content": "Lost Packer Mine" }]
+            },
+            {
+               "clean": "louielake",
+               "raw": [{ "_content": "Louie Lake" }]
+            },
+            {
+               "clean": "lowerstanley",
+               "raw": [{ "_content": "Lower Stanley" }]
+            },
+            {
+               "clean": "luckypeakreservoir",
+               "raw": [{ "_content": "Lucky Peak Reservoir" }]
+            },
+            {
+               "clean": "lunch",
+               "raw": [{ "_content": "Lunch" }]
+            },
+            {
+               "clean": "lupine",
+               "raw": [{ "_content": "Lupine" }]
+            },
+            {
+               "clean": "lysichitonamericanus",
+               "raw": [{ "_content": "Lysichiton Americanus" }]
+            },
+            {
+               "clean": "mackenzie",
+               "raw": [{ "_content": "Mackenzie" }]
+            },
+            {
+               "clean": "magazine",
+               "raw": [{ "_content": "Magazine" }]
+            },
+            {
+               "clean": "mahoganycreek",
+               "raw": [{ "_content": "Mahogany Creek" }]
+            },
+            {
+               "clean": "maladgorge",
+               "raw": [{ "_content": "Malad Gorge" }]
+            },
+            {
+               "clean": "maladriver",
+               "raw": [{ "_content": "Malad River" }]
+            },
+            {
+               "clean": "malfunctionjunction",
+               "raw": [{ "_content": "Malfunction Junction" }]
+            },
+            {
+               "clean": "malheurriver",
+               "raw": [{ "_content": "Malheur River" }]
+            },
+            {
+               "clean": "map",
+               "raw": [{ "_content": "Map" }]
+            },
+            {
+               "clean": "mapletree",
+               "raw": [{ "_content": "Maple Tree" }]
+            },
+            {
+               "clean": "marblecreek",
+               "raw": [{ "_content": "Marble Creek" }]
+            },
+            {
+               "clean": "marshmallows",
+               "raw": [{ "_content": "Marshmallows" }]
+            },
+            {
+               "clean": "marsing",
+               "raw": [{ "_content": "Marsing" }]
+            },
+            {
+               "clean": "mayfield",
+               "raw": [{ "_content": "Mayfield" }]
+            },
+            {
+               "clean": "mccall",
+               "raw": [{ "_content": "McCall" }]
+            },
+            {
+               "clean": "mccroskeypark",
+               "raw": [{ "_content": "McCroskey Park" }]
+            },
+            {
+               "clean": "mcgownpeak",
+               "raw": [{ "_content": "McGown Peak" }]
+            },
+            {
+               "clean": "meadow",
+               "raw": [{ "_content": "Meadow" }]
+            },
+            {
+               "clean": "melba",
+               "raw": [{ "_content": "Melba" }]
+            },
+            {
+               "clean": "melissajanereed",
+               "raw": [{ "_content": "Melissa Jane Reed" }]
+            },
+            {
+               "clean": "meridian",
+               "raw": [{ "_content": "Meridian" }]
+            },
+            {
+               "clean": "michaelmccrosky",
+               "raw": [{ "_content": "Michael McCrosky" }]
+            },
+            {
+               "clean": "microscope",
+               "raw": [{ "_content": "Microscope" }]
+            },
+            {
+               "clean": "middleforkoftheboise",
+               "raw": [{ "_content": "Middle Fork of the Boise" }]
+            },
+            {
+               "clean": "middleforkofthepayette",
+               "raw": [{ "_content": "Middle Fork of the Payette" }]
+            },
+            {
+               "clean": "middleforkofthesalmon",
+               "raw": [{ "_content": "Middle Fork of the Salmon" }]
+            },
+            {
+               "clean": "mikesnow",
+               "raw": [{ "_content": "Mike Snow" }]
+            },
+            {
+               "clean": "military",
+               "raw": [{ "_content": "Military" }]
+            },
+            {
+               "clean": "mill",
+               "raw": [{ "_content": "Mill" }]
+            },
+            {
+               "clean": "mine",
+               "raw": [{ "_content": "Mine" }]
+            },
+            {
+               "clean": "minnie",
+               "raw": [{ "_content": "Minnie" }]
+            },
+            {
+               "clean": "mist",
+               "raw": [{ "_content": "Mist" }]
+            },
+            {
+               "clean": "mom",
+               "raw": [{ "_content": "Mom" }]
+            },
+            {
+               "clean": "montana",
+               "raw": [{ "_content": "Montana" }]
+            },
+            {
+               "clean": "moon",
+               "raw": [{ "_content": "Moon" }]
+            },
+            {
+               "clean": "moresmountain",
+               "raw": [{ "_content": "Mores Mountain" }]
+            },
+            {
+               "clean": "mormoncricket",
+               "raw": [{ "_content": "Mormon Cricket" }]
+            },
+            {
+               "clean": "moscow",
+               "raw": [{ "_content": "Moscow" }]
+            },
+            {
+               "clean": "moscowmountain",
+               "raw": [{ "_content": "Moscow Mountain" }]
+            },
+            {
+               "clean": "moss",
+               "raw": [{ "_content": "Moss" }]
+            },
+            {
+               "clean": "motel",
+               "raw": [{ "_content": "Motel" }]
+            },
+            {
+               "clean": "motorcycle",
+               "raw": [{ "_content": "Motorcycle" }]
+            },
+            {
+               "clean": "motorcycling",
+               "raw": [{ "_content": "Motorcycling" }]
+            },
+            {
+               "clean": "mountain",
+               "raw": [{ "_content": "Mountain" }]
+            },
+            {
+               "clean": "mountaingoat",
+               "raw": [{ "_content": "Mountain Goat" }]
+            },
+            {
+               "clean": "mountainpass",
+               "raw": [{ "_content": "Mountain Pass" }]
+            },
+            {
+               "clean": "mountains",
+               "raw": [{ "_content": "Mountains" }]
+            },
+            {
+               "clean": "moxiejava",
+               "raw": [{ "_content": "Moxie Java" }]
+            },
+            {
+               "clean": "mud",
+               "raw": [{ "_content": "Mud" }]
+            },
+            {
+               "clean": "mudflatroad",
+               "raw": [{ "_content": "Mud Flat Road" }]
+            },
+            {
+               "clean": "mule",
+               "raw": [{ "_content": "Mule" }]
+            },
+            {
+               "clean": "municipalpark",
+               "raw": [{ "_content": "Municipal Park" }]
+            },
+            {
+               "clean": "murphy",
+               "raw": [{ "_content": "Murphy" }]
+            },
+            {
+               "clean": "museum",
+               "raw": [{ "_content": "Museum" }]
+            },
+            {
+               "clean": "music",
+               "raw": [{ "_content": "Music" }]
+            },
+            {
+               "clean": "mylittlepony",
+               "raw": [{ "_content": "My Little Pony" }]
+            },
+            {
+               "clean": "nampa",
+               "raw": [{ "_content": "Nampa" }]
+            },
+            {
+               "clean": "natashajoyrodgers",
+               "raw": [{ "_content": "Natasha Joy Rodgers" }]
+            },
+            {
+               "clean": "needlepeak",
+               "raw": [{ "_content": "Needle Peak" }]
+            },
+            {
+               "clean": "nemomoto1p",
+               "raw": [{ "_content": "NEMO Moto 1P" }]
+            },
+            {
+               "clean": "neon",
+               "raw": [{ "_content": "Neon" }]
+            },
+            {
+               "clean": "nevada",
+               "raw": [{ "_content": "Nevada" }]
+            },
+            {
+               "clean": "newspaper",
+               "raw": [{ "_content": "Newspaper" }]
+            },
+            {
+               "clean": "newyorkcanal",
+               "raw": [{ "_content": "New York Canal" }]
+            },
+            {
+               "clean": "nezperce",
+               "raw": [{ "_content": "Nezperce" }]
+            },
+            {
+               "clean": "nicholas",
+               "raw": [{ "_content": "Nicholas" }]
+            },
+            {
+               "clean": "nicholasweston",
+               "raw": [{ "_content": "Nicholas Weston" }]
+            },
+            {
+               "clean": "night",
+               "raw": [{ "_content": "Night" }]
+            },
+            {
+               "clean": "nikon1755mmf28g",
+               "raw": [{ "_content": "Nikon 17-55mm f/2.8G" }]
+            },
+            {
+               "clean": "nikon18200mmf3556gvr",
+               "raw": [{ "_content": "Nikon 18-200mm f/3.5-5.6G VR" }]
+            },
+            {
+               "clean": "nikon2470mmf28g",
+               "raw": [{ "_content": "Nikon 24-70mm f/2.8G" }]
+            },
+            {
+               "clean": "nikon70200mmf28gvr",
+               "raw": [{ "_content": "Nikon 70-200mm f/2.8G VR" }]
+            },
+            {
+               "clean": "nikond200",
+               "raw": [{ "_content": "Nikon D200" }]
+            },
+            {
+               "clean": "nikond3",
+               "raw": [{ "_content": "Nikon D3" }]
+            },
+            {
+               "clean": "nikond40x",
+               "raw": [{ "_content": "Nikon D40x" }]
+            },
+            {
+               "clean": "nikond700",
+               "raw": [{ "_content": "Nikon D700" }]
+            },
+            {
+               "clean": "nikond80",
+               "raw": [{ "_content": "Nikon D80" }]
+            },
+            {
+               "clean": "nikond800",
+               "raw": [{ "_content": "Nikon D800" }]
+            },
+            {
+               "clean": "nikond90",
+               "raw": [{ "_content": "Nikon D90" }]
+            },
+            {
+               "clean": "nikonp7000",
+               "raw": [{ "_content": "Nikon P7000" }]
+            },
+            {
+               "clean": "nikonsb600",
+               "raw": [{ "_content": "Nikon SB600" }]
+            },
+            {
+               "clean": "northforkoftheboise",
+               "raw": [{ "_content": "North Fork of the Boise" }]
+            },
+            {
+               "clean": "northforkoftheclearwater",
+               "raw": [{ "_content": "North Fork of the Clearwater" }]
+            },
+            {
+               "clean": "northstarlake",
+               "raw": [{ "_content": "North Star Lake" }]
+            },
+            {
+               "clean": "oahu",
+               "raw": [{ "_content": "Oahu" }]
+            },
+            {
+               "clean": "obradvgear",
+               "raw": [{ "_content": "OBR ADV Gear" }]
+            },
+            {
+               "clean": "ocean",
+               "raw": [{ "_content": "Ocean" }]
+            },
+            {
+               "clean": "oldpenitentiary",
+               "raw": [{ "_content": "Old Penitentiary" }]
+            },
+            {
+               "clean": "olive",
+               "raw": [{ "_content": "Olive" }]
+            },
+            {
+               "clean": "oncoid",
+               "raw": [{ "_content": "Oncoid" }]
+            },
+            {
+               "clean": "oolite",
+               "raw": [{ "_content": "Oolite" }]
+            },
+            {
+               "clean": "orangebridge",
+               "raw": [{ "_content": "Orange Bridge" }]
+            },
+            {
+               "clean": "orchardcombattrainingcenter",
+               "raw": [{ "_content": "Orchard Combat Training Center" }]
+            },
+            {
+               "clean": "oreana",
+               "raw": [{ "_content": "Oreana" }]
+            },
+            {
+               "clean": "oreanacemetery",
+               "raw": [{ "_content": "Oreana Cemetery" }]
+            },
+            {
+               "clean": "oregon",
+               "raw": [{ "_content": "Oregon" }]
+            },
+            {
+               "clean": "oregontrail",
+               "raw": [{ "_content": "Oregon Trail" }]
+            },
+            {
+               "clean": "outcrop",
+               "raw": [{ "_content": "Outcrop" }]
+            },
+            {
+               "clean": "outhouse",
+               "raw": [{ "_content": "Outhouse" }]
+            },
+            {
+               "clean": "owhyeeuplandsbackcountrybyway",
+               "raw": [{ "_content": "Owhyee Uplands Back Country Byway" }]
+            },
+            {
+               "clean": "owyhee",
+               "raw": [{ "_content": "Owyhee" }]
+            },
+            {
+               "clean": "owyheecountymuseum",
+               "raw": [{ "_content": "Owyhee County Museum" }]
+            },
+            {
+               "clean": "owyheedam",
+               "raw": [{ "_content": "Owyhee Dam" }]
+            },
+            {
+               "clean": "owyheereservoir",
+               "raw": [{ "_content": "Owyhee Reservoir" }]
+            },
+            {
+               "clean": "owyheeriver",
+               "raw": [{ "_content": "Owyhee River" }]
+            },
+            {
+               "clean": "oxbow",
+               "raw": [{ "_content": "Oxbow" }]
+            },
+            {
+               "clean": "paige",
+               "raw": [{ "_content": "Paige" }]
+            },
+            {
+               "clean": "painting",
+               "raw": [{ "_content": "Painting" }]
+            },
+            {
+               "clean": "palouse",
+               "raw": [{ "_content": "Palouse" }]
+            },
+            {
+               "clean": "palouseriver",
+               "raw": [{ "_content": "Palouse River" }]
+            },
+            {
+               "clean": "park",
+               "raw": [{ "_content": "Park" }]
+            },
+            {
+               "clean": "parkerabbott",
+               "raw": [{ "_content": "Parker Abbott" }]
+            },
+            {
+               "clean": "parkinglot",
+               "raw": [{ "_content": "Parking Lot" }]
+            },
+            {
+               "clean": "party",
+               "raw": [{ "_content": "Party" }]
+            },
+            {
+               "clean": "path",
+               "raw": [{ "_content": "Path" }]
+            },
+            {
+               "clean": "paulabbott",
+               "raw": [{ "_content": "Paul Abbott" }]
+            },
+            {
+               "clean": "payettelake",
+               "raw": [{ "_content": "Payette Lake" }]
+            },
+            {
+               "clean": "payetteriver",
+               "raw": [{ "_content": "Payette River" }]
+            },
+            {
+               "clean": "penguin",
+               "raw": [{ "_content": "Penguin" }]
+            },
+            {
+               "clean": "peteabbott",
+               "raw": [{ "_content": "Pete Abbott" }]
+            },
+            {
+               "clean": "peterdeshazo",
+               "raw": [{ "_content": "Peter De Shazo" }]
+            },
+            {
+               "clean": "petrifiedwood",
+               "raw": [{ "_content": "Petrified Wood" }]
+            },
+            {
+               "clean": "petroglyph",
+               "raw": [{ "_content": "Petroglyph" }]
+            },
+            {
+               "clean": "philsauter",
+               "raw": [{ "_content": "Phil Sauter" }]
+            },
+            {
+               "clean": "phlox",
+               "raw": [{ "_content": "Phlox" }]
+            },
+            {
+               "clean": "phonecall",
+               "raw": [{ "_content": "Phone Call" }]
+            },
+            {
+               "clean": "photographing",
+               "raw": [{ "_content": "Photographing" }]
+            },
+            {
+               "clean": "piano",
+               "raw": [{ "_content": "Piano" }]
+            },
+            {
+               "clean": "picnic",
+               "raw": [{ "_content": "Picnic" }]
+            },
+            {
+               "clean": "picnictable",
+               "raw": [{ "_content": "Picnic Table" }]
+            },
+            {
+               "clean": "picoarmchair",
+               "raw": [{ "_content": "Pico Arm Chair" }]
+            },
+            {
+               "clean": "pie",
+               "raw": [{ "_content": "Pie" }]
+            },
+            {
+               "clean": "pierce",
+               "raw": [{ "_content": "Pierce" }]
+            },
+            {
+               "clean": "pine",
+               "raw": [{ "_content": "Pine" }]
+            },
+            {
+               "clean": "pinyonpeak",
+               "raw": [{ "_content": "Pinyon Peak" }]
+            },
+            {
+               "clean": "pinyonpeaklookout",
+               "raw": [{ "_content": "Pinyon Peak Lookout" }]
+            },
+            {
+               "clean": "pizza",
+               "raw": [{ "_content": "Pizza" }]
+            },
+            {
+               "clean": "placerville",
+               "raw": [{ "_content": "Placerville" }]
+            },
+            {
+               "clean": "playground",
+               "raw": [{ "_content": "Playground" }]
+            },
+            {
+               "clean": "plummer",
+               "raw": [{ "_content": "Plummer" }]
+            },
+            {
+               "clean": "pocketwatch",
+               "raw": [{ "_content": "Pocket Watch" }]
+            },
+            {
+               "clean": "poker",
+               "raw": [{ "_content": "Poker" }]
+            },
+            {
+               "clean": "polecreekroad",
+               "raw": [{ "_content": "Pole Creek Road" }]
+            },
+            {
+               "clean": "police",
+               "raw": [{ "_content": "Police" }]
+            },
+            {
+               "clean": "poll",
+               "raw": [{ "_content": "Poll" }]
+            },
+            {
+               "clean": "pond",
+               "raw": [{ "_content": "Pond" }]
+            },
+            {
+               "clean": "pool",
+               "raw": [{ "_content": "Pool" }]
+            },
+            {
+               "clean": "portrait",
+               "raw": [{ "_content": "Portrait" }]
+            },
+            {
+               "clean": "pottery",
+               "raw": [{ "_content": "Pottery" }]
+            },
+            {
+               "clean": "pouting",
+               "raw": [{ "_content": "Pouting" }]
+            },
+            {
+               "clean": "powell’ssweetshoppe",
+               "raw": [{ "_content": "Powell’s Sweet Shoppe" }]
+            },
+            {
+               "clean": "powerline",
+               "raw": [{ "_content": "Power Line" }]
+            },
+            {
+               "clean": "prairie",
+               "raw": [{ "_content": "Prairie" }]
+            },
+            {
+               "clean": "pregnant",
+               "raw": [{ "_content": "Pregnant" }]
+            },
+            {
+               "clean": "primusmicronlantern",
+               "raw": [{ "_content": "Primus Micron Lantern" }]
+            },
+            {
+               "clean": "pullman",
+               "raw": [{ "_content": "Pullman" }]
+            },
+            {
+               "clean": "pumpkin",
+               "raw": [{ "_content": "Pumpkin" }]
+            },
+            {
+               "clean": "purshiatridentata",
+               "raw": [{ "_content": "Purshia tridentata" }]
+            },
+            {
+               "clean": "quiznos",
+               "raw": [{ "_content": "Quiznos" }]
+            },
+            {
+               "clean": "rabbitcreek",
+               "raw": [{ "_content": "Rabbit Creek" }]
+            },
+            {
+               "clean": "rain",
+               "raw": [{ "_content": "Rain" }]
+            },
+            {
+               "clean": "rainbow",
+               "raw": [{ "_content": "Rainbow" }]
+            },
+            {
+               "clean": "rake",
+               "raw": [{ "_content": "Rake" }]
+            },
+            {
+               "clean": "rangerstation",
+               "raw": [{ "_content": "Ranger Station" }]
+            },
+            {
+               "clean": "rapids",
+               "raw": [{ "_content": "Rapids" }]
+            },
+            {
+               "clean": "rattlesnakecreek",
+               "raw": [{ "_content": "Rattlesnake Creek" }]
+            },
+            {
+               "clean": "reading",
+               "raw": [{ "_content": "Reading" }]
+            },
+            {
+               "clean": "rebekahsteward",
+               "raw": [{ "_content": "Rebekah Steward" }]
+            },
+            {
+               "clean": "red",
+               "raw": [{ "_content": "Red" }]
+            },
+            {
+               "clean": "redivesrangerstation",
+               "raw": [{ "_content": "Red Ives Ranger Station" }]
+            },
+            {
+               "clean": "redlightgarage",
+               "raw": [{ "_content": "Red Light Garage" }]
+            },
+            {
+               "clean": "reed",
+               "raw": [{ "_content": "Reed" }]
+            },
+            {
+               "clean": "reflection",
+               "raw": [{ "_content": "Reflection" }]
+            },
+            {
+               "clean": "reptile",
+               "raw": [{ "_content": "Reptile" }]
+            },
+            {
+               "clean": "reservoir",
+               "raw": [{ "_content": "Reservoir" }]
+            },
+            {
+               "clean": "restaurant",
+               "raw": [{ "_content": "Restaurant" }]
+            },
+            {
+               "clean": "retouched",
+               "raw": [{ "_content": "Retouched" }]
+            },
+            {
+               "clean": "reynolds",
+               "raw": [{ "_content": "Reynolds" }]
+            },
+            {
+               "clean": "rialtobeach",
+               "raw": [{ "_content": "Rialto Beach" }]
+            },
+            {
+               "clean": "richkuczajda",
+               "raw": [{ "_content": "Rich Kuczajda" }]
+            },
+            {
+               "clean": "riding",
+               "raw": [{ "_content": "Riding" }]
+            },
+            {
+               "clean": "riggins",
+               "raw": [{ "_content": "Riggins" }]
+            },
+            {
+               "clean": "river",
+               "raw": [{ "_content": "River" }]
+            },
+            {
+               "clean": "riversidepark",
+               "raw": [{ "_content": "Riverside Park" }]
+            },
+            {
+               "clean": "roadgrader",
+               "raw": [{ "_content": "Road Grader" }]
+            },
+            {
+               "clean": "robertcatmull",
+               "raw": [{ "_content": "Robert Catmull" }]
+            },
+            {
+               "clean": "robiecreek",
+               "raw": [{ "_content": "Robie Creek" }]
+            },
+            {
+               "clean": "rock",
+               "raw": [{ "_content": "Rock" }]
+            },
+            {
+               "clean": "rockclimbing",
+               "raw": [{ "_content": "Rock Climbing" }]
+            },
+            {
+               "clean": "rockfence",
+               "raw": [{ "_content": "Rock Fence" }]
+            },
+            {
+               "clean": "rockhunting",
+               "raw": [{ "_content": "Rock Hunting" }]
+            },
+            {
+               "clean": "rockiesdiner",
+               "raw": [{ "_content": "Rockies Diner" }]
+            },
+            {
+               "clean": "rockybar",
+               "raw": [{ "_content": "Rocky Bar" }]
+            },
+            {
+               "clean": "rockybarroad",
+               "raw": [{ "_content": "Rocky Bar Road" }]
+            },
+            {
+               "clean": "rose",
+               "raw": [{ "_content": "Rose" }]
+            },
+            {
+               "clean": "roxy",
+               "raw": [{ "_content": "Roxy" }]
+            },
+            {
+               "clean": "rumination",
+               "raw": [{ "_content": "Rumination" }]
+            },
+            {
+               "clean": "running",
+               "raw": [{ "_content": "Running" }]
+            },
+            {
+               "clean": "rust",
+               "raw": [{ "_content": "Rust" }]
+            },
+            {
+               "clean": "rustymewes",
+               "raw": [{ "_content": "Rusty Mewes" }]
+            },
+            {
+               "clean": "rvpark",
+               "raw": [{ "_content": "R.V. Park" }]
+            },
+            {
+               "clean": "ryan",
+               "raw": [{ "_content": "Ryan" }]
+            },
+            {
+               "clean": "ryancantrell",
+               "raw": [{ "_content": "Ryan Cantrell" }]
+            },
+            {
+               "clean": "ryanwilliamcantrell",
+               "raw": [{ "_content": "ryanwilliamcantrell" }]
+            },
+            {
+               "clean": "saddlecreekcampground",
+               "raw": [{ "_content": "Saddle Creek Campground" }]
+            },
+            {
+               "clean": "salmon",
+               "raw": [{ "_content": "Salmon" }]
+            },
+            {
+               "clean": "salmonriver",
+               "raw": [{ "_content": "Salmon River" }]
+            },
+            {
+               "clean": "sam",
+               "raw": [{ "_content": "Sam" }]
+            },
+            {
+               "clean": "samstone",
+               "raw": [{ "_content": "Sam Stone" }]
+            },
+            {
+               "clean": "sand",
+               "raw": [{ "_content": "Sand" }]
+            },
+            {
+               "clean": "sarsaparilla",
+               "raw": [{ "_content": "Sarsaparilla" }]
+            },
+            {
+               "clean": "saw",
+               "raw": [{ "_content": "Saw" }]
+            },
+            {
+               "clean": "sawmill",
+               "raw": [{ "_content": "Sawmill" }]
+            },
+            {
+               "clean": "saxaphone",
+               "raw": [{ "_content": "Saxaphone" }]
+            },
+            {
+               "clean": "scenicoverlook",
+               "raw": [{ "_content": "Scenic Overlook" }]
+            },
+            {
+               "clean": "scheffy’smotelandgeneralstore",
+               "raw": [{ "_content": "Scheffy’s Motel and General Store" }]
+            },
+            {
+               "clean": "school",
+               "raw": [{ "_content": "School" }]
+            },
+            {
+               "clean": "scottmountainlookout",
+               "raw": [{ "_content": "Scott Mountain Lookout" }]
+            },
+            {
+               "clean": "scottmountainroad",
+               "raw": [{ "_content": "Scott Mountain Road" }]
+            },
+            {
+               "clean": "scrabble",
+               "raw": [{ "_content": "Scrabble" }]
+            },
+            {
+               "clean": "scree",
+               "raw": [{ "_content": "Scree" }]
+            },
+            {
+               "clean": "screenshot",
+               "raw": [{ "_content": "Screenshot" }]
+            },
+            {
+               "clean": "sculpture",
+               "raw": [{ "_content": "Sculpture" }]
+            },
+            {
+               "clean": "secondbeach",
+               "raw": [{ "_content": "Second Beach" }]
+            },
+            {
+               "clean": "selaahhill",
+               "raw": [{ "_content": "Selaah Hill" }]
+            },
+            {
+               "clean": "selfportrait",
+               "raw": [{ "_content": "Self-portrait" }]
+            },
+            {
+               "clean": "sevendevils",
+               "raw": [{ "_content": "Seven Devils" }]
+            },
+            {
+               "clean": "shadow",
+               "raw": [{ "_content": "Shadow" }]
+            },
+            {
+               "clean": "shed",
+               "raw": [{ "_content": "Shed" }]
+            },
+            {
+               "clean": "sheep",
+               "raw": [{ "_content": "Sheep" }]
+            },
+            {
+               "clean": "shefootmountain",
+               "raw": [{ "_content": "Shefoot Mountain" }]
+            },
+            {
+               "clean": "shooting",
+               "raw": [{ "_content": "Shooting" }]
+            },
+            {
+               "clean": "shop",
+               "raw": [{ "_content": "Shop" }]
+            },
+            {
+               "clean": "shoshoneicecave",
+               "raw": [{ "_content": "Shoshone Ice Cave" }]
+            },
+            {
+               "clean": "shovel",
+               "raw": [{ "_content": "Shovel" }]
+            },
+            {
+               "clean": "sigma1020mmf456exdc",
+               "raw": [{ "_content": "Sigma 10-20mm f/4-5.6 EX DC" }]
+            },
+            {
+               "clean": "sign",
+               "raw": [{ "_content": "Sign" }]
+            },
+            {
+               "clean": "silkybigboy",
+               "raw": [{ "_content": "Silky BIGBOY" }]
+            },
+            {
+               "clean": "silly",
+               "raw": [{ "_content": "Silly" }]
+            },
+            {
+               "clean": "silvercity",
+               "raw": [{ "_content": "Silver City" }]
+            },
+            {
+               "clean": "simcoroad",
+               "raw": [{ "_content": "Simco Road" }]
+            },
+            {
+               "clean": "simmonscreek",
+               "raw": [{ "_content": "Simmons Creek" }]
+            },
+            {
+               "clean": "sinkercreek",
+               "raw": [{ "_content": "Sinker Creek" }]
+            },
+            {
+               "clean": "skeleton",
+               "raw": [{ "_content": "Skeleton" }]
+            },
+            {
+               "clean": "skull",
+               "raw": [{ "_content": "Skull" }]
+            },
+            {
+               "clean": "skullrock",
+               "raw": [{ "_content": "Skull Rock" }]
+            },
+            {
+               "clean": "skunkcabbage",
+               "raw": [{ "_content": "Skunk Cabbage" }]
+            },
+            {
+               "clean": "skyline",
+               "raw": [{ "_content": "Skyline" }]
+            },
+            {
+               "clean": "sledding",
+               "raw": [{ "_content": "Sledding" }]
+            },
+            {
+               "clean": "sleeping",
+               "raw": [{ "_content": "Sleeping" }]
+            },
+            {
+               "clean": "smithcreeklake",
+               "raw": [{ "_content": "Smith Creek Lake" }]
+            },
+            {
+               "clean": "smoke",
+               "raw": [{ "_content": "Smoke" }]
+            },
+            {
+               "clean": "smoking",
+               "raw": [{ "_content": "Smoking" }]
+            },
+            {
+               "clean": "snake",
+               "raw": [{ "_content": "Snake" }]
+            },
+            {
+               "clean": "snakeriver",
+               "raw": [{ "_content": "Snake River" }]
+            },
+            {
+               "clean": "snorkeling",
+               "raw": [{ "_content": "Snorkeling" }]
+            },
+            {
+               "clean": "snow",
+               "raw": [{ "_content": "Snow" }]
+            },
+            {
+               "clean": "sonyα7r",
+               "raw": [{ "_content": "Sony α7R" }]
+            },
+            {
+               "clean": "sonyα7ʀii",
+               "raw": [{ "_content": "Sony α7ʀ II" }]
+            },
+            {
+               "clean": "sourdoughlodge",
+               "raw": [{ "_content": "Sourdough Lodge" }]
+            },
+            {
+               "clean": "southforkoftheboise",
+               "raw": [{ "_content": "South Fork of the Boise" }]
+            },
+            {
+               "clean": "southforkofthepayette",
+               "raw": [{ "_content": "South Fork of the Payette" }]
+            },
+            {
+               "clean": "southmountain",
+               "raw": [{ "_content": "South Mountain" }]
+            },
+            {
+               "clean": "spider",
+               "raw": [{ "_content": "Spider" }]
+            },
+            {
+               "clean": "splashing",
+               "raw": [{ "_content": "Splashing" }]
+            },
+            {
+               "clean": "spraying",
+               "raw": [{ "_content": "Spraying" }]
+            },
+            {
+               "clean": "spring",
+               "raw": [{ "_content": "Spring" }]
+            },
+            {
+               "clean": "springvalleyreservoir",
+               "raw": [{ "_content": "Spring Valley Reservoir" }]
+            },
+            {
+               "clean": "sprinkler",
+               "raw": [{ "_content": "Sprinkler" }]
+            },
+            {
+               "clean": "squirrel",
+               "raw": [{ "_content": "Squirrel" }]
+            },
+            {
+               "clean": "stadium",
+               "raw": [{ "_content": "Stadium" }]
+            },
+            {
+               "clean": "stairs",
+               "raw": [{ "_content": "Stairs" }]
+            },
+            {
+               "clean": "stanley",
+               "raw": [{ "_content": "Stanley" }]
+            },
+            {
+               "clean": "stanleylakecreek",
+               "raw": [{ "_content": "Stanley Lake Creek" }]
+            },
+            {
+               "clean": "star",
+               "raw": [{ "_content": "Star" }]
+            },
+            {
+               "clean": "stars",
+               "raw": [{ "_content": "Stars" }]
+            },
+            {
+               "clean": "statelineroad",
+               "raw": [{ "_content": "Stateline Road" }]
+            },
+            {
+               "clean": "statepark",
+               "raw": [{ "_content": "State Park" }]
+            },
+            {
+               "clean": "statue",
+               "raw": [{ "_content": "Statue" }]
+            },
+            {
+               "clean": "steam",
+               "raw": [{ "_content": "Steam" }]
+            },
+            {
+               "clean": "steward",
+               "raw": [{ "_content": "Steward" }]
+            },
+            {
+               "clean": "stjoeriver",
+               "raw": [{ "_content": "St. Joe River" }]
+            },
+            {
+               "clean": "stjoeriverroad",
+               "raw": [{ "_content": "St. Joe River Road" }]
+            },
+            {
+               "clean": "stmaries",
+               "raw": [{ "_content": "St. Maries" }]
+            },
+            {
+               "clean": "stonemancreek",
+               "raw": [{ "_content": "Stoneman Creek" }]
+            },
+            {
+               "clean": "store",
+               "raw": [{ "_content": "Store" }]
+            },
+            {
+               "clean": "stroller",
+               "raw": [{ "_content": "Stroller" }]
+            },
+            {
+               "clean": "submarine",
+               "raw": [{ "_content": "Submarine" }]
+            },
+            {
+               "clean": "subway",
+               "raw": [{ "_content": "Subway" }]
+            },
+            {
+               "clean": "succorcreek",
+               "raw": [{ "_content": "Succor Creek" }]
+            },
+            {
+               "clean": "sugarloafrock",
+               "raw": [{ "_content": "Sugarloaf Rock" }]
+            },
+            {
+               "clean": "summitflatroad",
+               "raw": [{ "_content": "Summit Flat Road" }]
+            },
+            {
+               "clean": "sunglasses",
+               "raw": [{ "_content": "Sunglasses" }]
+            },
+            {
+               "clean": "sunrise",
+               "raw": [{ "_content": "Sunrise" }]
+            },
+            {
+               "clean": "sunset",
+               "raw": [{ "_content": "Sunset" }]
+            },
+            {
+               "clean": "superior",
+               "raw": [{ "_content": "Superior" }]
+            },
+            {
+               "clean": "suzukidrz400s",
+               "raw": [{ "_content": "Suzuki DR-Z 400S" }]
+            },
+            {
+               "clean": "svensaw",
+               "raw": [{ "_content": "Sven Saw" }]
+            },
+            {
+               "clean": "swanfallsdam",
+               "raw": [{ "_content": "Swan Falls Dam" }]
+            },
+            {
+               "clean": "swimming",
+               "raw": [{ "_content": "Swimming" }]
+            },
+            {
+               "clean": "swinging",
+               "raw": [{ "_content": "Swinging" }]
+            },
+            {
+               "clean": "table",
+               "raw": [{ "_content": "Table" }]
+            },
+            {
+               "clean": "tablerock",
+               "raw": [{ "_content": "Table Rock" }]
+            },
+            {
+               "clean": "tackettssawshop",
+               "raw": [{ "_content": "Tackett's Saw Shop" }]
+            },
+            {
+               "clean": "tadpole",
+               "raw": [{ "_content": "Tadpole" }]
+            },
+            {
+               "clean": "tafone",
+               "raw": [{ "_content": "Tafone" }]
+            },
+            {
+               "clean": "takenbybrenna",
+               "raw": [{ "_content": "Taken by Brenna" }]
+            },
+            {
+               "clean": "takenbycheryl",
+               "raw": [{ "_content": "Taken by Cheryl" }]
+            },
+            {
+               "clean": "takenbyhunter",
+               "raw": [{ "_content": "Taken by Hunter" }]
+            },
+            {
+               "clean": "takenbyjeremy",
+               "raw": [{ "_content": "Taken by Jeremy" }]
+            },
+            {
+               "clean": "takenbyjesse",
+               "raw": [{ "_content": "Taken by Jesse" }]
+            },
+            {
+               "clean": "takenbyjessica",
+               "raw": [{ "_content": "Taken by Jessica" }]
+            },
+            {
+               "clean": "takenbymichael",
+               "raw": [{ "_content": "Taken by Michael" }]
+            },
+            {
+               "clean": "talus",
+               "raw": [{ "_content": "Talus" }]
+            },
+            {
+               "clean": "tattoo",
+               "raw": [{ "_content": "Tattoo" }]
+            },
+            {
+               "clean": "tedtruebloodwildlifearea",
+               "raw": [{ "_content": "Ted Trueblood Wildlife Area" }]
+            },
+            {
+               "clean": "tekoa",
+               "raw": [{ "_content": "Tekoa" }]
+            },
+            {
+               "clean": "tent",
+               "raw": [{ "_content": "Tent" }]
+            },
+            {
+               "clean": "texting",
+               "raw": [{ "_content": "Texting" }]
+            },
+            {
+               "clean": "thaneeddington",
+               "raw": [{ "_content": "Thane Eddington" }]
+            },
+            {
+               "clean": "thanksgiving",
+               "raw": [{ "_content": "Thanksgiving" }]
+            },
+            {
+               "clean": "thepantry",
+               "raw": [{ "_content": "The Pantry" }]
+            },
+            {
+               "clean": "thinktankbeltpack",
+               "raw": [{ "_content": "Think Tank Belt Pack" }]
+            },
+            {
+               "clean": "thomas",
+               "raw": [{ "_content": "Thomas" }]
+            },
+            {
+               "clean": "thorncreek",
+               "raw": [{ "_content": "Thorn Creek" }]
+            },
+            {
+               "clean": "thorncreekbuttelookout",
+               "raw": [{ "_content": "Thorn Creek Butte Lookout" }]
+            },
+            {
+               "clean": "thornton",
+               "raw": [{ "_content": "Thornton" }]
+            },
+            {
+               "clean": "threefingersgulch",
+               "raw": [{ "_content": "Three Fingers Gulch" }]
+            },
+            {
+               "clean": "throwing",
+               "raw": [{ "_content": "Throwing" }]
+            },
+            {
+               "clean": "throwingrocks",
+               "raw": [{ "_content": "Throwing Rocks" }]
+            },
+            {
+               "clean": "tilleyhat",
+               "raw": [{ "_content": "Tilley Hat" }]
+            },
+            {
+               "clean": "tinahayman",
+               "raw": [{ "_content": "Tina Hayman" }]
+            },
+            {
+               "clean": "toni",
+               "raw": [{ "_content": "Toni" }]
+            },
+            {
+               "clean": "tool",
+               "raw": [{ "_content": "Tool" }]
+            },
+            {
+               "clean": "totem",
+               "raw": [{ "_content": "Totem" }]
+            },
+            {
+               "clean": "toy",
+               "raw": [{ "_content": "Toy" }]
+            },
+            {
+               "clean": "tractor",
+               "raw": [{ "_content": "Tractor" }]
+            },
+            {
+               "clean": "trailrider383",
+               "raw": [{ "_content": "trailrider383" }]
+            },
+            {
+               "clean": "train",
+               "raw": [{ "_content": "Train" }]
+            },
+            {
+               "clean": "traindepot",
+               "raw": [{ "_content": "Train Depot" }]
+            },
+            {
+               "clean": "tree",
+               "raw": [{ "_content": "Tree" }]
+            },
+            {
+               "clean": "treeclimbing",
+               "raw": [{ "_content": "Tree Climbing" }]
+            },
+            {
+               "clean": "tricycle",
+               "raw": [{ "_content": "Tricycle" }]
+            },
+            {
+               "clean": "trinitymountain",
+               "raw": [{ "_content": "Trinity Mountain" }]
+            },
+            {
+               "clean": "trinityridgeroad",
+               "raw": [{ "_content": "Trinity Ridge Road" }]
+            },
+            {
+               "clean": "triumphtiger800xc",
+               "raw": [{ "_content": "Triumph Tiger 800XC" }]
+            },
+            {
+               "clean": "troy",
+               "raw": [{ "_content": "Troy" }]
+            },
+            {
+               "clean": "troydays",
+               "raw": [{ "_content": "Troy Days" }]
+            },
+            {
+               "clean": "troyhighschool",
+               "raw": [{ "_content": "Troy High School" }]
+            },
+            {
+               "clean": "truck",
+               "raw": [{ "_content": "Truck" }]
+            },
+            {
+               "clean": "tullyscoffee",
+               "raw": [{ "_content": "Tully's Coffee" }]
+            },
+            {
+               "clean": "tumbleweed",
+               "raw": [{ "_content": "Tumbleweed" }]
+            },
+            {
+               "clean": "tunnel",
+               "raw": [{ "_content": "Tunnel" }]
+            },
+            {
+               "clean": "turkey",
+               "raw": [{ "_content": "Turkey" }]
+            },
+            {
+               "clean": "tuscarora",
+               "raw": [{ "_content": "Tuscarora" }]
+            },
+            {
+               "clean": "tuscarorapotteryschool",
+               "raw": [{ "_content": "Tuscarora Pottery School" }]
+            },
+            {
+               "clean": "tyson",
+               "raw": [{ "_content": "Tyson" }]
+            },
+            {
+               "clean": "tysonstellrecht",
+               "raw": [{ "_content": "Tyson Stellrecht" }]
+            },
+            {
+               "clean": "underwater",
+               "raw": [{ "_content": "Underwater" }]
+            },
+            {
+               "clean": "unitedstatesofamerica",
+               "raw": [{ "_content": "United States of America" }]
+            },
+            {
+               "clean": "university",
+               "raw": [{ "_content": "University" }]
+            },
+            {
+               "clean": "vehicle",
+               "raw": [{ "_content": "Vehicle" }]
+            },
+            {
+               "clean": "vision:beach=0524",
+               "raw": [{ "_content": "vision:beach=0.524" }]
+            },
+            {
+               "clean": "vision:beach=055",
+               "raw": [{ "_content": "vision:beach=0.55" }]
+            },
+            {
+               "clean": "vision:beach=0564",
+               "raw": [{ "_content": "vision:beach=0.564" }]
+            },
+            {
+               "clean": "vision:beach=060",
+               "raw": [{ "_content": "vision:beach=0.60" }]
+            },
+            {
+               "clean": "vision:beach=072",
+               "raw": [{ "_content": "vision:beach=0.72" }]
+            },
+            {
+               "clean": "vision:beach=0752",
+               "raw": [{ "_content": "vision:beach=0.752" }]
+            },
+            {
+               "clean": "vision:beach=078",
+               "raw": [{ "_content": "vision:beach=0.78" }]
+            },
+            {
+               "clean": "vision:beach=088",
+               "raw": [{ "_content": "vision:beach=0.88" }]
+            },
+            {
+               "clean": "vision:beach=089",
+               "raw": [{ "_content": "vision:beach=0.89" }]
+            },
+            {
+               "clean": "vision:beach=090",
+               "raw": [{ "_content": "vision:beach=0.90" }]
+            },
+            {
+               "clean": "vision:beach=098",
+               "raw": [{ "_content": "vision:beach=0.98" }]
+            },
+            {
+               "clean": "vision:car=0516",
+               "raw": [{ "_content": "vision:car=0.516" }]
+            },
+            {
+               "clean": "vision:car=0554",
+               "raw": [{ "_content": "vision:car=0.554" }]
+            },
+            {
+               "clean": "vision:car=0762",
+               "raw": [{ "_content": "vision:car=0.762" }]
+            },
+            {
+               "clean": "vision:car=0768",
+               "raw": [{ "_content": "vision:car=0.768" }]
+            },
+            {
+               "clean": "vision:clouds=0564",
+               "raw": [{ "_content": "vision:clouds=0.564" }]
+            },
+            {
+               "clean": "vision:clouds=0574",
+               "raw": [{ "_content": "vision:clouds=0.574" }]
+            },
+            {
+               "clean": "vision:clouds=0606",
+               "raw": [{ "_content": "vision:clouds=0.606" }]
+            },
+            {
+               "clean": "vision:clouds=062",
+               "raw": [{ "_content": "vision:clouds=0.62" }]
+            },
+            {
+               "clean": "vision:clouds=0649",
+               "raw": [{ "_content": "vision:clouds=0.649" }]
+            },
+            {
+               "clean": "vision:clouds=0651",
+               "raw": [{ "_content": "vision:clouds=0.651" }]
+            },
+            {
+               "clean": "vision:clouds=0652",
+               "raw": [{ "_content": "vision:clouds=0.652" }]
+            },
+            {
+               "clean": "vision:clouds=0684",
+               "raw": [{ "_content": "vision:clouds=0.684" }]
+            },
+            {
+               "clean": "vision:clouds=0701",
+               "raw": [{ "_content": "vision:clouds=0.701" }]
+            },
+            {
+               "clean": "vision:clouds=075",
+               "raw": [{ "_content": "vision:clouds=0.75" }]
+            },
+            {
+               "clean": "vision:clouds=0782",
+               "raw": [{ "_content": "vision:clouds=0.782" }]
+            },
+            {
+               "clean": "vision:clouds=0807",
+               "raw": [{ "_content": "vision:clouds=0.807" }]
+            },
+            {
+               "clean": "vision:clouds=0962",
+               "raw": [{ "_content": "vision:clouds=0.962" }]
+            },
+            {
+               "clean": "vision:clouds=099",
+               "raw": [{ "_content": "vision:clouds=0.99" }]
+            },
+            {
+               "clean": "vision:mountain=0502",
+               "raw": [{ "_content": "vision:mountain=0.502" }]
+            },
+            {
+               "clean": "vision:mountain=051",
+               "raw": [{ "_content": "vision:mountain=0.51" }]
+            },
+            {
+               "clean": "vision:mountain=0514",
+               "raw": [{ "_content": "vision:mountain=0.514" }]
+            },
+            {
+               "clean": "vision:mountain=0519",
+               "raw": [{ "_content": "vision:mountain=0.519" }]
+            },
+            {
+               "clean": "vision:mountain=055",
+               "raw": [{ "_content": "vision:mountain=0.55" }]
+            },
+            {
+               "clean": "vision:mountain=0553",
+               "raw": [{ "_content": "vision:mountain=0.553" }]
+            },
+            {
+               "clean": "vision:mountain=0558",
+               "raw": [{ "_content": "vision:mountain=0.558" }]
+            },
+            {
+               "clean": "vision:mountain=0559",
+               "raw": [{ "_content": "vision:mountain=0.559" }]
+            },
+            {
+               "clean": "vision:mountain=0567",
+               "raw": [{ "_content": "vision:mountain=0.567" }]
+            },
+            {
+               "clean": "vision:mountain=057",
+               "raw": [{ "_content": "vision:mountain=0.57" }]
+            },
+            {
+               "clean": "vision:mountain=0573",
+               "raw": [{ "_content": "vision:mountain=0.573" }]
+            },
+            {
+               "clean": "vision:mountain=059",
+               "raw": [{ "_content": "vision:mountain=0.59" }]
+            },
+            {
+               "clean": "vision:mountain=0595",
+               "raw": [{ "_content": "vision:mountain=0.595" }]
+            },
+            {
+               "clean": "vision:mountain=0596",
+               "raw": [{ "_content": "vision:mountain=0.596" }]
+            },
+            {
+               "clean": "vision:mountain=060",
+               "raw": [{ "_content": "vision:mountain=0.60" }]
+            },
+            {
+               "clean": "vision:mountain=0606",
+               "raw": [{ "_content": "vision:mountain=0.606" }]
+            },
+            {
+               "clean": "vision:mountain=0629",
+               "raw": [{ "_content": "vision:mountain=0.629" }]
+            },
+            {
+               "clean": "vision:mountain=0631",
+               "raw": [{ "_content": "vision:mountain=0.631" }]
+            },
+            {
+               "clean": "vision:mountain=0644",
+               "raw": [{ "_content": "vision:mountain=0.644" }]
+            },
+            {
+               "clean": "vision:mountain=065",
+               "raw": [{ "_content": "vision:mountain=0.65" }]
+            },
+            {
+               "clean": "vision:mountain=066",
+               "raw": [{ "_content": "vision:mountain=0.66" }]
+            },
+            {
+               "clean": "vision:mountain=0663",
+               "raw": [{ "_content": "vision:mountain=0.663" }]
+            },
+            {
+               "clean": "vision:mountain=0684",
+               "raw": [{ "_content": "vision:mountain=0.684" }]
+            },
+            {
+               "clean": "vision:mountain=0688",
+               "raw": [{ "_content": "vision:mountain=0.688" }]
+            },
+            {
+               "clean": "vision:mountain=069",
+               "raw": [{ "_content": "vision:mountain=0.69" }]
+            },
+            {
+               "clean": "vision:mountain=0702",
+               "raw": [{ "_content": "vision:mountain=0.702" }]
+            },
+            {
+               "clean": "vision:mountain=0708",
+               "raw": [{ "_content": "vision:mountain=0.708" }]
+            },
+            {
+               "clean": "vision:mountain=0713",
+               "raw": [{ "_content": "vision:mountain=0.713" }]
+            },
+            {
+               "clean": "vision:mountain=0715",
+               "raw": [{ "_content": "vision:mountain=0.715" }]
+            },
+            {
+               "clean": "vision:mountain=072",
+               "raw": [{ "_content": "vision:mountain=0.72" }]
+            },
+            {
+               "clean": "vision:mountain=0721",
+               "raw": [{ "_content": "vision:mountain=0.721" }]
+            },
+            {
+               "clean": "vision:mountain=073",
+               "raw": [{ "_content": "vision:mountain=0.73" }]
+            },
+            {
+               "clean": "vision:mountain=0735",
+               "raw": [{ "_content": "vision:mountain=0.735" }]
+            },
+            {
+               "clean": "vision:mountain=0752",
+               "raw": [{ "_content": "vision:mountain=0.752" }]
+            },
+            {
+               "clean": "vision:mountain=076",
+               "raw": [{ "_content": "vision:mountain=0.76" }]
+            },
+            {
+               "clean": "vision:mountain=0762",
+               "raw": [{ "_content": "vision:mountain=0.762" }]
+            },
+            {
+               "clean": "vision:mountain=0764",
+               "raw": [{ "_content": "vision:mountain=0.764" }]
+            },
+            {
+               "clean": "vision:mountain=0765",
+               "raw": [{ "_content": "vision:mountain=0.765" }]
+            },
+            {
+               "clean": "vision:mountain=0773",
+               "raw": [{ "_content": "vision:mountain=0.773" }]
+            },
+            {
+               "clean": "vision:mountain=0782",
+               "raw": [{ "_content": "vision:mountain=0.782" }]
+            },
+            {
+               "clean": "vision:mountain=079",
+               "raw": [{ "_content": "vision:mountain=0.79" }]
+            },
+            {
+               "clean": "vision:mountain=0795",
+               "raw": [{ "_content": "vision:mountain=0.795" }]
+            },
+            {
+               "clean": "vision:mountain=0797",
+               "raw": [{ "_content": "vision:mountain=0.797" }]
+            },
+            {
+               "clean": "vision:mountain=0805",
+               "raw": [{ "_content": "vision:mountain=0.805" }]
+            },
+            {
+               "clean": "vision:mountain=0809",
+               "raw": [{ "_content": "vision:mountain=0.809" }]
+            },
+            {
+               "clean": "vision:mountain=0819",
+               "raw": [{ "_content": "vision:mountain=0.819" }]
+            },
+            {
+               "clean": "vision:mountain=083",
+               "raw": [{ "_content": "vision:mountain=0.83" }]
+            },
+            {
+               "clean": "vision:mountain=0831",
+               "raw": [{ "_content": "vision:mountain=0.831" }]
+            },
+            {
+               "clean": "vision:mountain=084",
+               "raw": [{ "_content": "vision:mountain=0.84" }]
+            },
+            {
+               "clean": "vision:mountain=085",
+               "raw": [{ "_content": "vision:mountain=0.85" }]
+            },
+            {
+               "clean": "vision:mountain=0868",
+               "raw": [{ "_content": "vision:mountain=0.868" }]
+            },
+            {
+               "clean": "vision:mountain=088",
+               "raw": [{ "_content": "vision:mountain=0.88" }]
+            },
+            {
+               "clean": "vision:mountain=089",
+               "raw": [{ "_content": "vision:mountain=0.89" }]
+            },
+            {
+               "clean": "vision:mountain=0919",
+               "raw": [{ "_content": "vision:mountain=0.919" }]
+            },
+            {
+               "clean": "vision:mountain=0929",
+               "raw": [{ "_content": "vision:mountain=0.929" }]
+            },
+            {
+               "clean": "vision:mountain=0939",
+               "raw": [{ "_content": "vision:mountain=0.939" }]
+            },
+            {
+               "clean": "vision:mountain=094",
+               "raw": [{ "_content": "vision:mountain=0.94" }]
+            },
+            {
+               "clean": "vision:mountain=0959",
+               "raw": [{ "_content": "vision:mountain=0.959" }]
+            },
+            {
+               "clean": "vision:mountain=0983",
+               "raw": [{ "_content": "vision:mountain=0.983" }]
+            },
+            {
+               "clean": "vision:night=057",
+               "raw": [{ "_content": "vision:night=0.57" }]
+            },
+            {
+               "clean": "vision:night=069",
+               "raw": [{ "_content": "vision:night=0.69" }]
+            },
+            {
+               "clean": "vision:night=094",
+               "raw": [{ "_content": "vision:night=0.94" }]
+            },
+            {
+               "clean": "vision:ocean=0579",
+               "raw": [{ "_content": "vision:ocean=0.579" }]
+            },
+            {
+               "clean": "vision:ocean=0601",
+               "raw": [{ "_content": "vision:ocean=0.601" }]
+            },
+            {
+               "clean": "vision:ocean=0662",
+               "raw": [{ "_content": "vision:ocean=0.662" }]
+            },
+            {
+               "clean": "vision:ocean=0674",
+               "raw": [{ "_content": "vision:ocean=0.674" }]
+            },
+            {
+               "clean": "vision:ocean=0691",
+               "raw": [{ "_content": "vision:ocean=0.691" }]
+            },
+            {
+               "clean": "vision:ocean=0885",
+               "raw": [{ "_content": "vision:ocean=0.885" }]
+            },
+            {
+               "clean": "vision:ocean=0906",
+               "raw": [{ "_content": "vision:ocean=0.906" }]
+            },
+            {
+               "clean": "vision:outdoor=0541",
+               "raw": [{ "_content": "vision:outdoor=0.541" }]
+            },
+            {
+               "clean": "vision:outdoor=0606",
+               "raw": [{ "_content": "vision:outdoor=0.606" }]
+            },
+            {
+               "clean": "vision:outdoor=0615",
+               "raw": [{ "_content": "vision:outdoor=0.615" }]
+            },
+            {
+               "clean": "vision:outdoor=0651",
+               "raw": [{ "_content": "vision:outdoor=0.651" }]
+            },
+            {
+               "clean": "vision:outdoor=0656",
+               "raw": [{ "_content": "vision:outdoor=0.656" }]
+            },
+            {
+               "clean": "vision:outdoor=0684",
+               "raw": [{ "_content": "vision:outdoor=0.684" }]
+            },
+            {
+               "clean": "vision:outdoor=0737",
+               "raw": [{ "_content": "vision:outdoor=0.737" }]
+            },
+            {
+               "clean": "vision:outdoor=0748",
+               "raw": [{ "_content": "vision:outdoor=0.748" }]
+            },
+            {
+               "clean": "vision:outdoor=0757",
+               "raw": [{ "_content": "vision:outdoor=0.757" }]
+            },
+            {
+               "clean": "vision:outdoor=0802",
+               "raw": [{ "_content": "vision:outdoor=0.802" }]
+            },
+            {
+               "clean": "vision:outdoor=0817",
+               "raw": [{ "_content": "vision:outdoor=0.817" }]
+            },
+            {
+               "clean": "vision:outdoor=0818",
+               "raw": [{ "_content": "vision:outdoor=0.818" }]
+            },
+            {
+               "clean": "vision:outdoor=083",
+               "raw": [{ "_content": "vision:outdoor=0.83" }]
+            },
+            {
+               "clean": "vision:outdoor=0834",
+               "raw": [{ "_content": "vision:outdoor=0.834" }]
+            },
+            {
+               "clean": "vision:outdoor=0863",
+               "raw": [{ "_content": "vision:outdoor=0.863" }]
+            },
+            {
+               "clean": "vision:outdoor=0868",
+               "raw": [{ "_content": "vision:outdoor=0.868" }]
+            },
+            {
+               "clean": "vision:outdoor=087",
+               "raw": [{ "_content": "vision:outdoor=0.87" }]
+            },
+            {
+               "clean": "vision:outdoor=0874",
+               "raw": [{ "_content": "vision:outdoor=0.874" }]
+            },
+            {
+               "clean": "vision:outdoor=088",
+               "raw": [{ "_content": "vision:outdoor=0.88" }]
+            },
+            {
+               "clean": "vision:outdoor=0883",
+               "raw": [{ "_content": "vision:outdoor=0.883" }]
+            },
+            {
+               "clean": "vision:outdoor=0886",
+               "raw": [{ "_content": "vision:outdoor=0.886" }]
+            },
+            {
+               "clean": "vision:outdoor=0892",
+               "raw": [{ "_content": "vision:outdoor=0.892" }]
+            },
+            {
+               "clean": "vision:outdoor=0896",
+               "raw": [{ "_content": "vision:outdoor=0.896" }]
+            },
+            {
+               "clean": "vision:outdoor=0906",
+               "raw": [{ "_content": "vision:outdoor=0.906" }]
+            },
+            {
+               "clean": "vision:outdoor=0911",
+               "raw": [{ "_content": "vision:outdoor=0.911" }]
+            },
+            {
+               "clean": "vision:outdoor=0918",
+               "raw": [{ "_content": "vision:outdoor=0.918" }]
+            },
+            {
+               "clean": "vision:outdoor=092",
+               "raw": [{ "_content": "vision:outdoor=0.92" }]
+            },
+            {
+               "clean": "vision:outdoor=0923",
+               "raw": [{ "_content": "vision:outdoor=0.923" }]
+            },
+            {
+               "clean": "vision:outdoor=0927",
+               "raw": [{ "_content": "vision:outdoor=0.927" }]
+            },
+            {
+               "clean": "vision:outdoor=0928",
+               "raw": [{ "_content": "vision:outdoor=0.928" }]
+            },
+            {
+               "clean": "vision:outdoor=0929",
+               "raw": [{ "_content": "vision:outdoor=0.929" }]
+            },
+            {
+               "clean": "vision:outdoor=0932",
+               "raw": [{ "_content": "vision:outdoor=0.932" }]
+            },
+            {
+               "clean": "vision:outdoor=0933",
+               "raw": [{ "_content": "vision:outdoor=0.933" }]
+            },
+            {
+               "clean": "vision:outdoor=0938",
+               "raw": [{ "_content": "vision:outdoor=0.938" }]
+            },
+            {
+               "clean": "vision:outdoor=0939",
+               "raw": [{ "_content": "vision:outdoor=0.939" }]
+            },
+            {
+               "clean": "vision:outdoor=094",
+               "raw": [{ "_content": "vision:outdoor=0.94" }]
+            },
+            {
+               "clean": "vision:outdoor=0942",
+               "raw": [{ "_content": "vision:outdoor=0.942" }]
+            },
+            {
+               "clean": "vision:outdoor=0944",
+               "raw": [{ "_content": "vision:outdoor=0.944" }]
+            },
+            {
+               "clean": "vision:outdoor=0945",
+               "raw": [{ "_content": "vision:outdoor=0.945" }]
+            },
+            {
+               "clean": "vision:outdoor=0946",
+               "raw": [{ "_content": "vision:outdoor=0.946" }]
+            },
+            {
+               "clean": "vision:outdoor=0947",
+               "raw": [{ "_content": "vision:outdoor=0.947" }]
+            },
+            {
+               "clean": "vision:outdoor=0952",
+               "raw": [{ "_content": "vision:outdoor=0.952" }]
+            },
+            {
+               "clean": "vision:outdoor=0954",
+               "raw": [{ "_content": "vision:outdoor=0.954" }]
+            },
+            {
+               "clean": "vision:outdoor=096",
+               "raw": [{ "_content": "vision:outdoor=0.96" }]
+            },
+            {
+               "clean": "vision:outdoor=0961",
+               "raw": [{ "_content": "vision:outdoor=0.961" }]
+            },
+            {
+               "clean": "vision:outdoor=0962",
+               "raw": [{ "_content": "vision:outdoor=0.962" }]
+            },
+            {
+               "clean": "vision:outdoor=0963",
+               "raw": [{ "_content": "vision:outdoor=0.963" }]
+            },
+            {
+               "clean": "vision:outdoor=0965",
+               "raw": [{ "_content": "vision:outdoor=0.965" }]
+            },
+            {
+               "clean": "vision:outdoor=0967",
+               "raw": [{ "_content": "vision:outdoor=0.967" }]
+            },
+            {
+               "clean": "vision:outdoor=0968",
+               "raw": [{ "_content": "vision:outdoor=0.968" }]
+            },
+            {
+               "clean": "vision:outdoor=0969",
+               "raw": [{ "_content": "vision:outdoor=0.969" }]
+            },
+            {
+               "clean": "vision:outdoor=097",
+               "raw": [{ "_content": "vision:outdoor=0.97" }]
+            },
+            {
+               "clean": "vision:outdoor=0971",
+               "raw": [{ "_content": "vision:outdoor=0.971" }]
+            },
+            {
+               "clean": "vision:outdoor=0972",
+               "raw": [{ "_content": "vision:outdoor=0.972" }]
+            },
+            {
+               "clean": "vision:outdoor=0973",
+               "raw": [{ "_content": "vision:outdoor=0.973" }]
+            },
+            {
+               "clean": "vision:outdoor=0974",
+               "raw": [{ "_content": "vision:outdoor=0.974" }]
+            },
+            {
+               "clean": "vision:outdoor=0975",
+               "raw": [{ "_content": "vision:outdoor=0.975" }]
+            },
+            {
+               "clean": "vision:outdoor=0976",
+               "raw": [{ "_content": "vision:outdoor=0.976" }]
+            },
+            {
+               "clean": "vision:outdoor=0977",
+               "raw": [{ "_content": "vision:outdoor=0.977" }]
+            },
+            {
+               "clean": "vision:outdoor=0978",
+               "raw": [{ "_content": "vision:outdoor=0.978" }]
+            },
+            {
+               "clean": "vision:outdoor=0979",
+               "raw": [{ "_content": "vision:outdoor=0.979" }]
+            },
+            {
+               "clean": "vision:outdoor=098",
+               "raw": [{ "_content": "vision:outdoor=0.98" }]
+            },
+            {
+               "clean": "vision:outdoor=0981",
+               "raw": [{ "_content": "vision:outdoor=0.981" }]
+            },
+            {
+               "clean": "vision:outdoor=0982",
+               "raw": [{ "_content": "vision:outdoor=0.982" }]
+            },
+            {
+               "clean": "vision:outdoor=0984",
+               "raw": [{ "_content": "vision:outdoor=0.984" }]
+            },
+            {
+               "clean": "vision:outdoor=0985",
+               "raw": [{ "_content": "vision:outdoor=0.985" }]
+            },
+            {
+               "clean": "vision:outdoor=0986",
+               "raw": [{ "_content": "vision:outdoor=0.986" }]
+            },
+            {
+               "clean": "vision:outdoor=0988",
+               "raw": [{ "_content": "vision:outdoor=0.988" }]
+            },
+            {
+               "clean": "vision:outdoor=0989",
+               "raw": [{ "_content": "vision:outdoor=0.989" }]
+            },
+            {
+               "clean": "vision:outdoor=099",
+               "raw": [{ "_content": "vision:outdoor=0.99" }]
+            },
+            {
+               "clean": "vision:plant=0545",
+               "raw": [{ "_content": "vision:plant=0.545" }]
+            },
+            {
+               "clean": "vision:plant=0576",
+               "raw": [{ "_content": "vision:plant=0.576" }]
+            },
+            {
+               "clean": "vision:plant=0577",
+               "raw": [{ "_content": "vision:plant=0.577" }]
+            },
+            {
+               "clean": "vision:plant=0582",
+               "raw": [{ "_content": "vision:plant=0.582" }]
+            },
+            {
+               "clean": "vision:plant=0586",
+               "raw": [{ "_content": "vision:plant=0.586" }]
+            },
+            {
+               "clean": "vision:plant=0631",
+               "raw": [{ "_content": "vision:plant=0.631" }]
+            },
+            {
+               "clean": "vision:plant=0636",
+               "raw": [{ "_content": "vision:plant=0.636" }]
+            },
+            {
+               "clean": "vision:plant=0638",
+               "raw": [{ "_content": "vision:plant=0.638" }]
+            },
+            {
+               "clean": "vision:plant=0658",
+               "raw": [{ "_content": "vision:plant=0.658" }]
+            },
+            {
+               "clean": "vision:plant=0698",
+               "raw": [{ "_content": "vision:plant=0.698" }]
+            },
+            {
+               "clean": "vision:plant=0702",
+               "raw": [{ "_content": "vision:plant=0.702" }]
+            },
+            {
+               "clean": "vision:plant=0827",
+               "raw": [{ "_content": "vision:plant=0.827" }]
+            },
+            {
+               "clean": "vision:sky=0501",
+               "raw": [{ "_content": "vision:sky=0.501" }]
+            },
+            {
+               "clean": "vision:sky=0512",
+               "raw": [{ "_content": "vision:sky=0.512" }]
+            },
+            {
+               "clean": "vision:sky=0518",
+               "raw": [{ "_content": "vision:sky=0.518" }]
+            },
+            {
+               "clean": "vision:sky=0525",
+               "raw": [{ "_content": "vision:sky=0.525" }]
+            },
+            {
+               "clean": "vision:sky=0529",
+               "raw": [{ "_content": "vision:sky=0.529" }]
+            },
+            {
+               "clean": "vision:sky=0542",
+               "raw": [{ "_content": "vision:sky=0.542" }]
+            },
+            {
+               "clean": "vision:sky=055",
+               "raw": [{ "_content": "vision:sky=0.55" }]
+            },
+            {
+               "clean": "vision:sky=0551",
+               "raw": [{ "_content": "vision:sky=0.551" }]
+            },
+            {
+               "clean": "vision:sky=0558",
+               "raw": [{ "_content": "vision:sky=0.558" }]
+            },
+            {
+               "clean": "vision:sky=0564",
+               "raw": [{ "_content": "vision:sky=0.564" }]
+            },
+            {
+               "clean": "vision:sky=0573",
+               "raw": [{ "_content": "vision:sky=0.573" }]
+            },
+            {
+               "clean": "vision:sky=0575",
+               "raw": [{ "_content": "vision:sky=0.575" }]
+            },
+            {
+               "clean": "vision:sky=0605",
+               "raw": [{ "_content": "vision:sky=0.605" }]
+            },
+            {
+               "clean": "vision:sky=0609",
+               "raw": [{ "_content": "vision:sky=0.609" }]
+            },
+            {
+               "clean": "vision:sky=0616",
+               "raw": [{ "_content": "vision:sky=0.616" }]
+            },
+            {
+               "clean": "vision:sky=0623",
+               "raw": [{ "_content": "vision:sky=0.623" }]
+            },
+            {
+               "clean": "vision:sky=0625",
+               "raw": [{ "_content": "vision:sky=0.625" }]
+            },
+            {
+               "clean": "vision:sky=0643",
+               "raw": [{ "_content": "vision:sky=0.643" }]
+            },
+            {
+               "clean": "vision:sky=0667",
+               "raw": [{ "_content": "vision:sky=0.667" }]
+            },
+            {
+               "clean": "vision:sky=0705",
+               "raw": [{ "_content": "vision:sky=0.705" }]
+            },
+            {
+               "clean": "vision:sky=073",
+               "raw": [{ "_content": "vision:sky=0.73" }]
+            },
+            {
+               "clean": "vision:sky=0741",
+               "raw": [{ "_content": "vision:sky=0.741" }]
+            },
+            {
+               "clean": "vision:sky=0742",
+               "raw": [{ "_content": "vision:sky=0.742" }]
+            },
+            {
+               "clean": "vision:sky=0747",
+               "raw": [{ "_content": "vision:sky=0.747" }]
+            },
+            {
+               "clean": "vision:sky=0752",
+               "raw": [{ "_content": "vision:sky=0.752" }]
+            },
+            {
+               "clean": "vision:sky=0769",
+               "raw": [{ "_content": "vision:sky=0.769" }]
+            },
+            {
+               "clean": "vision:sky=0779",
+               "raw": [{ "_content": "vision:sky=0.779" }]
+            },
+            {
+               "clean": "vision:sky=0783",
+               "raw": [{ "_content": "vision:sky=0.783" }]
+            },
+            {
+               "clean": "vision:sky=0801",
+               "raw": [{ "_content": "vision:sky=0.801" }]
+            },
+            {
+               "clean": "vision:sky=0817",
+               "raw": [{ "_content": "vision:sky=0.817" }]
+            },
+            {
+               "clean": "vision:sky=0834",
+               "raw": [{ "_content": "vision:sky=0.834" }]
+            },
+            {
+               "clean": "vision:sky=0835",
+               "raw": [{ "_content": "vision:sky=0.835" }]
+            },
+            {
+               "clean": "vision:sky=0893",
+               "raw": [{ "_content": "vision:sky=0.893" }]
+            },
+            {
+               "clean": "vision:sky=091",
+               "raw": [{ "_content": "vision:sky=0.91" }]
+            },
+            {
+               "clean": "vision:sky=0912",
+               "raw": [{ "_content": "vision:sky=0.912" }]
+            },
+            {
+               "clean": "vision:sky=0946",
+               "raw": [{ "_content": "vision:sky=0.946" }]
+            },
+            {
+               "clean": "vision:sky=099",
+               "raw": [{ "_content": "vision:sky=0.99" }]
+            },
+            {
+               "clean": "vision:snow=0526",
+               "raw": [{ "_content": "vision:snow=0.526" }]
+            },
+            {
+               "clean": "vision:street=0672",
+               "raw": [{ "_content": "vision:street=0.672" }]
+            },
+            {
+               "clean": "vision:street=0913",
+               "raw": [{ "_content": "vision:street=0.913" }]
+            },
+            {
+               "clean": "vision:sunset=0633",
+               "raw": [{ "_content": "vision:sunset=0.633" }]
+            },
+            {
+               "clean": "vision:text=0568",
+               "raw": [{ "_content": "vision:text=0.568" }]
+            },
+            {
+               "clean": "vision:text=057",
+               "raw": [{ "_content": "vision:text=0.57" }]
+            },
+            {
+               "clean": "vision:text=0602",
+               "raw": [{ "_content": "vision:text=0.602" }]
+            },
+            {
+               "clean": "vision:text=0679",
+               "raw": [{ "_content": "vision:text=0.679" }]
+            },
+            {
+               "clean": "vision:text=0747",
+               "raw": [{ "_content": "vision:text=0.747" }]
+            },
+            {
+               "clean": "vision:text=0835",
+               "raw": [{ "_content": "vision:text=0.835" }]
+            },
+            {
+               "clean": "vision:text=0864",
+               "raw": [{ "_content": "vision:text=0.864" }]
+            },
+            {
+               "clean": "volkswagen",
+               "raw": [{ "_content": "Volkswagen" }]
+            },
+            {
+               "clean": "wading",
+               "raw": [{ "_content": "Wading" }]
+            },
+            {
+               "clean": "wagon",
+               "raw": [{ "_content": "Wagon" }]
+            },
+            {
+               "clean": "wagontown",
+               "raw": [{ "_content": "Wagontown" }]
+            },
+            {
+               "clean": "waialua",
+               "raw": [{ "_content": "Waialua" }]
+            },
+            {
+               "clean": "waikiki",
+               "raw": [{ "_content": "Waikiki" }]
+            },
+            {
+               "clean": "walking",
+               "raw": [{ "_content": "Walking" }]
+            },
+            {
+               "clean": "wallace",
+               "raw": [{ "_content": "Wallace" }]
+            },
+            {
+               "clean": "wareaglemountain",
+               "raw": [{ "_content": "War Eagle Mountain" }]
+            },
+            {
+               "clean": "warmlakeroad",
+               "raw": [{ "_content": "Warm Lake Road" }]
+            },
+            {
+               "clean": "warmspringsroad",
+               "raw": [{ "_content": "Warm Springs Road" }]
+            },
+            {
+               "clean": "washing",
+               "raw": [{ "_content": "Washing" }]
+            },
+            {
+               "clean": "washington",
+               "raw": [{ "_content": "Washington" }]
+            },
+            {
+               "clean": "washingtonpeak",
+               "raw": [{ "_content": "Washington Peak" }]
+            },
+            {
+               "clean": "washingtonstateuniversity",
+               "raw": [{ "_content": "Washington State University" }]
+            },
+            {
+               "clean": "washoutcreek",
+               "raw": [{ "_content": "Washout Creek" }]
+            },
+            {
+               "clean": "watch",
+               "raw": [{ "_content": "Watch" }]
+            },
+            {
+               "clean": "watchingtv",
+               "raw": [{ "_content": "Watching TV" }]
+            },
+            {
+               "clean": "waterfall",
+               "raw": [{ "_content": "Waterfall" }]
+            },
+            {
+               "clean": "waterfilter",
+               "raw": [{ "_content": "Water Filter" }]
+            },
+            {
+               "clean": "weippe",
+               "raw": [{ "_content": "Weippe" }]
+            },
+            {
+               "clean": "weir",
+               "raw": [{ "_content": "Weir" }]
+            },
+            {
+               "clean": "weiser",
+               "raw": [{ "_content": "Weiser" }]
+            },
+            {
+               "clean": "weitascreek",
+               "raw": [{ "_content": "Weitas Creek" }]
+            },
+            {
+               "clean": "weitascreekguardstation",
+               "raw": [{ "_content": "Weitas Creek Guard Station" }]
+            },
+            {
+               "clean": "weitesbuttelookout",
+               "raw": [{ "_content": "Weites Butte Lookout" }]
+            },
+            {
+               "clean": "westforkoftheowyhee",
+               "raw": [{ "_content": "West Fork of the Owyhee" }]
+            },
+            {
+               "clean": "weston",
+               "raw": [{ "_content": "Weston" }]
+            },
+            {
+               "clean": "wheelbarrow",
+               "raw": [{ "_content": "Wheelbarrow" }]
+            },
+            {
+               "clean": "whiskey",
+               "raw": [{ "_content": "Whiskey" }]
+            },
+            {
+               "clean": "whitebird",
+               "raw": [{ "_content": "White Bird" }]
+            },
+            {
+               "clean": "wildfire",
+               "raw": [{ "_content": "Wildfire" }]
+            },
+            {
+               "clean": "wildhorsedam",
+               "raw": [{ "_content": "Wild Horse Dam" }]
+            },
+            {
+               "clean": "wildhorsereservoir",
+               "raw": [{ "_content": "Wild Horse Reservoir" }]
+            },
+            {
+               "clean": "willowcreek",
+               "raw": [{ "_content": "Willow Creek" }]
+            },
+            {
+               "clean": "wilsoncreek",
+               "raw": [{ "_content": "Wilson Creek" }]
+            },
+            {
+               "clean": "wind",
+               "raw": [{ "_content": "Wind" }]
+            },
+            {
+               "clean": "wine",
+               "raw": [{ "_content": "Wine" }]
+            },
+            {
+               "clean": "winter",
+               "raw": [{ "_content": "Winter" }]
+            },
+            {
+               "clean": "wiregate",
+               "raw": [{ "_content": "Wire Gate" }]
+            },
+            {
+               "clean": "woodduckisland",
+               "raw": [{ "_content": "Wood Duck Island" }]
+            },
+            {
+               "clean": "worswickhotsprings",
+               "raw": [{ "_content": "Worswick Hot Springs" }]
+            },
+            {
+               "clean": "wright",
+               "raw": [{ "_content": "Wright" }]
+            },
+            {
+               "clean": "writing",
+               "raw": [{ "_content": "Writing" }]
+            },
+            {
+               "clean": "wsu",
+               "raw": [{ "_content": "WSU" }]
+            },
+            {
+               "clean": "xerophyllumtenax",
+               "raw": [{ "_content": "Xerophyllum tenax" }]
+            },
+            {
+               "clean": "yamahattr110",
+               "raw": [{ "_content": "Yamaha TT-R 110" }]
+            },
+            {
+               "clean": "yamahatw200",
+               "raw": [{ "_content": "Yamaha TW200" }]
+            },
+            {
+               "clean": "yamahaxt250",
+               "raw": [{ "_content": "Yamaha XT 250" }]
+            },
+            {
+               "clean": "yankeeforkgolddredge",
+               "raw": [{ "_content": "Yankee Fork Gold Dredge" }]
+            },
+            {
+               "clean": "yellowpine",
+               "raw": [
+                  { "_content": "Yellow Pine" },
+                  { "_content": "Yellowpine" }
+               ]
+            },
+            {
+               "clean": "yockey",
+               "raw": [{ "_content": "Yockey" }]
+            },
+            {
+               "clean": "yoonji",
+               "raw": [{ "_content": "Yoon Ji" }]
+            },
+            {
+               "clean": "ystop",
+               "raw": [{ "_content": "Y-Stop" }]
+            },
+            {
+               "clean": "zeissdistagont235",
+               "raw": [{ "_content": "Zeiss Distagon T* 2/35" }]
+            },
+            {
+               "clean": "zenofalls",
+               "raw": [{ "_content": "Zeno Falls" }]
+            },
+            {
+               "clean": "zoecoffeehouse",
+               "raw": [{ "_content": "Zoe Coffeehouse" }]
+            }
+         ]
+      }
+   },
+   "stat": "ok"
+}

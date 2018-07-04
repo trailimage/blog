@@ -1,19 +1,15 @@
 {
-   "extends": "./tsconfig.json",
+   "extends": "./node_modules/@toba/build/ts/config",
    "compilerOptions": {
       "target": "es5",
       "module": "none",
-      "outDir": "./dist/js",
+      "outDir": "./public/js",
       "baseUrl": "./src/client",
       "noEmitOnError": true,
       "alwaysStrict": true,
-      "lib": ["es6","dom"]
+      "declaration": false,
+      "lib": ["es2017", "dom"]
    },
-   "include": [
-      "./src/client/*.ts"
-   ],
-   "exclude": [
-      "./src/types/",
-      "node_modules"
-   ]
+   "include": ["./src/client/*.ts"],
+   "exclude": ["./src/types/", "node_modules"]
 }

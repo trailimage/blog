@@ -1,112 +1,118 @@
-import { Blog, Category } from '../types/';
-import is from '../is';
-import ld from '../json-ld';
-import config from '../config';
-import util from '../util/';
-import template from '../template';
-import library from '../library';
-import { route as ph } from '../constants';
+import { is, merge, sayNumber } from '@toba/tools';
+import { Category, blog } from '@trailimage/models';
+import { Request, Response } from 'express';
+import { config } from '../config';
+import { RouteParam } from '../routes';
+import { Layout, Page } from '../views/template';
+import { view, ViewContext } from '../views/view';
 
-function view(res:Blog.Response, path:string, homePage = false) {
-   res.sendView(path, { callback: render => {
+function send(req: Request, res: Response, path: string, homePage = false) {
+   view.send(res, path, async render => {
       // use renderer to build view that wasn't cached
-      const category = library.categoryWithKey(path);
+      const category = blog.categoryWithKey(path);
 
-      if (is.value(category)) {
-         category.ensureLoaded().then(()=> {
-            const linkData = ld.fromCategory(category, path, homePage);
-            const count = category.posts.length;
-            const options = { posts: category.posts };
-            const subtitle = config.site.postAlias + ((count > 1) ? 's' : '');
-
-            renderCategory(render, template.page.CATEGORY, category, linkData, options, count, subtitle);
-         });
-      } else {
-         res.notFound();
+      if (!is.value(category)) {
+         return view.notFound(req, res);
       }
-   }});
+
+      await category.ensureLoaded();
+
+      const count = category.posts.size;
+
+      render(
+         Page.Category,
+         standardContext(category, count, {
+            jsonLD: category.jsonLD(),
+            subtitle: config.site.postAlias + (count > 1 ? 's' : ''),
+            posts: Array.from(category.posts)
+         })
+      );
+   });
 }
 
-
 /**
- * A particular category like When/2013
+ * A particular category like When/2013.
  */
-function forPath(req:Blog.Request, res:Blog.Response) {
-   view(res, req.params[ph.ROOT_CATEGORY] + '/' + req.params[ph.CATEGORY]);
+export function forPath(req: Request, res: Response) {
+   send(
+      req,
+      res,
+      req.params[RouteParam.RootCategory] +
+         '/' +
+         req.params[RouteParam.Category]
+   );
 }
 
 /**
- * "Home" page shows latest default category that contains posts
+ * "Home" page shows latest default category that contains posts.
  * This is still messed up from a configurability perspective since it assumes
  * the default tag has years as child tags
  */
-function home(req:Blog.Request, res:Blog.Response) {
-   const category = library.categories[config.library.defaultCategory];
-   let year = (new Date()).getFullYear();
+export function home(req: Request, res: Response) {
+   const category = blog.categories.get(config.posts.defaultCategory);
+   let year = new Date().getFullYear();
    let subcategory = null;
    let count = 0;
 
    while (count == 0) {
       // step backwards until a year with posts is found
       subcategory = category.getSubcategory(year.toString());
-      if (is.value(subcategory)) { count = subcategory.posts.length; }
+      if (is.value<Category>(subcategory)) {
+         count = subcategory.posts.size;
+      }
       year--;
    }
-   view(res, subcategory.key, true);
+   send(req, res, subcategory.key, true);
 }
 
 /**
- * Show root category with list of subcategories
+ * Show root category with list of subcategories.
  */
-function list(req:Blog.Request, res:Blog.Response) {
-   const key = req.params[ph.ROOT_CATEGORY] as string;
+export function list(req: Request, res: Response) {
+   const key = req.params[RouteParam.RootCategory] as string;
 
-   if (is.value(key)) {
-      res.sendView(key, { callback: render => {
-         // use renderer to build view that wasn't cached
-         const category = library.categoryWithKey(key);
-
-         if (is.value(category)) {
-            const linkData = ld.fromCategory(category);
-            const count = category.subcategories.length;
-            const options = { subcategories: category.subcategories };
-            const subtitle = 'Subcategories';
-
-            renderCategory(render as Blog.Renderer, template.page.CATEGORY_LIST, category, linkData, options, count, subtitle);
-         } else {
-            res.notFound();
-         }
-      }});
-   } else {
-      res.notFound();
+   if (is.empty(key)) {
+      return view.notFound(req, res);
    }
+
+   view.send(res, key, render => {
+      // use renderer to build view that wasn't cached
+      const category = blog.categoryWithKey(key);
+
+      if (!is.value(category)) {
+         return view.notFound(req, res);
+      }
+
+      render(
+         Page.CategoryList,
+         standardContext(category, category.subcategories.size, {
+            jsonLD: category.jsonLD(),
+            subtitle: 'Subcategories',
+            subcategories: Array.from(category.subcategories)
+         })
+      );
+   });
 }
 
-function menu(req:Blog.Request, res:Blog.Response) {
-   const t = template.page.CATEGORY_MENU;
-   res.sendView(t, { callback: render => {
-       render(t, { library, layout: template.layout.NONE });
-   }});
+export function menu(_req: Request, res: Response) {
+   view.send(res, Page.CategoryMenu, render => {
+      render(Page.CategoryMenu, { blog, layout: Layout.None });
+   });
 }
 
 /**
- * Render category if it wasn't cached
+ * Add standard category context fields.
+ * @param childCount Number of posts or subcategories in the category
  */
-function renderCategory(
-   render:Blog.Renderer,
-   template:string,
-   category:Category,
-   linkData:any,
-   options:{[key:string]:any},
-   childCount:number,
-   subtitle:string) {
-
-   render(template, Object.assign(options, {
+const standardContext = (
+   category: Category,
+   childCount: number,
+   context: ViewContext
+): ViewContext =>
+   merge<ViewContext>(context, {
       title: category.title,
-      jsonLD: ld.serialize(linkData),
       headerCSS: config.style.css.categoryHeader,
-      subtitle: util.number.say(childCount) + ' ' + subtitle
-   }));
-}
+      subtitle: `${sayNumber(childCount)} ${context.subtitle}`
+   });
 
-export default { home, list, forPath, menu };
+export const category = { forPath, home, list, menu };

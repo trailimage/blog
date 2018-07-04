@@ -1,136 +1,167 @@
-import { Blog } from './types/';
+import { HttpStatus } from '@toba/tools';
+import { blog } from '@trailimage/models';
 import * as Express from 'express';
-import config from './config';
-import { route as ph, httpStatus } from './constants';
-import ctrl from './controllers/';
-import library from './library';
+import { config } from './config';
+import {
+   staticPage,
+   post,
+   postFeed,
+   photo,
+   category,
+   menu,
+   auth,
+   map
+} from './controllers/index';
 
 /**
- * Need to capture top-level route parameters
+ * Route placeholders that become `req.params` keys.
+ */
+export enum RouteParam {
+   Category = 'category',
+   Month = 'month',
+   /**
+    * Unique portion of the key for posts in a series. For example, in
+    * `brother-ride/day-10` the `PartKey` is `day-10`.
+    */
+   PartKey = 'partKey',
+   PhotoID = 'photoID',
+   PhotoTag = 'tagSlug',
+   PostID = 'postID',
+   /**
+    * Unique identifier for a post, also used as its URL slug. If the post is
+    * part of a series then this is the combined key.
+    *
+    * @example brother-ride/day-10
+    */
+   PostKey = 'postKey',
+   RootCategory = 'rootCategory',
+   /**
+    * Common portion of the key for posts in a series. For example, in
+    * `brother-ride/day-10` the `SeriesKey` is `brother-ride`.
+    */
+   SeriesKey = 'seriesKey',
+   MapSource = 'mapSource',
+   Year = 'year'
+}
+
+/**
+ * Need to capture top-level route parameters.
  *
- * http://expressjs.com/en/4x/api.html#express.router
+ * @see http://expressjs.com/en/4x/api.html#express.router
  */
 const keepParams = { mergeParams: true };
 
-function adminRoutes() {
-   const r = Express.Router();
-   r.get('/', ctrl.admin.home);
-   r.post('/view/delete', ctrl.admin.cache.deleteView);
-   r.post('/map/delete', ctrl.admin.cache.deleteMap);
-   r.post('/json/delete', ctrl.admin.cache.deleteJSON);
-   r.post('/library/reload', ctrl.admin.updateLibrary);
-   return r;
-}
-
-function postRoutes(photoID:string):Express.Router {
+function postRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', ctrl.post.withKey);
+   r.get('/', post.withKey);
    //r.get('/pdf', c.pdf);
-   r.get('/map', ctrl.map.post);
-   r.get('/gpx', ctrl.map.gpx);
-   r.get(`/map/${photoID}`, ctrl.map.post);
-   r.get('/geo.json', ctrl.map.json.post);
+   r.get('/map', map.post);
+   r.get('/gpx', map.gpx);
+   r.get(`/map/${photoID}`, map.post);
+   r.get('/geo.json', map.json.post);
    return r;
 }
 
 /**
- * Series should load the PDF, GPX and GeoJSON for the main post
+ * Series should load the PDF, GPX and GeoJSON for the main post.
  */
-function seriesRoutes(photoID:string):Express.Router {
+function seriesRoutes(photoID: string): Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', ctrl.post.inSeries);
-   r.get('/map', ctrl.map.series);
-   r.get(`/map/${photoID}`, ctrl.map.series);
+   r.get('/', post.inSeries);
+   r.get('/map', map.series);
+   r.get(`/map/${photoID}`, map.series);
    return r;
 }
 
-function photoTagRoutes():Express.Router {
+function photoTagRoutes(): Express.Router {
    const r = Express.Router();
-   r.get('/', ctrl.photo.tags);
+   r.get('/', photo.tags);
    // photo tag page
-   r.get(`/:${ph.PHOTO_TAG}`, ctrl.photo.tags);
+   r.get(`/:${RouteParam.PhotoTag}`, photo.tags);
    // API call for photo info
-   r.get(`/search/:${ph.PHOTO_TAG}`, ctrl.photo.withTag);
+   r.get(`/search/:${RouteParam.PhotoTag}`, photo.withTag);
    return r;
 }
 
-function categoryRoutes():Express.Router {
+function categoryRoutes(): Express.Router {
    const r = Express.Router(keepParams);
-   r.get('/', ctrl.category.list);
-   r.get(`/:${ph.CATEGORY}`, ctrl.category.forPath);
+   r.get('/', category.list);
+   r.get(`/:${RouteParam.Category}`, category.forPath);
    return r;
 }
 
 /**
  * Standard routes. Regular expressions must match the full string.
  *
- * http://expressjs.com/en/4x/api.html
- * http://expressjs.com/en/guide/routing.html
+ * @see http://expressjs.com/en/4x/api.html
+ * @see http://expressjs.com/en/guide/routing.html
  */
-function standard(app:Express.Application) {
-   // slug pattern
+function standard(app: Express.Application) {
+   /** Slug pattern */
    const s = '([\\w\\d-]{4,})';
-   // Flickr photo ID pattern
-   const photoID = `:${ph.PHOTO_ID}(\\d{10,11})`;
-   // Flickr set ID pattern
-   const postID = `:${ph.POST_ID}(\\d{17})`;
-   // post key (slug or path) pattern
-   const postKey = `:${ph.POST_KEY}${s}`;
-   const series = `:${ph.SERIES_KEY}${s}/:${ph.PART_KEY}${s}`;
-   // pattern matching any root category key
-   const rootCategory = ':' + ph.ROOT_CATEGORY + '(' + Object
-      .keys(library.categories)
-      .map(name => library.categories[name].key)
-      .join('|') + ')';
-
-   app.use('/admin', adminRoutes());
+   /** Flickr photo ID pattern */
+   const photoID = `:${RouteParam.PhotoID}(\\d{10,11})`;
+   /** Provider set ID pattern */
+   const postID = `:${RouteParam.PostID}(\\d{17})`;
+   /** Post key (slug or path) pattern */
+   const postKey = `:${RouteParam.PostKey}${s}`;
+   const series = `:${RouteParam.SeriesKey}${s}/:${RouteParam.PartKey}${s}`;
+   /** Pattern matching any root category key */
+   const rootCategory = `:${RouteParam.RootCategory}(${Array.from(
+      blog.categories.values()
+   )
+      .map(c => c.key)
+      .join('|')})`;
 
    for (const slug in config.redirects) {
-      app.get('/' + slug, (req:Blog.Request, res:Blog.Response) => {
-         res.redirect(httpStatus.PERMANENT_REDIRECT, '/' + config.redirects[slug]);
+      app.get('/' + slug, (_req: Express.Request, res: Express.Response) => {
+         res.redirect(
+            HttpStatus.PermanentRedirect,
+            '/' + config.redirects[slug]
+         );
       });
    }
 
    // the latest posts
-   app.get('/', ctrl.category.home);
-   app.get('/map', ctrl.map.blog);
-   app.get(`/map/source/:${ph.MAP_SOURCE}([a-z\-]+\.json$)`, ctrl.map.source);
-   app.get('/geo.json', ctrl.map.json.blog);
-   app.get('/rss', ctrl.rss);
-   app.get('/about', ctrl.about);
-   app.get('/js/post-menu-data.js', ctrl.menu.data);
-   app.get('/sitemap.xml', ctrl.siteMap);
-   app.get(`/exif/${photoID}`, ctrl.photo.exif);
-   app.get('/issues?', ctrl.issues);
-   app.get('/issues?/:slug'+s, ctrl.issues);
-   app.get('/category-menu', ctrl.category.menu);
-   app.get('/mobile-menu', ctrl.menu.mobile);
-   app.get('/search', ctrl.search);
+   app.get('/', category.home);
+   app.get('/map', map.blog);
+   app.get(`/map/source/:${RouteParam.MapSource}([a-z\-]+\.json$)`, map.source);
+   app.get('/geo.json', map.json.blog);
+   app.get('/rss', postFeed);
+   app.get('/about', staticPage.about);
+   app.get('/js/post-menu-data.js', menu.data);
+   app.get('/sitemap.xml', staticPage.siteMap);
+   app.get(`/exif/${photoID}`, photo.exif);
+   app.get('/issues?', staticPage.issues);
+   app.get('/issues?/:slug' + s, staticPage.issues);
+   app.get('/category-menu', category.menu);
+   app.get('/mobile-menu', menu.mobile);
+   app.get('/search', staticPage.search);
 
    app.use(`/${rootCategory}`, categoryRoutes());
 
-   // old blog links with format /YYYY/MM/slug
-   //app.get(`/:${ph.YEAR}(\\d{4})/:${ph.MONTH}(\\d{2})/:${ph.POST_KEY}`, c.post.date);
    app.use('/photo-tag', photoTagRoutes());
-   app.get(`/${photoID}`, ctrl.post.withPhoto);
-   app.get(`/${postID}`, ctrl.post.withID);
-   app.get(`/${postID}/${photoID}`, ctrl.post.withID);
+   app.get(`/${photoID}`, post.withPhoto);
+   app.get(`/${postID}`, post.withID);
+   app.get(`/${postID}/${photoID}`, post.withID);
    app.use(`/${postKey}`, postRoutes(photoID));
    app.use(`/${series}`, seriesRoutes(photoID));
 }
 
 /**
- * If a provider isn't authenticated then all paths route to authentication pages
+ * If a provider isn't authenticated then all paths route to authentication
+ * pages.
  */
-function authentication(app:Express.Application) {
+function authentication(app: Express.Application) {
    // provider authentication callbacks
-   app.get('/auth/flickr', ctrl.auth.flickr);
-   app.get('/auth/google', ctrl.auth.google);
+   // TODO: use config for these URLs
+   app.get('/auth/flickr', auth.post);
+   app.get('/auth/google', auth.map);
    // all other routes begin authentication process
-   app.get('*', ctrl.auth.view);
+   app.get('*', auth.main);
 }
 
-export default {
+export const route = {
    standard,
    authentication
 };

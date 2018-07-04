@@ -1,6 +1,6 @@
 /// <reference types="geojson" />
 
-import * as Mapbox from 'mapbox-gl'
+import * as Mapbox from 'mapbox-gl';
 
 /**
  * Members missing from the existing definition
@@ -10,14 +10,14 @@ import * as Mapbox from 'mapbox-gl'
  */
 declare module 'mapbox-gl' {
    export interface Evented {
-      on(type:string, layer:string, listener:Function):this;
+      on(type: string, layer: string, listener: Function): this;
    }
 
    export interface MapMouseEvent {
       /**
        * GeoJSON layer click includes features
        */
-      features:GeoJSON.Feature<any>[];
+      features: GeoJSON.Feature<any>[];
    }
 
    export interface EventData {
@@ -25,15 +25,15 @@ declare module 'mapbox-gl' {
        * Reason for the event. Not part of the Mapbox itself but added in local
        * handling.
        */
-      reason:string;
+      reason: string;
    }
 
    export interface Point {
-      x:number;
-      y:number;
+      x: number;
+      y: number;
    }
 
    export interface PointCluster {
-      point_count:number;
+      point_count: number;
    }
 }

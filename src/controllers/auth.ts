@@ -1,83 +1,46 @@
-import { Blog } from '../types/';
-import is from '../is';
-import log from '../logger';
-import config from '../config';
-import template from '../template';
-import flickr from '../providers/flickr';
-import google from '../providers/google';
-import { httpStatus } from '../constants';
+import { Response, Request } from 'express';
+import { is } from '@toba/tools';
+import { log } from '@toba/logger';
+import { Page, Layout } from '../views/';
+import { config as modelConfig, DataProvider } from '@trailimage/models';
 
 /**
- * Redirect to authorization URL for unauthorized providers
- *
- * https://github.com/google/google-api-nodejs-client/#generating-an-authentication-url
+ * Redirect to authorization URL for unauthorized providers.
  */
-function view(req:Blog.Request, res:Blog.Response) {
-   if (config.needsAuth) {
-      if (flickr.auth.isEmpty()) {
-         res.redirect(flickr.auth.url());
-      } else if (google.auth.isEmpty()) {
-         res.redirect(google.auth.url());
+export function main(_req: Request, res: Response) {
+   [
+      modelConfig.providers.post,
+      modelConfig.providers.map,
+      modelConfig.providers.video
+   ].forEach(async p => {
+      if (is.value(p) && !p.isAuthenticated) {
+         const url = await p.authorizationURL();
+         res.redirect(url);
+         return;
       }
-   } else {
-      // we shouldn't be here
-   }
+   });
+}
+
+export function postAuth(req: Request, res: Response) {
+   authCallback(modelConfig.providers.post, req, res);
+}
+
+export function mapAuth(req: Request, res: Response) {
+   authCallback(modelConfig.providers.map, req, res);
 }
 
 /**
- * Retrieve tokens for Flickr and display on page to be manually copied into
- * configuration
- *
- * http://www.flickr.com/services/api/auth.oauth.html
+ * Handle provider authorization callback. Parameters can be unique per provider
+ * so hand-off full request to the provider for parsing.
  */
-function flickrAuth(req:Blog.Request, res:Blog.Response) {
-   if (is.empty(req.param('oauth_token'))) {
-      log.warn('%s is updating Flickr tokens', req.clientIP());
-      flickr.auth.getRequestToken().then(url => res.redirect(url));
-   } else {
-      const token = req.param('oauth_token');
-      const verifier = req.param('oauth_verifier');
-
-      flickr.auth.getAccessToken(token, verifier)
-         .then(token => {
-            res.render(template.page.AUTHORIZE, {
-               title: 'Flickr Access',
-               token: token.access,
-               secret: token.secret,
-               layout: template.layout.NONE
-            });
-         })
-         .catch((err:Error) => { log.error(err); });
-   }
+async function authCallback(p: DataProvider<any>, req: Request, res: Response) {
+   const token = await p.getAccessToken(req);
+   res.render(Page.Authorize, {
+      title: 'Flickr Access',
+      token: token.access,
+      secret: token.secret,
+      layout: Layout.NONE
+   });
 }
 
-/**
- * Retrieve tokens for Google and display on page to be manually copied into
- * configuration
- *
- * https://github.com/google/google-api-nodejs-client/
- */
-function googleAuth(req:Blog.Request, res:Blog.Response) {
-   const code = req.param('code');
-
-   if (is.empty(code)) {
-      res.end('Cannot continue without Google authorization code');
-   } else {
-      google.auth.getAccessToken(code)
-         .then(token => {
-            res.render(template.page.AUTHORIZE, {
-               title: 'Google Access',
-               token: token.access,
-               secret: token.refresh,
-               layout: template.layout.NONE
-            });
-         })
-         .catch(err => {
-            log.error(err);
-            res.status(httpStatus.INTERNAL_ERROR);
-            res.end(err.toString());
-         });
-   }
-}
-
-export default { flickr: flickrAuth, google: googleAuth, view };
+export const auth = { map: mapAuth, post: postAuth, main };

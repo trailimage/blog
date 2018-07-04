@@ -5,69 +5,83 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const through = require('through2');
 const ts = require('gulp-typescript');
-const vinyl = require('vinyl')
+const vinyl = require('vinyl');
 const path = require('path');
 const sourcemaps = require('gulp-sourcemaps');
 const merge = require('merge2');
-const jsPath = './src/client/'
-const dist = './dist/';
+const jsPath = './src/client/';
+const dist = './public/';
 /**
- * https://github.com/gulp-sourcemaps/gulp-sourcemaps
+ * @see https://github.com/gulp-sourcemaps/gulp-sourcemaps
  */
 const sourceMapConfig = {
    sourceMappingURL: file => '/js/maps/' + file.relative + '.map'
-}
+};
 
 /**
  * TypeScript configuration should set noEmitOnError=true to keep incremental
  * compilation from building and caching bad bundles.
  *
- * https://github.com/ivogabe/gulp-typescript
+ * @see https://github.com/ivogabe/gulp-typescript
  */
 const tsConfig = ts.createProject('tsconfig.browser.json');
 
 // https://github.com/plus3network/gulp-less
 // https://github.com/jonathanepollack/gulp-minify-css
 // https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
-gulp.task('css', ()=>
+gulp.task('css', () =>
    merge(
-      gulp.src(lessPath(['map', 'mapbox', 'admin'])).pipe(less()).on('error', handleError),
+      gulp
+         .src(lessPath(['map', 'mapbox', 'admin']))
+         .pipe(less())
+         .on('error', handleError),
       merge(
          // combine fonts with main styles
-         gulp.src(lessPath(['ti'])).pipe(less()).on('error', handleError),
+         gulp
+            .src(lessPath(['ti']))
+            .pipe(less())
+            .on('error', handleError),
          gulp.src(dist + 'fonts/webfont.css')
-      )
-         .pipe(concat('ti.css'))
+      ).pipe(concat('ti.css'))
    )
-      .pipe(less()).on('error', handleError)
-      .pipe(nano({ discardUnused: false })).on('error', handleError)
+      .pipe(less())
+      .on('error', handleError)
+      .pipe(nano({ discardUnused: false }))
+      .on('error', handleError)
       .pipe(gulp.dest(dist + 'css'))
 );
 
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
-gulp.task('js', ()=> {
-   return merge(
-      tsConfig.src().pipe(tsConfig()),
-      gulp.src(jsPath + 'jquery.lazyload.js')
-   )
-      .pipe(bundle('post','static-map','jquery.lazyload').as('post', { keep: ['static-map'] }))
-      .pipe(bundle('mapbox','util').as('mapbox', { keep: 'util'}))
-      // responsive script is on every page except map
-      .pipe(bundle('responsive', 'util').as('responsive'))
-      .pipe(bundle('static-map').as('category'))
-      .pipe(sourcemaps.init())
-      .pipe(uglify()).on('error', handleError)
-      .pipe(sourcemaps.write('maps', sourceMapConfig))
-      .pipe(gulp.dest(dist + 'js'));
+gulp.task('js', () => {
+   return (
+      merge(
+         tsConfig.src().pipe(tsConfig()),
+         gulp.src(jsPath + 'jquery.lazyload.js')
+      )
+         .pipe(
+            bundle('post', 'static-map', 'jquery.lazyload').as('post', {
+               keep: ['static-map']
+            })
+         )
+         .pipe(bundle('mapbox', 'util').as('mapbox', { keep: 'util' }))
+         // responsive script is on every page except map
+         .pipe(bundle('responsive', 'util').as('responsive'))
+         .pipe(bundle('static-map').as('category'))
+         .pipe(sourcemaps.init())
+         .pipe(uglify())
+         .on('error', handleError)
+         .pipe(sourcemaps.write('maps', sourceMapConfig))
+         .pipe(gulp.dest(dist + 'js'))
+   );
 });
 
 // act on changes
-gulp.task('watch', ()=> {
+gulp.task('watch', () => {
    gulp.watch('./src/less/*.less', ['css']);
    gulp.watch('./src/client/*.?s', ['js']);
 });
 
-//= Helper functions ==========================================================
+//#region Helpers
 
 /**
  * @param {string[]} names
@@ -122,7 +136,9 @@ const bundle = (...files) => ({
          if (files.indexOf(name) >= 0) {
             content.push(file.contents);
             // use first file as template
-            if (template == null) { template = file; }
+            if (template == null) {
+               template = file;
+            }
             // if not keeping file then empty callback removes it from stream
             if (keep.length == 0 || keep.indexOf(name) == -1) {
                cb();
@@ -130,7 +146,7 @@ const bundle = (...files) => ({
             }
          }
          // any file returned in callback is kept in stream
-         cb(null, file)
+         cb(null, file);
       }
 
       // create merged file and place in stream
@@ -148,3 +164,5 @@ const bundle = (...files) => ({
       return through.obj(transform, finish);
    }
 });
+
+//#endregion

@@ -1,49 +1,51 @@
-import { Blog } from '../types/';
-import is from '../is';
-import ld from '../json-ld';
-import config from '../config';
-import { page } from '../template';
-import library from '../library';
-import { httpStatus, mimeType } from '../constants';
+import { HttpStatus, MimeType, is } from '@toba/tools';
+import { blog, owner } from '@trailimage/models';
+import { Request, Response } from 'express';
+import { config } from '../config';
+import { Page, Layout, view } from '../views/';
 
-function search(req:Blog.Request, res:Blog.Response) {
-   const term = req.query['q'];
+/**
+ * Google search results page rendered directly without the `view.send` cache
+ * pipeline.
+ */
+function search(req: Request, res: Response) {
+   const term: string = req.query['q'];
 
    if (is.value(term)) {
-      res.render(page.SEARCH, {
-         title: 'Search for “' + req.query['q'] + '”',
-         config: config
+      res.render(Page.Search, {
+         title: `Search for “${term}”`
       });
    } else {
-      res.notFound();
+      view.notFound(req, res);
    }
 }
 
-function about(req:Blog.Request, res:Blog.Response) {
-   res.sendView(page.ABOUT, {
-      templateValues: {
-         title: 'About ' + config.site.title,
-         jsonLD: ld.serialize(ld.owner)
-      }
+function about(_req: Request, res: Response) {
+   view.send(res, Page.About, {
+      title: 'About ' + config.site.title,
+      jsonLD: owner()
    });
 }
 
-function siteMap(req:Blog.Request, res:Blog.Response) {
-   res.sendView(page.SITEMAP, {
-      mimeType: mimeType.XML,
-      callback: render => {
-         render(page.SITEMAP, {
-            posts: library.posts,
-            categories: library.categoryKeys(),
-            tags: library.tags,
-            layout: null
-         });
-      }
-   });
+/**
+ * XML Sitemap.
+ */
+function siteMap(_req: Request, res: Response) {
+   view.send(
+      res,
+      Page.Sitemap,
+      {
+         posts: blog.posts,
+         layout: Layout.None,
+         categories: blog.categoryKeys(),
+         tags: blog.tags
+      },
+      MimeType.XML
+   );
 }
 
-function issues(req:Blog.Request, res:Blog.Response) {
-   res.redirect(httpStatus.PERMANENT_REDIRECT, 'http://issues.' + config.domain);
+function issues(_req: Request, res: Response) {
+   res.redirect(HttpStatus.PermanentRedirect, 'http://issues.' + config.domain);
 }
 
-export default { search, about, siteMap, issues };
+export const staticPage = { issues, about, search, siteMap };

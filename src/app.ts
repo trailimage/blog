@@ -1,90 +1,79 @@
-import { Blog } from "./types/";
-import config from "./config";
-import log from "./logger";
-import * as Express from "express";
-import * as hbs from "express-hbs";
-import * as path from "path";
-import template from "./template";
-import factory from "./factory/";
-import route from "./routes";
-import * as compress from "compression";
-import * as bodyParser from "body-parser";
-import middleware from "./middleware";
-import * as wwwhisper from "connect-wwwhisper";
+import { log } from '@toba/logger';
+import { blockSpamReferers } from '@toba/block-spam-referer';
+import * as compress from 'compression';
+import * as Express from 'express';
+import { ExpressHandlebars } from '@toba/handlebars';
+import * as path from 'path';
+import { postProvider } from '@trailimage/flickr-provider';
+import { mapProvider } from '@trailimage/google-provider';
+import { config as modelConfig, blog } from '@trailimage/models';
+import { config } from './config';
+import { Layout, addTemplateMethods } from './views/';
+import { route } from './routes';
 
-const root = path.normalize(__dirname + "/../");
+const root = path.join(__dirname, '..');
 
+configureModels();
 createWebService();
 
-function createWebService() {
-   const app = Express();
-   const port = process.env["PORT"] || 3000;
+export function configureModels() {
+   postProvider.configure(config.providers.post);
+   mapProvider.configure(config.providers.map);
 
-   log.infoIcon("power-settings_new", "Starting %s application", config.isProduction ? "production" : "development");
+   modelConfig.site = config.site;
+   modelConfig.owner = config.owner;
+   modelConfig.subtitleSeparator = config.posts.subtitleSeparator;
+   modelConfig.maxPhotoMarkersOnMap = config.providers.map.maxMarkers;
+   modelConfig.providers.post = postProvider;
+   modelConfig.providers.map = mapProvider;
+}
+
+async function createWebService() {
+   const app = Express();
+   const port = process.env['PORT'] || 3000;
+
+   log.info(
+      `Starting ${
+         config.isProduction ? 'production' : 'development'
+      } application`
+   );
 
    defineViews(app);
 
-   if (config.needsAuth) {
+   if (false) {
+      //config.needsAuth) {
       // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
-      log.infoIcon("lock", "Listening for authentication on port %d", port);
+      log.info(`Listening for authentication on port ${port}`);
    } else {
-      applyMiddleware(app);
+      app.use(blockSpamReferers);
+      // https://github.com/expressjs/compression/blob/master/README.md
+      app.use(compress());
+      app.use(Express.static(path.join(root, 'public')));
 
-      factory.buildLibrary().then(() => {
-         // library must be loaded before routes are defined
-         route.standard(app);
-         app.listen(port);
-         log.infoIcon("hearing", "Listening on port %d", port);
-      });
+      await blog.load();
+      // blog must be loaded before routes are defined
+      route.standard(app);
+      app.listen(port);
+      log.info(`Listening on port ${port}`);
    }
-}
-
-// https://github.com/donpark/hbs/blob/master/examples/extend/app.js
-// https://npmjs.org/package/express-hbs
-// http://mustache.github.com/mustache.5.html
-function defineViews(app: Express.Application) {
-   const engine = "hbs";
-   const views = path.normalize(root + "views/");
-
-   // http://expressjs.com/4x/api.html#app-settings
-   app.set("views", views);
-   app.set("view engine", engine);
-   app.engine(engine, hbs.express4({
-      defaultLayout: views + template.layout.MAIN + ".hbs",
-      partialsDir: views + "partials"
-   }));
-
-   template.assignHelpers(hbs);
 }
 
 /**
- * See http://expressjs.com/api.html#app.use
+ * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
+ * @see http://mustache.github.com/mustache.5.html
  */
-function applyMiddleware(app: Express.Application) {
-   // https://github.com/expressjs/compression/blob/master/README.md
-   app.use(middleware.blockSpamReferers);
+function defineViews(app: Express.Application) {
+   const viewPath = path.join(root, 'views');
+   const ehb = new ExpressHandlebars({
+      defaultLayout: Layout.Main
+   });
 
-   if (config.usePersona) {
-      // use wwwhisper middleware to authenticate some routes
-      // https://devcenter.heroku.com/articles/wwwhisper
+   // http://expressjs.com/4x/api.html#app-settings
+   app.set('views', viewPath);
+   app.set('view engine', ehb.fileExtension);
+   app.engine(ehb.fileExtension, ehb.renderer);
 
-      //app.use(/\/admin|\/wwwhisper/gi, wwwhisper(false));
-      app.use(filter(/^\/(admin|wwwhisper)/, wwwhisper(false)));
-      //app.use(['/admin','/wwwhisper'], wwwhisper(false));
-   }
-   // needed to parse admin page posts with extended enabled for form select arrays
-   app.use("/admin", bodyParser.urlencoded({ extended: true }));
-   app.use(compress({}));
-   app.use(middleware.enableStatusHelpers);
-   app.use(middleware.enableViewCache);
-   app.use(Express.static(root + "dist"));
-}
-
-// this should be what Express already supports but it isn't behaving as expected
-function filter(regex: RegExp, fn: Function) {
-   return (req: Blog.Request, res: Blog.Response, next: Function) => {
-      if (regex.test(req.originalUrl)) { fn(req, res, next); } else { next(); }
-   };
+   addTemplateMethods(ehb);
 }

@@ -23,5 +23,10 @@
       "**/dist": true
    },
    "tslint.enable": true,
-   "eslint.enable": false
+   "eslint.enable": false,
+   "jest.autoEnable": false,
+   "typescript.tsdk": "node_modules\\typescript\\lib",
+   "[handlebars]": {
+      "editor.formatOnSave": false
+   }
 }

@@ -1,78 +1,98 @@
-import { Blog } from '../types/';
-import is from '../is';
-import ld from '../json-ld';
-import template from '../template';
-import library from '../library';
-import { route as ph, httpStatus } from '../constants';
+import { HttpStatus, is } from '@toba/tools';
+import { log } from '@toba/logger';
+import { blog } from '@trailimage/models';
+import { Request, Response } from 'express';
+import { RouteParam } from '../routes';
+import { Page, Layout, view } from '../views/';
 
-function view(res:Blog.Response, key:string, pageTemplate:string = template.page.POST) {
-   res.sendView(key, {
-      callback: render => {
-         const p = library.postWithKey(key);
-         if (!is.value(p)) { res.notFound(); return; }
-         p.ensureLoaded()
-            .then(() => {
-               render(pageTemplate, {
-                  post: p,
-                  title: p.title,
-                  // https://developers.google.com/structured-data/testing-tool/
-                  jsonLD: ld.serialize(ld.fromPost(p)),
-                  description: p.longDescription,
-                  slug: key,
-                  layout: template.layout.NONE
-               });
-            })
-            .catch(res.internalError);
-         }
+function send(
+   req: Request,
+   res: Response,
+   key: string,
+   viewName: string = Page.Post
+) {
+   view.send(res, key, render => {
+      const p = blog.postWithKey(key);
+      if (!is.value(p)) {
+         view.notFound(req, res);
+         return;
       }
+      p.ensureLoaded()
+         .then(() => {
+            render(viewName, {
+               post: p,
+               title: p.title,
+               jsonLD: p.jsonLD(),
+               layout: Layout.None,
+               description: p.longDescription,
+               slug: key
+            });
+         })
+         .catch(err => view.internalError(res, err));
+   });
+}
+
+/**
+ * Display post that's part of a series.
+ */
+function inSeries(req: Request, res: Response) {
+   send(
+      req,
+      res,
+      req.params[RouteParam.SeriesKey] + '/' + req.params[RouteParam.PartKey]
    );
 }
 
 /**
- * Display post that's part of a series
+ * Render post with matching key.
  */
-function inSeries(req:Blog.Request, res:Blog.Response) {
-   view(res, req.params[ph.SERIES_KEY] + '/' + req.params[ph.PART_KEY]);
-}
-
-function withKey(req:Blog.Request, res:Blog.Response) {
-   view(res, req.params[ph.POST_KEY]);
+function withKey(req: Request, res: Response) {
+   send(req, res, req.params[RouteParam.PostKey]);
 }
 
 /**
- * Post with given Flickr ID
- * Redirect to normal URL
+ * Render post with matching provider (e.g. Flickr) ID. Redirect to normal URL.
  */
-function withID(req:Blog.Request, res:Blog.Response) {
-   const post = library.postWithID(req.params[ph.POST_ID]);
+function withID(req: Request, res: Response) {
+   const post = blog.postWithID(req.params[RouteParam.PostID]);
 
    if (is.value(post)) {
-      res.redirect(httpStatus.PERMANENT_REDIRECT, '/' + post.key);
+      res.redirect(HttpStatus.PermanentRedirect, '/' + post.key);
    } else {
-      res.notFound();
+      view.notFound(req, res);
    }
 }
 
 /**
- * Show post with given photo ID
+ * Render post that contains photo with given ID.
  */
-function withPhoto(req:Blog.Request, res:Blog.Response) {
-   const photoID = req.params[ph.PHOTO_ID];
+function withPhoto(req: Request, res: Response) {
+   const photoID = req.params[RouteParam.PhotoID];
 
-   library.getPostWithPhoto(photoID)
+   blog
+      .postWithPhoto(photoID)
       .then(post => {
          if (is.value(post)) {
-            res.redirect(httpStatus.PERMANENT_REDIRECT, '/' + post.key + '#' + photoID);
+            res.redirect(
+               HttpStatus.PermanentRedirect,
+               `/${post.key}#${photoID}`
+            );
          } else {
-            res.notFound();
+            view.notFound(req, res);
          }
       })
-      .catch(res.notFound);
+      .catch(err => {
+         log.error(err, { photoID });
+         view.notFound(req, res);
+      });
 }
 
 /**
- * Show newest post on home page
+ * Show newest post on home page. Provider should have populated posts newest-
+ * first.
  */
-function latest(req:Blog.Request, res:Blog.Response) { view(res, library.posts[0].key); }
+function latest(req: Request, res: Response) {
+   send(req, res, blog.posts[0].key);
+}
 
-export default { latest, withID, withKey, withPhoto, inSeries };
+export const post = { latest, withID, withKey, withPhoto, inSeries };

@@ -1,5 +1,7 @@
 node_modules/
 profile/
-dist/js/maps/
+dist/
+lib/
+public/js/maps/
 .vscode/chrome/
-lib/**/*.js.map
+yarn-error.log

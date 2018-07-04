@@ -3,62 +3,40 @@
    "configurations": [
       // http://www.mithunvp.com/typescript-tutorials-setting-visual-studio-code/
       {
-         "name": "Node Server",
+         "name": "Server (precompiled)",
          "type": "node",
          "request": "launch",
          "program": "${workspaceRoot}/lib/app.js",
          "protocol": "inspector",
          "sourceMaps": true,
-         "outFiles": [
-            "${workspaceRoot}/lib"
-         ],
+         "outFiles": ["${workspaceRoot}/lib"],
          "cwd": "${workspaceRoot}"
       },
       {
-         "name": "Mocha Test",
+         "name": "Server (ts-node)",
          "type": "node",
          "request": "launch",
-         "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-         "cwd": "${workspaceRoot}",
-         "runtimeExecutable": null,
-         "stopOnEntry": false,
-         "protocol": "inspector",
+         "args": ["${workspaceRoot}/src/app.ts"],
+         "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
          "sourceMaps": true,
-         "outFiles": [
-            "${workspaceRoot}/lib"
-         ],
-         //"args": ["test/**/*.js", "--no-timeouts"]
-         //"args": ["test/factory/*", "--no-timeouts"]
-         //"args": ["test/map/geojson*", "--no-timeouts"]
-         //"args": ["test/factory/photo*", "--no-timeouts"]
-         "args": [
-            "test/providers/google*",
-            "--no-timeouts"
-         ]
+         "cwd": "${workspaceRoot}",
+         "protocol": "inspector"
       },
       {
-         "name": "Attach to Node",
+         "name": "Jest",
          "type": "node",
-         "request": "attach",
-         "port": 9229
-      },
-      // https://github.com/Microsoft/vscode/issues/13405
-      // https://github.com/gulp-sourcemaps/gulp-sourcemaps
-      {
-         "name": "Chrome Debug",
-         "type": "chrome",
          "request": "launch",
-         "url": "http://localhost:3000/map/",
-         "userDataDir": "${workspaceRoot}/.vscode/chrome",
-         "webRoot": "${workspaceRoot}/dist",
-         "showAsyncStacks": true,
-         "skipFiles": [
-            "jquery.js"
+         "port": 9229,
+         "address": "localhost",
+         //"program": "${workspaceRoot}/node_modules/.bin/jest",
+         "runtimeArgs": [
+            "--inspect-brk",
+            "./node_modules/jest/bin/jest.js",
+            "--runInBand",
+            "post.test.ts"
          ],
-         "sourceMaps": true
-         // "sourceMapPathOverrides": {
-         //    "/source/*": "${workspaceRoot}/*"
-         // }
+         //"args": ["post"],
+         "cwd": "${workspaceRoot}"
       },
       {
          "name": "Gulp",
@@ -69,9 +47,7 @@
          "protocol": "inspector",
          "runtimeExecutable": null,
          "stopOnEntry": true,
-         "args": [
-            "js"
-         ]
+         "args": ["js"]
       }
    ]
 }

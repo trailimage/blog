@@ -4,34 +4,94 @@
    "version": "2.0.0",
    "tasks": [
       {
-         "label": "Run Server",
-         "command": "./node_modules/.bin/nodemon ./lib/app.js",
+         "label": "View Heroku test logs",
+         "command": "heroku",
+         "args": ["logs", "-a", "trail-image-test"],
          "type": "shell",
-         "isBackground": true,
-         "problemMatcher": [
-            "$tsc-watch"
-         ]
+         "problemMatcher": []
+      },
+      {
+         "label": "View Heroku live logs",
+         "command": "heroku",
+         "args": ["logs", "-a", "trail-image"],
+         "type": "shell",
+         "problemMatcher": []
       },
       {
          "label": "Test",
-         "command": "npm run test-pretty",
+         "command": "./node_modules/.bin/jest",
          "type": "shell",
          "group": "test",
          "problemMatcher": []
       },
       {
          "label": "Build and Watch Client",
-         "command": "npm run watch",
+         "command": "node_modules/.bin/gulp",
+         "args": ["watch"],
+         "group": "build",
          "type": "shell",
-         "isBackground": true,
-         "problemMatcher": []
+         "problemMatcher": ["$gulp-tsc"]
+      },
+      {
+         "label": "Build Client JavaScript",
+         "command": "node_modules/.bin/gulp",
+         "args": ["js"],
+         "group": "build",
+         "type": "shell",
+         "problemMatcher": ["$gulp-tsc"]
+      },
+      {
+         "label": "Build Server",
+         "group": "build",
+         "command": "./node_modules/.bin/tsc",
+         "args": ["-p", "tsconfig.node.json"],
+         "type": "shell",
+         "problemMatcher": "$tsc"
       },
       {
          "label": "Build and Watch Server",
          "group": "build",
-         "command": "./node_modules/.bin/tsc -p tsconfig.node.json",
+         "command": "./node_modules/.bin/tsc",
+         "args": ["-p", "tsconfig.node.json", "-w"],
          "type": "shell",
          "problemMatcher": "$tsc"
+      },
+      {
+         "label": "Run",
+         "command": "node",
+         "args": ["./lib/app.js"],
+         "type": "shell",
+         "dependsOn": ["Build Server"],
+         "problemMatcher": []
+      },
+      {
+         "label": "Run with nodemon",
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         },
+         "command": "./node_modules/.bin/nodemon",
+         "args": [
+            "--exec",
+            "./node_modules/.bin/ts-node",
+            "--",
+            "./src/app.ts"
+         ],
+         "type": "shell",
+         "problemMatcher": "$tsc"
+      },
+      {
+         "label": "List Production Dependencies",
+         "command": "npm",
+         "args": ["ls", "-prod=true"],
+         "type": "shell",
+         "presentation": {
+            "echo": false,
+            "reveal": "always",
+            "focus": true,
+            "panel": "shared"
+         },
+         "problemMatcher": []
       }
    ]
 }
