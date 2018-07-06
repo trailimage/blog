@@ -8,6 +8,7 @@ import {
    addCharSet,
    inferMimeType
 } from '@toba/tools';
+import { log } from '@toba/logger';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as compress from 'zlib';
@@ -139,24 +140,24 @@ async function source(req: Request, res: Response) {
 /**
  * Initiate GPX download for a post.
  */
-async function gpx(req: Request, res: Response) {
+function gpx(req: Request, res: Response) {
    const post = config.providers.map.allowDownload
       ? blog.postWithKey(req.params[RouteParam.PostKey])
       : null;
 
    if (is.value(post)) {
       const fileName = post.title + '.gpx';
-      try {
-         res.setHeader(
-            Header.Content.Disposition,
-            `attachment; filename=${fileName}`
-         );
-         res.setHeader(Header.Content.Type, inferMimeType(fileName));
-         post.gpx(res);
-      } catch (err) {
+      res.setHeader(
+         Header.Content.Disposition,
+         `attachment; filename=${fileName}`
+      );
+      res.setHeader(Header.Content.Type, inferMimeType(fileName));
+      post.gpx(res).catch(err => {
          log.error(err);
+         res.removeHeader(Header.Content.Type);
+         res.removeHeader(Header.Content.Disposition);
          view.notFound(req, res);
-      }
+      });
    } else {
       view.notFound(req, res);
    }
