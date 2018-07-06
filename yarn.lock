@@ -3,14 +3,14 @@
 
 
 "@babel/code-frame@^7.0.0-beta.35":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.51.tgz#bd71d9b192af978df915829d39d4094456439a0c"
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.52.tgz#192483bfa0d1e467c101571c21029ccb74af2801"
   dependencies:
-    "@babel/highlight" "7.0.0-beta.51"
+    "@babel/highlight" "7.0.0-beta.52"
 
-"@babel/highlight@7.0.0-beta.51":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.51.tgz#e8844ae25a1595ccfd42b89623b4376ca06d225d"
+"@babel/highlight@7.0.0-beta.52":
+  version "7.0.0-beta.52"
+  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.52.tgz#ef24931432f06155e7bc39cdb8a6b37b4a28b3d0"
   dependencies:
     chalk "^2.0.0"
     esutils "^2.0.2"
@@ -96,8 +96,8 @@
     node-fetch "^2.1.0"
 
 "@toba/google-drive@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@toba/google-drive/-/google-drive-1.6.0.tgz#241c4f0759223d2e66bc3d3c7d5b39a4fb466f92"
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@toba/google-drive/-/google-drive-1.6.1.tgz#a461e6f95d59c84f8bf7416bc55149ebe6704293"
   dependencies:
     "@toba/logger" "^1.1.0"
     "@toba/oauth" "^1.2.0"
@@ -233,8 +233,8 @@
     "@types/serve-static" "*"
 
 "@types/facebook-js-sdk@^2.8.2":
-  version "2.8.5"
-  resolved "https://registry.yarnpkg.com/@types/facebook-js-sdk/-/facebook-js-sdk-2.8.5.tgz#10acf169b4f034e369ff9d45c561d8727c8a4287"
+  version "2.8.6"
+  resolved "https://registry.yarnpkg.com/@types/facebook-js-sdk/-/facebook-js-sdk-2.8.6.tgz#10cc20253eafdbaea5785877453aecb2ae32f43a"
 
 "@types/form-data@*":
   version "2.2.1"
@@ -255,8 +255,8 @@
   resolved "https://registry.yarnpkg.com/@types/google.analytics/-/google.analytics-0.0.37.tgz#43f14241ab2d70b528467136f14fbab778cddd25"
 
 "@types/googlemaps@^3.30.0":
-  version "3.30.10"
-  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.10.tgz#6139b103860493bc345340806fe2d797ab78c78c"
+  version "3.30.11"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.11.tgz#9a1e0d63120136047be2a7fdbfbd2e7061a50ee6"
 
 "@types/jest@^23.1.0":
   version "23.1.4"
@@ -283,8 +283,8 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^10.3.0":
-  version "10.5.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.1.tgz#d578446f4abff5c0b49ade9b4e5274f6badaadfc"
+  version "10.5.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
 
 "@types/oauth@^0.9.0":
   version "0.9.0"
@@ -1054,12 +1054,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000862"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000862.tgz#6c1e296f8bbe5e5ea46f04215e8b90ed8fb9da8d"
+  version "1.0.30000864"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000864.tgz#35a4b2325a8d4553a46b516dbc233bf391d75555"
 
 caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000859:
-  version "1.0.30000862"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000862.tgz#7ca14f5079fa8f77ac814fca92d45deb4b7eff9d"
+  version "1.0.30000864"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000864.tgz#7a08c78da670f23c06f11aa918831b8f2dd60ddc"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -2254,8 +2254,8 @@ flush-write-stream@^1.0.2:
     readable-stream "^2.0.4"
 
 follow-redirects@^1.3.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.0.tgz#234f49cf770b7f35b40e790f636ceba0c3a0ab77"
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.1.tgz#67a8f14f5a1f67f962c2c46469c79eaec0a90291"
   dependencies:
     debug "^3.1.0"
 
@@ -4029,8 +4029,8 @@ left-pad@^1.2.0:
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
 
 "less@2.6.x || ^3.0.0":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/less/-/less-3.0.4.tgz#d27dcedbac96031c9e7b76f1da1e4b7d83760814"
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/less/-/less-3.5.2.tgz#bf33feaaf75e0f6448c5672ce024d33e18d54e85"
   optionalDependencies:
     errno "^0.1.1"
     graceful-fs "^4.1.2"
