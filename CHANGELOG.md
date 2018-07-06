@@ -1,3 +1,11 @@
+## 4.0.2
+
+-  Fix unhandled error for missing GPX
+
+## 4.0.1
+
+-  Fix GPX download
+
 ## 4.0.0
 
 -  Rewrite as separate modules
