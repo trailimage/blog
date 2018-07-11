@@ -1,18 +1,24 @@
-import { HttpStatus } from '@toba/tools';
+import { HttpStatus, Header } from '@toba/tools';
 import { Request, Response, NextFunction } from 'express';
+
+const protocol = 'https';
 
 /**
  * Middleware to require an SSL connection.
  */
 export function requireSSL(req: Request, res: Response, next: NextFunction) {
-   if (req.secure) {
+   if (
+      req.secure ||
+      req.header(Header.ForwardedProtocol).toLowerCase() == protocol
+   ) {
+      // already secure
       next();
    } else if (req.method == 'GET' || req.method == 'HEAD') {
       res.redirect(
          HttpStatus.TempRedirect,
-         'https://' + req.header('Host') + req.originalUrl
+         protocol + '://' + req.header(Header.Host) + req.originalUrl
       );
    } else {
-      res.status(HttpStatus.Forbidden).send('Data must be submitted securely');
+      res.status(HttpStatus.Forbidden).send('Data must be transmitted securely');
    }
 }
