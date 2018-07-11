@@ -23,6 +23,8 @@ export const posts = {
 export const config = {
    env,
    domain,
+   /** Whether to redirect `HTTP` requests to `HTTPS`. */
+   requireSSL: env('REQUIRE_SSL', '') == 'true',
 
    /** Whether any provider needs authorization tokens */
    //    get needsAuth(): boolean {

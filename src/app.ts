@@ -8,7 +8,7 @@ import { postProvider } from '@trailimage/flickr-provider';
 import { mapProvider } from '@trailimage/google-provider';
 import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from './config';
-import { Layout, addTemplateMethods } from './views/';
+import { Layout, addTemplateMethods, requireSSL } from './views/';
 import { route } from './routes';
 
 const root = path.join(__dirname, '..');
@@ -47,6 +47,9 @@ async function createWebService() {
       app.listen(port);
       log.info(`Listening for authentication on port ${port}`);
    } else {
+      if (config.requireSSL) {
+         app.use(requireSSL);
+      }
       app.use(blockSpamReferers);
       // https://github.com/expressjs/compression/blob/master/README.md
       app.use(compress());
