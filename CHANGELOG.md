@@ -1,3 +1,7 @@
+## 4.1.0
+
+-  Add option to require an SSL connection
+
 ## 4.0.2
 
 -  Fix unhandled error for missing GPX
