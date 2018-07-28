@@ -9,7 +9,7 @@
  */
 $(function() {
    /** Must be fully qualified path for use with Mapbox */
-   const pin = 'http://www.trailimage.com/p.png';
+   const pin = 'https://www.trailimage.com/p.png';
 
    $('.static-map').each((_i, el) => {
       const $img = $(el);

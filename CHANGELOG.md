@@ -1,3 +1,7 @@
+## 4.1.1
+
+= Fix Mapbox pin image reference to use HTTPS
+
 ## 4.1.0
 
 -  Add option to require an SSL connection
