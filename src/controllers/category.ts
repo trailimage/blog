@@ -6,7 +6,7 @@ import { RouteParam } from '../routes';
 import { Layout, Page } from '../views/template';
 import { view, ViewContext } from '../views/view';
 
-function send(req: Request, res: Response, path: string, homePage = false) {
+function send(req: Request, res: Response, path: string, _homePage = false) {
    view.send(res, path, async render => {
       // use renderer to build view that wasn't cached
       const category = blog.categoryWithKey(path);
