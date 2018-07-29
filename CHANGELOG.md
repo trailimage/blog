@@ -1,3 +1,7 @@
+## 4.1.2
+
+-  Fix navigation ordering (was reversed)
+
 ## 4.1.1
 
 = Fix Mapbox pin image reference to use HTTPS
