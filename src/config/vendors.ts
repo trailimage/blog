@@ -10,7 +10,7 @@ export const bing = {
  * https://developers.facebook.com/apps/110860435668134/summary
  */
 export const facebook = {
-   appID: '110860435668134',
+   appID: '599065673763481',
    pageID: '241863632579825',
    siteID: '578261855525416',
    adminID: '1332883594',
