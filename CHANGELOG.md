@@ -1,3 +1,7 @@
+## 4.1.3
+
+- Use secure YouTube link
+
 ## 4.1.2
 
 -  Fix navigation ordering (was reversed)
