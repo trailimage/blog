@@ -26,6 +26,9 @@ export function configureModels() {
    modelConfig.maxPhotoMarkersOnMap = config.providers.map.maxMarkers;
    modelConfig.providers.post = postProvider;
    modelConfig.providers.map = mapProvider;
+   modelConfig.artistsToNormalize = new RegExp(
+      config.posts.artistNames.join('|')
+   );
 }
 
 async function createWebService() {
