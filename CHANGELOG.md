@@ -1,6 +1,13 @@
+## 4.1.4
+
+-  Update copyright date
+-  Fix lens name normalization
+-  Fix post category icon
+-  Increase post cache capacity
+
 ## 4.1.3
 
-- Use secure YouTube link
+-  Use secure YouTube link
 
 ## 4.1.2
 
@@ -8,7 +15,7 @@
 
 ## 4.1.1
 
-= Fix Mapbox pin image reference to use HTTPS
+-  Fix Mapbox pin image reference to use HTTPS
 
 ## 4.1.0
 

@@ -56,11 +56,11 @@
       "gulp-typescript": "^4.0.0",
       "gulp-uglify": "^3.0.0",
       "merge2": "^1.2.0",
-      "nodemon": "^1.8.0",
+      "nodemon": "^1.18.0",
       "through2": "^2.0.3",
       "ts-node": "^7.0.0",
       "tslint": "^5.10.0",
-      "typescript": "^2.9.0",
+      "typescript": "^3.0.0",
       "vinyl": "^2.2.0"
    },
    "repository": {

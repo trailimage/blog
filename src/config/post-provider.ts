@@ -39,6 +39,8 @@ export const postProvider: ProviderConfig = {
       ],
       maxRetries: 10,
       retryDelay: 300,
+      useCache: true,
+      maxCacheSize: 500,
       auth: {
          apiKey: env('FLICKR_API_KEY'),
          secret: env('FLICKR_SECRET'),
