@@ -192,18 +192,16 @@ function categoryIcon(title: string): string {
  * HTML tag for mode of travel category icon.
  */
 function travelModeIcon(
-   categories: string[] | { [key: string]: Category }
+   categories: Map<string, string> | Map<string, Category>
 ): string {
    const icons = config.style.icon;
    const map = icons.mode;
+   const categoryNames = Array.from(categories.keys());
 
-   if (!is.array(categories)) {
-      categories = Object.keys(categories);
-   }
    if (is.value(map)) {
       const iconName = Object.keys(map).find(iconName => {
          const re = map[iconName];
-         return (categories as string[]).find(c => re.test(c)) !== undefined;
+         return categoryNames.find(c => re.test(c)) !== undefined;
       });
 
       if (is.value(iconName)) {

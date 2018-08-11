@@ -87,8 +87,8 @@
     "@toba/tools" "^3.1.0"
 
 "@toba/flickr@^1.5.6":
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.5.6.tgz#c26d63ff0023c2872dbc09964a6f2357917f33c2"
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@toba/flickr/-/flickr-1.5.8.tgz#22b4369e22e28ff8cf9c381c03a9a2fbdf867440"
   dependencies:
     "@toba/logger" "^1.1.0"
     "@toba/oauth" "^1.2.0"
@@ -151,8 +151,8 @@
     ts-jest "^23.1.0"
 
 "@toba/tools@^3.1.0", "@toba/tools@^3.11.0", "@toba/tools@^3.12.0", "@toba/tools@^3.14.0", "@toba/tools@^3.2.0", "@toba/tools@^3.3.0", "@toba/tools@^3.8.0":
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.14.0.tgz#e6931af12ccc4f1034c09d23b0d9f74af3604093"
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/@toba/tools/-/tools-3.15.1.tgz#ecebc50ee958dae7cdd2a01cc68b70bc3bb6b7fa"
 
 "@trailimage/flickr-provider@^2.3.3":
   version "2.3.5"
@@ -6463,8 +6463,8 @@ ts-jest@^23.1.0:
     lodash "^4.17.10"
 
 ts-node@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-7.0.0.tgz#a94a13c75e5e1aa6b82814b84c68deb339ba7bff"
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-7.0.1.tgz#9562dc2d1e6d248d24bc55f773e3f614337d9baf"
   dependencies:
     arrify "^1.0.0"
     buffer-from "^1.1.0"
