@@ -1,3 +1,8 @@
+## 4.1.4
+
+- Update copyright date
+- Fix lens name normalization
+
 ## 4.1.3
 
 - Use secure YouTube link
