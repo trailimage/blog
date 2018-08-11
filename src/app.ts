@@ -56,10 +56,15 @@ async function createWebService() {
       app.use(Express.static(path.join(root, 'public')));
 
       await blog.load();
-      // blog must be loaded before routes are defined
-      route.standard(app);
-      app.listen(port);
-      log.info(`Listening on port ${port}`);
+
+      if (blog.loaded) {
+         // blog must be loaded before routes are defined
+         route.standard(app);
+         app.listen(port);
+         log.info(`Listening on port ${port}`);
+      } else {
+         log.error('Blog data failed to load. Stopping application.');
+      }
    }
 }
 
