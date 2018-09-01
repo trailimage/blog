@@ -17,10 +17,10 @@
    <link href='/img/favicon.ico' rel='shortcut icon'/>
    <link href='/img/favicon.ico' rel='icon' type='image/vnd.microsoft.icon'/>
    {{> ga}}
-   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link href='/css/mapbox.css' rel='stylesheet' type='text/css'/>
-   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
    <script src='//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
    <script type='text/javascript'>
       {{! values used within mapbox.js }}
@@ -54,10 +54,10 @@
    {{/if}}
 	   <button class='back link' data-link="/{{post.key}}">{{{icon 'assignment_return'}}}<p>View Blog Post</p></button>
 {{/if}}
-      <button class='google-earth map-link' data-link='{{{config.map.link.googleEarth}}}'>
+      <button class='google-earth map-link' data-link='{{{config.providers.map.link.googleEarth}}}'>
          {{{icon '3d_rotation'}}}<p>View in Google Earth</p>
       </button>
-      <button class='gaia-gps map-link' data-link='{{{config.map.link.gaiaGPS}}}'>
+      <button class='gaia-gps map-link' data-link='{{{config.providers.map.link.gaiaGPS}}}'>
          {{{icon 'system_update'}}}<p><b>View in Gaia GPS</b>Draw routes and download to the mobile app</p>
       </button>
    </nav>
