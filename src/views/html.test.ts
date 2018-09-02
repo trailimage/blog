@@ -150,7 +150,6 @@ test('matches post categories to material icons', () => {
    expect(html.icon.category('Nothing')).toBe(empty);
 });
 
-
 test('identifies quote at end of text', () => {
    const source = lipsum + ds + '“' + lipsum + '”';
    const target =
@@ -190,6 +189,16 @@ test('identifies quote within text', () => {
 
    expect(html.caption(source)).toBe(target);
 });
+
+test('identifies block quote when it is the entire caption', () => {
+   const source = '“' + lipsum + '”¹';
+   const target = '<blockquote><p>' + lipsum + '<sup>¹</sup></p></blockquote>';
+   expect(html.caption(source)).toBe(target);
+});
+
+// “The historic, 101-mile, single-lane, mostly-unimproved Magruder Corridor Road winds through a vast undeveloped area, offering solitude and pristine beauty as well as expansive mountain views. The corridor was created in 1980 leaving a unique road that enables a traveler to drive between two wildernesses: the 1.2 million-acre Selway-Bitterroot Wilderness to the north, and the 2.3-million-acre Frank Church-River of No Return Wilderness to the South. The road itself has changed little since its construction by the Civilian Conservation Corps (CCC) in the 1930s.”¹
+// ___
+// ¹ U.S. Forest Service, “Magruder Road Corridor”: https://www.fs.usda.gov/recarea/nezperceclearwater/recarea/?recid=16482
 
 test('does not blockquote interrupted quotes', () => {
    // do no blockquote when quote is interrupted
