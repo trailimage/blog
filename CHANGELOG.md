@@ -1,3 +1,7 @@
+## 4.1.6
+
+- Fix block quote when it's the entire caption (issue #131)
+
 ## 4.1.5
 
 -  Fix external map links

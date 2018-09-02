@@ -69,8 +69,8 @@ export default {
          return /(&ldquo;|&rdquo;)/g;
       },
 
-      /** Long quote followed by line break */
-      block: /(\r\n|\r|\n)(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*(\r\n|\r|\n)?/g
+      /** Long quote followed by line break or end of text */
+      block: /(\r\n|\r|\n|^)(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*(\r\n|\r|\n|$)/g
       //get block() { return /[\r\n]*(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*[\r\n]/g; }
    },
 
