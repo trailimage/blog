@@ -319,7 +319,10 @@ function caption(text: string): string {
       text = text
          .replace(re.newLine, '</p><p>')
          .replace(re.tag.emptyParagraph, '')
-         .replace(re.quip, (_match, _tag, body) => '<p class="quip">' + body)
+         .replace(
+            re.quip,
+            (_match, _tag: string, body: string) => '<p class="quip">' + body
+         )
          .replace(re.footnote.number, '$1<sup>$2</sup>')
          // restore blockquotes
          .replace(/\[\/Q][\r\n\s]*([^<]+)/g, '[/Q]<p class="first">$1')

@@ -4,7 +4,7 @@ import { route, RouteParam } from './routes';
 import { MockExpressApp } from '@toba/test';
 import { loadMockData } from './.test-data';
 
-const app = new MockExpressApp();
+const app: any = new MockExpressApp();
 
 beforeAll(async done => {
    await loadMockData();

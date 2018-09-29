@@ -70,7 +70,7 @@ export default {
       },
 
       /** Long quote followed by line break or end of text */
-      block: /(\r\n|\r|\n|^)(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*(\r\n|\r|\n|$)/g
+      block: /(\r\n|\r|\n|^)(“[^”]{200,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*(\r\n|\r|\n|$)/g
       //get block() { return /[\r\n]*(“[^”]{275,}”[⁰¹²³⁴⁵⁶⁷⁸⁹]*)\s*[\r\n]/g; }
    },
 
@@ -144,7 +144,7 @@ export default {
        * leading space and poem body.
        */
       get any() {
-         return /(^|[\r\n]{1,2})((([^\r\n](?![,!?]”)){4,80}([\r\n]+|$)){3,})/gi;
+         return /(^|[\r\n]{1,2})((([^\r\n](?![\.,!?]”)){4,80}([\r\n]+|$)){3,})/gi;
       },
 
       //get any() { return /(^|[\r\n]{1,2})((([^\r\n](?![,?]”[⁰¹²³⁴⁵⁶⁷⁸⁹])){4,80}[\r\n]{1,2}){3,})/gi; },

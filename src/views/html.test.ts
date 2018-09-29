@@ -190,6 +190,22 @@ test('identifies quote within text', () => {
    expect(html.caption(source)).toBe(target);
 });
 
+test('formats blockquote with trailing ellipsis', () => {
+   const phrase =
+      'Firefighters are working to get a handle on several wildfires that sparked during a lightning storm on Thursday night. Strong winds and poor visibility created challenges for firefighters working the blazes on Saturday ...';
+   const source = lipsum + ds + '“' + phrase + '”¹' + ds + lipsum;
+   const target =
+      '<p>' +
+      lipsum +
+      '</p><blockquote><p>' +
+      phrase +
+      '<sup>¹</sup></p></blockquote><p class="first">' +
+      lipsum +
+      '</p>';
+
+   expect(html.caption(source)).toBe(target);
+});
+
 test('identifies block quote when it is the entire caption', () => {
    const source = '“' + lipsum + '”¹';
    const target = '<blockquote><p>' + lipsum + '<sup>¹</sup></p></blockquote>';
@@ -299,6 +315,28 @@ test('identifies haiku', () => {
    target =
       '<p class="haiku">cows stand chewing<br/>wet meadow grass<br/>while mud swallows wheels<i class="material-icons spa">spa</i></p>' +
       '<p>Here we have Joel &ldquo;Runs with Cows&rdquo; Abbott. He did a little loop out among them—kind of became one of them.</p>';
+
+   expect(html.story(source)).toBe(target);
+});
+
+test('does not convert conversation to a poem', () => {
+   const source =
+      '“What’s wrong Brenna?” I ask.' +
+      ds +
+      '“I can’t sleep.”' +
+      ds +
+      '“Just lay down.”' +
+      ds +
+      '“I can’t.”' +
+      ds +
+      '“Brenna,” I insist, “lay down.”';
+
+   const target =
+      '<p class="quip">“What’s wrong Brenna?” I ask.</p>' +
+      '<p>“I can’t sleep.”</p>' +
+      '<p>“Just lay down.”</p>' +
+      '<p>“I can’t.”</p>' +
+      '<p>“Brenna,” I insist, “lay down.”</p>';
 
    expect(html.story(source)).toBe(target);
 });

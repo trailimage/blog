@@ -1,7 +1,14 @@
 import '@toba/test';
 import { Header, MimeType } from '@toba/tools';
 import { MockRequest, MockResponse } from '@toba/test';
-import { cache, view, createViewItem, writeItemToResponse, IPv6 } from './view';
+import {
+   cache,
+   view,
+   createViewItem,
+   writeItemToResponse,
+   IPv6,
+   Renderer
+} from './view';
 import { config } from '../config/';
 
 const req = new MockRequest();
@@ -33,7 +40,7 @@ test('compresses new pages and adds to cache', done => {
    };
    res.endOnRender = false;
 
-   view.send(res, viewSlug, render => {
+   view.send(res, viewSlug, (render: Renderer) => {
       // mock response echoes back parameters instead of rendering view
       render('test-template', {
          option1: 'value1',
@@ -50,7 +57,7 @@ test('truncates IPv6 to v4', () => {
 
 test('sends already rendered pages from cache', done => {
    res.onEnd = done;
-   view.send(res, viewSlug, _render => {
+   view.send(res, viewSlug, (_render: Renderer) => {
       throw new Error('Attempt to render page that should be cached');
    });
 });

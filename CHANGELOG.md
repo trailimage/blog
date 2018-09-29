@@ -1,6 +1,10 @@
+## 4.1.7
+
+-  Shorten threshold for block quoting and make condition stricter for poem formatting
+
 ## 4.1.6
 
-- Fix block quote when it's the entire caption (issue #131)
+-  Fix block quote when it's the entire caption (issue #131)
 
 ## 4.1.5
 
