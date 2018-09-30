@@ -1,15 +1,15 @@
-@import "reset";
-@import "elements";
-@import "settings";
-@import "post-menu";
-@import "mobile-menu";
-@import "side-menu";
-@import "facebook";
-@import "google-search";
-@import "about-page";
-@import "post-page";
-@import "category-page";
-@import "photo-tag-page";
+@import 'reset';
+@import 'elements';
+@import 'settings';
+@import 'post-menu';
+@import 'mobile-menu';
+@import 'side-menu';
+@import 'facebook';
+@import 'google-search';
+@import 'about-page';
+@import 'post-page';
+@import 'category-page';
+@import 'photo-tag-page';
 
 html {
    overflow-y: scroll;
@@ -25,7 +25,10 @@ body {
    line-height: 1.3em;
    background: #222 url(/img/topo-map-tile.jpg) repeat;
 
-   @media @mobile { color: @mobileTextColor; padding-top: @mobileHeaderHeight; }
+   @media @mobile {
+      color: @mobileTextColor;
+      padding-top: @mobileHeaderHeight;
+   }
 }
 
 .content {
@@ -38,10 +41,15 @@ body {
    background-color: rgba(255, 255, 255, 0.9);
    width: @contentWidth;
 
-   @media @mobile { background: none; width: 100%; }
+   @media @mobile {
+      background: none;
+      width: 100%;
+   }
 }
 
-.clear { clear: both; }
+.clear {
+   clear: both;
+}
 
 #bug {
    position: absolute;
@@ -49,9 +57,12 @@ body {
    left: 5px;
    text-decoration: none;
 
-   @media @mobile { display: none; }
+   @media @mobile {
+      display: none;
+   }
 
-   h1, h2 {
+   h1,
+   h2 {
       margin: 0 0 0 10px;
       padding: 0;
       color: rgba(255, 255, 255, 0.1);
@@ -62,7 +73,9 @@ body {
       line-height: 1em;
    }
 
-   h1 { font-size: 40px; }
+   h1 {
+      font-size: 40px;
+   }
    h2 {
       font-size: 14px;
       letter-spacing: 3.4px;
@@ -81,10 +94,21 @@ body {
    }
 
    &:hover {
-      h1, h2, h3 { text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7); .transition(); }
-      h1 { color: rgba(255, 255, 255, 0.2); }
-      h2 { color: rgba(255, 255, 255, 0.4); }
-      p { color: rgba(255, 100, 100, 0.6); }
+      h1,
+      h2,
+      h3 {
+         text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7);
+         .transition();
+      }
+      h1 {
+         color: rgba(255, 255, 255, 0.2);
+      }
+      h2 {
+         color: rgba(255, 255, 255, 0.4);
+      }
+      p {
+         color: rgba(255, 100, 100, 0.6);
+      }
    }
 }
 
@@ -107,12 +131,15 @@ header.page {
          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
          vertical-align: top;
       }
-      a { color: #4e584c; }
+      a {
+         color: #4e584c;
+      }
    }
 
    @media @desktop {
       #top-bar {
-         background: @lightColor url(/img/logo.png) no-repeat (@contentWidth - 90) -15px;
+         background: @lightColor url(/img/logo.png) no-repeat
+            (@contentWidth - 90) -15px;
          border-bottom: 1px solid @lightTrimColor;
       }
    }
@@ -220,29 +247,41 @@ footer.page {
       margin: 2px;
       clear: right;
 
-      a { color: @lightColor; }
+      a {
+         color: @lightColor;
+      }
 
-      &.rights { font-size: 14px; }
+      &.rights {
+         font-size: 14px;
+      }
    }
 
    a.repo {
       display: block;
       margin-bottom: 10px;
       text-decoration: none;
-      span.icon { height: 25px; width: 25px; }
+      span.icon {
+         height: 25px;
+         width: 25px;
+      }
    }
 
    @media @desktop {
       a.repo {
          float: right;
          margin-top: 15px;
-         img { margin: 0 0 2px 3px; }
+         img {
+            margin: 0 0 2px 3px;
+         }
          .opacity(0.3);
-         &:hover { .opacity(1); }
+         &:hover {
+            .opacity(1);
+         }
       }
    }
 
    @media @mobile {
+      margin-top: 18px;
       width: 100%;
       background: #444;
 
@@ -251,19 +290,25 @@ footer.page {
          font-size: 10px;
          margin: 0;
          line-height: 1.1em;
-         &.rights { font-size: 10px; }
+         &.rights {
+            font-size: 10px;
+         }
       }
 
       a.repo {
          margin: 10px 0 0;
-         img { margin: 0 0 2px 1px; }
+         img {
+            margin: 0 0 2px 1px;
+         }
       }
    }
 
    @media @tablet {
       p {
          font-size: 14px;
-         &.rights { font-size: 14px; }
+         &.rights {
+            font-size: 14px;
+         }
       }
    }
 }
