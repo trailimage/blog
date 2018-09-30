@@ -8,8 +8,8 @@ import {
    addCharSet
 } from '@toba/tools';
 import { RouteParam } from '../routes';
-import { Page } from '../views/';
-import { map } from './';
+import { Page } from '../views';
+import { map } from '.';
 import { loadMockData } from '../.test-data';
 
 const req = new MockRequest();

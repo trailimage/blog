@@ -13,7 +13,7 @@ const res = new MockResponse(req);
 
 beforeAll(async done => {
    await loadMockData();
-   console.debug = jest.fn();
+   console.debug = console.log = jest.fn();
    done();
 });
 

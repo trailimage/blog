@@ -130,14 +130,6 @@ header.page.post-header {
             padding-top: 8px;
             color: @mobileTextColor;
             text-shadow: none;
-            // styles that effectively hide the named subtitle
-            font-size: 5px;
-            color: #666;
-
-            .parts {
-               padding-bottom: 2px;
-               color: #fff;
-            }
          }
       }
       #post-date {
@@ -161,6 +153,22 @@ header.page.post-header {
          font-size: 16px;
          // space for navigation
          padding: 10px 0 @mobileSynopsisMargin + 10;
+      }
+   }
+
+   @media @phone {
+      #top-bar .subtitle {
+         p {
+            display: none;
+         }
+
+         .parts {
+            span {
+               display: none;
+            }
+            padding-bottom: 2px;
+            color: #fff;
+         }
       }
    }
 }

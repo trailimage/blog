@@ -34,8 +34,8 @@
 		{{#if post.isPartial}}
 			<h1>{{post.title}}</h1>
 			<div class='subtitle'>
-				<div class='parts'>Part {{post.part}} of {{post.totalParts}}</div>
-				{{post.subTitle}}
+				<div class='parts'><span>Part </span>{{post.part}} of {{post.totalParts}}</div>
+				<p>{{post.subTitle}}</p>
 			</div>
 		{{else}}
 			<h1>{{post.title}}</h1>
