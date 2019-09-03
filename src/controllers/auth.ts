@@ -1,8 +1,7 @@
+import { config as modelConfig, DataProvider } from '@trailimage/models';
 import { Response, Request } from 'express';
 import { is } from '@toba/tools';
-import { log } from '@toba/logger';
 import { Page, Layout } from '../views/';
-import { config as modelConfig, DataProvider } from '@trailimage/models';
 
 /**
  * Redirect to authorization URL for unauthorized providers.
@@ -13,7 +12,7 @@ export function main(_req: Request, res: Response) {
       modelConfig.providers.map,
       modelConfig.providers.video
    ].forEach(async p => {
-      if (is.value(p) && !p.isAuthenticated) {
+      if (is.value<DataProvider<any>>(p) && !p.isAuthenticated) {
          const url = await p.authorizationURL();
          res.redirect(url);
          return;

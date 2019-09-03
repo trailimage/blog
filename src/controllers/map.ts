@@ -8,7 +8,6 @@ import {
    addCharSet,
    inferMimeType
 } from '@toba/tools';
-import { log } from '@toba/logger';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as compress from 'zlib';
@@ -25,7 +24,7 @@ const mapPath = 'map';
  * Map data are loaded asynchronously when the page is ready.
  */
 async function render(post: Post, req: Request, res: Response): Promise<void> {
-   if (!is.value(post)) {
+   if (!is.value<Post>(post)) {
       return view.notFound(req, res);
    }
 

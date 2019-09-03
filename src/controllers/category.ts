@@ -11,7 +11,7 @@ function send(req: Request, res: Response, path: string, _homePage = false) {
       // use renderer to build view that wasn't cached
       const category = blog.categoryWithKey(path);
 
-      if (!is.value(category)) {
+      if (!is.value<Category>(category)) {
          return view.notFound(req, res);
       }
 
@@ -51,8 +51,17 @@ export function forPath(req: Request, res: Response) {
 export function home(req: Request, res: Response) {
    const category = blog.categories.get(config.posts.defaultCategory);
    let year = new Date().getFullYear();
-   let subcategory = null;
+   let subcategory: Category | undefined = undefined;
    let count = 0;
+
+   if (category === undefined) {
+      return view.internalError(
+         res,
+         new Error(
+            `Unable to find default category ${config.posts.defaultCategory}`
+         )
+      );
+   }
 
    while (count == 0) {
       // step backwards until a year with posts is found
@@ -61,6 +70,14 @@ export function home(req: Request, res: Response) {
          count = subcategory.posts.size;
       }
       year--;
+   }
+   if (subcategory === undefined) {
+      return view.internalError(
+         res,
+         new Error(
+            `Unable to find latest year for ${config.posts.defaultCategory}`
+         )
+      );
    }
    send(req, res, subcategory.key, true);
 }
@@ -79,7 +96,7 @@ export function list(req: Request, res: Response) {
       // use renderer to build view that wasn't cached
       const category = blog.categoryWithKey(key);
 
-      if (!is.value(category)) {
+      if (!is.value<Category>(category)) {
          return view.notFound(req, res);
       }
 
