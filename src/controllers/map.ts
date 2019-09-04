@@ -23,12 +23,16 @@ const mapPath = 'map';
  *
  * Map data are loaded asynchronously when the page is ready.
  */
-async function render(post: Post, req: Request, res: Response): Promise<void> {
+async function render(
+   post: Post | undefined,
+   req: Request,
+   res: Response
+): Promise<void> {
    if (!is.value<Post>(post)) {
       return view.notFound(req, res);
    }
 
-   const key: string = post.isPartial ? post.seriesKey : post.key;
+   const key: string | undefined = post.isPartial ? post.seriesKey : post.key;
    const photoID: string = req.params[RouteParam.PhotoID];
    // ensure photos are loaded to calculate bounds for map zoom
    await post.getPhotos();
@@ -90,7 +94,7 @@ async function trackJSON(req: Request, res: Response) {
    const slug = req.params[RouteParam.PostKey];
    const post = blog.postWithKey(slug);
 
-   if (is.value(post)) {
+   if (is.value<Post>(post)) {
       view.sendJSON(res, `${slug}/${mapPath}`, post.geoJSON.bind(post));
    } else {
       view.notFound(req, res);
@@ -144,15 +148,18 @@ function gpx(req: Request, res: Response) {
       ? blog.postWithKey(req.params[RouteParam.PostKey])
       : null;
 
-   if (is.value(post)) {
+   if (is.value<Post>(post)) {
       const fileName = post.title + '.gpx';
+      const mimeType = inferMimeType(fileName);
       res.setHeader(
          Header.Content.Disposition,
          `attachment; filename=${fileName}`
       );
-      res.setHeader(Header.Content.Type, inferMimeType(fileName));
+      if (mimeType !== null) {
+         res.setHeader(Header.Content.Type, mimeType);
+      }
       post.gpx(res).catch(err => {
-         log.error(err);
+         console.error(err);
          res.removeHeader(Header.Content.Type);
          res.removeHeader(Header.Content.Disposition);
          view.notFound(req, res);
