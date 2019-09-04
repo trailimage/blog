@@ -1,5 +1,5 @@
 import '@toba/test';
-import { Header, MimeType } from '@toba/tools';
+import { Header, MimeType } from '@toba/node-tools';
 import { postFeed } from './rss';
 import { MockRequest, MockResponse } from '@toba/test';
 import { loadMockData } from '../.test-data';

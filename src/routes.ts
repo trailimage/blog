@@ -1,4 +1,4 @@
-import { HttpStatus } from '@toba/tools';
+import { HttpStatus } from '@toba/node-tools';
 import { blog } from '@trailimage/models';
 import * as Express from 'express';
 import { config } from './config';

@@ -7,7 +7,7 @@ import {
    is,
    addCharSet,
    inferMimeType
-} from '@toba/tools';
+} from '@toba/node-tools';
 import { Post, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import * as compress from 'zlib';

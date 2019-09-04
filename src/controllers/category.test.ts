@@ -34,9 +34,9 @@ test('renders home page for default category', done => {
       // Link Data should be serialized to linkData field
       expect(context).not.toHaveProperty('jsonLD');
       expect(context).not.toHaveProperty('subcategories');
-      expect(context['posts']).toHaveLength(5);
-      expect(context.title).toBe('2016');
-      expect(context.subtitle).toBe('Five Adventures');
+      expect(context!['posts']).toHaveLength(5);
+      expect(context!.title).toBe('2016');
+      expect(context!.subtitle).toBe('Five Adventures');
       done();
    };
    category.home(req, res);
@@ -47,8 +47,8 @@ test('renders a list of subcategories', done => {
       expect(res).toRenderTemplate(Page.CategoryList);
       const context = res.rendered.context;
       expect(context).toHaveAllProperties('subcategories', ...contextKeys);
-      expect(context['subcategories']).toHaveLength(7);
-      expect(context.title).toBe('What');
+      expect(context!['subcategories']).toHaveLength(7);
+      expect(context!.title).toBe('What');
       done();
    };
    req.params[RouteParam.RootCategory] = 'what';
@@ -60,8 +60,8 @@ test('displays category at path', done => {
       expect(res).toRenderTemplate(Page.CategoryList);
       const context = res.rendered.context;
       expect(context).toHaveAllProperties('subcategories', ...contextKeys);
-      expect(context.title).toBe('When');
-      expect(context.subtitle).toBe('Thirteen Subcategories');
+      expect(context!.title).toBe('When');
+      expect(context!.subtitle).toBe('Thirteen Subcategories');
       done();
    };
    req.params[RouteParam.RootCategory] = 'when';

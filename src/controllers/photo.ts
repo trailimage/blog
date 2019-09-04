@@ -1,6 +1,5 @@
-import { alphabet, is, sayNumber } from '@toba/tools';
+import { alphabet, is, sayNumber } from '@toba/node-tools';
 import { blog } from '@trailimage/models';
-import { log } from '@toba/logger';
 import { Request, Response } from 'express';
 import { config } from '../config';
 import { RouteParam } from '../routes';
@@ -20,7 +19,7 @@ function exif(req: Request, res: Response) {
          });
       })
       .catch(err => {
-         log.error(err, { photoID });
+         console.error(err, { photoID });
          view.notFound(req, res);
       });
 }
@@ -30,6 +29,10 @@ function exif(req: Request, res: Response) {
  */
 function withTag(req: Request, res: Response) {
    const slug = tagParam(req);
+
+   if (slug === null) {
+      return view.notFound(req, res);
+   }
 
    blog
       .getPhotosWithTags(slug)
@@ -52,7 +55,7 @@ function withTag(req: Request, res: Response) {
       })
       .catch(err => {
          view.notFound(req, res);
-         log.error(err, { photoTag: slug });
+         console.error(err, { photoTag: slug });
       });
 }
 
@@ -60,7 +63,7 @@ function withTag(req: Request, res: Response) {
  * Return normalized tag name matching the requested tag or `null` if no tag
  * requested.
  */
-const tagParam = (req: Request): string =>
+const tagParam = (req: Request): string | null =>
    is.defined(req.params, RouteParam.PhotoTag)
       ? normalizeTag(decodeURIComponent(req.params[RouteParam.PhotoTag]))
       : null;
@@ -82,7 +85,10 @@ function tags(req: Request, res: Response) {
    }
    for (const [key, value] of list.entries()) {
       // key is sometimes a number
-      const c = (key.toString()).substr(0, 1).toLowerCase();
+      const c = key
+         .toString()
+         .substr(0, 1)
+         .toLowerCase();
       if (alphabet.indexOf(c) >= 0) {
          // ignore tags that don't start with a letter of the alphabet
          tags[c][key] = value;
@@ -102,7 +108,7 @@ function tags(req: Request, res: Response) {
  * Convert photo tag to lowercase and substitute changed tag if one has been
  * defined.
  */
-export function normalizeTag(slug: string): string {
+export function normalizeTag(slug: string): string | null {
    if (is.value(slug)) {
       slug = slug.toLowerCase();
    } else {

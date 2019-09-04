@@ -1,5 +1,5 @@
 import '@toba/test';
-import { Header, MimeType } from '@toba/tools';
+import { Header, MimeType } from '@toba/node-tools';
 import { MockRequest, MockResponse } from '@toba/test';
 import {
    cache,
@@ -33,9 +33,9 @@ afterAll(() => {
 test('compresses new pages and adds to cache', done => {
    res.onEnd = () => {
       const item = cache.get(viewSlug);
-      expect(item).toBeDefined();
-      expect(item.eTag.includes(viewSlug)).toBe(true);
-      expect(item.buffer).toBeInstanceOf(Buffer);
+      expect(item).not.toBeNull();
+      expect(item!.eTag.includes(viewSlug)).toBe(true);
+      expect(item!.buffer).toBeInstanceOf(Buffer);
       done();
    };
    res.endOnRender = false;

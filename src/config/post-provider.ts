@@ -1,4 +1,4 @@
-import { env } from '@toba/tools';
+import { env } from '@toba/node-tools';
 import { Token } from '@toba/oauth';
 import { Flickr, ProviderConfig } from '@trailimage/flickr-provider';
 import { domain } from './models';
@@ -47,8 +47,7 @@ export const postProvider: ProviderConfig = {
          callback: 'http://www.' + domain + '/auth/flickr',
          token: {
             access: env('FLICKR_ACCESS_TOKEN', null),
-            secret: env('FLICKR_TOKEN_SECRET', null),
-            request: null as string
+            secret: env('FLICKR_TOKEN_SECRET', null)
          } as Token
       }
    }

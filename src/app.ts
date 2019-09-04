@@ -1,7 +1,6 @@
-import { log } from '@toba/logger';
 import { blockSpamReferers } from '@toba/block-spam-referer';
 import * as compress from 'compression';
-import * as Express from 'express';
+import Express from 'express';
 import { ExpressHandlebars } from '@toba/handlebars';
 import * as path from 'path';
 import { postProvider } from '@trailimage/flickr-provider';
@@ -35,7 +34,7 @@ async function createWebService() {
    const app = Express();
    const port = process.env['PORT'] || 3000;
 
-   log.info(
+   console.info(
       `Starting ${
          config.isProduction ? 'production' : 'development'
       } application`
@@ -48,7 +47,7 @@ async function createWebService() {
       // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
-      log.info(`Listening for authentication on port ${port}`);
+      console.info(`Listening for authentication on port ${port}`);
    } else {
       if (config.requireSSL) {
          app.use(requireSSL);
@@ -64,9 +63,9 @@ async function createWebService() {
          // blog must be loaded before routes are defined
          route.standard(app);
          app.listen(port);
-         log.info(`Listening on port ${port}`);
+         console.info(`Listening on port ${port}`);
       } else {
-         log.error('Blog data failed to load. Stopping application.');
+         console.error('Blog data failed to load. Stopping application.');
       }
    }
 }

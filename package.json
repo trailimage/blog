@@ -22,7 +22,7 @@
       "@toba/develop": "^6.6.12",
       "@toba/feed": "^3.1.1",
       "@toba/handlebars": "^2.1.0",
-      "@toba/node-tools": "^1.4.6",
+      "@toba/node-tools": "^1.4.7",
       "@trailimage/flickr-provider": "^3.0.0",
       "@trailimage/google-provider": "^2.4.0",
       "@trailimage/models": "^3.0.0",

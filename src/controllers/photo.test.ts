@@ -1,6 +1,6 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import { alphabet } from '@toba/tools';
+import { alphabet } from '@toba/node-tools';
 import { RouteParam } from '../routes';
 import { Page } from '../views/';
 import { photo } from './';

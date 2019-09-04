@@ -1,4 +1,4 @@
-import { env } from '@toba/tools';
+import { env } from '@toba/node-tools';
 import { mapSource } from './mapsource';
 
 export const bing = {

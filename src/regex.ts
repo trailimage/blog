@@ -1,4 +1,4 @@
-import { re } from '@toba/tools';
+import { re } from '@toba/node-tools';
 //import { library } from './config';
 
 /**

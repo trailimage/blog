@@ -1,7 +1,7 @@
 import { config as modelConfig, DataProvider } from '@trailimage/models';
 import { Response, Request } from 'express';
-import { is } from '@toba/tools';
-import { Page, Layout } from '../views/';
+import { is } from '@toba/node-tools';
+import { Page, Layout, view } from '../views/';
 
 /**
  * Redirect to authorization URL for unauthorized providers.
@@ -32,7 +32,17 @@ export function mapAuth(req: Request, res: Response) {
  * Handle provider authorization callback. Parameters can be unique per provider
  * so hand-off full request to the provider for parsing.
  */
-async function authCallback(p: DataProvider<any>, req: Request, res: Response) {
+async function authCallback(
+   p: DataProvider<any> | undefined,
+   req: Request,
+   res: Response
+) {
+   if (p === undefined) {
+      return view.internalError(
+         res,
+         new ReferenceError('No data provider supplied for authorization')
+      );
+   }
    const token = await p.getAccessToken(req);
    res.render(Page.Authorize, {
       title: 'Flickr Access',

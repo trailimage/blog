@@ -1,4 +1,4 @@
-import { env } from '@toba/tools';
+import { env } from '@toba/node-tools';
 import { Token } from '@toba/oauth';
 import { ProviderConfig } from '@trailimage/google-provider';
 import { domain } from './models';
@@ -19,9 +19,7 @@ export const mapProvider: ProviderConfig = {
          secret: env('GOOGLE_SECRET'),
          callback: 'http://www.' + domain + '/auth/google',
          token: {
-            type: null,
             access: env('GOOGLE_ACCESS_TOKEN', null),
-            accessExpiration: null as Date,
             refresh: env('GOOGLE_REFRESH_TOKEN')
          } as Token
       }
@@ -30,7 +28,7 @@ export const mapProvider: ProviderConfig = {
    minimumTrackPoints: 5,
    maxPointDeviationFeet: 0.5,
    maxPossibleSpeed: 150,
-   privacyCenter: null as number[],
+   privacyCenter: null,
    privacyMiles: 1,
    checkPrivacy: false,
    allowDownload: true,

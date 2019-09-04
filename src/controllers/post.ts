@@ -1,6 +1,5 @@
-import { HttpStatus, is } from '@toba/tools';
-import { log } from '@toba/logger';
-import { blog } from '@trailimage/models';
+import { HttpStatus, is } from '@toba/node-tools';
+import { blog, Post } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { RouteParam } from '../routes';
 import { Page, Layout, view } from '../views/';
@@ -13,16 +12,15 @@ function send(
 ) {
    view.send(res, key, render => {
       const p = blog.postWithKey(key);
-      if (!is.value(p)) {
-         view.notFound(req, res);
-         return;
+      if (!is.value<Post>(p)) {
+         return view.notFound(req, res);
       }
       p.ensureLoaded()
          .then(() => {
             render(viewName, {
                post: p,
                title: p.title,
-               jsonLD: p.jsonLD(),
+               jsonLD: p.jsonLD(), 
                layout: Layout.None,
                description: p.longDescription,
                slug: key
@@ -56,7 +54,7 @@ function withKey(req: Request, res: Response) {
 function withID(req: Request, res: Response) {
    const post = blog.postWithID(req.params[RouteParam.PostID]);
 
-   if (is.value(post)) {
+   if (is.value<Post>(post)) {
       res.redirect(HttpStatus.PermanentRedirect, '/' + post.key);
    } else {
       view.notFound(req, res);
@@ -72,7 +70,7 @@ function withPhoto(req: Request, res: Response) {
    blog
       .postWithPhoto(photoID)
       .then(post => {
-         if (is.value(post)) {
+         if (is.value<Post>(post)) {
             res.redirect(
                HttpStatus.PermanentRedirect,
                `/${post.key}#${photoID}`
@@ -82,7 +80,7 @@ function withPhoto(req: Request, res: Response) {
          }
       })
       .catch(err => {
-         log.error(err, { photoID });
+         console.error(err, { photoID });
          view.notFound(req, res);
       });
 }
@@ -92,7 +90,7 @@ function withPhoto(req: Request, res: Response) {
  * first.
  */
 function latest(req: Request, res: Response) {
-   send(req, res, blog.posts[0].key);
+   send(req, res, blog.posts[0].key!);
 }
 
 export const post = { latest, withID, withKey, withPhoto, inSeries };

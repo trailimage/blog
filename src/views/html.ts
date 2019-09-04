@@ -1,4 +1,4 @@
-import { is, format, LinkRelation } from "@toba/tools";
+import { is, format, LinkRelation } from "@toba/node-tools";
 import { Category } from "@trailimage/models";
 import re from "../regex";
 import { config } from "../config";
