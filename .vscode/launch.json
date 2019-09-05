@@ -48,6 +48,20 @@
          "runtimeExecutable": null,
          "stopOnEntry": true,
          "args": ["js"]
+      },
+      {
+         "type": "node",
+         "request": "launch",
+         "name": "vscode-jest-tests",
+         "stopOnEntry": false,
+         "cwd": "${workspaceRoot}",
+         "program": "${workspaceRoot}/node_modules/.bin/jest",
+         "args": ["--runInBand"],
+         "console": "integratedTerminal",
+         "internalConsoleOptions": "neverOpen",
+         "env": {
+            "EMAIL_CONTACT": "nobody@nowhere.com"
+         }
       }
    ]
 }

@@ -109,10 +109,10 @@ function tags(req: Request, res: Response) {
  * defined.
  */
 export function normalizeTag(slug: string): string | null {
-   if (is.value(slug)) {
-      slug = slug.toLowerCase();
-   } else {
+   if (is.empty(slug)) {
       return null;
+   } else {
+      slug = slug.toLowerCase();
    }
    return is.defined(config.photoTagChanges, slug)
       ? config.photoTagChanges[slug]

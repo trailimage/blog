@@ -31,7 +31,7 @@ export interface ViewContext {
     * Use `null` to render view only or leave `undefined` to use the default
     * layout.
     */
-   layout?: string;
+   layout?: string | null;
 }
 
 /**

@@ -52,7 +52,8 @@ export function home(req: Request, res: Response) {
    const category = blog.categories.get(config.posts.defaultCategory);
    let year = new Date().getFullYear();
    let subcategory: Category | undefined = undefined;
-   let count = 0;
+   let postCount = 0;
+   let tryCount = 0;
 
    if (category === undefined) {
       return view.internalError(
@@ -63,19 +64,20 @@ export function home(req: Request, res: Response) {
       );
    }
 
-   while (count == 0) {
+   while (postCount == 0 && tryCount < 10) {
       // step backwards until a year with posts is found
       subcategory = category.getSubcategory(year.toString());
       if (is.value<Category>(subcategory)) {
-         count = subcategory.posts.size;
+         postCount = subcategory.posts.size;
       }
+      tryCount++;
       year--;
    }
    if (subcategory === undefined) {
       return view.internalError(
          res,
          new Error(
-            `Unable to find latest year for ${config.posts.defaultCategory}`
+            `Unable to find year with posts in ${config.posts.defaultCategory}`
          )
       );
    }

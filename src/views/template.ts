@@ -6,10 +6,10 @@ import { html } from './html';
 /**
  * Handlebars layouts (`views/layouts/` path without `hbs` extension).
  */
-export const Layout: { [index: string]: string | undefined } = {
+export const Layout: { [index: string]: string | null } = {
    Main: 'default-layout',
    /** Render template without a layout. */
-   None: undefined
+   None: null
 };
 
 /**

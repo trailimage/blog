@@ -12,8 +12,10 @@ import { route } from './routes';
 
 const root = path.join(__dirname, '..');
 
-configureModels();
-createWebService();
+if (process.argv.includes('--serve')) {
+   configureModels();
+   createWebService();
+}
 
 export function configureModels() {
    postProvider.configure(config.providers.post);
@@ -75,7 +77,7 @@ async function createWebService() {
 function defineViews(app: Express.Application) {
    const viewPath = path.join(root, 'views');
    const ehb = new ExpressHandlebars({
-      defaultLayout: Layout.Main
+      defaultLayout: Layout.Main!
    });
 
    // http://expressjs.com/4x/api.html#app-settings

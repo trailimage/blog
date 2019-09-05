@@ -30,6 +30,11 @@
             "showReuseMessage": true,
             "clear": true
          },
+         "options": {
+            "env": {
+               "EMAIL_CONTACT": "nobody@nowhere.com"
+            }
+         },
          "problemMatcher": []
       },
       {
