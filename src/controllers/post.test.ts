@@ -36,7 +36,9 @@ test('forwards to correct URL from Flickr set ID', done => {
       expect(res).toRedirectTo('/ruminations');
       done();
    };
-   req.params[RouteParam.PostID] = config.providers.post.featureSets[0].id;
+   expect(config.providers.post).toBeDefined();
+   expect(config.providers.post!.featureSets).toBeDefined();
+   req.params[RouteParam.PostID] = config.providers.post!.featureSets![0].id;
    post.withID(req, res);
 });
 

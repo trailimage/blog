@@ -1,5 +1,5 @@
 import { blockSpamReferers } from '@toba/block-spam-referer';
-import * as compress from 'compression';
+import compress from 'compression';
 import Express from 'express';
 import { ExpressHandlebars } from '@toba/handlebars';
 import * as path from 'path';

@@ -7,10 +7,13 @@ const protocol = 'https';
  * Middleware to require an SSL connection.
  */
 export function requireSSL(req: Request, res: Response, next: NextFunction) {
-   if (
-      req.secure ||
-      req.header(Header.ForwardedProtocol).toLowerCase() == protocol
-   ) {
+   let forwardedProtocol = req.header(Header.ForwardedProtocol);
+
+   if (forwardedProtocol !== undefined) {
+      forwardedProtocol = forwardedProtocol.toLowerCase();
+   }
+
+   if (req.secure || forwardedProtocol == protocol) {
       // already secure
       next();
    } else if (req.method == 'GET' || req.method == 'HEAD') {
@@ -19,6 +22,8 @@ export function requireSSL(req: Request, res: Response, next: NextFunction) {
          protocol + '://' + req.header(Header.Host) + req.originalUrl
       );
    } else {
-      res.status(HttpStatus.Forbidden).send('Data must be transmitted securely');
+      res.status(HttpStatus.Forbidden).send(
+         'Data must be transmitted securely'
+      );
    }
 }
