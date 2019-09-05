@@ -1,5 +1,4 @@
 import { re } from '@toba/node-tools';
-//import { library } from './config';
 
 /**
  * Use getters to return new instances of global flagged patterns so lastIndex
