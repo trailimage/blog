@@ -32,7 +32,7 @@
       "uglify-js": "^3.4.0"
    },
    "devDependencies": {
-      "@toba/test": "^4.1.12",
+      "@toba/test": "^4.1.13",
       "@types/compression": "1.0.0",
       "@types/core-js": "^2.5.0",
       "@types/express": "^4.16.0",
