@@ -74,7 +74,7 @@ export type Renderer = (
  */
 export function compact(text: string, options?: uglify.MinifyOptions): string {
    const output = uglify.minify(text, options);
-   if (output.error) {
+   if (output.error !== undefined) {
       console.error(output.error);
       return text;
    } else {

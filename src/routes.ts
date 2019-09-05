@@ -16,7 +16,7 @@ import {
 /**
  * Route placeholders that become `req.params` keys.
  */
-export enum RouteParam {
+export const enum RouteParam {
    Category = 'category',
    Month = 'month',
    /**

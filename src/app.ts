@@ -56,9 +56,7 @@ async function createWebService() {
       // https://github.com/expressjs/compression/blob/master/README.md
       app.use(compress());
       app.use(Express.static(path.join(root, 'public')));
-
       await blog.load();
-
       if (blog.loaded) {
          // blog must be loaded before routes are defined
          route.standard(app);
