@@ -88,9 +88,15 @@
             "--exec",
             "./node_modules/.bin/ts-node",
             "--",
-            "./src/app.ts"
+            "./src/app.ts",
+            "--serve"
          ],
          "type": "shell",
+         "options": {
+            "env": {
+               "EMAIL_CONTACT": "nobody@nowhere.com"
+            }
+         },
          "problemMatcher": "$tsc"
       },
       {
