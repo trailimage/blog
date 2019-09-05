@@ -48,11 +48,16 @@ $(function() {
          loadPhotoTag($link);
 
          util.log.event(eventCategory, 'Click Name');
+         let url = $link.attr('href');
+
+         if (url !== undefined) {
+            url = url.replace('/search', '');
+         }
 
          window.history.pushState(
             null,
             siteName + ' photos tagged with "' + $link.html() + '"',
-            $link.attr('href').replace('/search', '')
+            url
          );
       });
 
@@ -60,26 +65,32 @@ $(function() {
     * Load photo-search.hbs rendered by server.
     */
    function loadPhotoTag($link: JQuery) {
-      if ($link.length > 0) {
-         $('#wait').show();
-         $('#thumbs').load($link.attr('href'), function(
-            this: HTMLElement,
-            _response: JQueryResponse,
-            status: string
-         ) {
-            if (status === 'error') {
-               $(this).empty();
-               $link.removeClass(css);
-               util.log.event(eventCategory, 'Load Photos Error', 'Error');
-               alert(
-                  'Sorry about that. Looking for "' +
-                     $link.html() +
-                     '" photos caused an error.'
-               );
-            }
-            $('#wait').hide();
-            window.scrollTo(0, 0);
-         });
+      if ($link.length == 0) {
+         return;
       }
+      const url = $link.attr('href');
+
+      if (url === undefined) {
+         return;
+      }
+      $('#wait').show();
+      $('#thumbs').load(url, function(
+         this: HTMLElement,
+         _response: JQueryResponse,
+         status: string
+      ) {
+         if (status === 'error') {
+            $(this).empty();
+            $link.removeClass(css);
+            util.log.event(eventCategory, 'Load Photos Error', 'Error');
+            alert(
+               'Sorry about that. Looking for "' +
+                  $link.html() +
+                  '" photos caused an error.'
+            );
+         }
+         $('#wait').hide();
+         window.scrollTo(0, 0);
+      });
    }
 });

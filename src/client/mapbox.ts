@@ -90,7 +90,7 @@ $(function() {
    /**
     * Cache GeoJSON photos so it can be reassigned if map style changes
     */
-   let geoJSON: GeoJSON.FeatureCollection<GeoJSON.Point> = null;
+   let geoJSON: GeoJSON.FeatureCollection<GeoJSON.Point> | null = null;
 
    /**
     * Methods for generating map content
@@ -110,8 +110,11 @@ $(function() {
       /**
        * Make photo HTML.
        */
-      photo: function(f: GeoJSON.Feature<GeoJSON.Point>): JQuery {
-         const img: MapPhoto = f.properties;
+      photo: function(f: GeoJSON.Feature<GeoJSON.Point>): JQuery | null {
+         const img: MapPhoto = f.properties as MapPhoto;
+         if (img.url === undefined) {
+            return null;
+         }
          const tip = 'Click or tap to enlarge';
          return $('<figure>')
             .append(
@@ -120,7 +123,7 @@ $(function() {
                   .attr('title', tip)
                   .attr('alt', tip)
                   .click(() => {
-                     showPhotoInPost(img.url);
+                     showPhotoInPost(img.url!);
                   })
             )
             .append(
@@ -166,7 +169,7 @@ $(function() {
       /**
        * Handle keyboard events while photo preview is visible.
        */
-      keyNav: null as EventListener,
+      keyNav: null as EventListener | null,
 
       /**
        * Respond to user map interaction by hiding photo preview.
@@ -182,8 +185,8 @@ $(function() {
        */
       windowResize() {
          const $c = $('canvas');
-         mapSize.width = $c.width();
-         mapSize.height = $c.height();
+         mapSize.width = $c.width()!;
+         mapSize.height = $c.height()!;
       },
 
       /**
@@ -199,8 +202,11 @@ $(function() {
          const range = document.createRange();
          try {
             range.selectNode($temp[0]);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
+            const selection = window.getSelection();
+            if (selection !== null) {
+               selection.removeAllRanges();
+               selection.addRange(range);
+            }
             util.log.event(eventCategory, 'Copy URL');
          } catch (ex) {
             console.error(ex);
@@ -237,7 +243,10 @@ $(function() {
        * Respond to mouse click on photo marker.
        */
       photoClick(e: mapboxgl.MapMouseEvent) {
-         html.photoPreview(e, 'single', html.photo(e.features[0]));
+         const $photo = html.photo(e.features[0]);
+         if ($photo !== null) {
+            html.photoPreview(e, 'single', $photo);
+         }
          util.log.event(eventCategory, 'Click Photo Pin');
       },
 
@@ -303,7 +312,7 @@ $(function() {
        * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
       clusterClick: function(e: mapboxgl.MapMouseEvent) {
-         const cluster: PointCluster = e.features[0].properties;
+         const cluster: PointCluster = e.features[0].properties as PointCluster;
          const atZoom = map.getZoom();
          const zoomIn = () => {
             map.easeTo({
@@ -312,10 +321,18 @@ $(function() {
             });
          };
 
-         if (cluster.point_count > MAX_IN_CAROUSEL && atZoom < MAX_ZOOM - 2) {
+         if (
+            cluster.point_count !== undefined &&
+            cluster.point_count > MAX_IN_CAROUSEL &&
+            atZoom < MAX_ZOOM - 2
+         ) {
             zoomIn();
          } else {
-            const photos = photosNearLocation(e.lngLat, cluster.point_count);
+            const photos =
+               cluster.point_count === undefined
+                  ? []
+                  : photosNearLocation(e.lngLat, cluster.point_count);
+
             if (photos.length == 0) {
                zoomIn();
             } else {
@@ -354,7 +371,10 @@ $(function() {
                }
 
                for (let i = 0; i < photos.length; i++) {
-                  $photos.append(html.photo(photos[i]));
+                  const $p = html.photo(photos[i]);
+                  if ($p !== null) {
+                     $photos.append($p);
+                  }
                }
 
                if (photos.length > MAX_IN_CAROUSEL) {
@@ -417,6 +437,10 @@ $(function() {
    map.addControl(nav, 'top-right').on('load', () => {
       $.getJSON('/geo.json', data => {
          geoJSON = data;
+         if (geoJSON === null) {
+            console.error('Unable to retrieve blog GeoJSON');
+            return;
+         }
          $count.find('div').html(geoJSON.features.length.toString());
          addBaseLayers();
          addMapHandlers();
@@ -467,13 +491,21 @@ $(function() {
                [offset.x, offset.y],
                { duration: 100 },
                {
-                  type: null,
-                  point: null,
-                  target: null,
+                  lngLat: e.lngLat,
+                  type: '',
+                  point: e.point,
+                  originalEvent: e.originalEvent,
                   reason: 'fit',
-                  lngLat: null,
-                  originalEvent: null
+                  target: e.target
                }
+               // {
+               //    type: null,
+               //    point: null,
+               //    target: null,
+               //    reason: 'fit',
+               //    lngLat: null,
+               //    originalEvent: null
+               // }
             );
          }
          return { top: y + 15, left: x + 50 };
@@ -492,7 +524,7 @@ $(function() {
             qs[pair[0]] = parseFloat(pair[1]);
          }
       }
-      if (qs.hasOwnProperty('lat') && qs.hasOwnProperty('lon')) {
+      if (qs.lon !== undefined && qs.lat !== undefined) {
          qs.center = [qs.lon, qs.lat];
       }
       return qs;
@@ -509,15 +541,19 @@ $(function() {
                   handle.mapInteraction();
                   break;
                case 37:
-                  prev();
+                  if (prev !== undefined) {
+                     prev();
+                  }
                   break;
                case 39:
-                  next();
+                  if (next !== undefined) {
+                     next();
+                  }
                   break;
             }
          };
          document.addEventListener('keydown', handle.keyNav);
-      } else {
+      } else if (handle.keyNav !== null) {
          document.removeEventListener('keydown', handle.keyNav);
       }
    }
@@ -534,29 +570,40 @@ $(function() {
       const f = (z * 3) / Math.pow(2, z);
       const sw = [lngLat.lng - f, lngLat.lat - f];
       const ne = [lngLat.lng + f, lngLat.lat + f];
-      const photos = geoJSON.features
-         .filter(f => {
-            const coord = f.geometry.coordinates;
-            return (
-               coord[0] >= sw[0] &&
-               coord[1] >= sw[1] &&
-               coord[0] <= ne[0] &&
-               coord[1] <= ne[1]
-            );
-         })
-         .map(f => {
-            (f.properties as MapPhoto).distance = distance(
-               lngLat,
-               f.geometry.coordinates
-            );
-            return f;
-         });
+      const photos =
+         geoJSON === null
+            ? []
+            : geoJSON.features
+                 .filter(f => {
+                    const coord = f.geometry.coordinates;
+                    return (
+                       coord[0] >= sw[0] &&
+                       coord[1] >= sw[1] &&
+                       coord[0] <= ne[0] &&
+                       coord[1] <= ne[1]
+                    );
+                 })
+                 .map(f => {
+                    (f.properties as MapPhoto).distance = distance(
+                       lngLat,
+                       f.geometry.coordinates
+                    );
+                    return f;
+                 });
 
-      photos.sort(
-         (p1, p2) =>
-            (p1.properties as MapPhoto).distance -
-            (p2.properties as MapPhoto).distance
-      );
+      photos.sort((p1, p2) => {
+         let d1 = (p1.properties as MapPhoto).distance;
+         let d2 = (p2.properties as MapPhoto).distance;
+
+         if (d1 === undefined) {
+            d1 = 0;
+         }
+         if (d2 === undefined) {
+            d2 = 0;
+         }
+
+         return d1 - d2;
+      });
 
       return photos.slice(0, count);
    }
@@ -586,7 +633,7 @@ $(function() {
             lngLat.lng +
             '&zoom=' +
             map.getZoom();
-         window.history.replaceState(null, null, url);
+         window.history.replaceState(null, '', url);
       }
    }
 
@@ -594,6 +641,9 @@ $(function() {
     * Enable or disable the zoom-out button.
     */
    function enableZoomOut() {
+      if (initial.zoom === undefined) {
+         return;
+      }
       if (map.getZoom() > initial.zoom && !zoomOutEnabled) {
          zoomOutEnabled = true;
          $zoomOut
@@ -732,13 +782,15 @@ $(function() {
     * Assign source and define layers for clustering.
     */
    function addBaseLayers() {
-      map.addSource('photos', {
-         type: 'geojson',
-         data: geoJSON,
-         cluster: true,
-         clusterMaxZoom: 18,
-         clusterRadius: 30
-      });
+      if (geoJSON !== null) {
+         map.addSource('photos', {
+            type: 'geojson',
+            data: geoJSON,
+            cluster: true,
+            clusterMaxZoom: 18,
+            clusterRadius: 30
+         });
+      }
 
       // https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-circle
       // https://www.mapbox.com/mapbox-gl-js/style-spec/#types-function

@@ -12,7 +12,10 @@ $(function() {
    // default root category
    const setting = util.setting.menuCategory;
 
-   let selection = setting == null ? 'when' : setting[0].toLocaleLowerCase();
+   let selection =
+      setting === null || setting[0] === null
+         ? 'when'
+         : setting[0].toLocaleLowerCase();
    let prepared = false;
    let visible = false;
 
@@ -41,8 +44,11 @@ $(function() {
 
       const css = 'selected';
       const $categoryList = $menu.find('.category-list li');
-      menuHeight = $menu.height();
+      const currentHeight = $menu.height();
 
+      if (currentHeight !== undefined) {
+         menuHeight = currentHeight;
+      }
       $menu.find('.close').click(() => {
          $menu.hide(0, () => {
             visible = false;
@@ -57,6 +63,10 @@ $(function() {
          const $cat = $(this);
          const catClass = $cat.attr('class');
 
+         if (catClass === undefined) {
+            console.error('Unable to identify clicked menu');
+            return;
+         }
          $down.hide();
          $categories.find('ul').hide();
          $categories.find('ul.' + catClass).show(0, toggleArrow);
@@ -73,7 +83,8 @@ $(function() {
     * Show down arrow if list of categories exceeds display area.
     */
    function toggleArrow(this: HTMLElement) {
-      if ($(this).height() > menuHeight) {
+      const height = $(this).height();
+      if (height !== undefined && height > menuHeight) {
          $down.show();
       } else {
          $down.hide();

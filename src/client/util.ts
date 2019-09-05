@@ -20,7 +20,7 @@ const util = {
       /**
        * Load setting from browser storage.
        */
-      load(key: string): string {
+      load(key: string): string | null {
          if (!window.localStorage) {
             return null;
          }
@@ -39,14 +39,16 @@ const util = {
       /**
        * Value is array of root and sub-category names.
        */
-      set menuCategory(selected: string[]) {
+      set menuCategory(selected: (string | null)[] | null) {
          if (typeof selected === 'string') {
             selected = [selected, null];
          }
-         util.setting.save('menu', selected.join());
+         if (selected !== null) {
+            util.setting.save('menu', selected.join());
+         }
       },
 
-      get menuCategory(): string[] {
+      get menuCategory(): (string | null)[] | null {
          const value = util.setting.load('menu');
          return value === null ? null : value[1].split(',');
       }
