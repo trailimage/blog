@@ -22,6 +22,19 @@
          "command": "./node_modules/.bin/jest",
          "type": "shell",
          "group": "test",
+         "presentation": {
+            "echo": false,
+            "reveal": "always",
+            "focus": false,
+            "panel": "shared",
+            "showReuseMessage": true,
+            "clear": true
+         },
+         "options": {
+            "env": {
+               "EMAIL_CONTACT": "nobody@nowhere.com"
+            }
+         },
          "problemMatcher": []
       },
       {
@@ -75,9 +88,15 @@
             "--exec",
             "./node_modules/.bin/ts-node",
             "--",
-            "./src/app.ts"
+            "./src/app.ts",
+            "--serve"
          ],
          "type": "shell",
+         "options": {
+            "env": {
+               "EMAIL_CONTACT": "nobody@nowhere.com"
+            }
+         },
          "problemMatcher": "$tsc"
       },
       {

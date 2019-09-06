@@ -1,5 +1,5 @@
 {
-   "extends": "./node_modules/@toba/build/ts/config",
+   "extends": "@toba/develop/tsconfig.cjs",
    "compilerOptions": {
       "target": "es5",
       "module": "none",

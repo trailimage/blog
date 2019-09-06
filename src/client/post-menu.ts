@@ -38,6 +38,9 @@ $(function() {
    // handle click on main menu button
    $button
       .one('click', () => {
+         if (selection === null) {
+            return;
+         }
          // populate menu on first click
          for (const root in postMenuData.category) {
             const $li = $('<li>').text(root);
@@ -65,6 +68,9 @@ $(function() {
       e: JQuery.Event
    ) {
       e.stopPropagation();
+      if (selection === null) {
+         return;
+      }
       const $li = $(this);
       selection[1] = $li.text();
       menuSelect($categoryList, $li, loadPosts, selection);
@@ -139,8 +145,8 @@ $(function() {
    function menuSelect(
       $list: JQuery,
       $clicked: JQuery,
-      loader: (selected: string[]) => void,
-      selected: string[]
+      loader: (selected: (string | null)[]) => void,
+      selected: (string | null)[]
    ) {
       $list.find('li').removeClass(css);
       loader(selected);
@@ -151,8 +157,12 @@ $(function() {
    /**
     * Build category HTML when root item is clicked.
     */
-   function loadSubcategories(selected: string[]) {
-      const subcategories = postMenuData.category[selected[0]];
+   function loadSubcategories(selected: (string | null)[]) {
+      const c = selected[0];
+      if (c === null) {
+         return;
+      }
+      const subcategories = postMenuData.category[c];
 
       $categoryList.empty();
 
@@ -174,8 +184,12 @@ $(function() {
     * Build post HTML from separately loaded `postMenuData` when subcategory
     * is clicked.
     */
-   function loadPosts(selected: string[]) {
-      const subcategories = postMenuData.category[selected[0]];
+   function loadPosts(selected: (string | null)[]) {
+      const c = selected[0];
+      if (c === null) {
+         return;
+      }
+      const subcategories = postMenuData.category[c];
 
       // reset list of posts in third column
       $postList.empty();
@@ -201,12 +215,15 @@ $(function() {
                      postMenuData.post[ids[j]].title == title
                   ) {
                      post = postMenuData.post[ids[j]];
+                     const value = post.part === undefined ? '' : post.part;
+                     const subTitle =
+                        post.subTitle === undefined ? '' : post.subTitle;
 
                      $ol.prepend(
                         $('<li>')
                            .addClass('post')
-                           .attr('value', post.part)
-                           .html(post.subTitle)
+                           .attr('value', value)
+                           .html(subTitle)
                            .data('description', post.description)
                            .data('slug', post.slug)
                      );

@@ -1,6 +1,12 @@
 {
-   "extends": "./tsconfig.json",
+   "extends": "@toba/develop/tsconfig.cjs",
    "compilerOptions": {
       "outDir": "./lib"
-   }
+   },
+   "exclude": [
+      "./node_modules/",
+      "./src/**/*.test.ts*",
+      "./src/**/*.skip.ts*",
+      "./src/**/__mocks__"
+   ]
 }

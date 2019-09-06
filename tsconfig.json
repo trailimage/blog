@@ -1,15 +1,6 @@
 {
-   "extends": "./node_modules/@toba/build/ts/config",
+   "extends": "@toba/develop/tsconfig.test",
    "compilerOptions": {
-      "declaration": false,
-      "removeComments": true
-   },
-   "include": ["./src/**/*.ts"],
-   "exclude": [
-      "./src/types",
-      "./src/client",
-      "./src/**/*.test.ts",
-      "./src/**/__mocks__",
-      "node_modules"
-   ]
+      "esModuleInterop": true
+   }
 }

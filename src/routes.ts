@@ -1,4 +1,4 @@
-import { HttpStatus } from '@toba/tools';
+import { HttpStatus } from '@toba/node-tools';
 import { blog } from '@trailimage/models';
 import * as Express from 'express';
 import { config } from './config';
@@ -16,7 +16,7 @@ import {
 /**
  * Route placeholders that become `req.params` keys.
  */
-export enum RouteParam {
+export const enum RouteParam {
    Category = 'category',
    Month = 'month',
    /**

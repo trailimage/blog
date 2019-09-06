@@ -1,4 +1,4 @@
-import { MimeType, Header } from '@toba/tools';
+import { MimeType, Header } from '@toba/node-tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { config } from '../config';

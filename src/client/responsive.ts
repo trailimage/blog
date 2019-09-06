@@ -55,7 +55,8 @@ $(function() {
     * Load resources based on current view width
     */
    function checkResources() {
-      if ($view.width() > breakAt) {
+      const width = $view.width();
+      if (width === undefined || width > breakAt) {
          loadDesktop();
       } else {
          loadMobile();
@@ -128,7 +129,14 @@ $(function() {
          js.id = id;
          js.src = url;
          js.async = async;
-         firstScript.parentNode.insertBefore(js, firstScript);
+
+         const parent = firstScript.parentNode;
+
+         if (parent === null) {
+            console.error('Failed to load script source');
+         } else {
+            parent.insertBefore(js, firstScript);
+         }
       }
    }
 });

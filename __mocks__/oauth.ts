@@ -25,8 +25,8 @@ export class OAuth {
          callbackUrl
       };
       this.last = {
-         accessToken: null,
-         secret: null
+         accessToken: '',
+         secret: ''
       };
    }
 
@@ -48,7 +48,7 @@ export class OAuth {
             callback(null, body);
          })
          .catch(err => {
-            callback(err, null);
+            callback(err, '');
          });
    }
 }

@@ -1,18 +1,22 @@
 language: node_js
 
 node_js:
-   - '10'
+   - '12'
 
 branches:
    only:
       - master
 
+before_install:
+   - npm install --g codecov
+
 script:
-   - yarn global add codecov
-   - yarn test
+   - npm run test
    - codecov
 
 sudo: false
 
 cache:
-   yarn: true
+   npm: true
+   directories:
+      - node_modules

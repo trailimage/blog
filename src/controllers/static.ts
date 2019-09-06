@@ -1,4 +1,4 @@
-import { HttpStatus, MimeType, is } from '@toba/tools';
+import { HttpStatus, MimeType, is } from '@toba/node-tools';
 import { blog, owner } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { config } from '../config';

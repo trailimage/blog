@@ -1,7 +1,6 @@
-import { log } from '@toba/logger';
 import { blockSpamReferers } from '@toba/block-spam-referer';
-import * as compress from 'compression';
-import * as Express from 'express';
+import compress from 'compression';
+import Express from 'express';
 import { ExpressHandlebars } from '@toba/handlebars';
 import * as path from 'path';
 import { postProvider } from '@trailimage/flickr-provider';
@@ -13,8 +12,10 @@ import { route } from './routes';
 
 const root = path.join(__dirname, '..');
 
-configureModels();
-createWebService();
+if (process.argv.includes('--serve')) {
+   configureModels();
+   createWebService();
+}
 
 export function configureModels() {
    postProvider.configure(config.providers.post);
@@ -35,7 +36,7 @@ async function createWebService() {
    const app = Express();
    const port = process.env['PORT'] || 3000;
 
-   log.info(
+   console.info(
       `Starting ${
          config.isProduction ? 'production' : 'development'
       } application`
@@ -48,7 +49,7 @@ async function createWebService() {
       // must authenticate before normal routes are available
       route.authentication(app);
       app.listen(port);
-      log.info(`Listening for authentication on port ${port}`);
+      console.info(`Listening for authentication on port ${port}`);
    } else {
       if (config.requireSSL) {
          app.use(requireSSL);
@@ -57,16 +58,14 @@ async function createWebService() {
       // https://github.com/expressjs/compression/blob/master/README.md
       app.use(compress());
       app.use(Express.static(path.join(root, 'public')));
-
       await blog.load();
-
       if (blog.loaded) {
          // blog must be loaded before routes are defined
          route.standard(app);
          app.listen(port);
-         log.info(`Listening on port ${port}`);
+         console.info(`Listening on port ${port}`);
       } else {
-         log.error('Blog data failed to load. Stopping application.');
+         console.error('Blog data failed to load. Stopping application.');
       }
    }
 }
@@ -78,7 +77,7 @@ async function createWebService() {
 function defineViews(app: Express.Application) {
    const viewPath = path.join(root, 'views');
    const ehb = new ExpressHandlebars({
-      defaultLayout: Layout.Main
+      defaultLayout: Layout.Main!
    });
 
    // http://expressjs.com/4x/api.html#app-settings

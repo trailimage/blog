@@ -25,7 +25,7 @@ test('shows latest', done => {
       expect(res).toRenderTemplate(Page.Post);
       const context = res.rendered.context;
       expect(context).toHaveProperty('slug', 'stanley-lake-snow-hike');
-      expect(context.layout).toBeNull();
+      expect(context!.layout).toBeNull();
       done();
    };
    post.latest(req, res);
@@ -36,7 +36,9 @@ test('forwards to correct URL from Flickr set ID', done => {
       expect(res).toRedirectTo('/ruminations');
       done();
    };
-   req.params[RouteParam.PostID] = config.providers.post.featureSets[0].id;
+   expect(config.providers.post).toBeDefined();
+   expect(config.providers.post!.featureSets).toBeDefined();
+   req.params[RouteParam.PostID] = config.providers.post!.featureSets![0].id;
    post.withID(req, res);
 });
 
@@ -56,8 +58,8 @@ test('shows post with slug', done => {
       const context = res.rendered.context;
       expect(context).toHaveProperty('title', 'Kuna Cave Fails to Impress');
       expect(context).toHaveProperty('post');
-      expect(context.post).toHaveProperty('id', '72157668896453295');
-      expect(context.post).toHaveProperty('isPartial', false);
+      expect(context!.post).toHaveProperty('id', '72157668896453295');
+      expect(context!.post).toHaveProperty('isPartial', false);
       done();
    };
    req.params[RouteParam.PostKey] = 'kuna-cave-fails-to-impress';
@@ -71,8 +73,8 @@ test('shows post in series', done => {
       const context = res.rendered.context;
       expect(context).toHaveProperty('title', 'Brother Ride 2015');
       expect(context).toHaveProperty('post');
-      expect(context.post).toHaveProperty('id', '72157658679070399');
-      expect(context.post).toHaveProperty('isPartial', true);
+      expect(context!.post).toHaveProperty('id', '72157658679070399');
+      expect(context!.post).toHaveProperty('isPartial', true);
       done();
    };
    req.params[RouteParam.SeriesKey] = 'brother-ride-2015';

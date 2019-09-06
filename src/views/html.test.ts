@@ -6,7 +6,6 @@ import { config } from '../config/';
 const nl = '\r\n';
 /** Double-space */
 const ds = nl + nl;
-const u: string = undefined;
 const empty = '';
 
 test('formats fractions', () => {
@@ -20,7 +19,6 @@ test('creates HTML for a photo tag list', () => {
 });
 
 test('substitutes nicer typography', () => {
-   expect(html.typography(u)).toBe(empty);
    expect(html.typography(empty)).toBe(empty);
    expect(html.typography('"He said," she said')).toBe(
       '&ldquo;He said,&rdquo; she said'

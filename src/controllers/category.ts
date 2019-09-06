@@ -1,4 +1,4 @@
-import { is, merge, sayNumber } from '@toba/tools';
+import { is, merge, sayNumber } from '@toba/node-tools';
 import { Category, blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { config } from '../config';
@@ -11,7 +11,7 @@ function send(req: Request, res: Response, path: string, _homePage = false) {
       // use renderer to build view that wasn't cached
       const category = blog.categoryWithKey(path);
 
-      if (!is.value(category)) {
+      if (!is.value<Category>(category)) {
          return view.notFound(req, res);
       }
 
@@ -51,16 +51,35 @@ export function forPath(req: Request, res: Response) {
 export function home(req: Request, res: Response) {
    const category = blog.categories.get(config.posts.defaultCategory);
    let year = new Date().getFullYear();
-   let subcategory = null;
-   let count = 0;
+   let subcategory: Category | undefined = undefined;
+   let postCount = 0;
+   let tryCount = 0;
 
-   while (count == 0) {
+   if (category === undefined) {
+      return view.internalError(
+         res,
+         new Error(
+            `Unable to find default category ${config.posts.defaultCategory}`
+         )
+      );
+   }
+
+   while (postCount == 0 && tryCount < 10) {
       // step backwards until a year with posts is found
       subcategory = category.getSubcategory(year.toString());
       if (is.value<Category>(subcategory)) {
-         count = subcategory.posts.size;
+         postCount = subcategory.posts.size;
       }
+      tryCount++;
       year--;
+   }
+   if (subcategory === undefined) {
+      return view.internalError(
+         res,
+         new Error(
+            `Unable to find year with posts in ${config.posts.defaultCategory}`
+         )
+      );
    }
    send(req, res, subcategory.key, true);
 }
@@ -79,7 +98,7 @@ export function list(req: Request, res: Response) {
       // use renderer to build view that wasn't cached
       const category = blog.categoryWithKey(key);
 
-      if (!is.value(category)) {
+      if (!is.value<Category>(category)) {
          return view.notFound(req, res);
       }
 

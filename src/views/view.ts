@@ -1,5 +1,4 @@
 import { JsonLD, serialize } from '@toba/json-ld';
-import { log } from '@toba/logger';
 import {
    Cache,
    Encoding,
@@ -8,7 +7,7 @@ import {
    MimeType,
    is,
    addCharSet
-} from '@toba/tools';
+} from '@toba/node-tools';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
@@ -32,7 +31,7 @@ export interface ViewContext {
     * Use `null` to render view only or leave `undefined` to use the default
     * layout.
     */
-   layout?: string;
+   layout?: string | null;
 }
 
 /**
@@ -75,8 +74,8 @@ export type Renderer = (
  */
 export function compact(text: string, options?: uglify.MinifyOptions): string {
    const output = uglify.minify(text, options);
-   if (output.error) {
-      log.error(output.error);
+   if (output.error !== undefined) {
+      console.error(output.error);
       return text;
    } else {
       return output.code;
@@ -112,14 +111,14 @@ export const createViewItem = (
       }
 
       compress.gzip(Buffer.from(text), (err: Error, buffer: Buffer) => {
-         if (is.value(err)) {
+         if (is.value<Error>(err)) {
             reject(err);
-            log.error(err, { slug: key });
+            console.error(err, { slug: key });
          } else {
             resolve({
                buffer,
                eTag: key + '_' + new Date().getTime().toString(),
-               type
+               type: type!
             });
          }
       });
@@ -130,7 +129,7 @@ export const createViewItem = (
  *
  * @see https://en.wikipedia.org/wiki/IPv6_address
  */
-export const IPv6 = (ip: string): string =>
+export const IPv6 = (ip?: string): string =>
    is.empty(ip) || ip === '::1'
       ? '127.0.0.1'
       : ip.replace(/^::[0123456789abcdef]{4}:/g, '');
@@ -155,7 +154,7 @@ export function clientIP(req: Request): string {
  */
 export function notFound(req: Request, res: Response): void {
    const ip = clientIP(req);
-   log.warn(`${req.originalUrl} not found for ${ip}`, { clientIP: ip });
+   console.warn(`${req.originalUrl} not found for ${ip}`, { clientIP: ip });
    res.statusCode = HttpStatus.NotFound;
    res.render(Page.NotFound, { title: 'Page Not Found', config });
 }
@@ -164,8 +163,8 @@ export function notFound(req: Request, res: Response): void {
  * Render status `500` page.
  */
 function internalError(res: Response, err?: Error): void {
-   if (is.value(err)) {
-      log.error(err);
+   if (is.value<Error>(err)) {
+      console.error(err);
    }
    res.statusCode = HttpStatus.InternalError;
    res.render(Page.InternalError, { title: 'Oops', config });
@@ -240,10 +239,10 @@ function sendFromCache(res: Response, slug: string): boolean {
          writeItemToResponse(res, item);
          return true;
       } else {
-         log.info(`"${slug}" not cached`, { slug });
+         console.info(`"${slug}" not cached`, { slug });
       }
    } else {
-      log.warn(`Caching disabled for ${slug}`, { slug });
+      console.warn(`Caching disabled for ${slug}`, { slug });
    }
    return false;
 }
@@ -297,9 +296,9 @@ function makeRenderer(res: Response, slug: string): Renderer {
       context.config = config;
 
       res.render(view, context, (renderError: Error, text: string) => {
-         if (is.value(renderError)) {
+         if (is.value<Error>(renderError)) {
             // error message includes view name
-            log.error(`Rendering ${slug} ${renderError.message}`, { slug });
+            console.error(renderError, { slug, view });
             internalError(res);
          } else {
             if (is.value<string>(text)) {
@@ -308,7 +307,7 @@ function makeRenderer(res: Response, slug: string): Renderer {
                }
                cacheAndSend(res, text, slug, type);
             } else {
-               log.error(`renderTemplate(${slug}) returned no content`, {
+               console.error(`renderTemplate(${slug}) returned no content`, {
                   slug
                });
                internalError(res);

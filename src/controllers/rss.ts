@@ -1,5 +1,4 @@
-import { log } from '@toba/logger';
-import { MimeType, Header } from '@toba/tools';
+import { MimeType, Header } from '@toba/node-tools';
 import { blog } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { render } from '@toba/feed';
@@ -12,13 +11,13 @@ let rssRetries = 0;
 export function postFeed(req: Request, res: Response) {
    if (!blog.postInfoLoaded) {
       if (rssRetries >= MAX_RSS_RETRIES) {
-         log.error(`Unable to load blog after ${MAX_RSS_RETRIES} tries`);
+         console.error(`Unable to load blog after ${MAX_RSS_RETRIES} tries`);
          view.notFound(req, res);
          // reset tries so page can be refreshed
          rssRetries = 0;
       } else {
          rssRetries++;
-         log.error(
+         console.error(
             `Blog posts not ready when creating RSS feed — attempt ${rssRetries}`
          );
          setTimeout(() => {

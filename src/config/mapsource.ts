@@ -1,4 +1,4 @@
-import { is, titleCase } from '@toba/tools';
+import { is, titleCase } from '@toba/node-tools';
 import { MapSource, MapProperties, relabel } from '@toba/map';
 
 const vehicle: { [key: string]: string } = {
@@ -23,7 +23,7 @@ function seasonal(
 }
 
 function trails(from: MapProperties): MapProperties {
-   const out: MapProperties = {};
+   const out: MapProperties = { description: '' };
    const miles: number = from['MILES'] as number;
    const who = 'Jurisdiction';
    let name: string = from['NAME'] as string;
@@ -69,7 +69,7 @@ function trails(from: MapProperties): MapProperties {
  * Normalize mining field names.
  */
 function mines(from: MapProperties): MapProperties {
-   const out: MapProperties = {};
+   const out: MapProperties = { description: '' };
    // lowercase "name" is the county name
    relabel(from, out, {
       FSAgencyName: 'Forest Service Agency',

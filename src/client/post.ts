@@ -136,27 +136,45 @@ $(function() {
        * Update image position within light box
        */
       const updateHoverPosition = (event: JQuery.Event) => {
-         $big.css({
-            top: size.height.CSS(event.clientY),
-            left: size.width.CSS(event.clientX)
-         });
+         const x = event.clientX;
+         const y = event.clientY;
+
+         if (x !== undefined && y !== undefined) {
+            $big.css({
+               top: size.height.CSS(y),
+               left: size.width.CSS(x)
+            });
+         }
+      };
+
+      const firstTouch = (
+         event: JQuery.Event | TouchEvent
+      ): [number, number] => {
+         let x = 0;
+         let y = 0;
+         const touches = event.targetTouches;
+
+         if (touches !== undefined) {
+            x = touches[0].clientX;
+            y = touches[0].clientY;
+         }
+         return [x, y];
       };
 
       const beginDrag = (event: JQuery.Event | TouchEvent) => {
-         const touchAt = event.targetTouches[0];
          const imageAt = $big.position();
+         const [touchX, touchY] = firstTouch(event);
 
-         fromCorner.left = imageAt.left - touchAt.clientX;
-         fromCorner.top = imageAt.top - touchAt.clientY;
+         fromCorner.left = imageAt.left - touchX;
+         fromCorner.top = imageAt.top - touchY;
       };
 
       const updateDragPosition = (event: JQuery.Event) => {
-         // ignore multi-finger touches
-         const at = event.targetTouches[0];
+         const [touchX, touchY] = firstTouch(event);
 
          $big.css({
-            top: fromCorner.top + at.clientY,
-            left: fromCorner.left + at.clientX
+            top: fromCorner.top + touchY,
+            left: fromCorner.left + touchX
          });
       };
 
@@ -183,7 +201,7 @@ $(function() {
       $big.height(size.height.image).width(size.width.image);
 
       // position based on initial click
-      updateSize(event as JQueryEventObject);
+      updateSize(event as JQuery.Event);
 
       $lb.show(0, disablePageScroll);
       // update panning calculations if window resizes

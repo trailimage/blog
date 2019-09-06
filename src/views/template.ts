@@ -1,4 +1,4 @@
-import { rot13, dateString } from '@toba/tools';
+import { rot13, dateString } from '@toba/node-tools';
 import { ExpressHandlebars } from '@toba/handlebars';
 import { config } from '../config';
 import { html } from './html';
@@ -6,7 +6,7 @@ import { html } from './html';
 /**
  * Handlebars layouts (`views/layouts/` path without `hbs` extension).
  */
-export const Layout: { [index: string]: string } = {
+export const Layout: { [index: string]: string | null } = {
    Main: 'default-layout',
    /** Render template without a layout. */
    None: null
@@ -15,7 +15,7 @@ export const Layout: { [index: string]: string } = {
 /**
  * Handlebars page templates (`views/` path without `hbs` extension).
  */
-export enum Page {
+export const enum Page {
    NotFound = 'error/404',
    InternalError = 'error/500',
    Error = '503',

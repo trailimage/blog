@@ -1,3 +1,7 @@
+## 4.2.0
+
+-  Improve layout for mobile
+
 ## 4.1.7
 
 -  Shorten threshold for block quoting and make condition stricter for poem formatting

@@ -1,4 +1,4 @@
-import { env } from '@toba/tools';
+import { env } from '@toba/node-tools';
 import { OwnerConfig, SiteConfig } from '@trailimage/models';
 
 /** Site domain name. */
@@ -13,7 +13,7 @@ export const owner: OwnerConfig = {
       width: 300,
       height: 300
    },
-   email: env('EMAIL_CONTACT', null),
+   email: env('EMAIL_CONTACT'),
    urls: [
       'https://www.facebook.com/jason.e.abbott',
       'http://www.flickr.com/photos/boise',
