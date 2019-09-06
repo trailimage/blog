@@ -54,6 +54,7 @@
       "gulp-sourcemaps": "^2.6.0",
       "gulp-typescript": "^5.0.0",
       "gulp-uglify": "^3.0.0",
+      "js-yaml": ">=3.13.1",
       "merge2": "^1.2.0",
       "nodemon": "^1.19.2",
       "through2": "^3.0.0",
