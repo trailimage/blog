@@ -5,4 +5,3 @@ dist/
 lib/
 public/js/maps/
 .vscode/chrome/
-yarn-error.log

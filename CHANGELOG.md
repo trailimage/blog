@@ -1,3 +1,7 @@
+## 4.2.1
+
+- Update dependencies and copyright date
+
 ## 4.2.0
 
 -  Improve layout for mobile
