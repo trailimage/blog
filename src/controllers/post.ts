@@ -20,7 +20,7 @@ function send(
             render(viewName, {
                post: p,
                title: p.title,
-               jsonLD: p.jsonLD(), 
+               jsonLD: p.jsonLD(),
                layout: Layout.None,
                description: p.longDescription,
                slug: key

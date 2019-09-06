@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
 import { config } from '../config';
