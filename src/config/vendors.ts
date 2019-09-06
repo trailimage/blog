@@ -1,5 +1,15 @@
 import { env } from '@toba/node-tools';
 import { mapSource } from './mapsource';
+import { MapSource } from '@toba/map';
+
+export interface MapboxConfig {
+   accessToken: string;
+   style: {
+      dynamic: string;
+      static: string;
+   };
+   mapSource: { [key: string]: MapSource };
+}
 
 export const bing = {
    key: env('BING_KEY', null)
@@ -26,7 +36,7 @@ export const google = {
    blogID: '118459106898417641'
 };
 
-export const mapbox = {
+export const mapbox: MapboxConfig = {
    accessToken: env('MAPBOX_ACCESS_TOKEN'),
    style: {
       /** Style used for interactive maps */

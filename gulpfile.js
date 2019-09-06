@@ -29,7 +29,7 @@ const tsConfig = ts.createProject('tsconfig.browser.json');
 // https://github.com/plus3network/gulp-less
 // https://github.com/jonathanepollack/gulp-minify-css
 // https://github.com/jakubpawlowicz/clean-css/blob/master/README.md
-gulp.task('css', () =>
+const buildCSS = () =>
    merge(
       gulp
          .src(lessPath(['map', 'mapbox', 'admin']))
@@ -48,37 +48,36 @@ gulp.task('css', () =>
       .on('error', handleError)
       .pipe(nano({ discardUnused: false }))
       .on('error', handleError)
-      .pipe(gulp.dest(dist + 'css'))
-);
+      .pipe(gulp.dest(dist + 'css'));
 
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
-gulp.task('js', () => {
-   return (
-      merge(
-         tsConfig.src().pipe(tsConfig()),
-         gulp.src(jsPath + 'jquery.lazyload.js')
+const buildJS = () =>
+   merge(
+      tsConfig.src().pipe(tsConfig()),
+      gulp.src(jsPath + 'jquery.lazyload.js')
+   )
+      .pipe(
+         bundle('post', 'static-map', 'jquery.lazyload').as('post', {
+            keep: ['static-map']
+         })
       )
-         .pipe(
-            bundle('post', 'static-map', 'jquery.lazyload').as('post', {
-               keep: ['static-map']
-            })
-         )
-         .pipe(bundle('mapbox', 'util').as('mapbox', { keep: 'util' }))
-         // responsive script is on every page except map
-         .pipe(bundle('responsive', 'util').as('responsive'))
-         .pipe(bundle('static-map').as('category'))
-         .pipe(sourcemaps.init())
-         .pipe(uglify())
-         .on('error', handleError)
-         .pipe(sourcemaps.write('maps', sourceMapConfig))
-         .pipe(gulp.dest(dist + 'js'))
-   );
-});
+      .pipe(bundle('mapbox', 'util').as('mapbox', { keep: 'util' }))
+      // responsive script is on every page except map
+      .pipe(bundle('responsive', 'util').as('responsive'))
+      .pipe(bundle('static-map').as('category'))
+      .pipe(sourcemaps.init())
+      .pipe(uglify())
+      .on('error', handleError)
+      .pipe(sourcemaps.write('maps', sourceMapConfig))
+      .pipe(gulp.dest(dist + 'js'));
+
+gulp.task('js', buildJS);
+gulp.task('css', buildCSS);
 
 // act on changes
 gulp.task('watch', () => {
-   gulp.watch('./src/less/*.less', ['css']);
-   gulp.watch('./src/client/*.?s', ['js']);
+   gulp.watch('./src/less/*.less', buildCSS);
+   gulp.watch('./src/client/*.?s', buildJS);
 });
 
 //#region Helpers
@@ -142,7 +141,7 @@ const bundle = (...files) => ({
             // if not keeping file then empty callback removes it from stream
             if (keep.length == 0 || keep.indexOf(name) == -1) {
                cb();
-               return;
+               return; 
             }
          }
          // any file returned in callback is kept in stream
