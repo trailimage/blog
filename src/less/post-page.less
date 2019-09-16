@@ -1,7 +1,7 @@
 @import 'elements';
 @import 'settings';
 
-@postHeaderHeight: @headerHeight + 15;
+@postHeaderHeight: @headerHeight + 10;
 @mobileButtonSize: 30px;
 @mobileButtonMargin: 5px;
 @mobileButtonColor: #fff;
@@ -52,12 +52,12 @@ header.page.post-header {
    }
 
    #post-date {
-      top: 40px;
-      right: 63px;
+      top: @postHeaderHeight - 20;
+      right: 80px;
       z-index: 500;
       font-weight: bold;
       font-size: 14px;
-      color: lighten(@boldColor, 10%);
+      color: @boldColor;
    }
 
    .video-link {
@@ -96,7 +96,7 @@ header.page.post-header {
       font-size: 16px;
       text-align: justify;
       margin: 13px 35px 0;
-      padding: 1.2em 2em 1em;
+      padding: 1.6em 2em 1.2em;
       text-rendering: optimizeLegibility;
 
       p {
@@ -325,7 +325,7 @@ div.previous {
 }
 
 nav.tag-wrapper {
-   @height: 22px;
+   @height: 28px;
    @mobileHeight: @height + 14;
 
    width: 100%;
