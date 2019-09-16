@@ -1,6 +1,11 @@
+## 4.3.0
+
+-  Adjust design for more white space
+-  Update jQuery version
+
 ## 4.2.1
 
-- Update dependencies and copyright date
+-  Update dependencies and copyright date
 
 ## 4.2.0
 
