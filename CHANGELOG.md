@@ -1,3 +1,7 @@
+## 4.3.1
+
+- Update Google API and other dependencies
+
 ## 4.3.0
 
 -  Adjust design for more white space

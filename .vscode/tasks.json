@@ -42,6 +42,9 @@
          "command": "node_modules/.bin/gulp",
          "args": ["watch"],
          "group": "build",
+         "presentation": {
+            "group": "run"
+         },
          "type": "shell",
          "problemMatcher": ["$gulp-tsc"]
       },
@@ -64,6 +67,9 @@
       {
          "label": "Build and Watch Server",
          "group": "build",
+         "presentation": {
+            "group": "run"
+         },
          "command": "./node_modules/.bin/tsc",
          "args": ["-p", "tsconfig.node.json", "-w"],
          "type": "shell",
@@ -74,6 +80,9 @@
          "command": "node",
          "args": ["./lib/app.js"],
          "type": "shell",
+         "presentation": {
+            "group": "run"
+         },
          "dependsOn": ["Build Server"],
          "problemMatcher": []
       },
@@ -82,6 +91,9 @@
          "group": {
             "kind": "build",
             "isDefault": true
+         },
+         "presentation": {
+            "group": "run"
          },
          "command": "./node_modules/.bin/nodemon",
          "args": [
