@@ -1,5 +1,12 @@
-@import "elements";
-@import "settings";
+@import 'elements';
+@import 'settings';
+
+header.page.content {
+   background: none;
+   #top-bar {
+      background: none;
+   }
+}
 
 #photo-tag {
    @thumbWidth: 150px;
@@ -8,23 +15,35 @@
    @mobileTabWidth: 28px;
    @mobileTagWidth: 150px;
 
+   border-radius: @borderRadius;
+   padding: 1em 0;
+
    @media @mobile {
       a {
          color: @mobileLinkColor;
-         &:active { color: @mobileActiveColor; }
+         &:active {
+            color: @mobileActiveColor;
+         }
       }
    }
 
    #flickr-logo {
       position: absolute;
-      top: -45px;
-      right: 100px;
+      top: -60px;
+      right: @borderRadius;
       z-index: 200;
       text-decoration: none;
       display: block;
       text-align: center;
+      color: @trimColor;
 
-      @media @mobile { display: none; }
+      img {
+         padding-top: 6px;
+      }
+
+      @media @mobile {
+         display: none;
+      }
    }
 
    #wait {
@@ -37,20 +56,24 @@
       background-color: rgba(255, 255, 255, 0.8);
       z-index: 500;
 
-      @media @mobile { background-color: rgba(0, 0, 0, 0.7); }
-      @media @desktop { cursor: wait; }
+      @media @mobile {
+         background-color: rgba(0, 0, 0, 0.7);
+      }
+      @media @desktop {
+         cursor: wait;
+      }
    }
 
    ul#letters {
       list-style: none;
       float: left;
-      margin: 5px 0 0 -@tabWidth;
+      margin: 10px 0 0 -@tabWidth;
       padding: 0;
 
       li {
          display: block;
          width: @tabWidth;
-         padding: 5px 0;
+         padding: 7px 0;
          margin-bottom: 2px;
          text-align: center;
          font-size: 24px;
@@ -66,7 +89,9 @@
       @media @desktop {
          li {
             .border-radius(0, 0, 4px, 4px);
-            &:hover { background-color: @boldColor; }
+            &:hover {
+               background-color: @hoverColor;
+            }
             &.selected {
                color: #400;
                background-color: rgba(255, 255, 255, 0.9);
@@ -83,8 +108,13 @@
             background-color: #444;
             text-shadow: none;
             padding: 25px 0;
-            &:active { background-color: @mobileActiveColor; }
-            &.selected { color: #444; background-color: @mobileActiveColor; }
+            &:active {
+               background-color: @mobileActiveColor;
+            }
+            &.selected {
+               color: #444;
+               background-color: @mobileActiveColor;
+            }
          }
       }
    }
@@ -106,7 +136,7 @@
             padding-left: 5px;
             white-space: nowrap;
             font-size: 14px;
-            line-height: 1.3em;
+            line-height: 1.6em;
             text-overflow: ellipsis;
          }
       }
@@ -114,7 +144,8 @@
       @media @desktop {
          a {
             &.selected {
-               background-color: #ff9;
+               background-color: @trimColor;
+               color: @lightColor;
             }
          }
       }
@@ -157,8 +188,14 @@
          padding: 2px 0;
          margin: 0;
 
-         img { margin: 0; padding: 0; border: 1px solid @trimColor; }
-         &:hover img { border-color: @hoverColor; }
+         img {
+            margin: 0;
+            padding: 0;
+            border: 1px solid @trimColor;
+         }
+         &:hover img {
+            border-color: @hoverColor;
+         }
       }
 
       @media @mobile {
@@ -178,11 +215,16 @@
          }
          a {
             float: left;
-            img { border: none; padding: 2px; }
+            img {
+               border: none;
+               padding: 2px;
+            }
          }
       }
       @media @phone {
-         a img { zoom: 0.6; }
+         a img {
+            zoom: 0.6;
+         }
       }
    }
 }

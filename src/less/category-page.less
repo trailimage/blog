@@ -1,48 +1,41 @@
 @import 'elements';
 @import 'settings';
 
-header.page.category-header #top-bar {
-   // custom height
-   height: 75px;
-
-   h1,
-   h4 {
-      clear: left;
-      float: none;
-      line-height: 1em;
-      text-rendering: optimizeLegibility;
-   }
-
-   h1 {
-      margin: 0 0 0 5px;
-      padding: 2px 0 0;
-      font-size: 45px;
-      letter-spacing: 0;
-   }
-
-   // subtitle
-   h4 {
-      margin: 7px 0 0 8px;
-      color: rgba(255, 255, 255, 0.1);
-      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-      font-size: 14px;
-      font-family: @headerFont;
-      font-weight: 400;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-   }
-
-   @media @mobile {
-      position: fixed;
-      height: @mobileHeaderHeight;
+header.page.category-header {
+   #top-bar {
+      h1,
+      h4 {
+         line-height: 1em;
+         text-rendering: optimizeLegibility;
+      }
 
       h1 {
-         padding-top: 6px;
-         font-size: 30px;
-         letter-spacing: 0;
+         padding-bottom: 0;
       }
+
+      // subtitle
       h4 {
-         color: @mobileTextColor;
+         margin: 7px 0 0 8px;
+         color: @lightTrimColor;
+         font-size: 14px;
+         font-family: @headerFont;
+         font-weight: 400;
+         letter-spacing: 8px;
+         text-transform: uppercase;
+      }
+
+      @media @mobile {
+         position: fixed;
+         height: @mobileHeaderHeight;
+
+         h1 {
+            padding-top: 6px;
+            font-size: 30px;
+            letter-spacing: 0;
+         }
+         h4 {
+            color: @mobileTextColor;
+         }
       }
    }
 }
@@ -72,30 +65,28 @@ div.root-category {
 }
 
 div.category {
-   margin-top: -20px;
+   background: none;
 
    section.posts {
       padding: 0;
       margin: 0;
       font-family: @sanSerifFont;
+      background: none;
 
       article.summary {
          font-weight: normal;
          clear: left;
          text-shadow: none;
          padding: 0;
-         margin: 0;
-
-         &:first-child header.post {
-            border-top: none;
-         }
+         margin: 20px 0 0 0;
+         background-color: @backgroundColor;
+         border-radius: 8px;
+         overflow: hidden;
 
          header.post {
             background-color: #fff;
-            margin-top: 20px;
-            border-top: 1px solid @lightTrimColor;
-            padding: 13px 7px 10px 15px;
-            .drop-shadow(0, -2px, 6px, 0.1);
+            margin-top: 0;
+            padding: 13px 13px 10px 15px;
 
             .mode-icon {
                float: right;
@@ -128,7 +119,6 @@ div.category {
                font-size: 23px;
                font-weight: bold;
                text-decoration: none;
-               text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 
                &:hover {
                   color: @hoverColor;
@@ -146,7 +136,7 @@ div.category {
          }
 
          p.summary {
-            margin: 25px 30px 0;
+            margin: 2em 2em 2.5em;
             font-family: @serifFont;
             font-size: 16px;
             line-height: 1.2em;
@@ -154,34 +144,43 @@ div.category {
          }
 
          ul.categories {
-            float: right;
+            display: flex;
+            justify-content: center;
             list-style: none;
             margin: 0;
+            background-color: @trimColor;
             padding: 10px 6px 10px 0;
+            clear: both;
 
             li {
                position: relative;
                font-size: 16px;
                font-weight: normal;
-               color: #888;
+
                display: block;
-               float: left;
-               clear: none;
                padding: 1px 4px 0;
                margin-left: 3px;
                line-height: 1em;
+               white-space: nowrap;
 
                a {
-                  cursor: pointer;
+                  color: @lightColor;
                   text-decoration: none;
-                  .material-icons {
-                     .opacity(0.2);
-                     font-size: 18px;
-                     vertical-align: text-bottom;
-                     margin: 0 2px 1px 0;
+                  letter-spacing: -0.5px;
+
+                  span {
+                     // pound sign
+                     //font-weight: bold;
+                     padding-right: 1px;
                   }
-                  &:hover .material-icons {
-                     .opacity(1);
+
+                  &:hover {
+                     text-decoration: underline;
+                     color: desaturate(lighten(@hoverColor, 40%), 30%);
+
+                     span {
+                        text-decoration: none !important;
+                     }
                   }
                }
             }

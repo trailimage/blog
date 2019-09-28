@@ -1,6 +1,10 @@
+## 4.4.0
+
+-  Change layout
+
 ## 4.3.1
 
-- Update Google API and other dependencies
+-  Update Google API and other dependencies
 
 ## 4.3.0
 

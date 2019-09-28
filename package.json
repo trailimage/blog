@@ -1,7 +1,7 @@
 {
    "name": "@trail-image/blog",
    "description": "Trail Image blog",
-   "version": "4.2.0",
+   "version": "4.4.0",
    "private": false,
    "author": {
       "name": "Jason Abbott"
@@ -43,7 +43,7 @@
       "@types/googlemaps": "^3.37.7",
       "@types/jquery": "^3.3.0",
       "@types/mapbox-gl": "^0.45.0",
-      "@types/node-fetch": "^2.5.1",
+      "@types/node-fetch": "^2.5.2",
       "@types/request": "^2.48.3",
       "@types/twitter": "1.7.0",
       "@types/uglify-js": "^3.0.0",
