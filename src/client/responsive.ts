@@ -22,9 +22,6 @@ $(function() {
    const breakAt = 1024;
    // default features
    const feature: PageFeature = {
-      sideMenu: true,
-      postMenu: true,
-      twitter: true,
       facebook: false,
       timestamp: 0
    };
@@ -80,7 +77,7 @@ $(function() {
    }
 
    /**
-    * Lazy-load desktop resources
+    * Lazy-load desktop resources. Append timestamp to break caches.
     */
    function loadDesktop() {
       if (desktopLoaded) {
@@ -88,15 +85,11 @@ $(function() {
       }
 
       // could optimized into a lazy-load
-      if (feature.sideMenu) {
-         $('#category-menu').load('/category-menu');
-      }
-
-      if (feature.postMenu) {
-         // append timestap to defeat caching between site deployments
-         $.getScript('/js/post-menu-data.js?t=' + feature.timestamp);
-         $.getScript('/js/post-menu.js');
-      }
+      $('#category-menu')
+         .load('/category-menu?t=' + feature.timestamp)
+         .on('change', 'select', e => {
+            window.location.assign($(e.target).val() as string);
+         });
 
       if (feature.facebook) {
          loadSource(
@@ -104,10 +97,6 @@ $(function() {
             '//connect.facebook.net/en_US/all.js#xfbml=1&appId=110860435668134',
             true
          );
-      }
-
-      if (feature.twitter) {
-         loadSource('twitter-wjs', '//platform.twitter.com/widgets.js');
       }
 
       desktopLoaded = true;

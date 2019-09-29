@@ -33,9 +33,6 @@ interface MenuPost {
  * Which features to enable on a page — determines which libraries to lazy-load
  */
 interface PageFeature {
-   sideMenu: boolean;
-   postMenu: boolean;
-   twitter: boolean;
    facebook: boolean;
    timestamp: number;
 }

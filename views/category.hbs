@@ -1,7 +1,11 @@
-{{#contentFor "head"}}
+{{#contentFor "html-head"}}
 	<meta name="robots" content="noindex">
    <script src='/js/category.js' type='text/javascript' defer></script>
 	{{> json-ld}}
+{{/contentFor}}
+
+{{#contentFor "header"}}
+  <aside class="site-description">{{config.site.description}}</aside>
 {{/contentFor}}
 
 <div class="category content">
@@ -21,7 +25,7 @@
 			<a class="thumb" title="View story" href="/{{key}}"><img src="{{coverPhoto.size.preview.url}}" width="{{coverPhoto.size.preview.width}}" height="{{coverPhoto.size.preview.height}}" style="width: {{coverPhoto.size.preview.width}}px; height: {{coverPhoto.size.preview.height}}px;"/></a>
 		{{#if photoLocations}}
 			<a class="map" title="View map" href="/{{key}}/map" rel="nofollow"><img
-            src="./img/blank.png" class="static-map"
+            src="/img/blank.png" class="static-map"
             width="{{subtract 650 coverPhoto.size.preview.width}}"
             height="{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}"
             data-locations="{{json photoLocations}}"

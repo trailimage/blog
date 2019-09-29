@@ -1,4 +1,4 @@
-{{#contentFor "head"}}
+{{#contentFor "html-head"}}
 	<meta name="robots" content="noindex">
 	<script type='text/javascript'>
 		{{! expose routed tag to script }}
@@ -8,9 +8,12 @@
 	<script src="/js/photo-tag.js" defer></script>
 {{/contentFor}}
 
+{{#contentFor "header"}}
+   <a id="flickr-logo" rel="nofollow" href="http://www.flickr.com/photos/trailimage/tags" title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
+{{/contentFor}}
+
 <div id="photo-tag" class="content">
 	<div id="wait">&nbsp;</div>
-	<a id="flickr-logo" rel="nofollow" href="http://www.flickr.com/photos/trailimage/tags" title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
 	<div id="thumbs"></div>
 	<ul id="letters">
 	{{#alphabet}}

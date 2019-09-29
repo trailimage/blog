@@ -31,8 +31,11 @@ body {
    }
 }
 
+*:focus {
+   outline: none;
+}
+
 .content {
-   position: relative;
    font-family: @sanSerifFont;
    font-weight: normal;
    text-align: left;
@@ -87,19 +90,11 @@ header.page {
          font-family: @headerFont;
          color: @lightColor;
          margin: 0 0 0 @borderRadius;
-         padding: 10px 0 14px;
+         padding: 12px 0 18px;
          font-size: 45px;
          line-height: 1em;
          letter-spacing: 0;
       }
-   }
-
-   @media @desktop {
-      // #top-bar {
-      //    background: @lightColor url(/img/logo.png) no-repeat
-      //       (@contentWidth - 90) -15px;
-      //    border-bottom: 1px solid @lightTrimColor;
-      // }
    }
 
    @media @mobile {
@@ -107,7 +102,6 @@ header.page {
       z-index: 500;
 
       #top-bar {
-         height: @mobileHeaderHeight;
          background-color: #666;
          border-bottom: none;
          position: fixed;
@@ -118,9 +112,7 @@ header.page {
          h1 {
             font-size: 38px;
             font-weight: 400;
-            letter-spacing: 1px;
             color: @mobileTextColor;
-            text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
          }
       }
    }
@@ -187,7 +179,7 @@ div.authorize {
 footer.page {
    position: relative;
    padding: 0;
-   margin-top: 2em;
+   margin: 2em auto 1em;
    width: @contentWidth;
    text-align: center;
    background: none;
@@ -205,8 +197,7 @@ footer.page {
    aside {
       background-color: rgba(255, 255, 255, 0.1);
       padding: 1em;
-      border-top-left-radius: @borderRadius;
-      border-top-right-radius: @borderRadius;
+      border-radius: @borderRadius;
 
       p {
          text-align: center;

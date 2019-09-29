@@ -2,9 +2,23 @@
 @import 'settings';
 
 header.page.content {
-   background: none;
-   #top-bar {
-      background: none;
+   #flickr-logo {
+      position: absolute;
+      top: 8px;
+      right: @borderRadius;
+      z-index: 200;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      color: @trimColor;
+
+      img {
+         padding-top: 6px;
+      }
+
+      @media @mobile {
+         display: none;
+      }
    }
 }
 
@@ -24,25 +38,6 @@ header.page.content {
          &:active {
             color: @mobileActiveColor;
          }
-      }
-   }
-
-   #flickr-logo {
-      position: absolute;
-      top: -60px;
-      right: @borderRadius;
-      z-index: 200;
-      text-decoration: none;
-      display: block;
-      text-align: center;
-      color: @trimColor;
-
-      img {
-         padding-top: 6px;
-      }
-
-      @media @mobile {
-         display: none;
       }
    }
 

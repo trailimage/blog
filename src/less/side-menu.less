@@ -1,83 +1,79 @@
-@import "elements";
-@import "settings";
+@import 'elements';
+@import 'settings';
 
-#links, #tag-navigation {
+@padding: 20px;
+@centerOffset: (@contentWidth / 2) + @padding;
+
+#links,
+#category-menu {
    position: absolute;
    font-family: @sanSerifFont;
-   left: 50%;
-   margin-left: (@contentWidth / 2) + 8;
+   top: @padding;
+   color: @trimColor;
+   padding: 0;
 
-   @media @mobile { display: none; }
+   @media @mobile {
+      display: none;
+   }
+}
+
+#links {
+   right: 50%;
+   margin-right: @centerOffset;
+   text-align: right;
 
    a {
       display: block;
       color: @trimColor;
       text-decoration: none;
       font-size: 17px;
-      padding-bottom: 4px;
+      padding-bottom: 8px;
       text-rendering: optimizeLegibility;
 
-      &:hover, &:active {
+      &:hover,
+      &:active {
          text-decoration: underline;
          color: desaturate(lighten(@hoverColor, 40%), 20%);
       }
    }
 }
 
-#tag-navigation {
-   top: 185px;
+#category-menu {
    color: @lightColor;
+   left: 50%;
+   margin-left: @centerOffset;
+   font-size: 17px;
 
-   li {
-      &.Where { display: none; }
-      &.head {
-         font-size: 17px;
-         font-weight: bold;
-         color: desaturate(lighten(@hoverColor, 40%), 20%);
-      }
-      &.title {
-         font-size: 17px;
-         font-weight: bold;
-         margin: 5px;
-      }
+   p {
+      color: @trimColor;
+      padding-bottom: 10px;
+      font-weight: 600;
+   }
 
-      .material-icons {
-         font-size: 18px;
-         margin: 0 5px 1px 0;
-         vertical-align: text-bottom;
-         .opacity(0.8);
-      }
+   select {
+      font-size: 15px;
+      margin: 4px 0 10px;
+      border: none;
+      background-color: #555;
+      color: @lightColor;
+      appearance: none;
+      padding: 3px;
+      cursor: pointer;
 
-      ul {
-         margin: 2px 0 0 10px;
+      option {
+         cursor: pointer;
 
-         li {
-            font-size: smaller;
-            font-weight: normal;
-            color: @lightTrimColor;
-            line-height: 1.2em;
-            a { display: inline; font-weight: normal; padding-right: 5px; }
+         &.label {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background-color: #333;
+            font-size: 13px;
+            text-align: right;
          }
       }
-   }
-}
 
-#links {
-   top: 3px;
-
-   .twitter {
-      height: 22px;
-      width: 65px;
-      position: absolute;
-      right: 17px;
-      top: 35px;
+      &:focus {
+         border: none;
+      }
    }
-
-   a.feed-icon {
-      background: url(/img/feed-icon-14x14.png) no-repeat;
-      margin-top: 3px;
-      padding-left: 18px;
-      line-height: 1em;
-   }
-   .twitter-follow-button { margin-top: 7px; }
 }

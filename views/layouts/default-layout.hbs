@@ -2,23 +2,22 @@
 <html lang="en">
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-   {{> head-meta}} {{> head-files}} {{> ga}} {{> google-search}} {{{block "head"}}}
+   {{> head-meta}} {{> head-files}} {{> ga}} {{{block "html-head"}}}
    <style type="text/css">
       #bug,
       #links,
-      #tag-navigation {
+      #category-menu {
          position: fixed;
       }
    </style>
    <script type="text/javascript">
       {{! features determine which scripts to load }}
-      pageFeatures = { sideMenu: true, postMenu: false, twitter: true, facebook: false, timestamp: {{ config.timestamp }} };
+      var pageFeatures = { facebook: true, timestamp: {{ config.timestamp }} };
    </script>
 </head>
 
 <body>
-   {{! adjust header size for some pages }}
-   <header class="page content{{#if headerCSS}} {{headerCSS}}{{/if}}">
+   <header class="page content">
       <!--googleoff: index-->
       <nav id="mobile-menu"></nav>
       <!--googleon: index-->
@@ -27,9 +26,10 @@
          {{#if subtitle}}
          <h4>{{subtitle}}</h4>{{/if}}
          <div id="mobile-menu-button">{{{icon "menu"}}}</div>
+         {{{block "header"}}}
       </div>
    </header>
-   {{> side-menu}} {{>bug}} {{{body}}} {{> footer}}
+   {{> side-menu}} {{{body}}} {{> footer}}
 </body>
 
 </html>

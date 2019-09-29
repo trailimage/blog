@@ -21,7 +21,6 @@ function send(
                post: p,
                title: p.title,
                jsonLD: p.jsonLD(),
-               layout: Layout.None,
                description: p.longDescription,
                slug: key
             });
