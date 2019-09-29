@@ -3,6 +3,7 @@
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
    {{> head-meta}} {{> head-files}} {{> ga}} {{{block "html-head"}}}
+   {{#unless scrollNav}}
    <style type="text/css">
       #bug,
       #links,
@@ -10,9 +11,13 @@
          position: fixed;
       }
    </style>
+   {{/unless}}
    <script type="text/javascript">
       {{! features determine which scripts to load }}
-      var pageFeatures = { facebook: true, timestamp: {{ config.timestamp }} };
+      var pageFeatures = {
+         facebook: {{#if useFacebook}}true{{else}}false{{/if}},
+         timestamp: {{ config.timestamp }}
+      };
    </script>
 </head>
 

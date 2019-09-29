@@ -20,6 +20,8 @@ function send(
             render(viewName, {
                post: p,
                title: p.title,
+               scrollNav: true,
+               useFacebook: true,
                jsonLD: p.jsonLD(),
                description: p.longDescription,
                slug: key

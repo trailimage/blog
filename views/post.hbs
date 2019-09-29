@@ -54,51 +54,52 @@
 		</div>
 		{{/if}}
 	{{/unless}}
+</div>
 
-	<div id="light-box"><img src="/img/topo-map-tile.jpg"/></div>
+<div id="light-box"><img src="/img/topo-map-tile.jpg"/></div>
 
 {{#each post.photos}}
 
-	<figure itemscope
+   <figure itemscope
       title="Click to enlarge image {{index}}"
       data-exif="/exif/{{id}}"
       style='width: {{size.normal.width}}px; height: {{size.normal.height}}px;'>
-		{{! links from photo tag search are anchored to ID }}
-		<a name="{{id}}"></a><a name="{{index}}"></a>
-		{{! data-original attribute supports jquery.lazyload }}
-		<img
+      {{! links from photo tag search are anchored to ID }}
+      <a name="{{id}}"></a><a name="{{index}}"></a>
+      {{! data-original attribute supports jquery.lazyload }}
+      <img
          src="{{size.preview.url}}"
          alt="{{title}}"
          data-original="{{size.normal.url}}"
-			style="width: {{size.normal.width}}px; height: {{size.normal.height}}px;"
-		   data-big="{{size.big.url}}"
+         style="width: {{size.normal.width}}px; height: {{size.normal.height}}px;"
+         data-big="{{size.big.url}}"
          data-big-width="{{size.big.width}}"
          data-big-height="{{size.big.height}}"/>
-		<div class="info-button">{{{icon 'photo_camera'}}}<p>Camera Settings</p></div>
+      <div class="info-button">{{{icon 'photo_camera'}}}<p>Camera Settings</p></div>
 
-	{{#if tags.size}}
-		<nav class="tags">
-			{{{icon 'local_offer'}}}
-			<h4>More photos like this</h4>
-			{{{makeTagList tags}}}
-		</nav>
-	{{/if}}
+   {{#if tags.size}}
+      <nav class="tags">
+         {{{icon 'local_offer'}}}
+         <h4>More photos like this</h4>
+         {{{makeTagList tags}}}
+      </nav>
+   {{/if}}
 
-	{{#if longitude}}
+   {{#if longitude}}
       {{! http://handlebarsjs.com/#paths }}
-		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow"><span>map</span>{{{icon 'map'}}}</a>
-	{{/if}}
+      <a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow"><span>map</span>{{{icon 'map'}}}</a>
+   {{/if}}
 
-	{{#if title}}
-		<figcaption><span>{{{formatTitle title}}}</span></figcaption>
-	{{/if}}
-	{{#if sourceUrl}}
-		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
-	{{/if}}
-		<div class="mobile-button">{{{icon 'info'}}}{{{icon 'info_outline'}}}</div>
-	</figure>
+   {{#if title}}
+      <figcaption><span>{{{formatTitle title}}}</span></figcaption>
+   {{/if}}
+   {{#if sourceUrl}}
+      <a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
+   {{/if}}
+      <div class="mobile-button">{{{icon 'info'}}}{{{icon 'info_outline'}}}</div>
+   </figure>
 
-	<div class="caption content">{{{formatCaption description}}}</div>
+   <div class="caption content">{{{formatCaption description}}}</div>
 
 {{/each}}
 

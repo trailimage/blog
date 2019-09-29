@@ -6,13 +6,14 @@ import {
    HttpStatus,
    MimeType,
    is,
-   addCharSet
+   addCharSet,
+   mergeAll
 } from '@toba/node-tools';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
 import { config } from '../config';
-import { Page } from './template';
+import { Page, Layout } from './template';
 
 /**
  * Values available within view template.
@@ -32,7 +33,19 @@ export interface ViewContext {
     * layout.
     */
    layout?: string | null;
+   /**
+    * Whether navigation should scroll with the page instead of bveing fixed.
+    */
+   scrollNav?: boolean;
+   /** Whether to load the Facebook API */
+   useFacebook?: boolean;
 }
+
+const defaultContext: Partial<ViewContext> = {
+   layout: Layout.Main,
+   scrollNav: false,
+   useFacebook: false
+};
 
 /**
  * Rendered page cache.
@@ -282,10 +295,14 @@ function makeRenderer(res: Response, slug: string): Renderer {
       type?: MimeType,
       minify = false
    ) => {
-      // use default meta tag description if none provided
-      if (is.empty(context.description)) {
-         context.description = config.site.description;
-      }
+      context = Object.assign(
+         {},
+         defaultContext,
+         {
+            description: config.site.description
+         },
+         context
+      );
 
       if (is.defined(context, 'jsonLD')) {
          context.linkData = serialize(context.jsonLD);
