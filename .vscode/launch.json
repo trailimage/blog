@@ -23,6 +23,20 @@
          "protocol": "inspector"
       },
       {
+         // https://github.com/whitecolor/ts-node-dev/issues/9
+         // https://github.com/whitecolor/ts-node-dev/issues/64
+         "name": "Server (ts-node-dev)",
+         "type": "node",
+         "request": "launch",
+         "args": ["${workspaceRoot}/src/app.ts"],
+         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node-dev",
+         //"runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+         "sourceMaps": true,
+         "cwd": "${workspaceRoot}",
+         "protocol": "inspector",
+         "restart": true
+      },
+      {
          "name": "Jest",
          "type": "node",
          "request": "launch",

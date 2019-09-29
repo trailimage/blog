@@ -8,6 +8,8 @@
       <link rel="next" href="/{{post.next.key}}" />
       {{/if}}
    {{/unless}}
+   {{> head-facebook}}
+   <script src='/js/post.js' type='text/javascript' defer></script>
 {{/contentFor}}
 
 {{#contentFor "header"}}
@@ -29,30 +31,24 @@
 </div>
 {{/if}}
 
-{{#if post.video}}
-<div class="post-links content">
-	<a class="video-link" href="#video">{{{icon 'videocam'}}}jump to the video</a>
-</div>
-{{/if}}
-
 <div class="post content">
 	{{#unless post.feature}}
 		{{> categories post.categories}}
-		<nav id="nav-top">{{> navigation}}</nav>
 		{{#if post.photoLocations}}
 		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
          <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow">
             <img
                src="/img/blank.png"
-               width="650"
+               width="{{config.style.contentWidth}}"
                height="200"
                class="static-map"
                data-locations="{{json post.photoLocations}}"
-               data-href="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/-pins-/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false"/>
+               data-href="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/-pins-/auto/{{config.style.contentWidth}}x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false"/>
          </a>
 		</div>
 		{{/if}}
+      <nav id="nav-top">{{> navigation}}</nav>
 	{{/unless}}
 </div>
 
@@ -112,10 +108,10 @@
 {{/if}}
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
+   <div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
 {{#unless post.feature}}
 	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}
-	<div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
 
 	<footer class="post content">
 		<div class="fb-comments" data-href="{{config.site.url}}/{{post.key}}/" data-width="648" data-num-posts="20"></div>

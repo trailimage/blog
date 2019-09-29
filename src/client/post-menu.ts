@@ -20,7 +20,6 @@ declare const postMenuData: PostMenu;
  * that have their HTML contents refreshed depending on clicks.
  */
 $(function() {
-   const eventCategory = 'Post Menu';
    const css = 'selected';
    const $button = $('#post-menu-button');
    const $menu = $('#post-menu');
@@ -50,7 +49,6 @@ $(function() {
                loadSubcategories(selection);
             }
          }
-         util.log.event(eventCategory, 'Open');
       })
       .click(toggleMenu);
 
@@ -130,7 +128,6 @@ $(function() {
    function showSelection(this: HTMLElement) {
       window.location.href = '/' + $(this).data('slug');
       toggleMenu();
-      util.log.event(eventCategory, 'Click Post');
    }
 
    /**

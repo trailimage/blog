@@ -1,6 +1,10 @@
-## 4.4.0
+## 5.0.0
 
 -  Change layout
+-  Simplify category selector (remove move JavaScript)
+-  Remove Google Analytics (unecessary privacy invasion)
+-  Remove Facebook "Like" button
+-  Remove Twitter link and API
 
 ## 4.3.1
 

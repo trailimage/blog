@@ -9,25 +9,29 @@
 {{/contentFor}}
 
 {{#contentFor "header"}}
-   <a id="flickr-logo" rel="nofollow" href="http://www.flickr.com/photos/trailimage/tags" title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
+   <a
+      id="flickr-logo"
+      rel="nofollow"
+      href="http://www.flickr.com/photos/trailimage/tags"
+      title="Powered by Flickr">Powered by<br/><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
 {{/contentFor}}
 
-<div id="photo-tag" class="content">
-	<div id="wait">&nbsp;</div>
-	<div id="thumbs"></div>
-	<ul id="letters">
-	{{#alphabet}}
-		<li data-for="item-{{this}}">{{this}}</li>
-	{{/alphabet}}
-	</ul>
-	<div id="tag-index">
-	{{#each tags}}
-		<div id="item-{{@key}}">
-		{{#each this}}
-			<a id="link-{{@key}}" rel="nofollow" href="/photo-tag/search/{{encode @key}}">{{this}}</a>
-		{{/each}}
-		</div>
-	{{/each}}
-	</div>
-	<div class="clear"></div>
+<ul id="letters" class="content">
+{{#alphabet}}
+	<li data-for="item-{{this}}">{{this}}</li>
+{{/alphabet}}
+</ul>
+
+<div id="selectors" class="content">
+{{#each tags}}
+   <select id="item-{{@key}}">
+      <option value="-">Select “{{@key}}” tag to see matches:</option>
+   {{#each this}}
+      <option value="{{encode @key}}">{{this}}</a>
+   {{/each}}
+   </select>
+{{/each}}
+   <div id="status"></div>
 </div>
+
+<div id="thumbs" class="content"></div>

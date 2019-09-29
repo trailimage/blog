@@ -151,7 +151,7 @@ header.page {
    }
 }
 
-/* Feature variations ------------------------------------------------------ */
+/* Main navigation ---------------------------------------------------------- */
 
 #nav-top,
 #nav-bottom {
@@ -176,38 +176,12 @@ header.page {
    }
 }
 
-#nav-bottom {
-   @media @mobile {
-      width: 100%;
-      margin: 0 0 20px;
-   }
-}
-
-div.next {
-   left: 50%;
-   margin-left: (@contentWidth / 2) + 10;
-   @media @mobile {
-      right: 10px;
-      margin: 0;
-      text-align: right;
-   }
-}
-
-div.previous {
-   right: 50%;
-   margin-right: (@contentWidth / 2) + 10;
-   text-align: right;
-   @media @mobile {
-      left: 10px;
-      margin: 0;
-      text-align: left;
-   }
-}
-
 div.next,
 div.previous {
    width: (@imageWidth - @contentWidth) / 2;
-   margin-top: 30px;
+   // this moves the navigation links up so they appear just above their div
+   // so they don't overlap image shown immediately below
+   margin-top: -4em;
    position: absolute;
    font-family: @sanSerifFont;
    font-size: 16px;
@@ -254,6 +228,41 @@ div.previous {
    }
 }
 
+div.next {
+   left: 50%;
+   margin-left: (@contentWidth / 2) + 10;
+   @media @mobile {
+      right: 10px;
+      margin: 0;
+      text-align: right;
+   }
+}
+
+div.previous {
+   right: 50%;
+   margin-right: (@contentWidth / 2) + 10;
+   text-align: right;
+   @media @mobile {
+      left: 10px;
+      margin: 0;
+      text-align: left;
+   }
+}
+
+#nav-bottom {
+   div.next,
+   div.previous {
+      margin-top: 0;
+   }
+
+   @media @mobile {
+      width: 100%;
+      margin: 0 0 20px;
+   }
+}
+
+/* End navigation ------------------------------------------------------------*/
+
 #light-box {
    display: none;
    position: fixed;
@@ -275,73 +284,42 @@ div.previous {
    }
 }
 
+// post category tags
 nav.tag-wrapper {
-   @height: 28px;
-   @mobileHeight: @height + 14;
-
-   width: 100%;
-   height: @height;
-   margin: 0;
-   padding: 0;
-   overflow: hidden;
-   text-align: center;
-   position: relative;
+   display: flex;
    border: none;
    background-color: @trimColor;
    font-family: @sanSerifFont;
-   line-height: 10px;
-   .drop-shadow(0, 0, 2px, 0.4);
-
-   .material-icons {
-      position: absolute;
-      top: 3px;
-      right: 6px;
-      font-size: @height - 6;
-      color: rgba(255, 255, 255, 0.4);
-
-      @media @mobile {
-         font-size: @mobileHeight - 9;
-         top: 5px;
-         right: 10px;
-         color: rgba(255, 255, 150, 0.4);
-      }
-   }
+   border-top-left-radius: @borderRadius;
+   border-top-right-radius: @borderRadius;
 
    ul.tags {
+      width: 100%;
       list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      white-space: nowrap;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
 
       li {
-         font-size: 13px;
-         font-weight: normal;
+         display: block;
+         white-space: nowrap;
+         padding: 5px;
+         font-size: 16px;
          color: #fff;
-         display: inline-block;
-         padding: 0;
-         margin: 0;
-         line-height: @height - 2;
-         vertical-align: bottom;
          text-rendering: optimizeLegibility;
 
-         &.label {
-            padding-bottom: 2px;
-            margin-left: 0;
-            font-weight: bold;
-            text-shadow: 1px 0 2px rgba(0, 0, 0, 0.5);
-         }
-
          a {
-            height: @height;
-            display: block;
-            padding: 1px 4px 0;
             text-decoration: none;
-            background-color: lighten(@trimColor, 7%);
             color: #fff;
 
+            span {
+               padding-right: 2px;
+            }
+
             &:hover {
-               color: desaturate(lighten(@hoverColor, 55%), 20%);
-               background-color: darken(@trimColor, 10%);
+               color: desaturate(lighten(@hoverColor, 45%), 10%);
+               text-decoration: underline;
+               background-color: @trimColor;
             }
          }
       }
@@ -350,8 +328,19 @@ nav.tag-wrapper {
    @media @mobile {
       display: none;
       background-color: #555;
-      height: @mobileHeight;
-      line-height: @mobileHeight - 5;
+   }
+}
+
+// post category tags shown above footer
+.footer-tags.content {
+   background: none;
+
+   nav.tag-wrapper {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: @borderRadius;
+      border-bottom-right-radius: @borderRadius;
+      margin-bottom: 20px;
    }
 }
 
@@ -976,21 +965,6 @@ div.caption {
       font-size: @fontSize + 3;
       p {
          padding: 0 1.5em 0.3em 2em;
-      }
-   }
-}
-
-.footer-tags {
-   margin: 0 auto;
-
-   nav.tag-wrapper {
-      .drop-shadow(0, 0, 7px, 0.6);
-   }
-
-   @media @mobile {
-      margin: 0;
-      nav.tag-wrapper {
-         .box-shadow(none);
       }
    }
 }

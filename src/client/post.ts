@@ -15,7 +15,6 @@ interface JQuery {
  * @see http://www.appelsiini.net/projects/lazyload
  */
 $(function() {
-   const eventCategory = 'Post';
    const $photos = $('figure');
    const $lb = $('#light-box');
 
@@ -67,8 +66,6 @@ $(function() {
                      $(this).appendTo($fig);
                      $fig.data(loadedKey, true);
                   });
-
-               util.log.event(eventCategory, 'Show Photo Info', 'Mobile');
             }
          }
       });
@@ -82,8 +79,6 @@ $(function() {
          .load($button.parent().data('exif'), function() {
             $button.removeClass('loading').addClass('loaded');
          });
-
-      util.log.event(eventCategory, 'Show Photo Info');
    });
 
    /**
@@ -206,8 +201,6 @@ $(function() {
       $lb.show(0, disablePageScroll);
       // update panning calculations if window resizes
       $(window).resize(updateSize);
-
-      util.log.event(eventCategory, 'Show Lightbox');
    }
 
    function disablePageScroll() {

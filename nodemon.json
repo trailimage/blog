@@ -1,6 +1,0 @@
-{
-   "verbose": true,
-   "watch": ["src", "lib", "views"],
-   "ext": "js,ts,json,hbs",
-   "ignore": ["*.test.*", "*.css", "src/client"]
-}

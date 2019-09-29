@@ -51,5 +51,10 @@ export const style = {
       maxInlineHeight: 200
    },
    /** Characters used between displayed title and subtitle */
-   subtitleSeparator: ':'
+   subtitleSeparator: ':',
+   /**
+    * Pixel width of main content used to compute generated image widths --
+    * should match value in `settings.less`.
+    */
+   contentWidth: 650
 };
