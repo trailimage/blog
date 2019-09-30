@@ -67,10 +67,18 @@ $(function() {
       if (mobileLoaded) {
          return;
       }
+      const imageStyle = { width: '100%', height: 'auto' };
 
       // could be optimized into a lazy-load
-      $('#mobile-menu').load('/mobile-menu', () => {
-         $.getScript('/js/mobile-menu.js');
+      $('#mobile-menu').load('/mobile-menu?t=' + feature.timestamp, () => {
+         $.getScript('/js/mobile-menu.js?t=' + feature.timestamp);
+      });
+
+      $('figure').each(function(this: HTMLElement) {
+         $(this)
+            .css(imageStyle)
+            .find('img')
+            .css(imageStyle);
       });
 
       mobileLoaded = true;
@@ -84,7 +92,7 @@ $(function() {
          return;
       }
 
-      // could optimized into a lazy-load
+      // could be optimized into a lazy-load
       $('#category-menu')
          .load('/category-menu?t=' + feature.timestamp)
          .on('change', 'select', e => {

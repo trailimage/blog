@@ -32,6 +32,7 @@ $(function() {
       $li = $(this);
       $li.addClass(css);
 
+      $selector.val(emptyTag);
       $selector.hide();
       $selector = $('#' + $li.data('for'));
       $selector.show();

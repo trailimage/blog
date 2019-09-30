@@ -24,7 +24,6 @@ export const enum Page {
    Authorize = 'authorize',
    EXIF = 'exif',
    CategoryMenu = 'category-menu',
-   PostMenuData = 'post-menu-data',
    MobileMenuData = 'mobile-menu-data',
    Post = 'post',
    Category = 'category',
@@ -33,7 +32,6 @@ export const enum Page {
    PhotoSearch = 'photo-search',
    //MAP: 'map',
    Mapbox = 'mapbox',
-   Search = 'search',
    Sitemap = 'sitemap-xml'
 }
 

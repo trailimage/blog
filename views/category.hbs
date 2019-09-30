@@ -17,7 +17,9 @@
 					<li class="date-taken">{{date happenedOn}}</li>
    {{#if photoCount}}<li class="photo-count">{{photoCount}} photos{{#if video}} and a video{{/if}}</li>{{/if}}
 				</ul>
-				<a class="title" href="/{{key}}">{{title}}{{#if subTitle}}: <span class="subtitle">{{subTitle}}</span>{{/if}}</a>
+				<a class="title" href="/{{key}}">{{title}}
+               {{#if subTitle}}<span class="subtitle"><span class="part">Part {{part}}:</span>{{subTitle}}</span>{{/if}}
+            </a>
 				<span class="mode-icon {{modeIconForPost categories}}"></span>
 				<div class="clear"></div>
 			</header>

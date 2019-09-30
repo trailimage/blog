@@ -31,6 +31,12 @@ header.page {
          font-family: @sanSerifFont;
          color: @lightColor;
       }
+
+      @media @mobile {
+         #post-date {
+            right: 15px;
+         }
+      }
    }
 }
 
@@ -50,38 +56,6 @@ header.page {
    }
 }
 
-.post-links.content {
-   background: none;
-   color: @lightColor;
-   margin: -10px auto 10px;
-
-   .video-link {
-      position: absolute;
-      right: 15px;
-      height: 20px;
-      text-transform: uppercase;
-      text-decoration: none;
-      letter-spacing: 1px;
-      font-size: 12px;
-      line-height: 12px;
-      z-index: 21;
-      color: #fff;
-      padding: 0 6px 4px 4px;
-      .gradient(#800, #810, #966);
-      .rounded(3px);
-      .opacity(0.7);
-
-      .material-icons {
-         padding: 0 6px 4px 0;
-         vertical-align: middle;
-      }
-
-      &:hover {
-         .opacity(1);
-      }
-   }
-}
-
 .post.content {
    border-radius: @borderRadius;
 
@@ -93,60 +67,16 @@ header.page {
       width: 100%;
       padding: 0;
       margin: 0;
-   }
 
-   @media @mobile {
-      position: relative;
-
-      #top-bar {
-         position: fixed;
-         height: @mobileHeaderHeight;
-
-         h1 {
-            padding-top: 10px;
-            letter-spacing: -1px;
-         }
-         .subtitle {
-            padding-top: 8px;
-            color: @mobileTextColor;
-            text-shadow: none;
+      @media @tablet {
+         img {
+            width: 100%;
+            height: auto;
          }
       }
-      #post-date {
-         position: fixed;
-         z-index: 400;
-         color: darken(@mobileTextColor, 30%);
-         font-size: 13px;
-         right: 10px;
-      }
-      .video-link,
-      .map {
+
+      @media @phone {
          display: none;
-      }
-
-      .synopsis {
-         font-family: @sanSerifFont;
-         color: #ddd;
-         background-color: transparent;
-         line-height: 1.3em;
-         text-align: justify;
-         font-size: 16px;
-      }
-   }
-
-   @media @phone {
-      #top-bar .subtitle {
-         p {
-            display: none;
-         }
-
-         .parts {
-            span {
-               display: none;
-            }
-            padding-bottom: 2px;
-            color: #fff;
-         }
       }
    }
 }
@@ -181,7 +111,7 @@ div.previous {
    width: (@imageWidth - @contentWidth) / 2;
    // this moves the navigation links up so they appear just above their div
    // so they don't overlap image shown immediately below
-   margin-top: -4em;
+   margin-top: -4.5em;
    position: absolute;
    font-family: @sanSerifFont;
    font-size: 16px;
@@ -323,11 +253,6 @@ nav.tag-wrapper {
             }
          }
       }
-   }
-
-   @media @mobile {
-      display: none;
-      background-color: #555;
    }
 }
 
@@ -903,6 +828,7 @@ div.caption {
       padding: 0 0 15px;
       font-size: @fontSize + 2;
       line-height: 1.3em;
+      color: @mobileTextColor;
 
       p {
          padding: 0 0.7em 0.3em;

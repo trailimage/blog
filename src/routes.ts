@@ -136,7 +136,6 @@ function standard(app: Express.Application) {
    app.get('/issues?/:slug' + s, staticPage.issues);
    app.get('/category-menu', category.menu);
    app.get('/mobile-menu', menu.mobile);
-   app.get('/search', staticPage.search);
 
    app.use(`/${rootCategory}`, categoryRoutes());
 

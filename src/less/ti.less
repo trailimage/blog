@@ -24,11 +24,6 @@ body {
    color: #333;
    line-height: 1.3em;
    background: #222 url(/img/topo-map-tile.jpg) repeat;
-
-   @media @mobile {
-      color: @mobileTextColor;
-      padding-top: @mobileHeaderHeight;
-   }
 }
 
 *:focus {
@@ -90,29 +85,35 @@ header.page {
          font-family: @headerFont;
          color: @lightColor;
          margin: 0 0 0 @borderRadius;
-         padding: 12px 0 18px;
+         padding: 12px 0;
          font-size: 45px;
          line-height: 1em;
          letter-spacing: 0;
       }
+      // subtitle
+      h4 {
+         margin: -6px 0 0 @borderRadius;
+         color: @lightTrimColor;
+         font-size: 14px;
+         font-family: @headerFont;
+         font-weight: 400;
+         letter-spacing: 8px;
+         text-transform: uppercase;
+      }
    }
 
    @media @mobile {
-      position: fixed;
       z-index: 500;
 
       #top-bar {
-         background-color: #666;
-         border-bottom: none;
-         position: fixed;
          width: 100%;
-         top: 0;
          z-index: 200;
 
          h1 {
-            font-size: 38px;
-            font-weight: 400;
-            color: @mobileTextColor;
+            padding-top: @borderRadius;
+         }
+         h4 {
+            padding-bottom: 10px;
          }
       }
    }
