@@ -3,8 +3,6 @@
 
 header.page {
    #top-bar {
-      // subtitle
-
       .site-description {
          position: absolute;
          text-align: right;
@@ -143,6 +141,7 @@ div.category {
             color: #000;
          }
 
+         // category tags
          ul.categories {
             display: flex;
             flex-wrap: wrap;
@@ -164,121 +163,24 @@ div.category {
                line-height: 1em;
                white-space: nowrap;
 
+               span {
+                  // pound sign
+                  color: @lightTrimColor;
+                  padding-right: 1px;
+               }
+
                a {
                   color: @lightColor;
                   text-decoration: none;
                   letter-spacing: -0.5px;
 
-                  span {
-                     // pound sign
-                     //font-weight: bold;
-                     padding-right: 1px;
-                  }
-
                   &:hover {
                      text-decoration: underline;
-                     color: desaturate(lighten(@hoverColor, 40%), 30%);
-
-                     span {
-                        text-decoration: none !important;
-                     }
+                     //color: desaturate(lighten(@hoverColor, 40%), 30%);
                   }
                }
             }
          }
       }
    }
-
-   //    @media @mobile {
-   //       section.posts {
-   //          article.summary {
-   //             header.post {
-   //                padding: 12px;
-   //                background-color: #333;
-   //                a.title,
-   //                ul.info {
-   //                   color: #fff;
-   //                }
-   //                a.title {
-   //                   line-height: 1em;
-   //                }
-   //                ul.info {
-   //                   padding-bottom: 4px;
-   //                   li.photo-count {
-   //                      padding-top: 2px;
-   //                   }
-   //                }
-   //                a:active {
-   //                   color: @mobileHoverColor;
-   //                }
-   //                .mode-icon {
-   //                   display: none;
-   //                }
-   //             }
-
-   //             a.thumb {
-   //                display: block;
-   //                text-align: center;
-   //                float: none;
-   //                margin: 0 auto;
-   //             }
-
-   //             a.map {
-   //                display: none;
-   //             }
-
-   //             p.summary {
-   //                font-size: 18px;
-   //                text-align: left;
-   //                margin: 18px 18px 8px 18px;
-   //                color: @mobileTextColor;
-   //             }
-
-   //             ul.categories {
-   //                padding: 6px 10px;
-   //                text-align: center;
-   //                float: none;
-
-   //                li {
-   //                   font-size: 16px;
-   //                   padding: 0 0 0 6px;
-   //                   margin: 10px 0;
-
-   //                   a {
-   //                      color: #999;
-   //                      padding: 2px 12px 4px;
-   //                      background-color: rgba(100, 100, 100, 0.4);
-   //                      border: none;
-
-   //                      .material-icons {
-   //                         display: none;
-   //                      }
-   //                      .rounded(16px);
-
-   //                      &:active {
-   //                         color: @mobileActiveColor;
-   //                      }
-   //                   }
-   //                }
-   //             }
-   //          }
-   //       }
-   //    }
-
-   //    @media @tablet {
-   //       section.posts {
-   //          article.summary {
-   //             header.post {
-   //                font-size: 22px;
-   //                padding-top: 4px;
-   //             }
-   //             a.thumb img {
-   //                zoom: 2;
-   //             }
-   //             p.summary {
-   //                font-size: 22px;
-   //             }
-   //          }
-   //       }
-   //    }
 }

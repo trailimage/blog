@@ -38,7 +38,7 @@
 				<ul class="categories">
 				{{#each categories}}
 					{{! posts store their categories as titles keyed to the slug }}
-					<li><a href="/{{@key}}" rel="tag"><span>#</span>{{this}}</a></li>
+					<li><span>#</span><a href="/{{@key}}" rel="tag">{{this}}</a></li>
 				{{/each}}
 				</ul>
 			</section>

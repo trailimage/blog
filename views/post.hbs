@@ -108,7 +108,9 @@
 {{/if}}
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
-   <div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
+   <div class='by-line content{{#if post.feature}} feature{{/if}}'>
+      <p rel='author'>by {{config.owner.name}}</p>
+   </div>
 {{#unless post.feature}}
 	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}

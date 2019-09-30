@@ -14,8 +14,7 @@ header.page {
          display: flex;
          font-family: @sanSerifFont;
          font-size: 22px;
-         line-height: 18px;
-         margin: -10px 0 0 @borderRadius;
+         margin: -4px 0 0 @borderRadius;
 
          .parts {
             display: block;
@@ -160,7 +159,7 @@ div.previous {
 
 div.next {
    left: 50%;
-   margin-left: (@contentWidth / 2) + 10;
+   margin-left: (@contentWidth / 2) + 15;
    @media @mobile {
       right: 10px;
       margin: 0;
@@ -170,7 +169,7 @@ div.next {
 
 div.previous {
    right: 50%;
-   margin-right: (@contentWidth / 2) + 10;
+   margin-right: (@contentWidth / 2) + 15;
    text-align: right;
    @media @mobile {
       left: 10px;
@@ -238,18 +237,17 @@ nav.tag-wrapper {
          color: #fff;
          text-rendering: optimizeLegibility;
 
+         span {
+            color: @lightTrimColor;
+            padding-right: 2px;
+         }
+
          a {
             text-decoration: none;
             color: #fff;
 
-            span {
-               padding-right: 2px;
-            }
-
             &:hover {
-               color: desaturate(lighten(@hoverColor, 45%), 10%);
                text-decoration: underline;
-               background-color: @trimColor;
             }
          }
       }
@@ -309,7 +307,7 @@ figure {
       background-color: #fff;
       padding: 4px;
       margin: 0;
-      cursor: pointer;
+      cursor: zoom-in;
       cursor: -webkit-zoom-in;
       cursor: -moz-zoom-in;
       z-index: 20;
@@ -582,9 +580,6 @@ figure {
          nav.tags {
             display: block;
          }
-         figcaption span {
-            color: #000;
-         }
       }
    }
 
@@ -625,10 +620,9 @@ figure {
          margin-top: -10px;
          background-color: #fff;
          white-space: nowrap;
-         color: rgba(0, 0, 0, 0.7);
-         border: 1px solid #666;
-         .opacity(0.8);
+         border: 1px solid @boldColor;
          padding: 0 10px 1px;
+         color: @boldColor;
       }
 
       @media @mobile {
@@ -662,6 +656,8 @@ div.caption {
    line-height: 1.3em;
    padding: 4px 0 0;
    font-size: @fontSize;
+   min-height: 1.5em;
+   position: relative;
 
    sup {
       color: @footnoteColor;
@@ -682,11 +678,10 @@ div.caption {
       background-image: url(/img/left-quote.png);
       background-repeat: no-repeat;
       background-position: left top;
-      margin: 1em 1em 0;
-      text-align: justify;
+      margin: 2em 1em 0;
 
       p {
-         padding: 0 4em 0.5em;
+         padding: 0 4em 1em;
          //text-indent: 0;
          line-height: 1.1em;
          color: #444;
@@ -697,34 +692,35 @@ div.caption {
          background-image: url(/img/quote-ornament.png);
          background-position: left bottom;
          font-family: @serifFont;
-         line-height: 1.4em;
          text-align: left;
-         margin-top: 1.5em;
+         margin-top: 3em;
 
          p {
             text-align: left;
             text-indent: 0;
+            line-height: 1.5em;
             padding: 0 0 1.4em 5em;
+         }
+
+         .tab {
+            width: 1.5em;
          }
       }
    }
 
-   p {
+   > p {
       text-indent: 2em;
       font-family: @serifFont;
       margin: 0;
-      padding: 0 2em 0.3em;
+      padding: 0 2.5em 0.5em;
 
       &:first-child,
       &.first {
          text-indent: 0;
-         padding-top: 1.4em;
+         padding-top: 2.5em;
       }
       &:last-child {
          padding-bottom: 2em;
-      }
-      &.first {
-         padding-top: 0.4em;
       }
       &.quip {
          &:first-child,
@@ -747,7 +743,6 @@ div.caption {
       &.poem {
          padding-left: 3em;
          line-height: 1.3em;
-         //margin-bottom: 1em;
          font-size: 18px;
 
          .drop-cap {
@@ -762,13 +757,15 @@ div.caption {
          font-style: italic;
          font-size: 22px;
          text-indent: 0;
-         padding: 10px 0 15px 65px;
+         padding-top: 2em;
+         padding-left: 3.5em;
+         //padding: 10px 0 15px 65px;
          line-height: 1.1em;
 
          .material-icons {
             display: block;
             position: absolute;
-            top: 15px;
+            top: 40px;
             right: 100px;
             color: @trimColor;
             font-size: 75px;
@@ -789,13 +786,6 @@ div.caption {
       cursor: help;
       color: @footnoteColor;
 
-      .opacity();
-
-      &:hover {
-         background: none;
-         .opacity(1);
-      }
-
       li {
          line-height: 1em;
          padding-bottom: 5px;
@@ -808,10 +798,12 @@ div.caption {
             color: @hoverColor;
          }
 
+         // from asterisk in photo title to credit creator
          &.credit {
             list-style: none;
             text-indent: -10px;
             padding-bottom: 10px;
+
             .material-icons {
                font-size: 14px;
                color: @footnoteColor;
@@ -903,10 +895,15 @@ div.by-line {
    font-style: italic;
    font-weight: normal;
    color: @boldColor;
-   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 
    p {
-      padding: 25px 25px 20px 0;
+      padding: 0 2em 1em;
+   }
+
+   &.feature {
+      border-bottom-left-radius: @borderRadius;
+      border-bottom-right-radius: @borderRadius;
+      margin-bottom: 20px;
    }
 
    @media @mobile {
