@@ -129,7 +129,6 @@ function standard(app: Express.Application) {
    app.get('/geo.json', map.json.blog);
    app.get('/rss', postFeed);
    app.get('/about', staticPage.about);
-   app.get('/js/post-menu-data.js', menu.data);
    app.get('/sitemap.xml', staticPage.siteMap);
    app.get(`/exif/${photoID}`, photo.exif);
    app.get('/issues?', staticPage.issues);
