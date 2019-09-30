@@ -1,3 +1,8 @@
+## 5.1.0
+
+-  Improve paragraph and blockquote padding consistency
+-  Remove deprecated CSSNano Gulp plugin
+
 ## 5.0.0
 
 -  Change layout
