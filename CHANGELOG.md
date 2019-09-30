@@ -7,7 +7,7 @@
 
 -  Change layout
 -  Simplify category selector (remove JavaScript)
--  Remove Google Analytics (unecessary privacy invasion)
+-  Remove Google Analytics (unnecessary privacy invasion)
 -  Remove Facebook "Like" button
 -  Remove Twitter link and API
 
