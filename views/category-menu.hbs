@@ -1,13 +1,9 @@
-<ul id="tag-navigation">
-   <li class="head">Other Posts</li>
-   {{#each blog.categories}}
-   <li class="title {{this.title}}">{{{iconForCategory this.title}}}{{this.title}}
-      <ul>
-         {{#each this.subcategories}}
-         <li>
-            <a href="/{{this.key}}" rel="tag">{{this.title}}</a>({{this.posts.size}})</li>
-         {{/each}}
-      </ul>
-   </li>
+<p>Adventure Categories</p>
+{{#each blog.categories}}
+<select class="catagery-selector">
+   <option class="label">{{this.title}}</option>
+   {{#each this.subcategories}}
+   <option value="/{{this.key}}">{{this.title}} ({{this.posts.size}})</option>
    {{/each}}
-</ul>
+</select>
+{{/each}}

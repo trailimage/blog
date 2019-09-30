@@ -1,121 +1,101 @@
-<html>
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-	{{> head-meta}}
-{{#unless post.feature}}
-	{{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
-	{{#if post.previousIsPart}}
-	<link rel="prev" href="/{{post.previous.key}}" />
-	{{/if}}
-	{{#if post.nextIsPart}}
-	<link rel="next" href="/{{post.next.key}}" />
-	{{/if}}
-{{/unless}}
-	{{> head-files}}
-	{{> head-facebook}}
-   {{> google-search}}
-	{{> ga}}
-   <script type="text/javascript">
-		var pageFeatures = { sideMenu: false, postMenu: true, twitter: true, facebook: true, timestamp: {{config.timestamp}} };
-	</script>
-	<script src='/js/post.js' type='text/javascript' defer></script>
-	{{> json-ld}}
-</head>
-{{! feature-based CSS classes allow conditional formatting }}
-<body class="post{{#if post.happenedOn}} has-date{{/if}}{{#if post.categories}} has-categories{{/if}}{{#if post.photoLocations}} has-map{{/if}}{{#if post.previous}} has-nav{{/if}}">
-	{{! script is loaded in /js/responsive.js }}
-	<div id="fb-root"></div>
-   {{> bug}}
-	{{> side-menu}}
-	<header class="page post-header content">
-		<!--googleoff: index-->
-		<nav id="mobile-menu"></nav>
-		<!--googleon: index-->
-		<div id="top-bar">
-		{{#if post.isPartial}}
-			<h1>{{post.title}}</h1>
-			<div class='subtitle'>
-				<div class='parts'><span>Part </span>{{post.part}} of {{post.totalParts}}</div>
-				<p>{{post.subTitle}}</p>
-			</div>
-		{{else}}
-			<h1>{{post.title}}</h1>
-		{{/if}}
+{{#contentFor "html-head"}}
+	{{#unless post.feature}}
+      {{! http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html }}
+      {{#if post.previousIsPart}}
+      <link rel="prev" href="/{{post.previous.key}}" />
+      {{/if}}
+      {{#if post.nextIsPart}}
+      <link rel="next" href="/{{post.next.key}}" />
+      {{/if}}
+   {{/unless}}
+   {{> head-facebook}}
+   <script src='/js/post.js' type='text/javascript' defer></script>
+{{/contentFor}}
 
-			<!--googleoff: index-->
-			{{> post-menu}}
-			<!--googleon: index-->
-			<div id="mobile-menu-button">{{{icon "menu"}}}</div>
-		</div>
+{{#contentFor "header"}}
+   {{#if post.isPartial}}
+      <div class='subtitle'>
+         <div class='parts'><span>Part </span>{{post.part}} of {{post.totalParts}}:</div>
+         <p>{{post.subTitle}}</p>
+      </div>
+   {{/if}}
 
-	{{#if post.happenedOn}}
-	{{! outside top-bar to avoid its fixed positioning }}
+   {{#if post.happenedOn}}
 		<div id="post-date">{{date post.happenedOn}}</div>
 	{{/if}}
+{{/contentFor}}
 
-		<div class="fb-like" data-href="{{config.site.url}}/{{slug}}/" data-send="true" data-width="550" data-show-faces="true" data-font="trebuchet ms"></div>
+{{#if post.description}}
+<div class="synopsis content">
+	<p>{{post.description}}</p>
+</div>
+{{/if}}
 
-	{{#if post.video}}
-		<a class="video-link" href="#video">{{{icon 'videocam'}}}jump to the video</a>
-	{{/if}}
-
-	{{#if post.description}}
-		<blockquote class="synopsis">
-			<p>{{post.description}}<p>
-		</blockquote>
-	{{/if}}
-
+<div class="post content">
 	{{#unless post.feature}}
 		{{> categories post.categories}}
-		<nav id="nav-top">{{> navigation}}</nav>
 		{{#if post.photoLocations}}
 		{{! https://www.mapbox.com/api-documentation/#static }}
 		<div class='map'>
          <a href="/{{slug}}/map" title="View Full Screen Map" rel="nofollow">
-            <img src="./img/blank.png" width="650" height="200" class="static-map"
+            <img
+               src="/img/blank.png"
+               width="{{config.style.contentWidth}}"
+               height="200"
+               class="static-map"
                data-locations="{{json post.photoLocations}}"
-               data-href="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/-pins-/auto/650x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false"/>
+               data-href="https://api.mapbox.com/styles/v1/{{config.mapbox.style.static}}/static/-pins-/auto/{{config.style.contentWidth}}x200?access_token={{config.mapbox.accessToken}}&attribution=false&logo=false"/>
          </a>
 		</div>
 		{{/if}}
+      <nav id="nav-top">{{> navigation}}</nav>
 	{{/unless}}
-	</header>
+</div>
 
-	<div id="light-box"><img src="/img/topo-map-tile.jpg"/></div>
+<div id="light-box"><img src="/img/topo-map-tile.jpg"/></div>
 
 {{#each post.photos}}
 
-	<figure itemscope title="Click to enlarge image {{index}}" data-exif="/exif/{{id}}" style='width: {{size.normal.width}}px; max-width: 100%;'>
-		{{! links from photo tag search are anchored to ID }}
-		<a name="{{id}}"></a><a name="{{index}}"></a>
-		{{! data-original attribute supports jquery.lazyload }}
-		<img src="{{size.preview.url}}" alt="{{title}}" data-original="{{size.normal.url}}"
-			 style="width: {{size.normal.width}}px; max-width: 100%; height: auto;"
-		     data-big="{{size.big.url}}" data-big-width="{{size.big.width}}" data-big-height="{{size.big.height}}"/>
-		<div class="info-button">{{{icon 'photo_camera'}}}<p>Camera Settings</p></div>
+   <figure itemscope
+      title="Click to enlarge image {{index}}"
+      data-exif="/exif/{{id}}"
+      style='width: {{size.normal.width}}px; height: {{size.normal.height}}px;'>
+      {{! links from photo tag search are anchored to ID }}
+      <a name="{{id}}"></a><a name="{{index}}"></a>
+      {{! data-original attribute supports jquery.lazyload }}
+      <img
+         src="{{size.preview.url}}"
+         alt="{{title}}"
+         data-original="{{size.normal.url}}"
+         style="width: {{size.normal.width}}px; height: {{size.normal.height}}px;"
+         data-big="{{size.big.url}}"
+         data-big-width="{{size.big.width}}"
+         data-big-height="{{size.big.height}}"/>
+      <div class="info-button">{{{icon 'photo_camera'}}}<p>Camera Settings</p></div>
 
-	{{#if tags.size}}
-		<nav class="tags">
-			{{{icon 'local_offer'}}}
-			<h4>More photos like this</h4>
-			{{{makeTagList tags}}}
-		</nav>
-	{{/if}}
+   {{#if tags.size}}
+      <nav class="tags">
+         {{{icon 'local_offer'}}}
+         <h4>More photos like this</h4>
+         {{{makeTagList tags}}}
+      </nav>
+   {{/if}}
 
-	{{#if longitude}}
+   {{#if longitude}}
       {{! http://handlebarsjs.com/#paths }}
-		<a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow"><span>map</span>{{{icon 'map'}}}</a>
-	{{/if}}
+      <a class='map' title='View on map' href="/{{../post.key}}/map/{{id}}" rel="nofollow"><span>map</span>{{{icon 'map'}}}</a>
+   {{/if}}
 
-	{{#if title}}
-		<figcaption><span>{{{formatTitle title}}}</span></figcaption>
-	{{/if}}
-	{{#if sourceUrl}}
-		<a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
-	{{/if}}
-		<div class="mobile-button">{{{icon 'info'}}}{{{icon 'info_outline'}}}</div>
-	</figure>
+   {{#if title}}
+      <figcaption><span>{{{formatTitle title}}}</span></figcaption>
+   {{/if}}
+   {{#if sourceUrl}}
+      <a class="source-link" href="http://{{sourceUrl}}">http://{{sourceUrl}}</a>
+   {{/if}}
+      <div class="mobile-button">{{{icon 'info'}}}{{{icon 'info_outline'}}}</div>
+   </figure>
 
-	<div class="caption content">{{{formatCaption description}}}</div>
+   <div class="caption content">{{{formatCaption description}}}</div>
 
 {{/each}}
 
@@ -128,14 +108,12 @@
 {{/if}}
 
 	<nav id="nav-bottom">{{> navigation}}</nav>
+   <div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
 {{#unless post.feature}}
 	<div class="footer-tags content">{{> categories post.categories}}</div>
 {{/unless}}
-	<div class='by-line content'><p rel='author'>by {{config.owner.name}}</p></div>
 
 	<footer class="post content">
 		<div class="fb-comments" data-href="{{config.site.url}}/{{post.key}}/" data-width="648" data-num-posts="20"></div>
 	</footer>
-	{{> footer}}
-</body>
-</html>
+</div>

@@ -130,7 +130,6 @@ const standardContext = (
 ): ViewContext =>
    merge<ViewContext>(context, {
       title: category.title,
-      headerCSS: config.style.css.categoryHeader,
       subtitle: `${sayNumber(childCount)} ${context.subtitle}`
    });
 

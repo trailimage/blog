@@ -45,13 +45,3 @@ test('redirects to issues page', done => {
    };
    staticPage.issues(req, res);
 });
-
-test('displays search results', done => {
-   res.onEnd = () => {
-      expect(res).toRenderTemplate(Page.Search);
-      expect(res.rendered.context).toBeDefined();
-      done();
-   };
-   req.query['q'] = 'search';
-   staticPage.search(req, res);
-});

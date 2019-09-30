@@ -33,7 +33,6 @@ $(function() {
       minZoom: 6,
       maxZoom: 18
    };
-   const eventCategory = 'Map';
    const $count = $('#photo-count');
    const $preview = $('#photo-preview');
    const $zoomOut = $('nav .zoom-out');
@@ -207,7 +206,6 @@ $(function() {
                selection.removeAllRanges();
                selection.addRange(range);
             }
-            util.log.event(eventCategory, 'Copy URL');
          } catch (ex) {
             console.error(ex);
          }
@@ -247,7 +245,6 @@ $(function() {
          if ($photo !== null) {
             html.photoPreview(e, 'single', $photo);
          }
-         util.log.event(eventCategory, 'Click Photo Pin');
       },
 
       /**
@@ -284,10 +281,6 @@ $(function() {
          $(this)
             .find('p')
             .html((photosVisible ? 'Hide' : 'Show') + ' Photos');
-         util.log.event(
-            eventCategory,
-            (photosVisible ? 'Show' : 'Hide') + ' Photos'
-         );
       },
 
       legendToggle() {
@@ -297,7 +290,6 @@ $(function() {
          if (!mobileLayout()) {
             util.setting.showMapLegend = legendVisible;
          }
-         util.log.event(eventCategory, 'Toggle Legend');
       },
 
       /**
@@ -354,8 +346,6 @@ $(function() {
                   );
 
                   if (!navigatedPhoto) {
-                     // only track first use so logs aren't spammed
-                     util.log.event(eventCategory, 'Navigate Photo Cluster');
                      navigatedPhoto = true;
                   }
                };
@@ -407,7 +397,6 @@ $(function() {
                );
             }
          }
-         util.log.event(eventCategory, 'Click Cluster');
       }
    };
 
@@ -649,7 +638,6 @@ $(function() {
          $zoomOut
             .click(() => {
                map.easeTo(initial);
-               util.log.event(eventCategory, 'Zoom Out');
             })
             .removeClass('disabled');
       } else if (map.getZoom() <= initial.zoom && zoomOutEnabled) {

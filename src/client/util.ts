@@ -69,13 +69,5 @@ const util = {
          }
          return $icon;
       }
-   },
-   log: {
-      /**
-       * Send Google Analytics event.
-       */
-      event(category: string, name: string, label?: string) {
-         ga('send', 'event', category, name, label);
-      }
    }
 };

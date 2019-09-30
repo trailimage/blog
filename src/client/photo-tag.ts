@@ -10,87 +10,91 @@ declare const selectedTag: string;
 declare const siteName: string;
 
 $(function() {
-   const eventCategory = 'Photo Tag';
+   const emptyTag = '-';
    const css = 'selected';
-   const $view = $('#photo-tag');
+   const $status = $('#status');
+   const $letters = $('#letters');
+   const $selectors = $('#selectors');
+   const $thumbs = $('#thumbs');
    const id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
-   let $list = $view.find('#' + id);
-   let $link = $list.find('#link-' + selectedTag);
-   let $li = $view.find('li[data-for=' + id + ']');
+   /** Tag selection list for current letter */
+   let $selector = $selectors.find('#' + id);
+   /** Currently selected letter */
+   let $li = $letters.find('li[data-for=' + id + ']');
 
-   $list.show();
-   $link.addClass(css);
+   $selector.val(selectedTag).show();
    $li.addClass(css);
 
-   loadPhotoTag($link);
+   loadPhotoTag(selectedTag);
 
-   $view.find('li').click(function(this: HTMLElement) {
+   $letters.find('li').click(function(this: HTMLElement) {
       $li.removeClass(css);
       $li = $(this);
       $li.addClass(css);
 
-      $list.hide();
-      $list = $('#' + $li.data('for'));
-      $list.show();
+      $selector.val(emptyTag);
+      $selector.hide();
+      $selector = $('#' + $li.data('for'));
+      $selector.show();
 
-      util.log.event(eventCategory, 'Click Index Letter');
+      const $options = $selector.find('option');
+
+      if ($options.length == 2) {
+         const tag = ($options[1] as HTMLOptionElement).value;
+         $selector.val(tag);
+         loadPhotoTag(tag);
+      } else {
+         $thumbs.empty();
+         $status.html('Waiting for selection &hellip;');
+      }
    });
 
-   $view
-      .find('#tag-index a')
-      .click(function(this: HTMLElement, e: JQuery.Event) {
-         e.stopPropagation();
-         e.preventDefault();
-         $link.removeClass(css);
-         $link = $(this);
-         $link.addClass(css);
+   $selectors.on('change', 'select', function(
+      this: HTMLElement,
+      e: JQuery.Event
+   ) {
+      e.stopPropagation();
+      e.preventDefault();
 
-         loadPhotoTag($link);
+      const tag = $selector.val() as string;
 
-         util.log.event(eventCategory, 'Click Name');
-         let url = $link.attr('href');
+      loadPhotoTag(tag);
 
-         if (url !== undefined) {
-            url = url.replace('/search', '');
-         }
-
+      if (tag && tag != emptyTag) {
          window.history.pushState(
             null,
-            siteName + ' photos tagged with "' + $link.html() + '"',
-            url
+            `${siteName} photos tagged with "${tag}"`,
+            `/photo-tag/${tag}`
          );
-      });
+      }
+   });
 
    /**
     * Load photo-search.hbs rendered by server.
     */
-   function loadPhotoTag($link: JQuery) {
-      if ($link.length == 0) {
-         return;
-      }
-      const url = $link.attr('href');
+   function loadPhotoTag(tag: string) {
+      if (tag && tag != emptyTag) {
+         const url = `/photo-tag/search/${tag}`;
 
-      if (url === undefined) {
-         return;
+         $status.html('Retrieving images &hellip;');
+         $thumbs.load(url, function(
+            this: HTMLElement,
+            _response: JQueryResponse,
+            status: string
+         ) {
+            $status.empty();
+
+            if (status === 'error') {
+               $thumbs.empty();
+               alert(
+                  `Sorry about that. Looking for "${tag}" photos caused an error.`
+               );
+            }
+            window.scrollTo(0, 0);
+         });
+      } else {
+         $thumbs.empty();
+         $status.empty();
       }
-      $('#wait').show();
-      $('#thumbs').load(url, function(
-         this: HTMLElement,
-         _response: JQueryResponse,
-         status: string
-      ) {
-         if (status === 'error') {
-            $(this).empty();
-            $link.removeClass(css);
-            util.log.event(eventCategory, 'Load Photos Error', 'Error');
-            alert(
-               'Sorry about that. Looking for "' +
-                  $link.html() +
-                  '" photos caused an error.'
-            );
-         }
-         $('#wait').hide();
-         window.scrollTo(0, 0);
-      });
    }
 });

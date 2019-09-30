@@ -2,7 +2,7 @@ import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
 import { config } from '../config';
 import { RouteParam } from '../routes';
-import { Page } from '../views/';
+import { Page, Layout } from '../views/';
 import { post } from './';
 import { loadMockData } from '../.test-data';
 
@@ -25,7 +25,7 @@ test('shows latest', done => {
       expect(res).toRenderTemplate(Page.Post);
       const context = res.rendered.context;
       expect(context).toHaveProperty('slug', 'stanley-lake-snow-hike');
-      expect(context!.layout).toBeNull();
+      expect(context!.layout).toBe(Layout.Main);
       done();
    };
    post.latest(req, res);

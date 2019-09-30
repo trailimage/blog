@@ -50,10 +50,11 @@ export const style = {
       /** Maximum pixel height of static maps displayed with post summaries */
       maxInlineHeight: 200
    },
-   css: {
-      /** See category-page.less */
-      categoryHeader: 'category-header'
-   },
    /** Characters used between displayed title and subtitle */
-   subtitleSeparator: ':'
+   subtitleSeparator: ':',
+   /**
+    * Pixel width of main content used to compute generated image widths --
+    * should match value in `settings.less`.
+    */
+   contentWidth: 650
 };

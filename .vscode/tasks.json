@@ -88,10 +88,6 @@
       },
       {
          "label": "Run with nodemon",
-         "group": {
-            "kind": "build",
-            "isDefault": true
-         },
          "presentation": {
             "group": "run"
          },
@@ -99,6 +95,43 @@
          "args": [
             "--exec",
             "./node_modules/.bin/ts-node",
+            "--",
+            "./src/app.ts",
+            "--serve"
+         ],
+         "type": "shell",
+         "options": {
+            "env": {
+               "EMAIL_CONTACT": "nobody@nowhere.com"
+            }
+         },
+         "problemMatcher": "$tsc"
+      },
+      {
+         "label": "Run with ts-node-dev",
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         },
+         "presentation": {
+            "group": "run",
+            "clear": true,
+            "echo": false
+         },
+         "command": "./node_modules/.bin/ts-node-dev",
+         "args": [
+            "--respawn",
+            "--clear",
+            "--no-notify",
+            "--watch",
+            "views",
+            "--ignore-watch",
+            "src/client",
+            "--debounce",
+            "4000",
+            "--project",
+            "tsconfig.node.json",
+            //"--transpileOnly",
             "--",
             "./src/app.ts",
             "--serve"

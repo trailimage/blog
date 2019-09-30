@@ -24,21 +24,19 @@ body {
    color: #333;
    line-height: 1.3em;
    background: #222 url(/img/topo-map-tile.jpg) repeat;
+}
 
-   @media @mobile {
-      color: @mobileTextColor;
-      padding-top: @mobileHeaderHeight;
-   }
+*:focus {
+   outline: none;
 }
 
 .content {
-   position: relative;
    font-family: @sanSerifFont;
    font-weight: normal;
    text-align: left;
    margin: 0 auto;
    padding: 0;
-   background-color: rgba(255, 255, 255, 0.9);
+   background-color: @backgroundColor;
    width: @contentWidth;
 
    @media @mobile {
@@ -54,114 +52,68 @@ body {
 #bug {
    position: absolute;
    top: 15px;
-   left: 5px;
+   left: 15px;
    text-decoration: none;
+   color: @trimColor;
+   font-size: 14px;
+   font-family: @sanSerifFont;
 
    @media @mobile {
       display: none;
    }
 
-   h1,
-   h2 {
-      margin: 0 0 0 10px;
-      padding: 0;
-      color: rgba(255, 255, 255, 0.1);
-      text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
-      font-family: 'Oswald', Impact, Arial, sans-serif;
-      text-rendering: optimizeLegibility;
-      font-weight: normal;
-      line-height: 1em;
-   }
-
-   h1 {
-      font-size: 40px;
-   }
-   h2 {
-      font-size: 14px;
-      letter-spacing: 3.4px;
-      text-transform: uppercase;
-      padding: 2px 0 0 5px;
-      color: rgba(255, 255, 255, 0.2);
-   }
-
    p {
-      margin: 2px 0 0 15px;
-      color: @trimColor;
-      font-size: 14px;
       line-height: 1.3em;
-      font-family: @sanSerifFont;
       width: 200px;
-   }
 
-   &:hover {
-      h1,
-      h2,
-      h3 {
-         text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.7);
-         .transition();
-      }
-      h1 {
-         color: rgba(255, 255, 255, 0.2);
-      }
-      h2 {
-         color: rgba(255, 255, 255, 0.4);
-      }
-      p {
-         color: rgba(255, 100, 100, 0.6);
+      &.by-line {
+         font-style: italic;
       }
    }
 }
 
 header.page {
    position: relative;
+   background: none;
 
    #top-bar {
       z-index: 500;
       position: relative;
-      height: @headerHeight;
+      background: none;
 
       h1 {
-         padding: 10px 0 0 10px;
          font-family: @headerFont;
-         font-weight: 700;
-         letter-spacing: -1.5px;
-         font-size: 34px;
+         color: @lightColor;
+         margin: 0 0 0 @borderRadius;
+         padding: 12px 0;
+         font-size: 45px;
          line-height: 1em;
-         color: @boldColor; /* 423938 or 5e685c */
-         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
-         vertical-align: top;
+         letter-spacing: 0;
       }
-      a {
-         color: #4e584c;
-      }
-   }
-
-   @media @desktop {
-      #top-bar {
-         background: @lightColor url(/img/logo.png) no-repeat
-            (@contentWidth - 90) -15px;
-         border-bottom: 1px solid @lightTrimColor;
+      // subtitle
+      h4 {
+         margin: -6px 0 0 @borderRadius;
+         color: @lightTrimColor;
+         font-size: 14px;
+         font-family: @headerFont;
+         font-weight: 400;
+         letter-spacing: 8px;
+         text-transform: uppercase;
       }
    }
 
    @media @mobile {
-      position: fixed;
       z-index: 500;
+
       #top-bar {
-         height: @mobileHeaderHeight;
-         background-color: #666;
-         border-bottom: none;
-         position: fixed;
          width: 100%;
-         top: 0;
          z-index: 200;
 
          h1 {
-            font-size: 38px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            color: @mobileTextColor;
-            text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+            padding-top: @borderRadius;
+         }
+         h4 {
+            padding-bottom: 10px;
          }
       }
    }
@@ -227,34 +179,11 @@ div.authorize {
 
 footer.page {
    position: relative;
-   padding: 7px 0;
-   border-top: 1px solid @trimColor;
-   clear: both;
+   padding: 0;
+   margin: 2em auto 1em;
    width: @contentWidth;
    text-align: center;
-   background-color: rgba(255, 255, 255, 0.2);
-
-   .inner-shadow(0, 2px, 2px, 0.1);
-
-   p {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-      font-weight: normal;
-      font-family: @sanSerifFont;
-      font-size: 14px;
-      text-indent: 0;
-      padding: 0;
-      margin: 2px;
-      clear: right;
-
-      a {
-         color: @lightColor;
-      }
-
-      &.rights {
-         font-size: 14px;
-      }
-   }
+   background: none;
 
    a.repo {
       display: block;
@@ -266,10 +195,34 @@ footer.page {
       }
    }
 
+   aside {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1em;
+      border-radius: @borderRadius;
+
+      p {
+         text-align: center;
+         color: rgba(255, 255, 255, 0.6);
+         font-weight: normal;
+         font-family: @sanSerifFont;
+         font-size: 14px;
+         text-indent: 0;
+         padding: 0;
+         margin: 2px;
+         clear: right;
+
+         a {
+            color: @lightColor;
+         }
+
+         &.rights {
+            font-size: 14px;
+         }
+      }
+   }
+
    @media @desktop {
       a.repo {
-         float: right;
-         margin-top: 15px;
          img {
             margin: 0 0 2px 3px;
          }

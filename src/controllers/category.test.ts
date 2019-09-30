@@ -18,13 +18,7 @@ beforeEach(() => {
    res.reset();
 });
 
-const contextKeys = [
-   'description',
-   'headerCSS',
-   'linkData',
-   'subtitle',
-   'title'
-];
+const contextKeys = ['description', 'linkData', 'subtitle', 'title'];
 
 test('renders home page for default category', done => {
    res.onEnd = () => {

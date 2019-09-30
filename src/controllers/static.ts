@@ -1,24 +1,8 @@
-import { HttpStatus, MimeType, is } from '@toba/node-tools';
+import { HttpStatus, MimeType } from '@toba/node-tools';
 import { blog, owner } from '@trailimage/models';
 import { Request, Response } from 'express';
 import { config } from '../config';
 import { Page, Layout, view } from '../views/';
-
-/**
- * Google search results page rendered directly without the `view.send` cache
- * pipeline.
- */
-function search(req: Request, res: Response) {
-   const term: string = req.query['q'];
-
-   if (is.value(term)) {
-      res.render(Page.Search, {
-         title: `Search for “${term}”`
-      });
-   } else {
-      view.notFound(req, res);
-   }
-}
 
 function about(_req: Request, res: Response) {
    view.send(res, Page.About, {
@@ -48,4 +32,4 @@ function issues(_req: Request, res: Response) {
    res.redirect(HttpStatus.PermanentRedirect, 'http://issues.' + config.domain);
 }
 
-export const staticPage = { issues, about, search, siteMap };
+export const staticPage = { issues, about, siteMap };
