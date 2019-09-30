@@ -12,16 +12,6 @@ beforeEach(() => {
    req.reset();
 });
 
-test('builds data for main menu', done => {
-   res.onEnd = () => {
-      expect(res).toRenderTemplate(Page.PostMenuData);
-      expect(res.headers).toHaveKeyValue(Header.Vary, Header.Accept.Encoding);
-      expect(res.rendered.context).toHaveProperty('blog');
-      done();
-   };
-   menu.data(req, res);
-});
-
 it('renders mobile menu', done => {
    res.onEnd = () => {
       expect(res).toRenderTemplate(Page.MobileMenuData);

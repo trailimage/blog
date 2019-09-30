@@ -1,7 +1,7 @@
 ## 5.0.0
 
 -  Change layout
--  Simplify category selector (remove move JavaScript)
+-  Simplify category selector (remove JavaScript)
 -  Remove Google Analytics (unecessary privacy invasion)
 -  Remove Facebook "Like" button
 -  Remove Twitter link and API
