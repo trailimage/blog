@@ -678,12 +678,13 @@ div.caption {
       background-image: url(/img/left-quote.png);
       background-repeat: no-repeat;
       background-position: left top;
-      margin: 2em 1em 0;
+      font-family: @serifFont;
+      margin: 1em 1em 0.5em;
 
       p {
          padding: 0 4em 1em;
          //text-indent: 0;
-         line-height: 1.1em;
+         line-height: 1.2em;
          color: #444;
       }
 
@@ -708,20 +709,31 @@ div.caption {
       }
    }
 
+   > p,
+   > blockquote {
+      &:last-child {
+         padding-bottom: 2em;
+      }
+   }
+
+   > p:first-child {
+      padding-top: 2.5em;
+   }
+
+   > blockquote:first-child {
+      margin-top: 2.5em;
+   }
+
    > p {
       text-indent: 2em;
       font-family: @serifFont;
       margin: 0;
       padding: 0 2.5em 0.5em;
 
-      &:first-child,
-      &.first {
+      &:first-of-type {
          text-indent: 0;
-         padding-top: 2.5em;
       }
-      &:last-child {
-         padding-bottom: 2em;
-      }
+
       &.quip {
          &:first-child,
          &.first {
@@ -761,6 +773,10 @@ div.caption {
          padding-left: 3.5em;
          //padding: 10px 0 15px 65px;
          line-height: 1.1em;
+
+         &:not(:last-child) {
+            padding-bottom: 1.5em;
+         }
 
          .material-icons {
             display: block;
