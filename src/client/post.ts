@@ -135,10 +135,9 @@ $(function() {
          const y = event.clientY;
 
          if (x !== undefined && y !== undefined) {
-            $big.css({
-               top: size.height.CSS(y),
-               left: size.width.CSS(x)
-            });
+            const dx = size.width.offset(x);
+            const dy = size.height.offset(y);
+            $big.css({ transform: `translate(${dx}px, ${dy}px)` });
          }
       };
 
@@ -166,7 +165,7 @@ $(function() {
 
       const updateDragPosition = (event: JQuery.Event) => {
          const [touchX, touchY] = firstTouch(event);
-
+         // TODO: use transform instead of position
          $big.css({
             top: fromCorner.top + touchY,
             left: fromCorner.left + touchX
@@ -218,6 +217,7 @@ $(function() {
    }
 
    /**
+    * ```
     *  ╔════════╤════════════════╗
     *  ║        │ extra          ║
     *  ║   ╔════╧═══╤════════╗   ║
@@ -227,16 +227,11 @@ $(function() {
     *  ║   ╚═════════════════╝   ║
     *  ║ image                   ║
     *  ╚═════════════════════════╝
-    *  Pan ratio maps mouse position from window center to the number of pixels
-    *  to offset against the image overlap
+    * ```
+    * Represent image width or height dimension compared to the window to
+    * calculate panning amount and speed.
     */
    class Length {
-      constructor(forImage: string) {
-         this.image = parseInt(forImage);
-         this.window = 0;
-         this.extra = 0;
-         this.panRatio = 0;
-      }
       /** Image edge length */
       image: number;
       /** Window edge length */
@@ -246,8 +241,15 @@ $(function() {
       /** Ratio of mouse to image movement pixels for panning */
       panRatio: number;
 
+      constructor(forImage: string) {
+         this.image = parseInt(forImage);
+         this.window = 0;
+         this.extra = 0;
+         this.panRatio = 0;
+      }
+
       /**
-       * Update window dimension and calculate how much larger it is than image
+       * Update window dimension and calculate how much larger it is than image.
        */
       update(forWindow: number) {
          this.window = forWindow;
@@ -264,26 +266,34 @@ $(function() {
       }
 
       /**
-       * Get CSS image offset based on mouse position.
+       * Get image offset based on mouse position.
+       * @param m Current mouse position in this d
        */
-      CSS(m: number): string {
+      offset(m: number): number {
          const subtract =
             this.extra > 0 ? 0 : (this.window / 2 - m) * this.panRatio;
-         return (this.extra - subtract).toFixed(0) + 'px';
+
+         return this.extra - subtract;
       }
    }
 
+   /**
+    * Represent image size.
+    */
    class Size {
-      constructor(imageWidth: string, imageHeight: string) {
-         this.width = new Length(imageWidth);
-         this.height = new Length(imageHeight);
-      }
-
       width: Length;
       height: Length;
       /** Whether image needs to pan */
       needsToPan: boolean;
 
+      constructor(imageWidth: string, imageHeight: string) {
+         this.width = new Length(imageWidth);
+         this.height = new Length(imageHeight);
+      }
+
+      /**
+       * Update calculations if window is resized.
+       */
       update() {
          this.height.update(window.innerHeight);
          this.width.update(window.innerWidth);
