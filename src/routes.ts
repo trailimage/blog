@@ -11,7 +11,7 @@ import {
    menu,
    auth,
    map
-} from './controllers/index';
+} from './controllers';
 
 /**
  * Route placeholders that become `req.params` keys.

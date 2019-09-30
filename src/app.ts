@@ -7,7 +7,7 @@ import { postProvider } from '@trailimage/flickr-provider';
 import { mapProvider } from '@trailimage/google-provider';
 import { config as modelConfig, blog, Category } from '@trailimage/models';
 import { config } from './config';
-import { Layout, addTemplateMethods, requireSSL } from './views/';
+import { Layout, addTemplateMethods, requireSSL, resetCache } from './views/';
 import { route } from './routes';
 
 const root = path.join(__dirname, '..');
@@ -55,6 +55,7 @@ async function createWebService() {
          app.use(requireSSL);
       }
       app.use(blockSpamReferers);
+      app.use(resetCache);
       // https://github.com/expressjs/compression/blob/master/README.md
       app.use(compress());
       app.use(Express.static(path.join(root, 'public')));

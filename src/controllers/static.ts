@@ -29,7 +29,10 @@ function siteMap(_req: Request, res: Response) {
 }
 
 function issues(_req: Request, res: Response) {
-   res.redirect(HttpStatus.PermanentRedirect, 'http://issues.' + config.domain);
+   res.redirect(
+      HttpStatus.PermanentRedirect,
+      'https://issues.' + config.domain
+   );
 }
 
 export const staticPage = { issues, about, siteMap };

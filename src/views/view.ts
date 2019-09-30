@@ -6,14 +6,15 @@ import {
    HttpStatus,
    MimeType,
    is,
-   addCharSet,
-   mergeAll
+   addCharSet
 } from '@toba/node-tools';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';
 import * as compress from 'zlib';
 import { config } from '../config';
 import { Page, Layout } from './template';
+import { IncomingMessage, ServerResponse } from 'http';
+import { blog } from '@trailimage/models';
 
 /**
  * Values available within view template.
@@ -348,6 +349,27 @@ async function cacheAndSend(
    const item = await createViewItem(slug, body, type);
    cache.add(slug, item);
    writeItemToResponse(res, item);
+}
+
+/**
+ * Reset page and model caches on command.
+ */
+export async function checkCacheReset(
+   req: Request,
+   _: Response,
+   next: (err?: any) => void = () => null
+) {
+   if (
+      is.value<string>(config.resetToken) &&
+      config.resetToken == req.query.reset
+   ) {
+      // clear caches
+      cache.clear();
+      console.info('Cleared page cache');
+      await blog.load(true);
+      console.info('Finished reloading blog data');
+   }
+   next();
 }
 
 export const view = {
