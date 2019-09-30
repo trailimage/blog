@@ -1,11 +1,11 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
-const nano = require('gulp-cssnano');
+const cssnano = require('cssnano');
+const postCSS = require('gulp-postcss');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const through = require('through2');
 const ts = require('gulp-typescript');
-const vinyl = require('vinyl');
 const path = require('path');
 const sourcemaps = require('gulp-sourcemaps');
 const merge = require('merge2');
@@ -46,7 +46,7 @@ const buildCSS = () =>
    )
       .pipe(less())
       .on('error', handleError)
-      .pipe(nano({ discardUnused: false }))
+      .pipe(postCSS([cssnano({ discardUnused: false })]))
       .on('error', handleError)
       .pipe(gulp.dest(dist + 'css'));
 
@@ -141,7 +141,7 @@ const bundle = (...files) => ({
             // if not keeping file then empty callback removes it from stream
             if (keep.length == 0 || keep.indexOf(name) == -1) {
                cb();
-               return; 
+               return;
             }
          }
          // any file returned in callback is kept in stream

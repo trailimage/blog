@@ -87,27 +87,6 @@
          "problemMatcher": []
       },
       {
-         "label": "Run with nodemon",
-         "presentation": {
-            "group": "run"
-         },
-         "command": "./node_modules/.bin/nodemon",
-         "args": [
-            "--exec",
-            "./node_modules/.bin/ts-node",
-            "--",
-            "./src/app.ts",
-            "--serve"
-         ],
-         "type": "shell",
-         "options": {
-            "env": {
-               "EMAIL_CONTACT": "nobody@nowhere.com"
-            }
-         },
-         "problemMatcher": "$tsc"
-      },
-      {
          "label": "Run with ts-node-dev",
          "group": {
             "kind": "build",
