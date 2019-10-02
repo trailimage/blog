@@ -6,8 +6,7 @@ import {
    HttpStatus,
    MimeType,
    is,
-   addCharSet,
-   mergeAll
+   addCharSet
 } from '@toba/node-tools';
 import { Request, Response } from 'express';
 import * as uglify from 'uglify-js';

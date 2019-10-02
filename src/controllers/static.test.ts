@@ -40,7 +40,7 @@ test('renders sitemap', done => {
 
 test('redirects to issues page', done => {
    res.onEnd = () => {
-      expect(res).toRedirectTo('http://issues.' + config.domain);
+      expect(res).toRedirectTo('https://issues.' + config.domain);
       done();
    };
    staticPage.issues(req, res);

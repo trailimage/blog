@@ -118,7 +118,8 @@
          "type": "shell",
          "options": {
             "env": {
-               "EMAIL_CONTACT": "nobody@nowhere.com"
+               "EMAIL_CONTACT": "nobody@nowhere.com",
+               "RESET_TOKEN": "test"
             }
          },
          "problemMatcher": "$tsc"

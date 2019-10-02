@@ -25,6 +25,8 @@ export const config = {
    domain,
    /** Whether to redirect `HTTP` requests to `HTTPS`. */
    requireSSL: env('REQUIRE_SSL', '') == 'true',
+   /** Token to confirm cache reset request */
+   resetToken: env('RESET_TOKEN', null),
 
    /** Whether any provider needs authorization tokens */
    //    get needsAuth(): boolean {
