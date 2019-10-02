@@ -5,9 +5,15 @@ import { ExpressHandlebars } from '@toba/handlebars';
 import * as path from 'path';
 import { postProvider } from '@trailimage/flickr-provider';
 import { mapProvider } from '@trailimage/google-provider';
-import { config as modelConfig, blog, Category } from '@trailimage/models';
+import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from './config';
-import { Layout, addTemplateMethods, requireSSL, resetCache } from './views/';
+import {
+   Layout,
+   addTemplateMethods,
+   requireSSL,
+   checkCacheReset,
+   sortCategories
+} from './views/';
 import { route } from './routes';
 
 const root = path.join(__dirname, '..');
@@ -55,35 +61,16 @@ async function createWebService() {
          app.use(requireSSL);
       }
       app.use(blockSpamReferers);
-      app.use(resetCache);
+      app.use(checkCacheReset);
       // https://github.com/expressjs/compression/blob/master/README.md
       app.use(compress());
       app.use(Express.static(path.join(root, 'public')));
 
       await blog.load();
 
-      blog.categories.forEach(c => {
-         if (c.title.toLowerCase() != 'when') {
-            c.subcategories = sortSet(c.subcategories, (c1, c2) =>
-               textCompare(c1.title, c2.title)
-            );
-         }
-      });
-
-      const order: { [key: string]: number } = {
-         When: 1,
-         Who: 2,
-         What: 3,
-         Where: 4
-      };
-
-      blog.categories = sortMap(
-         blog.categories,
-         (c1, c2) => order[c1.title] - order[c2.title]
-      );
-
       if (blog.loaded) {
          // blog must be loaded before routes are defined
+         sortCategories(blog);
          route.standard(app);
          app.listen(port);
          console.info(`Listening on port ${port}`);
@@ -92,23 +79,6 @@ async function createWebService() {
       }
    }
 }
-
-const textCompare = (t1: string, t2: string): number =>
-   t1 < t2 ? -1 : t1 > t2 ? 1 : 0;
-
-/**
- * Reconstruct set object in order to sort it.
- */
-const sortSet = <V>(s: Set<V>, sorter: (a: V, b: V) => number): Set<V> =>
-   new Set([...s.values()].sort(sorter));
-
-/**
- * Reconstruct map object in order to sort it.
- */
-const sortMap = <K, V>(
-   m: Map<K, V>,
-   sorter: (a: V, b: V) => number
-): Map<K, V> => new Map([...m.entries()].sort((a, b) => sorter(a[1], b[1])));
 
 /**
  * @see https://github.com/donpark/hbs/blob/master/examples/extend/app.js
