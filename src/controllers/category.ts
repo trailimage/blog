@@ -128,9 +128,9 @@ const standardContext = (
    childCount: number,
    context: ViewContext
 ): ViewContext => ({
+   ...context,
    title: category.title,
-   subtitle: `${sayNumber(childCount)} ${context.subtitle}`,
-   ...context
+   subtitle: `${sayNumber(childCount)} ${context.subtitle}`
 });
 
 export const category = { forPath, home, list, menu };
