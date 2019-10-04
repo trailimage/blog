@@ -34,10 +34,10 @@
 		{{#if photoLocations}}
 			<a class="map" title="View story" href="/{{key}}" rel="nofollow"><img
             src="/img/blank.png" class="static-map
-            width="{{subtract 650 coverPhoto.size.preview.width}}"
+            width="{{subtract ../config.style.contentWidth coverPhoto.size.preview.width}}"
             height="{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}"
             data-locations="{{json photoLocations}}"
-            data-href="https://api.mapbox.com/styles/v1/{{../config.mapbox.style.static}}/static/-pins-/auto/{{subtract 650 coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}?access_token={{../config.mapbox.accessToken}}&attribution=false&logo=false"/></a>
+            data-href="https://api.mapbox.com/styles/v1/{{../config.mapbox.style.static}}/static/-pins-/auto/{{subtract ../config.style.contentWidth coverPhoto.size.preview.width}}x{{mapHeight coverPhoto.size.preview.width coverPhoto.size.preview.height}}?access_token={{../config.mapbox.accessToken}}&attribution=false&logo=false"/></a>
 		{{/if}}
 			<section class="detail">
 				<p class="summary">{{description}}</p>

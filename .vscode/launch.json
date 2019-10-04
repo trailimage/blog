@@ -13,22 +13,12 @@
          "cwd": "${workspaceRoot}"
       },
       {
-         "name": "Server (ts-node)",
-         "type": "node",
-         "request": "launch",
-         "args": ["${workspaceRoot}/src/app.ts"],
-         "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
-         "sourceMaps": true,
-         "cwd": "${workspaceRoot}",
-         "protocol": "inspector"
-      },
-      {
          // https://github.com/whitecolor/ts-node-dev/issues/9
          // https://github.com/whitecolor/ts-node-dev/issues/64
          "name": "Server (ts-node-dev)",
          "type": "node",
          "request": "launch",
-         "args": ["${workspaceRoot}/src/app.ts"],
+         "args": ["${workspaceRoot}/src/app.ts", "--serve"],
          "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node-dev",
          //"runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
          "sourceMaps": true,

@@ -1,9 +1,10 @@
 import { HttpStatus, Header, is } from '@toba/node-tools';
 import { Request, Response, NextFunction } from 'express';
-import { blog } from '@trailimage/models';
+import { config as modelConfig, blog } from '@trailimage/models';
 import { config } from '../config';
 import { cache } from './view';
 import { sortCategories } from './index';
+import { ProviderConfig } from '@trailimage/models/esm/config';
 
 const protocol = 'https';
 
@@ -46,9 +47,20 @@ export async function checkCacheReset(
       is.value<string>(config.resetToken) &&
       config.resetToken == req.query.reset
    ) {
-      // clear caches
+      // clear view caches
       cache.clear();
       console.info('Cleared page cache');
+
+      let key: keyof ProviderConfig;
+
+      // clear API caches
+      for (key in modelConfig.providers) {
+         const p = modelConfig.providers[key];
+         if (p !== undefined) {
+            p.clearCache();
+         }
+      }
+      // rebuild entities
       await blog.load(true);
       sortCategories(blog);
       console.info('Finished reloading blog data');

@@ -127,10 +127,10 @@ const standardContext = (
    category: Category,
    childCount: number,
    context: ViewContext
-): ViewContext =>
-   merge<ViewContext>(context, {
-      title: category.title,
-      subtitle: `${sayNumber(childCount)} ${context.subtitle}`
-   });
+): ViewContext => ({
+   title: category.title,
+   subtitle: `${sayNumber(childCount)} ${context.subtitle}`,
+   ...context
+});
 
 export const category = { forPath, home, list, menu };
