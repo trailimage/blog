@@ -1,11 +1,11 @@
-import { re } from '@toba/node-tools';
+import { re as standardPatterns } from '@toba/node-tools';
 
 /**
  * Use getters to return new instances of global flagged patterns so lastIndex
  * isn't an issue
  */
-export default {
-   ...re,
+export const re = {
+   ...standardPatterns,
    /**
     * Facebook album ID to be inserted into Enum.url.facebookAlbum.
     *
@@ -139,15 +139,34 @@ export default {
 
       /**
        * Whether text contains a poem. Exclude dialog by negating comma or
-       * question mark before closing quote unless its footnoted. Capture
+       * question mark before closing quote unless it's footnoted. Capture
        * leading space and poem body.
+       *
+       * Match any character but new lines:
+       * ```js
+       * /[^\r\n]/
+       * ```
+       *
+       * Do not match punctuation followed by closing quote (negative look-
+       * ahead) unless the quote mark is followed by a superscript number:
+       * ```js
+       * /(?![\.,!?]”[^⁰¹²³⁴⁵⁶⁷⁸⁹])/
+       * ```
+       *
+       * Match stops at end of text (`$`) or when there are one or more
+       * new-lines (`\r\n`):
+       * ```js
+       * /([\r\n]+|$)/
+       *
+       * ```
        */
       get any() {
-         return /(^|[\r\n]{1,2})((([^\r\n](?![\.,!?]”)){4,80}([\r\n]+|$)){3,})/gi;
+         return /(^|[\r\n]+)((([^\r\n](?![\.,!?]”[^⁰¹²³⁴⁵⁶⁷⁸⁹])){4,80}([\r\n]+|$)){3,})/gi;
       },
 
-      //get any() { return /(^|[\r\n]{1,2})((([^\r\n](?![,?]”[⁰¹²³⁴⁵⁶⁷⁸⁹])){4,80}[\r\n]{1,2}){3,})/gi; },
-      //get any() { return /(^|[\r\n]{1,2})((([^\r\n](?![,!?]”)){4,80}[\r\n]{1,2}){3,})/gi; },
+      // /(^|[\r\n]{1,2})((([^\r\n](?![\.,!?]”)){4,80}([\r\n]+|$)){3,})/gi;
+      // /(^|[\r\n]{1,2})((([^\r\n](?![,?]”[⁰¹²³⁴⁵⁶⁷⁸⁹])){4,80}[\r\n]{1,2}){3,})/gi;
+      // /(^|[\r\n]{1,2})((([^\r\n](?![,!?]”)){4,80}[\r\n]{1,2}){3,})/gi;
 
       /**
        * Spaces are collapsed by Flickr so poems are indented with hard spaces

@@ -8,17 +8,17 @@ const nl = '\r\n';
 const ds = nl + nl;
 const empty = '';
 
-test('formats fractions', () => {
+it('formats fractions', () => {
    expect(html.fraction('1/2')).toBe('<sup>1</sup>&frasl;<sub>2</sub>');
 });
 
-test('creates HTML for a photo tag list', () => {
+it('creates HTML for a photo tag list', () => {
    expect(html.photoTagList(['Second', 'First', 'Third and Last'])).toBe(
       '<a href="/photo-tag/first" rel="tag">First</a> <a href="/photo-tag/second" rel="tag">Second</a> <a href="/photo-tag/thirdandlast" rel="tag">Third and Last</a> '
    );
 });
 
-test('substitutes nicer typography', () => {
+it('substitutes nicer typography', () => {
    expect(html.typography(empty)).toBe(empty);
    expect(html.typography('"He said," she said')).toBe(
       '&ldquo;He said,&rdquo; she said'
@@ -28,7 +28,7 @@ test('substitutes nicer typography', () => {
    );
 });
 
-test('fixes malformed links and URL decode text', () => {
+it('fixes malformed links and URL decode text', () => {
    let source =
       '<a href="http://www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20" rel="nofollow">www.motoidaho.com/sites/default/files/IAMC%20Newsletter%20</a>(4-2011%20Issue%202).pdf';
    let target =
@@ -65,11 +65,12 @@ test('fixes malformed links and URL decode text', () => {
    expect(html.fixMalformedLink(source)).toBe(target);
 });
 
-test('shortens link text to domain and URL decoded page', () => {
+it('shortens link text to domain and URL decoded page', () => {
+   let link =
+      '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">';
    let source =
-      '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">http://www.site.com/some/link-thing/that/goes/to%20page</a>';
-   let target =
-      '<a href="http://www.site.com/some/link-thing/that/goes/to%20page">site.com/&hellip;/to page</a>';
+      link + 'http://www.site.com/some/link-thing/that/goes/to%20page</a>';
+   let target = link + 'site.com/&hellip;/to page</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 
@@ -78,57 +79,63 @@ test('shortens link text to domain and URL decoded page', () => {
 
    expect(html.shortenLinkText(source)).toBe(source);
 
+   link = '<a href="http://www.advrider.com/forums/showthread.php?t=185698"';
    source =
-      '<a href="http://www.advrider.com/forums/showthread.php?t=185698" rel="nofollow">www.advrider.com/forums/showthread.php?t=185698</a>';
-   target =
-      '<a href="http://www.advrider.com/forums/showthread.php?t=185698">advrider.com/&hellip;/showthread</a>';
+      link +
+      ' rel="nofollow">www.advrider.com/forums/showthread.php?t=185698</a>';
+   target = link + '>advrider.com/&hellip;/showthread</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 
+   link = '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc"';
    source =
-      '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc" rel="nofollow">www.tvbch.com/TVBCH_newsletter_2013-08.doc</a>';
-   target =
-      '<a href="http://www.tvbch.com/TVBCH_newsletter_2013-08.doc">tvbch.com/TVBCH_newsletter_2013-08</a>';
+      link + ' rel="nofollow">www.tvbch.com/TVBCH_newsletter_2013-08.doc</a>';
+   target = link + '>tvbch.com/TVBCH_newsletter_2013-08</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 
-   source =
-      '<a href="http://youtu.be/QzdSlYoZitU" rel="nofollow">youtu.be/QzdSlYoZitU</a>';
-   target = '<a href="http://youtu.be/QzdSlYoZitU">youtu.be/QzdSlYoZitU</a>';
+   link = '<a href="http://youtu.be/QzdSlYoZitU"';
+   source = link + ' rel="nofollow">youtu.be/QzdSlYoZitU</a>';
+   target = link + '>youtu.be/QzdSlYoZitU</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 
+   link =
+      '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">';
    source =
-      '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
-   target =
-      '<a href="http://www.plosone.org/article/info:doi/10.1371/journal.pone.0032228">plosone.org/&hellip;/journal.pone.0032228</a>';
+      link +
+      'www.plosone.org/article/info:doi/10.1371/journal.pone.0032228</a>';
+   target = link + 'plosone.org/&hellip;/journal.pone.0032228</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 
+   link =
+      '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">';
    source =
-      '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3</a>';
-   target =
-      '<a href="https://www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3">facebook.com/&hellip;/set</a>';
+      link +
+      'www.facebook.com/media/set/?set=a.592596880759703.1073741842.243333819019346&type=3</a>';
+   target = link + 'facebook.com/&hellip;/set</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 
+   link = '<a href="http://www.trailimage.com/first-ride-to-silver-city/#8"';
    source =
-      '<a href="http://www.trailimage.com/first-ride-to-silver-city/#8" rel="nofollow">www.trailimage.com/first-ride-to-silver-city/#8</a>';
-   target =
-      '<a href="http://www.trailimage.com/first-ride-to-silver-city/#8">trailimage.com/first-ride-to-silver-city</a>';
+      link +
+      ' rel="nofollow">www.trailimage.com/first-ride-to-silver-city/#8</a>';
+   target = link + '>trailimage.com/first-ride-to-silver-city</a>';
 
    expect(html.shortenLinkText(source)).toBe(target);
 });
 
 //it.skip('obfuscates characters as HTML entities', () => false);
 
-test('creates material icon tags', () => {
+it('creates material icon tags', () => {
    expect(html.icon.tag('star')).toBe(
       '<i class="material-icons star">star</i>'
    );
 });
 
-test('matches post categories to material icons', () => {
+it('matches post categories to material icons', () => {
    config.style.icon.category = { Test: 'success', default: 'whatever' };
 
    expect(html.icon.category('Test')).toBe(
@@ -148,7 +155,7 @@ test('matches post categories to material icons', () => {
    expect(html.icon.category('Nothing')).toBe(empty);
 });
 
-test('identifies quote at end of text', () => {
+it('formats quote at end of text', () => {
    const source = lipsum + ds + '“' + lipsum + '”';
    const target =
       '<p>' + lipsum + '</p><blockquote><p>' + lipsum + '</p></blockquote>';
@@ -156,7 +163,7 @@ test('identifies quote at end of text', () => {
    expect(html.caption(source)).toBe(target);
 });
 
-test('identifies paragraphs within a quote', () => {
+it('formats paragraphs within a quote', () => {
    const source =
       lipsum + ds + '“' + lipsum + ds + '“' + lipsum + ds + '“' + lipsum + '”';
    const target =
@@ -173,7 +180,7 @@ test('identifies paragraphs within a quote', () => {
    expect(html.caption(source)).toBe(target);
 });
 
-test('identifies quote within text', () => {
+it('formats quote within text', () => {
    // text before and after quote
    const source = lipsum + ds + '“' + lipsum + '”' + ds + lipsum;
    const target =
@@ -188,7 +195,7 @@ test('identifies quote within text', () => {
    expect(html.caption(source)).toBe(target);
 });
 
-test('formats blockquote with trailing ellipsis', () => {
+it('formats blockquote with trailing ellipsis', () => {
    const phrase =
       'Firefighters are working to get a handle on several wildfires that sparked during a lightning storm on Thursday night. Strong winds and poor visibility created challenges for firefighters working the blazes on Saturday ...';
    const source = lipsum + ds + '“' + phrase + '”¹' + ds + lipsum;
@@ -204,7 +211,7 @@ test('formats blockquote with trailing ellipsis', () => {
    expect(html.caption(source)).toBe(target);
 });
 
-test('identifies block quote when it is the entire caption', () => {
+it('formats block quote when it is the entire caption', () => {
    const source = '“' + lipsum + '”¹';
    const target = '<blockquote><p>' + lipsum + '<sup>¹</sup></p></blockquote>';
    expect(html.caption(source)).toBe(target);
@@ -214,7 +221,7 @@ test('identifies block quote when it is the entire caption', () => {
 // ___
 // ¹ U.S. Forest Service, “Magruder Road Corridor”: https://www.fs.usda.gov/recarea/nezperceclearwater/recarea/?recid=16482
 
-test('does not blockquote interrupted quotes', () => {
+it('does not blockquote interrupted quotes', () => {
    // do no blockquote when quote is interrupted
    // “The constitutions of nearly all the states have qualifications for voters simply on citizenship,” Pefley countered, “without question with regard to what they believe on this or that question. Then I ask, why make a distinction of the people of Idaho?
    // “It appears to have been reserved for Idaho’s constitution to put in the first religious test in regard to the right of suffrage and holding office … Political and religious persecution are supposed to have died at the termination of the revolution but it appears that Idaho is again an exception.”¹
@@ -234,30 +241,19 @@ test('does not blockquote interrupted quotes', () => {
    expect(html.caption(source)).toBe(target);
 });
 
-test('identifies inline poems', () => {
-   // no text after
-   let source =
-      lipsum +
-      ds +
-      'Have you ever stood on the top of a mountain' +
-      nl +
-      'And gazed down on the grandeur below' +
-      nl +
-      'And thought of the vast army of people' +
-      nl +
-      '· · Who never get out as we go?' +
-      ds +
-      'Have you ever trailed into the desert' +
-      nl +
-      'Where the hills fade from gold into blue,' +
-      nl +
-      'And then thought of some poor other fellow' +
-      nl +
-      'Who would like to stand alongside of you?';
-   let target =
-      '<p>' +
-      lipsum +
-      '</p><blockquote class="poem"><p>' +
+it('formats inline poems', () => {
+   const poemText = `Have you ever stood on the top of a mountain
+And gazed down on the grandeur below
+And thought of the vast army of people
+· · Who never get out as we go?
+
+Have you ever trailed into the desert
+Where the hills fade from gold into blue,
+And then thought of some poor other fellow
+Who would like to stand alongside of you?`;
+
+   const poemHTML =
+      '<blockquote class="poem"><p>' +
       'Have you ever stood on the top of a mountain<br/>' +
       'And gazed down on the grandeur below<br/>' +
       'And thought of the vast army of people<br/>' +
@@ -267,26 +263,19 @@ test('identifies inline poems', () => {
       'And then thought of some poor other fellow<br/>' +
       'Who would like to stand alongside of you?</p></blockquote>';
 
+   // no text after
+   let source = lipsum + ds + poemText;
+   let target = '<p>' + lipsum + '</p>' + poemHTML;
+
    expect(html.caption(source)).toBe(target);
 
    // text after poem
-   source =
-      lipsum +
-      ds +
-      'Have you ever stood on the top of a mountain' +
-      nl +
-      'And gazed down on the grandeur below' +
-      nl +
-      'And thought of the vast army of people.' +
-      ds +
-      lipsum;
+   source = lipsum + ds + poemText + ds + lipsum;
    target =
       '<p>' +
       lipsum +
-      '</p><blockquote class="poem"><p>' +
-      'Have you ever stood on the top of a mountain<br/>' +
-      'And gazed down on the grandeur below<br/>' +
-      'And thought of the vast army of people.</p></blockquote>' +
+      '</p>' +
+      poemHTML +
       '<p class="first">' +
       lipsum +
       '</p>';
@@ -294,7 +283,103 @@ test('identifies inline poems', () => {
    expect(html.caption(source)).toBe(target);
 });
 
-test('identifies haiku', () => {
+it('formats footnoted poems', () => {
+   const source = `Now many years have passed since we lived there and little connects us to that place—now in other hands—other than our shared memories. My mom has written of Our Old House:
+
+“When I drive by I always think I see myself
+standing in the large picture window waving,
+wishing I’d stop by and have a spot of tea.
+
+“But I know its only what I want
+because I didn’t want to leave, you see,
+and when I drive by, smell the row
+of lilacs I planted along the road,
+see the gray smoke curling from the chimney,
+
+“I want to pull in and stop,
+pretend I never left, unload the groceries,
+stoke the fire, straighten the photos on the wall
+and wash the dishes that have stacked
+by the sink for the last ten years.
+
+“You’d be there, too, in your blue pajamas
+asking for a story. We’d climb the narrow
+staircase to your room and turn on the lamp,
+listening for a moment to the frogs outside,
+that bellowed thousands strong.
+
+“I’d read your Sweet Pickles books¹
+and sing that Bumble Bee song you loved.
+Then we’d lay quietly and never grow old,
+while time went on without us, down
+the dusty country road, slipping over the horizon,
+leaving a soft orange glow for us to read by.”²
+
+In recent years I’ve tried to make the annual, three-hundred mile pilgrimage to “Troy Days.”³ Starchy pancake-feed food, a couple fire trucks and horses paraded down main street, and an evening of under-age inebriation make a good time, of course, but my trip is not for those things. Troy Days is when and where my dad’s brothers reunite annually from their homes across the western U.S. In their company, my mind can visit our old house, find a place alongside my dad, my grandma and the rest seated around a fire, our eyes all reflecting the same eternal glow.
+
+This particular weekend had an additional attraction, my nephew Kaden’s seventh birthday party. I don’t see my nephews often so I was glad for the coincidence of events.
+___
+¹ Wikipedia: http://en.wikipedia.org/wiki/Sweet_Pickles
+² Cheryl Reed, January 17, 2003: http://www.amazon.com/Cheryl-Dudley/e/B001JP7LNO/ref=ntt_athr_dp_pel_1`;
+
+   const target =
+      '<p>Now many years have passed since we lived there and little connects ' +
+      'us to that place—now in other hands—other than our shared memories. My ' +
+      'mom has written of Our Old House:</p>' +
+      '<blockquote class="poem"><p>' +
+      'When I drive by I always think I see myself' +
+      '<br/>standing in the large picture window waving,' +
+      '<br/>wishing I’d stop by and have a spot of tea.' +
+      '</p><p>' +
+      'But I know its only what I want' +
+      '<br/>because I didn’t want to leave, you see,' +
+      '<br/>and when I drive by, smell the row' +
+      '<br/>of lilacs I planted along the road,' +
+      '<br/>see the gray smoke curling from the chimney,' +
+      '</p><p>' +
+      'I want to pull in and stop,' +
+      '<br/>pretend I never left, unload the groceries,' +
+      '<br/>stoke the fire, straighten the photos on the wall' +
+      '<br/>and wash the dishes that have stacked' +
+      '<br/>by the sink for the last ten years.' +
+      '</p><p>' +
+      'You’d be there, too, in your blue pajamas' +
+      '<br/>asking for a story. We’d climb the narrow' +
+      '<br/>staircase to your room and turn on the lamp,' +
+      '<br/>listening for a moment to the frogs outside,' +
+      '<br/>that bellowed thousands strong.' +
+      '</p><p>' +
+      'I’d read your Sweet Pickles books<sup>¹</sup>' +
+      '<br/>and sing that Bumble Bee song you loved.' +
+      '<br/>Then we’d lay quietly and never grow old,' +
+      '<br/>while time went on without us, down' +
+      '<br/>the dusty country road, slipping over the horizon,' +
+      '<br/>leaving a soft orange glow for us to read by.<sup>²</sup>' +
+      '</p></blockquote>' +
+      '<p class="first">' +
+      'In recent years I’ve tried to make the annual, three-hundred mile ' +
+      'pilgrimage to “Troy Days.”<sup>³</sup> Starchy pancake-feed food, a couple fire ' +
+      'trucks and horses paraded down main street, and an evening of under-age ' +
+      'inebriation make a good time, of course, but my trip is not for those ' +
+      'things. Troy Days is when and where my dad’s brothers reunite annually ' +
+      'from their homes across the western U.S. In their company, my mind can ' +
+      'visit our old house, find a place alongside my dad, my grandma and the ' +
+      'rest seated around a fire, our eyes all reflecting the same eternal ' +
+      'glow.' +
+      '</p><p>' +
+      'This particular weekend had an additional attraction, my nephew Kaden’s ' +
+      'seventh birthday party. I don’t see my nephews often so I was glad for ' +
+      'the coincidence of events.' +
+      '</p>' +
+      '<ol class="footnotes">' +
+      '<li><span>Wikipedia: http://en.wikipedia.org/wiki/Sweet_Pickles</span></li>' +
+      '<li><span>Cheryl Reed, January 17, 2003: http://www.amazon.com/Cheryl-Dudley/e/B001JP7LNO/ref=ntt_athr_dp_pel_1</span></li>' +
+      '</ol>';
+
+   expect(html.caption(source)).toBe(target);
+});
+
+it('formats haiku', () => {
    let source =
       'neck bent' + nl + 'apply the brakes' + nl + 'for the reign of fire';
    let target =
@@ -317,7 +402,7 @@ test('identifies haiku', () => {
    expect(html.story(source)).toBe(target);
 });
 
-test('does not convert conversation to a poem', () => {
+it('does not convert conversation to a poem', () => {
    const source =
       '“What’s wrong Brenna?” I ask.' +
       ds +
@@ -339,7 +424,7 @@ test('does not convert conversation to a poem', () => {
    expect(html.story(source)).toBe(target);
 });
 
-test('identifies captions that are entirely a poem', () => {
+it('formats captions that are entirely a poem', () => {
    const source =
       '-' +
       nl +
@@ -362,13 +447,13 @@ test('identifies captions that are entirely a poem', () => {
    expect(html.story(source)).toBe(target);
 });
 
-test('styles superscripts', () => {
+it('styles superscripts', () => {
    const source = lipsum + '²';
    const target = '<p>' + lipsum + '<sup>²</sup></p>';
    expect(html.caption(source)).toBe(target);
 });
 
-test('identifies footnotes', () => {
+it('formats footnotes', () => {
    let source =
       lipsum +
       nl +

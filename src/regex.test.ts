@@ -1,4 +1,4 @@
-import re from './regex';
+import { re } from './regex';
 import { lipsum } from '@toba/test';
 
 const nl = '\r\n';
@@ -8,11 +8,11 @@ than
 
 one line`;
 
-test('matches quote characters', () => {
+it('matches quote characters', () => {
    expect('"say"“'.replace(re.quote.any, '')).toBe('say');
 });
 
-test('matches quote block', () => {
+it('matches quote block', () => {
    let quote = '“' + lipsum + nl + '“' + lipsum + '”' + nl;
    expect(re.quote.block.test(quote)).toBe(true);
 
@@ -21,13 +21,13 @@ test('matches quote block', () => {
    expect(re.quote.block.test(quote)).toBe(false);
 });
 
-test('matches line breaks', () => {
+it('matches line breaks', () => {
    expect(text.replace(re.lineBreak, '-')).toBe(
       'some-text on more-than--one line'
    );
 });
 
-test('identifies numbers', () => {
+it('identifies numbers', () => {
    expect(re.numeric.test('1.3')).toBe(true);
    expect(re.numeric.test((-26.36).toString())).toBe(true);
    expect(re.numeric.test('.1.3')).toBe(false);

@@ -59,7 +59,7 @@
          "name": "vscode-jest-tests",
          "stopOnEntry": false,
          "cwd": "${workspaceRoot}",
-         "program": "${workspaceRoot}/node_modules/.bin/jest",
+         "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
          "args": ["--runInBand"],
          "console": "integratedTerminal",
          "internalConsoleOptions": "neverOpen",
