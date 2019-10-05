@@ -100,11 +100,9 @@
 {{/each}}
 
 {{#if post.video}}
-	<a name="video">
-		<div class="video" style="width: {{{add post.video.width 8}}}px;">
-			<iframe width="{{post.video.width}}" height="{{post.video.height}}" src="//www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
-		</div>
-	</a>
+   <div class="video" style="width: {{{add post.video.width 8}}}px;">
+      <iframe width="{{post.video.width}}" height="{{post.video.height}}" src="//www.youtube.com/embed/{{post.video.id}}?rel=0" frameborder="0" allowfullscreen></iframe>
+   </div>
 {{/if}}
 
 	<nav id="nav-bottom">{{> navigation}}</nav>

@@ -181,7 +181,7 @@ div.previous {
 #nav-bottom {
    div.next,
    div.previous {
-      margin-top: 0;
+      margin-top: 0.5em;
    }
 
    @media @mobile {
@@ -276,7 +276,7 @@ div.gas {
 }
 
 div.video {
-   margin: 0 auto 1px;
+   margin: 0 auto -4px;
 
    @maxWidth: 1032px;
    @minWidth: 650px;
@@ -290,8 +290,9 @@ div.video {
    }
 
    iframe {
-      background-color: #000;
+      background-color: #fff;
       padding: 4px;
+      border: 1px solid #000;
    }
 }
 
@@ -428,7 +429,6 @@ figure {
       font-weight: normal;
       text-align: center;
       .opacity(0.6);
-      //.border-radius(0, 0, 3px);
 
       p,
       .material-icons {
@@ -674,7 +674,7 @@ div.caption {
    }
 
    blockquote {
-      font-size: @fontSize - 1;
+      //font-size: @fontSize - 1;
       background-image: url(/img/left-quote.png);
       background-repeat: no-repeat;
       background-position: left top;
@@ -694,12 +694,12 @@ div.caption {
          background-position: left bottom;
          font-family: @serifFont;
          text-align: left;
-         margin-top: 3em;
+         margin-top: 1.5em;
 
          p {
             text-align: left;
             text-indent: 0;
-            line-height: 1.5em;
+            //line-height: 1.5em;
             padding: 0 0 1.4em 5em;
          }
 
@@ -730,7 +730,8 @@ div.caption {
       margin: 0;
       padding: 0 2.5em 0.5em;
 
-      &:first-of-type {
+      &:first-of-type,
+      &.first {
          text-indent: 0;
       }
 
@@ -756,13 +757,6 @@ div.caption {
          padding-left: 3em;
          line-height: 1.3em;
          font-size: 18px;
-
-         .drop-cap {
-            font-size: 36pt;
-            padding: 0 3px 0 0;
-            float: left;
-            line-height: 33pt;
-         }
       }
 
       &.haiku {
@@ -911,6 +905,7 @@ div.by-line {
    font-style: italic;
    font-weight: normal;
    color: @boldColor;
+   padding-top: 0.75em;
 
    p {
       padding: 0 2em 1em;
