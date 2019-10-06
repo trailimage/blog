@@ -138,16 +138,29 @@ div.category {
                &:hover {
                   color: @hoverColor;
                }
+
+               @media @mobile {
+                  line-height: 1em;
+               }
             }
          }
 
          a.thumb {
             margin: 0 20px 0 0;
             float: left;
+
+            @media @phone {
+               // thumb image updated in responsive.ts to take full width
+               float: none;
+               margin: 0;
+            }
          }
 
          a.map {
             margin-left: -20px;
+            @media @phone {
+               display: none;
+            }
          }
 
          p.summary {

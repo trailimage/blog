@@ -6,6 +6,7 @@
 $(function() {
    const $button = $('#mobile-menu-button');
    const $menu = $('#mobile-menu');
+   const $body = $('body');
 
    let prepared = false;
    let visible = false;
@@ -13,6 +14,7 @@ $(function() {
    const close = () => {
       $menu.hide(0, () => {
          visible = false;
+         $body.css({ position: 'static' });
       });
    };
 
@@ -20,6 +22,7 @@ $(function() {
       if (visible) {
          close();
       } else {
+         $body.css({ position: 'fixed' });
          $menu.show(0, prepare);
       }
    });
@@ -33,11 +36,7 @@ $(function() {
          return;
       }
 
-      $menu.find('.close').click(() => {
-         $menu.hide(0, () => {
-            visible = false;
-         });
-      });
+      $menu.find('.close').click(close);
 
       $menu.find('.menu-categories').on('change', 'select', e => {
          close();
