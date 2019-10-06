@@ -1,11 +1,11 @@
-@import "elements";
-@import "settings";
+@import 'elements';
+@import 'settings';
 
 #mobile-menu-button {
    position: absolute;
    z-index: 300;
-   top: 0;
-   right: 0;
+   top: 10px;
+   right: 10px;
    width: 50px;
    display: none;
 
@@ -14,7 +14,9 @@
       font-size: 40px;
       color: @mobileTextColor;
    }
-   @media @mobile { display: block; }
+   @media @mobile {
+      display: block;
+   }
 }
 
 #mobile-menu {
@@ -44,7 +46,9 @@
          a {
             color: @mobileTextColor;
             text-decoration: none;
-            &:active { color: @mobileActiveColor; }
+            &:active {
+               color: @mobileActiveColor;
+            }
          }
       }
 

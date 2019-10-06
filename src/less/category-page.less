@@ -20,6 +20,12 @@ header.page {
             right: 70px;
          }
       }
+
+      @media @phone {
+         .site-description {
+            display: none;
+         }
+      }
    }
 }
 
@@ -66,6 +72,11 @@ div.category {
          border-radius: @borderRadius;
          overflow: hidden;
 
+         @media @mobile {
+            border-radius: 0;
+            margin-top: 30px;
+         }
+
          &:first-of-type {
             margin-top: 10px;
          }
@@ -78,6 +89,12 @@ div.category {
             .mode-icon {
                float: right;
                margin: 1px 10px 0 0;
+            }
+
+            @media @phone {
+               .mode-icon {
+                  display: none;
+               }
             }
 
             ul.info {
@@ -176,8 +193,14 @@ div.category {
 
                   &:hover {
                      text-decoration: underline;
-                     //color: desaturate(lighten(@hoverColor, 40%), 30%);
                   }
+               }
+            }
+
+            @media @mobile {
+               li {
+                  font-size: 20px;
+                  padding: 6px 8px;
                }
             }
          }
