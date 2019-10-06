@@ -49,7 +49,7 @@ $(function() {
    }
 
    /**
-    * Load resources based on current view width
+    * Load resources based on current view width.
     */
    function checkResources() {
       const width = $view.width();
@@ -74,7 +74,8 @@ $(function() {
          $.getScript('/js/mobile-menu.js?t=' + feature.timestamp);
       });
 
-      $('figure').each(function(this: HTMLElement) {
+      // make post images fill width
+      $('figure, .category.content a.thumb').each(function(this: HTMLElement) {
          $(this)
             .css(imageStyle)
             .find('img')

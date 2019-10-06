@@ -1,6 +1,6 @@
 <p>Adventure Categories</p>
 {{#each blog.categories}}
-<select class="catagery-selector">
+<select class="category-selector">
    <option class="label">{{this.title}}</option>
    {{#each this.subcategories}}
    <option value="/{{this.key}}">{{this.title}} ({{this.posts.size}})</option>

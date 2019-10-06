@@ -17,7 +17,13 @@ header.page {
             color: @lightTrimColor;
             top: 10px;
             // room for menu icon
-            right: 70px;
+            right: 75px;
+         }
+      }
+
+      @media @phone {
+         .site-description {
+            display: none;
          }
       }
    }
@@ -66,6 +72,11 @@ div.category {
          border-radius: @borderRadius;
          overflow: hidden;
 
+         @media @mobile {
+            border-radius: 0;
+            margin-top: 30px;
+         }
+
          &:first-of-type {
             margin-top: 10px;
          }
@@ -78,6 +89,12 @@ div.category {
             .mode-icon {
                float: right;
                margin: 1px 10px 0 0;
+            }
+
+            @media @phone {
+               .mode-icon {
+                  display: none;
+               }
             }
 
             ul.info {
@@ -121,16 +138,29 @@ div.category {
                &:hover {
                   color: @hoverColor;
                }
+
+               @media @mobile {
+                  line-height: 1em;
+               }
             }
          }
 
          a.thumb {
             margin: 0 20px 0 0;
             float: left;
+
+            @media @phone {
+               // thumb image updated in responsive.ts to take full width
+               float: none;
+               margin: 0;
+            }
          }
 
          a.map {
             margin-left: -20px;
+            @media @phone {
+               display: none;
+            }
          }
 
          p.summary {
@@ -176,8 +206,14 @@ div.category {
 
                   &:hover {
                      text-decoration: underline;
-                     //color: desaturate(lighten(@hoverColor, 40%), 30%);
                   }
+               }
+            }
+
+            @media @mobile {
+               li {
+                  font-size: 20px;
+                  padding: 6px 8px;
                }
             }
          }

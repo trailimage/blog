@@ -1,11 +1,11 @@
-@import "elements";
-@import "settings";
+@import 'elements';
+@import 'settings';
 
 #mobile-menu-button {
    position: absolute;
    z-index: 300;
-   top: 0;
-   right: 0;
+   top: 10px;
+   right: 10px;
    width: 50px;
    display: none;
 
@@ -14,20 +14,20 @@
       font-size: 40px;
       color: @mobileTextColor;
    }
-   @media @mobile { display: block; }
+   @media @mobile {
+      display: block;
+   }
 }
 
 #mobile-menu {
-   @headerSize: 15px;
    @selectColor: #333;
-   @menuHeight: 500px;
 
-   top: @mobileHeaderHeight;
+   position: fixed;
+   top: 0;
    bottom: 0;
    width: 100%;
-   position: fixed;
    font-family: @sanSerifFont;
-   font-size: 16px;
+   font-size: 18px;
    line-height: 1em;
    color: @mobileTextColor;
    background-color: #222;
@@ -35,90 +35,51 @@
    margin: 0;
    display: none;
 
+   .material-icons.close {
+      position: absolute;
+      left: 1em;
+      top: 1em;
+   }
+
    ul {
-      margin: 0;
+      margin: 1em 1em 0 0;
 
       li {
+         width: 100%;
          padding: 14px 0;
          cursor: pointer;
+         text-align: right;
+
          a {
             color: @mobileTextColor;
             text-decoration: none;
-            &:active { color: @mobileActiveColor; }
-         }
-      }
-
-      &.links {
-         width: 45%;
-         position: absolute;
-         top: 0;
-         right: 0;
-         text-align: right;
-
-         li {
-            .material-icons {
-               vertical-align: middle;
-               font-size: 28px;
-               padding: 0 10px 4px;
-               color: darken(@mobileTextColor, 50%);
+            &:active {
+               color: @mobileActiveColor;
             }
          }
-      }
 
-      &.category-list {
-         width: 25%;
-         margin: 0;
-         float: left;
-         li {
-            text-align: center;
-            white-space: nowrap;
-            padding: 30px 15px;
-
-            &.selected {
-               background-color: @selectColor;
-            }
+         .material-icons {
+            vertical-align: middle;
+            font-size: 28px;
+            padding: 0 10px 4px;
+            color: darken(@mobileTextColor, 50%);
          }
       }
    }
 
-   .categories {
-      float: left;
-      position: relative;
-      width: 33%;
-      height: 100%;
-      margin: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
-      background-color: @selectColor;
-      z-index: 90;
+   .menu-categories {
+      text-align: center;
+      margin: 0 1em;
 
-      ul {
-         padding: 0;
-         margin: 0;
-         display: none;
-
-         li {
-            font-size: 16px;
-            text-align: left;
-            padding: 15px 5px;
-            .count {
-               font-size: smaller;
-               padding-left: 10px;
-               color: #666;
-            }
-         }
+      p,
+      select {
+         margin-bottom: 1em;
       }
-   }
 
-   .material-icons.arrow_downward {
-      color: #666;
-      display: none;
-      padding: 0;
-      margin: 0 0 0 10px;
-      font-size: 50px;
-      position: absolute;
-      bottom: 0;
-      left: 55%;
-      z-index: 100;
+      select {
+         display: block;
+         width: 100%;
+         font-size: 18px;
+      }
    }
 }

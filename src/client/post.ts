@@ -26,49 +26,8 @@ $(function() {
    // clicking an image opens it in a lightbox
    $photos
       .find('img')
-      .on('click', lightBox)
+      .on('click touchstart', lightBox)
       .lazyload();
-
-   // tapping mobile info button loads camera detail
-   $photos
-      .find('.mobile-button')
-      .on('touchstart', function(this: HTMLElement, e: JQuery.Event) {
-         const $button = $(this);
-         const infoClass = 'mobile-info';
-         const activeKey = 'info-visible';
-         const loadedKey = 'info-loaded';
-         const activeCSS = 'active';
-         const $fig = $button.parent();
-
-         // avoid triggering lightbox
-         e.preventDefault();
-         e.stopImmediatePropagation();
-
-         if ($fig.data(activeKey)) {
-            // hide info box
-            $button.removeClass(activeCSS);
-            $fig
-               .data(activeKey, false)
-               .find('.' + infoClass)
-               .hide();
-         } else {
-            $button.addClass(activeCSS);
-            $fig.data(activeKey, true);
-
-            if ($fig.data(loadedKey)) {
-               // show already loaded info box
-               $fig.find('.' + infoClass).show();
-            } else {
-               // load and show info box
-               $('<div/>')
-                  .addClass(infoClass)
-                  .load($fig.data('exif'), function(this: HTMLElement) {
-                     $(this).appendTo($fig);
-                     $fig.data(loadedKey, true);
-                  });
-            }
-         }
-      });
 
    // hovering photo info button loads camera detail
    $photos.find('.info-button').one('mouseover', function(this: Element) {
@@ -93,12 +52,15 @@ $(function() {
     * defining the big image URL and dimensions.
     */
    function lightBox(this: EventTarget, event: JQuery.Event) {
+      event.preventDefault();
+
       /** Post image */
       const $img = $(this);
       /** Big image */
       const $big = $lb.find('img');
       /** Whether big image is already browser cached */
       let loaded: boolean = $img.data('big-loaded');
+      const isTouch = event.type == 'touchstart';
 
       const size = new Size($img.data('big-width'), $img.data('big-height'));
       /** click position relative to image corner */
@@ -112,19 +74,21 @@ $(function() {
 
          size.update();
 
-         if (size.needsToPan) {
-            cursor = 'move';
-            $lb.on('mousemove', updateHoverPosition);
+         if (isTouch) {
             $lb.on('touchstart', beginDrag);
             $lb.on('touchmove', updateDragPosition);
+            centerImage();
+         } else if (size.needsToPan) {
+            cursor = 'move';
+            $lb.on('mousemove', updateHoverPosition);
          } else {
             $lb.off('mousemove', updateHoverPosition);
-            $lb.off('touchstart', beginDrag);
-            $lb.off('touchmove', updateDragPosition);
          }
-         // set initial position
-         updateHoverPosition(event);
-         $big.css('cursor', cursor);
+         // set initial desktop position and cursor
+         if (!isTouch) {
+            updateHoverPosition(event);
+            $big.css('cursor', cursor);
+         }
       };
 
       /**
@@ -139,6 +103,12 @@ $(function() {
             const dy = size.height.offset(y);
             $big.css({ transform: `translate(${dx}px, ${dy}px)` });
          }
+      };
+
+      const centerImage = () => {
+         const dx = size.width.center();
+         const dy = size.height.center();
+         $big.css({ transform: `translate(${dx}px, ${dy}px)` });
       };
 
       const firstTouch = (
@@ -165,11 +135,10 @@ $(function() {
 
       const updateDragPosition = (event: JQuery.Event) => {
          const [touchX, touchY] = firstTouch(event);
-         // TODO: use transform instead of position
-         $big.css({
-            top: fromCorner.top + touchY,
-            left: fromCorner.left + touchX
-         });
+         const dx = fromCorner.left + touchX;
+         const dy = fromCorner.top + touchY;
+
+         $big.css({ transform: `translate(${dx}px, ${dy}px)` });
       };
 
       if (loaded === undefined) {
@@ -198,22 +167,18 @@ $(function() {
       updateSize(event as JQuery.Event);
 
       $lb.show(0, disablePageScroll);
+
       // update panning calculations if window resizes
       $(window).resize(updateSize);
    }
 
    function disablePageScroll() {
-      $('html').css('overflow', 'hidden');
-      // prevent iOS from dragging page underneath image
-      document.ontouchmove = function(event) {
-         event.preventDefault();
-      };
+      $('html').css({ overflow: 'hidden' });
    }
 
    function enablePageScroll() {
-      $('html').css('overflow', 'auto');
       $(window).off('resize');
-      document.ontouchmove = null;
+      $('html').css({ overflow: 'auto' });
    }
 
    /**
@@ -267,13 +232,20 @@ $(function() {
 
       /**
        * Get image offset based on mouse position.
-       * @param m Current mouse position in this d
+       * @param m Current mouse position in this dimension
        */
       offset(m: number): number {
          const subtract =
             this.extra > 0 ? 0 : (this.window / 2 - m) * this.panRatio;
 
          return this.extra - subtract;
+      }
+
+      /**
+       * Get image offset necessary to center the image.
+       */
+      center(): number {
+         return this.extra / 2;
       }
    }
 

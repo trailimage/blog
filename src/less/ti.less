@@ -5,7 +5,6 @@
 @import 'mobile-menu';
 @import 'side-menu';
 @import 'facebook';
-@import 'google-search';
 @import 'about-page';
 @import 'post-page';
 @import 'category-page';
@@ -49,29 +48,6 @@ body {
    clear: both;
 }
 
-#bug {
-   position: absolute;
-   top: 15px;
-   left: 15px;
-   text-decoration: none;
-   color: @trimColor;
-   font-size: 14px;
-   font-family: @sanSerifFont;
-
-   @media @mobile {
-      display: none;
-   }
-
-   p {
-      line-height: 1.3em;
-      width: 200px;
-
-      &.by-line {
-         font-style: italic;
-      }
-   }
-}
-
 header.page {
    position: relative;
    background: none;
@@ -106,14 +82,20 @@ header.page {
       z-index: 500;
 
       #top-bar {
+         // place subtitle above title since it's always shorter which prevents
+         // overlap with mobile menu icon
          width: 100%;
          z-index: 200;
 
          h1 {
-            padding-top: @borderRadius;
+            padding-top: 50px;
          }
          h4 {
-            padding-bottom: 10px;
+            position: absolute;
+            padding: 0;
+            // main title must fall below the mobile menu icon
+            top: 35px;
+            left: 2px;
          }
       }
    }
@@ -185,31 +167,44 @@ footer.page {
    text-align: center;
    background: none;
 
+   @media @mobile {
+      width: 100%;
+   }
+
    a.repo {
-      display: block;
+      // GitHub version badge
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-bottom: 10px;
       text-decoration: none;
+
+      @media @phone {
+         display: none;
+      }
+
       span.icon {
+         // GitHub icon
          height: 25px;
          width: 25px;
+         margin-right: 6px;
       }
    }
 
    aside {
+      // footer block
       background-color: rgba(255, 255, 255, 0.1);
       padding: 1em;
       border-radius: @borderRadius;
 
       p {
          text-align: center;
-         color: rgba(255, 255, 255, 0.6);
-         font-weight: normal;
+         color: @lightTrimColor;
          font-family: @sanSerifFont;
          font-size: 14px;
          text-indent: 0;
          padding: 0;
          margin: 2px;
-         clear: right;
 
          a {
             color: @lightColor;
@@ -219,48 +214,19 @@ footer.page {
             font-size: 14px;
          }
       }
-   }
 
-   @media @desktop {
-      a.repo {
-         img {
-            margin: 0 0 2px 3px;
-         }
-         .opacity(0.3);
-         &:hover {
-            .opacity(1);
-         }
-      }
-   }
+      @media @mobile {
+         border-radius: 0;
+         padding: 1em @borderRadius;
+         background-color: @mobileBackgroundColor;
 
-   @media @mobile {
-      margin-top: 18px;
-      width: 100%;
-      background: #444;
-
-      p {
-         padding: 0 10px;
-         font-size: 10px;
-         margin: 0;
-         line-height: 1.1em;
-         &.rights {
+         p {
             font-size: 10px;
-         }
-      }
+            line-height: 1em;
 
-      a.repo {
-         margin: 10px 0 0;
-         img {
-            margin: 0 0 2px 1px;
-         }
-      }
-   }
-
-   @media @tablet {
-      p {
-         font-size: 14px;
-         &.rights {
-            font-size: 14px;
+            &.rights {
+               font-size: 10px;
+            }
          }
       }
    }

@@ -34,7 +34,7 @@ ul#letters {
    justify-content: space-between;
    list-style: none;
    padding: 0;
-   margin: -4px auto 10px;
+   margin: 0 auto 10px;
 
    li {
       display: block;
@@ -62,12 +62,14 @@ ul#letters {
 
    @media @mobile {
       margin: 0;
+      flex-wrap: wrap;
 
       li {
          width: @mobileTabWidth;
-         background-color: #444;
-         text-shadow: none;
+         background-color: @mobileBackgroundColor;
          padding: 25px 0;
+         margin-top: 10px;
+
          &:active {
             background-color: @mobileActiveColor;
          }
@@ -118,6 +120,38 @@ ul#letters {
       color: @lightTrimColor;
       padding: 0 0 5px 10px;
    }
+
+   @media @mobile {
+      margin-top: 1em;
+
+      select {
+         margin: 1em 0;
+
+         font-size: 20px;
+      }
+   }
+
+   @media @tablet {
+      #status {
+         font-size: 20px;
+      }
+   }
+
+   @media @phone {
+      select {
+         background-color: @lightColor;
+         color: @mobileBackgroundColor;
+         width: 100%;
+
+         option {
+            font-size: 20px;
+            background-color: @lightColor;
+         }
+      }
+      #status {
+         display: none;
+      }
+   }
 }
 
 #thumbs.content {
@@ -139,20 +173,17 @@ ul#letters {
 
    @media @mobile {
       width: auto;
+      justify-content: space-around;
       left: @mobileTabWidth + @mobileTagWidth + 10;
       right: 0;
       top: 0;
 
       a {
+         padding-top: 14px;
          img {
             border: none;
             padding: 2px;
          }
-      }
-   }
-   @media @phone {
-      a img {
-         zoom: 0.6;
       }
    }
 }

@@ -6,29 +6,23 @@
 $(function() {
    const $button = $('#mobile-menu-button');
    const $menu = $('#mobile-menu');
-   const $categories = $menu.find('.categories');
-   const $down = $menu.find('.material-icons.arrow_downward');
-   let menuHeight = 0;
-   // default root category
-   const setting = util.setting.menuCategory;
+   const $body = $('body');
 
-   let selection =
-      setting === null || setting[0] === null
-         ? 'when'
-         : setting[0].toLocaleLowerCase();
    let prepared = false;
    let visible = false;
 
-   if (selection.length < 4) {
-      selection = 'when';
-   }
+   const close = () => {
+      $menu.hide(0, () => {
+         visible = false;
+         $body.css({ position: 'static' });
+      });
+   };
 
    $button.click(() => {
       if (visible) {
-         $menu.hide(0, () => {
-            visible = false;
-         });
+         close();
       } else {
+         $body.css({ position: 'fixed' });
          $menu.show(0, prepare);
       }
    });
@@ -42,52 +36,13 @@ $(function() {
          return;
       }
 
-      const css = 'selected';
-      const $categoryList = $menu.find('.category-list li');
-      const currentHeight = $menu.height();
+      $menu.find('.close').click(close);
 
-      if (currentHeight !== undefined) {
-         menuHeight = currentHeight;
-      }
-      $menu.find('.close').click(() => {
-         $menu.hide(0, () => {
-            visible = false;
-         });
-      });
-
-      // make initial selection
-      $categories.find('ul.' + selection).show(0, toggleArrow);
-      $categoryList.filter('li.' + selection).addClass(css);
-
-      $categoryList.click(function(this: HTMLElement) {
-         const $cat = $(this);
-         const catClass = $cat.attr('class');
-
-         if (catClass === undefined) {
-            console.error('Unable to identify clicked menu');
-            return;
-         }
-         $down.hide();
-         $categories.find('ul').hide();
-         $categories.find('ul.' + catClass).show(0, toggleArrow);
-         $categoryList.removeClass(css);
-         $cat.addClass(css);
-
-         util.setting.menuCategory = [catClass, null];
+      $menu.find('.menu-categories').on('change', 'select', e => {
+         close();
+         window.location.assign($(e.target).val() as string);
       });
 
       prepared = true;
-   }
-
-   /**
-    * Show down arrow if list of categories exceeds display area.
-    */
-   function toggleArrow(this: HTMLElement) {
-      const height = $(this).height();
-      if (height !== undefined && height > menuHeight) {
-         $down.show();
-      } else {
-         $down.hide();
-      }
    }
 });

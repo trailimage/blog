@@ -50,16 +50,24 @@
          border: none;
       }
       p {
+         color: @lightColor;
          font-size: 20px;
+
          a {
             color: @mobileLinkColor;
          }
       }
+   }
+   @media @tablet {
+      p {
+         padding: 0 @borderRadius;
 
-      .by-line {
-         margin-bottom: 20px;
+         &.first {
+            padding-top: 0;
+         }
       }
    }
+
    @media @phone {
       .main-image {
          float: none;
