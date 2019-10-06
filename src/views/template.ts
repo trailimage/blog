@@ -24,7 +24,7 @@ export const enum Page {
    Authorize = 'authorize',
    EXIF = 'exif',
    CategoryMenu = 'category-menu',
-   MobileMenuData = 'mobile-menu-data',
+   MobileMenu = 'mobile-menu',
    Post = 'post',
    Category = 'category',
    CategoryList = 'category-list',

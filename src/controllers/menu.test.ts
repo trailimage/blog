@@ -1,6 +1,5 @@
 import '@toba/test';
 import { MockRequest, MockResponse } from '@toba/test';
-import { Header } from '@toba/node-tools';
 import { menu } from '../controllers/';
 import { Page } from '../views/';
 
@@ -14,7 +13,7 @@ beforeEach(() => {
 
 it('renders mobile menu', done => {
    res.onEnd = () => {
-      expect(res).toRenderTemplate(Page.MobileMenuData);
+      expect(res).toRenderTemplate(Page.MobileMenu);
       expect(res.rendered.context).toHaveProperty('blog');
       done();
    };
