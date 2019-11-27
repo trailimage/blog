@@ -2,7 +2,8 @@
 export const redirects: { [key: string]: string } = {
    'brother-rider-2013-a-night-in-pierce': 'brother-ride-2013',
    'backroads-to-college': 'panhandle-past-and-future',
-   'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand'
+   'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand',
+   'lunch-at-trinity-lookout': 'trinity-lookout-lunch'
 };
 
 /**
