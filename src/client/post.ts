@@ -2,14 +2,15 @@
 /// <reference path="../types/jquery/index.d.ts" />
 /// <reference path="./browser.d.ts"/>
 /// <reference path="./util.ts"/>
+/// <reference path="./lazy-load.ts"/>
 
 interface JQuery {
-   lazyload(): void;
+   lazyload(options?: LazyLoadOptions): any;
 }
 
 /**
  * Set up lazy loading and light box for post images. Depends on post images
- * having data-original, data-big, data-big-width and data-big-height
+ * having data-src, data-big, data-big-width and data-big-height
  * attributes.
  *
  * @see http://www.appelsiini.net/projects/lazyload
@@ -150,7 +151,7 @@ $(function() {
          $big.attr('src', $img.data('big'));
       } else {
          // assign lower resolution image while the bigger one is loading
-         $big.attr('src', $img.data('original'));
+         $big.attr('src', $img.data('src'));
          // load photo in detached element
          $('<img />')
             .bind('load', function(this: HTMLImageElement) {

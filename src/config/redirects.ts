@@ -12,6 +12,7 @@ export const redirects: { [key: string]: string } = {
  */
 export const photoTagChanges: { [key: string]: string } = {
    jeremy: 'jeremyabbott',
-   jessica: 'jessicaabbott',
-   jime: 'jimeldredge'
+   jessica: 'jessicawright',
+   jime: 'jimeldredge',
+   jessicaabbott: 'jessicawright'
 };
