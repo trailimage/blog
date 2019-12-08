@@ -1,4 +1,3 @@
-//import { log } from '@toba/logger';
 import { MapSource, loadSource } from '@toba/map';
 import {
    Encoding,
@@ -16,6 +15,8 @@ import { RouteParam } from '../routes';
 import { Layout, Page, view } from '../views/';
 
 const mapPath = 'map';
+const googleMapURL =
+   'https://maps.google.com/?t=h&q=[lat-lon]&ll=[lat-lon]&z=13';
 
 /**
  * Render map screen for a post. Add photo ID to template context if given so
@@ -34,6 +35,21 @@ async function render(
 
    const key: string | undefined = post.isPartial ? post.seriesKey : post.key;
    const photoID: string = req.params[RouteParam.PhotoID];
+
+   if (is.numeric(photoID) && post.photosLoaded) {
+      const photo = post.photos?.find(p => p.id == photoID);
+
+      if (photo !== undefined) {
+         res.redirect(
+            googleMapURL.replace(
+               /\[lat-lon\]/g,
+               photo.latitude + ',' + photo.longitude
+            )
+         );
+         return;
+      }
+   }
+
    // ensure photos are loaded to calculate bounds for map zoom
    await post.getPhotos();
 
