@@ -6,18 +6,25 @@ import { Page, Layout, view } from '../views/'
 /**
  * Redirect to authorization URL for unauthorized providers.
  */
-export function main(_req: Request, res: Response) {
-   ;[
-      modelConfig.providers.post,
-      modelConfig.providers.map,
-      modelConfig.providers.video
-   ].forEach(async p => {
-      if (is.value<DataProvider<any>>(p) && !p.isAuthenticated) {
-         const url = await p.authorizationURL()
-         res.redirect(url)
-         return
-      }
-   })
+export async function main(_req: Request, res: Response) {
+   try {
+      const urls = await Promise.all(
+         [
+            modelConfig.providers.post,
+            modelConfig.providers.map,
+            modelConfig.providers.video
+         ]
+            .filter(p => is.value<DataProvider<any>>(p) && !p.isAuthenticated)
+            .map(p => p!.authorizationURL())
+      )
+      res.render(Page.Authorize, {
+         title: 'Provider Login Links',
+         urls,
+         layout: Layout.NONE
+      })
+   } catch (e) {
+      view.internalError(res, e)
+   }
 }
 
 export function postAuth(req: Request, res: Response) {
@@ -45,7 +52,7 @@ async function authCallback(
    }
    const token = await p.getAccessToken(req)
    res.render(Page.Authorize, {
-      title: 'Flickr Access',
+      title: 'Provider Access',
       token: token.access,
       secret: token.secret,
       layout: Layout.NONE

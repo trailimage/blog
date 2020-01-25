@@ -16,7 +16,7 @@ export const mapProvider: ProviderConfig = {
          apiKey: '',
          clientID: env('GOOGLE_CLIENT_ID'),
          secret: env('GOOGLE_SECRET'),
-         callback: 'http://www.' + domain + '/auth/google',
+         callback: 'https://www.' + domain + '/auth/google',
          token: {
             access: env('GOOGLE_ACCESS_TOKEN'),
             refresh: env('GOOGLE_REFRESH_TOKEN')
