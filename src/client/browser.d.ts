@@ -7,34 +7,34 @@
  * @see http://www.trailimage.com/js/post-menu-data.js
  */
 interface PostMenu {
-   category: { [key: string]: MenuCategory[] };
-   post: { [key: string]: MenuPost };
+   category: { [key: string]: MenuCategory[] }
+   post: { [key: string]: MenuPost }
 }
 
 interface MenuCategory {
-   title: string;
-   posts: string[];
+   title: string
+   posts: string[]
 }
 
 /**
  * Post data within menu.
  */
 interface MenuPost {
-   slug: string;
-   title: string;
-   icon: string;
-   description: string;
-   subTitle?: string;
+   slug: string
+   title: string
+   icon: string
+   description: string
+   subTitle?: string
    /** Post position if part of a series */
-   part?: number;
+   part?: number
 }
 
 /**
  * Which features to enable on a page — determines which libraries to lazy-load
  */
 interface PageFeature {
-   facebook: boolean;
-   timestamp: number;
+   facebook: boolean
+   timestamp: number
 }
 
 /**
@@ -49,54 +49,54 @@ interface PageFeature {
  * GeoJSON properties for post photos.
  */
 interface MapPhoto {
-   url?: string;
-   title?: string;
-   partKey?: string;
+   url?: string
+   title?: string
+   partKey?: string
    /** Distance from clicked cluster */
-   distance?: number;
+   distance?: number
 }
 
 /**
  * Object generated in `mapbox.hbs` to display post details on the map.
  */
 interface MapPost {
-   key: string;
-   photoID: number;
+   key: string
+   photoID: number
    bounds: {
       /**
        * Southwest corner as lon, lat. For the U.S. this is the smallest
        * longitude and latitude values.
        */
-      sw: number[];
+      sw: number[]
       /**
        * Northeast corner as lon, lat. For the U.S. this is the largest
        * longitude and latitude values.
        */
-      ne: number[];
-   };
+      ne: number[]
+   }
 }
 
 interface PointCluster {
-   point_count?: number;
+   point_count?: number
 }
 
 interface UrlPosition {
-   [key: string]: number | number[];
+   [key: string]: number | number[]
    /** longitude, latitude */
-   center?: number[];
-   lon?: number;
-   lat?: number;
-   zoom?: number;
+   center?: number[]
+   lon?: number
+   lat?: number
+   zoom?: number
 }
 interface FakeEvent {
-   reason: string;
+   reason: string
 }
 
 interface CssPosition extends JQuery.PlainObject {
-   top?: number;
-   left?: number;
-   right?: number;
-   bottom?: number;
+   top?: number
+   left?: number
+   right?: number
+   bottom?: number
 }
 
 /**
@@ -106,4 +106,4 @@ type JQueryResponse = (
    responseText: string,
    textStatus: string,
    XMLHttpRequest: XMLHttpRequest
-) => any;
+) => any

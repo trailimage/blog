@@ -1,12 +1,12 @@
-import { Duration, env } from '@toba/node-tools';
-import { mapProvider } from './map-provider';
-import { postProvider } from './post-provider';
-import { owner, site, domain } from './models';
-import { redirects, photoTagChanges } from './redirects';
-import { bing, facebook, mapbox, google } from './vendors';
-import { keywords, style } from './views';
+import { Duration, env } from '@toba/node-tools'
+import { mapProvider } from './map-provider'
+import { postProvider } from './post-provider'
+import { owner, site, domain } from './models'
+import { redirects, photoTagChanges } from './redirects'
+import { bing, facebook, mapbox, google } from './vendors'
+import { keywords, style } from './views'
 
-const isProduction = process.env['NODE_ENV'] === 'production';
+const isProduction = process.env['NODE_ENV'] === 'production'
 
 export const posts = {
    /**
@@ -18,7 +18,7 @@ export const posts = {
    artistNames: ['Abbott', 'Wright', 'Bowman', 'Thomas', 'Reed'],
    /** Key (slug) of root category to display on home page */
    defaultCategory: 'when'
-};
+}
 
 export const config = {
    env,
@@ -54,8 +54,8 @@ export const config = {
    cache: {
       /** Enable or disable all caching */
       setAll(enabled: boolean) {
-         this.views = enabled;
-         this.maps = enabled;
+         this.views = enabled
+         this.maps = enabled
       },
       /** Whether to cache rendered template views */
       views: isProduction,
@@ -78,4 +78,4 @@ export const config = {
    photoTagChanges,
    alwaysKeywords: 'Adventure, Scenery, Photography,',
    keywords: keywords.join(', ')
-};
+}

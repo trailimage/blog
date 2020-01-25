@@ -1,47 +1,47 @@
-import '@toba/test';
-import { Header, MimeType, addCharSet } from '@toba/node-tools';
-import { MockRequest, MockResponse } from '@toba/test';
-import { Page } from '../views/index';
-import { staticPage } from './static';
-import { config } from '../config';
+import '@toba/test'
+import { Header, MimeType, addCharSet } from '@toba/node-tools'
+import { MockRequest, MockResponse } from '@toba/test'
+import { Page } from '../views/index'
+import { staticPage } from './static'
+import { config } from '../config'
 
-const req = new MockRequest();
-const res = new MockResponse(req);
-const wasCached = config.cache.views;
+const req = new MockRequest()
+const res = new MockResponse(req)
+const wasCached = config.cache.views
 
 beforeAll(() => {
-   config.cache.views = false;
-});
+   config.cache.views = false
+})
 
 afterAll(() => {
-   config.cache.views = wasCached;
-});
+   config.cache.views = wasCached
+})
 
 beforeEach(() => {
-   res.reset();
-   req.reset();
-   res.endOnRender = true;
-});
+   res.reset()
+   req.reset()
+   res.endOnRender = true
+})
 
 test('renders sitemap', done => {
    res.onEnd = () => {
-      expect(res).toRenderTemplate(Page.Sitemap);
-      const context = res.rendered.context;
-      expect(context).toHaveAllProperties('posts', 'categories', 'tags');
+      expect(res).toRenderTemplate(Page.Sitemap)
+      const context = res.rendered.context
+      expect(context).toHaveAllProperties('posts', 'categories', 'tags')
       expect(res.headers).toHaveKeyValue(
          Header.Content.Type,
          addCharSet(MimeType.XML)
-      );
-      done();
-   };
-   res.endOnRender = false;
-   staticPage.siteMap(req, res);
-});
+      )
+      done()
+   }
+   res.endOnRender = false
+   staticPage.siteMap(req, res)
+})
 
 test('redirects to issues page', done => {
    res.onEnd = () => {
-      expect(res).toRedirectTo('https://issues.' + config.domain);
-      done();
-   };
-   staticPage.issues(req, res);
-});
+      expect(res).toRedirectTo('https://issues.' + config.domain)
+      done()
+   }
+   staticPage.issues(req, res)
+})

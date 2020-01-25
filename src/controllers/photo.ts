@@ -1,62 +1,60 @@
-import { alphabet, is, sayNumber } from '@toba/node-tools';
-import { blog } from '@trailimage/models';
-import { Request, Response } from 'express';
-import { config } from '../config';
-import { RouteParam } from '../routes';
-import { Layout, Page, view } from '../views/';
+import { alphabet, is, sayNumber } from '@toba/node-tools'
+import { blog } from '@trailimage/models'
+import { Request, Response } from 'express'
+import { config } from '../config'
+import { RouteParam } from '../routes'
+import { Layout, Page, view } from '../views/'
 
 /**
  * Render HTML table of EXIF values for given photo.
  */
 function exif(req: Request, res: Response) {
-   const photoID = req.params[RouteParam.PhotoID];
+   const photoID = req.params[RouteParam.PhotoID]
    blog
       .getEXIF(photoID)
       .then(exif => {
          res.render(Page.EXIF, {
             EXIF: exif,
             layout: Layout.None
-         });
+         })
       })
       .catch(err => {
-         console.error(err, { photoID });
-         view.notFound(req, res);
-      });
+         console.error(err, { photoID })
+         view.notFound(req, res)
+      })
 }
 
 /**
  * Photos with tag rendered in response to click on label in photo tags page.
  */
 function withTag(req: Request, res: Response) {
-   const slug = tagParam(req);
+   const slug = tagParam(req)
 
-   if (slug === null) {
-      return view.notFound(req, res);
-   }
+   if (slug === null) return view.notFound(req, res)
 
    blog
       .getPhotosWithTags(slug)
       .then(photos => {
          if (photos === null || photos.length == 0) {
-            view.notFound(req, res);
+            view.notFound(req, res)
          } else {
-            const tag = blog.tags.get(slug);
+            const tag = blog.tags.get(slug)
             const title = `${sayNumber(
                photos.length
-            )} &ldquo;${tag}&rdquo; Image${photos.length != 1 ? 's' : ''}`;
+            )} &ldquo;${tag}&rdquo; Image${photos.length != 1 ? 's' : ''}`
 
             res.render(Page.PhotoSearch, {
                photos,
                config,
                title,
                layout: Layout.None
-            });
+            })
          }
       })
       .catch(err => {
-         view.notFound(req, res);
-         console.error(err, { photoTag: slug });
-      });
+         view.notFound(req, res)
+         console.error(err, { photoTag: slug })
+      })
 }
 
 /**
@@ -66,32 +64,32 @@ function withTag(req: Request, res: Response) {
 const tagParam = (req: Request): string | null =>
    is.defined(req.params, RouteParam.PhotoTag)
       ? normalizeTag(decodeURIComponent(req.params[RouteParam.PhotoTag]))
-      : null;
+      : null
 
 function tags(req: Request, res: Response) {
-   let slug = tagParam(req);
-   const list = blog.tags;
-   const keys = Array.from(list.keys());
-   const tags: { [key: string]: { [key: string]: string } } = {};
+   let slug = tagParam(req)
+   const list = blog.tags
+   const keys = Array.from(list.keys())
+   const tags: { [key: string]: { [key: string]: string } } = {}
 
    if (is.empty(slug)) {
       // select a random tag
-      slug = keys[Math.floor(Math.random() * keys.length + 1)];
+      slug = keys[Math.floor(Math.random() * keys.length + 1)]
    }
 
    // group tags by first letter (character)
    for (const c of alphabet) {
-      tags[c] = {};
+      tags[c] = {}
    }
    for (const [key, value] of list.entries()) {
       // key is sometimes a number
       const c = key
          .toString()
          .substr(0, 1)
-         .toLowerCase();
+         .toLowerCase()
       if (alphabet.indexOf(c) >= 0) {
          // ignore tags that don't start with a letter of the alphabet
-         tags[c][key] = value;
+         tags[c][key] = value
       }
    }
 
@@ -101,7 +99,7 @@ function tags(req: Request, res: Response) {
       alphabet,
       title: keys.length + ' Photo Tags',
       config
-   });
+   })
 }
 
 /**
@@ -110,13 +108,13 @@ function tags(req: Request, res: Response) {
  */
 export function normalizeTag(slug: string): string | null {
    if (is.empty(slug)) {
-      return null;
+      return null
    } else {
-      slug = slug.toLowerCase();
+      slug = slug.toLowerCase()
    }
    return is.defined(config.photoTagChanges, slug)
       ? config.photoTagChanges[slug]
-      : slug;
+      : slug
 }
 
-export const photo = { withTag, tags, exif };
+export const photo = { withTag, tags, exif }

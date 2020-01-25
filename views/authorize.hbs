@@ -1,7 +1,15 @@
 <div class="authorize content">
+   {{#if urls}}
+   <ul>
+      {{#urls}}
+      <li><a href="{{this}}">{{this}}</a></li>
+      {{/urls}}
+   </ul>
+   {{else}}
 	<h4>Access Token</h4>
 	<div>{{token}}</div>
 
 	<h4>Secret or Refresh Token</h4>
 	<div>{{secret}}</div>
+   {{/if}}
 </div>
