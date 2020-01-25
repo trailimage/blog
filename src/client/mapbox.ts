@@ -7,43 +7,43 @@
 /// <reference path="./util.ts"/>
 
 /** Mapbox style identifier defined in /views/mapbox.hbs */
-declare const mapStyle: string;
+declare const mapStyle: string
 /** Post key if displaying map for post otherwise undefined */
-declare const post: MapPost;
+declare const post: MapPost
 /** Whether GPX downloads are allowed */
-declare const allowDownload: boolean;
+declare const allowDownload: boolean
 
 $(function() {
-   const MAX_ZOOM = 18;
+   const MAX_ZOOM = 18
    /**
     * Number of decimals to round coordinates to.
     */
-   const COORD_DECIMALS = 5;
+   const COORD_DECIMALS = 5
    /**
     * Maximum number of photos to display in carousel.
     */
-   const MAX_IN_CAROUSEL = 20;
+   const MAX_IN_CAROUSEL = 20
    /**
     * Initial map position if not specified in URL
     */
-   const initial: UrlPosition = { zoom: 6.5, center: [-116.0987, 44.7] };
+   const initial: UrlPosition = { zoom: 6.5, center: [-116.0987, 44.7] }
 
    const style = {
       font: ['Open Sans Bold', 'Arial Unicode MS Bold'],
       minZoom: 6,
       maxZoom: 18
-   };
-   const $count = $('#photo-count');
-   const $preview = $('#photo-preview');
-   const $zoomOut = $('nav .zoom-out');
-   const $legendToggle = $('#legend .toggle');
-   const slug = post ? '/' + post.key : '';
-   const qs = parseUrl();
+   }
+   const $count = $('#photo-count')
+   const $preview = $('#photo-preview')
+   const $zoomOut = $('nav .zoom-out')
+   const $legendToggle = $('#legend .toggle')
+   const slug = post ? '/' + post.key : ''
+   const qs = parseUrl()
 
    /**
     * @see https://www.mapbox.com/mapbox-gl-js/api/#navigationcontrol
     */
-   const nav = new mapboxgl.NavigationControl();
+   const nav = new mapboxgl.NavigationControl()
 
    /** https://www.mapbox.com/mapbox-gl-js/api/ */
    const map = new mapboxgl.Map({
@@ -56,40 +56,40 @@ $(function() {
       // https://github.com/mapbox/mapbox-gl-js/issues/3371
       //touchZoomRotate: false,
       keyboard: false
-   });
-   const canvas = map.getCanvasContainer();
-   const markerOpacity = 0.6;
-   const mapSize = { width: 0, height: 0 };
-   const previewSize = { width: 322, height: 350 };
+   })
+   const canvas = map.getCanvasContainer()
+   const markerOpacity = 0.6
+   const mapSize = { width: 0, height: 0 }
+   const previewSize = { width: 322, height: 350 }
    /**
     * Whether styling for mobile device. Should match CSS media queries in
     * `settings.less` and `breakAt` in `responsive.ts`.
     */
-   const mobileLayout = (width: number = 1024) => window.innerWidth <= width;
+   const mobileLayout = (width: number = 1024) => window.innerWidth <= width
 
    /**
     * Whether zoom-out button is enabled
     */
-   let zoomOutEnabled = false;
+   let zoomOutEnabled = false
    /**
     * CSS media query hides legend for mobile. Browser setting will also be
     * checkbed below to see if user hid legend.
     */
-   let legendVisible = !mobileLayout();
-   let photosVisible = true;
+   let legendVisible = !mobileLayout()
+   let photosVisible = true
    /**
     * Analytics: only track first use of photo navigation.
     */
-   let navigatedPhoto = false;
+   let navigatedPhoto = false
    /**
     * Don't update URL with map position until after automatic movements.
     */
-   let showPositionInUrl = false;
+   let showPositionInUrl = false
 
    /**
     * Cache GeoJSON photos so it can be reassigned if map style changes
     */
-   let geoJSON: GeoJSON.FeatureCollection<GeoJSON.Point> | null = null;
+   let geoJSON: GeoJSON.FeatureCollection<GeoJSON.Point> | null = null
 
    /**
     * Methods for generating map content
@@ -99,22 +99,22 @@ $(function() {
        * Format coordinates.
        */
       coordinate: function(pos: number[]): string {
-         const factor = Math.pow(10, COORD_DECIMALS);
+         const factor = Math.pow(10, COORD_DECIMALS)
          const round = function(n: number): number {
-            return Math.round(n * factor) / factor;
-         };
-         return round(pos[1]) + ', ' + round(pos[0]);
+            return Math.round(n * factor) / factor
+         }
+         return round(pos[1]) + ', ' + round(pos[0])
       },
 
       /**
        * Make photo HTML.
        */
       photo: function(f: GeoJSON.Feature<GeoJSON.Point>): JQuery | null {
-         const img: MapPhoto = f.properties as MapPhoto;
+         const img: MapPhoto = f.properties as MapPhoto
          if (img.url === undefined) {
-            return null;
+            return null
          }
-         const tip = 'Click or tap to enlarge';
+         const tip = 'Click or tap to enlarge'
          return $('<figure>')
             .append(
                $('<img>')
@@ -122,12 +122,12 @@ $(function() {
                   .attr('title', tip)
                   .attr('alt', tip)
                   .click(() => {
-                     showPhotoInPost(img.url!);
+                     showPhotoInPost(img.url!)
                   })
             )
             .append(
                $('<figcaption>').html(this.coordinate(f.geometry.coordinates))
-            );
+            )
       },
 
       /**
@@ -142,27 +142,27 @@ $(function() {
          $preview
             .empty()
             .removeClass()
-            .css(getPreviewPosition(e));
+            .css(getPreviewPosition(e))
 
          if (navigation !== undefined) {
-            $preview.append(navigation);
+            $preview.append(navigation)
          }
 
          $preview
             .addClass(cssClass)
             .append(content)
             .append(util.html.icon('close', handle.closePreview))
-            .show({ complete: handle.previewShown });
+            .show({ complete: handle.previewShown })
       }
-   };
+   }
 
    /**
     * Event handlers
     */
    const handle = {
       zoomEnd() {
-         updateUrl();
-         enableZoomOut();
+         updateUrl()
+         enableZoomOut()
       },
 
       /**
@@ -175,7 +175,7 @@ $(function() {
        */
       mapInteraction(e?: mapboxgl.EventData | FakeEvent) {
          if (e !== undefined && e.reason != 'fit') {
-            handle.closePreview();
+            handle.closePreview()
          }
       },
 
@@ -183,9 +183,9 @@ $(function() {
        * Update map size variables when window is resized.
        */
       windowResize() {
-         const $c = $('canvas');
-         mapSize.width = $c.width()!;
-         mapSize.height = $c.height()!;
+         const $c = $('canvas')
+         mapSize.width = $c.width()!
+         mapSize.height = $c.height()!
       },
 
       /**
@@ -197,26 +197,26 @@ $(function() {
          const $temp = $('<textarea>')
             .text(window.location.href)
             .appendTo(document.body)
-            .hide();
-         const range = document.createRange();
+            .hide()
+         const range = document.createRange()
          try {
-            range.selectNode($temp[0]);
-            const selection = window.getSelection();
+            range.selectNode($temp[0])
+            const selection = window.getSelection()
             if (selection !== null) {
-               selection.removeAllRanges();
-               selection.addRange(range);
+               selection.removeAllRanges()
+               selection.addRange(range)
             }
          } catch (ex) {
-            console.error(ex);
+            console.error(ex)
          }
-         $temp.remove();
+         $temp.remove()
       },
 
       /**
        * Click on button with `data-link` attribute.
        */
       buttonClick(this: EventTarget, _e: JQuery.Event) {
-         window.location.href = $(this).data('link');
+         window.location.href = $(this).data('link')
       },
 
       /**
@@ -224,26 +224,26 @@ $(function() {
        * and `zoom` tokens.
        */
       mapLink(this: EventTarget, _e: JQuery.Event) {
-         const lngLat = map.getCenter();
-         const zoom = map.getZoom();
+         const lngLat = map.getCenter()
+         const zoom = map.getZoom()
          // very rough conversion based on trial-and-error
-         const altitude = (1 / Math.pow(2.3, zoom)) * 375000000;
+         const altitude = (1 / Math.pow(2.3, zoom)) * 375000000
 
          window.location.href = $(this)
             .data('link')
             .replace('{lat}', lngLat.lat)
             .replace('{lon}', lngLat.lng)
             .replace('{zoom}', zoom)
-            .replace('{altitude}', altitude);
+            .replace('{altitude}', altitude)
       },
 
       /**
        * Respond to mouse click on photo marker.
        */
       photoClick(e: mapboxgl.MapMouseEvent) {
-         const $photo = html.photo(e.features[0]);
+         const $photo = html.photo(e.features[0])
          if ($photo !== null) {
-            html.photoPreview(e, 'single', $photo);
+            html.photoPreview(e, 'single', $photo)
          }
       },
 
@@ -252,16 +252,16 @@ $(function() {
        * interaction.
        */
       previewShown() {
-         map.on('move', handle.mapInteraction);
+         map.on('move', handle.mapInteraction)
       },
 
       /**
        * Click to close photo preview.
        */
       closePreview() {
-         $preview.hide();
-         enableKeyNav(false);
-         map.off('move', handle.mapInteraction);
+         $preview.hide()
+         enableKeyNav(false)
+         map.off('move', handle.mapInteraction)
       },
 
       /**
@@ -271,24 +271,23 @@ $(function() {
        * @see https://www.mapbox.com/mapbox-gl-js/api/#map#setlayoutproperty
        */
       photoLayerToggle(this: EventTarget, _e: JQuery.Event) {
-         photosVisible = !photosVisible;
-         const p = photosVisible ? 'visible' : 'none';
-
-         ['cluster', 'cluster-count', 'photo'].forEach(l => {
-            map.setLayoutProperty(l, 'visibility', p);
-         });
+         photosVisible = !photosVisible
+         const p = photosVisible ? 'visible' : 'none'
+         ;['cluster', 'cluster-count', 'photo'].forEach(l => {
+            map.setLayoutProperty(l, 'visibility', p)
+         })
 
          $(this)
             .find('p')
-            .html((photosVisible ? 'Hide' : 'Show') + ' Photos');
+            .html((photosVisible ? 'Hide' : 'Show') + ' Photos')
       },
 
       legendToggle() {
-         $legendToggle.parents('ul').toggleClass('collapsed');
-         $('nav .toggle-legend').toggleClass('active');
-         legendVisible = !legendVisible;
+         $legendToggle.parents('ul').toggleClass('collapsed')
+         $('nav .toggle-legend').toggleClass('active')
+         legendVisible = !legendVisible
          if (!mobileLayout()) {
-            util.setting.showMapLegend = legendVisible;
+            util.setting.showMapLegend = legendVisible
          }
       },
 
@@ -304,82 +303,82 @@ $(function() {
        * @see https://github.com/mapbox/mapbox-gl-js/issues/2384
        */
       clusterClick: function(e: mapboxgl.MapMouseEvent) {
-         const cluster: PointCluster = e.features[0].properties as PointCluster;
-         const atZoom = map.getZoom();
+         const cluster: PointCluster = e.features[0].properties as PointCluster
+         const atZoom = map.getZoom()
          const zoomIn = () => {
             map.easeTo({
                center: e.lngLat,
                zoom: MAX_ZOOM - atZoom < 2 ? MAX_ZOOM : atZoom + 2
-            });
-         };
+            })
+         }
 
          if (
             cluster.point_count !== undefined &&
             cluster.point_count > MAX_IN_CAROUSEL &&
             atZoom < MAX_ZOOM - 2
          ) {
-            zoomIn();
+            zoomIn()
          } else {
             const photos =
                cluster.point_count === undefined
                   ? []
-                  : photosNearLocation(e.lngLat, cluster.point_count);
+                  : photosNearLocation(e.lngLat, cluster.point_count)
 
             if (photos.length == 0) {
-               zoomIn();
+               zoomIn()
             } else {
-               let selected = 1;
-               const $photos = $('<div>').addClass('photo-list');
-               const $markers = $('<div>').addClass('markers');
+               let selected = 1
+               const $photos = $('<div>').addClass('photo-list')
+               const $markers = $('<div>').addClass('markers')
                const select = (count: number) => {
-                  selected += count;
+                  selected += count
                   if (selected > photos.length) {
-                     selected = 1;
+                     selected = 1
                   } else if (selected < 1) {
-                     selected = photos.length;
+                     selected = photos.length
                   }
-                  $('figure', $photos).hide();
-                  $('i', $markers).removeClass('selected');
-                  $('figure:nth-child(' + selected + ')', $photos).show();
+                  $('figure', $photos).hide()
+                  $('i', $markers).removeClass('selected')
+                  $('figure:nth-child(' + selected + ')', $photos).show()
                   $('i:nth-child(' + selected + ')', $markers).addClass(
                      'selected'
-                  );
+                  )
 
                   if (!navigatedPhoto) {
-                     navigatedPhoto = true;
+                     navigatedPhoto = true
                   }
-               };
+               }
                const prev = () => {
-                  select(-1);
-               };
+                  select(-1)
+               }
                const next = () => {
-                  select(1);
-               };
+                  select(1)
+               }
 
                if (!mobileLayout()) {
-                  enableKeyNav(true, next, prev);
+                  enableKeyNav(true, next, prev)
                }
 
                for (let i = 0; i < photos.length; i++) {
-                  const $p = html.photo(photos[i]);
+                  const $p = html.photo(photos[i])
                   if ($p !== null) {
-                     $photos.append($p);
+                     $photos.append($p)
                   }
                }
 
                if (photos.length > MAX_IN_CAROUSEL) {
-                  $markers.addClass('too-many');
+                  $markers.addClass('too-many')
                   // use the same <i> tag that icons use to simplify CSS
                   for (let i = 0; i < photos.length; i++) {
-                     $markers.append($('<i>').html((i + 1).toString()));
+                     $markers.append($('<i>').html((i + 1).toString()))
                   }
-                  $markers.append('of ' + photos.length);
+                  $markers.append('of ' + photos.length)
                } else {
                   for (let i = 0; i < photos.length; i++) {
-                     $markers.append(util.html.icon('place'));
+                     $markers.append(util.html.icon('place'))
                   }
                }
-               $('i:first-child', $markers).addClass('selected');
+               $('i:first-child', $markers).addClass('selected')
 
                html.photoPreview(
                   e,
@@ -394,86 +393,86 @@ $(function() {
                            .html('tap photo to view post')
                      )
                      .append(util.html.icon('arrow_forward', next))
-               );
+               )
             }
          }
       }
-   };
-
-   if (qs.center) {
-      enableZoomOut();
    }
 
-   $legendToggle.click(handle.legendToggle);
-   // legend nav button only visible on mobile
-   $('nav button.toggle-legend').click(handle.legendToggle);
-   $('nav button.map-link').click(handle.mapLink);
-   $('nav button.copy-url').click(handle.copyUrl);
-   $('nav button.toggle-photos').click(handle.photoLayerToggle);
+   if (qs.center) {
+      enableZoomOut()
+   }
 
-   window.addEventListener('resize', handle.windowResize);
+   $legendToggle.click(handle.legendToggle)
+   // legend nav button only visible on mobile
+   $('nav button.toggle-legend').click(handle.legendToggle)
+   $('nav button.map-link').click(handle.mapLink)
+   $('nav button.copy-url').click(handle.copyUrl)
+   $('nav button.toggle-photos').click(handle.photoLayerToggle)
+
+   window.addEventListener('resize', handle.windowResize)
 
    if (legendVisible) {
       // if set visible but user hid it then toggle off
       if (!util.setting.showMapLegend) {
-         $legendToggle.click();
+         $legendToggle.click()
       }
    } else {
       // ensure that legend has 'collapsed' class to match its visibility
-      $legendToggle.parents('ul').addClass('collapsed');
+      $legendToggle.parents('ul').addClass('collapsed')
    }
 
    map.addControl(nav, 'top-right').on('load', () => {
       $.getJSON('/geo.json', data => {
-         geoJSON = data;
+         geoJSON = data
          if (geoJSON === null) {
-            console.error('Unable to retrieve blog GeoJSON');
-            return;
+            console.error('Unable to retrieve blog GeoJSON')
+            return
          }
-         $count.find('div').html(geoJSON.features.length.toString());
-         addBaseLayers();
-         addMapHandlers();
-         addMoscowMountainLayers();
+         $count.find('div').html(geoJSON.features.length.toString())
+         addBaseLayers()
+         addMapHandlers()
+         addMoscowMountainLayers()
          // set initial map dimensions
-         handle.windowResize();
+         handle.windowResize()
 
          // can't add post layers until base layers are ready
          if (post) {
             // Expand bounds so pictures aren't right at the edge. This should
             // probably do something smarter like a percent of bounding box.
-            post.bounds.sw[0] -= 0.01;
-            post.bounds.sw[1] -= 0.01;
-            post.bounds.ne[0] += 0.01;
-            post.bounds.ne[1] += 0.01;
-            $.getJSON('/' + post.key + '/geo.json', addPostLayers);
+            post.bounds.sw[0] -= 0.01
+            post.bounds.sw[1] -= 0.01
+            post.bounds.ne[0] += 0.01
+            post.bounds.ne[1] += 0.01
+            $.getJSON('/' + post.key + '/geo.json', addPostLayers)
          } else {
-            showPositionInUrl = true;
+            showPositionInUrl = true
          }
-      });
-   });
+      })
+   })
 
    /**
     * Preview images may be 320 pixels on a side.
     */
    function getPreviewPosition(e: mapboxgl.MapMouseEvent): CssPosition {
-      let x = e.point.x;
-      let y = e.point.y;
+      let x = e.point.x
+      let y = e.point.y
 
       if (mobileLayout(767)) {
          return {
             top: (mapSize.height - previewSize.height) / 2,
             right: 0
-         };
+         }
       } else {
          const offset = {
             x: x + previewSize.width - mapSize.width,
             y: y + previewSize.height - mapSize.height
-         };
-         offset.x = offset.x < 0 ? 0 : offset.x + 10;
-         offset.y = offset.y < 0 ? 0 : offset.y + 10;
+         }
+         offset.x = offset.x < 0 ? 0 : offset.x + 10
+         offset.y = offset.y < 0 ? 0 : offset.y + 10
 
-         x -= offset.x;
-         y -= offset.y;
+         x -= offset.x
+         y -= offset.y
 
          if (offset.x + offset.y > 0) {
             map.panBy(
@@ -495,9 +494,9 @@ $(function() {
                //    lngLat: null,
                //    originalEvent: null
                // }
-            );
+            )
          }
-         return { top: y + 15, left: x + 50 };
+         return { top: y + 15, left: x + 50 }
       }
    }
 
@@ -505,18 +504,16 @@ $(function() {
     * Load map location from URL.
     */
    function parseUrl(): UrlPosition {
-      const parts = window.location.search.split(/[&\?]/g);
-      const qs: UrlPosition = {};
+      const parts = window.location.search.split(/[&\?]/g)
+      const qs: UrlPosition = {}
       for (let i = 0; i < parts.length; i++) {
-         const pair = parts[i].split('=');
-         if (pair.length == 2) {
-            qs[pair[0]] = parseFloat(pair[1]);
-         }
+         const pair = parts[i].split('=')
+         if (pair.length == 2) qs[pair[0]] = parseFloat(pair[1])
       }
       if (qs.lon !== undefined && qs.lat !== undefined) {
-         qs.center = [qs.lon, qs.lat];
+         qs.center = [qs.lon, qs.lat]
       }
-      return qs;
+      return qs
    }
 
    /**
@@ -527,23 +524,19 @@ $(function() {
          handle.keyNav = (e: KeyboardEvent) => {
             switch (e.keyCode) {
                case 27:
-                  handle.mapInteraction();
-                  break;
+                  handle.mapInteraction()
+                  break
                case 37:
-                  if (prev !== undefined) {
-                     prev();
-                  }
-                  break;
+                  if (prev !== undefined) prev()
+                  break
                case 39:
-                  if (next !== undefined) {
-                     next();
-                  }
-                  break;
+                  if (next !== undefined) next()
+                  break
             }
-         };
-         document.addEventListener('keydown', handle.keyNav);
+         }
+         document.addEventListener('keydown', handle.keyNav)
       } else if (handle.keyNav !== null) {
-         document.removeEventListener('keydown', handle.keyNav);
+         document.removeEventListener('keydown', handle.keyNav)
       }
    }
 
@@ -555,57 +548,53 @@ $(function() {
       lngLat: mapboxgl.LngLat,
       count: number
    ): GeoJSON.Feature<GeoJSON.Point>[] {
-      const z = map.getZoom();
-      const f = (z * 3) / Math.pow(2, z);
-      const sw = [lngLat.lng - f, lngLat.lat - f];
-      const ne = [lngLat.lng + f, lngLat.lat + f];
+      const z = map.getZoom()
+      const f = (z * 3) / Math.pow(2, z)
+      const sw = [lngLat.lng - f, lngLat.lat - f]
+      const ne = [lngLat.lng + f, lngLat.lat + f]
       const photos =
          geoJSON === null
             ? []
             : geoJSON.features
                  .filter(f => {
-                    const coord = f.geometry.coordinates;
+                    const coord = f.geometry.coordinates
                     return (
                        coord[0] >= sw[0] &&
                        coord[1] >= sw[1] &&
                        coord[0] <= ne[0] &&
                        coord[1] <= ne[1]
-                    );
+                    )
                  })
                  .map(f => {
-                    (f.properties as MapPhoto).distance = distance(
+                    ;(f.properties as MapPhoto).distance = distance(
                        lngLat,
                        f.geometry.coordinates
-                    );
-                    return f;
-                 });
+                    )
+                    return f
+                 })
 
       photos.sort((p1, p2) => {
-         let d1 = (p1.properties as MapPhoto).distance;
-         let d2 = (p2.properties as MapPhoto).distance;
+         let d1 = (p1.properties as MapPhoto).distance
+         let d2 = (p2.properties as MapPhoto).distance
 
-         if (d1 === undefined) {
-            d1 = 0;
-         }
-         if (d2 === undefined) {
-            d2 = 0;
-         }
+         if (d1 === undefined) d1 = 0
+         if (d2 === undefined) d2 = 0
 
-         return d1 - d2;
-      });
+         return d1 - d2
+      })
 
-      return photos.slice(0, count);
+      return photos.slice(0, count)
    }
 
    /**
     * Straight-line distance between two points.
     */
    function distance(lngLat: mapboxgl.LngLat, point: number[]): number {
-      const x1 = lngLat.lng;
-      const y1 = lngLat.lat;
-      const x2 = point[0];
-      const y2 = point[1];
-      return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+      const x1 = lngLat.lng
+      const y1 = lngLat.lat
+      const x2 = point[0]
+      const y2 = point[1]
+      return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
    }
 
    /**
@@ -613,7 +602,7 @@ $(function() {
     */
    function updateUrl() {
       if (showPositionInUrl) {
-         const lngLat = map.getCenter();
+         const lngLat = map.getCenter()
          const url =
             slug +
             '/map?lat=' +
@@ -621,8 +610,8 @@ $(function() {
             '&lon=' +
             lngLat.lng +
             '&zoom=' +
-            map.getZoom();
-         window.history.replaceState(null, '', url);
+            map.getZoom()
+         window.history.replaceState(null, '', url)
       }
    }
 
@@ -631,18 +620,18 @@ $(function() {
     */
    function enableZoomOut() {
       if (initial.zoom === undefined) {
-         return;
+         return
       }
       if (map.getZoom() > initial.zoom && !zoomOutEnabled) {
-         zoomOutEnabled = true;
+         zoomOutEnabled = true
          $zoomOut
             .click(() => {
-               map.easeTo(initial);
+               map.easeTo(initial)
             })
-            .removeClass('disabled');
+            .removeClass('disabled')
       } else if (map.getZoom() <= initial.zoom && zoomOutEnabled) {
-         zoomOutEnabled = false;
-         $zoomOut.off('click').addClass('disabled');
+         zoomOutEnabled = false
+         $zoomOut.off('click').addClass('disabled')
       }
    }
 
@@ -650,8 +639,8 @@ $(function() {
     * Curry function to update canvas cursor.
     */
    const cursor = (name: string = '') => () => {
-      canvas.style.cursor = name;
-   };
+      canvas.style.cursor = name
+   }
 
    /**
     * Retrieve photo ID from preview URL and redirect to post with that photo.
@@ -659,9 +648,9 @@ $(function() {
     * Example https://farm3.staticflickr.com/2853/33767184811_9eff6deb48_n.jpg
     */
    function showPhotoInPost(url: string) {
-      const path = url.split('/');
-      const parts = path[path.length - 1].split('_');
-      window.location.href = '/' + parts[0];
+      const path = url.split('/')
+      const parts = path[path.length - 1].split('_')
+      window.location.href = '/' + parts[0]
    }
 
    /**
@@ -690,22 +679,22 @@ $(function() {
                }
             },
             'photo'
-         );
+         )
 
-         $('#legend .track').removeClass('hidden');
+         $('#legend .track').removeClass('hidden')
       }
 
-      $('nav > button.link').click(handle.buttonClick);
+      $('nav > button.link').click(handle.buttonClick)
 
       // avoid updating URL with automatic reposition
       map.once('zoomend', () => {
          window.setTimeout(() => {
-            showPositionInUrl = true;
-         }, 500);
-      });
+            showPositionInUrl = true
+         }, 500)
+      })
 
       // https://www.mapbox.com/mapbox-gl-js/api/#map#fitbounds
-      map.fitBounds([post.bounds.sw, post.bounds.ne]);
+      map.fitBounds([post.bounds.sw, post.bounds.ne])
    }
 
    /**
@@ -715,7 +704,7 @@ $(function() {
       map.addSource('moscow-mountain', {
          type: 'vector',
          url: 'mapbox://jabbott7.1q8zrllv'
-      });
+      })
 
       map.addLayer({
          id: 'mountain-labels',
@@ -727,7 +716,10 @@ $(function() {
             'text-field': '{name}',
             'text-size': {
                base: 1,
-               stops: [[10, 10], [14, 13]]
+               stops: [
+                  [10, 10],
+                  [14, 13]
+               ]
             },
             // "symbol-placement": {
             //    base: 1,
@@ -744,7 +736,7 @@ $(function() {
          },
          minzoom: 6,
          maxzoom: 18
-      });
+      })
 
       map.addLayer(
          {
@@ -756,14 +748,17 @@ $(function() {
                'line-color': '#55f',
                'line-width': {
                   base: 1,
-                  stops: [[8, 1], [13, 2]]
+                  stops: [
+                     [8, 1],
+                     [13, 2]
+                  ]
                }
             },
             minzoom: style.minZoom,
             maxzoom: style.maxZoom
          },
          'mountain-labels'
-      );
+      )
    }
 
    /**
@@ -777,7 +772,7 @@ $(function() {
             cluster: true,
             clusterMaxZoom: 18,
             clusterRadius: 30
-         });
+         })
       }
 
       // https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-circle
@@ -792,13 +787,17 @@ $(function() {
             'circle-radius': {
                property: 'point_count',
                type: 'interval',
-               stops: [[0, 10], [10, 12], [100, 15]]
+               stops: [
+                  [0, 10],
+                  [10, 12],
+                  [100, 15]
+               ]
             },
             'circle-opacity': markerOpacity,
             'circle-stroke-width': 3,
             'circle-stroke-color': '#ccc'
          }
-      });
+      })
 
       // https://www.mapbox.com/mapbox-gl-js/style-spec/#layers-symbol
       map.addLayer({
@@ -814,7 +813,7 @@ $(function() {
          paint: {
             'text-color': '#fff'
          }
-      });
+      })
 
       // https://www.mapbox.com/mapbox-gl-js/example/custom-marker-icons/
       map.addLayer({
@@ -829,7 +828,7 @@ $(function() {
             'circle-stroke-color': '#fdd',
             'circle-opacity': markerOpacity
          }
-      });
+      })
    }
 
    /**
@@ -843,6 +842,6 @@ $(function() {
          .on('zoomend', handle.zoomEnd)
          .on('moveend', updateUrl)
          .on('click', 'cluster', handle.clusterClick)
-         .on('click', 'photo', handle.photoClick);
+         .on('click', 'photo', handle.photoClick)
    }
-});
+})

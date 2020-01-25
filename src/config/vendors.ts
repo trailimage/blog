@@ -1,19 +1,19 @@
-import { env } from '@toba/node-tools';
-import { mapSource } from './mapsource';
-import { MapSource } from '@toba/map';
+import { env } from '@toba/node-tools'
+import { mapSource } from './mapsource'
+import { MapSource } from '@toba/map'
 
 export interface MapboxConfig {
-   accessToken: string;
+   accessToken: string
    style: {
-      dynamic: string;
-      static: string;
-   };
-   mapSource: { [key: string]: MapSource };
+      dynamic: string
+      static: string
+   }
+   mapSource: { [key: string]: MapSource }
 }
 
 export const bing = {
    key: env('BING_KEY', null)
-};
+}
 
 /**
  * https://developers.facebook.com/docs/reference/plugins/like/
@@ -26,7 +26,7 @@ export const facebook = {
    adminID: '1332883594',
    enabled: true,
    authorURL: 'https://www.facebook.com/jason.e.abbott'
-};
+}
 
 export const google = {
    apiKey: env('GOOGLE_KEY', null),
@@ -34,7 +34,7 @@ export const google = {
    analyticsID: '22180727', // shown as 'UA-22180727-1
    searchEngineID: env('GOOGLE_SEARCH_ID', null),
    blogID: '118459106898417641'
-};
+}
 
 export const mapbox: MapboxConfig = {
    accessToken: env('MAPBOX_ACCESS_TOKEN'),
@@ -45,4 +45,4 @@ export const mapbox: MapboxConfig = {
       static: 'jabbott7/cj1prg25g002o2ro2xtzos6cy'
    },
    mapSource
-};
+}

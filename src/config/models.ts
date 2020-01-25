@@ -1,10 +1,10 @@
-import { env } from '@toba/node-tools';
-import { OwnerConfig, SiteConfig } from '@trailimage/models';
+import { env } from '@toba/node-tools'
+import { OwnerConfig, SiteConfig } from '@trailimage/models'
 
 /** Site domain name. */
-export const domain = 'trailimage.com';
+export const domain = 'trailimage.com'
 
-const url = `http://www.${domain}`;
+const url = `http://www.${domain}`
 
 export const owner: OwnerConfig = {
    name: 'Jason Abbott',
@@ -20,7 +20,7 @@ export const owner: OwnerConfig = {
       'https://www.youtube.com/user/trailimage',
       'https://twitter.com/trailimage'
    ]
-};
+}
 
 export const site: SiteConfig = {
    domain,
@@ -40,4 +40,4 @@ export const site: SiteConfig = {
       width: 308,
       height: 60
    }
-};
+}

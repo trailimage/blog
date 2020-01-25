@@ -1,6 +1,6 @@
-import { env } from '@toba/node-tools';
-import { Flickr, ProviderConfig } from '@trailimage/flickr-provider';
-import { domain } from './models';
+import { env } from '@toba/node-tools'
+import { Flickr, ProviderConfig } from '@trailimage/flickr-provider'
+import { domain } from './models'
 
 /** Preferred photo sizes */
 export const sizes = {
@@ -16,7 +16,7 @@ export const sizes = {
       Flickr.SizeCode.Large1600,
       Flickr.SizeCode.Large1024
    ]
-};
+}
 
 export const postProvider: ProviderConfig = {
    /** Photo sizes that must be retrieved for certain contexts */
@@ -51,4 +51,4 @@ export const postProvider: ProviderConfig = {
          }
       }
    }
-};
+}

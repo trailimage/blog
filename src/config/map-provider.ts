@@ -1,7 +1,7 @@
-import { env } from '@toba/node-tools';
-import { ProviderConfig } from '@trailimage/google-provider';
-import { domain } from './models';
-import { mapSource } from './mapsource';
+import { env } from '@toba/node-tools'
+import { ProviderConfig } from '@trailimage/google-provider'
+import { domain } from './models'
+import { mapSource } from './mapsource'
 
 /**
  * @see http://code.google.com/apis/console/#project:1033232213688
@@ -39,4 +39,4 @@ export const mapProvider: ProviderConfig = {
          'https://www.gaiagps.com/map/?layer=GaiaTopoRasterFeet&lat={lat}&lon={lon}&zoom={zoom}'
    },
    source: mapSource
-};
+}

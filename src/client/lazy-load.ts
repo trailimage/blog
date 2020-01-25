@@ -3,14 +3,14 @@
 /// <reference path="./browser.d.ts"/>
 
 interface LazyLoadOptions {
-   src: string;
-   srcset: string;
-   selector: string;
-   rootMargin?: string;
-   root?: Element | null;
-   threshold?: number | number[];
+   src: string
+   srcset: string
+   selector: string
+   rootMargin?: string
+   root?: Element | null
+   threshold?: number | number[]
    /** Milliseconds to delay image load */
-   delayLoad?: number;
+   delayLoad?: number
 }
 
 const defaultOptions: LazyLoadOptions = {
@@ -21,21 +21,21 @@ const defaultOptions: LazyLoadOptions = {
    rootMargin: '0px',
    threshold: 0,
    delayLoad: 300
-};
+}
 
-const timerKey = 'timerid';
+const timerKey = 'timerid'
 
 const getTimerID = (el: HTMLElement): number => {
-   const textID = el.dataset[timerKey];
-   return textID === undefined ? 0 : parseInt(textID);
-};
+   const textID = el.dataset[timerKey]
+   return textID === undefined ? 0 : parseInt(textID)
+}
 const setTimerID = (el: HTMLElement, id: number = 0) => {
    if (id == 0) {
-      delete el.dataset[timerKey];
+      delete el.dataset[timerKey]
    } else {
-      el.dataset[timerKey] = id.toString();
+      el.dataset[timerKey] = id.toString()
    }
-};
+}
 
 /**
  * Based on Lazy Load plugin by Mika Tuupola.
@@ -43,45 +43,45 @@ const setTimerID = (el: HTMLElement, id: number = 0) => {
  */
 class LazyLoad {
    /** Image references */
-   images: NodeListOf<Element> | HTMLElement[];
-   options: LazyLoadOptions;
-   observer: IntersectionObserver;
+   images: NodeListOf<Element> | HTMLElement[]
+   options: LazyLoadOptions
+   observer: IntersectionObserver
 
    constructor(images: HTMLElement[], options: Partial<LazyLoadOptions> = {}) {
-      this.options = jQuery.extend({}, options, defaultOptions);
+      this.options = jQuery.extend({}, options, defaultOptions)
       this.images =
          images.length > 0
             ? images
-            : document.querySelectorAll(this.options.selector);
+            : document.querySelectorAll(this.options.selector)
 
       if (window.IntersectionObserver) {
-         this.observe();
+         this.observe()
       } else {
          // pre-load all image if no observer available
-         console.warn('Browser does not support IntersectionObserver');
-         this.images.forEach(this.loadImage);
+         console.warn('Browser does not support IntersectionObserver')
+         this.images.forEach(this.loadImage)
       }
    }
 
    delayLoad(el: HTMLElement) {
-      let timerID: number = getTimerID(el);
+      let timerID: number = getTimerID(el)
 
       if (timerID == 0) {
          timerID = setTimeout(() => {
-            this.observer.unobserve(el);
-            this.loadImage(el);
-            setTimerID(el); // remove timer data
-         }, this.options.delayLoad);
+            this.observer.unobserve(el)
+            this.loadImage(el)
+            setTimerID(el) // remove timer data
+         }, this.options.delayLoad)
 
-         setTimerID(el, timerID);
+         setTimerID(el, timerID)
       }
    }
 
    cancelLoad(el: HTMLElement) {
-      const timerID: number = getTimerID(el);
+      const timerID: number = getTimerID(el)
       if (timerID > 0) {
-         clearTimeout(timerID);
-         setTimerID(el); // remove timer data
+         clearTimeout(timerID)
+         setTimerID(el) // remove timer data
       }
    }
 
@@ -89,46 +89,42 @@ class LazyLoad {
       this.observer = new IntersectionObserver(
          entries => {
             entries.forEach(e => {
-               const el = e.target as HTMLElement;
+               const el = e.target as HTMLElement
                if (e.isIntersecting) {
-                  this.delayLoad(el);
+                  this.delayLoad(el)
                } else {
-                  this.cancelLoad(el);
+                  this.cancelLoad(el)
                }
-            });
+            })
          },
          {
             root: this.options.root,
             rootMargin: this.options.rootMargin,
             threshold: this.options.threshold
          }
-      );
-      this.images.forEach((el: Element) => this.observer.observe(el));
+      )
+      this.images.forEach((el: Element) => this.observer.observe(el))
    }
 
    loadImage(el: Element) {
-      const src = el.getAttribute(this.options.src);
+      const src = el.getAttribute(this.options.src)
 
       if (el.tagName.toLowerCase() == 'img') {
-         const img = el as HTMLImageElement;
-         const srcset = img.getAttribute(this.options.srcset);
+         const img = el as HTMLImageElement
+         const srcset = img.getAttribute(this.options.srcset)
 
-         if (src !== null) {
-            img.src = src;
-         }
-         if (srcset !== null) {
-            img.srcset = srcset;
-         }
+         if (src !== null) img.src = src
+         if (srcset !== null) img.srcset = srcset
       } else {
-         (el as HTMLElement).style.backgroundImage = `url(${src})`;
+         ;(el as HTMLElement).style.backgroundImage = `url(${src})`
       }
    }
 }
 
 if (jQuery) {
-   const $ = jQuery;
+   const $ = jQuery
    $.fn.lazyload = function(options: LazyLoadOptions) {
-      new LazyLoad($.makeArray(this), options);
-      return this;
-   };
+      new LazyLoad($.makeArray(this), options)
+      return this
+   }
 }

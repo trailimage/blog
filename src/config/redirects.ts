@@ -4,7 +4,7 @@ export const redirects: { [key: string]: string } = {
    'backroads-to-college': 'panhandle-past-and-future',
    'owyhee-snow-and-sands-uplands': 'owyhee-snow-and-sand',
    'lunch-at-trinity-lookout': 'trinity-lookout-lunch'
-};
+}
 
 /**
  * Support for renamed photo tags. The key is the old name and value is the
@@ -15,4 +15,4 @@ export const photoTagChanges: { [key: string]: string } = {
    jessica: 'jessicawright',
    jime: 'jimeldredge',
    jessicaabbott: 'jessicawright'
-};
+}
