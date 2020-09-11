@@ -28,7 +28,7 @@
       "@trailimage/models": "^3.2.2",
       "compression": "^1.7.0",
       "express": "^4.16.0",
-      "node-fetch": "^2.2.0",
+      "node-fetch": "^2.6.1",
       "uglify-js": "^3.7.6"
    },
    "devDependencies": {
