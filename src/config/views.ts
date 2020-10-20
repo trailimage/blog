@@ -29,7 +29,7 @@ export const style = {
          When: 'date_range',
          Where: 'map',
          default: 'local_offer' // tag icon
-      } as { [key: string]: string },
+      } as { [key: string]: string } | undefined,
 
       /**
        * Assign mode of transportation icon based on pattern match to
