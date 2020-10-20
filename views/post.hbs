@@ -62,12 +62,12 @@
       style='width: {{size.normal.width}}px; height: {{size.normal.height}}px;'>
       {{! links from photo tag search are anchored to ID }}
       <a name="{{id}}"></a><a name="{{index}}"></a>
-      {{! data-original attribute supports jquery.lazyload }}
+      {{! data-src attribute supports lazyload }}
       <img
          src="{{size.preview.url}}"
          alt="{{title}}"
-         data-original="{{size.normal.url}}"
          style="width: {{size.normal.width}}px; height: {{size.normal.height}}px;"
+         data-src="{{size.normal.url}}"
          data-big="{{size.big.url}}"
          data-big-width="{{size.big.width}}"
          data-big-height="{{size.big.height}}"/>

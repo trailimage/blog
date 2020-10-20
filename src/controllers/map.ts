@@ -1,5 +1,4 @@
-//import { log } from '@toba/logger';
-import { MapSource, loadSource } from '@toba/map';
+import { MapSource, loadSource } from '@toba/map'
 import {
    Encoding,
    Header,
@@ -7,15 +6,17 @@ import {
    is,
    addCharSet,
    inferMimeType
-} from '@toba/node-tools';
-import { Post, blog } from '@trailimage/models';
-import { Request, Response } from 'express';
-import * as compress from 'zlib';
-import { config } from '../config';
-import { RouteParam } from '../routes';
-import { Layout, Page, view } from '../views/';
+} from '@toba/node-tools'
+import { Post, blog } from '@trailimage/models'
+import { Request, Response } from 'express'
+import * as compress from 'zlib'
+import { config } from '../config'
+import { RouteParam } from '../routes'
+import { Layout, Page, view } from '../views/'
 
-const mapPath = 'map';
+const mapPath = 'map'
+const googleMapURL =
+   'https://maps.google.com/?t=h&q=[lat-lon]&ll=[lat-lon]&z=13'
 
 /**
  * Render map screen for a post. Add photo ID to template context if given so
@@ -29,13 +30,28 @@ async function render(
    res: Response
 ): Promise<void> {
    if (!is.value<Post>(post)) {
-      return view.notFound(req, res);
+      return view.notFound(req, res)
    }
 
-   const key: string | undefined = post.isPartial ? post.seriesKey : post.key;
-   const photoID: string = req.params[RouteParam.PhotoID];
+   const key: string | undefined = post.isPartial ? post.seriesKey : post.key
+   const photoID: string = req.params[RouteParam.PhotoID]
+
+   if (is.numeric(photoID) && post.photosLoaded) {
+      const photo = post.photos?.find(p => p.id == photoID)
+
+      if (photo !== undefined) {
+         res.redirect(
+            googleMapURL.replace(
+               /\[lat-lon\]/g,
+               photo.latitude + ',' + photo.longitude
+            )
+         )
+         return
+      }
+   }
+
    // ensure photos are loaded to calculate bounds for map zoom
-   await post.getPhotos();
+   await post.getPhotos()
 
    res.render(Page.Mapbox, {
       layout: Layout.None,
@@ -45,7 +61,7 @@ async function render(
       key,
       photoID: is.numeric(photoID) ? photoID : 0,
       config
-   });
+   })
 }
 
 /**
@@ -56,14 +72,14 @@ function blogMap(_req: Request, res: Response) {
       layout: Layout.None,
       title: config.site.title + ' Map',
       config
-   });
+   })
 }
 
 /**
  * Render map for a single post.
  */
 function post(req: Request, res: Response) {
-   render(blog.postWithKey(req.params[RouteParam.PostKey]), req, res);
+   render(blog.postWithKey(req.params[RouteParam.PostKey]), req, res)
 }
 
 /**
@@ -77,27 +93,27 @@ function series(req: Request, res: Response) {
       ),
       req,
       res
-   );
+   )
 }
 
 /**
  * Compressed GeoJSON of all site photos.
  */
 function photoJSON(_req: Request, res: Response) {
-   view.sendJSON(res, mapPath, blog.geoJSON.bind(blog));
+   view.sendJSON(res, mapPath, blog.geoJSON.bind(blog))
 }
 
 /**
  * Compressed GeoJSON of post photos and possible track.
  */
 async function trackJSON(req: Request, res: Response) {
-   const slug = req.params[RouteParam.PostKey];
-   const post = blog.postWithKey(slug);
+   const slug = req.params[RouteParam.PostKey]
+   const post = blog.postWithKey(slug)
 
    if (is.value<Post>(post)) {
-      view.sendJSON(res, `${slug}/${mapPath}`, post.geoJSON.bind(post));
+      view.sendJSON(res, `${slug}/${mapPath}`, post.geoJSON.bind(post))
    } else {
-      view.notFound(req, res);
+      view.notFound(req, res)
    }
 }
 
@@ -105,38 +121,34 @@ async function trackJSON(req: Request, res: Response) {
  * Retrieve, parse and display a map source.
  */
 async function source(req: Request, res: Response) {
-   const key: string = req.params[RouteParam.MapSource];
+   const key: string = req.params[RouteParam.MapSource]
 
-   if (!is.text(key)) {
-      return view.notFound(req, res);
-   }
+   if (!is.text(key)) return view.notFound(req, res)
 
-   const geo = await loadSource(key.replace('.json', ''));
+   const geo = await loadSource(key.replace('.json', ''))
 
-   if (!is.value<MapSource>(geo)) {
-      return view.notFound(req, res);
-   }
+   if (!is.value<MapSource>(geo)) return view.notFound(req, res)
 
-   const geoText = JSON.stringify(geo);
+   const geoText = JSON.stringify(geo)
 
    try {
       compress.gzip(Buffer.from(geoText), (err: Error, buffer: Buffer) => {
          if (is.value(err)) {
-            view.internalError(res, err);
+            view.internalError(res, err)
          } else {
-            res.setHeader(Header.Content.Encoding, Encoding.GZip);
-            res.setHeader(Header.CacheControl, 'max-age=86400, public'); // seconds
-            res.setHeader(Header.Content.Type, addCharSet(MimeType.JSON));
+            res.setHeader(Header.Content.Encoding, Encoding.GZip)
+            res.setHeader(Header.CacheControl, 'max-age=86400, public') // seconds
+            res.setHeader(Header.Content.Type, addCharSet(MimeType.JSON))
             res.setHeader(
                Header.Content.Disposition,
                `attachment; filename=${key}`
-            );
-            res.write(buffer);
-            res.end();
+            )
+            res.write(buffer)
+            res.end()
          }
-      });
+      })
    } catch (err) {
-      view.internalError(res, err);
+      view.internalError(res, err)
    }
 }
 
@@ -146,26 +158,26 @@ async function source(req: Request, res: Response) {
 function gpx(req: Request, res: Response) {
    const post = config.providers.map.allowDownload
       ? blog.postWithKey(req.params[RouteParam.PostKey])
-      : null;
+      : null
 
    if (is.value<Post>(post)) {
-      const fileName = post.title + '.gpx';
-      const mimeType = inferMimeType(fileName);
+      const fileName = post.title + '.gpx'
+      const mimeType = inferMimeType(fileName)
       res.setHeader(
          Header.Content.Disposition,
          `attachment; filename=${fileName}`
-      );
+      )
       if (mimeType !== null) {
-         res.setHeader(Header.Content.Type, mimeType);
+         res.setHeader(Header.Content.Type, mimeType)
       }
       post.gpx(res).catch(err => {
-         console.error(err);
-         res.removeHeader(Header.Content.Type);
-         res.removeHeader(Header.Content.Disposition);
-         view.notFound(req, res);
-      });
+         console.error(err)
+         res.removeHeader(Header.Content.Type)
+         res.removeHeader(Header.Content.Disposition)
+         view.notFound(req, res)
+      })
    } else {
-      view.notFound(req, res);
+      view.notFound(req, res)
    }
 }
 
@@ -180,4 +192,4 @@ export const map = {
       post: trackJSON,
       blog: photoJSON
    }
-};
+}

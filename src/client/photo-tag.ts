@@ -6,95 +6,95 @@
 /**
  * Defined in /views/photo-tag.hbs
  */
-declare const selectedTag: string;
-declare const siteName: string;
+declare const selectedTag: string
+declare const siteName: string
 
 $(function() {
-   const emptyTag = '-';
-   const css = 'selected';
-   const $status = $('#status');
-   const $letters = $('#letters');
-   const $selectors = $('#selectors');
-   const $thumbs = $('#thumbs');
-   const id = 'item-' + selectedTag.substr(0, 1).toLowerCase();
+   const emptyTag = '-'
+   const css = 'selected'
+   const $status = $('#status')
+   const $letters = $('#letters')
+   const $selectors = $('#selectors')
+   const $thumbs = $('#thumbs')
+   const id = 'item-' + selectedTag.substr(0, 1).toLowerCase()
    /** Tag selection list for current letter */
-   let $selector = $selectors.find('#' + id);
+   let $selector = $selectors.find('#' + id)
    /** Currently selected letter */
-   let $li = $letters.find('li[data-for=' + id + ']');
+   let $li = $letters.find('li[data-for=' + id + ']')
 
-   $selector.val(selectedTag).show();
-   $li.addClass(css);
+   $selector.val(selectedTag).show()
+   $li.addClass(css)
 
-   loadPhotoTag(selectedTag);
+   loadPhotoTag(selectedTag)
 
    $letters.find('li').click(function(this: HTMLElement) {
-      $li.removeClass(css);
-      $li = $(this);
-      $li.addClass(css);
+      $li.removeClass(css)
+      $li = $(this)
+      $li.addClass(css)
 
-      $selector.val(emptyTag);
-      $selector.hide();
-      $selector = $('#' + $li.data('for'));
-      $selector.show();
+      $selector.val(emptyTag)
+      $selector.hide()
+      $selector = $('#' + $li.data('for'))
+      $selector.show()
 
-      const $options = $selector.find('option');
+      const $options = $selector.find('option')
 
       if ($options.length == 2) {
-         const tag = ($options[1] as HTMLOptionElement).value;
-         $selector.val(tag);
-         loadPhotoTag(tag);
+         const tag = ($options[1] as HTMLOptionElement).value
+         $selector.val(tag)
+         loadPhotoTag(tag)
       } else {
-         $thumbs.empty();
-         $status.html('Waiting for selection &hellip;');
+         $thumbs.empty()
+         $status.html('Waiting for selection &hellip;')
       }
-   });
+   })
 
    $selectors.on('change', 'select', function(
       this: HTMLElement,
       e: JQuery.Event
    ) {
-      e.stopPropagation();
-      e.preventDefault();
+      e.stopPropagation()
+      e.preventDefault()
 
-      const tag = $selector.val() as string;
+      const tag = $selector.val() as string
 
-      loadPhotoTag(tag);
+      loadPhotoTag(tag)
 
       if (tag && tag != emptyTag) {
          window.history.pushState(
             null,
             `${siteName} photos tagged with "${tag}"`,
             `/photo-tag/${tag}`
-         );
+         )
       }
-   });
+   })
 
    /**
     * Load photo-search.hbs rendered by server.
     */
    function loadPhotoTag(tag: string) {
       if (tag && tag != emptyTag) {
-         const url = `/photo-tag/search/${tag}`;
+         const url = `/photo-tag/search/${tag}`
 
-         $status.html('Retrieving images &hellip;');
+         $status.html('Retrieving images &hellip;')
          $thumbs.load(url, function(
             this: HTMLElement,
             _response: JQueryResponse,
             status: string
          ) {
-            $status.empty();
+            $status.empty()
 
             if (status === 'error') {
-               $thumbs.empty();
+               $thumbs.empty()
                alert(
                   `Sorry about that. Looking for "${tag}" photos caused an error.`
-               );
+               )
             }
-            window.scrollTo(0, 0);
-         });
+            window.scrollTo(0, 0)
+         })
       } else {
-         $thumbs.empty();
-         $status.empty();
+         $thumbs.empty()
+         $status.empty()
       }
    }
-});
+})

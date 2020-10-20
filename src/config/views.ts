@@ -1,4 +1,4 @@
-import { sizes } from './post-provider';
+import { sizes } from './post-provider'
 
 export const keywords = [
    'BMW R1200GS',
@@ -14,7 +14,7 @@ export const keywords = [
    'scenery',
    'idaho',
    'mountains'
-];
+]
 
 export const style = {
    icon: {
@@ -57,4 +57,4 @@ export const style = {
     * should match value in `settings.less`.
     */
    contentWidth: 650
-};
+}

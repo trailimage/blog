@@ -1,4 +1,4 @@
-export const domain = 'trailimage.blogspot.com';
+export const domain = 'trailimage.blogspot.com'
 
 /**
  * Match old blog URLs to new. Slug is always prefixed by `/YYYY/MM/`. Route
@@ -91,4 +91,4 @@ export const redirects: { [key: string]: string } = {
    'lucky-peak-with-laura': 'lucky-peak-with-laura',
    'cricket-ridge-ride': 'cricket-ridge-ride',
    'caterpillar-ridge-ride': 'spring-caterpillars-on-the-boise-ridge'
-};
+}

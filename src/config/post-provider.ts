@@ -1,6 +1,6 @@
-import { env } from '@toba/node-tools';
-import { Flickr, ProviderConfig } from '@trailimage/flickr-provider';
-import { domain } from './models';
+import { env } from '@toba/node-tools'
+import { Flickr, ProviderConfig } from '@trailimage/flickr-provider'
+import { domain } from './models'
 
 /** Preferred photo sizes */
 export const sizes = {
@@ -16,7 +16,7 @@ export const sizes = {
       Flickr.SizeCode.Large1600,
       Flickr.SizeCode.Large1024
    ]
-};
+}
 
 export const postProvider: ProviderConfig = {
    /** Photo sizes that must be retrieved for certain contexts */
@@ -24,7 +24,7 @@ export const postProvider: ProviderConfig = {
    featureSets: [{ id: '72157632729508554', title: 'Ruminations' }],
    api: {
       userID: '60950751@N04',
-      appID: '72157631007435048',
+      appID: '72157712821709122',
       timeZoneOffset: -7,
       setPhotoSizes: [],
       searchPhotoSizes: [Flickr.SizeCode.Square150],
@@ -44,11 +44,11 @@ export const postProvider: ProviderConfig = {
       auth: {
          apiKey: env('FLICKR_API_KEY'),
          secret: env('FLICKR_SECRET'),
-         callback: 'http://www.' + domain + '/auth/flickr',
+         callback: 'https://www.' + domain + '/auth/flickr',
          token: {
-            access: env('FLICKR_ACCESS_TOKEN'),
-            secret: env('FLICKR_TOKEN_SECRET')
+            access: process.env['FLICKR_ACCESS_TOKEN'],
+            secret: process.env['FLICKR_TOKEN_SECRET']
          }
       }
    }
-};
+}

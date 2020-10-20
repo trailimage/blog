@@ -52,12 +52,9 @@ const buildCSS = () =>
 
 // https://github.com/gulp-sourcemaps/gulp-sourcemaps
 const buildJS = () =>
-   merge(
-      tsConfig.src().pipe(tsConfig()),
-      gulp.src(jsPath + 'jquery.lazyload.js')
-   )
+   merge(tsConfig.src().pipe(tsConfig()))
       .pipe(
-         bundle('post', 'static-map', 'jquery.lazyload').as('post', {
+         bundle('post', 'static-map', 'lazy-load').as('post', {
             keep: ['static-map']
          })
       )

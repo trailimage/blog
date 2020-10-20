@@ -1,23 +1,23 @@
-import { is, sayNumber } from '@toba/node-tools';
-import { Category, blog } from '@trailimage/models';
-import { Request, Response } from 'express';
-import { config } from '../config';
-import { RouteParam } from '../routes';
-import { Layout, Page } from '../views/template';
-import { view, ViewContext } from '../views/view';
+import { is, sayNumber } from '@toba/node-tools'
+import { Category, blog } from '@trailimage/models'
+import { Request, Response } from 'express'
+import { config } from '../config'
+import { RouteParam } from '../routes'
+import { Layout, Page } from '../views/template'
+import { view, ViewContext } from '../views/view'
 
 function send(req: Request, res: Response, path: string) {
    view.send(res, path, async render => {
       // use renderer to build view that wasn't cached
-      const category = blog.categoryWithKey(path);
+      const category = blog.categoryWithKey(path)
 
       if (!is.value<Category>(category)) {
-         return view.notFound(req, res);
+         return view.notFound(req, res)
       }
 
-      await category.ensureLoaded();
+      await category.ensureLoaded()
 
-      const count = category.posts.size;
+      const count = category.posts.size
 
       render(
          Page.Category,
@@ -26,8 +26,8 @@ function send(req: Request, res: Response, path: string) {
             subtitle: config.site.postAlias + (count > 1 ? 's' : ''),
             posts: Array.from(category.posts)
          })
-      );
-   });
+      )
+   })
 }
 
 /**
@@ -40,7 +40,7 @@ export function forPath(req: Request, res: Response) {
       req.params[RouteParam.RootCategory] +
          '/' +
          req.params[RouteParam.Category]
-   );
+   )
 }
 
 /**
@@ -49,11 +49,11 @@ export function forPath(req: Request, res: Response) {
  * the default tag has years as child tags
  */
 export function home(req: Request, res: Response) {
-   const category = blog.categories.get(config.posts.defaultCategory);
-   let year = new Date().getFullYear();
-   let subcategory: Category | undefined = undefined;
-   let postCount = 0;
-   let tryCount = 0;
+   const category = blog.categories.get(config.posts.defaultCategory)
+   let year = new Date().getFullYear()
+   let subcategory: Category | undefined = undefined
+   let postCount = 0
+   let tryCount = 0
 
    if (category === undefined) {
       return view.internalError(
@@ -61,17 +61,17 @@ export function home(req: Request, res: Response) {
          new Error(
             `Unable to find default category ${config.posts.defaultCategory}`
          )
-      );
+      )
    }
 
    while (postCount == 0 && tryCount < 10) {
       // step backwards until a year with posts is found
-      subcategory = category.getSubcategory(year.toString());
+      subcategory = category.getSubcategory(year.toString())
       if (is.value<Category>(subcategory)) {
-         postCount = subcategory.posts.size;
+         postCount = subcategory.posts.size
       }
-      tryCount++;
-      year--;
+      tryCount++
+      year--
    }
    if (subcategory === undefined) {
       return view.internalError(
@@ -79,28 +79,24 @@ export function home(req: Request, res: Response) {
          new Error(
             `Unable to find year with posts in ${config.posts.defaultCategory}`
          )
-      );
+      )
    }
-   send(req, res, subcategory.key);
+   send(req, res, subcategory.key)
 }
 
 /**
  * Show root category with list of subcategories.
  */
 export function list(req: Request, res: Response) {
-   const key = req.params[RouteParam.RootCategory] as string;
+   const key = req.params[RouteParam.RootCategory] as string
 
-   if (is.empty(key)) {
-      return view.notFound(req, res);
-   }
+   if (is.empty(key)) return view.notFound(req, res)
 
    view.send(res, key, render => {
       // use renderer to build view that wasn't cached
-      const category = blog.categoryWithKey(key);
+      const category = blog.categoryWithKey(key)
 
-      if (!is.value<Category>(category)) {
-         return view.notFound(req, res);
-      }
+      if (!is.value<Category>(category)) return view.notFound(req, res)
 
       render(
          Page.CategoryList,
@@ -109,14 +105,14 @@ export function list(req: Request, res: Response) {
             subtitle: 'Subcategories',
             subcategories: Array.from(category.subcategories)
          })
-      );
-   });
+      )
+   })
 }
 
 export function menu(_req: Request, res: Response) {
    view.send(res, Page.CategoryMenu, render => {
-      render(Page.CategoryMenu, { blog, layout: Layout.None });
-   });
+      render(Page.CategoryMenu, { blog, layout: Layout.None })
+   })
 }
 
 /**
@@ -131,6 +127,6 @@ const standardContext = (
    ...context,
    title: category.title,
    subtitle: `${sayNumber(childCount)} ${context.subtitle}`
-});
+})
 
-export const category = { forPath, home, list, menu };
+export const category = { forPath, home, list, menu }

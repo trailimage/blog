@@ -1,3 +1,8 @@
+## 5.1.1
+
+-  Update image lazy load plugin
+-  Fix image map link
+
 ## 5.1.0
 
 -  Improve paragraph and blockquote padding consistency
