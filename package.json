@@ -1,7 +1,7 @@
 {
    "name": "@trail-image/blog",
    "description": "Trail Image blog",
-   "version": "5.1.2",
+   "version": "5.1.3",
    "private": false,
    "author": {
       "name": "Jason Abbott"
